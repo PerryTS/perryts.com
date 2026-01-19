@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-perry-50: #f0f9ff;
+  --color-perry-100: #e0f2fe;
+  --color-perry-200: #bae6fd;
+  --color-perry-300: #7dd3fc;
+  --color-perry-400: #38bdf8;
+  --color-perry-500: #0ea5e9;
+  --color-perry-600: #0284c7;
+  --color-perry-700: #0369a1;
+  --color-perry-800: #075985;
+  --color-perry-900: #0c4a6e;
+  --color-perry-950: #082f49;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  ::selection {
+    @apply bg-perry-500/30;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-perry-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .glow {
+    box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+  }
+
+  .code-block {
+    @apply bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-xl p-6 font-mono text-sm overflow-x-auto;
+  }
+
+  .feature-card {
+    @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 hover:border-perry-500/50 transition-all duration-300 hover:bg-slate-900/80;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-perry-500 to-cyan-500 hover:from-perry-400 hover:to-cyan-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-perry-500/25 hover:shadow-perry-500/40;
+  }
+
+  .btn-secondary {
+    @apply border border-slate-700 hover:border-perry-500/50 text-slate-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 bg-slate-900/50 hover:bg-slate-900;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

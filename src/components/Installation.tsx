@@ -1,0 +1,163 @@
+"use client";
+
+import { useState } from "react";
+
+export function Installation() {
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(id);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const installCommands = [
+    {
+      id: "clone",
+      label: "Clone & Build",
+      commands: [
+        "git clone https://github.com/aspect-build/perry.git",
+        "cd perry",
+        "cargo build --release",
+      ],
+    },
+  ];
+
+  const usageExamples = [
+    {
+      id: "build",
+      label: "Compile a file",
+      command: "perry build main.ts",
+      description: "Compiles main.ts to a native executable",
+    },
+    {
+      id: "output",
+      label: "Custom output",
+      command: "perry build main.ts -o myapp",
+      description: "Specify the output executable name",
+    },
+    {
+      id: "jsruntime",
+      label: "With V8 runtime",
+      command: "perry build main.ts --enable-js-runtime",
+      description: "Enable V8 for JavaScript npm package compatibility",
+    },
+    {
+      id: "check",
+      label: "Check compatibility",
+      command: "perry check ./src",
+      description: "Validate TypeScript code for native compilation",
+    },
+  ];
+
+  return (
+    <section id="installation" className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Get <span className="gradient-text">Started</span>
+          </h2>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            Install Perry and start compiling TypeScript to native executables
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Installation */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-perry-500/20 flex items-center justify-center text-perry-400 text-sm font-bold">
+                1
+              </span>
+              Installation
+            </h3>
+            <div className="code-block">
+              <div className="flex items-center gap-2 mb-4 text-slate-500">
+                <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                <span className="ml-2 text-xs">terminal</span>
+              </div>
+              {installCommands[0].commands.map((cmd, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between group py-1"
+                >
+                  <code className="text-sm">
+                    <span className="text-slate-500">$</span>{" "}
+                    <span className="text-slate-300">{cmd}</span>
+                  </code>
+                  <button
+                    onClick={() => copyToClipboard(cmd, `install-${i}`)}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-500 hover:text-white p-1"
+                    title="Copy"
+                  >
+                    {copied === `install-${i}` ? (
+                      <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              ))}
+              <div className="mt-4 pt-4 border-t border-slate-800">
+                <p className="text-sm text-slate-500">
+                  Requires Rust toolchain. Binary will be at{" "}
+                  <code className="text-perry-400">target/release/perry</code>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Usage */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-perry-500/20 flex items-center justify-center text-perry-400 text-sm font-bold">
+                2
+              </span>
+              Usage
+            </h3>
+            <div className="space-y-4">
+              {usageExamples.map((example) => (
+                <div
+                  key={example.id}
+                  className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 hover:border-perry-500/30 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-slate-400">{example.label}</span>
+                    <button
+                      onClick={() => copyToClipboard(example.command, example.id)}
+                      className="text-slate-500 hover:text-white transition-colors p-1"
+                      title="Copy"
+                    >
+                      {copied === example.id ? (
+                        <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                  <code className="text-sm font-mono">
+                    <span className="text-cyan-400">perry</span>{" "}
+                    <span className="text-slate-300">
+                      {example.command.replace("perry ", "")}
+                    </span>
+                  </code>
+                  <p className="text-xs text-slate-500 mt-2">{example.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
