@@ -1,4 +1,17 @@
 export function Performance() {
+  const benchmarks = [
+    { name: "closure", perry: 14, node: 63, speedup: "4.5x" },
+    { name: "object_create", perry: 2, node: 7, speedup: "3.5x" },
+    { name: "array_read", perry: 4, node: 12, speedup: "3.0x" },
+    { name: "math_intensive", perry: 22, node: 66, speedup: "3.0x" },
+    { name: "method_calls", perry: 5, node: 15, speedup: "3.0x" },
+    { name: "binary_trees", perry: 3, node: 8, speedup: "2.7x" },
+    { name: "string_concat", perry: 2, node: 5, speedup: "2.5x" },
+    { name: "fibonacci", perry: 621, node: 1318, speedup: "2.1x" },
+    { name: "mandelbrot", perry: 25, node: 47, speedup: "1.9x" },
+    { name: "factorial", perry: 70, node: 116, speedup: "1.7x" },
+  ];
+
   const comparisons = [
     {
       metric: "Binary Size",
@@ -91,6 +104,52 @@ export function Performance() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Benchmark comparison */}
+          <div className="mt-16">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold mb-2">
+                Benchmark Results: <span className="gradient-text">2.2x Faster</span>
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Perry vs Node.js v24 on macOS ARM64 (lower is better)
+              </p>
+            </div>
+            <div className="grid gap-3">
+              {benchmarks.map((bench) => {
+                const perryWidth = (bench.perry / bench.node) * 100;
+                return (
+                  <div key={bench.name} className="flex items-center gap-4">
+                    <span className="w-28 text-sm text-slate-400 text-right">
+                      {bench.name.replace(/_/g, " ")}
+                    </span>
+                    <div className="flex-1 flex items-center gap-2">
+                      <div className="flex-1 h-6 bg-slate-800 rounded overflow-hidden relative">
+                        <div
+                          className="absolute h-full bg-gradient-to-r from-perry-500 to-cyan-500 rounded"
+                          style={{ width: `${perryWidth}%` }}
+                        />
+                        <div
+                          className="absolute h-full bg-slate-600/50 rounded"
+                          style={{ width: "100%" }}
+                        />
+                        <div
+                          className="absolute h-full bg-gradient-to-r from-perry-500 to-cyan-500 rounded"
+                          style={{ width: `${perryWidth}%` }}
+                        />
+                      </div>
+                      <span className="w-16 text-sm text-perry-400 font-semibold">
+                        {bench.speedup}
+                      </span>
+                    </div>
+                    <div className="w-32 text-xs text-slate-500 hidden sm:block">
+                      {bench.perry}ms vs {bench.node}ms
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Visual comparison bars */}

@@ -36,7 +36,7 @@ export function Header() {
               Docs
             </a>
             <a
-              href="https://github.com/aspect-build/perry"
+              href="https://github.com/skelpo/perry"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
@@ -107,7 +107,7 @@ export function Header() {
                 Docs
               </a>
               <a
-                href="https://github.com/aspect-build/perry"
+                href="https://github.com/skelpo/perry"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 GitHub

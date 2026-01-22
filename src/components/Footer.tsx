@@ -47,7 +47,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/aspect-build/perry"
+                  href="https://github.com/skelpo/perry"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -64,7 +64,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/aspect-build/perry/issues"
+                  href="https://github.com/skelpo/perry/issues"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -74,7 +74,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/aspect-build/perry/discussions"
+                  href="https://github.com/skelpo/perry/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -84,7 +84,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/aspect-build/perry/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/skelpo/perry/blob/main/CONTRIBUTING.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -103,7 +103,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <a
-              href="https://github.com/aspect-build/perry"
+              href="https://github.com/skelpo/perry"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors flex items-center gap-2"

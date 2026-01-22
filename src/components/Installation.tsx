@@ -16,7 +16,7 @@ export function Installation() {
       id: "clone",
       label: "Clone & Build",
       commands: [
-        "git clone https://github.com/aspect-build/perry.git",
+        "git clone https://github.com/skelpo/perry.git",
         "cd perry",
         "cargo build --release",
       ],
