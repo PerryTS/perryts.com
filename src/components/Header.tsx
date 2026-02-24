@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,32 +10,32 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800/50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-perry-500 to-cyan-500 flex items-center justify-center font-bold text-white">
               P
             </div>
             <span className="text-xl font-bold gradient-text">Perry</span>
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <a
-              href="#features"
+            <Link
+              href="/showcase"
               className="text-slate-400 hover:text-white transition-colors"
             >
-              Features
-            </a>
-            <a
-              href="#installation"
+              Showcase
+            </Link>
+            <Link
+              href="/blog"
               className="text-slate-400 hover:text-white transition-colors"
             >
-              Installation
-            </a>
-            <a
-              href="#docs"
+              Blog
+            </Link>
+            <Link
+              href="/roadmap"
               className="text-slate-400 hover:text-white transition-colors"
             >
-              Docs
-            </a>
+              Roadmap
+            </Link>
             <a
               href="https://github.com/skelpo/perry"
               target="_blank"
@@ -88,24 +89,24 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-slate-800">
             <div className="flex flex-col gap-4">
-              <a
-                href="#features"
+              <Link
+                href="/showcase"
                 className="text-slate-400 hover:text-white transition-colors"
               >
-                Features
-              </a>
-              <a
-                href="#installation"
+                Showcase
+              </Link>
+              <Link
+                href="/blog"
                 className="text-slate-400 hover:text-white transition-colors"
               >
-                Installation
-              </a>
-              <a
-                href="#docs"
+                Blog
+              </Link>
+              <Link
+                href="/roadmap"
                 className="text-slate-400 hover:text-white transition-colors"
               >
-                Docs
-              </a>
+                Roadmap
+              </Link>
               <a
                 href="https://github.com/skelpo/perry"
                 className="text-slate-400 hover:text-white transition-colors"

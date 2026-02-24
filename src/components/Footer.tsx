@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
@@ -5,12 +7,12 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4 w-fit">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-perry-500 to-cyan-500 flex items-center justify-center font-bold text-white">
                 P
               </div>
               <span className="text-xl font-bold gradient-text">Perry</span>
-            </div>
+            </Link>
             <p className="text-slate-400 text-sm max-w-md">
               A native TypeScript compiler written in Rust. Compile your TypeScript
               directly to standalone executables with no runtime dependencies.
@@ -30,20 +32,28 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#docs"
+                <Link
+                  href="/showcase"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
-                  Documentation
-                </a>
+                  Showcase
+                </Link>
               </li>
               <li>
-                <a
-                  href="#features"
+                <Link
+                  href="/blog"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
-                  Features
-                </a>
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/roadmap"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Roadmap
+                </Link>
               </li>
               <li>
                 <a

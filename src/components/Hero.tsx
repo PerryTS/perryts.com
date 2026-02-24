@@ -13,22 +13,22 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-perry-500"></span>
           </span>
           <span className="text-sm text-perry-300">
-            59/59 tests passing | Active Development
+            62/62 tests passing | Active Development
           </span>
         </div>
 
         {/* Main headline */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-          Compile TypeScript to
+          One Codebase. Every Platform.
           <br />
-          <span className="gradient-text">Native Executables</span>
+          <span className="gradient-text">Native Performance.</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-xl sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-12">
-          Perry is a native TypeScript compiler written in Rust that compiles
-          your TypeScript directly to machine code.{" "}
-          <span className="text-slate-300">No runtime required.</span>
+          Perry compiles TypeScript to native GUI and CLI apps on{" "}
+          <span className="text-slate-300">macOS, iPadOS, iOS, Android, Linux, and Windows.</span>{" "}
+          No runtime. No Electron. Just native binaries.
         </p>
 
         {/* CTA buttons */}
@@ -93,6 +93,10 @@ export function Hero() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
           <div className="text-center">
+            <div className="text-3xl font-bold gradient-text">6</div>
+            <div className="text-slate-500 text-sm mt-1">Platforms</div>
+          </div>
+          <div className="text-center">
             <div className="text-3xl font-bold gradient-text">2-5 MB</div>
             <div className="text-slate-500 text-sm mt-1">Binary size</div>
           </div>
@@ -102,11 +106,7 @@ export function Hero() {
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold gradient-text">27+</div>
-            <div className="text-slate-500 text-sm mt-1">Native npm packages</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">100%</div>
-            <div className="text-slate-500 text-sm mt-1">Type-safe</div>
+            <div className="text-slate-500 text-sm mt-1">Native packages</div>
           </div>
         </div>
       </div>
