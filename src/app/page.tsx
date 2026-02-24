@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { PlatformSupport } from "@/components/PlatformSupport";
+import { ComparisonMatrix } from "@/components/ComparisonMatrix";
 import { CodeExample } from "@/components/CodeExample";
 import { Performance } from "@/components/Performance";
 import { Installation } from "@/components/Installation";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <Features />
       <PlatformSupport />
+      <ComparisonMatrix />
       <CodeExample />
       <Performance />
       <Installation />
