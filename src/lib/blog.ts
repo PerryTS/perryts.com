@@ -37,6 +37,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["tutorial", "showcase", "Pry"],
     content: () => null,
   },
+  {
+    slug: "compiling-hono-trpc-strapi",
+    title: "Compiling Hono, tRPC, and Strapi to Native Binaries",
+    date: "2026-02-25",
+    excerpt:
+      "Perry now compiles three major TypeScript frameworks — Hono, tRPC, and Strapi — into native ARM64 executables. They compile in under a second, produce binaries under 2 MB, and run without crashes.",
+    tags: ["compiler", "frameworks", "progress"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
