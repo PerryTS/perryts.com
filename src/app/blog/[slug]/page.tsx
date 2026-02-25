@@ -10,12 +10,13 @@ export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const post = getBlogPost(params.slug);
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} - Perry Blog`,
@@ -1241,15 +1242,16 @@ const contentMap: Record<string, () => React.JSX.Element> = {
   "compiling-hono-trpc-strapi": CompilingFrameworksContent,
 };
 
-export default function BlogPostPage({
+export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) notFound();
 
-  const ContentComponent = contentMap[params.slug];
+  const ContentComponent = contentMap[slug];
   if (!ContentComponent) notFound();
 
   return (

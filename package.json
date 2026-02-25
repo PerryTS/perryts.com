@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:site && npm run build:server",
+    "build:site": "next build",
+    "build:server": "perry compile server.ts -o server",
+    "serve": "./server",
     "start": "next start",
     "lint": "next lint"
   },

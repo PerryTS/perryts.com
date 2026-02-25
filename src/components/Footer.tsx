@@ -109,7 +109,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-500">
-            Built with Rust, SWC, and Cranelift
+            Built with Rust, SWC, and Cranelift &mdash; and yes, this website is served by a Perry-compiled binary
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <a
