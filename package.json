@@ -8,6 +8,7 @@
     "build:site": "next build",
     "build:server": "perry compile server.ts -o server",
     "serve": "./server",
+    "deploy": "./deploy.sh",
     "start": "next start",
     "lint": "next lint"
   },

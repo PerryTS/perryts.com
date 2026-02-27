@@ -38,6 +38,15 @@ export const blogPosts: BlogPost[] = [
     content: () => null,
   },
   {
+    slug: "plugin-systems-are-a-performance-tax",
+    title: "Plugin Systems Are a Performance Tax",
+    date: "2026-02-27",
+    excerpt:
+      "Plugin architectures trade performance for extensibility. But what if extensibility happened at build time instead of runtime? Compile-time composition gives you both — zero overhead, full flexibility.",
+    tags: ["architecture", "performance", "compiler"],
+    content: () => null,
+  },
+  {
     slug: "compiling-hono-trpc-strapi",
     title: "Compiling Hono, tRPC, and Strapi to Native Binaries",
     date: "2026-02-25",
