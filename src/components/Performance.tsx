@@ -127,7 +127,7 @@ export function Performance() {
                     <div className="flex-1 flex items-center gap-2">
                       <div className="flex-1 h-6 bg-slate-800 rounded overflow-hidden relative">
                         <div
-                          className="absolute h-full bg-gradient-to-r from-perry-500 to-cyan-500 rounded"
+                          className="absolute h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded"
                           style={{ width: `${perryWidth}%` }}
                         />
                         <div
@@ -135,7 +135,7 @@ export function Performance() {
                           style={{ width: "100%" }}
                         />
                         <div
-                          className="absolute h-full bg-gradient-to-r from-perry-500 to-cyan-500 rounded"
+                          className="absolute h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded"
                           style={{ width: `${perryWidth}%` }}
                         />
                       </div>
@@ -164,7 +164,7 @@ export function Performance() {
                   <span className="w-16 text-sm text-slate-400">Perry</span>
                   <div className="flex-1 h-8 bg-slate-800 rounded-lg overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-perry-500 to-cyan-500 rounded-lg flex items-center justify-end pr-3"
+                      className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg flex items-center justify-end pr-3"
                       style={{ width: "6%" }}
                     >
                       <span className="text-xs font-medium">5 MB</span>

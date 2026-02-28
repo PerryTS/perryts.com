@@ -1,17 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-perry-50: #f0f9ff;
-  --color-perry-100: #e0f2fe;
-  --color-perry-200: #bae6fd;
-  --color-perry-300: #7dd3fc;
-  --color-perry-400: #38bdf8;
-  --color-perry-500: #0ea5e9;
-  --color-perry-600: #0284c7;
-  --color-perry-700: #0369a1;
-  --color-perry-800: #075985;
-  --color-perry-900: #0c4a6e;
-  --color-perry-950: #082f49;
+  /* Perry amber scale — primary warm accent */
+  --color-perry-50: #fffbeb;
+  --color-perry-100: #fef3c7;
+  --color-perry-200: #fde68a;
+  --color-perry-300: #fcd34d;
+  --color-perry-400: #fbbf24;
+  --color-perry-500: #f59e0b;
+  --color-perry-600: #d97706;
+  --color-perry-700: #b45309;
+  --color-perry-800: #92400e;
+  --color-perry-900: #78350f;
+  --color-perry-950: #0a0a0f;
+
+  /* Perry brand backgrounds */
+  --color-perry-bg: #0a0a0f;
+  --color-perry-surface: #1a1a1e;
+
+  /* Font family */
+  --font-sans: 'Rubik', 'Segoe UI', '-apple-system', 'Arial', sans-serif;
 }
 
 @layer base {
@@ -20,37 +28,52 @@
   }
 
   body {
-    @apply bg-slate-950 text-slate-100;
+    background-color: #0a0a0f;
+    color: #e0e7ff;
+    font-family: var(--font-sans);
   }
 
   ::selection {
-    @apply bg-perry-500/30;
+    background: rgba(251, 191, 36, 0.25);
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-perry-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #fbbf24, #a855f7, #3b82f6);
   }
 
   .glow {
-    box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.25);
   }
 
   .code-block {
-    @apply bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-xl p-6 font-mono text-sm overflow-x-auto;
+    @apply bg-[#1a1a1e] border border-white/10 rounded-xl p-6 font-mono text-sm overflow-x-auto;
   }
 
   .feature-card {
-    @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 hover:border-perry-500/50 transition-all duration-300 hover:bg-slate-900/80;
+    background: rgba(26, 26, 30, 0.6);
+    backdrop-filter: blur(12px);
+    @apply border border-white/10 rounded-2xl p-6 transition-all duration-300;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(251, 191, 36, 0.35);
+    background: rgba(26, 26, 30, 0.85);
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-perry-500 to-cyan-500 hover:from-perry-400 hover:to-cyan-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-perry-500/25 hover:shadow-perry-500/40;
+    @apply bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+    box-shadow: 0 4px 24px rgba(245, 158, 11, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 4px 32px rgba(245, 158, 11, 0.45);
   }
 
   .btn-secondary {
-    @apply border border-slate-700 hover:border-perry-500/50 text-slate-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 bg-slate-900/50 hover:bg-slate-900;
+    @apply border border-white/15 hover:border-amber-500/40 text-slate-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 bg-white/5 hover:bg-white/10;
   }
 }
 

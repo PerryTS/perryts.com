@@ -60,6 +60,26 @@ export function Features() {
       description:
         "Need to use a pure JavaScript npm package? Enable the V8 runtime flag for full npm ecosystem compatibility.",
     },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+      title: "20+ Native UI Widgets",
+      description:
+        "Buttons, text fields, tables, canvas, scroll views, toolbars, alerts, sheets, and more — all compiling to real platform widgets via AppKit, GTK4, Win32, UIKit, and JNI.",
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+        </svg>
+      ),
+      title: "Compile-Time Plugin System",
+      description:
+        "Modules compose at build time — no runtime plugin overhead, no IPC boundaries. Your dependencies become direct native function calls in the final binary.",
+    },
   ];
 
   return (
@@ -77,7 +97,7 @@ export function Features() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <div key={index} className="feature-card">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-perry-500/20 to-cyan-500/20 flex items-center justify-center text-perry-400 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/15 to-orange-500/15 flex items-center justify-center text-amber-400 mb-4">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>

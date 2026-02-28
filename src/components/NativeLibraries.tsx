@@ -74,7 +74,7 @@ export function NativeLibraries() {
           {libraryCategories.map((category, index) => (
             <div key={index} className="feature-card">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-perry-500/20 to-cyan-500/20 flex items-center justify-center text-perry-400">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/15 to-orange-500/15 flex items-center justify-center text-amber-400">
                   {category.icon}
                 </div>
                 <h3 className="text-lg font-semibold">{category.name}</h3>

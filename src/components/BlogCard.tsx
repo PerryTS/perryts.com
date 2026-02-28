@@ -8,13 +8,13 @@ export function BlogCard({ post }: { post: BlogPost }) {
         {post.tags.map((tag) => (
           <span
             key={tag}
-            className="text-xs px-2 py-1 rounded-full bg-perry-500/10 text-perry-300 border border-perry-500/20"
+            className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20"
           >
             {tag}
           </span>
         ))}
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-perry-400 transition-colors">
+      <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors">
         {post.title}
       </h3>
       <p className="text-slate-400 text-sm mb-4 line-clamp-3">{post.excerpt}</p>

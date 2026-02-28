@@ -2,20 +2,19 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+    <footer className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/8">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4 w-fit">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-perry-500 to-cyan-500 flex items-center justify-center font-bold text-white">
-                P
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/perry-icon.svg" alt="Perry" className="w-8 h-8" />
               <span className="text-xl font-bold gradient-text">Perry</span>
             </Link>
             <p className="text-slate-400 text-sm max-w-md">
-              A native TypeScript compiler written in Rust. Compile your TypeScript
-              directly to standalone executables with no runtime dependencies.
+              TypeScript → Native. Compile TypeScript directly to standalone executables
+              on macOS, iOS, Android, Linux, and Windows. No runtime, no Electron.
             </p>
           </div>
 
@@ -57,7 +56,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/skelpo/perry"
+                  href="https://github.com/PerryTS/perry"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -74,7 +73,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/skelpo/perry/issues"
+                  href="https://github.com/PerryTS/perry/issues"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -84,7 +83,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/skelpo/perry/discussions"
+                  href="https://github.com/PerryTS/perry/discussions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -94,7 +93,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/skelpo/perry/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/PerryTS/perry/blob/main/CONTRIBUTING.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -107,13 +106,13 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-white/8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-500">
             Built with Rust, SWC, and Cranelift &mdash; and yes, this website is served by a Perry-compiled binary
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <a
-              href="https://github.com/skelpo/perry"
+              href="https://github.com/PerryTS/perry"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors flex items-center gap-2"

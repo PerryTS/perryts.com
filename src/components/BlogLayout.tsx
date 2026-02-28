@@ -35,7 +35,7 @@ export function BlogLayout({
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs px-2 py-1 rounded-full bg-perry-500/10 text-perry-300 border border-perry-500/20"
+              className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20"
             >
               {tag}
             </span>

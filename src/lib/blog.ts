@@ -55,6 +55,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["compiler", "frameworks", "progress"],
     content: () => null,
   },
+  {
+    slug: "all-six-platforms-ui-parity",
+    title: "All Six Platforms, Full Feature Parity",
+    date: "2026-02-28",
+    excerpt:
+      "20+ native UI widgets, a Canvas widget, Table views, system notifications, keychain access, multi-window support, and full feature parity across macOS, iOS, iPadOS, Android, Linux, and Windows — all from a single TypeScript codebase.",
+    tags: ["UI", "cross-platform", "release", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Rubik, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const rubik = Rubik({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
+  weight: ["400", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -13,9 +14,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Perry - Compile TypeScript to Native Executables",
+  metadataBase: new URL("https://perryts.com"),
+  title: {
+    default: "Perry — TypeScript → Native",
+    template: "%s — Perry",
+  },
   description:
-    "Perry is a native TypeScript compiler written in Rust that compiles TypeScript directly to standalone executables. No runtime required.",
+    "Perry compiles TypeScript directly to native executables. No Node.js, no Electron, no runtime. Native GUI and CLI apps on macOS, iOS, Android, Linux, and Windows.",
   keywords: [
     "TypeScript",
     "compiler",
@@ -24,21 +29,23 @@ export const metadata: Metadata = {
     "executable",
     "AOT",
     "performance",
+    "cross-platform",
+    "native UI",
   ],
-  authors: [{ name: "Perry Team" }],
+  authors: [{ name: "Perry" }],
   openGraph: {
-    title: "Perry - Compile TypeScript to Native Executables",
+    title: "Perry — TypeScript → Native",
     description:
-      "Compile TypeScript directly to native machine code. No runtime, fast startup, small binaries.",
+      "Compile TypeScript to native executables. 6 platforms, 20+ UI widgets, 0 ms startup.",
     url: "https://perryts.com",
     siteName: "Perry",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Perry - Compile TypeScript to Native Executables",
+    title: "Perry — TypeScript → Native",
     description:
-      "Compile TypeScript directly to native machine code. No runtime, fast startup, small binaries.",
+      "Compile TypeScript to native executables. 6 platforms, 20+ UI widgets, 0 ms startup.",
   },
 };
 
@@ -48,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${rubik.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

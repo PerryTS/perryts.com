@@ -143,7 +143,7 @@ const sections: RoadmapSection[] = [
     color: "text-slate-300",
     borderColor: "border-slate-600/30",
     bgColor: "bg-slate-500/10",
-    dotColor: "bg-gradient-to-br from-perry-500 to-cyan-500",
+    dotColor: "bg-gradient-to-br from-amber-500 to-orange-500",
     milestones: [
       {
         title: "One TypeScript codebase → native apps on all 6 platforms",

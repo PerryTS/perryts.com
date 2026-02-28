@@ -2,18 +2,18 @@ export function Hero() {
   return (
     <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-perry-950/50 via-slate-950 to-slate-950" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-perry-500/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-[#0a0a0f] to-[#0a0a0f]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-amber-500/8 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-perry-500/10 border border-perry-500/20 rounded-full px-4 py-2 mb-8">
+        <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-2 mb-8">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-perry-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-perry-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
-          <span className="text-sm text-perry-300">
-            62/62 tests passing | Active Development
+          <span className="text-sm text-amber-300">
+            v0.2.164 — All 6 platforms, full UI feature parity
           </span>
         </div>
 
@@ -50,7 +50,7 @@ export function Hero() {
             </svg>
           </a>
           <a
-            href="https://github.com/skelpo/perry"
+            href="https://github.com/PerryTS/perry"
             className="btn-secondary flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -97,8 +97,8 @@ export function Hero() {
             <div className="text-slate-500 text-sm mt-1">Platforms</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">2-5 MB</div>
-            <div className="text-slate-500 text-sm mt-1">Binary size</div>
+            <div className="text-3xl font-bold gradient-text">20+</div>
+            <div className="text-slate-500 text-sm mt-1">Native UI widgets</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold gradient-text">0 ms</div>

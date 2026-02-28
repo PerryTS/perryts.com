@@ -15,7 +15,7 @@ export function Architecture() {
           {/* Pipeline visualization */}
           <div className="relative">
             {/* Connection line */}
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-perry-500/20 via-perry-500/50 to-perry-500/20 -translate-y-1/2 hidden md:block" />
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500/20 via-amber-500/50 to-amber-500/20 -translate-y-1/2 hidden md:block" />
 
             <div className="grid md:grid-cols-5 gap-4 md:gap-2">
               {/* Step 1 */}
@@ -58,7 +58,7 @@ export function Architecture() {
 
               {/* Step 5 */}
               <div className="relative flex flex-col items-center">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-perry-500 to-cyan-500 flex items-center justify-center text-white z-10">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white z-10">
                   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>

@@ -7,13 +7,12 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/85 backdrop-blur-lg border-b border-white/8">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-perry-500 to-cyan-500 flex items-center justify-center font-bold text-white">
-              P
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/perry-icon.svg" alt="Perry" className="w-8 h-8" />
             <span className="text-xl font-bold gradient-text">Perry</span>
           </Link>
 
@@ -37,7 +36,7 @@ export function Header() {
               Roadmap
             </Link>
             <a
-              href="https://github.com/skelpo/perry"
+              href="https://github.com/PerryTS/perry"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
@@ -108,7 +107,7 @@ export function Header() {
                 Roadmap
               </Link>
               <a
-                href="https://github.com/skelpo/perry"
+                href="https://github.com/PerryTS/perry"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 GitHub
