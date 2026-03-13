@@ -55,6 +55,24 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/publish"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Perry Publish
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://geisterhand.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Geisterhand
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://github.com/PerryTS/perry"
                   target="_blank"

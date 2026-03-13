@@ -35,6 +35,12 @@ export function Header() {
             >
               Roadmap
             </Link>
+            <Link
+              href="/publish"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              Publish
+            </Link>
             <a
               href="https://github.com/PerryTS/perry"
               target="_blank"
@@ -105,6 +111,12 @@ export function Header() {
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 Roadmap
+              </Link>
+              <Link
+                href="/publish"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                Publish
               </Link>
               <a
                 href="https://github.com/PerryTS/perry"

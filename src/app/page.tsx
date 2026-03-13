@@ -9,6 +9,7 @@ import { Installation } from "@/components/Installation";
 import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
 import { NativeLibraries } from "@/components/NativeLibraries";
+import { ShipIt } from "@/components/ShipIt";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Installation />
       <FeatureTable />
       <NativeLibraries />
+      <ShipIt />
       <Architecture />
       <Footer />
     </main>

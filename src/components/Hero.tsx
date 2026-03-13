@@ -105,8 +105,8 @@ export function Hero() {
             <div className="text-slate-500 text-sm mt-1">Startup time</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">27+</div>
-            <div className="text-slate-500 text-sm mt-1">Native packages</div>
+            <div className="text-3xl font-bold gradient-text">App Store</div>
+            <div className="text-slate-500 text-sm mt-1">Ready</div>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Architecture() {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
@@ -69,53 +71,16 @@ export function Architecture() {
             </div>
           </div>
 
-          {/* Key design decisions */}
-          <div className="mt-20 grid md:grid-cols-2 gap-6">
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="text-perry-400">01</span>
-                NaN-Boxing
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Values are stored as 64-bit floats with special bit patterns for pointers,
-                enabling union types without runtime overhead. This allows{" "}
-                <code className="text-perry-400">(string | number)[]</code> to work efficiently.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="text-perry-400">02</span>
-                Monomorphization
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Generics are specialized at compile time, like Rust. Each type instantiation
-                generates optimized code, eliminating runtime type checking overhead.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="text-perry-400">03</span>
-                Static Dispatch
-              </h3>
-              <p className="text-slate-400 text-sm">
-                No virtual tables. Method calls are resolved at compile time, enabling
-                direct function calls and inlining optimizations.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <span className="text-perry-400">04</span>
-                Zero-Cost Abstractions
-              </h3>
-              <p className="text-slate-400 text-sm">
-                TypeScript classes, interfaces, and generics compile to efficient native
-                code with no runtime representation overhead.
-              </p>
-            </div>
-          </div>
+          {/* Link to internals */}
+          <p className="mt-12 text-center text-slate-400">
+            Want to know how the compiler works under the hood?{" "}
+            <Link
+              href="/internals"
+              className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
+            >
+              Compiler internals
+            </Link>
+          </p>
         </div>
       </div>
     </section>
