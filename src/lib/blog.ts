@@ -64,6 +64,24 @@ export const blogPosts: BlogPost[] = [
     tags: ["UI", "cross-platform", "release", "milestone"],
     content: () => null,
   },
+  {
+    slug: "from-compiler-to-ecosystem",
+    title: "From Compiler to Ecosystem: React, Databases, and Cloud Builds",
+    date: "2026-03-06",
+    excerpt:
+      "Perry grows from a compiler into a full ecosystem. perry/ui at the core, Prisma-compatible ORMs for MySQL/PostgreSQL/SQLite, universal push notifications, distributed builds with App Store publishing, and a React compatibility layer — all in one week.",
+    tags: ["ecosystem", "perry/ui", "databases", "infrastructure", "milestone"],
+    content: () => null,
+  },
+  {
+    slug: "the-full-pipeline",
+    title: "The Full Pipeline: Docs, Distribution, and WidgetKit",
+    date: "2026-03-13",
+    excerpt:
+      "82 commits in one week: a 49-page documentation site, automated App Store and Play Store publishing, Homebrew and APT packages, native WidgetKit extensions from TypeScript, new widgets, http/https modules, and a self-hosting LLVM compiler.",
+    tags: ["distribution", "documentation", "WidgetKit", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

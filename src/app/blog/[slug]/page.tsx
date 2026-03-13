@@ -1733,6 +1733,600 @@ function AllSixPlatformsContent() {
 }
 
 /* ─────────────────────────────────────────────
+   Blog post 7: From Compiler to Ecosystem
+   ───────────────────────────────────────────── */
+
+function FromCompilerToEcosystemContent() {
+  return (
+    <>
+      <p>
+        A week ago, Perry was a compiler with a UI toolkit. You could write TypeScript, compile it
+        to a native binary, and ship it on six platforms. That was the story. Today the story is
+        bigger: Perry is becoming an ecosystem. Three database ORMs, universal push notifications,
+        distributed builds with App Store and Play Store publishing, a React compatibility layer,
+        and automated app verification — all landed in the last week.
+      </p>
+      <p>
+        This post covers what shipped, why it matters, and what the code looks like.
+      </p>
+
+      <h2>perry/ui: The Foundation</h2>
+      <p>
+        Before getting into the new libraries, it&apos;s worth emphasizing what sits at the center
+        of everything: <code className="text-amber-400">perry/ui</code>. This is Perry&apos;s own
+        native UI toolkit — 20+ widgets that compile directly to platform-native components on all
+        six targets. It&apos;s not a wrapper, not an abstraction layer, not a web view.
+        Every <code className="text-amber-400">Button</code> becomes an{" "}
+        <code className="text-amber-400">NSButton</code> on macOS, a{" "}
+        <code className="text-amber-400">UIButton</code> on iOS, a{" "}
+        <code className="text-amber-400">GtkButton</code> on Linux, an{" "}
+        <code className="text-amber-400">android.widget.Button</code> on Android, and a{" "}
+        <code className="text-amber-400">CreateWindowEx</code> control on Windows.
+      </p>
+      <p>
+        <code className="text-amber-400">perry/ui</code> is Perry&apos;s primary and most advanced
+        UI surface. It includes reactive state management, layout containers (VStack, HStack,
+        ZStack, SplitView), a hardware-accelerated Canvas, Table views with column sorting, the{" "}
+        <code className="text-amber-400">perry/system</code> module for file dialogs, keychain
+        access, notifications, and multi-window — all from TypeScript, all compiled to direct
+        platform API calls. Every other UI approach in Perry, including the React compatibility
+        layer, is built on top of <code className="text-amber-400">perry/ui</code> and maps back
+        to its widgets.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">app.ts</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-violet-400">import</span> {`{ Window, VStack, Button, Text, State }`} <span className="text-violet-400">from</span> <span className="text-green-400">&apos;perry/ui&apos;</span>;</p>
+          <p className="mt-3"><span className="text-blue-400">const</span> count = <span className="text-blue-400">new</span> <span className="text-amber-400">State</span>(0);</p>
+          <p className="mt-3"><span className="text-blue-400">const</span> window = <span className="text-blue-400">new</span> <span className="text-amber-400">Window</span>({`{ title: "Counter" }`});</p>
+          <p>window.<span className="text-amber-400">setContent</span>(</p>
+          <p className="ml-4"><span className="text-blue-400">new</span> <span className="text-amber-400">VStack</span>({`{`} children: [</p>
+          <p className="ml-8"><span className="text-blue-400">new</span> <span className="text-amber-400">Text</span>({`{ text: count }`}),</p>
+          <p className="ml-8"><span className="text-blue-400">new</span> <span className="text-amber-400">Button</span>({`{ title: "+1", onClick: () => count.set(count.get() + 1) }`}),</p>
+          <p className="ml-4">] {`})`}</p>
+          <p>);</p>
+        </div>
+      </div>
+
+      <p>
+        The reactive <code className="text-amber-400">State</code> object is the key primitive.
+        When a State value changes, only the widgets bound to that state update — no virtual DOM
+        diffing, no full-tree re-renders, no reconciliation pass. It&apos;s the most direct path
+        from TypeScript to native platform UI that exists.
+      </p>
+
+      <h2>React Compatibility: A Thin Layer on perry/ui</h2>
+      <p>
+        For developers coming from React, <code className="text-amber-400">perry-react</code>{" "}
+        provides a compatibility layer that maps React&apos;s component model to{" "}
+        <code className="text-amber-400">perry/ui</code> widgets. You can use{" "}
+        <code className="text-amber-400">useState</code>,{" "}
+        <code className="text-amber-400">useRef</code>,{" "}
+        <code className="text-amber-400">useReducer</code>, and JSX — and Perry compiles it to the
+        same native widgets underneath. It&apos;s a convenience bridge, not a separate rendering engine.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">counter.tsx</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-violet-400">import</span> React, {`{ useState }`} <span className="text-violet-400">from</span> <span className="text-green-400">&apos;react&apos;</span>;</p>
+          <p className="mt-3"><span className="text-violet-400">function</span> <span className="text-amber-400">Counter</span>() {`{`}</p>
+          <p className="ml-4"><span className="text-blue-400">const</span> [count, setCount] = <span className="text-amber-400">useState</span>(0);</p>
+          <p className="ml-4"><span className="text-violet-400">return</span> (</p>
+          <p className="ml-8">&lt;<span className="text-blue-400">div</span>&gt;</p>
+          <p className="ml-12">&lt;<span className="text-blue-400">h1</span>&gt;{`{count}`}&lt;/<span className="text-blue-400">h1</span>&gt;</p>
+          <p className="ml-12">&lt;<span className="text-blue-400">button</span> <span className="text-amber-400">onClick</span>={`{() => setCount(count + 1)}`}&gt;+1&lt;/<span className="text-blue-400">button</span>&gt;</p>
+          <p className="ml-8">&lt;/<span className="text-blue-400">div</span>&gt;</p>
+          <p className="ml-4">);</p>
+          <p>{`}`}</p>
+        </div>
+      </div>
+
+      <p>
+        Under the hood, every JSX element maps to a <code className="text-amber-400">perry/ui</code>{" "}
+        widget: <code className="text-amber-400">{`<div>`}</code> becomes a VStack,{" "}
+        <code className="text-amber-400">{`<button>`}</code> becomes a Button,{" "}
+        <code className="text-amber-400">useState</code> is backed by Perry&apos;s reactive State.
+        It&apos;s early — Phase 1 with full-tree re-renders and global hook storage — but it proves
+        that existing React code can target native platforms through Perry. We&apos;re also exploring
+        Angular and Ionic compatibility along similar lines.
+      </p>
+
+      <h2>Three Database ORMs: Prisma API, Native Performance</h2>
+      <p>
+        If you&apos;re building a server or a desktop app that talks to a database, Perry now has
+        you covered with three Prisma-compatible ORMs:{" "}
+        <code className="text-amber-400">perry-prisma</code> (MySQL),{" "}
+        <code className="text-amber-400">perry-sqlite</code> (SQLite), and{" "}
+        <code className="text-amber-400">perry-postgres</code> (PostgreSQL). All three are drop-in
+        replacements for <code className="text-amber-400">@prisma/client</code>. Same API, same
+        query patterns, but compiled to native code with direct database FFI — no Prisma engine,
+        no Node.js.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">database.ts</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-violet-400">import</span> {`{ PrismaClient }`} <span className="text-violet-400">from</span> <span className="text-green-400">&apos;@prisma/client&apos;</span>;</p>
+          <p className="mt-3"><span className="text-blue-400">const</span> prisma = <span className="text-blue-400">new</span> <span className="text-amber-400">PrismaClient</span>();</p>
+          <p className="mt-3"><span className="text-slate-500">// Same Prisma API — compiled to native SQL via Rust FFI</span></p>
+          <p><span className="text-blue-400">const</span> users = <span className="text-violet-400">await</span> prisma.user.<span className="text-amber-400">findMany</span>({`{`}</p>
+          <p className="ml-4">where: {`{ email: { contains: "@perry.dev" } }`},</p>
+          <p className="ml-4">orderBy: {`{ createdAt: "desc" }`},</p>
+          <p className="ml-4">take: 10,</p>
+          <p>{`});`}</p>
+          <p className="mt-3"><span className="text-violet-400">await</span> prisma.post.<span className="text-amber-400">create</span>({`{`}</p>
+          <p className="ml-4">data: {`{ title: "Hello", authorId: users[0].id }`},</p>
+          <p>{`});`}</p>
+        </div>
+      </div>
+
+      <p>
+        Under the hood, each ORM is a TypeScript front-end backed by a Rust FFI layer using{" "}
+        <code className="text-amber-400">sqlx</code>. The query flow: TypeScript serializes the
+        query to JSON, passes it across the FFI boundary, Rust builds parameterized SQL, executes
+        it via the connection pool, and serializes the result back. The Prisma schema is read at
+        build time — zero runtime parsing.
+      </p>
+      <p>
+        The three implementations share ~95% of their code. The differences are what you&apos;d
+        expect: identifier quoting (<code className="text-amber-400">`col`</code> vs{" "}
+        <code className="text-amber-400">&quot;col&quot;</code>), placeholder syntax ({" "}
+        <code className="text-amber-400">?</code> vs{" "}
+        <code className="text-amber-400">$1, $2</code>), and transaction semantics. All three
+        support the full Prisma CRUD surface: findMany, findFirst, findUnique, create, createMany,
+        update, updateMany, upsert, delete, deleteMany, count — plus raw SQL, transactions,
+        and 10+ WHERE filter operators.
+      </p>
+
+      <h2>perry-push: Universal Push Notifications</h2>
+      <p>
+        <code className="text-amber-400">perry-push</code> is a single library that handles push
+        notifications across every platform: APNs (iOS/macOS), FCM (Android), Web Push (browsers),
+        and WNS (Windows). Each provider is a Rust FFI module with exactly three functions:{" "}
+        <code className="text-amber-400">*_provider_new</code>,{" "}
+        <code className="text-amber-400">*_provider_close</code>, and{" "}
+        <code className="text-amber-400">*_send</code>.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">notify.ts</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-violet-400">import</span> {`{ ApnProvider }`} <span className="text-violet-400">from</span> <span className="text-green-400">&apos;perry-push/apn&apos;</span>;</p>
+          <p><span className="text-violet-400">import</span> {`{ FcmProvider }`} <span className="text-violet-400">from</span> <span className="text-green-400">&apos;perry-push/fcm&apos;</span>;</p>
+          <p className="mt-3"><span className="text-blue-400">const</span> apn = <span className="text-blue-400">new</span> <span className="text-amber-400">ApnProvider</span>({`{ teamId, keyId, key }`});</p>
+          <p><span className="text-blue-400">const</span> fcm = <span className="text-blue-400">new</span> <span className="text-amber-400">FcmProvider</span>({`{ serviceAccount }`});</p>
+          <p className="mt-3"><span className="text-slate-500">// Unified result type for all providers</span></p>
+          <p><span className="text-blue-400">const</span> result = <span className="text-violet-400">await</span> apn.<span className="text-amber-400">send</span>({`{`}</p>
+          <p className="ml-4">deviceToken: token,</p>
+          <p className="ml-4">title: <span className="text-green-400">&quot;New message&quot;</span>,</p>
+          <p className="ml-4">body: <span className="text-green-400">&quot;You have a new reply&quot;</span>,</p>
+          <p>{`});`}</p>
+        </div>
+      </div>
+
+      <p>
+        Cryptography is handled by{" "}
+        <code className="text-amber-400">ring</code> — ES256 JWTs for APNs and VAPID, RS256 for
+        FCM service accounts, AES-GCM for Web Push payload encryption. All compiled to native code.
+        No <code className="text-amber-400">node-gyp</code>, no OpenSSL dependency.
+      </p>
+
+      <h2>Perry Hub + Builders: Distributed Cloud Builds</h2>
+      <p>
+        This is the infrastructure play. <code className="text-amber-400">perry-hub</code> is a
+        build orchestration server — itself compiled from TypeScript by Perry — that manages a pool
+        of build workers. You push your project, the hub dispatches it to the right worker based on
+        target platform, and the worker compiles, signs, and optionally publishes your app.
+      </p>
+      <p>
+        Two workers exist today: a macOS builder (handles macOS, iOS, and Android targets) and a
+        Linux builder (handles Linux and Android). Both are Rust binaries that connect to the hub
+        over WebSocket, download source tarballs, run the Perry compiler, and upload artifacts back.
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>Code signing</strong> — Apple notarization for macOS, provisioning profiles for iOS, Android keystore signing</li>
+        <li><strong>App Store publishing</strong> — direct upload to App Store Connect and Google Play Store</li>
+        <li><strong>Artifact management</strong> — built binaries uploaded to the hub with TTL-based cleanup</li>
+        <li><strong>License management</strong> — per-license rate limits, priority queuing (pro tier gets priority)</li>
+      </ul>
+      <p>
+        The hub itself is a fascinating case study. It&apos;s a ~1,500-line TypeScript file compiled
+        to a 2 MB native binary by Perry. It runs Fastify on port 3456 for HTTP and{" "}
+        <code className="text-amber-400">ws</code> on port 3457 for WebSocket. All state is
+        in-memory with JSON persistence — no external database. It&apos;s the kind of server you
+        can deploy with <code className="text-amber-400">scp</code> and a systemd unit file.
+      </p>
+
+      <h2>perry-verify: Automated App Verification</h2>
+      <p>
+        <code className="text-amber-400">perry-verify</code> is a standalone HTTP service that
+        takes a compiled binary and a configuration, runs a verification pipeline, and returns
+        structured pass/fail results with screenshots. It launches the app, runs authentication
+        flows (deterministic or AI-assisted), checks state, and captures evidence.
+      </p>
+      <p>
+        Platform adapters exist for macOS (via accessibility APIs), Linux (AT-SPI), and stubs
+        for iOS Simulator and Android Emulator. The AI layer uses Claude for fallback authentication
+        and state verification when deterministic checks aren&apos;t possible. It&apos;s designed
+        to slot into the hub&apos;s build pipeline as a post-build step: compile, sign, verify, publish.
+      </p>
+
+      <h2>Pry Ships Everywhere</h2>
+      <p>
+        <Link href="/blog/building-pry" className="text-amber-400 hover:text-amber-300">Pry</Link>,
+        the native JSON viewer we built as a Perry showcase, now ships on five platforms. It&apos;s
+        on the{" "}
+        <a href="https://apps.apple.com/app/pry-json-viewer/id6759329040" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          Mac App Store
+        </a>{" "}
+        and{" "}
+        <a href="https://play.google.com/store/apps/details?id=com.perry.pry" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          Google Play
+        </a>, with native binaries for Linux and Windows. Same TypeScript codebase, five
+        platform-specific entry points, five native binaries. It&apos;s the most concrete proof
+        that this whole approach works end to end — from TypeScript source to App Store listing.
+      </p>
+
+      <h2>What This All Means</h2>
+      <p>
+        A compiler is interesting. An ecosystem is useful. In the last week, Perry went from
+        &quot;you can compile TypeScript to native&quot; to &quot;you can build a full app with
+        native UI, a Prisma database, push notifications, and builds that auto-publish to
+        the App Store.&quot;
+      </p>
+      <p>
+        The pieces are starting to connect:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>perry/ui</strong> is the most direct path from TypeScript to native platform UI — reactive state, 20+ widgets, zero abstraction layers</li>
+        <li><strong>perry-prisma/sqlite/postgres</strong> means existing database code ports with minimal changes</li>
+        <li><strong>perry-push</strong> means native push notifications without per-platform libraries</li>
+        <li><strong>perry-hub + builders</strong> means you can go from <code className="text-amber-400">perry publish</code> to App Store in one step</li>
+        <li><strong>perry-verify</strong> means automated testing of the compiled output, not just the source</li>
+        <li><strong>perry-react</strong> means React developers can ease into Perry using familiar patterns, all mapping to perry/ui underneath</li>
+      </ul>
+      <p>
+        These aren&apos;t theoretical. Every library listed here has working code, tests, and
+        documentation. Several are already used in production — the Perry landing site itself
+        runs on a Perry-compiled Fastify server, and Pry is live in two app stores.
+      </p>
+
+      <h2>What&apos;s Next</h2>
+      <p>
+        The immediate roadmap:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>perry/ui expansion</strong> — drag and drop, accessibility labels, custom context menus, more layout primitives</li>
+        <li><strong>perry-verify integration</strong> — automated verification in the build pipeline</li>
+        <li><strong>Framework compatibility</strong> — improving React, Angular, and Ionic layers as on-ramps to perry/ui</li>
+        <li><strong>Full regex support</strong> — ECMAScript-compatible regex engine compiled to native</li>
+      </ul>
+      <p>
+        Follow the progress on{" "}
+        <a href="https://github.com/PerryTS/perry" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          GitHub
+        </a>, or check the{" "}
+        <Link href="/roadmap" className="text-amber-400 hover:text-amber-300">roadmap</Link>
+        {" "}for the full picture.
+      </p>
+    </>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Blog post 8: The Full Pipeline
+   ───────────────────────────────────────────── */
+
+function TheFullPipelineContent() {
+  return (
+    <>
+      <p>
+        82 commits in seven days. A documentation site with 49 pages. Automated App Store and Play Store
+        publishing. Homebrew and APT packages. Native WidgetKit extensions compiled from TypeScript.
+        A self-hosting LLVM compiler. And dozens of bug fixes across every platform.
+      </p>
+      <p>
+        This post covers everything that shipped in Perry between March 6 and March 13, 2026. The theme
+        is completion — filling in the gaps between &quot;I wrote some TypeScript&quot; and &quot;my app
+        is in the App Store.&quot;
+      </p>
+
+      <h2>docs.perryts.com</h2>
+      <p>
+        Perry now has a real documentation site. 49 pages built with mdBook, covering everything from
+        getting started to the CLI reference. The docs are organized into sections:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>Getting Started</strong> — installation, first project, project structure</li>
+        <li><strong>Language Features</strong> — everything Perry supports from TypeScript</li>
+        <li><strong>Native UI</strong> — 12 pages covering all widget types, layout, state management, and platform-specific behavior</li>
+        <li><strong>Platforms</strong> — dedicated pages for each of the 6 target platforms</li>
+        <li><strong>Standard Library</strong> — 50+ native package implementations documented</li>
+        <li><strong>System APIs</strong> — file dialogs, keychain, notifications, multi-window</li>
+        <li><strong>WidgetKit</strong> — the new widget extension module</li>
+        <li><strong>Plugins</strong> — compile-time plugin architecture</li>
+        <li><strong>CLI Reference</strong> — every command and flag</li>
+      </ul>
+      <p>
+        The site also includes an <code className="text-amber-400">llms.txt</code> file for
+        AI discoverability, and is deployed via GitHub Pages with a custom domain at{" "}
+        <a href="https://docs.perryts.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          docs.perryts.com
+        </a>.
+      </p>
+
+      <h2>Install Perry in One Command</h2>
+      <p>
+        Perry is now distributed through Homebrew and APT, in addition to building from source. A new
+        GitHub Actions release pipeline builds binaries for macOS (arm64 and x86_64) and
+        Linux (x86_64 and arm64), then automatically updates the Homebrew tap and APT repository.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">terminal</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-slate-500"># macOS</span></p>
+          <p><span className="text-cyan-400">brew</span> tap PerryTS/perry</p>
+          <p><span className="text-cyan-400">brew</span> install perry</p>
+          <p className="mt-3"><span className="text-slate-500"># Debian/Ubuntu</span></p>
+          <p><span className="text-cyan-400">sudo</span> apt update &amp;&amp; sudo apt install perry</p>
+        </div>
+      </div>
+
+      <p>
+        No more cloning the repo and building with Cargo. Install Perry the same way you install
+        any other tool.
+      </p>
+
+      <h2>Automated App Store Publishing</h2>
+      <p>
+        This is the change that collapses the most manual steps. Running{" "}
+        <code className="text-amber-400">perry publish --ios</code> now handles the entire iOS distribution
+        pipeline automatically:
+      </p>
+      <ol className="list-decimal list-inside space-y-1">
+        <li>Generates an RSA key and CSR via the App Store Connect API</li>
+        <li>Creates a distribution certificate and bundles it into a <code className="text-amber-400">.p12</code></li>
+        <li>Registers the bundle ID</li>
+        <li>Creates and downloads a provisioning profile</li>
+        <li>Creates the App Store Connect app record</li>
+        <li>Builds, signs, and uploads to TestFlight or the App Store</li>
+      </ol>
+      <p>
+        No Xcode. No manual portal visits. No downloading certificates from a browser. The setup
+        wizard runs automatically the first time you publish, walking through API key configuration
+        and storing credentials in <code className="text-amber-400">perry.toml</code>.
+      </p>
+      <p>
+        macOS distribution is equally automated. Perry supports three modes: TestFlight, notarized DMG,
+        and a new <strong>&quot;both&quot;</strong> mode that publishes to the App Store and creates a
+        notarized DMG simultaneously. Three certificate types are auto-generated:{" "}
+        <code className="text-amber-400">MAC_APP_DISTRIBUTION</code>,{" "}
+        <code className="text-amber-400">MAC_INSTALLER_DISTRIBUTION</code>, and{" "}
+        <code className="text-amber-400">DEVELOPER_ID_APPLICATION</code>.
+      </p>
+      <p>
+        Android publishing also gained an auto-triggered setup wizard. All three platforms now follow
+        the same pattern: first run triggers setup, credentials are saved to the project, subsequent
+        runs are zero-configuration.
+      </p>
+      <p>
+        Pre-flight validation catches problems before the build starts — provisioning profile bundle
+        ID mismatch, certificate expiration, missing app icon, invalid version format, wrong team ID.
+        And <code className="text-amber-400">encryption_exempt</code> in{" "}
+        <code className="text-amber-400">perry.toml [ios]</code> auto-sets the{" "}
+        <code className="text-amber-400">ITSAppUsesNonExemptEncryption</code> Info.plist key, skipping
+        the manual export compliance prompt in App Store Connect.
+      </p>
+
+      <h2>perry/widget: WidgetKit from TypeScript</h2>
+      <p>
+        Perry can now compile TypeScript to native SwiftUI WidgetKit extensions. This is not a wrapper
+        or a bridge — the compiler walks the render tree at the HIR level and emits SwiftUI source code
+        directly. The output is a complete WidgetKit extension bundle that Xcode (or Perry&apos;s build
+        pipeline) can embed in your app.
+      </p>
+
+      <div className="code-block my-8">
+        <div className="flex items-center gap-2 mb-4 text-slate-500">
+          <div className="w-3 h-3 rounded-full bg-red-500/50" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+          <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          <span className="ml-2 text-xs">terminal</span>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p><span className="text-cyan-400">perry</span> widget.ts --target ios-widget --app-bundle-id com.example.app -o out/</p>
+        </div>
+      </div>
+
+      <p>
+        The approach is fundamentally different from the rest of Perry&apos;s compilation. Normal Perry
+        code goes through Cranelift to native machine code. Widget code goes through the HIR to SwiftUI
+        text output, because WidgetKit requires SwiftUI — there&apos;s no way to build a widget extension
+        with imperative UIKit or AppKit code. Perry solves this by treating the widget render tree as a
+        compile-time template, not runtime code.
+      </p>
+
+      <h2>New Widgets and Platform Improvements</h2>
+      <p>
+        Four new widget types landed this week:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>TextArea</strong> — multi-line text editing on macOS, iOS, and Android</li>
+        <li><strong>SecureField</strong> — password input on iOS and macOS</li>
+        <li><strong>QR Code</strong> — native QR code generation on iOS, macOS, and Android</li>
+        <li><strong>Splash Screen</strong> — auto-generated LaunchScreen storyboards (iOS) and splash themes (Android)</li>
+      </ul>
+
+      <h3>iPad Goes Native</h3>
+      <p>
+        Perry now generates full iPad-native apps: <code className="text-amber-400">UIDeviceFamily [1,2]</code>,
+        orientation support, <code className="text-amber-400">UIRequiresFullScreen</code>, and a compiled
+        LaunchScreen storyboard via ibtool. A new <code className="text-amber-400">getDeviceIdiom()</code>{" "}
+        function detects phone vs. iPad at runtime, and <code className="text-amber-400">PerryFrameSplit</code>{" "}
+        provides frame-based horizontal split containers for iPad layouts.
+      </p>
+
+      <h3>Windows</h3>
+      <p>
+        Windows got timer support (50ms <code className="text-amber-400">WM_TIMER</code> tick),
+        owner-drawn buttons with dark theme backgrounds, and fixes for a use-after-free bug in{" "}
+        <code className="text-amber-400">to_wide().as_ptr()</code> across 18 widget files. V8 runtime
+        now works on Windows with the required system libraries linked.
+      </p>
+
+      <h3>GTK4 (Linux)</h3>
+      <p>
+        The GTK4 backend received visual polish to match macOS: CSS padding for edge insets, Adwaita
+        button styling, VStack margin fixes, and ScrollView horizontal policy.
+      </p>
+
+      <h2>http/https and better-sqlite3</h2>
+      <p>
+        Two significant stdlib additions:
+      </p>
+      <p>
+        The new <code className="text-amber-400">http</code> and{" "}
+        <code className="text-amber-400">https</code> native modules provide client-side HTTP
+        using reqwest under the hood. The API matches Node.js:{" "}
+        <code className="text-amber-400">request()</code>,{" "}
+        <code className="text-amber-400">get()</code>,{" "}
+        <code className="text-amber-400">ClientRequest</code> with write/end/on, and{" "}
+        <code className="text-amber-400">IncomingMessage</code> with statusCode and event handlers.
+      </p>
+      <p>
+        <code className="text-amber-400">better-sqlite3</code> is now fully supported:{" "}
+        <code className="text-amber-400">new Database()</code>,{" "}
+        <code className="text-amber-400">prepare</code>,{" "}
+        <code className="text-amber-400">exec</code>,{" "}
+        <code className="text-amber-400">run</code>,{" "}
+        <code className="text-amber-400">get</code>,{" "}
+        <code className="text-amber-400">all</code> — with proper NaN-boxing and row objects
+        with named property access.
+      </p>
+      <p>
+        Other stdlib improvements: <code className="text-amber-400">crypto.randomBytes()</code> now
+        returns a Buffer (matching Node.js), MongoDB gained{" "}
+        <code className="text-amber-400">listDatabases</code> and{" "}
+        <code className="text-amber-400">listCollections</code> with thread-safety fixes, and
+        mysql2 INSERT/UPDATE/DELETE now returns{" "}
+        <code className="text-amber-400">ResultSetHeader</code> with{" "}
+        <code className="text-amber-400">insertId</code>.
+      </p>
+
+      <h2>GC and Correctness Fixes</h2>
+      <p>
+        Several critical garbage collector and runtime correctness fixes shipped this week:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>GC reentrancy guard</strong> — prevents collection during allocation, fixing RefCell double-borrow panics</li>
+        <li><strong>GC Map tracing</strong> — Maps now properly traced during mark phase, preventing string key collection</li>
+        <li><strong>String aliasing fix</strong> — string append now always allocates fresh strings, fixing corruption from pointer copy aliasing</li>
+        <li><strong>BigInt arithmetic</strong> — right-shift uses arithmetic shift for negative numbers, bitwise ops use ToInt32 wrapping semantics</li>
+        <li><strong>Map.get() undefined</strong> — returns correct <code className="text-amber-400">TAG_UNDEFINED</code> for missing keys instead of wrong NaN tag</li>
+        <li><strong>Static field GC roots</strong> — BigInt values in static class fields registered as GC roots</li>
+      </ul>
+      <p>
+        These aren&apos;t minor. The GC reentrancy fix alone resolved an entire class of intermittent
+        crashes. The string aliasing fix affected any program that assigned one string variable to
+        another and then mutated either. These are the kind of bugs that only surface under real
+        workloads, and fixing them is what makes the compiler production-grade.
+      </p>
+
+      <h2>perry-verify: Hardened</h2>
+      <p>
+        <code className="text-amber-400">perry-verify</code>, the automated app verification service,
+        got a security hardening pass: sandboxed execution via{" "}
+        <code className="text-amber-400">bwrap</code> on Linux and{" "}
+        <code className="text-amber-400">sandbox-exec</code> on macOS, auth tokens on WebSocket
+        handshake and binary download, per-IP rate limiting, full UUID job IDs to prevent enumeration,
+        and reduced body limits.
+      </p>
+
+      <h2>perrysdad: The Self-Hosting Compiler</h2>
+      <p>
+        In a parallel effort, <code className="text-amber-400">perrysdad</code> — a self-hosting LLVM IR
+        compiler written in TypeScript — went from zero to self-compilation in five phases over the week:
+      </p>
+      <ol className="list-decimal list-inside space-y-1">
+        <li><strong>Phase 0-1</strong> — end-to-end skeleton: HIR to LLVM IR text to clang, linked against Perry&apos;s <code className="text-amber-400">libperry_runtime.a</code></li>
+        <li><strong>Phase 2</strong> — hand-rolled recursive descent parser with Pratt expression parsing for real <code className="text-amber-400">.ts</code> files</li>
+        <li><strong>Phase 3</strong> — arrays, objects, and maps with runtime FFI, plus fixing a critical ABI mismatch (JSValue declared as double in LLVM IR instead of i64)</li>
+        <li><strong>Phase 4</strong> — classes, enums, closures, multi-file compilation with module discovery and topological sort</li>
+      </ol>
+      <p>
+        The milestone: the self-compiled <code className="text-amber-400">anvil</code> binary can now
+        compile test programs and produce correct output matching the node-compiled version. A TypeScript
+        compiler, compiled by Perry to native code, compiling more TypeScript to native code. Turtles
+        all the way down.
+      </p>
+
+      <h2>By the Numbers</h2>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>82 commits</strong> to the main Perry compiler</li>
+        <li><strong>1 release</strong>: v0.2.173 (March 8)</li>
+        <li><strong>49 documentation pages</strong> at docs.perryts.com</li>
+        <li><strong>4 new widgets</strong>: TextArea, SecureField, QR Code, Splash Screen</li>
+        <li><strong>3 distribution channels</strong>: Homebrew, APT, source</li>
+        <li><strong>3 automated store pipelines</strong>: App Store, TestFlight, Google Play</li>
+        <li><strong>All 6 platforms</strong> received improvements this week</li>
+      </ul>
+
+      <h2>What&apos;s Next</h2>
+      <p>
+        The pipeline is filling in. You can write TypeScript, compile to six platforms, distribute via
+        Homebrew or APT, publish to the App Store and Play Store, add home screen widgets, and read
+        comprehensive documentation — all without leaving Perry&apos;s toolchain. What remains:
+      </p>
+      <ul className="list-disc list-inside space-y-1">
+        <li><strong>Full regex support</strong> — the last major language gap</li>
+        <li><strong>perry/ui expansion</strong> — drag and drop, accessibility labels, DatePicker</li>
+        <li><strong>perrysdad maturation</strong> — expanding the self-hosting compiler toward full Perry parity</li>
+        <li><strong>Hub public beta</strong> — opening distributed builds to external users</li>
+      </ul>
+      <p>
+        Follow the progress on{" "}
+        <a href="https://github.com/PerryTS/perry" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          GitHub
+        </a>, read the new docs at{" "}
+        <a href="https://docs.perryts.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">
+          docs.perryts.com
+        </a>, or check the{" "}
+        <Link href="/roadmap" className="text-amber-400 hover:text-amber-300">roadmap</Link>
+        {" "}for the full picture.
+      </p>
+    </>
+  );
+}
+
+/* ─────────────────────────────────────────────
    Content map & page component
    ───────────────────────────────────────────── */
 
@@ -1743,6 +2337,8 @@ const contentMap: Record<string, () => React.JSX.Element> = {
   "plugin-systems-are-a-performance-tax": PluginSystemsContent,
   "compiling-hono-trpc-strapi": CompilingFrameworksContent,
   "all-six-platforms-ui-parity": AllSixPlatformsContent,
+  "from-compiler-to-ecosystem": FromCompilerToEcosystemContent,
+  "the-full-pipeline": TheFullPipelineContent,
 };
 
 export default async function BlogPostPage({

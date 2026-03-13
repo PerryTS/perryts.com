@@ -35,24 +35,28 @@ const sections: RoadmapSection[] = [
         description: "SWC parsing + Cranelift code generation for AOT compilation of TypeScript to native machine code.",
       },
       {
-        title: "macOS native UI (AppKit)",
-        description: "Full AppKit integration — NSWindow, NSView, NSButton, NSTextField, menus, and more.",
+        title: "6-platform native UI with full feature parity",
+        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32 — 20+ widgets, Canvas, Table, system APIs on all platforms.",
       },
       {
-        title: "iOS & iPadOS native UI (UIKit)",
-        description: "UIKit integration for iPhone and iPad — UIViewController, UIView, UIButton, UITableView.",
+        title: "React compatibility layer (perry-react)",
+        description: "Optional bridge: write React/JSX and it compiles to perry/ui widgets underneath. Phase 1 shipped.",
       },
       {
-        title: "Android native UI (JNI + Views)",
-        description: "Android support via JNI — Activity, View, Button, TextView, RecyclerView, and Android lifecycle.",
+        title: "Prisma-compatible ORMs (MySQL, PostgreSQL, SQLite)",
+        description: "Drop-in @prisma/client replacements backed by Rust FFI + sqlx. Full CRUD, transactions, raw SQL — zero runtime overhead.",
       },
       {
-        title: "Linux native UI (GTK4)",
-        description: "GTK4 integration — GtkWindow, GtkBox, GtkButton, GtkEntry, GtkListBox, and CSS theming.",
+        title: "Universal push notifications (perry-push)",
+        description: "APNs, FCM, Web Push, and WNS from a single library with Rust FFI. ES256/RS256 JWT, OAuth 2.0, VAPID.",
       },
       {
-        title: "Windows native UI (Win32)",
-        description: "Win32 API integration — CreateWindowEx, message loop, common controls, and GDI rendering.",
+        title: "Perry Hub + distributed build workers",
+        description: "Cloud build orchestration server with macOS and Linux workers. Code signing, notarization, App Store and Play Store publishing.",
+      },
+      {
+        title: "Pry: native JSON viewer on 5 platforms",
+        description: "Flagship app shipping on Mac App Store and Google Play. Same TypeScript codebase, five native binaries.",
       },
       {
         title: "27+ native npm package implementations",
@@ -75,8 +79,32 @@ const sections: RoadmapSection[] = [
         description: "Build for other platforms from your development machine without needing the target OS.",
       },
       {
-        title: "62/62 tests passing",
-        description: "Comprehensive test suite covering compilation, runtime behavior, and platform-specific features.",
+        title: "Documentation site (docs.perryts.com)",
+        description: "49-page mdBook documentation covering language features, native UI, stdlib, CLI reference, all 6 platforms, and plugins.",
+      },
+      {
+        title: "Homebrew + APT distribution",
+        description: "Install Perry via brew install PerryTS/perry/perry on macOS or apt-get on Debian/Ubuntu. Automated release pipeline via GitHub Actions.",
+      },
+      {
+        title: "Automated App Store & Play Store publishing",
+        description: "perry publish --ios / --macos / --android: automated certificate generation, code signing, provisioning profiles, and store submission with no manual portal visits.",
+      },
+      {
+        title: "perry/widget — Native WidgetKit from TypeScript",
+        description: "Compile TypeScript widget definitions to native SwiftUI WidgetKit extensions. HIR-level render tree emitted as SwiftUI source code.",
+      },
+      {
+        title: "iPad native support",
+        description: "Full iPad support with UIDeviceFamily [1,2], orientation, LaunchScreen storyboard, and device idiom detection.",
+      },
+      {
+        title: "http/https native modules",
+        description: "Client-side HTTP via reqwest: request(), get(), ClientRequest, IncomingMessage — matching the Node.js http API.",
+      },
+      {
+        title: "better-sqlite3 support",
+        description: "Full better-sqlite3 API: new Database(), prepare, exec, run, get, all — with NaN-boxing and named column access.",
       },
     ],
   },
@@ -88,20 +116,24 @@ const sections: RoadmapSection[] = [
     dotColor: "bg-blue-500",
     milestones: [
       {
-        title: "UI widget library expansion",
-        description: "Adding State<string>, SecureField, ProgressView, Alert, DatePicker, and more across all platforms.",
-      },
-      {
-        title: "Performance optimization",
-        description: "Improving string operations, object creation, and memory management for even faster binaries.",
+        title: "perry/ui expansion",
+        description: "Drag and drop, accessibility labels, custom context menus, DatePicker, and more layout primitives across all platforms.",
       },
       {
         title: "Full regex support",
         description: "Complete ECMAScript-compatible regular expression engine compiled to native code.",
       },
       {
-        title: "Stream module",
-        description: "Node.js-compatible Readable, Writable, Transform, and Duplex stream implementations.",
+        title: "Performance optimization",
+        description: "Improving string operations, object creation, and memory management for even faster binaries.",
+      },
+      {
+        title: "Framework compatibility layers",
+        description: "Improving React, Angular, and Ionic bridges as on-ramps — all mapping to perry/ui underneath.",
+      },
+      {
+        title: "perrysdad: self-hosting LLVM compiler",
+        description: "Alternative LLVM IR backend for Perry written in TypeScript, compiled by Perry itself. Classes, enums, closures, and multi-file compilation working.",
       },
     ],
   },
@@ -113,6 +145,10 @@ const sections: RoadmapSection[] = [
     dotColor: "bg-purple-500",
     milestones: [
       {
+        title: "Hub public beta",
+        description: "Opening distributed builds to external users — push TypeScript, get signed native binaries for all platforms.",
+      },
+      {
         title: "WASM compilation target",
         description: "Compile TypeScript to WebAssembly for browser and edge runtime deployment.",
       },
@@ -121,8 +157,8 @@ const sections: RoadmapSection[] = [
         description: "Native thread spawning and shared memory for CPU-intensive workloads.",
       },
       {
-        title: "Package manager integration",
-        description: "First-class integration with npm/yarn/pnpm for dependency resolution and native compilation.",
+        title: "Stream module",
+        description: "Node.js-compatible Readable, Writable, Transform, and Duplex stream implementations.",
       },
       {
         title: "Source maps & debug info",
@@ -150,16 +186,12 @@ const sections: RoadmapSection[] = [
         description: "Write once, compile to native GUI and CLI apps on macOS, iPadOS, iOS, Android, Linux, and Windows.",
       },
       {
-        title: "Full GUI framework parity across all platforms",
-        description: "Every widget, layout, gesture, and animation available on every supported platform.",
+        title: "Full perry/ui framework with layout engine",
+        description: "Advanced layout system, animations, gestures, and accessibility — the most complete native UI toolkit for TypeScript.",
       },
       {
         title: "Hot reload for native UI development",
         description: "Instant preview of UI changes during development without recompiling the entire binary.",
-      },
-      {
-        title: "Perry Cloud",
-        description: "CI/CD service for multi-platform builds — push TypeScript, get native binaries for all platforms.",
       },
     ],
   },

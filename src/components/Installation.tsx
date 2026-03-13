@@ -11,17 +11,36 @@ export function Installation() {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const installCommands = [
-    {
-      id: "clone",
-      label: "Clone & Build",
+  const [installMethod, setInstallMethod] = useState<"homebrew" | "apt" | "source">("homebrew");
+
+  const installMethods = {
+    homebrew: {
+      label: "Homebrew (macOS)",
+      commands: [
+        "brew tap PerryTS/perry",
+        "brew install perry",
+      ],
+      note: "Requires Homebrew. Supports macOS arm64 and x86_64.",
+    },
+    apt: {
+      label: "APT (Debian/Ubuntu)",
+      commands: [
+        "curl -fsSL https://perry.dev/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/perry.gpg",
+        "echo 'deb [signed-by=/usr/share/keyrings/perry.gpg] https://perry.dev/apt stable main' | sudo tee /etc/apt/sources.list.d/perry.list",
+        "sudo apt update && sudo apt install perry",
+      ],
+      note: "Supports x86_64 and arm64 Linux.",
+    },
+    source: {
+      label: "From Source",
       commands: [
         "git clone https://github.com/PerryTS/perry.git",
         "cd perry",
         "cargo build --release",
       ],
+      note: "Requires Rust toolchain. Binary will be at target/release/perry.",
     },
-  ];
+  };
 
   const usageExamples = [
     {
@@ -71,6 +90,21 @@ export function Installation() {
               </span>
               Installation
             </h3>
+            <div className="flex gap-2 mb-4">
+              {(Object.keys(installMethods) as Array<keyof typeof installMethods>).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setInstallMethod(key)}
+                  className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
+                    installMethod === key
+                      ? "bg-perry-500/20 border-perry-500/50 text-perry-400"
+                      : "bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-600"
+                  }`}
+                >
+                  {installMethods[key].label}
+                </button>
+              ))}
+            </div>
             <div className="code-block">
               <div className="flex items-center gap-2 mb-4 text-slate-500">
                 <div className="w-3 h-3 rounded-full bg-red-500/50" />
@@ -78,18 +112,18 @@ export function Installation() {
                 <div className="w-3 h-3 rounded-full bg-green-500/50" />
                 <span className="ml-2 text-xs">terminal</span>
               </div>
-              {installCommands[0].commands.map((cmd, i) => (
+              {installMethods[installMethod].commands.map((cmd, i) => (
                 <div
                   key={i}
                   className="flex items-center justify-between group py-1"
                 >
-                  <code className="text-sm">
+                  <code className="text-sm break-all">
                     <span className="text-slate-500">$</span>{" "}
                     <span className="text-slate-300">{cmd}</span>
                   </code>
                   <button
                     onClick={() => copyToClipboard(cmd, `install-${i}`)}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-500 hover:text-white p-1"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-500 hover:text-white p-1 shrink-0"
                     title="Copy"
                   >
                     {copied === `install-${i}` ? (
@@ -106,8 +140,7 @@ export function Installation() {
               ))}
               <div className="mt-4 pt-4 border-t border-slate-800">
                 <p className="text-sm text-slate-500">
-                  Requires Rust toolchain. Binary will be at{" "}
-                  <code className="text-perry-400">target/release/perry</code>
+                  {installMethods[installMethod].note}
                 </p>
               </div>
             </div>

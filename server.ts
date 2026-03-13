@@ -20,32 +20,44 @@ function mimeType(filePath: string): string {
   return "application/octet-stream";
 }
 
+function mimeTypeFromName(filePath: string): string {
+  const name = filePath.split("/").pop() || "";
+  if (name.includes("opengraph-image")) return "image/png";
+  if (name.includes("apple-icon")) return "image/png";
+  if (name.includes("icon")) return "image/png";
+  return "application/octet-stream";
+}
+
+function sendFile(filePath: string, mime: string, reply: any) {
+  reply.header("content-type", mime).send(fs.readFileSync(filePath, "utf-8"));
+}
+
 app.get("/*", async (req: any, reply: any) => {
-  const urlPath = req.url;
+  const urlPath = (req.url as string).split("?")[0];
   const relative = urlPath.startsWith("/") ? urlPath.slice(1) : urlPath;
   const base = outDir + "/" + relative;
 
   // Try directory index
   const indexPath = base + "/index.html";
   if (fs.existsSync(indexPath)) {
-    const content = fs.readFileSync(indexPath, "utf-8");
-    reply.header("content-type", "text/html; charset=utf-8").send(content);
+    sendFile(indexPath, "text/html; charset=utf-8", reply);
     return;
   }
 
-  // Try exact file (only if relative has a dot = has extension)
-  if (relative.indexOf(".") !== -1 && fs.existsSync(base)) {
-    const content = fs.readFileSync(base, "utf-8");
-    const mime = mimeType(base);
-    reply.header("content-type", mime).send(content);
+  // Try exact file
+  if (relative && fs.existsSync(base) && fs.statSync(base).isFile()) {
+    let mime = mimeType(base);
+    if (mime === "application/octet-stream") {
+      mime = mimeTypeFromName(base);
+    }
+    sendFile(base, mime, reply);
     return;
   }
 
   // Try adding .html
   const htmlPath = base + ".html";
   if (fs.existsSync(htmlPath)) {
-    const content = fs.readFileSync(htmlPath, "utf-8");
-    reply.header("content-type", "text/html; charset=utf-8").send(content);
+    sendFile(htmlPath, "text/html; charset=utf-8", reply);
     return;
   }
 

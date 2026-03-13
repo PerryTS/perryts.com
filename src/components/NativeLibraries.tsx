@@ -25,7 +25,7 @@ export function NativeLibraries() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
         </svg>
       ),
-      packages: ["axios", "node-fetch", "ws", "nodemailer"],
+      packages: ["http", "https", "axios", "node-fetch", "ws", "nodemailer"],
     },
     {
       name: "Data Processing",
@@ -62,7 +62,7 @@ export function NativeLibraries() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            <span className="gradient-text">27+</span> Native npm Packages
+            <span className="gradient-text">30+</span> Native npm Packages
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
             Popular npm packages reimplemented in native Rust. No npm install, no
