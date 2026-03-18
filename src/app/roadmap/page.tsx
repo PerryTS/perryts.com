@@ -35,8 +35,8 @@ const sections: RoadmapSection[] = [
         description: "SWC parsing + Cranelift code generation for AOT compilation of TypeScript to native machine code.",
       },
       {
-        title: "6-platform native UI with full feature parity",
-        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32 — 20+ widgets, Canvas, Table, system APIs on all platforms.",
+        title: "8-target compilation: 6 native platforms + WASM + Web",
+        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32, WebAssembly, and JavaScript — 25+ widgets, Canvas, Table, system APIs across all targets.",
       },
       {
         title: "React compatibility layer (perry-react)",
@@ -59,7 +59,7 @@ const sections: RoadmapSection[] = [
         description: "Flagship app shipping on Mac App Store and Google Play. Same TypeScript codebase, five native binaries.",
       },
       {
-        title: "27+ native npm package implementations",
+        title: "30+ native npm package implementations",
         description: "mysql2, pg, mongodb, axios, bcrypt, express, ws, jsonwebtoken, uuid, chalk, and more — compiled natively.",
       },
       {
@@ -88,7 +88,7 @@ const sections: RoadmapSection[] = [
       },
       {
         title: "Automated App Store & Play Store publishing",
-        description: "perry publish --ios / --macos / --android: automated certificate generation, code signing, provisioning profiles, and store submission with no manual portal visits.",
+        description: "perry publish ios / macos / android: automated certificate generation, code signing, provisioning profiles, and store submission with no manual portal visits.",
       },
       {
         title: "perry/widget — Native WidgetKit from TypeScript",
@@ -105,6 +105,46 @@ const sections: RoadmapSection[] = [
       {
         title: "better-sqlite3 support",
         description: "Full better-sqlite3 API: new Database(), prepare, exec, run, get, all — with NaN-boxing and named column access.",
+      },
+      {
+        title: "WASM compilation target",
+        description: "Compile TypeScript to WebAssembly bytecode. Self-contained HTML output, full perry/ui support via DOM bridge, NaN-boxing, async/await, class system.",
+      },
+      {
+        title: "Web/JavaScript compilation target",
+        description: "Compile TypeScript to optimized JavaScript with Rust-native minification and name obfuscation. Pure JS output for browser deployment.",
+      },
+      {
+        title: "Geisterhand: cross-platform UI testing",
+        description: "In-process testing framework with embedded HTTP server. Programmatic widget interaction, screenshot capture, and chaos/fuzz testing on all 5 native platforms.",
+      },
+      {
+        title: "perry run — one-step compile and launch",
+        description: "Auto-detects entry file, target platform, and connected devices. Interactive prompts for multiple targets, live console streaming, remote build fallback.",
+      },
+      {
+        title: "Enhanced type inference",
+        description: "Infers types from literals, binary ops, variable propagation, and method returns. Optional tsgo IPC integration for full type checking.",
+      },
+      {
+        title: "Compile native npm packages",
+        description: "perry.compilePackages config: compile pure TS/JS npm packages natively instead of V8. Deduplication across nested node_modules.",
+      },
+      {
+        title: "Design system bridge (perry-styling)",
+        description: "Token codegen CLI, typed PerryTheme objects, flat-primitive styling helpers, compile-time platform constants via __platform__.",
+      },
+      {
+        title: "Telemetry & auto-update",
+        description: "Opt-in anonymous usage statistics, background version check on every CLI invocation with 24h cache, perry update command.",
+      },
+      {
+        title: "CLI: platform as positional argument",
+        description: "perry run ios, perry publish macos — platform is now a positional argument instead of boolean flags, making commands more intuitive.",
+      },
+      {
+        title: "Runtime performance optimizations",
+        description: "memcmp-based string comparison, interned typeof results, inline .length access, direct field access on known types, and reduced NaN-boxing for strings, closures, and private fields.",
       },
     ],
   },
@@ -124,8 +164,8 @@ const sections: RoadmapSection[] = [
         description: "Complete ECMAScript-compatible regular expression engine compiled to native code.",
       },
       {
-        title: "Performance optimization",
-        description: "Improving string operations, object creation, and memory management for even faster binaries.",
+        title: "Further performance optimization",
+        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.2.194 shipped memcmp strings, inline .length, direct field access, and reduced NaN-boxing.",
       },
       {
         title: "Framework compatibility layers",
@@ -147,10 +187,6 @@ const sections: RoadmapSection[] = [
       {
         title: "Hub public beta",
         description: "Opening distributed builds to external users — push TypeScript, get signed native binaries for all platforms.",
-      },
-      {
-        title: "WASM compilation target",
-        description: "Compile TypeScript to WebAssembly for browser and edge runtime deployment.",
       },
       {
         title: "Multi-threading support",
@@ -182,8 +218,8 @@ const sections: RoadmapSection[] = [
     dotColor: "bg-gradient-to-br from-amber-500 to-orange-500",
     milestones: [
       {
-        title: "One TypeScript codebase → native apps on all 6 platforms",
-        description: "Write once, compile to native GUI and CLI apps on macOS, iPadOS, iOS, Android, Linux, and Windows.",
+        title: "One TypeScript codebase → every platform and the web",
+        description: "Write once, compile to native GUI and CLI apps on macOS, iPadOS, iOS, Android, Linux, Windows, WebAssembly, and the Web.",
       },
       {
         title: "Full perry/ui framework with layout engine",

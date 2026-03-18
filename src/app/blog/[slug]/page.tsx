@@ -782,7 +782,7 @@ function BuildingPryContent() {
       </p>
       <ol className="list-decimal list-inside">
         <li>Write TypeScript in your editor (VS Code, Zed, Neovim, whatever you prefer)</li>
-        <li>Run <code className="text-perry-400">perry build pry.ts</code></li>
+        <li>Run <code className="text-perry-400">perry compile pry.ts</code></li>
         <li>Execute <code className="text-perry-400">./pry test.json</code></li>
         <li>Iterate</li>
       </ol>
@@ -2108,7 +2108,7 @@ function TheFullPipelineContent() {
       <h2>Automated App Store Publishing</h2>
       <p>
         This is the change that collapses the most manual steps. Running{" "}
-        <code className="text-amber-400">perry publish --ios</code> now handles the entire iOS distribution
+        <code className="text-amber-400">perry publish ios</code> now handles the entire iOS distribution
         pipeline automatically:
       </p>
       <ol className="list-decimal list-inside space-y-1">

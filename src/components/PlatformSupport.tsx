@@ -66,6 +66,28 @@ export function PlatformSupport() {
       status: "Stable",
       statusColor: "text-green-400",
     },
+    {
+      name: "WASM",
+      framework: "WebAssembly",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M2 12l2-2 2 2-2 2-2-2zm4-4l2-2 2 2-2 2-2-2zm0 8l2-2 2 2-2 2-2-2zm4-4l2-2 2 2-2 2-2-2zm4-4l2-2 2 2-2 2-2-2zm0 8l2-2 2 2-2 2-2-2zm4-4l2-2 2 2-2 2-2-2z" />
+        </svg>
+      ),
+      status: "Stable",
+      statusColor: "text-green-400",
+    },
+    {
+      name: "Web",
+      framework: "JavaScript",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 3h18v18H3V3zm16.525 13.707c-.131-.821-.666-1.511-2.252-2.155-.552-.259-1.165-.438-1.349-.854-.068-.248-.078-.382-.034-.529.113-.484.687-.629 1.137-.495.293.086.567.317.733.646.775-.507.775-.507 1.316-.844-.2-.308-.303-.446-.438-.576-.609-.646-1.429-.826-2.295-.655a2.557 2.557 0 00-.664.291c-.384.256-.745.652-.879 1.091-.261.81-.108 1.98.488 2.526.593.502 1.463.8 1.975 1.107.357.217.612.553.549.953-.092.573-.663.739-1.197.671-.551-.093-.855-.365-1.186-.829l-1.313.78c.135.304.285.432.512.713.932.93 3.257 1.066 3.672-.433.015-.055.137-.516.056-.95zm-7.93-2.234l1.583 3.705.008.018h1.227l1.893-4.626h-1.332l-1.14 3.159-1.101-3.159H9.993l-1.136 3.159-1.109-3.159H6.375L8.27 15.48h1.218l.088-.225 1.019-2.782z" />
+        </svg>
+      ),
+      status: "Stable",
+      statusColor: "text-green-400",
+    },
   ];
 
   return (
@@ -76,12 +98,12 @@ export function PlatformSupport() {
             Native on <span className="gradient-text">Every Platform</span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Perry compiles your TypeScript to native UI frameworks — not web views, not Electron.
-            Real native widgets on every platform.
+            Perry compiles your TypeScript to native UI frameworks, WebAssembly, and JavaScript — not web views, not Electron.
+            Real native widgets on every platform, plus the web.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           {platforms.map((platform) => (
             <div
               key={platform.name}

@@ -13,7 +13,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
           <span className="text-sm text-amber-300">
-            v0.2.164 — All 6 platforms, full UI feature parity
+            v0.2.194 — Runtime performance, CLI improvements
           </span>
         </div>
 
@@ -27,7 +27,7 @@ export function Hero() {
         {/* Subheadline */}
         <p className="text-xl sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-12">
           Perry compiles TypeScript to native GUI and CLI apps on{" "}
-          <span className="text-slate-300">macOS, iPadOS, iOS, Android, Linux, and Windows.</span>{" "}
+          <span className="text-slate-300">macOS, iPadOS, iOS, Android, Linux, Windows, WebAssembly, and the Web.</span>{" "}
           No runtime. No Electron. Just native binaries.
         </p>
 
@@ -76,11 +76,11 @@ export function Hero() {
             <div className="space-y-2">
               <p>
                 <span className="text-slate-500">$</span>{" "}
-                <span className="text-cyan-400">perry</span> build main.ts
+                <span className="text-cyan-400">perry</span> compile main.ts
               </p>
               <p className="text-slate-500">Compiling main.ts...</p>
               <p className="text-green-400">
-                ✓ Built executable: main (2.3 MB)
+                ✓ Compiled executable: main (2.3 MB)
               </p>
               <p className="mt-4">
                 <span className="text-slate-500">$</span> ./main
@@ -93,11 +93,11 @@ export function Hero() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">6</div>
-            <div className="text-slate-500 text-sm mt-1">Platforms</div>
+            <div className="text-3xl font-bold gradient-text">8</div>
+            <div className="text-slate-500 text-sm mt-1">Targets</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">20+</div>
+            <div className="text-3xl font-bold gradient-text">25+</div>
             <div className="text-slate-500 text-sm mt-1">Native UI widgets</div>
           </div>
           <div className="text-center">
