@@ -13,7 +13,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
           <span className="text-sm text-amber-300">
-            v0.2.194 — Runtime performance, CLI improvements
+            v0.2.197 — Windows cross-compilation, iOS game loops, crash reporting
           </span>
         </div>
 

@@ -75,8 +75,8 @@ const sections: RoadmapSection[] = [
         description: "Embed V8 to run uncompiled JavaScript npm packages when native implementations aren't available.",
       },
       {
-        title: "Cross-compilation (macOS → Linux, macOS → iOS)",
-        description: "Build for other platforms from your development machine without needing the target OS.",
+        title: "Cross-compilation (macOS → Linux, macOS → iOS, Linux → Windows)",
+        description: "Build for other platforms from your development machine without needing the target OS. Linux → Windows via lld-link and xwin-style sysroot.",
       },
       {
         title: "Documentation site (docs.perryts.com)",
@@ -146,6 +146,30 @@ const sections: RoadmapSection[] = [
         title: "Runtime performance optimizations",
         description: "memcmp-based string comparison, interned typeof results, inline .length access, direct field access on known types, and reduced NaN-boxing for strings, closures, and private fields.",
       },
+      {
+        title: "Cross-compile to Windows from Linux",
+        description: "Build Windows executables from Linux using lld-link and PERRY_WINDOWS_SYSROOT. Runtime target detection replaces compile-time #[cfg] checks for true cross-compilation.",
+      },
+      {
+        title: "iOS game loop support",
+        description: "UIApplicationMain on main thread, user code on background thread via --features ios-game-loop. Enables blocking game loop patterns (while !shouldClose) on iOS where UIKit must own the main thread.",
+      },
+      {
+        title: "Crash reporting (crash.log)",
+        description: "Panic hooks and signal handlers (SIGSEGV/SIGBUS/SIGABRT) write crash details to ~/.hone/crash.log for Chirp telemetry. Caught panics clear the log.",
+      },
+      {
+        title: "Two-stage Hub build pipeline",
+        description: "Linux workers cross-compile Windows artifacts, Hub re-queues for Windows workers to sign and package. Azure VM auto-startup for Windows sign workers.",
+      },
+      {
+        title: "Cross-platform menu APIs",
+        description: "menuClear and menuAddStandardAction extended from macOS-only to all 6 native platforms.",
+      },
+      {
+        title: "Comprehensive perry.toml and Geisterhand documentation",
+        description: "Complete perry.toml reference with bundle ID resolution, build number auto-increment, and CI/CD examples. Full Geisterhand rewrite with API docs and test automation patterns.",
+      },
     ],
   },
   {
@@ -165,7 +189,7 @@ const sections: RoadmapSection[] = [
       },
       {
         title: "Further performance optimization",
-        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.2.194 shipped memcmp strings, inline .length, direct field access, and reduced NaN-boxing.",
+        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.2.197 shipped memcmp strings, inline .length, direct field access, reduced NaN-boxing, and 50+ correctness fixes.",
       },
       {
         title: "Framework compatibility layers",
@@ -173,7 +197,7 @@ const sections: RoadmapSection[] = [
       },
       {
         title: "perrysdad: self-hosting LLVM compiler",
-        description: "Alternative LLVM IR backend for Perry written in TypeScript, compiled by Perry itself. Classes, enums, closures, and multi-file compilation working.",
+        description: "Alternative LLVM IR backend for Perry written in TypeScript, compiled by Perry itself. 68/68 deterministic tests passing (100% parity). Phase 6: async/await, generators, interface dispatch.",
       },
     ],
   },

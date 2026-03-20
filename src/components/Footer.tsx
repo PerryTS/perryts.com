@@ -64,6 +64,16 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href="https://docs.perryts.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Documentation
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://geisterhand.io"
                   target="_blank"
                   rel="noopener noreferrer"

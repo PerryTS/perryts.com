@@ -42,6 +42,14 @@ export function Header() {
               Publish
             </Link>
             <a
+              href="https://docs.perryts.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              Docs
+            </a>
+            <a
               href="https://github.com/PerryTS/perry"
               target="_blank"
               rel="noopener noreferrer"
@@ -118,6 +126,14 @@ export function Header() {
               >
                 Publish
               </Link>
+              <a
+                href="https://docs.perryts.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                Docs
+              </a>
               <a
                 href="https://github.com/PerryTS/perry"
                 className="text-slate-400 hover:text-white transition-colors"

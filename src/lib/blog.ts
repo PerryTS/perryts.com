@@ -82,6 +82,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["distribution", "documentation", "WidgetKit", "milestone"],
     content: () => null,
   },
+  {
+    slug: "cross-compile-windows-game-loops-and-parity",
+    title: "Cross-Compile to Windows, iOS Game Loops, and 100% Test Parity",
+    date: "2026-03-20",
+    excerpt:
+      "103 commits in one week: cross-compile to Windows from Linux via lld-link, iOS game loop support, crash reporting, a two-stage Hub build pipeline, and the self-hosting compiler hits 68/68 deterministic test parity.",
+    tags: ["compiler", "cross-compilation", "infrastructure", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
