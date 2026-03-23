@@ -80,6 +80,26 @@ export function Features() {
       description:
         "Modules compose at build time — no runtime plugin overhead, no IPC boundaries. Your dependencies become direct native function calls in the final binary.",
     },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+      title: "True Multi-Threading",
+      description:
+        "Real OS threads with parallelMap, parallelFilter, and spawn. Compile-time safety rejects mutable captures — no SharedArrayBuffer, no workers, just threads.",
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+        </svg>
+      ),
+      title: "Compile-Time i18n",
+      description:
+        "Automatic string extraction, CLDR plural rules for 30+ locales, compile-time validation. Translations baked into the binary with near-zero runtime lookup.",
+    },
   ];
 
   return (

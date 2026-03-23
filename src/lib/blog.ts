@@ -91,6 +91,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["compiler", "cross-compilation", "infrastructure", "milestone"],
     content: () => null,
   },
+  {
+    slug: "true-multithreading-i18n-and-watchos",
+    title: "True Multi-Threading, Compile-Time i18n, and watchOS",
+    date: "2026-03-23",
+    excerpt:
+      "Perry v0.4.0: real OS threads with compile-time safety, a zero-ceremony internationalization system for 30+ locales, watchOS as the 9th compilation target, audio and camera APIs, and a parallel compiler pipeline.",
+    tags: ["threading", "i18n", "watchOS", "compiler", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

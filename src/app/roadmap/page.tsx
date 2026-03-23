@@ -35,8 +35,8 @@ const sections: RoadmapSection[] = [
         description: "SWC parsing + Cranelift code generation for AOT compilation of TypeScript to native machine code.",
       },
       {
-        title: "8-target compilation: 6 native platforms + WASM + Web",
-        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32, WebAssembly, and JavaScript — 25+ widgets, Canvas, Table, system APIs across all targets.",
+        title: "9-target compilation: 7 native platforms + WASM + Web",
+        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32, SwiftUI (watchOS), WebAssembly, and JavaScript — 25+ widgets, Canvas, Table, system APIs across all targets.",
       },
       {
         title: "React compatibility layer (perry-react)",
@@ -170,6 +170,38 @@ const sections: RoadmapSection[] = [
         title: "Comprehensive perry.toml and Geisterhand documentation",
         description: "Complete perry.toml reference with bundle ID resolution, build number auto-increment, and CI/CD examples. Full Geisterhand rewrite with API docs and test automation patterns.",
       },
+      {
+        title: "True multi-threading (v0.4.0)",
+        description: "Real OS threads via perry/thread: parallelMap, parallelFilter, and spawn. Compile-time mutable capture rejection for thread safety. Thread-local arenas, SerializedValue deep-copy, parallel compiler pipeline.",
+      },
+      {
+        title: "Compile-time i18n system (v0.3.0)",
+        description: "Zero-ceremony internationalization: auto-extract string literals, CLDR plural rules for 30+ locales, compile-time validation, translations baked into binary. perry i18n extract CLI, format wrappers, native locale detection.",
+      },
+      {
+        title: "watchOS native app support (v0.3.2)",
+        description: "Full watchOS compilation target with data-driven SwiftUI renderer, 15 supported widgets, perry run watchos with simulator auto-detection, and perry setup watchos wizard.",
+      },
+      {
+        title: "perry/widget — 4-platform widget support",
+        description: "Expanded from iOS-only to iOS, Android (Glance), watchOS, and Wear OS (Tiles). Four new compile targets for widget extensions.",
+      },
+      {
+        title: "Audio & camera capture APIs",
+        description: "perry/system audio capture (AVAudioEngine, AudioRecord, PulseAudio, WASAPI, Web Audio) and perry/ui camera capture (AVCaptureSession) with A-weighted dB measurement and color sampling.",
+      },
+      {
+        title: "perry run android — full APK pipeline",
+        description: "One-step compile, package, assembleDebug, install, and launch for Android apps with Gradle integration.",
+      },
+      {
+        title: "Push notifications & StoreKit packages",
+        description: "perry/push (APNs permission, token retrieval, badge count) and perry/storekit (StoreKit 2 purchases, subscriptions, receipt validation) as first-party native packages.",
+      },
+      {
+        title: "Cranelift 0.121 + parallel compilation",
+        description: "Upgraded from Cranelift 0.113 to 0.121. Module codegen, transform passes, and symbol scanning parallelized via rayon across all CPU cores.",
+      },
     ],
   },
   {
@@ -189,7 +221,7 @@ const sections: RoadmapSection[] = [
       },
       {
         title: "Further performance optimization",
-        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.2.197 shipped memcmp strings, inline .length, direct field access, reduced NaN-boxing, and 50+ correctness fixes.",
+        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.4.0 shipped parallel compilation, TimSort, Cranelift 0.121, and Windows function splitting.",
       },
       {
         title: "Framework compatibility layers",
@@ -211,10 +243,6 @@ const sections: RoadmapSection[] = [
       {
         title: "Hub public beta",
         description: "Opening distributed builds to external users — push TypeScript, get signed native binaries for all platforms.",
-      },
-      {
-        title: "Multi-threading support",
-        description: "Native thread spawning and shared memory for CPU-intensive workloads.",
       },
       {
         title: "Stream module",
