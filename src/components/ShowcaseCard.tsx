@@ -9,27 +9,28 @@ export function ShowcaseCard({ project }: { project: ShowcaseProject }) {
   const isExternal = !project.hasFeaturePage;
 
   const content = (
-    <div className="feature-card block group h-full flex flex-col">
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex flex-wrap gap-2">
-          {project.platforms.map((platform) => (
-            <span
-              key={platform}
-              className="text-xs px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
-            >
-              {platform}
-            </span>
-          ))}
-        </div>
-        {project.logoUrl && (
+    <div className="feature-card block group h-full flex flex-col !p-0 overflow-hidden">
+      {project.logoUrl && (
+        <div className="w-full h-28 flex items-center justify-center bg-white/5 border-b border-white/10 px-6">
           <Image
             src={project.logoUrl}
             alt={`${project.name} logo`}
-            width={40}
-            height={40}
-            className="rounded-lg shrink-0 ml-3"
+            width={200}
+            height={80}
+            className="max-h-16 w-auto object-contain"
           />
-        )}
+        </div>
+      )}
+      <div className="p-5 flex flex-col flex-1">
+      <div className="flex flex-wrap gap-2 mb-3">
+        {project.platforms.map((platform) => (
+          <span
+            key={platform}
+            className="text-xs px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
+          >
+            {platform}
+          </span>
+        ))}
       </div>
       <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-perry-400 transition-colors">
         {project.name}
@@ -45,6 +46,7 @@ export function ShowcaseCard({ project }: { project: ShowcaseProject }) {
             {tag}
           </span>
         ))}
+      </div>
       </div>
     </div>
   );
