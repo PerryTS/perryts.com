@@ -7,6 +7,7 @@ export interface ShowcaseProject {
   githubUrl: string;
   tags: string[];
   hasFeaturePage: boolean;
+  logoUrl?: string;
 }
 
 export const showcaseProjects: ShowcaseProject[] = [
@@ -42,6 +43,42 @@ export const showcaseProjects: ShowcaseProject[] = [
     githubUrl: "https://github.com/PerryTS/perry-starter",
     tags: ["template", "starter"],
     hasFeaturePage: false,
+  },
+  {
+    slug: "mango",
+    name: "Mango",
+    tagline: "Native MongoDB GUI that starts instantly",
+    description:
+      "A fast, native MongoDB database management tool with connection management, query builder, inline document editing, and index viewer. ~7 MB binary, <100 MB RAM, <1s cold start.",
+    platforms: ["macOS", "Windows", "Linux", "iOS", "Android"],
+    githubUrl: "https://github.com/MangoQuery/app",
+    tags: ["database", "native-ui", "MongoDB"],
+    hasFeaturePage: false,
+    logoUrl: "/showcase/mango-logo.svg",
+  },
+  {
+    slug: "hone",
+    name: "Hone",
+    tagline: "Native, AI-powered code editor",
+    description:
+      "A native code editor with AI-first architecture, built-in terminal, Git integration, LSP support, and cross-device sync. Sub-second startup, <100 MB RAM, <50 MB binary.",
+    platforms: ["macOS", "Windows", "Linux", "iOS", "Android", "Web"],
+    githubUrl: "https://hone.codes",
+    tags: ["developer-tools", "AI", "code-editor"],
+    hasFeaturePage: false,
+    logoUrl: "/showcase/hone-icon.svg",
+  },
+  {
+    slug: "dbmeter",
+    name: "dB Meter",
+    tagline: "Simple sound level measurement app",
+    description:
+      "Real-time decibel measurement with 60fps updates, color-coded feedback, live waveform display, and per-device calibration. One-time purchase, no subscriptions.",
+    platforms: ["iOS", "macOS", "Android"],
+    githubUrl: "https://dbmeter.app",
+    tags: ["audio", "utility", "native-ui"],
+    hasFeaturePage: false,
+    logoUrl: "/showcase/dbmeter-icon.png",
   },
 ];
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ShowcaseProject } from "@/lib/showcase";
 
@@ -9,15 +10,26 @@ export function ShowcaseCard({ project }: { project: ShowcaseProject }) {
 
   const content = (
     <div className="feature-card block group h-full flex flex-col">
-      <div className="flex flex-wrap gap-2 mb-3">
-        {project.platforms.map((platform) => (
-          <span
-            key={platform}
-            className="text-xs px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
-          >
-            {platform}
-          </span>
-        ))}
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex flex-wrap gap-2">
+          {project.platforms.map((platform) => (
+            <span
+              key={platform}
+              className="text-xs px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
+            >
+              {platform}
+            </span>
+          ))}
+        </div>
+        {project.logoUrl && (
+          <Image
+            src={project.logoUrl}
+            alt={`${project.name} logo`}
+            width={40}
+            height={40}
+            className="rounded-lg shrink-0 ml-3"
+          />
+        )}
       </div>
       <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-perry-400 transition-colors">
         {project.name}
