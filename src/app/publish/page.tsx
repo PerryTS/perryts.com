@@ -15,10 +15,6 @@ export default function PublishPage() {
       <Header />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-2 mb-8">
-            <span className="text-sm text-amber-300">Coming soon</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">
             <span className="gradient-text">Perry Publish</span>
           </h1>
@@ -28,6 +24,18 @@ export default function PublishPage() {
             Publish handles code signing, notarization, packaging, and
             submission — so you can focus on your code.
           </p>
+
+          <div className="code-block text-left mb-12 max-w-lg mx-auto">
+            <code className="text-amber-400">$ perry publish ios</code>
+            <br />
+            <span className="text-slate-500">  Building for iOS...</span>
+            <br />
+            <span className="text-slate-500">  Signing with your certificate...</span>
+            <br />
+            <span className="text-slate-500">  Verifying — app launches successfully</span>
+            <br />
+            <span className="text-green-400">  Published to App Store Connect.</span>
+          </div>
 
           <div className="grid sm:grid-cols-3 gap-6 mb-16">
             <div className="feature-card text-center">
@@ -46,9 +54,9 @@ export default function PublishPage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold mb-1">Build & Sign</h3>
+              <h3 className="font-semibold mb-1">Build &amp; Sign</h3>
               <p className="text-sm text-slate-500">
-                macOS, iOS, Android, Windows
+                macOS, iOS, Android, Windows, Linux
               </p>
             </div>
 
@@ -70,7 +78,7 @@ export default function PublishPage() {
               </div>
               <h3 className="font-semibold mb-1">Distribute</h3>
               <p className="text-sm text-slate-500">
-                App Store, Play Store, direct
+                App Store, Play Store, direct download
               </p>
             </div>
 
@@ -92,31 +100,32 @@ export default function PublishPage() {
               </div>
               <h3 className="font-semibold mb-1">Verify</h3>
               <p className="text-sm text-slate-500">
-                Geisterhand cross-platform testing
+                AI-powered cross-platform testing
               </p>
             </div>
           </div>
 
-          <p className="text-slate-500 text-sm mb-8">
-            Free for open-source projects. Team plans coming soon.
-          </p>
-
-          <Link href="/" className="btn-secondary inline-flex items-center gap-2">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 16l-4-4m0 0l4-4m-4 4h18"
-              />
-            </svg>
-            Back to Home
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/pricing" className="btn-primary inline-flex items-center justify-center gap-2">
+              See pricing
+            </Link>
+            <Link href="/" className="btn-secondary inline-flex items-center justify-center gap-2">
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 16l-4-4m0 0l4-4m-4 4h18"
+                />
+              </svg>
+              Back to Home
+            </Link>
+          </div>
         </div>
       </section>
       <Footer />
