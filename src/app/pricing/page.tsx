@@ -75,7 +75,7 @@ export default function PricingPage() {
                 <Feature>All platforms (macOS, iOS, Android, Windows, Linux)</Feature>
                 <Feature>Code signing &amp; notarization</Feature>
                 <Feature>App Store &amp; Play Store submission</Feature>
-                <Feature>One project per device (no account)</Feature>
+                <Feature>Unlimited projects (with free account)</Feature>
               </ul>
               <Link
                 href="https://docs.perryts.com/getting-started"
@@ -165,12 +165,12 @@ export default function PricingPage() {
                   </tr>
                   <tr className="border-b border-white/5">
                     <td className="py-3 pr-4 text-slate-400">Projects</td>
-                    <td className="py-3 px-4 text-slate-300">1 (device-bound)</td>
+                    <td className="py-3 px-4 text-slate-300">Unlimited*</td>
                     <td className="py-3 px-4 text-slate-300">Unlimited</td>
                   </tr>
                   <tr className="border-b border-white/5">
                     <td className="py-3 pr-4 text-slate-400">Account required</td>
-                    <td className="py-3 px-4 text-slate-300">No</td>
+                    <td className="py-3 px-4 text-slate-300">No (1 project) / GitHub (multiple)</td>
                     <td className="py-3 px-4 text-slate-300">Yes (GitHub)</td>
                   </tr>
                   <tr>
@@ -233,9 +233,9 @@ export default function PricingPage() {
                 </h3>
                 <p className="text-slate-400 text-sm">
                   No. Your first <code className="text-amber-400/80">perry publish</code> just
-                  works — no signup, no payment. You get a device-bound license for one
-                  project with 15 publishes per month. Create a free account to publish
-                  multiple projects.
+                  works — no signup, no payment. You get 15 publishes per month. To publish
+                  multiple projects, run <code className="text-amber-400/80">perry login</code> to
+                  create a free GitHub-linked account. No payment needed.
                 </p>
               </div>
               <div>
