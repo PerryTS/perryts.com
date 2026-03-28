@@ -13,7 +13,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
           <span className="text-sm text-amber-300">
-            v0.4.0 — True multi-threading, compile-time i18n, watchOS support
+            v0.4.24 — tvOS target, cross-compile iOS/macOS from Linux, perry login
           </span>
         </div>
 
@@ -27,7 +27,7 @@ export function Hero() {
         {/* Subheadline */}
         <p className="text-xl sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-12">
           Perry compiles TypeScript to native GUI and CLI apps on{" "}
-          <span className="text-slate-300">macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, WebAssembly, and the Web.</span>{" "}
+          <span className="text-slate-300">macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</span>{" "}
           No runtime. No Electron. Just native binaries.
         </p>
 
@@ -93,7 +93,7 @@ export function Hero() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">9</div>
+            <div className="text-3xl font-bold gradient-text">10</div>
             <div className="text-slate-500 text-sm mt-1">Targets</div>
           </div>
           <div className="text-center">

@@ -100,6 +100,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["threading", "i18n", "watchOS", "compiler", "milestone"],
     content: () => null,
   },
+  {
+    slug: "tvos-cross-compile-and-perry-login",
+    title: "tvOS, Cross-Compile iOS from Linux, and Perry Login",
+    date: "2026-03-28",
+    excerpt:
+      "Perry v0.4.24: tvOS as the 10th compilation target, cross-compile iOS and macOS from Linux via ld64.lld, perry login with usage-based billing, Windows UI overhaul, macOS notarization, and 120 commits in 5 days.",
+    tags: ["tvOS", "cross-compilation", "billing", "Windows", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

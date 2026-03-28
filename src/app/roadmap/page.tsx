@@ -35,8 +35,8 @@ const sections: RoadmapSection[] = [
         description: "SWC parsing + Cranelift code generation for AOT compilation of TypeScript to native machine code.",
       },
       {
-        title: "9-target compilation: 7 native platforms + WASM + Web",
-        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32, SwiftUI (watchOS), WebAssembly, and JavaScript — 25+ widgets, Canvas, Table, system APIs across all targets.",
+        title: "10-target compilation: 8 native platforms + WASM + Web",
+        description: "AppKit, UIKit, Android Views (JNI), GTK4, Win32, SwiftUI (watchOS/tvOS), WebAssembly, and JavaScript — 25+ widgets, Canvas, Table, system APIs across all targets.",
       },
       {
         title: "React compatibility layer (perry-react)",
@@ -202,6 +202,42 @@ const sections: RoadmapSection[] = [
         title: "Cranelift 0.121 + parallel compilation",
         description: "Upgraded from Cranelift 0.113 to 0.121. Module codegen, transform passes, and symbol scanning parallelized via rayon across all CPU cores.",
       },
+      {
+        title: "tvOS (Apple TV) target (v0.4.5)",
+        description: "10th compilation target. Full tvOS support with SwiftUI renderer, same codebase as iOS/watchOS apps.",
+      },
+      {
+        title: "Cross-compile iOS/macOS from Linux (v0.4.23–v0.4.24)",
+        description: "Build iOS and macOS binaries from Linux using ld64.lld. Framework linking, -lobjc, CoreGraphics/Metal/IOKit, and Mach-O codegen triple.",
+      },
+      {
+        title: "perry login + usage-based billing (v0.4.14)",
+        description: "GitHub OAuth login flow, API tokens, free tier (15 builds/month), Pro tier via Polar.sh. Dashboard at app.perryts.com with usage tracking.",
+      },
+      {
+        title: "Hub parallel builds",
+        description: "Slot-based dispatch with concurrent workers. Workers report max_concurrent capacity, artifacts served as base64 downloads.",
+      },
+      {
+        title: "Windows UI overhaul (v0.4.8–v0.4.13)",
+        description: "DPI-aware scaling, GDI gradient fills, PNG/JPEG image loading, launcher-style window APIs, global hotkeys, app icons, reentrancy-safe layout.",
+      },
+      {
+        title: "macOS notarization + GCloud KMS signing",
+        description: "--notarize flag for perry publish macos with Developer ID certificate. GCloud KMS code signing for Windows builds.",
+      },
+      {
+        title: "perry/appstorereview package",
+        description: "Native app store review prompts: SKStoreReviewController (iOS) and Play In-App Review API (Android).",
+      },
+      {
+        title: "Performance: native fcmp, string append, short-circuit (v0.4.14)",
+        description: "Native floating-point comparison (mandelbrot 30% faster), in-place string append (125x faster), short-circuit AND/OR, negative literal folding at HIR level.",
+      },
+      {
+        title: "iOS App Store readiness (v0.4.24)",
+        description: "Full Info.plist with all Apple-required keys, CFBundleIcons, version/build from perry.toml, UILaunchScreen, provisioning profiles for TestFlight.",
+      },
     ],
   },
   {
@@ -221,7 +257,7 @@ const sections: RoadmapSection[] = [
       },
       {
         title: "Further performance optimization",
-        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.4.0 shipped parallel compilation, TimSort, Cranelift 0.121, and Windows function splitting.",
+        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.4.14 shipped native fcmp (30% faster mandelbrot), 125x string append, short-circuit AND/OR, and negative literal folding.",
       },
       {
         title: "Framework compatibility layers",
