@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "Về trang chủ",
+    "viewOnGithub": "Xem trên GitHub",
+    "getStarted": "Bắt đầu",
+    "readTheBlogPost": "Đọc bài viết",
+    "backToShowcase": "Quay lại Showcase",
+    "backToBlog": "Quay lại Blog",
+    "seePricing": "Xem bảng giá",
+    "terminal": "terminal",
+    "comingSoon": "sắp ra mắt"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "Blog",
+    "roadmap": "Lộ trình",
+    "publish": "Xuất bản",
+    "overview": "Tổng quan",
+    "pricing": "Bảng giá",
+    "docs": "Tài liệu",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — target tvOS, biên dịch chéo iOS/macOS từ Linux, perry login",
+    "headline1": "Một mã nguồn. Mọi nền tảng.",
+    "headline2": "Hiệu năng gốc.",
+    "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
+    "getStarted": "Bắt đầu",
+    "viewOnGithub": "Xem trên GitHub",
+    "compiling": "Đang biên dịch main.ts...",
+    "compiled": "✓ Tệp thực thi đã biên dịch: main (2,3 MB)",
+    "targetsLabel": "Mục tiêu",
+    "widgetsLabel": "Widget UI gốc",
+    "startupLabel": "Thời gian khởi động",
+    "appStore": "App Store",
+    "readyLabel": "Sẵn sàng"
+  },
+  "features": {
+    "title": "Tại sao chọn <brand>Perry</brand>?",
+    "subtitle": "Mọi thứ bạn cần để biên dịch TypeScript thành ứng dụng gốc",
+    "noRuntime": {
+      "title": "Không cần Runtime",
+      "description": "Tạo ra tệp thực thi gốc độc lập. Không Node.js, không V8, không phụ thuộc runtime. Chỉ một binary duy nhất chạy được ở mọi nơi."
+    },
+    "fastCompilation": {
+      "title": "Biên dịch nhanh",
+      "description": "Biên dịch trực tiếp TypeScript sang mã gốc sử dụng SWC để phân tích cú pháp và Cranelift để sinh mã. Không có JavaScript trung gian."
+    },
+    "smallBinaries": {
+      "title": "Binary nhỏ gọn",
+      "description": "Binary đầu ra thường chỉ 2-5 MB. Với V8 runtime tùy chọn cho các gói npm JS, 15-20 MB. Gửi ít hơn, triển khai nhanh hơn."
+    },
+    "typeSafe": {
+      "title": "An toàn kiểu",
+      "description": "Tận dụng hệ thống kiểu của TypeScript để tối ưu hóa. Kiểu giúp tạo mã tốt hơn thông qua monomorphization."
+    },
+    "stdLib": {
+      "title": "Thư viện chuẩn toàn diện",
+      "description": "Triển khai gốc tích hợp sẵn của fs, path, crypto, os, Buffer, child_process và nhiều hơn nữa. Sử dụng các API Node.js quen thuộc."
+    },
+    "v8Runtime": {
+      "title": "V8 Runtime tùy chọn",
+      "description": "Cần sử dụng gói npm JavaScript thuần? Bật cờ V8 runtime để tương thích đầy đủ với hệ sinh thái npm."
+    },
+    "widgets": {
+      "title": "Hơn 25 Widget UI gốc",
+      "description": "Nút bấm, trường văn bản, vùng văn bản, bảng, canvas, scroll view, mã QR, trường bảo mật, màn hình khởi động và nhiều hơn — tất cả biên dịch thành widget nền tảng thực sự qua AppKit, GTK4, Win32, UIKit và JNI."
+    },
+    "plugins": {
+      "title": "Hệ thống plugin thời điểm biên dịch",
+      "description": "Các module được kết hợp tại thời điểm build — không có chi phí plugin khi runtime, không có ranh giới IPC. Các phụ thuộc của bạn trở thành lệnh gọi hàm gốc trực tiếp trong binary cuối cùng."
+    },
+    "threading": {
+      "title": "Đa luồng thực sự",
+      "description": "Thread OS thực sự với parallelMap, parallelFilter và spawn. An toàn tại thời điểm biên dịch từ chối các capture có thể thay đổi — không SharedArrayBuffer, không worker, chỉ có thread."
+    },
+    "i18n": {
+      "title": "i18n thời điểm biên dịch",
+      "description": "Trích xuất chuỗi tự động, quy tắc số nhiều CLDR cho hơn 30 ngôn ngữ, xác thực thời điểm biên dịch. Bản dịch được nhúng vào binary với tra cứu gần như bằng không tại runtime."
+    }
+  },
+  "platforms": {
+    "title": "Gốc trên <gradient>mọi nền tảng</gradient>",
+    "subtitle": "Perry biên dịch TypeScript của bạn thành framework UI gốc, WebAssembly và JavaScript — không phải web view, không phải Electron. Widget gốc thực sự trên mọi nền tảng, cộng thêm web.",
+    "stable": "Ổn định"
+  },
+  "comparison": {
+    "badge": "So sánh framework",
+    "title": "Framework duy nhất đáp ứng <gradient>mọi tiêu chí</gradient>",
+    "subtitle": "TypeScript biên dịch sang mã gốc. Widget nền tảng thực sự. Không có chi phí runtime.",
+    "framework": "Framework",
+    "language": "Ngôn ngữ",
+    "nativeCode": "Mã gốc",
+    "nativeWidgets": "Widget gốc",
+    "runtimeOverhead": "Chi phí runtime",
+    "partial": "Một phần",
+    "noSharedUI": "Không có UI dùng chung",
+    "nativeCompiled": "Biên dịch gốc",
+    "realPlatformWidgets": "Widget nền tảng thực sự",
+    "zeroRuntimeOverhead": "Không có chi phí runtime"
+  },
+  "codeExample": {
+    "title": "Viết <gradient>TypeScript</gradient>, xuất bản gốc",
+    "subtitle": "Sử dụng cú pháp và API TypeScript quen thuộc. Perry lo phần còn lại.",
+    "nativeBinary": "Binary gốc"
+  },
+  "performance": {
+    "title": "So sánh <gradient>hiệu năng</gradient>",
+    "subtitle": "Biên dịch gốc mang lại hiệu quả vượt trội",
+    "metric": "Chỉ số",
+    "binarySize": "Kích thước binary",
+    "startupTime": "Thời gian khởi động",
+    "runtimeDeps": "Phụ thuộc runtime",
+    "memoryOverhead": "Chi phí bộ nhớ",
+    "none": "Không có",
+    "minimal": "Tối thiểu",
+    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn 2,2 lần</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24 trên macOS ARM64 (thấp hơn là tốt hơn)",
+    "lowerIsBetter": "Thấp hơn là tốt hơn"
+  },
+  "installation": {
+    "title": "<gradient>Bắt đầu</gradient>",
+    "subtitle": "Cài đặt Perry và bắt đầu biên dịch TypeScript thành tệp thực thi gốc",
+    "step1": "Cài đặt",
+    "step2": "Sử dụng",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "Từ mã nguồn",
+    "homebrewNote": "Yêu cầu Homebrew. Hỗ trợ macOS arm64 và x86_64.",
+    "aptNote": "Hỗ trợ Linux x86_64 và arm64.",
+    "sourceNote": "Yêu cầu Rust toolchain. Binary sẽ ở target/release/perry.",
+    "compileFile": "Biên dịch tệp",
+    "compileFileDesc": "Biên dịch main.ts thành tệp thực thi gốc",
+    "customOutput": "Đầu ra tùy chỉnh",
+    "customOutputDesc": "Chỉ định tên tệp thực thi đầu ra",
+    "withV8": "Với V8 runtime",
+    "withV8Desc": "Bật V8 để tương thích với các gói npm JavaScript",
+    "checkCompat": "Kiểm tra tương thích",
+    "checkCompatDesc": "Xác thực mã TypeScript cho biên dịch gốc"
+  },
+  "featureTable": {
+    "title": "<gradient>Hỗ trợ</gradient> tính năng",
+    "subtitle": "Bao phủ toàn diện API TypeScript và Node.js",
+    "coreLanguage": "Ngôn ngữ cốt lõi",
+    "functions": "Hàm",
+    "classes": "Lớp",
+    "typeSystem": "Hệ thống kiểu",
+    "standardLibrary": "Thư viện chuẩn",
+    "fullSupport": "Hỗ trợ đầy đủ",
+    "partial": "Một phần"
+  },
+  "nativeLibs": {
+    "title": "<gradient>Hơn 30</gradient> gói npm gốc",
+    "subtitle": "Các gói npm phổ biến được triển khai lại bằng Rust gốc. Không npm install, không node_modules, chỉ có mã gốc nhanh.",
+    "database": "Cơ sở dữ liệu",
+    "security": "Bảo mật",
+    "http": "HTTP",
+    "dataProcessing": "Xử lý dữ liệu",
+    "dateTime": "Ngày và giờ",
+    "utilities": "Tiện ích",
+    "info": "Chỉ cần import và sử dụng — Perry tự động dùng triển khai gốc"
+  },
+  "shipIt": {
+    "title": "Từ mã nguồn đến <gradient>App Store</gradient>",
+    "subtitle": "Perry không chỉ biên dịch ứng dụng — mà còn đưa nó đến tay người dùng.",
+    "compileSign": "Biên dịch và ký",
+    "packageSubmit": "Đóng gói và gửi",
+    "storesDownloads": "Cửa hàng và tải về",
+    "storesList": "App Store, Play Store, trực tiếp",
+    "testEveryPlatform": "Kiểm thử mọi nền tảng",
+    "buildSign": {
+      "title": "Build và Ký",
+      "description": "Build đa nền tảng chỉ với một lệnh. Ký mã cho macOS, iOS, Android và Windows được xử lý cho bạn. Không cần vật lộn với provisioning profile của Xcode hay keystore của Android."
+    },
+    "distribute": {
+      "title": "Phân phối",
+      "description": "Đẩy lên App Store, Play Store hoặc cung cấp tải trực tiếp. Perry Publish xử lý đóng gói, công chứng và gửi."
+    },
+    "verify": {
+      "title": "Xác minh",
+      "description": "Được hỗ trợ bởi Geisterhand. Kiểm thử UI tự động trên cả 6 nền tảng. Biết rằng ứng dụng của bạn hoạt động ở mọi nơi trước khi người dùng nói cho bạn biết nó không."
+    },
+    "freeForOpenSource": "Miễn phí cho dự án mã nguồn mở.",
+    "plansForTeams": "Gói cho nhóm"
+  },
+  "architecture": {
+    "title": "Cách <gradient>hoạt động</gradient>",
+    "subtitle": "Từ mã nguồn TypeScript đến tệp thực thi gốc chỉ trong vài giây",
+    "parser": "Bộ phân tích",
+    "fastParsing": "Phân tích nhanh",
+    "transform": "Chuyển đổi",
+    "codegen": "Sinh mã",
+    "machineCode": "Mã máy",
+    "executable": "Tệp thực thi",
+    "binarySize": "Binary 2-5 MB",
+    "tsFiles": "Tệp .ts",
+    "compilerInternalsPrompt": "Muốn biết trình biên dịch hoạt động bên trong như thế nào?",
+    "compilerInternals": "Cấu trúc bên trong trình biên dịch"
+  },
+  "footer": {
+    "brand": "TypeScript → Gốc. Biên dịch TypeScript trực tiếp thành tệp thực thi độc lập trên macOS, iOS, Android, Linux và Windows. Không runtime, không Electron.",
+    "resources": "Tài nguyên",
+    "gettingStarted": "Bắt đầu",
+    "documentation": "Tài liệu",
+    "perryPublish": "Perry Publish",
+    "community": "Cộng đồng",
+    "issues": "Issues",
+    "discussions": "Thảo luận",
+    "contributing": "Đóng góp",
+    "tagline": "Được xây dựng với Rust, SWC và Cranelift — và đúng vậy, trang web này được phục vụ bởi binary được biên dịch bằng Perry"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "Bảng giá",
+    "title": "Bảng giá đơn giản",
+    "subtitle": "Một lệnh để build, ký và gửi. Miễn phí cho hầu hết nhà phát triển. Không cần tài khoản để bắt đầu.",
+    "free": "Miễn phí",
+    "noAccountRequired": "Không cần tài khoản",
+    "perMonth": "/tháng",
+    "pro": "Pro",
+    "mostPopular": "Phổ biến nhất",
+    "forDevs": "Cho nhà phát triển gửi nhanh",
+    "subscribeToPro": "Đăng ký Pro",
+    "feature_publishes15": "15 lần xuất bản mỗi tháng",
+    "feature_deepVerify2": "2 lần chạy deep verify mỗi tháng",
+    "feature_lightVerify": "Light verify mỗi lần xuất bản",
+    "feature_allPlatforms": "Tất cả nền tảng (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "Ký mã và công chứng",
+    "feature_storeSubmission": "Gửi App Store và Play Store",
+    "feature_unlimitedProjects": "Không giới hạn dự án (với tài khoản miễn phí)",
+    "feature_publishes50": "50 lần xuất bản mỗi tháng",
+    "feature_deepVerify20": "20 lần chạy deep verify mỗi tháng",
+    "feature_unlimitedProjectsPro": "Không giới hạn dự án",
+    "feature_priorityQueue": "Hàng đợi build ưu tiên",
+    "feature_overage": "$0.49/lần xuất bản vượt mức (vs $0.99 miễn phí)",
+    "comparePlans": "So sánh gói",
+    "col_free": "Miễn phí",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "Lần xuất bản hàng tháng",
+    "row_deepVerifyRuns": "Lần chạy deep verify",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "Mỗi lần xuất bản",
+    "row_overagePublish": "Phí vượt mức mỗi lần xuất bản",
+    "row_overageVerify": "Phí vượt mức mỗi deep verify",
+    "row_buildQueue": "Ưu tiên hàng đợi build",
+    "row_standard": "Tiêu chuẩn",
+    "row_priority": "Ưu tiên",
+    "row_projects": "Dự án",
+    "row_unlimitedStar": "Không giới hạn*",
+    "row_unlimited": "Không giới hạn",
+    "row_accountRequired": "Yêu cầu tài khoản",
+    "row_accountFreeDesc": "Không (1 dự án) / GitHub (nhiều dự án)",
+    "row_accountProDesc": "Có (GitHub)",
+    "row_failedBuilds": "Build thất bại có tính không?",
+    "row_noStar": "Không*",
+    "failedBuildsNote": "* Các build thất bại trước khi biên dịch (cấu hình không hợp lệ, thiếu phụ thuộc) không tính vào hạn mức hàng tháng.",
+    "selfHost": {
+      "title": "Hoặc tự lưu trữ mọi thứ",
+      "description": "Perry là mã nguồn mở 100% — trình biên dịch, runtime, máy chủ build, dịch vụ xác minh và trang web này. Bạn có thể chạy toàn bộ pipeline xuất bản trên phần cứng của riêng mình miễn phí. Không bị khóa nhà cung cấp, mãi mãi.",
+      "selfHostingGuide": "Hướng dẫn tự lưu trữ"
+    },
+    "faq": {
+      "title": "Câu hỏi",
+      "q1": "Tôi có cần tài khoản để xuất bản không?",
+      "a1": "Không. Lần perry publish đầu tiên của bạn hoạt động ngay — không cần đăng ký, không cần thanh toán. Bạn được 15 lần xuất bản mỗi tháng. Để xuất bản nhiều dự án, chạy perry login để tạo tài khoản miễn phí liên kết GitHub. Không cần thanh toán.",
+      "q2": "Chuyện gì xảy ra khi tôi đạt giới hạn?",
+      "a2": "Các build của bạn bị tạm dừng cho đến tháng sau. Nâng cấp lên Pro để có thêm lần xuất bản, hoặc thêm phương thức thanh toán cho phần vượt mức theo nhu cầu.",
+      "q3": "Tôi có thể tự lưu trữ máy chủ build không?",
+      "a3": "Có. Trình biên dịch Perry, máy chủ build (perry-hub), dịch vụ xác minh và build worker đều là mã nguồn mở. Clone repo, chạy hub trên Mac Mini hoặc máy Linux của riêng bạn, và đặt PERRY_HUB_SELF_HOSTED=true để tắt giới hạn tốc độ. Bạn nhận được build không giới hạn với chi phí bằng không. Dịch vụ lưu trữ tại hub.perryts.com tồn tại vì sự tiện lợi — không cần quản lý hạ tầng, không cần xử lý chứng chỉ ký, không cần giám sát hàng đợi build.",
+      "q4": "Một \"lần xuất bản\" bao gồm những gì?",
+      "a4": "Một lần gọi perry publish '<'platform'>'. Mỗi nền tảng là một lần xuất bản riêng. Một lần xuất bản bao gồm build, ký mã, xác minh nhẹ (ứng dụng khởi chạy thành công) và gửi lên cửa hàng hoặc tạo artifact."
+    }
+  },
+  "roadmap": {
+    "title": "Lộ trình",
+    "subtitle": "Perry đang ở đâu hôm nay và đang đi đến đâu. Từ biên dịch gốc đến hệ sinh thái phát triển đa nền tảng hoàn chỉnh.",
+    "shipped": "Đã phát hành",
+    "inProgress": "Đang tiến hành",
+    "planned": "Kế hoạch",
+    "vision": "Tầm nhìn"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "Một lệnh để build, ký và gửi ứng dụng đến mọi cửa hàng. Perry Publish xử lý ký mã, công chứng, đóng gói và gửi — để bạn tập trung vào mã của mình.",
+    "buildingForIos": "Đang build cho iOS...",
+    "signingCert": "Đang ký với chứng chỉ của bạn...",
+    "verifyingLaunch": "Đang xác minh — ứng dụng khởi chạy thành công",
+    "publishedToAppStore": "Đã xuất bản lên App Store Connect.",
+    "buildSign": "Build và Ký",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "Phân phối",
+    "distributePlatforms": "App Store, Play Store, tải trực tiếp",
+    "verify": "Xác minh",
+    "verifyDesc": "Kiểm thử đa nền tảng hỗ trợ bởi AI"
+  },
+  "internals": {
+    "title": "Cấu trúc <gradient>bên trong</gradient> trình biên dịch",
+    "subtitle": "Các quyết định thiết kế chính giúp Perry nhanh",
+    "nanBoxing": {
+      "p1": "Giá trị được lưu dưới dạng float 64-bit với các mẫu bit đặc biệt cho con trỏ, cho phép kiểu union hoạt động mà không có chi phí runtime. Điều này giúp (string | number)[] hoạt động hiệu quả.",
+      "p2": "Bằng cách mã hóa thông tin kiểu trực tiếp trong các bit payload NaN của IEEE 754, Perry tránh được nhu cầu về tagged union hoặc boxed value. Một từ 64-bit duy nhất có thể biểu diễn bất kỳ kiểu giá trị JavaScript nào — số sử dụng biểu diễn tự nhiên, trong khi chuỗi, đối tượng và các giá trị cấp phát heap khác sử dụng mẫu bit con trỏ nằm trong phạm vi NaN."
+    },
+    "monomorphization": {
+      "p1": "Generic được chuyên biệt hóa tại thời điểm biên dịch, giống như Rust. Mỗi lần khởi tạo kiểu tạo ra mã được tối ưu hóa, loại bỏ chi phí kiểm tra kiểu tại runtime.",
+      "p2": "Khi bạn viết Array'<'number'>' và Array'<'string'>', Perry tạo ra hai triển khai riêng biệt, được tối ưu hóa hoàn toàn. Điều này có nghĩa là các phép toán mảng trên số sử dụng phép tính máy trực tiếp — không type guard, không dynamic dispatch, không boxing."
+    },
+    "staticDispatch": {
+      "p1": "Không có bảng ảo. Các lệnh gọi phương thức được giải quyết tại thời điểm biên dịch, cho phép gọi hàm trực tiếp và tối ưu hóa inline.",
+      "p2": "Runtime OOP truyền thống sử dụng vtable để giải quyết phương thức, thêm một lớp gián tiếp vào mỗi lần gọi. Perry giải quyết tất cả các lệnh gọi phương thức một cách tĩnh trong quá trình biên dịch, biến các lệnh gọi phương thức interface thành nhảy trực tiếp. Điều này cũng mở khóa inline mạnh mẽ — các phương thức nhỏ thường được gấp trực tiếp vào nơi gọi."
+    },
+    "zeroCost": {
+      "p1": "Các lớp, interface và generic của TypeScript biên dịch thành mã gốc hiệu quả mà không có chi phí biểu diễn tại runtime.",
+      "p2": "Hệ thống kiểu của TypeScript chỉ tồn tại tại thời điểm biên dịch — và Perry thực hiện điều này đúng nghĩa đen. Interface không tạo mã runtime. Phân cấp lớp được làm phẳng. Ràng buộc generic được giải quyết thành kiểu cụ thể. Binary đã biên dịch chỉ chứa logic thực tế, không có bộ máy trừu tượng mà các trình thông dịch thường mang theo."
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Các dự án thực được xây dựng với Perry. Từ ứng dụng GUI gốc đến công cụ CLI, xem những gì có thể với biên dịch TypeScript gốc."
+  },
+  "pry": {
+    "subtitle": "Trình xem JSON nhanh, gốc được xây dựng với Perry. Điều hướng cây, tìm kiếm, phím tắt — biên dịch từ TypeScript sang binary gốc.",
+    "features": "Tính năng",
+    "treeView": "Chế độ xem cây",
+    "treeViewDesc": "Hiển thị cây có thể thu gọn, điều hướng cho cấu trúc JSON lồng sâu.",
+    "search": "Tìm kiếm",
+    "searchDesc": "Tìm kiếm toàn văn trên khóa và giá trị với đánh dấu tức thì.",
+    "keyboardShortcuts": "Phím tắt",
+    "keyboardShortcutsDesc": "Điều hướng, mở rộng, thu gọn và sao chép chỉ bằng bàn phím.",
+    "clipboardSupport": "Hỗ trợ clipboard",
+    "clipboardSupportDesc": "Sao chép bất kỳ nút hoặc cây con nào vào clipboard dưới dạng JSON đã định dạng.",
+    "statusBar": "Thanh trạng thái",
+    "statusBarDesc": "Hiển thị số nút, độ sâu hiện tại, kích thước tệp và thời gian phân tích.",
+    "syntaxColoring": "Tô màu cú pháp",
+    "syntaxColoringDesc": "Giá trị được tô màu theo kiểu — chuỗi, số, boolean, null.",
+    "howItsBuilt": "Cách xây dựng",
+    "howItsBuiltDesc": "Pry được viết bằng TypeScript và biên dịch với Perry thành binary gốc. Không Electron, không web view, không JavaScript runtime.",
+    "typeScriptSource": "Mã nguồn TypeScript",
+    "typeScriptSourceDesc": "TypeScript tiêu chuẩn với API UI gốc của Perry",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "Phân tích SWC → giải quyết kiểu → sinh mã Cranelift",
+    "nativeBinary": "Binary gốc",
+    "nativeBinaryDesc": "Tệp thực thi độc lập không phụ thuộc runtime",
+    "platformSupport": "Hỗ trợ nền tảng",
+    "nativeWidgets": "Widget {framework} gốc",
+    "available": "Có sẵn",
+    "screenshots": "Ảnh chụp màn hình",
+    "macOsScreenshot": "Ảnh chụp macOS — sắp ra mắt",
+    "iosScreenshot": "Ảnh chụp iOS — sắp ra mắt",
+    "screenshotsNote": "Ảnh chụp màn hình sẽ được thêm khi phát triển Pry tiếp tục. Kiểm tra repo GitHub để cập nhật mới nhất."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Tin tức, hướng dẫn và phân tích chuyên sâu về xây dựng ứng dụng gốc với Perry.",
+    "englishOnly": "Bài viết này chỉ có bằng tiếng Anh."
+  },
+  "languageSwitcher": {
+    "label": "Ngôn ngữ"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Giới thiệu Perry",
+      "excerpt": "Perry là trình biên dịch TypeScript gốc được viết bằng Rust, biên dịch TypeScript của bạn trực tiếp thành tệp thực thi độc lập. Không cần runtime, không cần Electron, không thỏa hiệp."
+    },
+    "cross-platform-native-ui": {
+      "title": "UI gốc đa nền tảng từ TypeScript",
+      "excerpt": "Cách Perry ánh xạ một mã nguồn TypeScript sang AppKit, UIKit, Android Views, GTK4 và Win32 — mang đến UI gốc thực sự trên mọi nền tảng."
+    },
+    "building-pry": {
+      "title": "Xây dựng Pry: Trình xem JSON gốc bằng TypeScript",
+      "excerpt": "Hướng dẫn từng bước xây dựng Pry — trình xem JSON gốc biên dịch từ TypeScript sang binary ARM64 gốc. Không cần runtime, không cần web view."
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "Hệ thống plugin là một loại thuế hiệu năng",
+      "excerpt": "Kiến trúc plugin đánh đổi hiệu năng lấy khả năng mở rộng. Nhưng nếu khả năng mở rộng diễn ra lúc biên dịch thay vì lúc chạy thì sao? Kết hợp tại thời điểm biên dịch mang đến cả hai — không có chi phí, linh hoạt hoàn toàn."
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Biên dịch Hono, tRPC và Strapi thành binary gốc",
+      "excerpt": "Perry giờ đây biên dịch ba framework TypeScript lớn — Hono, tRPC và Strapi — thành tệp thực thi ARM64 gốc. Biên dịch trong chưa đầy một giây, tạo binary dưới 2 MB và chạy không lỗi."
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "Cả sáu nền tảng, đồng bộ tính năng hoàn toàn",
+      "excerpt": "Hơn 20 widget UI gốc, widget Canvas, Table view, thông báo hệ thống, truy cập keychain, hỗ trợ nhiều cửa sổ và đồng bộ tính năng hoàn toàn trên macOS, iOS, iPadOS, Android, Linux và Windows — tất cả từ một mã nguồn TypeScript duy nhất."
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "Từ trình biên dịch đến hệ sinh thái: React, cơ sở dữ liệu và build trên đám mây",
+      "excerpt": "Perry phát triển từ trình biên dịch thành hệ sinh thái hoàn chỉnh. perry/ui làm cốt lõi, ORM tương thích Prisma cho MySQL/PostgreSQL/SQLite, thông báo đẩy toàn cầu, build phân tán kèm xuất bản App Store và lớp tương thích React — tất cả trong một tuần."
+    },
+    "the-full-pipeline": {
+      "title": "Pipeline hoàn chỉnh: Tài liệu, phân phối và WidgetKit",
+      "excerpt": "82 commit trong một tuần: trang tài liệu 49 trang, xuất bản tự động trên App Store và Play Store, gói Homebrew và APT, phần mở rộng WidgetKit gốc từ TypeScript, widget mới, module http/https và trình biên dịch LLVM tự lưu trữ."
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Biên dịch chéo sang Windows, game loop trên iOS và 100% đồng bộ kiểm thử",
+      "excerpt": "103 commit trong một tuần: biên dịch chéo sang Windows từ Linux qua lld-link, hỗ trợ game loop trên iOS, báo cáo lỗi, pipeline build Hub hai giai đoạn và trình biên dịch tự lưu trữ đạt đồng bộ kiểm thử deterministic 68/68."
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "Đa luồng thực sự, i18n thời điểm biên dịch và watchOS",
+      "excerpt": "Perry v0.4.0: thread OS thực sự với an toàn tại thời điểm biên dịch, hệ thống quốc tế hóa không rườm rà cho hơn 30 ngôn ngữ, watchOS là mục tiêu biên dịch thứ 9, API âm thanh và camera, và pipeline biên dịch song song."
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, biên dịch chéo iOS từ Linux và Perry Login",
+      "excerpt": "Perry v0.4.24: tvOS là mục tiêu biên dịch thứ 10, biên dịch chéo iOS và macOS từ Linux qua ld64.lld, perry login với thanh toán theo sử dụng, cải tiến UI Windows, công chứng macOS và 120 commit trong 5 ngày."
+    }
+  }
+}

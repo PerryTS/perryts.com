@@ -1,3 +1,5 @@
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
@@ -12,22 +14,27 @@ import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
 import { Footer } from "@/components/Footer";
 
-export default function Home() {
+export default async function Home() {
+  setRequestLocale("en");
+  const messages = await getMessages();
+
   return (
-    <main className="min-h-screen">
-      <Header />
-      <Hero />
-      <Features />
-      <PlatformSupport />
-      <ComparisonMatrix />
-      <CodeExample />
-      <Performance />
-      <Installation />
-      <FeatureTable />
-      <NativeLibraries />
-      <ShipIt />
-      <Architecture />
-      <Footer />
-    </main>
+    <NextIntlClientProvider messages={messages} locale="en">
+      <main className="min-h-screen">
+        <Header />
+        <Hero />
+        <Features />
+        <PlatformSupport />
+        <ComparisonMatrix />
+        <CodeExample />
+        <Performance />
+        <Installation />
+        <FeatureTable />
+        <NativeLibraries />
+        <ShipIt />
+        <Architecture />
+        <Footer />
+      </main>
+    </NextIntlClientProvider>
   );
 }

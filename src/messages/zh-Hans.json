@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "返回首页",
+    "viewOnGithub": "在 GitHub 上查看",
+    "getStarted": "开始使用",
+    "readTheBlogPost": "阅读博客文章",
+    "backToShowcase": "返回 Showcase",
+    "backToBlog": "返回博客",
+    "seePricing": "查看价格",
+    "terminal": "终端",
+    "comingSoon": "即将推出"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "博客",
+    "roadmap": "路线图",
+    "publish": "发布",
+    "overview": "概览",
+    "pricing": "价格",
+    "docs": "文档",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — tvOS 目标平台、从 Linux 交叉编译 iOS/macOS、perry login",
+    "headline1": "一套代码。所有平台。",
+    "headline2": "原生性能。",
+    "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
+    "getStarted": "开始使用",
+    "viewOnGithub": "在 GitHub 上查看",
+    "compiling": "正在编译 main.ts...",
+    "compiled": "✓ 已编译可执行文件：main（2.3 MB）",
+    "targetsLabel": "目标平台",
+    "widgetsLabel": "原生 UI 组件",
+    "startupLabel": "启动时间",
+    "appStore": "App Store",
+    "readyLabel": "就绪"
+  },
+  "features": {
+    "title": "为什么选择 <brand>Perry</brand>？",
+    "subtitle": "将 TypeScript 编译为原生应用所需的一切",
+    "noRuntime": {
+      "title": "无需运行时",
+      "description": "生成独立的原生可执行文件。无需 Node.js、无需 V8、无运行时依赖。只需一个二进制文件即可在任何地方运行。"
+    },
+    "fastCompilation": {
+      "title": "快速编译",
+      "description": "使用 SWC 解析和 Cranelift 代码生成，将 TypeScript 直接编译为原生代码。无中间 JavaScript。"
+    },
+    "smallBinaries": {
+      "title": "体积小巧",
+      "description": "输出的二进制文件通常只有 2-5 MB。搭配可选的 V8 运行时（用于 JS npm 包）为 15-20 MB。分发更少，部署更快。"
+    },
+    "typeSafe": {
+      "title": "类型安全",
+      "description": "利用 TypeScript 的类型系统进行优化。类型通过 Monomorphization 实现更好的代码生成。"
+    },
+    "stdLib": {
+      "title": "全面的标准库",
+      "description": "内置 fs、path、crypto、os、Buffer、child_process 等原生实现。使用您熟悉的 Node.js API。"
+    },
+    "v8Runtime": {
+      "title": "可选 V8 运行时",
+      "description": "需要使用纯 JavaScript npm 包？启用 V8 运行时标志即可获得完整的 npm 生态系统兼容性。"
+    },
+    "widgets": {
+      "title": "25+ 原生 UI 组件",
+      "description": "按钮、文本框、文本区域、表格、Canvas、滚动视图、二维码、安全输入框、启动画面等——全部编译为通过 AppKit、GTK4、Win32、UIKit 和 JNI 实现的真正平台组件。"
+    },
+    "plugins": {
+      "title": "编译时插件系统",
+      "description": "模块在构建时组合——无运行时插件开销，无 IPC 边界。您的依赖项成为最终二进制文件中的直接原生函数调用。"
+    },
+    "threading": {
+      "title": "真正的多线程",
+      "description": "通过 parallelMap、parallelFilter 和 spawn 使用真正的操作系统线程。编译时安全性拒绝可变捕获——无需 SharedArrayBuffer，无需 Worker，只有线程。"
+    },
+    "i18n": {
+      "title": "编译时 i18n",
+      "description": "自动字符串提取、30+ 语言环境的 CLDR 复数规则、编译时验证。翻译被嵌入二进制文件中，运行时查找几乎为零。"
+    }
+  },
+  "platforms": {
+    "title": "在<gradient>每个平台</gradient>上原生运行",
+    "subtitle": "Perry 将您的 TypeScript 编译为原生 UI 框架、WebAssembly 和 JavaScript——不是 Web 视图，不是 Electron。每个平台上都是真正的原生组件，外加 Web。",
+    "stable": "稳定"
+  },
+  "comparison": {
+    "badge": "框架对比",
+    "title": "唯一满足<gradient>所有条件</gradient>的框架",
+    "subtitle": "TypeScript 编译为原生代码。真正的平台组件。零运行时开销。",
+    "framework": "框架",
+    "language": "语言",
+    "nativeCode": "原生代码",
+    "nativeWidgets": "原生组件",
+    "runtimeOverhead": "运行时开销",
+    "partial": "部分",
+    "noSharedUI": "无共享 UI",
+    "nativeCompiled": "原生编译",
+    "realPlatformWidgets": "真正的平台组件",
+    "zeroRuntimeOverhead": "零运行时开销"
+  },
+  "codeExample": {
+    "title": "编写 <gradient>TypeScript</gradient>，交付原生应用",
+    "subtitle": "使用熟悉的 TypeScript 语法和 API。Perry 处理剩下的一切。",
+    "nativeBinary": "原生二进制文件"
+  },
+  "performance": {
+    "title": "性能<gradient>对比</gradient>",
+    "subtitle": "原生编译带来无与伦比的效率",
+    "metric": "指标",
+    "binarySize": "二进制文件大小",
+    "startupTime": "启动时间",
+    "runtimeDeps": "运行时依赖",
+    "memoryOverhead": "内存开销",
+    "none": "无",
+    "minimal": "极少",
+    "benchmarkTitle": "基准测试结果：<gradient>快 2.2 倍</gradient>",
+    "benchmarkSubtitle": "Perry 对比 Node.js v24（macOS ARM64，越低越好）",
+    "lowerIsBetter": "越低越好"
+  },
+  "installation": {
+    "title": "<gradient>开始使用</gradient>",
+    "subtitle": "安装 Perry，开始将 TypeScript 编译为原生可执行文件",
+    "step1": "安装",
+    "step2": "使用",
+    "homebrew": "Homebrew（macOS）",
+    "apt": "APT（Debian/Ubuntu）",
+    "source": "从源码构建",
+    "homebrewNote": "需要 Homebrew。支持 macOS arm64 和 x86_64。",
+    "aptNote": "支持 x86_64 和 arm64 Linux。",
+    "sourceNote": "需要 Rust 工具链。二进制文件将位于 target/release/perry。",
+    "compileFile": "编译文件",
+    "compileFileDesc": "将 main.ts 编译为原生可执行文件",
+    "customOutput": "自定义输出",
+    "customOutputDesc": "指定输出可执行文件名称",
+    "withV8": "附带 V8 运行时",
+    "withV8Desc": "启用 V8 以兼容 JavaScript npm 包",
+    "checkCompat": "检查兼容性",
+    "checkCompatDesc": "验证 TypeScript 代码是否可进行原生编译"
+  },
+  "featureTable": {
+    "title": "功能<gradient>支持</gradient>",
+    "subtitle": "全面覆盖 TypeScript 和 Node.js API",
+    "coreLanguage": "核心语言",
+    "functions": "函数",
+    "classes": "类",
+    "typeSystem": "类型系统",
+    "standardLibrary": "标准库",
+    "fullSupport": "完全支持",
+    "partial": "部分"
+  },
+  "nativeLibs": {
+    "title": "<gradient>30+</gradient> 原生 npm 包",
+    "subtitle": "热门 npm 包以原生 Rust 重新实现。无需 npm install，无需 node_modules，只有快速的原生代码。",
+    "database": "数据库",
+    "security": "安全",
+    "http": "HTTP",
+    "dataProcessing": "数据处理",
+    "dateTime": "日期和时间",
+    "utilities": "工具",
+    "info": "只需 import 即可使用——Perry 自动使用原生实现"
+  },
+  "shipIt": {
+    "title": "从代码到 <gradient>App Store</gradient>",
+    "subtitle": "Perry 不仅编译您的应用——还将其送到用户手中。",
+    "compileSign": "编译并签名",
+    "packageSubmit": "打包并提交",
+    "storesDownloads": "商店和下载",
+    "storesList": "App Store、Play Store、直接分发",
+    "testEveryPlatform": "测试每个平台",
+    "buildSign": {
+      "title": "构建并签名",
+      "description": "一条命令完成跨平台构建。macOS、iOS、Android 和 Windows 的代码签名自动处理。无需与 Xcode 配置文件或 Android 密钥库搏斗。"
+    },
+    "distribute": {
+      "title": "分发",
+      "description": "推送到 App Store、Play Store，或提供直接下载。Perry Publish 处理打包、公证和提交。"
+    },
+    "verify": {
+      "title": "验证",
+      "description": "由 Geisterhand 驱动。在全部 6 个平台上进行自动化 UI 测试。在用户告诉您之前，确保您的应用在所有地方都能正常工作。"
+    },
+    "freeForOpenSource": "开源项目免费。",
+    "plansForTeams": "团队方案"
+  },
+  "architecture": {
+    "title": "<gradient>工作原理</gradient>",
+    "subtitle": "从 TypeScript 源码到原生可执行文件，仅需数秒",
+    "parser": "解析器",
+    "fastParsing": "快速解析",
+    "transform": "转换",
+    "codegen": "代码生成",
+    "machineCode": "机器码",
+    "executable": "可执行文件",
+    "binarySize": "2-5 MB 二进制文件",
+    "tsFiles": ".ts 文件",
+    "compilerInternalsPrompt": "想了解编译器内部是如何工作的吗？",
+    "compilerInternals": "编译器内部原理"
+  },
+  "footer": {
+    "brand": "TypeScript → 原生。将 TypeScript 直接编译为 macOS、iOS、Android、Linux 和 Windows 上的独立可执行文件。无需运行时，无需 Electron。",
+    "resources": "资源",
+    "gettingStarted": "快速入门",
+    "documentation": "文档",
+    "perryPublish": "Perry Publish",
+    "community": "社区",
+    "issues": "Issues",
+    "discussions": "讨论",
+    "contributing": "贡献",
+    "tagline": "使用 Rust、SWC 和 Cranelift 构建——没错，这个网站由 Perry 编译的二进制文件提供服务"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "价格",
+    "title": "简单的定价",
+    "subtitle": "一条命令完成构建、签名和分发。对大多数开发者免费。无需账户即可开始。",
+    "free": "免费",
+    "noAccountRequired": "无需账户",
+    "perMonth": "/月",
+    "pro": "Pro",
+    "mostPopular": "最受欢迎",
+    "forDevs": "为快速交付的开发者而设",
+    "subscribeToPro": "订阅 Pro",
+    "feature_publishes15": "每月 15 次发布",
+    "feature_deepVerify2": "每月 2 次 deep verify 运行",
+    "feature_lightVerify": "每次发布时进行 light verify",
+    "feature_allPlatforms": "所有平台（macOS、iOS、Android、Windows、Linux）",
+    "feature_codeSigning": "代码签名和公证",
+    "feature_storeSubmission": "App Store 和 Play Store 提交",
+    "feature_unlimitedProjects": "无限项目（需免费账户）",
+    "feature_publishes50": "每月 50 次发布",
+    "feature_deepVerify20": "每月 20 次 deep verify 运行",
+    "feature_unlimitedProjectsPro": "无限项目",
+    "feature_priorityQueue": "优先构建队列",
+    "feature_overage": "超额 $0.49/次发布（免费版 $0.99）",
+    "comparePlans": "对比方案",
+    "col_free": "免费",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "每月发布次数",
+    "row_deepVerifyRuns": "deep verify 运行次数",
+    "row_lightVerify": "light verify",
+    "row_everyPublish": "每次发布时",
+    "row_overagePublish": "每次发布的超额费用",
+    "row_overageVerify": "每次 deep verify 的超额费用",
+    "row_buildQueue": "构建队列优先级",
+    "row_standard": "标准",
+    "row_priority": "优先",
+    "row_projects": "项目",
+    "row_unlimitedStar": "无限*",
+    "row_unlimited": "无限",
+    "row_accountRequired": "需要账户",
+    "row_accountFreeDesc": "否（1 个项目）/ GitHub（多个）",
+    "row_accountProDesc": "是（GitHub）",
+    "row_failedBuilds": "失败的构建是否计数？",
+    "row_noStar": "否*",
+    "failedBuildsNote": "* 在编译前失败的构建（无效配置、缺少依赖项）不计入每月配额。",
+    "selfHost": {
+      "title": "或自行托管一切",
+      "description": "Perry 是 100% 开源的——编译器、运行时、构建服务器、验证服务和这个网站。您可以在自己的硬件上免费运行整个发布流水线。永远没有供应商锁定。",
+      "selfHostingGuide": "自托管指南"
+    },
+    "faq": {
+      "title": "常见问题",
+      "q1": "发布需要账户吗？",
+      "a1": "不需要。您的第一次 perry publish 直接就能用——无需注册，无需付款。每月有 15 次发布额度。要发布多个项目，运行 perry login 创建一个免费的 GitHub 关联账户。无需付款。",
+      "q2": "达到限额后会怎样？",
+      "a2": "您的构建将暂停到下个月。升级到 Pro 获得更多发布次数，或添加付款方式按需支付超额费用。",
+      "q3": "我可以自行托管构建服务器吗？",
+      "a3": "可以。Perry 编译器、构建服务器（perry-hub）、验证服务和构建工作节点都是开源的。克隆仓库，在您自己的 Mac Mini 或 Linux 服务器上运行 hub，设置 PERRY_HUB_SELF_HOSTED=true 禁用速率限制。您可以零成本获得无限构建。hub.perryts.com 上的托管服务是为方便而存在的——无需管理基础设施，无需处理签名证书，无需监控构建队列。",
+      "q4": "\"发布\"包括什么？",
+      "a4": "一次 perry publish '<'platform'>' 的调用。每个平台算一次单独的发布。发布包括构建、代码签名、轻量验证（应用成功启动）以及商店提交或构件生成。"
+    }
+  },
+  "roadmap": {
+    "title": "路线图",
+    "subtitle": "Perry 的现状与未来方向。从原生编译到完整的跨平台开发生态系统。",
+    "shipped": "已发布",
+    "inProgress": "进行中",
+    "planned": "已规划",
+    "vision": "愿景"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "一条命令将您的应用构建、签名并发布到每个商店。Perry Publish 处理代码签名、公证、打包和提交——让您专注于代码。",
+    "buildingForIos": "正在为 iOS 构建...",
+    "signingCert": "正在使用您的证书签名...",
+    "verifyingLaunch": "正在验证——应用成功启动",
+    "publishedToAppStore": "已发布到 App Store Connect。",
+    "buildSign": "构建并签名",
+    "buildSignPlatforms": "macOS、iOS、Android、Windows、Linux",
+    "distribute": "分发",
+    "distributePlatforms": "App Store、Play Store、直接下载",
+    "verify": "验证",
+    "verifyDesc": "AI 驱动的跨平台测试"
+  },
+  "internals": {
+    "title": "编译器<gradient>内部原理</gradient>",
+    "subtitle": "让 Perry 快速运行的关键设计决策",
+    "nanBoxing": {
+      "p1": "值以 64 位浮点数存储，使用特殊位模式表示指针，实现无运行时开销的联合类型。这使得 (string | number)[] 能够高效工作。",
+      "p2": "通过将类型信息直接编码在 IEEE 754 NaN 有效载荷位中，Perry 无需使用标记联合或装箱值。单个 64 位字可以表示任何 JavaScript 值类型——数字使用其自然表示，而字符串、对象和其他堆分配值使用落在 NaN 范围内的指针位模式。"
+    },
+    "monomorphization": {
+      "p1": "泛型在编译时进行特化，与 Rust 相同。每次类型实例化都生成优化后的代码，消除运行时类型检查开销。",
+      "p2": "当您编写 Array'<'number'>' 和 Array'<'string'>' 时，Perry 会生成两个独立的、完全优化的实现。这意味着数组对数字的操作使用直接的机器算术——没有类型守卫，没有动态分派，没有装箱。"
+    },
+    "staticDispatch": {
+      "p1": "没有虚表。方法调用在编译时解析，支持直接函数调用和内联优化。",
+      "p2": "传统 OOP 运行时使用虚表进行方法解析，每次调用都增加一层间接。Perry 在编译期间静态解析所有方法调用，将接口方法调用转换为直接跳转。这也释放了激进的内联——小方法通常直接折叠到调用点。"
+    },
+    "zeroCost": {
+      "p1": "TypeScript 类、接口和泛型编译为高效的原生代码，无运行时表示开销。",
+      "p2": "TypeScript 的类型系统仅存在于编译时——Perry 将此贯彻到底。接口不产生任何运行时代码。类层次结构被扁平化。泛型约束被解析为具体类型。编译后的二进制文件仅包含实际逻辑，没有解释器通常携带的抽象机制。"
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "使用 Perry 构建的真实项目。从原生 GUI 应用到 CLI 工具，了解原生 TypeScript 编译的无限可能。"
+  },
+  "pry": {
+    "subtitle": "使用 Perry 构建的快速原生 JSON 查看器。树形导航、搜索、键盘快捷键——从 TypeScript 编译为原生二进制文件。",
+    "features": "功能",
+    "treeView": "树形视图",
+    "treeViewDesc": "可折叠、可导航的树形渲染，适用于深层嵌套的 JSON 结构。",
+    "search": "搜索",
+    "searchDesc": "对键和值进行全文搜索，即时高亮显示。",
+    "keyboardShortcuts": "键盘快捷键",
+    "keyboardShortcutsDesc": "仅使用键盘即可导航、展开、折叠和复制。",
+    "clipboardSupport": "剪贴板支持",
+    "clipboardSupportDesc": "将任意节点或子树以格式化 JSON 复制到剪贴板。",
+    "statusBar": "状态栏",
+    "statusBarDesc": "显示节点数量、当前深度、文件大小和解析时间。",
+    "syntaxColoring": "语法着色",
+    "syntaxColoringDesc": "按类型对值进行颜色编码——字符串、数字、布尔值、null。",
+    "howItsBuilt": "构建方式",
+    "howItsBuiltDesc": "Pry 使用 TypeScript 编写，通过 Perry 编译为原生二进制文件。无 Electron，无 Web 视图，无 JavaScript 运行时。",
+    "typeScriptSource": "TypeScript 源码",
+    "typeScriptSourceDesc": "使用 Perry 原生 UI API 的标准 TypeScript",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "SWC 解析 → 类型解析 → Cranelift 代码生成",
+    "nativeBinary": "原生二进制文件",
+    "nativeBinaryDesc": "无运行时依赖的独立可执行文件",
+    "platformSupport": "平台支持",
+    "nativeWidgets": "原生 {framework} 组件",
+    "available": "可用",
+    "screenshots": "截图",
+    "macOsScreenshot": "macOS 截图——即将推出",
+    "iosScreenshot": "iOS 截图——即将推出",
+    "screenshotsNote": "截图将随着 Pry 的持续开发而添加。请查看 GitHub 仓库获取最新信息。"
+  },
+  "blog": {
+    "title": "博客",
+    "subtitle": "关于使用 Perry 构建原生应用的新闻、教程和深度解析。",
+    "englishOnly": "本文仅提供英文版本。"
+  },
+  "languageSwitcher": {
+    "label": "语言"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Perry 介绍",
+      "excerpt": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器，可将您的 TypeScript 直接编译为独立可执行文件。无需运行时，无需 Electron，毫不妥协。"
+    },
+    "cross-platform-native-ui": {
+      "title": "从 TypeScript 到跨平台原生 UI",
+      "excerpt": "Perry 如何将一套 TypeScript 代码映射到 AppKit、UIKit、Android Views、GTK4 和 Win32——在每个平台上提供真正的原生 UI。"
+    },
+    "building-pry": {
+      "title": "构建 Pry：用 TypeScript 编写的原生 JSON 查看器",
+      "excerpt": "Pry 的构建过程详解——一个从 TypeScript 编译为原生 ARM64 二进制文件的 JSON 查看器。无需运行时，无需 Web 视图。"
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "插件系统是一种性能税",
+      "excerpt": "插件架构以性能换取可扩展性。但如果可扩展性发生在编译时而非运行时呢？编译时组合两者兼得——零开销，完全灵活。"
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "将 Hono、tRPC 和 Strapi 编译为原生二进制文件",
+      "excerpt": "Perry 现在可以将三个主要 TypeScript 框架——Hono、tRPC 和 Strapi——编译为原生 ARM64 可执行文件。编译不到一秒，生成不到 2 MB 的二进制文件，运行零崩溃。"
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "全部六个平台，功能完全对等",
+      "excerpt": "20 多个原生 UI 组件、Canvas 组件、Table 视图、系统通知、钥匙串访问、多窗口支持，以及 macOS、iOS、iPadOS、Android、Linux 和 Windows 的完全功能对等——全部来自一套 TypeScript 代码。"
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "从编译器到生态系统：React、数据库和云构建",
+      "excerpt": "Perry 从编译器成长为完整的生态系统。perry/ui 作为核心，兼容 Prisma 的 MySQL/PostgreSQL/SQLite ORM，通用推送通知，带 App Store 发布的分布式构建，以及 React 兼容层——全部在一周内完成。"
+    },
+    "the-full-pipeline": {
+      "title": "完整流水线：文档、分发和 WidgetKit",
+      "excerpt": "一周 82 次提交：49 页的文档站点、自动化 App Store 和 Play Store 发布、Homebrew 和 APT 软件包、从 TypeScript 创建的原生 WidgetKit 扩展、新组件、http/https 模块，以及自托管 LLVM 编译器。"
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "交叉编译到 Windows、iOS 游戏循环和 100% 测试对等",
+      "excerpt": "一周 103 次提交：通过 lld-link 从 Linux 交叉编译到 Windows、iOS 游戏循环支持、崩溃报告、两阶段 Hub 构建流水线，以及自托管编译器达到 68/68 确定性测试对等。"
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "真正的多线程、编译时 i18n 和 watchOS",
+      "excerpt": "Perry v0.4.0：具有编译时安全性的真正操作系统线程、支持 30 多种语言环境的零仪式国际化系统、watchOS 作为第 9 个编译目标、音频和摄像头 API，以及并行编译器流水线。"
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS、从 Linux 交叉编译 iOS 和 Perry Login",
+      "excerpt": "Perry v0.4.24：tvOS 作为第 10 个编译目标，通过 ld64.lld 从 Linux 交叉编译 iOS 和 macOS，perry login 支持按量计费，Windows UI 改版，macOS 公证，5 天内 120 次提交。"
+    }
+  }
+}

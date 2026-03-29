@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const examples = [
   {
@@ -75,16 +76,17 @@ console.log(result);`,
 
 export function CodeExample() {
   const [activeTab, setActiveTab] = useState(0);
+  const t = useTranslations("codeExample");
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Write <span className="gradient-text">TypeScript</span>, Ship Native
+            {t.rich("title", { gradient: (chunks) => <span className="gradient-text">{chunks}</span> })}
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Use familiar TypeScript syntax and APIs. Perry handles the rest.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -149,7 +151,7 @@ export function CodeExample() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                Native binary
+                {t("nativeBinary")}
               </div>
             </div>
           </div>

@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getLocale } from "next-intl/server";
 import type { BlogPost } from "@/lib/blog";
 
-export function BlogCard({ post }: { post: BlogPost }) {
+export async function BlogCard({ post }: { post: BlogPost }) {
+  const locale = await getLocale();
+
   return (
     <Link href={`/blog/${post.slug}`} className="feature-card block group">
       <div className="flex flex-wrap gap-2 mb-3">
@@ -19,7 +22,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
       </h3>
       <p className="text-slate-400 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
       <time className="text-xs text-slate-500">
-        {new Date(post.date).toLocaleDateString("en-US", {
+        {new Date(post.date).toLocaleDateString(locale, {
           year: "numeric",
           month: "long",
           day: "numeric",

@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "กลับหน้าแรก",
+    "viewOnGithub": "ดูบน GitHub",
+    "getStarted": "เริ่มต้น",
+    "readTheBlogPost": "อ่านบทความ",
+    "backToShowcase": "กลับไปยัง Showcase",
+    "backToBlog": "กลับไปยังบล็อก",
+    "seePricing": "ดูราคา",
+    "terminal": "เทอร์มินัล",
+    "comingSoon": "เร็ว ๆ นี้"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "บล็อก",
+    "roadmap": "แผนงาน",
+    "publish": "เผยแพร่",
+    "overview": "ภาพรวม",
+    "pricing": "ราคา",
+    "docs": "เอกสาร",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — เป้าหมาย tvOS, คอมไพล์ข้ามแพลตฟอร์ม iOS/macOS จาก Linux, perry login",
+    "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
+    "headline2": "ประสิทธิภาพระดับเนทีฟ",
+    "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
+    "getStarted": "เริ่มต้น",
+    "viewOnGithub": "ดูบน GitHub",
+    "compiling": "กำลังคอมไพล์ main.ts...",
+    "compiled": "✓ คอมไพล์ไฟล์สำเร็จ: main (2.3 MB)",
+    "targetsLabel": "เป้าหมาย",
+    "widgetsLabel": "วิดเจ็ต UI เนทีฟ",
+    "startupLabel": "เวลาเริ่มต้น",
+    "appStore": "App Store",
+    "readyLabel": "พร้อม"
+  },
+  "features": {
+    "title": "ทำไมต้อง <brand>Perry</brand>?",
+    "subtitle": "ทุกอย่างที่คุณต้องการเพื่อคอมไพล์ TypeScript เป็นแอปพลิเคชันเนทีฟ",
+    "noRuntime": {
+      "title": "ไม่ต้องมี Runtime",
+      "description": "สร้างไฟล์ปฏิบัติการเนทีฟแบบ standalone ไม่ต้องมี Node.js, ไม่ต้องมี V8, ไม่มี dependency ที่รันไทม์ เป็นไบนารีตัวเดียวที่รันได้ทุกที่"
+    },
+    "fastCompilation": {
+      "title": "คอมไพล์เร็ว",
+      "description": "คอมไพล์ TypeScript เป็นโค้ดเนทีฟโดยตรง ใช้ SWC สำหรับการแยกวิเคราะห์และ Cranelift สำหรับการสร้างโค้ด ไม่มี JavaScript ตัวกลาง"
+    },
+    "smallBinaries": {
+      "title": "ไบนารีขนาดเล็ก",
+      "description": "ไบนารีเอาต์พุตโดยทั่วไปมีขนาด 2-5 MB พร้อม V8 runtime เสริมสำหรับแพ็กเกจ npm JS จะอยู่ที่ 15-20 MB ส่งน้อยลง ติดตั้งเร็วขึ้น"
+    },
+    "typeSafe": {
+      "title": "Type-Safe",
+      "description": "ใช้ระบบ type ของ TypeScript เพื่อการเพิ่มประสิทธิภาพ type ช่วยให้สร้างโค้ดได้ดีขึ้นผ่าน monomorphization"
+    },
+    "stdLib": {
+      "title": "Standard Library ที่ครอบคลุม",
+      "description": "มีการ implement เนทีฟในตัวของ fs, path, crypto, os, Buffer, child_process และอื่น ๆ ใช้ API ของ Node.js ที่คุ้นเคย"
+    },
+    "v8Runtime": {
+      "title": "V8 Runtime เสริม",
+      "description": "ต้องใช้แพ็กเกจ npm ที่เป็น JavaScript ล้วน? เปิดใช้งาน flag V8 runtime เพื่อความเข้ากันได้กับระบบ npm อย่างเต็มรูปแบบ"
+    },
+    "widgets": {
+      "title": "วิดเจ็ต UI เนทีฟ 25+ ตัว",
+      "description": "ปุ่ม, ช่องข้อความ, พื้นที่ข้อความ, ตาราง, canvas, scroll view, QR code, ช่องป้อนข้อมูลที่ปลอดภัย, หน้าจอเปิดแอป และอื่น ๆ — ทั้งหมดคอมไพล์เป็นวิดเจ็ตแพลตฟอร์มจริงผ่าน AppKit, GTK4, Win32, UIKit และ JNI"
+    },
+    "plugins": {
+      "title": "ระบบปลั๊กอินแบบ Compile-Time",
+      "description": "โมดูลประกอบกันในเวลา build — ไม่มี overhead ของปลั๊กอินที่รันไทม์ ไม่มีขอบเขต IPC dependency ของคุณจะกลายเป็นการเรียกฟังก์ชันเนทีฟโดยตรงในไบนารีสุดท้าย"
+    },
+    "threading": {
+      "title": "Multi-Threading ที่แท้จริง",
+      "description": "เธรด OS จริงพร้อม parallelMap, parallelFilter และ spawn ความปลอดภัยระดับ compile-time ปฏิเสธการจับค่าที่เปลี่ยนแปลงได้ — ไม่มี SharedArrayBuffer, ไม่มี worker, มีแค่เธรด"
+    },
+    "i18n": {
+      "title": "i18n แบบ Compile-Time",
+      "description": "แยกสตริงอัตโนมัติ, กฎพหูพจน์ CLDR สำหรับ 30+ locale, การตรวจสอบแบบ compile-time การแปลถูกฝังในไบนารีโดยแทบไม่ต้อง lookup ที่รันไทม์"
+    }
+  },
+  "platforms": {
+    "title": "เนทีฟบน<gradient>ทุกแพลตฟอร์ม</gradient>",
+    "subtitle": "Perry คอมไพล์ TypeScript ของคุณเป็นเฟรมเวิร์ก UI เนทีฟ, WebAssembly และ JavaScript — ไม่ใช่ web view, ไม่ใช่ Electron วิดเจ็ตเนทีฟจริงบนทุกแพลตฟอร์ม รวมถึงเว็บ",
+    "stable": "เสถียร"
+  },
+  "comparison": {
+    "badge": "เปรียบเทียบเฟรมเวิร์ก",
+    "title": "เฟรมเวิร์กเดียวที่ตรงตาม<gradient>ทุกข้อกำหนด</gradient>",
+    "subtitle": "TypeScript คอมไพล์เป็นโค้ดเนทีฟ วิดเจ็ตแพลตฟอร์มจริง ไม่มี overhead ที่รันไทม์",
+    "framework": "เฟรมเวิร์ก",
+    "language": "ภาษา",
+    "nativeCode": "โค้ดเนทีฟ",
+    "nativeWidgets": "วิดเจ็ตเนทีฟ",
+    "runtimeOverhead": "Overhead ที่รันไทม์",
+    "partial": "บางส่วน",
+    "noSharedUI": "ไม่มี UI ที่ใช้ร่วมกัน",
+    "nativeCompiled": "คอมไพล์เนทีฟ",
+    "realPlatformWidgets": "วิดเจ็ตแพลตฟอร์มจริง",
+    "zeroRuntimeOverhead": "ไม่มี overhead ที่รันไทม์"
+  },
+  "codeExample": {
+    "title": "เขียน <gradient>TypeScript</gradient> ส่งมอบแบบเนทีฟ",
+    "subtitle": "ใช้ syntax และ API ของ TypeScript ที่คุ้นเคย Perry จัดการส่วนที่เหลือ",
+    "nativeBinary": "ไบนารีเนทีฟ"
+  },
+  "performance": {
+    "title": "การเปรียบเทียบ<gradient>ประสิทธิภาพ</gradient>",
+    "subtitle": "การคอมไพล์เนทีฟให้ประสิทธิภาพที่ไม่มีใครเทียบได้",
+    "metric": "ตัวชี้วัด",
+    "binarySize": "ขนาดไบนารี",
+    "startupTime": "เวลาเริ่มต้น",
+    "runtimeDeps": "Dependencies ที่รันไทม์",
+    "memoryOverhead": "Overhead หน่วยความจำ",
+    "none": "ไม่มี",
+    "minimal": "น้อยมาก",
+    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่า 2.2 เท่า</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24 บน macOS ARM64 (ยิ่งต่ำยิ่งดี)",
+    "lowerIsBetter": "ยิ่งต่ำยิ่งดี"
+  },
+  "installation": {
+    "title": "<gradient>เริ่มต้น</gradient>",
+    "subtitle": "ติดตั้ง Perry และเริ่มคอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ",
+    "step1": "การติดตั้ง",
+    "step2": "การใช้งาน",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "จากซอร์สโค้ด",
+    "homebrewNote": "ต้องมี Homebrew รองรับ macOS arm64 และ x86_64",
+    "aptNote": "รองรับ Linux x86_64 และ arm64",
+    "sourceNote": "ต้องมี Rust toolchain ไบนารีจะอยู่ที่ target/release/perry",
+    "compileFile": "คอมไพล์ไฟล์",
+    "compileFileDesc": "คอมไพล์ main.ts เป็นไฟล์ปฏิบัติการเนทีฟ",
+    "customOutput": "เอาต์พุตกำหนดเอง",
+    "customOutputDesc": "ระบุชื่อไฟล์ปฏิบัติการเอาต์พุต",
+    "withV8": "พร้อม V8 runtime",
+    "withV8Desc": "เปิดใช้ V8 สำหรับความเข้ากันได้กับแพ็กเกจ npm ที่เป็น JavaScript",
+    "checkCompat": "ตรวจสอบความเข้ากันได้",
+    "checkCompatDesc": "ตรวจสอบโค้ด TypeScript สำหรับการคอมไพล์เนทีฟ"
+  },
+  "featureTable": {
+    "title": "การรองรับ<gradient>ฟีเจอร์</gradient>",
+    "subtitle": "ครอบคลุม API ของ TypeScript และ Node.js อย่างครบถ้วน",
+    "coreLanguage": "ภาษาหลัก",
+    "functions": "ฟังก์ชัน",
+    "classes": "คลาส",
+    "typeSystem": "ระบบ Type",
+    "standardLibrary": "Standard Library",
+    "fullSupport": "รองรับเต็มรูปแบบ",
+    "partial": "บางส่วน"
+  },
+  "nativeLibs": {
+    "title": "แพ็กเกจ npm เนทีฟ <gradient>30+</gradient> ตัว",
+    "subtitle": "แพ็กเกจ npm ยอดนิยมที่ implement ใหม่ในเนทีฟ Rust ไม่ต้อง npm install ไม่ต้อง node_modules แค่โค้ดเนทีฟที่เร็ว",
+    "database": "ฐานข้อมูล",
+    "security": "ความปลอดภัย",
+    "http": "HTTP",
+    "dataProcessing": "การประมวลผลข้อมูล",
+    "dateTime": "วันที่และเวลา",
+    "utilities": "ยูทิลิตี้",
+    "info": "แค่ import และใช้งาน — Perry จะใช้ implementation เนทีฟโดยอัตโนมัติ"
+  },
+  "shipIt": {
+    "title": "จากโค้ดสู่ <gradient>App Store</gradient>",
+    "subtitle": "Perry ไม่แค่คอมไพล์แอปของคุณ — แต่ส่งมอบถึงมือผู้ใช้",
+    "compileSign": "คอมไพล์และลงนาม",
+    "packageSubmit": "แพ็กเกจและส่ง",
+    "storesDownloads": "สโตร์และดาวน์โหลด",
+    "storesList": "App Store, Play Store, ดาวน์โหลดตรง",
+    "testEveryPlatform": "ทดสอบทุกแพลตฟอร์ม",
+    "buildSign": {
+      "title": "บิลด์และลงนาม",
+      "description": "บิลด์ข้ามแพลตฟอร์มด้วยคำสั่งเดียว การลงนามโค้ดสำหรับ macOS, iOS, Android และ Windows จัดการให้คุณ ไม่ต้องต่อสู้กับ provisioning profile ของ Xcode หรือ keystore ของ Android"
+    },
+    "distribute": {
+      "title": "แจกจ่าย",
+      "description": "ส่งไปยัง App Store, Play Store หรือให้ดาวน์โหลดโดยตรง Perry Publish จัดการการแพ็กเกจ, การรับรอง และการส่ง"
+    },
+    "verify": {
+      "title": "ตรวจสอบ",
+      "description": "ขับเคลื่อนโดย Geisterhand ทดสอบ UI อัตโนมัติบนทั้ง 6 แพลตฟอร์ม รู้ว่าแอปของคุณทำงานได้ทุกที่ก่อนที่ผู้ใช้จะบอกคุณว่ามันใช้ไม่ได้"
+    },
+    "freeForOpenSource": "ฟรีสำหรับโปรเจกต์โอเพนซอร์ส",
+    "plansForTeams": "แพลนสำหรับทีม"
+  },
+  "architecture": {
+    "title": "มัน<gradient>ทำงาน</gradient>อย่างไร",
+    "subtitle": "จากซอร์สโค้ด TypeScript เป็นไฟล์ปฏิบัติการเนทีฟในไม่กี่วินาที",
+    "parser": "Parser",
+    "fastParsing": "แยกวิเคราะห์เร็ว",
+    "transform": "แปลง",
+    "codegen": "สร้างโค้ด",
+    "machineCode": "โค้ดเครื่อง",
+    "executable": "ไฟล์ปฏิบัติการ",
+    "binarySize": "ไบนารี 2-5 MB",
+    "tsFiles": "ไฟล์ .ts",
+    "compilerInternalsPrompt": "อยากรู้ว่าคอมไพเลอร์ทำงานภายในอย่างไร?",
+    "compilerInternals": "โครงสร้างภายในคอมไพเลอร์"
+  },
+  "footer": {
+    "brand": "TypeScript → เนทีฟ คอมไพล์ TypeScript โดยตรงเป็นไฟล์ปฏิบัติการ standalone บน macOS, iOS, Android, Linux และ Windows ไม่ต้องมี runtime ไม่ต้องมี Electron",
+    "resources": "แหล่งข้อมูล",
+    "gettingStarted": "เริ่มต้น",
+    "documentation": "เอกสาร",
+    "perryPublish": "Perry Publish",
+    "community": "ชุมชน",
+    "issues": "Issues",
+    "discussions": "การสนทนา",
+    "contributing": "การมีส่วนร่วม",
+    "tagline": "สร้างด้วย Rust, SWC และ Cranelift — และใช่ เว็บไซต์นี้ให้บริการโดยไบนารีที่คอมไพล์ด้วย Perry"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "ราคา",
+    "title": "ราคาที่เรียบง่าย",
+    "subtitle": "คำสั่งเดียวเพื่อบิลด์ ลงนาม และส่ง ฟรีสำหรับนักพัฒนาส่วนใหญ่ ไม่ต้องมีบัญชีเพื่อเริ่มต้น",
+    "free": "ฟรี",
+    "noAccountRequired": "ไม่ต้องมีบัญชี",
+    "perMonth": "/เดือน",
+    "pro": "Pro",
+    "mostPopular": "ยอดนิยม",
+    "forDevs": "สำหรับนักพัฒนาที่ส่งมอบเร็ว",
+    "subscribeToPro": "สมัคร Pro",
+    "feature_publishes15": "15 ครั้งการเผยแพร่ต่อเดือน",
+    "feature_deepVerify2": "2 ครั้งการรัน deep verify ต่อเดือน",
+    "feature_lightVerify": "Light verify ทุกครั้งที่เผยแพร่",
+    "feature_allPlatforms": "ทุกแพลตฟอร์ม (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "การลงนามโค้ดและการรับรอง",
+    "feature_storeSubmission": "ส่ง App Store และ Play Store",
+    "feature_unlimitedProjects": "โปรเจกต์ไม่จำกัด (ด้วยบัญชีฟรี)",
+    "feature_publishes50": "50 ครั้งการเผยแพร่ต่อเดือน",
+    "feature_deepVerify20": "20 ครั้งการรัน deep verify ต่อเดือน",
+    "feature_unlimitedProjectsPro": "โปรเจกต์ไม่จำกัด",
+    "feature_priorityQueue": "คิวบิลด์ลำดับความสำคัญ",
+    "feature_overage": "$0.49/ครั้งเผยแพร่ส่วนเกิน (vs $0.99 ฟรี)",
+    "comparePlans": "เปรียบเทียบแพลน",
+    "col_free": "ฟรี",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "จำนวนเผยแพร่ต่อเดือน",
+    "row_deepVerifyRuns": "จำนวนรัน deep verify",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "ทุกครั้งที่เผยแพร่",
+    "row_overagePublish": "ส่วนเกินต่อการเผยแพร่",
+    "row_overageVerify": "ส่วนเกินต่อ deep verify",
+    "row_buildQueue": "ลำดับความสำคัญของคิวบิลด์",
+    "row_standard": "มาตรฐาน",
+    "row_priority": "ลำดับความสำคัญ",
+    "row_projects": "โปรเจกต์",
+    "row_unlimitedStar": "ไม่จำกัด*",
+    "row_unlimited": "ไม่จำกัด",
+    "row_accountRequired": "ต้องมีบัญชี",
+    "row_accountFreeDesc": "ไม่ (1 โปรเจกต์) / GitHub (หลายโปรเจกต์)",
+    "row_accountProDesc": "ใช่ (GitHub)",
+    "row_failedBuilds": "บิลด์ที่ล้มเหลวนับหรือไม่?",
+    "row_noStar": "ไม่*",
+    "failedBuildsNote": "* บิลด์ที่ล้มเหลวก่อนการคอมไพล์ (การตั้งค่าไม่ถูกต้อง, dependency หายไป) จะไม่นับรวมในโควตาประจำเดือน",
+    "selfHost": {
+      "title": "หรือ self-host ทั้งหมด",
+      "description": "Perry เป็นโอเพนซอร์ส 100% — คอมไพเลอร์, runtime, เซิร์ฟเวอร์บิลด์, บริการตรวจสอบ และเว็บไซต์นี้ คุณสามารถรันไปป์ไลน์การเผยแพร่ทั้งหมดบนฮาร์ดแวร์ของคุณเองได้ฟรี ไม่มี vendor lock-in ตลอดกาล",
+      "selfHostingGuide": "คู่มือ self-hosting"
+    },
+    "faq": {
+      "title": "คำถาม",
+      "q1": "ต้องมีบัญชีเพื่อเผยแพร่ไหม?",
+      "a1": "ไม่ perry publish ครั้งแรกของคุณใช้งานได้ทันที — ไม่ต้องสมัคร ไม่ต้องจ่าย คุณได้ 15 ครั้งการเผยแพร่ต่อเดือน เพื่อเผยแพร่หลายโปรเจกต์ ให้รัน perry login เพื่อสร้างบัญชีฟรีที่เชื่อมต่อกับ GitHub ไม่ต้องจ่าย",
+      "q2": "จะเกิดอะไรขึ้นเมื่อถึงขีดจำกัด?",
+      "a2": "บิลด์ของคุณจะหยุดชั่วคราวจนกว่าเดือนถัดไป อัปเกรดเป็น Pro เพื่อเผยแพร่มากขึ้น หรือเพิ่มวิธีการชำระเงินสำหรับส่วนเกินแบบจ่ายตามการใช้งาน",
+      "q3": "สามารถ self-host เซิร์ฟเวอร์บิลด์ได้ไหม?",
+      "a3": "ได้ คอมไพเลอร์ Perry, เซิร์ฟเวอร์บิลด์ (perry-hub), บริการตรวจสอบ และ build worker ล้วนเป็นโอเพนซอร์ส Clone repo รัน hub บน Mac Mini หรือเครื่อง Linux ของคุณเอง และตั้ง PERRY_HUB_SELF_HOSTED=true เพื่อปิด rate limiting คุณจะได้บิลด์ไม่จำกัดโดยไม่มีค่าใช้จ่าย บริการโฮสต์บน hub.perryts.com มีไว้เพื่อความสะดวก — ไม่ต้องจัดการโครงสร้างพื้นฐาน ไม่ต้องจัดการใบรับรองการลงนาม ไม่ต้องตรวจสอบคิวบิลด์",
+      "q4": "\"การเผยแพร่\" รวมอะไรบ้าง?",
+      "a4": "การเรียกใช้ perry publish '<'platform'>' หนึ่งครั้ง แต่ละแพลตฟอร์มเป็นการเผยแพร่แยกกัน การเผยแพร่รวมถึงการบิลด์ การลงนามโค้ด light verification (แอปเปิดได้สำเร็จ) และการส่งไปยังสโตร์หรือการสร้าง artifact"
+    }
+  },
+  "roadmap": {
+    "title": "แผนงาน",
+    "subtitle": "Perry อยู่ที่ไหนวันนี้และจะไปทางไหน จากการคอมไพล์เนทีฟสู่ระบบนิเวศการพัฒนาข้ามแพลตฟอร์มที่สมบูรณ์",
+    "shipped": "ปล่อยแล้ว",
+    "inProgress": "กำลังดำเนินการ",
+    "planned": "วางแผน",
+    "vision": "วิสัยทัศน์"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "คำสั่งเดียวเพื่อบิลด์ ลงนาม และส่งแอปของคุณไปทุกสโตร์ Perry Publish จัดการการลงนามโค้ด การรับรอง การแพ็กเกจ และการส่ง — เพื่อให้คุณโฟกัสกับโค้ดของคุณ",
+    "buildingForIos": "กำลังบิลด์สำหรับ iOS...",
+    "signingCert": "กำลังลงนามด้วยใบรับรองของคุณ...",
+    "verifyingLaunch": "กำลังตรวจสอบ — แอปเปิดได้สำเร็จ",
+    "publishedToAppStore": "เผยแพร่ไปยัง App Store Connect แล้ว",
+    "buildSign": "บิลด์และลงนาม",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "แจกจ่าย",
+    "distributePlatforms": "App Store, Play Store, ดาวน์โหลดตรง",
+    "verify": "ตรวจสอบ",
+    "verifyDesc": "การทดสอบข้ามแพลตฟอร์มขับเคลื่อนด้วย AI"
+  },
+  "internals": {
+    "title": "<gradient>โครงสร้างภายใน</gradient>คอมไพเลอร์",
+    "subtitle": "การตัดสินใจออกแบบหลักที่ทำให้ Perry เร็ว",
+    "nanBoxing": {
+      "p1": "ค่าถูกเก็บเป็น float 64 บิตพร้อม bit pattern พิเศษสำหรับ pointer ทำให้ union type ทำงานได้โดยไม่มี overhead ที่รันไทม์ ซึ่งทำให้ (string | number)[] ทำงานได้อย่างมีประสิทธิภาพ",
+      "p2": "โดยการเข้ารหัสข้อมูล type โดยตรงใน bit payload ของ NaN ตามมาตรฐาน IEEE 754 Perry หลีกเลี่ยงความจำเป็นของ tagged union หรือ boxed value คำ 64 บิตเดียวสามารถแทนค่า JavaScript type ใดก็ได้ — ตัวเลขใช้การแสดงผลตามธรรมชาติ ในขณะที่ string, object และค่า heap-allocated อื่น ๆ ใช้ pointer bit pattern ที่อยู่ในช่วง NaN"
+    },
+    "monomorphization": {
+      "p1": "Generic ถูกเฉพาะทางในเวลาคอมไพล์ เหมือน Rust การ instantiate type แต่ละครั้งจะสร้างโค้ดที่ปรับให้เหมาะสม กำจัด overhead ของการตรวจสอบ type ที่รันไทม์",
+      "p2": "เมื่อคุณเขียน Array'<'number'>' และ Array'<'string'>' Perry จะสร้าง implementation ที่แยกกันสองตัวซึ่งปรับให้เหมาะสมอย่างเต็มที่ นั่นหมายความว่าการดำเนินการ array บนตัวเลขใช้เลขคณิตเครื่องโดยตรง — ไม่มี type guard, ไม่มี dynamic dispatch, ไม่มี boxing"
+    },
+    "staticDispatch": {
+      "p1": "ไม่มี virtual table การเรียก method ถูกแก้ไขในเวลาคอมไพล์ ทำให้สามารถเรียกฟังก์ชันโดยตรงและเพิ่มประสิทธิภาพด้วย inlining",
+      "p2": "Runtime OOP แบบดั้งเดิมใช้ vtable สำหรับการแก้ไข method ซึ่งเพิ่มชั้นของ indirection ในทุกการเรียก Perry แก้ไขการเรียก method ทั้งหมดแบบ static ระหว่างการคอมไพล์ เปลี่ยนการเรียก method ของ interface เป็น jump โดยตรง ซึ่งยังปลดล็อก inlining แบบเข้มข้น — method ขนาดเล็กมักถูกรวมเข้ากับจุดเรียกโดยตรง"
+    },
+    "zeroCost": {
+      "p1": "คลาส, interface และ generic ของ TypeScript คอมไพล์เป็นโค้ดเนทีฟที่มีประสิทธิภาพโดยไม่มี overhead ของ runtime representation",
+      "p2": "ระบบ type ของ TypeScript มีอยู่เฉพาะเวลาคอมไพล์ — และ Perry รับเรื่องนี้อย่างตรงตัว Interface ไม่สร้างโค้ดรันไทม์ ลำดับชั้นของคลาสถูกทำให้แบน Generic constraint ถูกแก้ไขเป็น type ที่เป็นรูปธรรม ไบนารีที่คอมไพล์แล้วมีเพียงลอจิกจริง โดยไม่มีกลไกนามธรรมที่ interpreter มักแบกรับ"
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "โปรเจกต์จริงที่สร้างด้วย Perry จากแอป GUI เนทีฟไปจนถึงเครื่องมือ CLI ดูว่าอะไรเป็นไปได้ด้วยการคอมไพล์ TypeScript แบบเนทีฟ"
+  },
+  "pry": {
+    "subtitle": "โปรแกรมดู JSON ที่เร็วและเนทีฟ สร้างด้วย Perry การนำทางแบบต้นไม้ ค้นหา ปุ่มลัด — คอมไพล์จาก TypeScript เป็นไบนารีเนทีฟ",
+    "features": "ฟีเจอร์",
+    "treeView": "มุมมองต้นไม้",
+    "treeViewDesc": "การแสดงผลแบบต้นไม้ที่พับได้และนำทางได้สำหรับโครงสร้าง JSON ที่ซ้อนลึก",
+    "search": "ค้นหา",
+    "searchDesc": "ค้นหาข้อความเต็มใน key และ value พร้อมการเน้นสีแบบทันที",
+    "keyboardShortcuts": "ปุ่มลัด",
+    "keyboardShortcutsDesc": "นำทาง ขยาย พับ และคัดลอกด้วยคีย์บอร์ดอย่างเดียว",
+    "clipboardSupport": "รองรับคลิปบอร์ด",
+    "clipboardSupportDesc": "คัดลอก node หรือ subtree ใดก็ได้ไปยังคลิปบอร์ดเป็น JSON ที่จัดรูปแบบแล้ว",
+    "statusBar": "แถบสถานะ",
+    "statusBarDesc": "แสดงจำนวน node ความลึกปัจจุบัน ขนาดไฟล์ และเวลาแยกวิเคราะห์",
+    "syntaxColoring": "การระบายสีไวยากรณ์",
+    "syntaxColoringDesc": "ค่าที่ระบายสีตาม type — string, number, boolean, null",
+    "howItsBuilt": "สร้างอย่างไร",
+    "howItsBuiltDesc": "Pry เขียนด้วย TypeScript และคอมไพล์ด้วย Perry เป็นไบนารีเนทีฟ ไม่มี Electron ไม่มี web view ไม่มี JavaScript runtime",
+    "typeScriptSource": "ซอร์สโค้ด TypeScript",
+    "typeScriptSourceDesc": "TypeScript มาตรฐานพร้อม API UI เนทีฟของ Perry",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "SWC parse → แก้ไข type → Cranelift codegen",
+    "nativeBinary": "ไบนารีเนทีฟ",
+    "nativeBinaryDesc": "ไฟล์ปฏิบัติการ standalone ไม่มี dependency ที่รันไทม์",
+    "platformSupport": "รองรับแพลตฟอร์ม",
+    "nativeWidgets": "วิดเจ็ต {framework} เนทีฟ",
+    "available": "พร้อมใช้งาน",
+    "screenshots": "ภาพหน้าจอ",
+    "macOsScreenshot": "ภาพหน้าจอ macOS — เร็ว ๆ นี้",
+    "iosScreenshot": "ภาพหน้าจอ iOS — เร็ว ๆ นี้",
+    "screenshotsNote": "ภาพหน้าจอจะถูกเพิ่มเมื่อการพัฒนา Pry ดำเนินต่อไป ตรวจสอบ repo GitHub เพื่อดูข้อมูลล่าสุด"
+  },
+  "blog": {
+    "title": "บล็อก",
+    "subtitle": "ข่าว บทเรียน และการวิเคราะห์เชิงลึกเกี่ยวกับการสร้างแอปเนทีฟด้วย Perry",
+    "englishOnly": "บทความนี้มีเฉพาะภาษาอังกฤษเท่านั้น"
+  },
+  "languageSwitcher": {
+    "label": "ภาษา"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "แนะนำ Perry",
+      "excerpt": "Perry เป็นคอมไพเลอร์ TypeScript เนทีฟที่เขียนด้วย Rust ซึ่งคอมไพล์ TypeScript ของคุณโดยตรงเป็นไฟล์ปฏิบัติการแบบ standalone ไม่ต้องใช้ runtime ไม่ต้องใช้ Electron ไม่มีข้อประนีประนอม"
+    },
+    "cross-platform-native-ui": {
+      "title": "UI เนทีฟข้ามแพลตฟอร์มจาก TypeScript",
+      "excerpt": "Perry แมปโค้ดเบส TypeScript เดียวไปยัง AppKit, UIKit, Android Views, GTK4 และ Win32 ได้อย่างไร — ส่งมอบ UI เนทีฟอย่างแท้จริงบนทุกแพลตฟอร์ม"
+    },
+    "building-pry": {
+      "title": "สร้าง Pry: โปรแกรมดู JSON เนทีฟใน TypeScript",
+      "excerpt": "คำแนะนำทีละขั้นตอนในการสร้าง Pry — โปรแกรมดู JSON เนทีฟที่คอมไพล์จาก TypeScript เป็นไบนารี ARM64 เนทีฟ ไม่ต้องใช้ runtime ไม่ต้องใช้ web view"
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "ระบบปลั๊กอินคือภาษีด้านประสิทธิภาพ",
+      "excerpt": "สถาปัตยกรรมปลั๊กอินแลกประสิทธิภาพกับความสามารถในการขยาย แต่ถ้าความสามารถในการขยายเกิดขึ้นตอนคอมไพล์แทนที่จะเป็นตอนรันไทม์ล่ะ? การประกอบตอนคอมไพล์ให้คุณทั้งสองอย่าง — ไม่มี overhead ยืดหยุ่นเต็มที่"
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "คอมไพล์ Hono, tRPC และ Strapi เป็นไบนารีเนทีฟ",
+      "excerpt": "ตอนนี้ Perry คอมไพล์เฟรมเวิร์ก TypeScript สำคัญสามตัว — Hono, tRPC และ Strapi — เป็นไฟล์ปฏิบัติการ ARM64 เนทีฟ คอมไพล์ได้ในไม่ถึงวินาที สร้างไบนารีขนาดไม่ถึง 2 MB และทำงานได้โดยไม่มีข้อผิดพลาด"
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "ทั้ง 6 แพลตฟอร์ม ฟีเจอร์ครบถ้วนเท่าเทียมกัน",
+      "excerpt": "วิดเจ็ต UI เนทีฟกว่า 20 ตัว, วิดเจ็ต Canvas, Table view, การแจ้งเตือนระบบ, การเข้าถึง keychain, รองรับหลายหน้าต่าง และฟีเจอร์ครบถ้วนเท่าเทียมกันบน macOS, iOS, iPadOS, Android, Linux และ Windows — ทั้งหมดจากโค้ดเบส TypeScript เดียว"
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "จากคอมไพเลอร์สู่ระบบนิเวศ: React, ฐานข้อมูล และ Cloud Build",
+      "excerpt": "Perry เติบโตจากคอมไพเลอร์เป็นระบบนิเวศที่สมบูรณ์ perry/ui เป็นแกนหลัก, ORM ที่เข้ากันได้กับ Prisma สำหรับ MySQL/PostgreSQL/SQLite, push notification สากล, build แบบกระจายพร้อมการเผยแพร่บน App Store และเลเยอร์ความเข้ากันได้กับ React — ทั้งหมดในหนึ่งสัปดาห์"
+    },
+    "the-full-pipeline": {
+      "title": "Pipeline ครบวงจร: เอกสาร, การกระจาย และ WidgetKit",
+      "excerpt": "82 commit ในหนึ่งสัปดาห์: เว็บไซต์เอกสาร 49 หน้า, การเผยแพร่อัตโนมัติบน App Store และ Play Store, แพ็กเกจ Homebrew และ APT, ส่วนขยาย WidgetKit เนทีฟจาก TypeScript, วิดเจ็ตใหม่, โมดูล http/https และคอมไพเลอร์ LLVM แบบ self-hosting"
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "คอมไพล์ข้ามแพลตฟอร์มไป Windows, Game Loop บน iOS และความเท่าเทียมของการทดสอบ 100%",
+      "excerpt": "103 commit ในหนึ่งสัปดาห์: คอมไพล์ข้ามแพลตฟอร์มไป Windows จาก Linux ผ่าน lld-link, รองรับ game loop บน iOS, การรายงานข้อผิดพลาด, pipeline การ build Hub สองขั้นตอน และคอมไพเลอร์ self-hosting ทำได้ 68/68 ความเท่าเทียมของการทดสอบแบบ deterministic"
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "Multi-Threading แท้จริง, i18n ตอนคอมไพล์ และ watchOS",
+      "excerpt": "Perry v0.4.0: เธรด OS จริงพร้อมความปลอดภัยตอนคอมไพล์, ระบบ i18n แบบไม่ยุ่งยากสำหรับกว่า 30 ภาษา, watchOS เป็นเป้าหมายการคอมไพล์ลำดับที่ 9, API เสียงและกล้อง และ pipeline คอมไพล์แบบขนาน"
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, คอมไพล์ข้าม iOS จาก Linux และ Perry Login",
+      "excerpt": "Perry v0.4.24: tvOS เป็นเป้าหมายการคอมไพล์ลำดับที่ 10, คอมไพล์ข้าม iOS และ macOS จาก Linux ผ่าน ld64.lld, perry login พร้อมการเรียกเก็บเงินตามการใช้งาน, ปรับปรุง UI บน Windows, การรับรอง macOS และ 120 commit ใน 5 วัน"
+    }
+  }
+}

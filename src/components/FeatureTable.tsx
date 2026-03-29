@@ -1,4 +1,7 @@
-export function FeatureTable() {
+import { getTranslations } from "next-intl/server";
+
+export async function FeatureTable() {
+  const t = await getTranslations("featureTable");
   const categories = [
     {
       name: "Core Language",
@@ -67,10 +70,10 @@ export function FeatureTable() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Feature <span className="gradient-text">Support</span>
+            {t.rich("title", { gradient: (chunks) => <span className="gradient-text">{chunks}</span> })}
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Comprehensive TypeScript and Node.js API coverage
+            {t("subtitle")}
           </p>
         </div>
 
@@ -160,7 +163,7 @@ export function FeatureTable() {
                 d="M5 13l4 4L19 7"
               />
             </svg>
-            Full Support
+            {t("fullSupport")}
           </div>
           <div className="flex items-center gap-2">
             <svg
@@ -176,7 +179,7 @@ export function FeatureTable() {
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Partial
+            {t("partial")}
           </div>
         </div>
       </div>

@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "Voltar ao Início",
+    "viewOnGithub": "Ver no GitHub",
+    "getStarted": "Começar",
+    "readTheBlogPost": "Ler o artigo",
+    "backToShowcase": "Voltar ao Showcase",
+    "backToBlog": "Voltar ao Blog",
+    "seePricing": "Ver preços",
+    "terminal": "terminal",
+    "comingSoon": "em breve"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "Blog",
+    "roadmap": "Roadmap",
+    "publish": "Publicar",
+    "overview": "Visão geral",
+    "pricing": "Preços",
+    "docs": "Documentação",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — alvo tvOS, compilação cruzada iOS/macOS a partir do Linux, perry login",
+    "headline1": "Um único código. Todas as plataformas.",
+    "headline2": "Desempenho nativo.",
+    "subheadline": "Perry compila TypeScript para aplicações GUI e CLI nativas em <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly e Web.</platforms> Sem runtime. Sem Electron. Apenas binários nativos.",
+    "getStarted": "Começar",
+    "viewOnGithub": "Ver no GitHub",
+    "compiling": "Compilando main.ts...",
+    "compiled": "✓ Executável compilado: main (2,3 MB)",
+    "targetsLabel": "Alvos",
+    "widgetsLabel": "Widgets UI nativos",
+    "startupLabel": "Tempo de inicialização",
+    "appStore": "App Store",
+    "readyLabel": "Pronto"
+  },
+  "features": {
+    "title": "Por que <brand>Perry</brand>?",
+    "subtitle": "Tudo o que você precisa para compilar TypeScript em aplicações nativas",
+    "noRuntime": {
+      "title": "Sem runtime necessário",
+      "description": "Produz executáveis nativos independentes. Sem Node.js, sem V8, sem dependências de runtime. Apenas um binário que roda em qualquer lugar."
+    },
+    "fastCompilation": {
+      "title": "Compilação rápida",
+      "description": "Compilação direta de TypeScript para código nativo usando SWC para análise e Cranelift para geração de código. Sem JavaScript intermediário."
+    },
+    "smallBinaries": {
+      "title": "Binários pequenos",
+      "description": "Os binários de saída são tipicamente 2-5 MB. Com o runtime V8 opcional para pacotes npm JS, 15-20 MB. Envie menos, faça deploy mais rápido."
+    },
+    "typeSafe": {
+      "title": "Segurança de tipos",
+      "description": "Utiliza o sistema de tipos do TypeScript para otimização. Os tipos permitem melhor geração de código através de monomorphization."
+    },
+    "stdLib": {
+      "title": "Biblioteca padrão abrangente",
+      "description": "Implementações nativas integradas de fs, path, crypto, os, Buffer, child_process e mais. Use as APIs familiares do Node.js."
+    },
+    "v8Runtime": {
+      "title": "Runtime V8 opcional",
+      "description": "Precisa usar um pacote npm de JavaScript puro? Ative a flag de runtime V8 para compatibilidade total com o ecossistema npm."
+    },
+    "widgets": {
+      "title": "Mais de 25 widgets UI nativos",
+      "description": "Botões, campos de texto, áreas de texto, tabelas, canvas, scroll views, códigos QR, campos seguros, telas de abertura e mais — tudo compilado para widgets reais da plataforma via AppKit, GTK4, Win32, UIKit e JNI."
+    },
+    "plugins": {
+      "title": "Sistema de plugins em tempo de compilação",
+      "description": "Módulos se compõem em tempo de build — sem overhead de plugins em runtime, sem fronteiras IPC. Suas dependências se tornam chamadas de função nativas diretas no binário final."
+    },
+    "threading": {
+      "title": "Multi-threading real",
+      "description": "Threads reais do sistema operacional com parallelMap, parallelFilter e spawn. Segurança em tempo de compilação rejeita capturas mutáveis — sem SharedArrayBuffer, sem workers, apenas threads."
+    },
+    "i18n": {
+      "title": "i18n em tempo de compilação",
+      "description": "Extração automática de strings, regras de plural CLDR para mais de 30 idiomas, validação em tempo de compilação. Traduções integradas no binário com busca quase nula em runtime."
+    }
+  },
+  "platforms": {
+    "title": "Nativo em <gradient>todas as plataformas</gradient>",
+    "subtitle": "Perry compila seu TypeScript para frameworks UI nativos, WebAssembly e JavaScript — sem web views, sem Electron. Widgets nativos reais em cada plataforma, mais a web.",
+    "stable": "Estável"
+  },
+  "comparison": {
+    "badge": "Comparação de frameworks",
+    "title": "O único framework que marca <gradient>todas as caixas</gradient>",
+    "subtitle": "TypeScript compilado para código nativo. Widgets reais da plataforma. Zero overhead de runtime.",
+    "framework": "Framework",
+    "language": "Linguagem",
+    "nativeCode": "Código nativo",
+    "nativeWidgets": "Widgets nativos",
+    "runtimeOverhead": "Overhead de runtime",
+    "partial": "Parcial",
+    "noSharedUI": "Sem UI compartilhada",
+    "nativeCompiled": "Compilado nativo",
+    "realPlatformWidgets": "Widgets reais da plataforma",
+    "zeroRuntimeOverhead": "Zero overhead de runtime"
+  },
+  "codeExample": {
+    "title": "Escreva <gradient>TypeScript</gradient>, entregue nativo",
+    "subtitle": "Use a sintaxe e APIs familiares do TypeScript. Perry cuida do resto.",
+    "nativeBinary": "Binário nativo"
+  },
+  "performance": {
+    "title": "Comparação de <gradient>desempenho</gradient>",
+    "subtitle": "A compilação nativa oferece eficiência incomparável",
+    "metric": "Métrica",
+    "binarySize": "Tamanho do binário",
+    "startupTime": "Tempo de inicialização",
+    "runtimeDeps": "Dependências de runtime",
+    "memoryOverhead": "Overhead de memória",
+    "none": "Nenhuma",
+    "minimal": "Mínimo",
+    "benchmarkTitle": "Resultados do benchmark: <gradient>2,2x mais rápido</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24 no macOS ARM64 (menor é melhor)",
+    "lowerIsBetter": "Menor é melhor"
+  },
+  "installation": {
+    "title": "<gradient>Começar</gradient>",
+    "subtitle": "Instale Perry e comece a compilar TypeScript para executáveis nativos",
+    "step1": "Instalação",
+    "step2": "Uso",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "A partir do código-fonte",
+    "homebrewNote": "Requer Homebrew. Suporta macOS arm64 e x86_64.",
+    "aptNote": "Suporta Linux x86_64 e arm64.",
+    "sourceNote": "Requer a toolchain Rust. O binário estará em target/release/perry.",
+    "compileFile": "Compilar um arquivo",
+    "compileFileDesc": "Compila main.ts para um executável nativo",
+    "customOutput": "Saída personalizada",
+    "customOutputDesc": "Especificar o nome do executável de saída",
+    "withV8": "Com runtime V8",
+    "withV8Desc": "Ativar V8 para compatibilidade com pacotes npm JavaScript",
+    "checkCompat": "Verificar compatibilidade",
+    "checkCompatDesc": "Validar código TypeScript para compilação nativa"
+  },
+  "featureTable": {
+    "title": "<gradient>Suporte</gradient> de funcionalidades",
+    "subtitle": "Cobertura abrangente de APIs TypeScript e Node.js",
+    "coreLanguage": "Linguagem base",
+    "functions": "Funções",
+    "classes": "Classes",
+    "typeSystem": "Sistema de tipos",
+    "standardLibrary": "Biblioteca padrão",
+    "fullSupport": "Suporte completo",
+    "partial": "Parcial"
+  },
+  "nativeLibs": {
+    "title": "<gradient>Mais de 30</gradient> pacotes npm nativos",
+    "subtitle": "Pacotes npm populares reimplementados em Rust nativo. Sem npm install, sem node_modules, apenas código nativo rápido.",
+    "database": "Banco de dados",
+    "security": "Segurança",
+    "http": "HTTP",
+    "dataProcessing": "Processamento de dados",
+    "dateTime": "Data e hora",
+    "utilities": "Utilitários",
+    "info": "Basta importar e usar — Perry utiliza automaticamente a implementação nativa"
+  },
+  "shipIt": {
+    "title": "Do código à <gradient>App Store</gradient>",
+    "subtitle": "Perry não apenas compila sua app — coloca-a nas mãos dos seus usuários.",
+    "compileSign": "Compilar e assinar",
+    "packageSubmit": "Empacotar e enviar",
+    "storesDownloads": "Lojas e downloads",
+    "storesList": "App Store, Play Store, direto",
+    "testEveryPlatform": "Testar em cada plataforma",
+    "buildSign": {
+      "title": "Compilar e assinar",
+      "description": "Builds multiplataforma com um único comando. Assinatura de código para macOS, iOS, Android e Windows feita por você. Sem lutar com perfis de provisionamento do Xcode ou keystores do Android."
+    },
+    "distribute": {
+      "title": "Distribuir",
+      "description": "Publique na App Store, Play Store ou envie downloads diretos. Perry Publish cuida do empacotamento, notarização e envio."
+    },
+    "verify": {
+      "title": "Verificar",
+      "description": "Powered by Geisterhand. Testes de UI automatizados em todas as 6 plataformas. Saiba que sua app funciona em todos os lugares antes que seus usuários digam o contrário."
+    },
+    "freeForOpenSource": "Grátis para projetos de código aberto.",
+    "plansForTeams": "Planos para equipes"
+  },
+  "architecture": {
+    "title": "Como <gradient>funciona</gradient>",
+    "subtitle": "Do código-fonte TypeScript ao executável nativo em segundos",
+    "parser": "Parser",
+    "fastParsing": "Análise rápida",
+    "transform": "Transformação",
+    "codegen": "Codegen",
+    "machineCode": "Código de máquina",
+    "executable": "Executável",
+    "binarySize": "Binário de 2-5 MB",
+    "tsFiles": "Arquivos .ts",
+    "compilerInternalsPrompt": "Quer saber como o compilador funciona por dentro?",
+    "compilerInternals": "Internos do compilador"
+  },
+  "footer": {
+    "brand": "TypeScript → Nativo. Compile TypeScript diretamente para executáveis independentes em macOS, iOS, Android, Linux e Windows. Sem runtime, sem Electron.",
+    "resources": "Recursos",
+    "gettingStarted": "Primeiros passos",
+    "documentation": "Documentação",
+    "perryPublish": "Perry Publish",
+    "community": "Comunidade",
+    "issues": "Issues",
+    "discussions": "Discussões",
+    "contributing": "Contribuir",
+    "tagline": "Construído com Rust, SWC e Cranelift — e sim, este site é servido por um binário compilado com Perry"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "Preços",
+    "title": "Preços simples",
+    "subtitle": "Um comando para compilar, assinar e enviar. Grátis para a maioria dos desenvolvedores. Sem necessidade de conta para começar.",
+    "free": "Grátis",
+    "noAccountRequired": "Sem necessidade de conta",
+    "perMonth": "/mês",
+    "pro": "Pro",
+    "mostPopular": "Mais popular",
+    "forDevs": "Para desenvolvedores que entregam rápido",
+    "subscribeToPro": "Assinar Pro",
+    "feature_publishes15": "15 publicações por mês",
+    "feature_deepVerify2": "2 execuções de deep verify por mês",
+    "feature_lightVerify": "Light verify em cada publicação",
+    "feature_allPlatforms": "Todas as plataformas (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "Assinatura de código e notarização",
+    "feature_storeSubmission": "Envio para App Store e Play Store",
+    "feature_unlimitedProjects": "Projetos ilimitados (com conta gratuita)",
+    "feature_publishes50": "50 publicações por mês",
+    "feature_deepVerify20": "20 execuções de deep verify por mês",
+    "feature_unlimitedProjectsPro": "Projetos ilimitados",
+    "feature_priorityQueue": "Fila de build prioritária",
+    "feature_overage": "$0.49/publicação excedente (vs $0.99 grátis)",
+    "comparePlans": "Comparar planos",
+    "col_free": "Grátis",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "Publicações mensais",
+    "row_deepVerifyRuns": "Execuções de deep verify",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "Em cada publicação",
+    "row_overagePublish": "Excedente por publicação",
+    "row_overageVerify": "Excedente por deep verify",
+    "row_buildQueue": "Prioridade na fila de build",
+    "row_standard": "Padrão",
+    "row_priority": "Prioritária",
+    "row_projects": "Projetos",
+    "row_unlimitedStar": "Ilimitados*",
+    "row_unlimited": "Ilimitados",
+    "row_accountRequired": "Conta necessária",
+    "row_accountFreeDesc": "Não (1 projeto) / GitHub (múltiplos)",
+    "row_accountProDesc": "Sim (GitHub)",
+    "row_failedBuilds": "Builds com falha contam?",
+    "row_noStar": "Não*",
+    "failedBuildsNote": "* Builds que falham antes da compilação (configuração inválida, dependências ausentes) não contam na sua cota mensal.",
+    "selfHost": {
+      "title": "Ou auto-hospede tudo",
+      "description": "Perry é 100% código aberto — o compilador, runtime, servidor de builds, serviço de verificação e este site. Você pode rodar todo o pipeline de publicação no seu próprio hardware gratuitamente. Sem dependência de fornecedor, nunca.",
+      "selfHostingGuide": "Guia de auto-hospedagem"
+    },
+    "faq": {
+      "title": "Perguntas",
+      "q1": "Preciso de uma conta para publicar?",
+      "a1": "Não. Seu primeiro perry publish simplesmente funciona — sem cadastro, sem pagamento. Você tem 15 publicações por mês. Para publicar múltiplos projetos, execute perry login para criar uma conta gratuita vinculada ao GitHub. Sem necessidade de pagamento.",
+      "q2": "O que acontece quando atinjo o limite?",
+      "a2": "Seus builds são pausados até o próximo mês. Faça upgrade para Pro para mais publicações, ou adicione um método de pagamento para excedente sob demanda.",
+      "q3": "Posso auto-hospedar o servidor de builds?",
+      "a3": "Sim. O compilador Perry, o servidor de builds (perry-hub), o serviço de verificação e os workers são todos código aberto. Clone o repositório, rode o hub no seu próprio Mac Mini ou servidor Linux, e defina PERRY_HUB_SELF_HOSTED=true para desativar o rate limiting. Você obtém builds ilimitados com custo zero. O serviço hospedado em hub.perryts.com existe por conveniência — sem infraestrutura para gerenciar, sem certificados de assinatura para lidar, sem fila de builds para monitorar.",
+      "q4": "O que uma \"publicação\" inclui?",
+      "a4": "Uma invocação de perry publish '<'platform'>'. Cada plataforma é uma publicação separada. Uma publicação inclui compilação, assinatura de código, verificação leve (app inicia com sucesso) e envio à loja ou geração de artefatos."
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Onde Perry está hoje e para onde vai. Da compilação nativa a um ecossistema completo de desenvolvimento multiplataforma.",
+    "shipped": "Lançado",
+    "inProgress": "Em andamento",
+    "planned": "Planejado",
+    "vision": "Visão"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "Um comando para compilar, assinar e enviar sua app para cada loja. Perry Publish cuida da assinatura de código, notarização, empacotamento e envio — para que você possa focar no seu código.",
+    "buildingForIos": "Compilando para iOS...",
+    "signingCert": "Assinando com seu certificado...",
+    "verifyingLaunch": "Verificando — app inicia com sucesso",
+    "publishedToAppStore": "Publicado no App Store Connect.",
+    "buildSign": "Compilar e assinar",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "Distribuir",
+    "distributePlatforms": "App Store, Play Store, download direto",
+    "verify": "Verificar",
+    "verifyDesc": "Testes multiplataforma com IA"
+  },
+  "internals": {
+    "title": "<gradient>Internos</gradient> do compilador",
+    "subtitle": "As decisões de design chave que tornam Perry rápido",
+    "nanBoxing": {
+      "p1": "Os valores são armazenados como floats de 64 bits com padrões de bits especiais para ponteiros, permitindo tipos union sem overhead de runtime. Isso permite que (string | number)[] funcione eficientemente.",
+      "p2": "Ao codificar informações de tipo diretamente nos bits de payload NaN do IEEE 754, Perry evita a necessidade de tagged unions ou valores encapsulados. Uma única palavra de 64 bits pode representar qualquer tipo de valor JavaScript — números usam sua representação natural, enquanto strings, objetos e outros valores alocados no heap usam padrões de bits de ponteiro que ficam dentro da faixa NaN."
+    },
+    "monomorphization": {
+      "p1": "Generics são especializados em tempo de compilação, como em Rust. Cada instanciação de tipo gera código otimizado, eliminando o overhead de verificação de tipo em runtime.",
+      "p2": "Quando você escreve Array'<'number'>' e Array'<'string'>', Perry gera duas implementações separadas e totalmente otimizadas. Isso significa que operações de array em números usam aritmética de máquina direta — sem type guards, sem dispatch dinâmico, sem boxing."
+    },
+    "staticDispatch": {
+      "p1": "Sem tabelas virtuais. Chamadas de método são resolvidas em tempo de compilação, permitindo chamadas de função diretas e otimizações de inlining.",
+      "p2": "Runtimes OOP tradicionais usam vtables para resolução de métodos, adicionando uma camada de indireção em cada chamada. Perry resolve todas as chamadas de método estaticamente durante a compilação, transformando chamadas de método de interface em saltos diretos. Isso também libera inlining agressivo — métodos pequenos são frequentemente incorporados diretamente em seus pontos de chamada."
+    },
+    "zeroCost": {
+      "p1": "Classes, interfaces e generics TypeScript compilam para código nativo eficiente sem overhead de representação em runtime.",
+      "p2": "O sistema de tipos do TypeScript existe apenas em tempo de compilação — e Perry leva isso literalmente. Interfaces não produzem código runtime. Hierarquias de classes são achatadas. Restrições genéricas são resolvidas para tipos concretos. O binário compilado contém apenas a lógica real, sem a maquinaria de abstração que interpretadores tipicamente carregam."
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Projetos reais construídos com Perry. De apps GUI nativas a ferramentas CLI, veja o que é possível com a compilação nativa de TypeScript."
+  },
+  "pry": {
+    "subtitle": "Um visualizador JSON rápido e nativo construído com Perry. Navegação em árvore, busca, atalhos de teclado — compilado de TypeScript para binários nativos.",
+    "features": "Funcionalidades",
+    "treeView": "Visualização em árvore",
+    "treeViewDesc": "Renderização em árvore dobrável e navegável para estruturas JSON profundamente aninhadas.",
+    "search": "Busca",
+    "searchDesc": "Busca de texto completo em chaves e valores com destaque instantâneo.",
+    "keyboardShortcuts": "Atalhos de teclado",
+    "keyboardShortcutsDesc": "Navegue, expanda, recolha e copie com fluxo de trabalho apenas por teclado.",
+    "clipboardSupport": "Suporte à área de transferência",
+    "clipboardSupportDesc": "Copie qualquer nó ou subárvore para a área de transferência como JSON formatado.",
+    "statusBar": "Barra de status",
+    "statusBarDesc": "Mostra contagem de nós, profundidade atual, tamanho do arquivo e tempo de análise.",
+    "syntaxColoring": "Coloração de sintaxe",
+    "syntaxColoringDesc": "Valores coloridos por tipo — strings, números, booleanos, null.",
+    "howItsBuilt": "Como foi construído",
+    "howItsBuiltDesc": "Pry é escrito em TypeScript e compilado com Perry para um binário nativo. Sem Electron, sem web views, sem runtime JavaScript.",
+    "typeScriptSource": "Código-fonte TypeScript",
+    "typeScriptSourceDesc": "TypeScript padrão com a API de UI nativa do Perry",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "Análise SWC → resolução de tipos → codegen Cranelift",
+    "nativeBinary": "Binário nativo",
+    "nativeBinaryDesc": "Executável independente sem dependências de runtime",
+    "platformSupport": "Suporte a plataformas",
+    "nativeWidgets": "Widgets {framework} nativos",
+    "available": "Disponível",
+    "screenshots": "Capturas de tela",
+    "macOsScreenshot": "Captura de tela macOS — em breve",
+    "iosScreenshot": "Captura de tela iOS — em breve",
+    "screenshotsNote": "Capturas de tela serão adicionadas conforme o desenvolvimento do Pry continua. Confira o repositório GitHub para as novidades."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Notícias, tutoriais e análises aprofundadas sobre como criar apps nativas com Perry.",
+    "englishOnly": "Este artigo está disponível apenas em inglês."
+  },
+  "languageSwitcher": {
+    "label": "Idioma"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Apresentando o Perry",
+      "excerpt": "Perry é um compilador nativo de TypeScript escrito em Rust que compila seu TypeScript diretamente para executáveis independentes. Sem runtime, sem Electron, sem concessões."
+    },
+    "cross-platform-native-ui": {
+      "title": "UI Nativa Multiplataforma a Partir de TypeScript",
+      "excerpt": "Como o Perry mapeia um único código TypeScript para AppKit, UIKit, Android Views, GTK4 e Win32 — entregando UI verdadeiramente nativa em todas as plataformas."
+    },
+    "building-pry": {
+      "title": "Construindo o Pry: Um Visualizador JSON Nativo em TypeScript",
+      "excerpt": "Um passo a passo da construção do Pry — um visualizador JSON nativo que compila de TypeScript para um binário ARM64 nativo. Sem runtime, sem web views."
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "Sistemas de Plugins São um Imposto sobre o Desempenho",
+      "excerpt": "Arquiteturas de plugins trocam desempenho por extensibilidade. Mas e se a extensibilidade acontecesse em tempo de compilação em vez de runtime? Composição em tempo de compilação oferece ambos — zero overhead, flexibilidade total."
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Compilando Hono, tRPC e Strapi para Binários Nativos",
+      "excerpt": "Perry agora compila três grandes frameworks TypeScript — Hono, tRPC e Strapi — para executáveis ARM64 nativos. Compilam em menos de um segundo, produzem binários com menos de 2 MB e rodam sem crashes."
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "Todas as Seis Plataformas, Paridade Total de Funcionalidades",
+      "excerpt": "Mais de 20 widgets UI nativos, widget Canvas, Table views, notificações do sistema, acesso ao keychain, suporte a múltiplas janelas e paridade total de funcionalidades em macOS, iOS, iPadOS, Android, Linux e Windows — tudo a partir de um único código TypeScript."
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "De Compilador a Ecossistema: React, Bancos de Dados e Builds na Nuvem",
+      "excerpt": "Perry cresce de um compilador para um ecossistema completo. perry/ui no centro, ORMs compatíveis com Prisma para MySQL/PostgreSQL/SQLite, notificações push universais, builds distribuídos com publicação na App Store e uma camada de compatibilidade React — tudo em uma semana."
+    },
+    "the-full-pipeline": {
+      "title": "O Pipeline Completo: Documentação, Distribuição e WidgetKit",
+      "excerpt": "82 commits em uma semana: um site de documentação de 49 páginas, publicação automatizada na App Store e Play Store, pacotes Homebrew e APT, extensões WidgetKit nativas a partir de TypeScript, novos widgets, módulos http/https e um compilador LLVM auto-hospedado."
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Compilação Cruzada para Windows, Game Loops no iOS e 100% de Paridade de Testes",
+      "excerpt": "103 commits em uma semana: compilação cruzada para Windows a partir do Linux via lld-link, suporte a game loop no iOS, relatório de crashes, pipeline de build Hub em dois estágios e o compilador auto-hospedado atinge paridade determinística de 68/68 testes."
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "Multi-Threading Real, i18n em Tempo de Compilação e watchOS",
+      "excerpt": "Perry v0.4.0: threads reais do SO com segurança em tempo de compilação, um sistema de internacionalização sem cerimônia para mais de 30 idiomas, watchOS como 9º alvo de compilação, APIs de áudio e câmera e um pipeline de compilação paralelo."
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, Compilação Cruzada de iOS a Partir do Linux e Perry Login",
+      "excerpt": "Perry v0.4.24: tvOS como 10º alvo de compilação, compilação cruzada de iOS e macOS a partir do Linux via ld64.lld, perry login com cobrança baseada em uso, reformulação da UI do Windows, notarização no macOS e 120 commits em 5 dias."
+    }
+  }
+}

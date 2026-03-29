@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "Ana Sayfaya Dön",
+    "viewOnGithub": "GitHub'da Görüntüle",
+    "getStarted": "Başlayın",
+    "readTheBlogPost": "Blog Yazısını Oku",
+    "backToShowcase": "Showcase'e Dön",
+    "backToBlog": "Bloga Dön",
+    "seePricing": "Fiyatları gör",
+    "terminal": "terminal",
+    "comingSoon": "yakında"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "Blog",
+    "roadmap": "Yol Haritası",
+    "publish": "Yayınla",
+    "overview": "Genel Bakış",
+    "pricing": "Fiyatlandırma",
+    "docs": "Dokümantasyon",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — tvOS hedefi, Linux'tan iOS/macOS çapraz derleme, perry login",
+    "headline1": "Tek Kod Tabanı. Her Platform.",
+    "headline2": "Yerel Performans.",
+    "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
+    "getStarted": "Başlayın",
+    "viewOnGithub": "GitHub'da Görüntüle",
+    "compiling": "main.ts derleniyor...",
+    "compiled": "✓ Derlenen çalıştırılabilir dosya: main (2,3 MB)",
+    "targetsLabel": "Hedefler",
+    "widgetsLabel": "Yerel UI widget'ları",
+    "startupLabel": "Başlatma süresi",
+    "appStore": "App Store",
+    "readyLabel": "Hazır"
+  },
+  "features": {
+    "title": "Neden <brand>Perry</brand>?",
+    "subtitle": "TypeScript'i yerel uygulamalara derlemek için ihtiyacınız olan her şey",
+    "noRuntime": {
+      "title": "Runtime Gerektirmez",
+      "description": "Bağımsız yerel çalıştırılabilir dosyalar üretir. Node.js yok, V8 yok, runtime bağımlılığı yok. Her yerde çalışan tek bir ikili dosya."
+    },
+    "fastCompilation": {
+      "title": "Hızlı Derleme",
+      "description": "SWC ile ayrıştırma ve Cranelift ile kod üretimi kullanarak TypeScript'ten yerel koda doğrudan derleme. Ara JavaScript yok."
+    },
+    "smallBinaries": {
+      "title": "Küçük İkili Dosyalar",
+      "description": "Çıktı ikili dosyaları genellikle 2-5 MB'dir. JS npm paketleri için isteğe bağlı V8 runtime ile 15-20 MB. Daha az gönder, daha hızlı dağıt."
+    },
+    "typeSafe": {
+      "title": "Tip Güvenli",
+      "description": "Optimizasyon için TypeScript'in tip sistemini kullanır. Tipler, monomorphization aracılığıyla daha iyi kod üretimi sağlar."
+    },
+    "stdLib": {
+      "title": "Kapsamlı Standart Kütüphane",
+      "description": "fs, path, crypto, os, Buffer, child_process ve daha fazlasının yerleşik yerel implementasyonları. Tanıdık Node.js API'lerini kullanın."
+    },
+    "v8Runtime": {
+      "title": "İsteğe Bağlı V8 Runtime",
+      "description": "Saf JavaScript npm paketi mi kullanmanız gerekiyor? Tam npm ekosistemi uyumluluğu için V8 runtime bayrağını etkinleştirin."
+    },
+    "widgets": {
+      "title": "25+ Yerel UI Widget'ı",
+      "description": "Düğmeler, metin alanları, metin bölgeleri, tablolar, canvas, scroll view'lar, QR kodlar, güvenli alanlar, açılış ekranları ve daha fazlası — tümü AppKit, GTK4, Win32, UIKit ve JNI aracılığıyla gerçek platform widget'larına derlenir."
+    },
+    "plugins": {
+      "title": "Derleme Zamanı Eklenti Sistemi",
+      "description": "Modüller derleme zamanında birleşir — runtime'da eklenti yükü yok, IPC sınırları yok. Bağımlılıklarınız son ikili dosyada doğrudan yerel fonksiyon çağrılarına dönüşür."
+    },
+    "threading": {
+      "title": "Gerçek Çok İş Parçacığı",
+      "description": "parallelMap, parallelFilter ve spawn ile gerçek işletim sistemi iş parçacıkları. Derleme zamanı güvenliği değiştirilebilir yakalanmaları reddeder — SharedArrayBuffer yok, worker yok, sadece iş parçacıkları."
+    },
+    "i18n": {
+      "title": "Derleme Zamanı i18n",
+      "description": "Otomatik dize çıkarımı, 30+ dil için CLDR çoğul kuralları, derleme zamanı doğrulama. Çeviriler neredeyse sıfır runtime arama ile ikili dosyaya gömülür."
+    }
+  },
+  "platforms": {
+    "title": "<gradient>Her Platformda</gradient> Yerel",
+    "subtitle": "Perry, TypeScript'inizi yerel UI framework'lerine, WebAssembly'e ve JavaScript'e derler — web view değil, Electron değil. Her platformda gerçek yerel widget'lar, artı web.",
+    "stable": "Kararlı"
+  },
+  "comparison": {
+    "badge": "Framework Karşılaştırması",
+    "title": "<gradient>Her kutuyu</gradient> işaretleyen tek framework",
+    "subtitle": "TypeScript yerel koda derlendi. Gerçek platform widget'ları. Sıfır runtime yükü.",
+    "framework": "Framework",
+    "language": "Dil",
+    "nativeCode": "Yerel Kod",
+    "nativeWidgets": "Yerel Widget'lar",
+    "runtimeOverhead": "Runtime Yükü",
+    "partial": "Kısmi",
+    "noSharedUI": "Paylaşılan UI yok",
+    "nativeCompiled": "Yerel derlenmiş",
+    "realPlatformWidgets": "Gerçek platform widget'ları",
+    "zeroRuntimeOverhead": "Sıfır runtime yükü"
+  },
+  "codeExample": {
+    "title": "<gradient>TypeScript</gradient> Yaz, Yerel Gönder",
+    "subtitle": "Tanıdık TypeScript sözdizimi ve API'lerini kullanın. Perry gerisini halleder.",
+    "nativeBinary": "Yerel ikili dosya"
+  },
+  "performance": {
+    "title": "Performans <gradient>Karşılaştırması</gradient>",
+    "subtitle": "Yerel derleme benzersiz verimlilik sunar",
+    "metric": "Metrik",
+    "binarySize": "İkili Dosya Boyutu",
+    "startupTime": "Başlatma Süresi",
+    "runtimeDeps": "Runtime Bağımlılıkları",
+    "memoryOverhead": "Bellek Yükü",
+    "none": "Yok",
+    "minimal": "Minimal",
+    "benchmarkTitle": "Benchmark Sonuçları: <gradient>2,2x Daha Hızlı</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24, macOS ARM64 (düşük olan daha iyi)",
+    "lowerIsBetter": "Düşük olan daha iyi"
+  },
+  "installation": {
+    "title": "<gradient>Başlayın</gradient>",
+    "subtitle": "Perry'yi kurun ve TypeScript'i yerel çalıştırılabilir dosyalara derlemeye başlayın",
+    "step1": "Kurulum",
+    "step2": "Kullanım",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "Kaynak Koddan",
+    "homebrewNote": "Homebrew gerektirir. macOS arm64 ve x86_64 desteklenir.",
+    "aptNote": "x86_64 ve arm64 Linux desteklenir.",
+    "sourceNote": "Rust araç zinciri gerektirir. İkili dosya target/release/perry konumunda olacaktır.",
+    "compileFile": "Dosya derle",
+    "compileFileDesc": "main.ts'yi yerel bir çalıştırılabilir dosyaya derler",
+    "customOutput": "Özel çıktı",
+    "customOutputDesc": "Çıktı çalıştırılabilir dosya adını belirtin",
+    "withV8": "V8 runtime ile",
+    "withV8Desc": "JavaScript npm paketi uyumluluğu için V8'i etkinleştirin",
+    "checkCompat": "Uyumluluğu kontrol et",
+    "checkCompatDesc": "TypeScript kodunu yerel derleme için doğrulayın"
+  },
+  "featureTable": {
+    "title": "Özellik <gradient>Desteği</gradient>",
+    "subtitle": "Kapsamlı TypeScript ve Node.js API kapsama alanı",
+    "coreLanguage": "Temel Dil",
+    "functions": "Fonksiyonlar",
+    "classes": "Sınıflar",
+    "typeSystem": "Tip Sistemi",
+    "standardLibrary": "Standart Kütüphane",
+    "fullSupport": "Tam Destek",
+    "partial": "Kısmi"
+  },
+  "nativeLibs": {
+    "title": "<gradient>30+</gradient> Yerel npm Paketi",
+    "subtitle": "Popüler npm paketleri yerel Rust'ta yeniden implemente edildi. npm install yok, node_modules yok, sadece hızlı yerel kod.",
+    "database": "Veritabanı",
+    "security": "Güvenlik",
+    "http": "HTTP",
+    "dataProcessing": "Veri İşleme",
+    "dateTime": "Tarih ve Saat",
+    "utilities": "Yardımcılar",
+    "info": "Sadece içe aktarın ve kullanın — Perry otomatik olarak yerel implementasyonu kullanır"
+  },
+  "shipIt": {
+    "title": "Koddan <gradient>App Store</gradient>'a",
+    "subtitle": "Perry sadece uygulamanızı derlemez — kullanıcılarınızın eline ulaştırır.",
+    "compileSign": "Derle ve imzala",
+    "packageSubmit": "Paketle ve gönder",
+    "storesDownloads": "Mağazalar ve İndirmeler",
+    "storesList": "App Store, Play Store, doğrudan",
+    "testEveryPlatform": "Her platformu test et",
+    "buildSign": {
+      "title": "Derle ve İmzala",
+      "description": "Tek komutla çapraz platform derlemeleri. macOS, iOS, Android ve Windows için kod imzalama sizin için halledilir. Xcode sağlama profilleri veya Android keystore'ları ile uğraşmaya gerek yok."
+    },
+    "distribute": {
+      "title": "Dağıt",
+      "description": "App Store, Play Store'a gönderin veya doğrudan indirme sunun. Perry Publish paketleme, noter onayı ve gönderimi yönetir."
+    },
+    "verify": {
+      "title": "Doğrula",
+      "description": "Geisterhand tarafından desteklenir. 6 platformun tamamında otomatik UI testleri. Kullanıcılarınız size söylemeden önce uygulamanızın her yerde çalıştığından emin olun."
+    },
+    "freeForOpenSource": "Açık kaynak projeler için ücretsiz.",
+    "plansForTeams": "Takımlar için planlar"
+  },
+  "architecture": {
+    "title": "Nasıl <gradient>Çalışır</gradient>",
+    "subtitle": "TypeScript kaynağından yerel çalıştırılabilir dosyaya saniyeler içinde",
+    "parser": "Ayrıştırıcı",
+    "fastParsing": "Hızlı ayrıştırma",
+    "transform": "Dönüşüm",
+    "codegen": "Kod Üretimi",
+    "machineCode": "Makine kodu",
+    "executable": "Çalıştırılabilir",
+    "binarySize": "2-5 MB ikili dosya",
+    "tsFiles": ".ts dosyaları",
+    "compilerInternalsPrompt": "Derleyicinin kaputun altında nasıl çalıştığını öğrenmek ister misiniz?",
+    "compilerInternals": "Derleyici iç yapısı"
+  },
+  "footer": {
+    "brand": "TypeScript → Yerel. TypeScript'i doğrudan macOS, iOS, Android, Linux ve Windows'ta bağımsız çalıştırılabilir dosyalara derleyin. Runtime yok, Electron yok.",
+    "resources": "Kaynaklar",
+    "gettingStarted": "Başlarken",
+    "documentation": "Dokümantasyon",
+    "perryPublish": "Perry Publish",
+    "community": "Topluluk",
+    "issues": "Sorunlar",
+    "discussions": "Tartışmalar",
+    "contributing": "Katkıda Bulunma",
+    "tagline": "Rust, SWC ve Cranelift ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "Fiyatlandırma",
+    "title": "Basit fiyatlandırma",
+    "subtitle": "Derlemek, imzalamak ve göndermek için tek komut. Çoğu geliştirici için ücretsiz. Başlamak için hesap gerekmez.",
+    "free": "Ücretsiz",
+    "noAccountRequired": "Hesap gerekmez",
+    "perMonth": "/ay",
+    "pro": "Pro",
+    "mostPopular": "En popüler",
+    "forDevs": "Hızlı gönderim yapan geliştiriciler için",
+    "subscribeToPro": "Pro'ya abone ol",
+    "feature_publishes15": "Ayda 15 yayın",
+    "feature_deepVerify2": "Ayda 2 deep verify çalıştırması",
+    "feature_lightVerify": "Her yayında light verify",
+    "feature_allPlatforms": "Tüm platformlar (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "Kod imzalama ve noter onayı",
+    "feature_storeSubmission": "App Store ve Play Store gönderimi",
+    "feature_unlimitedProjects": "Sınırsız proje (ücretsiz hesapla)",
+    "feature_publishes50": "Ayda 50 yayın",
+    "feature_deepVerify20": "Ayda 20 deep verify çalıştırması",
+    "feature_unlimitedProjectsPro": "Sınırsız proje",
+    "feature_priorityQueue": "Öncelikli derleme kuyruğu",
+    "feature_overage": "Fazlalık $0.49/yayın (ücretsizde $0.99)",
+    "comparePlans": "Planları karşılaştır",
+    "col_free": "Ücretsiz",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "Aylık yayınlar",
+    "row_deepVerifyRuns": "Deep verify çalıştırmaları",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "Her yayında",
+    "row_overagePublish": "Yayın başına fazlalık",
+    "row_overageVerify": "Deep verify başına fazlalık",
+    "row_buildQueue": "Derleme kuyruğu önceliği",
+    "row_standard": "Standart",
+    "row_priority": "Öncelikli",
+    "row_projects": "Projeler",
+    "row_unlimitedStar": "Sınırsız*",
+    "row_unlimited": "Sınırsız",
+    "row_accountRequired": "Hesap gerekli",
+    "row_accountFreeDesc": "Hayır (1 proje) / GitHub (birden fazla)",
+    "row_accountProDesc": "Evet (GitHub)",
+    "row_failedBuilds": "Başarısız derlemeler sayılır mı?",
+    "row_noStar": "Hayır*",
+    "failedBuildsNote": "* Derlemeden önce başarısız olan derlemeler (geçersiz yapılandırma, eksik bağımlılıklar) aylık kotanıza sayılmaz.",
+    "selfHost": {
+      "title": "Veya her şeyi kendiniz barındırın",
+      "description": "Perry %100 açık kaynaktır — derleyici, runtime, derleme sunucusu, doğrulama servisi ve bu web sitesi. Yayınlama hattının tamamını kendi donanımınızda ücretsiz olarak çalıştırabilirsiniz. Hiçbir zaman satıcı bağımlılığı yok.",
+      "selfHostingGuide": "Kendi barındırma kılavuzu"
+    },
+    "faq": {
+      "title": "Sorular",
+      "q1": "Yayınlamak için hesaba ihtiyacım var mı?",
+      "a1": "Hayır. İlk perry publish'iniz doğrudan çalışır — kayıt yok, ödeme yok. Ayda 15 yayın hakkınız var. Birden fazla proje yayınlamak için perry login çalıştırarak ücretsiz GitHub bağlantılı hesap oluşturun. Ödeme gerekmez.",
+      "q2": "Limite ulaştığımda ne olur?",
+      "a2": "Derlemeleriniz bir sonraki aya kadar duraklatılır. Daha fazla yayın için Pro'ya yükseltin veya kullandıkça öde fazlalığı için ödeme yöntemi ekleyin.",
+      "q3": "Derleme sunucusunu kendim barındırabilir miyim?",
+      "a3": "Evet. Perry derleyicisi, derleme sunucusu (perry-hub), doğrulama servisi ve derleme worker'ları tamamen açık kaynaktır. Repo'yu klonlayın, hub'ı kendi Mac Mini veya Linux makinenizde çalıştırın ve PERRY_HUB_SELF_HOSTED=true ayarlayarak hız sınırlamasını devre dışı bırakın. Sıfır maliyetle sınırsız derleme yaparsınız. hub.perryts.com'daki barındırılan servis kolaylık için vardır — yönetilecek altyapı yok, uğraşılacak imzalama sertifikaları yok, izlenecek derleme kuyruğu yok.",
+      "q4": "Bir \"yayın\" neyi içerir?",
+      "a4": "perry publish '<'platform'>' komutunun bir çağrısı. Her platform ayrı bir yayındır. Bir yayın derleme, kod imzalama, hafif doğrulama (uygulamanın başarıyla başlatılması) ve mağaza gönderimi veya yapıt oluşturmayı içerir."
+    }
+  },
+  "roadmap": {
+    "title": "Yol Haritası",
+    "subtitle": "Perry bugün nerede ve nereye gidiyor. Yerel derlemeden tam kapsamlı çapraz platform geliştirme ekosistemine.",
+    "shipped": "Yayınlandı",
+    "inProgress": "Devam Ediyor",
+    "planned": "Planlandı",
+    "vision": "Vizyon"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "Uygulamanızı her mağazaya derlemek, imzalamak ve göndermek için tek komut. Perry Publish kod imzalama, noter onayı, paketleme ve gönderimi yönetir — böylece kodunuza odaklanabilirsiniz.",
+    "buildingForIos": "iOS için derleniyor...",
+    "signingCert": "Sertifikanızla imzalanıyor...",
+    "verifyingLaunch": "Doğrulanıyor — uygulama başarıyla başlatıldı",
+    "publishedToAppStore": "App Store Connect'e yayınlandı.",
+    "buildSign": "Derle ve İmzala",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "Dağıt",
+    "distributePlatforms": "App Store, Play Store, doğrudan indirme",
+    "verify": "Doğrula",
+    "verifyDesc": "Yapay zeka destekli çapraz platform testi"
+  },
+  "internals": {
+    "title": "Derleyici <gradient>İç Yapısı</gradient>",
+    "subtitle": "Perry'yi hızlı yapan temel tasarım kararları",
+    "nanBoxing": {
+      "p1": "Değerler, işaretçiler için özel bit kalıplarına sahip 64-bit float olarak depolanır, bu da union tiplerini runtime yükü olmadan mümkün kılar. Bu, (string | number)[]'in verimli çalışmasını sağlar.",
+      "p2": "Tip bilgilerini doğrudan IEEE 754 NaN payload bitlerinde kodlayarak, Perry tagged union veya boxed değer ihtiyacını ortadan kaldırır. Tek bir 64-bit kelime herhangi bir JavaScript değer tipini temsil edebilir — sayılar doğal gösterimlerini kullanırken, dizeler, nesneler ve diğer heap-allocated değerler NaN aralığında kalan işaretçi bit kalıplarını kullanır."
+    },
+    "monomorphization": {
+      "p1": "Generic'ler Rust'ta olduğu gibi derleme zamanında özelleştirilir. Her tip somutlaştırması optimize edilmiş kod üretir ve runtime tip kontrolü yükünü ortadan kaldırır.",
+      "p2": "Array'<'number'>' ve Array'<'string'>' yazdığınızda, Perry iki ayrı, tamamen optimize edilmiş implementasyon üretir. Bu, sayılar üzerindeki dizi işlemlerinin doğrudan makine aritmetiği kullanması demektir — tip koruması yok, dinamik dağıtım yok, boxing yok."
+    },
+    "staticDispatch": {
+      "p1": "Sanal tablo yok. Metot çağrıları derleme zamanında çözümlenir ve doğrudan fonksiyon çağrıları ile satır içi optimizasyonlar mümkün olur.",
+      "p2": "Geleneksel OOP runtime'ları metot çözümlemesi için vtable kullanır ve her çağrıda bir dolaylama katmanı ekler. Perry tüm metot çağrılarını derleme sırasında statik olarak çözümler ve arayüz metot çağrılarını doğrudan atlamalara dönüştürür. Bu ayrıca agresif satır içi almayı da mümkün kılar — küçük metotlar genellikle doğrudan çağrı noktalarına katlanır."
+    },
+    "zeroCost": {
+      "p1": "TypeScript sınıfları, arayüzleri ve generic'leri runtime temsil yükü olmadan verimli yerel koda derlenir.",
+      "p2": "TypeScript'in tip sistemi yalnızca derleme zamanında var olur — ve Perry bunu kelimesi kelimesine uygular. Arayüzler hiçbir runtime kodu üretmez. Sınıf hiyerarşileri düzleştirilir. Generic kısıtlamalar somut tiplere çözümlenir. Derlenen ikili dosya yalnızca gerçek mantığı içerir, yorumlayıcıların tipik olarak taşıdığı soyutlama mekanizması olmadan."
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Perry ile inşa edilmiş gerçek projeler. Yerel GUI uygulamalarından CLI araçlarına, yerel TypeScript derleme ile nelerin mümkün olduğunu görün."
+  },
+  "pry": {
+    "subtitle": "Perry ile inşa edilmiş hızlı, yerel JSON görüntüleyici. Ağaç gezinme, arama, klavye kısayolları — TypeScript'ten yerel ikili dosyalara derlendi.",
+    "features": "Özellikler",
+    "treeView": "Ağaç Görünümü",
+    "treeViewDesc": "Derinlemesine iç içe geçmiş JSON yapıları için katlanabilir, gezinilebilir ağaç görüntüleme.",
+    "search": "Arama",
+    "searchDesc": "Anahtar ve değerler üzerinde anında vurgulama ile tam metin araması.",
+    "keyboardShortcuts": "Klavye Kısayolları",
+    "keyboardShortcutsDesc": "Sadece klavye ile gezinin, genişletin, daraltın ve kopyalayın.",
+    "clipboardSupport": "Pano Desteği",
+    "clipboardSupportDesc": "Herhangi bir düğüm veya alt ağacı biçimlendirilmiş JSON olarak panoya kopyalayın.",
+    "statusBar": "Durum Çubuğu",
+    "statusBarDesc": "Düğüm sayısı, geçerli derinlik, dosya boyutu ve ayrıştırma süresini gösterir.",
+    "syntaxColoring": "Sözdizimi Renklendirmesi",
+    "syntaxColoringDesc": "Tipe göre renk kodlu değerler — dizeler, sayılar, boolean'lar, null.",
+    "howItsBuilt": "Nasıl İnşa Edildi",
+    "howItsBuiltDesc": "Pry TypeScript ile yazılmış ve Perry ile yerel bir ikili dosyaya derlenmiştir. Electron yok, web view yok, JavaScript runtime yok.",
+    "typeScriptSource": "TypeScript Kaynağı",
+    "typeScriptSourceDesc": "Perry'nin yerel UI API'si ile standart TypeScript",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "SWC ayrıştırma → tip çözümleme → Cranelift kod üretimi",
+    "nativeBinary": "Yerel İkili Dosya",
+    "nativeBinaryDesc": "Sıfır runtime bağımlılığı ile bağımsız çalıştırılabilir",
+    "platformSupport": "Platform Desteği",
+    "nativeWidgets": "Yerel {framework} widget'ları",
+    "available": "Mevcut",
+    "screenshots": "Ekran Görüntüleri",
+    "macOsScreenshot": "macOS ekran görüntüsü — yakında",
+    "iosScreenshot": "iOS ekran görüntüsü — yakında",
+    "screenshotsNote": "Ekran görüntüleri Pry geliştirmesi ilerledikçe eklenecektir. En son bilgiler için GitHub deposunu kontrol edin."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Perry ile yerel uygulamalar oluşturma hakkında haberler, eğitimler ve derinlemesine incelemeler.",
+    "englishOnly": "Bu yazı yalnızca İngilizce olarak mevcuttur."
+  },
+  "languageSwitcher": {
+    "label": "Dil"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Perry'yi Tanıtıyoruz",
+      "excerpt": "Perry, Rust ile yazılmış yerel bir TypeScript derleyicisidir ve TypeScript'inizi doğrudan bağımsız çalıştırılabilir dosyalara derler. Runtime yok, Electron yok, taviz yok."
+    },
+    "cross-platform-native-ui": {
+      "title": "TypeScript'ten Çapraz Platform Yerel UI",
+      "excerpt": "Perry tek bir TypeScript kod tabanını AppKit, UIKit, Android Views, GTK4 ve Win32'ye nasıl eşler — her platformda gerçekten yerel UI sunar."
+    },
+    "building-pry": {
+      "title": "Pry'ı İnşa Etmek: TypeScript'te Yerel Bir JSON Görüntüleyici",
+      "excerpt": "Pry'ın inşa sürecine adım adım bakış — TypeScript'ten yerel ARM64 ikili dosyasına derlenen yerel bir JSON görüntüleyici. Runtime yok, web view yok."
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "Eklenti Sistemleri Bir Performans Vergisidir",
+      "excerpt": "Eklenti mimarileri performansı genişletilebilirlik için takas eder. Peki ya genişletilebilirlik runtime yerine derleme zamanında gerçekleşseydi? Derleme zamanı bileşimi size her ikisini de verir — sıfır yük, tam esneklik."
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Hono, tRPC ve Strapi'yi Yerel İkili Dosyalara Derleme",
+      "excerpt": "Perry artık üç büyük TypeScript framework'ünü — Hono, tRPC ve Strapi — yerel ARM64 çalıştırılabilir dosyalara derler. Bir saniyeden kısa sürede derlenir, 2 MB'nin altında ikili dosyalar üretir ve çökmeden çalışır."
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "Altı Platformun Tamamında Tam Özellik Eşitliği",
+      "excerpt": "20'den fazla yerel UI widget'ı, Canvas widget'ı, Table view'lar, sistem bildirimleri, keychain erişimi, çoklu pencere desteği ve macOS, iOS, iPadOS, Android, Linux ve Windows genelinde tam özellik eşitliği — tek bir TypeScript kod tabanından."
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "Derleyiciden Ekosisteme: React, Veritabanları ve Bulut Derlemeleri",
+      "excerpt": "Perry bir derleyiciden tam bir ekosisteme dönüşür. Merkezde perry/ui, MySQL/PostgreSQL/SQLite için Prisma uyumlu ORM'ler, evrensel push bildirimleri, App Store yayınlamalı dağıtık derlemeler ve React uyumluluk katmanı — hepsi bir haftada."
+    },
+    "the-full-pipeline": {
+      "title": "Tam Pipeline: Dokümantasyon, Dağıtım ve WidgetKit",
+      "excerpt": "Bir haftada 82 commit: 49 sayfalık dokümantasyon sitesi, otomatik App Store ve Play Store yayınlama, Homebrew ve APT paketleri, TypeScript'ten yerel WidgetKit uzantıları, yeni widget'lar, http/https modülleri ve kendi kendini barındıran LLVM derleyicisi."
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Windows'a Çapraz Derleme, iOS Game Loop'ları ve %100 Test Eşitliği",
+      "excerpt": "Bir haftada 103 commit: lld-link ile Linux'tan Windows'a çapraz derleme, iOS game loop desteği, çökme raporlama, iki aşamalı Hub derleme pipeline'ı ve kendi kendini barındıran derleyici 68/68 deterministik test eşitliğine ulaşır."
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "Gerçek Çok İş Parçacığı, Derleme Zamanı i18n ve watchOS",
+      "excerpt": "Perry v0.4.0: derleme zamanı güvenliği ile gerçek işletim sistemi iş parçacıkları, 30'dan fazla dil için sıfır tören uluslararasılaştırma sistemi, 9. derleme hedefi olarak watchOS, ses ve kamera API'leri ve paralel derleyici pipeline'ı."
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, Linux'tan iOS Çapraz Derleme ve Perry Login",
+      "excerpt": "Perry v0.4.24: 10. derleme hedefi olarak tvOS, ld64.lld ile Linux'tan iOS ve macOS çapraz derleme, kullanım bazlı faturalandırma ile perry login, Windows UI yenilemesi, macOS noter onayı ve 5 günde 120 commit."
+    }
+  }
+}

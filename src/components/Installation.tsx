@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function Installation() {
+  const t = useTranslations("installation");
   const [copied, setCopied] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, id: string) => {
@@ -15,58 +17,31 @@ export function Installation() {
 
   const installMethods = {
     homebrew: {
-      label: "Homebrew (macOS)",
-      commands: [
-        "brew tap PerryTS/perry",
-        "brew install perry",
-      ],
-      note: "Requires Homebrew. Supports macOS arm64 and x86_64.",
+      label: t("homebrew"),
+      commands: ["brew tap PerryTS/perry", "brew install perry"],
+      note: t("homebrewNote"),
     },
     apt: {
-      label: "APT (Debian/Ubuntu)",
+      label: t("apt"),
       commands: [
         "curl -fsSL https://perry.dev/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/perry.gpg",
         "echo 'deb [signed-by=/usr/share/keyrings/perry.gpg] https://perry.dev/apt stable main' | sudo tee /etc/apt/sources.list.d/perry.list",
         "sudo apt update && sudo apt install perry",
       ],
-      note: "Supports x86_64 and arm64 Linux.",
+      note: t("aptNote"),
     },
     source: {
-      label: "From Source",
-      commands: [
-        "git clone https://github.com/PerryTS/perry.git",
-        "cd perry",
-        "cargo build --release",
-      ],
-      note: "Requires Rust toolchain. Binary will be at target/release/perry.",
+      label: t("source"),
+      commands: ["git clone https://github.com/PerryTS/perry.git", "cd perry", "cargo build --release"],
+      note: t("sourceNote"),
     },
   };
 
   const usageExamples = [
-    {
-      id: "build",
-      label: "Compile a file",
-      command: "perry build main.ts",
-      description: "Compiles main.ts to a native executable",
-    },
-    {
-      id: "output",
-      label: "Custom output",
-      command: "perry build main.ts -o myapp",
-      description: "Specify the output executable name",
-    },
-    {
-      id: "jsruntime",
-      label: "With V8 runtime",
-      command: "perry build main.ts --enable-js-runtime",
-      description: "Enable V8 for JavaScript npm package compatibility",
-    },
-    {
-      id: "check",
-      label: "Check compatibility",
-      command: "perry check ./src",
-      description: "Validate TypeScript code for native compilation",
-    },
+    { id: "build", label: t("compileFile"), command: "perry build main.ts", description: t("compileFileDesc") },
+    { id: "output", label: t("customOutput"), command: "perry build main.ts -o myapp", description: t("customOutputDesc") },
+    { id: "jsruntime", label: t("withV8"), command: "perry build main.ts --enable-js-runtime", description: t("withV8Desc") },
+    { id: "check", label: t("checkCompat"), command: "perry check ./src", description: t("checkCompatDesc") },
   ];
 
   return (
@@ -74,10 +49,10 @@ export function Installation() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Get <span className="gradient-text">Started</span>
+            {t.rich("title", { gradient: (chunks) => <span className="gradient-text">{chunks}</span> })}
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Install Perry and start compiling TypeScript to native executables
+            {t("subtitle")}
           </p>
         </div>
 
@@ -88,7 +63,7 @@ export function Installation() {
               <span className="w-8 h-8 rounded-lg bg-perry-500/20 flex items-center justify-center text-perry-400 text-sm font-bold">
                 1
               </span>
-              Installation
+              {t("step1")}
             </h3>
             <div className="flex gap-2 mb-4">
               {(Object.keys(installMethods) as Array<keyof typeof installMethods>).map((key) => (
@@ -152,7 +127,7 @@ export function Installation() {
               <span className="w-8 h-8 rounded-lg bg-perry-500/20 flex items-center justify-center text-perry-400 text-sm font-bold">
                 2
               </span>
-              Usage
+              {t("step2")}
             </h3>
             <div className="space-y-4">
               {usageExamples.map((example) => (

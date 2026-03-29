@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "Kembali ke Beranda",
+    "viewOnGithub": "Lihat di GitHub",
+    "getStarted": "Mulai",
+    "readTheBlogPost": "Baca Artikel Blog",
+    "backToShowcase": "Kembali ke Showcase",
+    "backToBlog": "Kembali ke Blog",
+    "seePricing": "Lihat harga",
+    "terminal": "terminal",
+    "comingSoon": "segera hadir"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "Blog",
+    "roadmap": "Peta Jalan",
+    "publish": "Publikasi",
+    "overview": "Gambaran Umum",
+    "pricing": "Harga",
+    "docs": "Dokumentasi",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — target tvOS, kompilasi silang iOS/macOS dari Linux, perry login",
+    "headline1": "Satu Kode Sumber. Semua Platform.",
+    "headline2": "Performa Native.",
+    "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
+    "getStarted": "Mulai",
+    "viewOnGithub": "Lihat di GitHub",
+    "compiling": "Mengompilasi main.ts...",
+    "compiled": "✓ Executable terkompilasi: main (2,3 MB)",
+    "targetsLabel": "Target",
+    "widgetsLabel": "Widget UI native",
+    "startupLabel": "Waktu mulai",
+    "appStore": "App Store",
+    "readyLabel": "Siap"
+  },
+  "features": {
+    "title": "Mengapa <brand>Perry</brand>?",
+    "subtitle": "Semua yang Anda butuhkan untuk mengompilasi TypeScript menjadi aplikasi native",
+    "noRuntime": {
+      "title": "Tanpa Runtime",
+      "description": "Menghasilkan executable native yang berdiri sendiri. Tanpa Node.js, tanpa V8, tanpa dependensi runtime. Hanya satu binary yang berjalan di mana saja."
+    },
+    "fastCompilation": {
+      "title": "Kompilasi Cepat",
+      "description": "Kompilasi langsung dari TypeScript ke kode native menggunakan SWC untuk parsing dan Cranelift untuk pembuatan kode. Tanpa JavaScript perantara."
+    },
+    "smallBinaries": {
+      "title": "Binary Kecil",
+      "description": "Binary output biasanya berukuran 2-5 MB. Dengan runtime V8 opsional untuk paket npm JS, 15-20 MB. Kirim lebih sedikit, deploy lebih cepat."
+    },
+    "typeSafe": {
+      "title": "Type-Safe",
+      "description": "Memanfaatkan sistem tipe TypeScript untuk optimasi. Tipe memungkinkan pembuatan kode yang lebih baik melalui monomorphization."
+    },
+    "stdLib": {
+      "title": "Standard Library Lengkap",
+      "description": "Implementasi native bawaan untuk fs, path, crypto, os, Buffer, child_process, dan lainnya. Gunakan API Node.js yang familiar."
+    },
+    "v8Runtime": {
+      "title": "Runtime V8 Opsional",
+      "description": "Perlu menggunakan paket npm JavaScript murni? Aktifkan flag runtime V8 untuk kompatibilitas penuh dengan ekosistem npm."
+    },
+    "widgets": {
+      "title": "25+ Widget UI Native",
+      "description": "Tombol, field teks, area teks, tabel, canvas, scroll view, kode QR, field aman, layar pembuka, dan lainnya — semuanya dikompilasi menjadi widget platform asli melalui AppKit, GTK4, Win32, UIKit, dan JNI."
+    },
+    "plugins": {
+      "title": "Sistem Plugin Waktu Kompilasi",
+      "description": "Modul dikomposisi saat build — tanpa overhead plugin saat runtime, tanpa batasan IPC. Dependensi Anda menjadi pemanggilan fungsi native langsung di binary akhir."
+    },
+    "threading": {
+      "title": "Multi-Threading Sejati",
+      "description": "Thread OS nyata dengan parallelMap, parallelFilter, dan spawn. Keamanan waktu kompilasi menolak capture yang bisa berubah — tanpa SharedArrayBuffer, tanpa worker, hanya thread."
+    },
+    "i18n": {
+      "title": "i18n Waktu Kompilasi",
+      "description": "Ekstraksi string otomatis, aturan jamak CLDR untuk 30+ bahasa, validasi waktu kompilasi. Terjemahan ditanam ke binary dengan pencarian runtime hampir nol."
+    }
+  },
+  "platforms": {
+    "title": "Native di <gradient>Semua Platform</gradient>",
+    "subtitle": "Perry mengompilasi TypeScript Anda ke framework UI native, WebAssembly, dan JavaScript — bukan web view, bukan Electron. Widget native asli di setiap platform, plus web.",
+    "stable": "Stabil"
+  },
+  "comparison": {
+    "badge": "Perbandingan Framework",
+    "title": "Satu-satunya framework yang memenuhi <gradient>semua kriteria</gradient>",
+    "subtitle": "TypeScript dikompilasi ke kode native. Widget platform asli. Nol overhead runtime.",
+    "framework": "Framework",
+    "language": "Bahasa",
+    "nativeCode": "Kode Native",
+    "nativeWidgets": "Widget Native",
+    "runtimeOverhead": "Overhead Runtime",
+    "partial": "Sebagian",
+    "noSharedUI": "Tanpa UI bersama",
+    "nativeCompiled": "Dikompilasi native",
+    "realPlatformWidgets": "Widget platform asli",
+    "zeroRuntimeOverhead": "Nol overhead runtime"
+  },
+  "codeExample": {
+    "title": "Tulis <gradient>TypeScript</gradient>, Kirim Native",
+    "subtitle": "Gunakan sintaks dan API TypeScript yang familiar. Perry menangani sisanya.",
+    "nativeBinary": "Binary native"
+  },
+  "performance": {
+    "title": "Perbandingan <gradient>Performa</gradient>",
+    "subtitle": "Kompilasi native memberikan efisiensi tak tertandingi",
+    "metric": "Metrik",
+    "binarySize": "Ukuran Binary",
+    "startupTime": "Waktu Mulai",
+    "runtimeDeps": "Dependensi Runtime",
+    "memoryOverhead": "Overhead Memori",
+    "none": "Tidak ada",
+    "minimal": "Minimal",
+    "benchmarkTitle": "Hasil Benchmark: <gradient>2,2x Lebih Cepat</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24 di macOS ARM64 (lebih rendah lebih baik)",
+    "lowerIsBetter": "Lebih rendah lebih baik"
+  },
+  "installation": {
+    "title": "<gradient>Mulai</gradient>",
+    "subtitle": "Instal Perry dan mulai mengompilasi TypeScript menjadi executable native",
+    "step1": "Instalasi",
+    "step2": "Penggunaan",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "Dari Kode Sumber",
+    "homebrewNote": "Memerlukan Homebrew. Mendukung macOS arm64 dan x86_64.",
+    "aptNote": "Mendukung Linux x86_64 dan arm64.",
+    "sourceNote": "Memerlukan Rust toolchain. Binary akan berada di target/release/perry.",
+    "compileFile": "Kompilasi file",
+    "compileFileDesc": "Mengompilasi main.ts menjadi executable native",
+    "customOutput": "Output kustom",
+    "customOutputDesc": "Tentukan nama executable output",
+    "withV8": "Dengan runtime V8",
+    "withV8Desc": "Aktifkan V8 untuk kompatibilitas paket npm JavaScript",
+    "checkCompat": "Periksa kompatibilitas",
+    "checkCompatDesc": "Validasi kode TypeScript untuk kompilasi native"
+  },
+  "featureTable": {
+    "title": "<gradient>Dukungan</gradient> Fitur",
+    "subtitle": "Cakupan API TypeScript dan Node.js yang komprehensif",
+    "coreLanguage": "Bahasa Inti",
+    "functions": "Fungsi",
+    "classes": "Kelas",
+    "typeSystem": "Sistem Tipe",
+    "standardLibrary": "Standard Library",
+    "fullSupport": "Dukungan Penuh",
+    "partial": "Sebagian"
+  },
+  "nativeLibs": {
+    "title": "<gradient>30+</gradient> Paket npm Native",
+    "subtitle": "Paket npm populer diimplementasi ulang dalam Rust native. Tanpa npm install, tanpa node_modules, hanya kode native yang cepat.",
+    "database": "Database",
+    "security": "Keamanan",
+    "http": "HTTP",
+    "dataProcessing": "Pemrosesan Data",
+    "dateTime": "Tanggal & Waktu",
+    "utilities": "Utilitas",
+    "info": "Cukup import dan gunakan — Perry secara otomatis menggunakan implementasi native"
+  },
+  "shipIt": {
+    "title": "Dari Kode ke <gradient>App Store</gradient>",
+    "subtitle": "Perry tidak hanya mengompilasi aplikasi Anda — tetapi juga mengantarkannya ke tangan pengguna.",
+    "compileSign": "Kompilasi & tanda tangani",
+    "packageSubmit": "Kemas & kirim",
+    "storesDownloads": "Toko & Unduhan",
+    "storesList": "App Store, Play Store, langsung",
+    "testEveryPlatform": "Uji setiap platform",
+    "buildSign": {
+      "title": "Build & Tanda Tangani",
+      "description": "Build lintas platform dengan satu perintah. Penandatanganan kode untuk macOS, iOS, Android, dan Windows ditangani untuk Anda. Tidak perlu bergulat dengan provisioning profile Xcode atau keystore Android."
+    },
+    "distribute": {
+      "title": "Distribusi",
+      "description": "Push ke App Store, Play Store, atau kirim unduhan langsung. Perry Publish menangani pengemasan, notarisasi, dan pengiriman."
+    },
+    "verify": {
+      "title": "Verifikasi",
+      "description": "Didukung oleh Geisterhand. Pengujian UI otomatis di semua 6 platform. Ketahui bahwa aplikasi Anda bekerja di mana saja sebelum pengguna memberi tahu Anda bahwa tidak."
+    },
+    "freeForOpenSource": "Gratis untuk proyek open source.",
+    "plansForTeams": "Paket untuk tim"
+  },
+  "architecture": {
+    "title": "Cara <gradient>Kerjanya</gradient>",
+    "subtitle": "Dari kode sumber TypeScript ke executable native dalam hitungan detik",
+    "parser": "Parser",
+    "fastParsing": "Parsing cepat",
+    "transform": "Transformasi",
+    "codegen": "Codegen",
+    "machineCode": "Kode mesin",
+    "executable": "Executable",
+    "binarySize": "Binary 2-5 MB",
+    "tsFiles": "File .ts",
+    "compilerInternalsPrompt": "Ingin tahu bagaimana kompiler bekerja di balik layar?",
+    "compilerInternals": "Struktur internal kompiler"
+  },
+  "footer": {
+    "brand": "TypeScript → Native. Kompilasi TypeScript langsung ke executable standalone di macOS, iOS, Android, Linux, dan Windows. Tanpa runtime, tanpa Electron.",
+    "resources": "Sumber Daya",
+    "gettingStarted": "Memulai",
+    "documentation": "Dokumentasi",
+    "perryPublish": "Perry Publish",
+    "community": "Komunitas",
+    "issues": "Issues",
+    "discussions": "Diskusi",
+    "contributing": "Kontribusi",
+    "tagline": "Dibangun dengan Rust, SWC, dan Cranelift — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "Harga",
+    "title": "Harga sederhana",
+    "subtitle": "Satu perintah untuk build, tanda tangani, dan kirim. Gratis untuk sebagian besar developer. Tidak perlu akun untuk memulai.",
+    "free": "Gratis",
+    "noAccountRequired": "Tidak perlu akun",
+    "perMonth": "/bulan",
+    "pro": "Pro",
+    "mostPopular": "Paling populer",
+    "forDevs": "Untuk developer yang mengirim cepat",
+    "subscribeToPro": "Berlangganan Pro",
+    "feature_publishes15": "15 publikasi per bulan",
+    "feature_deepVerify2": "2 kali deep verify per bulan",
+    "feature_lightVerify": "Light verify setiap publikasi",
+    "feature_allPlatforms": "Semua platform (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "Penandatanganan kode & notarisasi",
+    "feature_storeSubmission": "Pengiriman App Store & Play Store",
+    "feature_unlimitedProjects": "Proyek tak terbatas (dengan akun gratis)",
+    "feature_publishes50": "50 publikasi per bulan",
+    "feature_deepVerify20": "20 kali deep verify per bulan",
+    "feature_unlimitedProjectsPro": "Proyek tak terbatas",
+    "feature_priorityQueue": "Antrean build prioritas",
+    "feature_overage": "$0.49/publikasi kelebihan (vs $0.99 gratis)",
+    "comparePlans": "Bandingkan paket",
+    "col_free": "Gratis",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "Publikasi bulanan",
+    "row_deepVerifyRuns": "Kali deep verify",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "Setiap publikasi",
+    "row_overagePublish": "Kelebihan per publikasi",
+    "row_overageVerify": "Kelebihan per deep verify",
+    "row_buildQueue": "Prioritas antrean build",
+    "row_standard": "Standar",
+    "row_priority": "Prioritas",
+    "row_projects": "Proyek",
+    "row_unlimitedStar": "Tak terbatas*",
+    "row_unlimited": "Tak terbatas",
+    "row_accountRequired": "Akun diperlukan",
+    "row_accountFreeDesc": "Tidak (1 proyek) / GitHub (banyak)",
+    "row_accountProDesc": "Ya (GitHub)",
+    "row_failedBuilds": "Build gagal dihitung?",
+    "row_noStar": "Tidak*",
+    "failedBuildsNote": "* Build yang gagal sebelum kompilasi (konfigurasi tidak valid, dependensi hilang) tidak dihitung dalam jatah bulanan Anda.",
+    "selfHost": {
+      "title": "Atau host sendiri semuanya",
+      "description": "Perry 100% open source — kompiler, runtime, server build, layanan verifikasi, dan website ini. Anda dapat menjalankan seluruh pipeline publikasi di hardware Anda sendiri secara gratis. Tanpa vendor lock-in, selamanya.",
+      "selfHostingGuide": "Panduan self-hosting"
+    },
+    "faq": {
+      "title": "Pertanyaan",
+      "q1": "Apakah saya perlu akun untuk mempublikasi?",
+      "a1": "Tidak. perry publish pertama Anda langsung berjalan — tanpa pendaftaran, tanpa pembayaran. Anda mendapat 15 publikasi per bulan. Untuk mempublikasi banyak proyek, jalankan perry login untuk membuat akun gratis yang terhubung dengan GitHub. Tidak perlu pembayaran.",
+      "q2": "Apa yang terjadi ketika saya mencapai batas?",
+      "a2": "Build Anda dijeda hingga bulan berikutnya. Upgrade ke Pro untuk lebih banyak publikasi, atau tambahkan metode pembayaran untuk kelebihan bayar sesuai penggunaan.",
+      "q3": "Bisakah saya menghost sendiri server build?",
+      "a3": "Ya. Kompiler Perry, server build (perry-hub), layanan verifikasi, dan build worker semuanya open source. Clone repo, jalankan hub di Mac Mini atau mesin Linux Anda sendiri, dan atur PERRY_HUB_SELF_HOSTED=true untuk menonaktifkan pembatasan rate. Anda mendapat build tak terbatas tanpa biaya. Layanan yang dihost di hub.perryts.com ada untuk kemudahan — tanpa infrastruktur untuk dikelola, tanpa sertifikat penandatanganan untuk diurus, tanpa antrean build untuk dipantau.",
+      "q4": "Apa yang termasuk dalam \"publikasi\"?",
+      "a4": "Satu pemanggilan perry publish '<'platform'>'. Setiap platform adalah publikasi terpisah. Publikasi mencakup build, penandatanganan kode, verifikasi ringan (aplikasi berhasil diluncurkan), dan pengiriman ke toko atau pembuatan artifact."
+    }
+  },
+  "roadmap": {
+    "title": "Peta Jalan",
+    "subtitle": "Di mana Perry hari ini dan ke mana tujuannya. Dari kompilasi native ke ekosistem pengembangan lintas platform yang lengkap.",
+    "shipped": "Dirilis",
+    "inProgress": "Sedang Berlangsung",
+    "planned": "Direncanakan",
+    "vision": "Visi"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "Satu perintah untuk build, tanda tangani, dan kirim aplikasi Anda ke setiap toko. Perry Publish menangani penandatanganan kode, notarisasi, pengemasan, dan pengiriman — sehingga Anda bisa fokus pada kode Anda.",
+    "buildingForIos": "Building untuk iOS...",
+    "signingCert": "Menandatangani dengan sertifikat Anda...",
+    "verifyingLaunch": "Memverifikasi — aplikasi berhasil diluncurkan",
+    "publishedToAppStore": "Dipublikasikan ke App Store Connect.",
+    "buildSign": "Build & Tanda Tangani",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "Distribusi",
+    "distributePlatforms": "App Store, Play Store, unduhan langsung",
+    "verify": "Verifikasi",
+    "verifyDesc": "Pengujian lintas platform bertenaga AI"
+  },
+  "internals": {
+    "title": "Struktur <gradient>Internal</gradient> Kompiler",
+    "subtitle": "Keputusan desain utama yang membuat Perry cepat",
+    "nanBoxing": {
+      "p1": "Nilai disimpan sebagai float 64-bit dengan pola bit khusus untuk pointer, memungkinkan tipe union tanpa overhead runtime. Ini memungkinkan (string | number)[] bekerja secara efisien.",
+      "p2": "Dengan mengkodekan informasi tipe langsung dalam bit payload NaN IEEE 754, Perry menghindari kebutuhan akan tagged union atau boxed value. Satu kata 64-bit dapat merepresentasikan tipe nilai JavaScript apa pun — angka menggunakan representasi naturalnya, sementara string, objek, dan nilai heap-allocated lainnya menggunakan pola bit pointer yang berada dalam rentang NaN."
+    },
+    "monomorphization": {
+      "p1": "Generic dikhususkan pada waktu kompilasi, seperti Rust. Setiap instansiasi tipe menghasilkan kode yang dioptimalkan, menghilangkan overhead pemeriksaan tipe saat runtime.",
+      "p2": "Ketika Anda menulis Array'<'number'>' dan Array'<'string'>', Perry menghasilkan dua implementasi terpisah yang sepenuhnya dioptimalkan. Ini berarti operasi array pada angka menggunakan aritmatika mesin langsung — tanpa type guard, tanpa dynamic dispatch, tanpa boxing."
+    },
+    "staticDispatch": {
+      "p1": "Tanpa tabel virtual. Pemanggilan metode diselesaikan pada waktu kompilasi, memungkinkan pemanggilan fungsi langsung dan optimasi inlining.",
+      "p2": "Runtime OOP tradisional menggunakan vtable untuk resolusi metode, menambahkan lapisan indireksi pada setiap pemanggilan. Perry menyelesaikan semua pemanggilan metode secara statis selama kompilasi, mengubah pemanggilan metode interface menjadi lompatan langsung. Ini juga membuka inlining agresif — metode kecil sering dilipat langsung ke situs pemanggilan mereka."
+    },
+    "zeroCost": {
+      "p1": "Kelas, interface, dan generic TypeScript dikompilasi menjadi kode native yang efisien tanpa overhead representasi runtime.",
+      "p2": "Sistem tipe TypeScript hanya ada pada waktu kompilasi — dan Perry mengambil ini secara literal. Interface tidak menghasilkan kode runtime. Hierarki kelas diratakan. Constraint generic diselesaikan menjadi tipe konkret. Binary yang dikompilasi hanya berisi logika aktual, tanpa mesin abstraksi yang biasanya dibawa oleh interpreter."
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Proyek nyata yang dibangun dengan Perry. Dari aplikasi GUI native hingga tool CLI, lihat apa yang mungkin dengan kompilasi TypeScript native."
+  },
+  "pry": {
+    "subtitle": "Penampil JSON yang cepat dan native dibangun dengan Perry. Navigasi pohon, pencarian, pintasan keyboard — dikompilasi dari TypeScript ke binary native.",
+    "features": "Fitur",
+    "treeView": "Tampilan Pohon",
+    "treeViewDesc": "Rendering pohon yang dapat dilipat dan dinavigasi untuk struktur JSON yang sangat bertingkat.",
+    "search": "Pencarian",
+    "searchDesc": "Pencarian teks lengkap pada kunci dan nilai dengan penyorotan instan.",
+    "keyboardShortcuts": "Pintasan Keyboard",
+    "keyboardShortcutsDesc": "Navigasi, perluas, lipat, dan salin dengan alur kerja keyboard saja.",
+    "clipboardSupport": "Dukungan Clipboard",
+    "clipboardSupportDesc": "Salin node atau subtree apa pun ke clipboard sebagai JSON terformat.",
+    "statusBar": "Bilah Status",
+    "statusBarDesc": "Menampilkan jumlah node, kedalaman saat ini, ukuran file, dan waktu parsing.",
+    "syntaxColoring": "Pewarnaan Sintaks",
+    "syntaxColoringDesc": "Nilai diberi kode warna berdasarkan tipe — string, angka, boolean, null.",
+    "howItsBuilt": "Cara Pembuatannya",
+    "howItsBuiltDesc": "Pry ditulis dalam TypeScript dan dikompilasi dengan Perry menjadi binary native. Tanpa Electron, tanpa web view, tanpa JavaScript runtime.",
+    "typeScriptSource": "Kode Sumber TypeScript",
+    "typeScriptSourceDesc": "TypeScript standar dengan API UI native Perry",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "Parsing SWC → resolusi tipe → codegen Cranelift",
+    "nativeBinary": "Binary Native",
+    "nativeBinaryDesc": "Executable standalone tanpa dependensi runtime",
+    "platformSupport": "Dukungan Platform",
+    "nativeWidgets": "Widget {framework} native",
+    "available": "Tersedia",
+    "screenshots": "Tangkapan Layar",
+    "macOsScreenshot": "Tangkapan layar macOS — segera hadir",
+    "iosScreenshot": "Tangkapan layar iOS — segera hadir",
+    "screenshotsNote": "Tangkapan layar akan ditambahkan seiring perkembangan Pry. Periksa repo GitHub untuk informasi terbaru."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Berita, tutorial, dan analisis mendalam tentang membangun aplikasi native dengan Perry.",
+    "englishOnly": "Artikel ini hanya tersedia dalam bahasa Inggris."
+  },
+  "languageSwitcher": {
+    "label": "Bahasa"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Memperkenalkan Perry",
+      "excerpt": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust yang mengompilasi TypeScript Anda langsung menjadi executable standalone. Tanpa runtime, tanpa Electron, tanpa kompromi."
+    },
+    "cross-platform-native-ui": {
+      "title": "UI Native Lintas Platform dari TypeScript",
+      "excerpt": "Bagaimana Perry memetakan satu kode sumber TypeScript ke AppKit, UIKit, Android Views, GTK4, dan Win32 — menghadirkan UI yang benar-benar native di setiap platform."
+    },
+    "building-pry": {
+      "title": "Membangun Pry: Penampil JSON Native dalam TypeScript",
+      "excerpt": "Panduan langkah demi langkah membangun Pry — penampil JSON native yang dikompilasi dari TypeScript ke binary ARM64 native. Tanpa runtime, tanpa web view."
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "Sistem Plugin Adalah Pajak Performa",
+      "excerpt": "Arsitektur plugin menukar performa demi ekstensibilitas. Tapi bagaimana jika ekstensibilitas terjadi saat kompilasi bukan saat runtime? Komposisi waktu kompilasi memberikan keduanya — nol overhead, fleksibilitas penuh."
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Mengompilasi Hono, tRPC, dan Strapi ke Binary Native",
+      "excerpt": "Perry kini mengompilasi tiga framework TypeScript utama — Hono, tRPC, dan Strapi — menjadi executable ARM64 native. Dikompilasi dalam waktu kurang dari satu detik, menghasilkan binary di bawah 2 MB, dan berjalan tanpa crash."
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "Enam Platform Sekaligus, Paritas Fitur Penuh",
+      "excerpt": "20+ widget UI native, widget Canvas, Table view, notifikasi sistem, akses keychain, dukungan multi-window, dan paritas fitur penuh di macOS, iOS, iPadOS, Android, Linux, dan Windows — semuanya dari satu kode sumber TypeScript."
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "Dari Kompiler ke Ekosistem: React, Database, dan Cloud Build",
+      "excerpt": "Perry berkembang dari kompiler menjadi ekosistem lengkap. perry/ui sebagai inti, ORM kompatibel Prisma untuk MySQL/PostgreSQL/SQLite, push notification universal, build terdistribusi dengan publikasi App Store, dan lapisan kompatibilitas React — semuanya dalam satu minggu."
+    },
+    "the-full-pipeline": {
+      "title": "Pipeline Lengkap: Dokumentasi, Distribusi, dan WidgetKit",
+      "excerpt": "82 commit dalam satu minggu: situs dokumentasi 49 halaman, publikasi otomatis ke App Store dan Play Store, paket Homebrew dan APT, ekstensi WidgetKit native dari TypeScript, widget baru, modul http/https, dan kompiler LLVM self-hosting."
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Kompilasi Silang ke Windows, Game Loop iOS, dan 100% Paritas Pengujian",
+      "excerpt": "103 commit dalam satu minggu: kompilasi silang ke Windows dari Linux via lld-link, dukungan game loop iOS, pelaporan crash, pipeline build Hub dua tahap, dan kompiler self-hosting mencapai paritas pengujian deterministik 68/68."
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "Multi-Threading Sejati, i18n Waktu Kompilasi, dan watchOS",
+      "excerpt": "Perry v0.4.0: thread OS nyata dengan keamanan waktu kompilasi, sistem internasionalisasi tanpa ribet untuk 30+ bahasa, watchOS sebagai target kompilasi ke-9, API audio dan kamera, dan pipeline kompiler paralel."
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, Kompilasi Silang iOS dari Linux, dan Perry Login",
+      "excerpt": "Perry v0.4.24: tvOS sebagai target kompilasi ke-10, kompilasi silang iOS dan macOS dari Linux via ld64.lld, perry login dengan penagihan berbasis penggunaan, perombakan UI Windows, notarisasi macOS, dan 120 commit dalam 5 hari."
+    }
+  }
+}

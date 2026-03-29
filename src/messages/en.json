@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "Back to Home",
+    "viewOnGithub": "View on GitHub",
+    "getStarted": "Get started",
+    "readTheBlogPost": "Read the Blog Post",
+    "backToShowcase": "Back to Showcase",
+    "backToBlog": "Back to Blog",
+    "seePricing": "See pricing",
+    "terminal": "terminal",
+    "comingSoon": "coming soon"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "Blog",
+    "roadmap": "Roadmap",
+    "publish": "Publish",
+    "overview": "Overview",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — tvOS target, cross-compile iOS/macOS from Linux, perry login",
+    "headline1": "One Codebase. Every Platform.",
+    "headline2": "Native Performance.",
+    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
+    "getStarted": "Get Started",
+    "viewOnGithub": "View on GitHub",
+    "compiling": "Compiling main.ts...",
+    "compiled": "✓ Compiled executable: main (2.3 MB)",
+    "targetsLabel": "Targets",
+    "widgetsLabel": "Native UI widgets",
+    "startupLabel": "Startup time",
+    "appStore": "App Store",
+    "readyLabel": "Ready"
+  },
+  "features": {
+    "title": "Why <brand>Perry</brand>?",
+    "subtitle": "Everything you need to compile TypeScript to native applications",
+    "noRuntime": {
+      "title": "No Runtime Required",
+      "description": "Produces standalone native executables. No Node.js, no V8, no runtime dependencies. Just a single binary that runs anywhere."
+    },
+    "fastCompilation": {
+      "title": "Fast Compilation",
+      "description": "Direct TypeScript to native code compilation using SWC for parsing and Cranelift for code generation. No intermediate JavaScript."
+    },
+    "smallBinaries": {
+      "title": "Small Binaries",
+      "description": "Output binaries are typically 2-5MB. With optional V8 runtime for JS npm packages, 15-20MB. Ship less, deploy faster."
+    },
+    "typeSafe": {
+      "title": "Type-Safe",
+      "description": "Leverages TypeScript's type system for optimization. Types enable better code generation through monomorphization."
+    },
+    "stdLib": {
+      "title": "Comprehensive Standard Library",
+      "description": "Built-in native implementations of fs, path, crypto, os, Buffer, child_process, and more. Use familiar Node.js APIs."
+    },
+    "v8Runtime": {
+      "title": "Optional V8 Runtime",
+      "description": "Need to use a pure JavaScript npm package? Enable the V8 runtime flag for full npm ecosystem compatibility."
+    },
+    "widgets": {
+      "title": "25+ Native UI Widgets",
+      "description": "Buttons, text fields, text areas, tables, canvas, scroll views, QR codes, secure fields, splash screens, and more — all compiling to real platform widgets via AppKit, GTK4, Win32, UIKit, and JNI."
+    },
+    "plugins": {
+      "title": "Compile-Time Plugin System",
+      "description": "Modules compose at build time — no runtime plugin overhead, no IPC boundaries. Your dependencies become direct native function calls in the final binary."
+    },
+    "threading": {
+      "title": "True Multi-Threading",
+      "description": "Real OS threads with parallelMap, parallelFilter, and spawn. Compile-time safety rejects mutable captures — no SharedArrayBuffer, no workers, just threads."
+    },
+    "i18n": {
+      "title": "Compile-Time i18n",
+      "description": "Automatic string extraction, CLDR plural rules for 30+ locales, compile-time validation. Translations baked into the binary with near-zero runtime lookup."
+    }
+  },
+  "platforms": {
+    "title": "Native on <gradient>Every Platform</gradient>",
+    "subtitle": "Perry compiles your TypeScript to native UI frameworks, WebAssembly, and JavaScript — not web views, not Electron. Real native widgets on every platform, plus the web.",
+    "stable": "Stable"
+  },
+  "comparison": {
+    "badge": "Framework Comparison",
+    "title": "The only framework that checks <gradient>every box</gradient>",
+    "subtitle": "TypeScript compiled to native code. Real platform widgets. No runtime overhead.",
+    "framework": "Framework",
+    "language": "Language",
+    "nativeCode": "Native Code",
+    "nativeWidgets": "Native Widgets",
+    "runtimeOverhead": "Runtime Overhead",
+    "partial": "Partial",
+    "noSharedUI": "No shared UI",
+    "nativeCompiled": "Native compiled",
+    "realPlatformWidgets": "Real platform widgets",
+    "zeroRuntimeOverhead": "Zero runtime overhead"
+  },
+  "codeExample": {
+    "title": "Write <gradient>TypeScript</gradient>, Ship Native",
+    "subtitle": "Use familiar TypeScript syntax and APIs. Perry handles the rest.",
+    "nativeBinary": "Native binary"
+  },
+  "performance": {
+    "title": "Performance <gradient>Comparison</gradient>",
+    "subtitle": "Native compilation delivers unmatched efficiency",
+    "metric": "Metric",
+    "binarySize": "Binary Size",
+    "startupTime": "Startup Time",
+    "runtimeDeps": "Runtime Dependencies",
+    "memoryOverhead": "Memory Overhead",
+    "none": "None",
+    "minimal": "Minimal",
+    "benchmarkTitle": "Benchmark Results: <gradient>2.2x Faster</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24 on macOS ARM64 (lower is better)",
+    "lowerIsBetter": "Lower is better"
+  },
+  "installation": {
+    "title": "Get <gradient>Started</gradient>",
+    "subtitle": "Install Perry and start compiling TypeScript to native executables",
+    "step1": "Installation",
+    "step2": "Usage",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "From Source",
+    "homebrewNote": "Requires Homebrew. Supports macOS arm64 and x86_64.",
+    "aptNote": "Supports x86_64 and arm64 Linux.",
+    "sourceNote": "Requires Rust toolchain. Binary will be at target/release/perry.",
+    "compileFile": "Compile a file",
+    "compileFileDesc": "Compiles main.ts to a native executable",
+    "customOutput": "Custom output",
+    "customOutputDesc": "Specify the output executable name",
+    "withV8": "With V8 runtime",
+    "withV8Desc": "Enable V8 for JavaScript npm package compatibility",
+    "checkCompat": "Check compatibility",
+    "checkCompatDesc": "Validate TypeScript code for native compilation"
+  },
+  "featureTable": {
+    "title": "Feature <gradient>Support</gradient>",
+    "subtitle": "Comprehensive TypeScript and Node.js API coverage",
+    "coreLanguage": "Core Language",
+    "functions": "Functions",
+    "classes": "Classes",
+    "typeSystem": "Type System",
+    "standardLibrary": "Standard Library",
+    "fullSupport": "Full Support",
+    "partial": "Partial"
+  },
+  "nativeLibs": {
+    "title": "<gradient>30+</gradient> Native npm Packages",
+    "subtitle": "Popular npm packages reimplemented in native Rust. No npm install, no node_modules, just fast native code.",
+    "database": "Database",
+    "security": "Security",
+    "http": "HTTP",
+    "dataProcessing": "Data Processing",
+    "dateTime": "Date & Time",
+    "utilities": "Utilities",
+    "info": "Just import and use - Perry automatically uses the native implementation"
+  },
+  "shipIt": {
+    "title": "From Code to <gradient>App Store</gradient>",
+    "subtitle": "Perry doesn't just compile your app — it gets it into your users' hands.",
+    "compileSign": "Compile & sign",
+    "packageSubmit": "Package & submit",
+    "storesDownloads": "Stores & Downloads",
+    "storesList": "App Store, Play Store, direct",
+    "testEveryPlatform": "Test every platform",
+    "buildSign": {
+      "title": "Build & Sign",
+      "description": "Cross-platform builds from one command. Code signing for macOS, iOS, Android, and Windows handled for you. No wrestling with Xcode provisioning profiles or Android keystores."
+    },
+    "distribute": {
+      "title": "Distribute",
+      "description": "Push to the App Store, Play Store, or ship direct downloads. Perry Publish handles packaging, notarization, and submission."
+    },
+    "verify": {
+      "title": "Verify",
+      "description": "Powered by Geisterhand. Automated UI testing across all 6 platforms. Know your app works everywhere before your users tell you it doesn't."
+    },
+    "freeForOpenSource": "Free for open-source projects.",
+    "plansForTeams": "Plans for teams"
+  },
+  "architecture": {
+    "title": "How It <gradient>Works</gradient>",
+    "subtitle": "From TypeScript source to native executable in seconds",
+    "parser": "Parser",
+    "fastParsing": "Fast parsing",
+    "transform": "Transform",
+    "codegen": "Codegen",
+    "machineCode": "Machine code",
+    "executable": "Executable",
+    "binarySize": "2-5 MB binary",
+    "tsFiles": ".ts files",
+    "compilerInternalsPrompt": "Want to know how the compiler works under the hood?",
+    "compilerInternals": "Compiler internals"
+  },
+  "footer": {
+    "brand": "TypeScript → Native. Compile TypeScript directly to standalone executables on macOS, iOS, Android, Linux, and Windows. No runtime, no Electron.",
+    "resources": "Resources",
+    "gettingStarted": "Getting Started",
+    "documentation": "Documentation",
+    "perryPublish": "Perry Publish",
+    "community": "Community",
+    "issues": "Issues",
+    "discussions": "Discussions",
+    "contributing": "Contributing",
+    "tagline": "Built with Rust, SWC, and Cranelift — and yes, this website is served by a Perry-compiled binary"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "Pricing",
+    "title": "Simple pricing",
+    "subtitle": "One command to build, sign, and ship. Free for most developers. No account required to get started.",
+    "free": "Free",
+    "noAccountRequired": "No account required",
+    "perMonth": "/month",
+    "pro": "Pro",
+    "mostPopular": "Most popular",
+    "forDevs": "For developers who ship fast",
+    "subscribeToPro": "Subscribe to Pro",
+    "feature_publishes15": "15 publishes per month",
+    "feature_deepVerify2": "2 deep verify runs per month",
+    "feature_lightVerify": "Light verify on every publish",
+    "feature_allPlatforms": "All platforms (macOS, iOS, Android, Windows, Linux)",
+    "feature_codeSigning": "Code signing & notarization",
+    "feature_storeSubmission": "App Store & Play Store submission",
+    "feature_unlimitedProjects": "Unlimited projects (with free account)",
+    "feature_publishes50": "50 publishes per month",
+    "feature_deepVerify20": "20 deep verify runs per month",
+    "feature_unlimitedProjectsPro": "Unlimited projects",
+    "feature_priorityQueue": "Priority build queue",
+    "feature_overage": "$0.49/publish overage (vs $0.99 free)",
+    "comparePlans": "Compare plans",
+    "col_free": "Free",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "Monthly publishes",
+    "row_deepVerifyRuns": "Deep verify runs",
+    "row_lightVerify": "Light verify",
+    "row_everyPublish": "Every publish",
+    "row_overagePublish": "Overage per publish",
+    "row_overageVerify": "Overage per deep verify",
+    "row_buildQueue": "Build queue priority",
+    "row_standard": "Standard",
+    "row_priority": "Priority",
+    "row_projects": "Projects",
+    "row_unlimitedStar": "Unlimited*",
+    "row_unlimited": "Unlimited",
+    "row_accountRequired": "Account required",
+    "row_accountFreeDesc": "No (1 project) / GitHub (multiple)",
+    "row_accountProDesc": "Yes (GitHub)",
+    "row_failedBuilds": "Failed builds count?",
+    "row_noStar": "No*",
+    "failedBuildsNote": "* Builds that fail before compilation (invalid config, missing dependencies) do not count against your monthly allowance.",
+    "selfHost": {
+      "title": "Or self-host everything",
+      "description": "Perry is 100% open source — the compiler, runtime, build server, verification service, and this website. You can run the entire publish pipeline on your own hardware for free. No vendor lock-in, ever.",
+      "selfHostingGuide": "Self-hosting guide"
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Do I need an account to publish?",
+      "a1": "No. Your first perry publish just works — no signup, no payment. You get 15 publishes per month. To publish multiple projects, run perry login to create a free GitHub-linked account. No payment needed.",
+      "q2": "What happens when I hit the limit?",
+      "a2": "Your builds are paused until the next month. Upgrade to Pro for more publishes, or add a payment method for pay-as-you-go overage.",
+      "q3": "Can I self-host the build server?",
+      "a3": "Yes. The Perry compiler, build server (perry-hub), verification service, and build workers are all open source. Clone the repo, run the hub on your own Mac Mini or Linux box, and set PERRY_HUB_SELF_HOSTED=true to disable rate limiting. You get unlimited builds with zero cost. The hosted service at hub.perryts.com exists for convenience — no infra to manage, no signing certs to juggle, no build queue to monitor.",
+      "q4": "What does a \"publish\" include?",
+      "a4": "One invocation of perry publish '<'platform'>'. Each platform is a separate publish. A publish includes building, code signing, light verification (app launches successfully), and store submission or artifact generation."
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Where Perry is today and where it's headed. From native compilation to a full cross-platform development ecosystem.",
+    "shipped": "Shipped",
+    "inProgress": "In Progress",
+    "planned": "Planned",
+    "vision": "Vision"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "One command to build, sign, and ship your app to every store. Perry Publish handles code signing, notarization, packaging, and submission — so you can focus on your code.",
+    "buildingForIos": "Building for iOS...",
+    "signingCert": "Signing with your certificate...",
+    "verifyingLaunch": "Verifying — app launches successfully",
+    "publishedToAppStore": "Published to App Store Connect.",
+    "buildSign": "Build & Sign",
+    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "distribute": "Distribute",
+    "distributePlatforms": "App Store, Play Store, direct download",
+    "verify": "Verify",
+    "verifyDesc": "AI-powered cross-platform testing"
+  },
+  "internals": {
+    "title": "Compiler <gradient>Internals</gradient>",
+    "subtitle": "The key design decisions that make Perry fast",
+    "nanBoxing": {
+      "p1": "Values are stored as 64-bit floats with special bit patterns for pointers, enabling union types without runtime overhead. This allows (string | number)[] to work efficiently.",
+      "p2": "By encoding type information directly in the IEEE 754 NaN payload bits, Perry avoids the need for tagged unions or boxed values. A single 64-bit word can represent any JavaScript value type — numbers use their natural representation, while strings, objects, and other heap-allocated values use pointer bit patterns that fall within the NaN range."
+    },
+    "monomorphization": {
+      "p1": "Generics are specialized at compile time, like Rust. Each type instantiation generates optimized code, eliminating runtime type checking overhead.",
+      "p2": "When you write Array'<'number'>' and Array'<'string'>', Perry generates two separate, fully optimized implementations. This means array operations on numbers use direct machine arithmetic — no type guards, no dynamic dispatch, no boxing."
+    },
+    "staticDispatch": {
+      "p1": "No virtual tables. Method calls are resolved at compile time, enabling direct function calls and inlining optimizations.",
+      "p2": "Traditional OOP runtimes use vtables for method resolution, adding a layer of indirection on every call. Perry resolves all method calls statically during compilation, turning interface method calls into direct jumps. This also unlocks aggressive inlining — small methods are often folded directly into their call sites."
+    },
+    "zeroCost": {
+      "p1": "TypeScript classes, interfaces, and generics compile to efficient native code with no runtime representation overhead.",
+      "p2": "TypeScript's type system exists only at compile time — and Perry takes this literally. Interfaces produce zero runtime code. Class hierarchies are flattened. Generic constraints are resolved to concrete types. The compiled binary contains only the actual logic, with none of the abstraction machinery that interpreters typically carry."
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Real projects built with Perry. From native GUI apps to CLI tools, see what's possible with native TypeScript compilation."
+  },
+  "pry": {
+    "subtitle": "A fast, native JSON viewer built with Perry. Tree navigation, search, keyboard shortcuts — compiled from TypeScript to native binaries.",
+    "features": "Features",
+    "treeView": "Tree View",
+    "treeViewDesc": "Collapsible, navigable tree rendering for deeply nested JSON structures.",
+    "search": "Search",
+    "searchDesc": "Full-text search across keys and values with instant highlighting.",
+    "keyboardShortcuts": "Keyboard Shortcuts",
+    "keyboardShortcutsDesc": "Navigate, expand, collapse, and copy with keyboard-only workflow.",
+    "clipboardSupport": "Clipboard Support",
+    "clipboardSupportDesc": "Copy any node or subtree to clipboard as formatted JSON.",
+    "statusBar": "Status Bar",
+    "statusBarDesc": "Shows node count, current depth, file size, and parse time.",
+    "syntaxColoring": "Syntax Coloring",
+    "syntaxColoringDesc": "Color-coded values by type — strings, numbers, booleans, null.",
+    "howItsBuilt": "How It's Built",
+    "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to a native binary. No Electron, no web views, no JavaScript runtime.",
+    "typeScriptSource": "TypeScript Source",
+    "typeScriptSourceDesc": "Standard TypeScript with Perry's native UI API",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "SWC parse → type resolution → Cranelift codegen",
+    "nativeBinary": "Native Binary",
+    "nativeBinaryDesc": "Standalone executable with zero runtime dependencies",
+    "platformSupport": "Platform Support",
+    "nativeWidgets": "Native {framework} widgets",
+    "available": "Available",
+    "screenshots": "Screenshots",
+    "macOsScreenshot": "macOS screenshot — coming soon",
+    "iosScreenshot": "iOS screenshot — coming soon",
+    "screenshotsNote": "Screenshots will be added as Pry development continues. Check the GitHub repo for the latest."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "News, tutorials, and deep dives into building native apps with Perry.",
+    "englishOnly": "This post is available in English only."
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Introducing Perry",
+      "excerpt": "Perry is a native TypeScript compiler written in Rust that compiles your TypeScript directly to standalone executables. No runtime, no Electron, no compromises."
+    },
+    "cross-platform-native-ui": {
+      "title": "Cross-Platform Native UI from TypeScript",
+      "excerpt": "How Perry maps one TypeScript codebase to AppKit, UIKit, Android Views, GTK4, and Win32 — delivering truly native UI on every platform."
+    },
+    "building-pry": {
+      "title": "Building Pry: A Native JSON Viewer in TypeScript",
+      "excerpt": "A walkthrough of building Pry — a native JSON viewer that compiles from TypeScript to a native ARM64 binary. No runtime, no web views."
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "Plugin Systems Are a Performance Tax",
+      "excerpt": "Plugin architectures trade performance for extensibility. But what if extensibility happened at build time instead of runtime? Compile-time composition gives you both — zero overhead, full flexibility."
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Compiling Hono, tRPC, and Strapi to Native Binaries",
+      "excerpt": "Perry now compiles three major TypeScript frameworks — Hono, tRPC, and Strapi — into native ARM64 executables. They compile in under a second, produce binaries under 2 MB, and run without crashes."
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "All Six Platforms, Full Feature Parity",
+      "excerpt": "20+ native UI widgets, a Canvas widget, Table views, system notifications, keychain access, multi-window support, and full feature parity across macOS, iOS, iPadOS, Android, Linux, and Windows — all from a single TypeScript codebase."
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "From Compiler to Ecosystem: React, Databases, and Cloud Builds",
+      "excerpt": "Perry grows from a compiler into a full ecosystem. perry/ui at the core, Prisma-compatible ORMs for MySQL/PostgreSQL/SQLite, universal push notifications, distributed builds with App Store publishing, and a React compatibility layer — all in one week."
+    },
+    "the-full-pipeline": {
+      "title": "The Full Pipeline: Docs, Distribution, and WidgetKit",
+      "excerpt": "82 commits in one week: a 49-page documentation site, automated App Store and Play Store publishing, Homebrew and APT packages, native WidgetKit extensions from TypeScript, new widgets, http/https modules, and a self-hosting LLVM compiler."
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Cross-Compile to Windows, iOS Game Loops, and 100% Test Parity",
+      "excerpt": "103 commits in one week: cross-compile to Windows from Linux via lld-link, iOS game loop support, crash reporting, a two-stage Hub build pipeline, and the self-hosting compiler hits 68/68 deterministic test parity."
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "True Multi-Threading, Compile-Time i18n, and watchOS",
+      "excerpt": "Perry v0.4.0: real OS threads with compile-time safety, a zero-ceremony internationalization system for 30+ locales, watchOS as the 9th compilation target, audio and camera APIs, and a parallel compiler pipeline."
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS, Cross-Compile iOS from Linux, and Perry Login",
+      "excerpt": "Perry v0.4.24: tvOS as the 10th compilation target, cross-compile iOS and macOS from Linux via ld64.lld, perry login with usage-based billing, Windows UI overhaul, macOS notarization, and 120 commits in 5 days."
+    }
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  }
+}

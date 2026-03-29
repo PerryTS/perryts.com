@@ -1,0 +1,405 @@
+{
+  "common": {
+    "backToHome": "ホームに戻る",
+    "viewOnGithub": "GitHubで見る",
+    "getStarted": "はじめる",
+    "readTheBlogPost": "ブログ記事を読む",
+    "backToShowcase": "Showcaseに戻る",
+    "backToBlog": "ブログに戻る",
+    "seePricing": "料金を見る",
+    "terminal": "ターミナル",
+    "comingSoon": "近日公開"
+  },
+  "nav": {
+    "showcase": "Showcase",
+    "blog": "ブログ",
+    "roadmap": "ロードマップ",
+    "publish": "公開",
+    "overview": "概要",
+    "pricing": "料金",
+    "docs": "ドキュメント",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "v0.4.24 — tvOSターゲット、LinuxからのiOS/macOSクロスコンパイル、perry login",
+    "headline1": "ひとつのコードベース。すべてのプラットフォーム。",
+    "headline2": "ネイティブパフォーマンス。",
+    "subheadline": "PerryはTypeScriptを<platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web</platforms>向けのネイティブGUI・CLIアプリにコンパイルします。ランタイム不要。Electron不要。ネイティブバイナリのみ。",
+    "getStarted": "はじめる",
+    "viewOnGithub": "GitHubで見る",
+    "compiling": "main.tsをコンパイル中...",
+    "compiled": "✓ コンパイル済み実行ファイル: main (2.3 MB)",
+    "targetsLabel": "ターゲット",
+    "widgetsLabel": "ネイティブUIウィジェット",
+    "startupLabel": "起動時間",
+    "appStore": "App Store",
+    "readyLabel": "対応済み"
+  },
+  "features": {
+    "title": "なぜ<brand>Perry</brand>なのか？",
+    "subtitle": "TypeScriptをネイティブアプリケーションにコンパイルするために必要なすべてが揃っています",
+    "noRuntime": {
+      "title": "ランタイム不要",
+      "description": "スタンドアロンのネイティブ実行ファイルを生成します。Node.js不要、V8不要、ランタイム依存なし。どこでも動作する単一バイナリです。"
+    },
+    "fastCompilation": {
+      "title": "高速コンパイル",
+      "description": "SWCによるパースとCraneliftによるコード生成で、TypeScriptからネイティブコードへ直接コンパイルします。中間JavaScriptは不要です。"
+    },
+    "smallBinaries": {
+      "title": "コンパクトなバイナリ",
+      "description": "出力バイナリは通常2〜5MB。JS npmパッケージ用のオプションV8ランタイムを含めても15〜20MB。少なく配布し、高速にデプロイ。"
+    },
+    "typeSafe": {
+      "title": "型安全",
+      "description": "TypeScriptの型システムを最適化に活用。型によりMonomorphizationを通じたより効率的なコード生成が可能になります。"
+    },
+    "stdLib": {
+      "title": "充実した標準ライブラリ",
+      "description": "fs、path、crypto、os、Buffer、child_processなどのネイティブ実装を内蔵。おなじみのNode.js APIが使えます。"
+    },
+    "v8Runtime": {
+      "title": "オプションV8ランタイム",
+      "description": "純粋なJavaScript npmパッケージを使う必要がありますか？ V8ランタイムフラグを有効にして、npmエコシステムとの完全な互換性を確保できます。"
+    },
+    "widgets": {
+      "title": "25以上のネイティブUIウィジェット",
+      "description": "ボタン、テキストフィールド、テキストエリア、テーブル、Canvas、スクロールビュー、QRコード、セキュアフィールド、スプラッシュスクリーンなど——すべてAppKit、GTK4、Win32、UIKit、JNIを通じた実際のプラットフォームウィジェットにコンパイルされます。"
+    },
+    "plugins": {
+      "title": "コンパイル時プラグインシステム",
+      "description": "モジュールはビルド時に合成されます——ランタイムでのプラグインオーバーヘッドなし、IPCの境界なし。依存関係は最終バイナリ内で直接的なネイティブ関数呼び出しになります。"
+    },
+    "threading": {
+      "title": "真のマルチスレッド",
+      "description": "parallelMap、parallelFilter、spawnによる本物のOSスレッド。コンパイル時の安全性がミュータブルキャプチャを拒否します——SharedArrayBufferなし、Workerなし、純粋なスレッドのみ。"
+    },
+    "i18n": {
+      "title": "コンパイル時i18n",
+      "description": "自動文字列抽出、30以上のロケール向けCLDR複数形ルール、コンパイル時バリデーション。翻訳はバイナリに組み込まれ、ランタイムでのルックアップはほぼゼロです。"
+    }
+  },
+  "platforms": {
+    "title": "<gradient>すべてのプラットフォーム</gradient>でネイティブ",
+    "subtitle": "PerryはTypeScriptをネイティブUIフレームワーク、WebAssembly、JavaScriptにコンパイルします——Webビューでもなく、Electronでもありません。すべてのプラットフォームで本物のネイティブウィジェットを、そしてWebも。",
+    "stable": "安定版"
+  },
+  "comparison": {
+    "badge": "フレームワーク比較",
+    "title": "<gradient>すべての要件</gradient>を満たす唯一のフレームワーク",
+    "subtitle": "TypeScriptをネイティブコードにコンパイル。本物のプラットフォームウィジェット。ランタイムオーバーヘッドゼロ。",
+    "framework": "フレームワーク",
+    "language": "言語",
+    "nativeCode": "ネイティブコード",
+    "nativeWidgets": "ネイティブウィジェット",
+    "runtimeOverhead": "ランタイムオーバーヘッド",
+    "partial": "部分的",
+    "noSharedUI": "共通UIなし",
+    "nativeCompiled": "ネイティブコンパイル",
+    "realPlatformWidgets": "本物のプラットフォームウィジェット",
+    "zeroRuntimeOverhead": "ランタイムオーバーヘッドゼロ"
+  },
+  "codeExample": {
+    "title": "<gradient>TypeScript</gradient>を書いて、ネイティブで出荷",
+    "subtitle": "おなじみのTypeScript構文とAPIを使用。Perryが残りを処理します。",
+    "nativeBinary": "ネイティブバイナリ"
+  },
+  "performance": {
+    "title": "パフォーマンス<gradient>比較</gradient>",
+    "subtitle": "ネイティブコンパイルが圧倒的な効率性を実現",
+    "metric": "指標",
+    "binarySize": "バイナリサイズ",
+    "startupTime": "起動時間",
+    "runtimeDeps": "ランタイム依存",
+    "memoryOverhead": "メモリオーバーヘッド",
+    "none": "なし",
+    "minimal": "最小限",
+    "benchmarkTitle": "ベンチマーク結果: <gradient>2.2倍高速</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v24（macOS ARM64、低いほど良い）",
+    "lowerIsBetter": "低いほど良い"
+  },
+  "installation": {
+    "title": "<gradient>はじめる</gradient>",
+    "subtitle": "Perryをインストールして、TypeScriptをネイティブ実行ファイルにコンパイルしましょう",
+    "step1": "インストール",
+    "step2": "使い方",
+    "homebrew": "Homebrew (macOS)",
+    "apt": "APT (Debian/Ubuntu)",
+    "source": "ソースから",
+    "homebrewNote": "Homebrewが必要です。macOS arm64とx86_64に対応。",
+    "aptNote": "x86_64およびarm64 Linuxに対応。",
+    "sourceNote": "Rustツールチェーンが必要です。バイナリはtarget/release/perryに生成されます。",
+    "compileFile": "ファイルをコンパイル",
+    "compileFileDesc": "main.tsをネイティブ実行ファイルにコンパイルします",
+    "customOutput": "カスタム出力",
+    "customOutputDesc": "出力実行ファイル名を指定します",
+    "withV8": "V8ランタイム付き",
+    "withV8Desc": "JavaScript npmパッケージの互換性のためにV8を有効化",
+    "checkCompat": "互換性チェック",
+    "checkCompatDesc": "TypeScriptコードのネイティブコンパイル互換性を検証します"
+  },
+  "featureTable": {
+    "title": "機能<gradient>サポート</gradient>",
+    "subtitle": "TypeScriptおよびNode.js APIの包括的なカバレッジ",
+    "coreLanguage": "コア言語",
+    "functions": "関数",
+    "classes": "クラス",
+    "typeSystem": "型システム",
+    "standardLibrary": "標準ライブラリ",
+    "fullSupport": "完全サポート",
+    "partial": "部分的"
+  },
+  "nativeLibs": {
+    "title": "<gradient>30以上</gradient>のネイティブnpmパッケージ",
+    "subtitle": "人気のnpmパッケージをネイティブRustで再実装。npm installもnode_modulesも不要、高速なネイティブコードだけ。",
+    "database": "データベース",
+    "security": "セキュリティ",
+    "http": "HTTP",
+    "dataProcessing": "データ処理",
+    "dateTime": "日付と時刻",
+    "utilities": "ユーティリティ",
+    "info": "インポートして使うだけ——Perryが自動的にネイティブ実装を使用します"
+  },
+  "shipIt": {
+    "title": "コードから<gradient>App Store</gradient>へ",
+    "subtitle": "Perryはアプリをコンパイルするだけでなく、ユーザーの手に届けます。",
+    "compileSign": "コンパイルと署名",
+    "packageSubmit": "パッケージと提出",
+    "storesDownloads": "ストアとダウンロード",
+    "storesList": "App Store、Play Store、直接配布",
+    "testEveryPlatform": "すべてのプラットフォームでテスト",
+    "buildSign": {
+      "title": "ビルドと署名",
+      "description": "ひとつのコマンドでクロスプラットフォームビルド。macOS、iOS、Android、Windowsのコード署名を自動処理。XcodeプロビジョニングプロファイルやAndroidキーストアとの格闘は不要です。"
+    },
+    "distribute": {
+      "title": "配布",
+      "description": "App Store、Play Storeへのプッシュ、または直接ダウンロードとして配布。Perry Publishがパッケージング、公証、提出を処理します。"
+    },
+    "verify": {
+      "title": "検証",
+      "description": "Geisterhandによる自動UIテスト。6つのプラットフォームすべてでテスト。ユーザーから指摘される前に、アプリがどこでも動作することを確認できます。"
+    },
+    "freeForOpenSource": "オープンソースプロジェクトは無料。",
+    "plansForTeams": "チーム向けプラン"
+  },
+  "architecture": {
+    "title": "<gradient>仕組み</gradient>",
+    "subtitle": "TypeScriptソースからネイティブ実行ファイルまで、わずか数秒",
+    "parser": "パーサー",
+    "fastParsing": "高速パース",
+    "transform": "変換",
+    "codegen": "コード生成",
+    "machineCode": "マシンコード",
+    "executable": "実行ファイル",
+    "binarySize": "2〜5 MBバイナリ",
+    "tsFiles": ".tsファイル",
+    "compilerInternalsPrompt": "コンパイラの内部の仕組みを知りたいですか？",
+    "compilerInternals": "コンパイラ内部構造"
+  },
+  "footer": {
+    "brand": "TypeScript → ネイティブ。TypeScriptをmacOS、iOS、Android、Linux、Windowsのスタンドアロン実行ファイルに直接コンパイル。ランタイムなし、Electronなし。",
+    "resources": "リソース",
+    "gettingStarted": "はじめに",
+    "documentation": "ドキュメント",
+    "perryPublish": "Perry Publish",
+    "community": "コミュニティ",
+    "issues": "Issues",
+    "discussions": "ディスカッション",
+    "contributing": "コントリビューション",
+    "tagline": "Rust、SWC、Craneliftで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています"
+  },
+  "pricing": {
+    "breadcrumbPublish": "Perry Publish",
+    "breadcrumbPricing": "料金",
+    "title": "シンプルな料金体系",
+    "subtitle": "ビルド、署名、配布をワンコマンドで。ほとんどの開発者は無料。アカウント不要ですぐに始められます。",
+    "free": "無料",
+    "noAccountRequired": "アカウント不要",
+    "perMonth": "/月",
+    "pro": "Pro",
+    "mostPopular": "最も人気",
+    "forDevs": "素早く出荷する開発者向け",
+    "subscribeToPro": "Proに登録",
+    "feature_publishes15": "月15回の公開",
+    "feature_deepVerify2": "月2回のdeep verify実行",
+    "feature_lightVerify": "毎回の公開時にlight verify",
+    "feature_allPlatforms": "全プラットフォーム対応（macOS、iOS、Android、Windows、Linux）",
+    "feature_codeSigning": "コード署名と公証",
+    "feature_storeSubmission": "App StoreとPlay Storeへの提出",
+    "feature_unlimitedProjects": "無制限のプロジェクト（無料アカウント付き）",
+    "feature_publishes50": "月50回の公開",
+    "feature_deepVerify20": "月20回のdeep verify実行",
+    "feature_unlimitedProjectsPro": "無制限のプロジェクト",
+    "feature_priorityQueue": "優先ビルドキュー",
+    "feature_overage": "超過分$0.49/公開（無料プランは$0.99）",
+    "comparePlans": "プランを比較",
+    "col_free": "無料",
+    "col_pro": "Pro",
+    "row_monthlyPublishes": "月間公開回数",
+    "row_deepVerifyRuns": "deep verify実行回数",
+    "row_lightVerify": "light verify",
+    "row_everyPublish": "毎回の公開時",
+    "row_overagePublish": "公開ごとの超過料金",
+    "row_overageVerify": "deep verifyごとの超過料金",
+    "row_buildQueue": "ビルドキュー優先度",
+    "row_standard": "標準",
+    "row_priority": "優先",
+    "row_projects": "プロジェクト",
+    "row_unlimitedStar": "無制限*",
+    "row_unlimited": "無制限",
+    "row_accountRequired": "アカウント必須",
+    "row_accountFreeDesc": "不要（1プロジェクト）/ GitHub（複数）",
+    "row_accountProDesc": "必要（GitHub）",
+    "row_failedBuilds": "失敗したビルドはカウントされますか？",
+    "row_noStar": "いいえ*",
+    "failedBuildsNote": "* コンパイル前に失敗したビルド（無効な設定、依存関係の不足）は月間の割り当てにカウントされません。",
+    "selfHost": {
+      "title": "またはすべてをセルフホスト",
+      "description": "Perryは100%オープンソースです——コンパイラ、ランタイム、ビルドサーバー、検証サービス、そしてこのウェブサイトも。公開パイプライン全体を自分のハードウェアで無料で実行できます。ベンダーロックインは一切ありません。",
+      "selfHostingGuide": "セルフホスティングガイド"
+    },
+    "faq": {
+      "title": "よくある質問",
+      "q1": "公開にアカウントは必要ですか？",
+      "a1": "いいえ。最初のperry publishはそのまま動作します——登録不要、支払い不要。月15回の公開が可能です。複数のプロジェクトを公開するには、perry loginを実行してGitHubと連携した無料アカウントを作成してください。支払いは不要です。",
+      "q2": "上限に達したらどうなりますか？",
+      "a2": "翌月までビルドが一時停止されます。Proにアップグレードして公開回数を増やすか、従量制の超過分に対して支払い方法を追加してください。",
+      "q3": "ビルドサーバーをセルフホストできますか？",
+      "a3": "はい。Perryコンパイラ、ビルドサーバー（perry-hub）、検証サービス、ビルドワーカーはすべてオープンソースです。リポジトリをクローンし、自分のMac MiniやLinuxマシンでhubを実行し、PERRY_HUB_SELF_HOSTED=trueを設定してレート制限を無効化してください。無制限のビルドがコストゼロで利用できます。hub.perryts.comのホスティングサービスは利便性のためにあります——インフラ管理不要、署名証明書の管理不要、ビルドキューの監視不要。",
+      "q4": "「公開」には何が含まれますか？",
+      "a4": "perry publish '<'platform'>'の1回の実行です。各プラットフォームは個別の公開としてカウントされます。公開にはビルド、コード署名、ライト検証（アプリが正常に起動すること）、ストアへの提出またはアーティファクト生成が含まれます。"
+    }
+  },
+  "roadmap": {
+    "title": "ロードマップ",
+    "subtitle": "Perryの現在地と目指す先。ネイティブコンパイルから完全なクロスプラットフォーム開発エコシステムへ。",
+    "shipped": "リリース済み",
+    "inProgress": "開発中",
+    "planned": "計画中",
+    "vision": "ビジョン"
+  },
+  "publish": {
+    "title": "Perry Publish",
+    "subtitle": "ワンコマンドでアプリをビルド、署名、すべてのストアに配布。Perry Publishがコード署名、公証、パッケージング、提出を処理——あなたはコードに集中できます。",
+    "buildingForIos": "iOS向けビルド中...",
+    "signingCert": "証明書で署名中...",
+    "verifyingLaunch": "検証中——アプリが正常に起動",
+    "publishedToAppStore": "App Store Connectに公開済み。",
+    "buildSign": "ビルドと署名",
+    "buildSignPlatforms": "macOS、iOS、Android、Windows、Linux",
+    "distribute": "配布",
+    "distributePlatforms": "App Store、Play Store、直接ダウンロード",
+    "verify": "検証",
+    "verifyDesc": "AI搭載のクロスプラットフォームテスト"
+  },
+  "internals": {
+    "title": "コンパイラ<gradient>内部構造</gradient>",
+    "subtitle": "Perryを高速にする主要な設計上の決定",
+    "nanBoxing": {
+      "p1": "値はポインタ用の特殊なビットパターンを持つ64ビット浮動小数点数として格納され、ランタイムオーバーヘッドなしでユニオン型を実現します。これにより(string | number)[]が効率的に動作します。",
+      "p2": "IEEE 754のNaNペイロードビットに型情報を直接エンコードすることで、Perryはタグ付きユニオンやボックス化された値の必要性を回避します。1つの64ビットワードがあらゆるJavaScript値型を表現できます——数値は自然な表現を使用し、文字列、オブジェクト、その他のヒープ割り当て値はNaN範囲内に収まるポインタビットパターンを使用します。"
+    },
+    "monomorphization": {
+      "p1": "ジェネリクスはRustと同様にコンパイル時に特殊化されます。各型のインスタンス化は最適化されたコードを生成し、ランタイムの型チェックオーバーヘッドを排除します。",
+      "p2": "Array'<'number'>'とArray'<'string'>'を書くと、Perryは2つの別々の完全に最適化された実装を生成します。つまり、数値の配列操作は直接的なマシン算術を使用します——タイプガードなし、動的ディスパッチなし、ボクシングなし。"
+    },
+    "staticDispatch": {
+      "p1": "仮想テーブルなし。メソッド呼び出しはコンパイル時に解決され、直接的な関数呼び出しとインライン化の最適化を可能にします。",
+      "p2": "従来のOOPランタイムはメソッド解決にvtableを使用し、すべての呼び出しに間接参照のレイヤーを追加します。Perryはコンパイル時にすべてのメソッド呼び出しを静的に解決し、インターフェースメソッド呼び出しを直接ジャンプに変換します。これにより積極的なインライン化も可能になります——小さなメソッドは呼び出しサイトに直接埋め込まれることが多いです。"
+    },
+    "zeroCost": {
+      "p1": "TypeScriptのクラス、インターフェース、ジェネリクスは、ランタイム表現のオーバーヘッドなしで効率的なネイティブコードにコンパイルされます。",
+      "p2": "TypeScriptの型システムはコンパイル時にのみ存在し、Perryはこれを文字通りに実装します。インターフェースはランタイムコードを一切生成しません。クラス階層はフラット化されます。ジェネリック制約は具体的な型に解決されます。コンパイルされたバイナリには実際のロジックのみが含まれ、インタプリタが通常持つ抽象化の仕組みは含まれません。"
+    }
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "Perryで構築された実際のプロジェクト。ネイティブGUIアプリからCLIツールまで、ネイティブTypeScriptコンパイルの可能性をご覧ください。"
+  },
+  "pry": {
+    "subtitle": "Perryで構築された高速なネイティブJSONビューア。ツリーナビゲーション、検索、キーボードショートカット——TypeScriptからネイティブバイナリにコンパイル。",
+    "features": "機能",
+    "treeView": "ツリービュー",
+    "treeViewDesc": "深くネストされたJSON構造に対応する折りたたみ可能でナビゲート可能なツリー表示。",
+    "search": "検索",
+    "searchDesc": "キーと値のフルテキスト検索と即時ハイライト。",
+    "keyboardShortcuts": "キーボードショートカット",
+    "keyboardShortcutsDesc": "キーボードのみでナビゲート、展開、折りたたみ、コピー。",
+    "clipboardSupport": "クリップボードサポート",
+    "clipboardSupportDesc": "任意のノードやサブツリーをフォーマット済みJSONとしてクリップボードにコピー。",
+    "statusBar": "ステータスバー",
+    "statusBarDesc": "ノード数、現在の深さ、ファイルサイズ、パース時間を表示。",
+    "syntaxColoring": "シンタックスカラーリング",
+    "syntaxColoringDesc": "型ごとに色分けされた値——文字列、数値、ブール値、null。",
+    "howItsBuilt": "構築方法",
+    "howItsBuiltDesc": "PryはTypeScriptで書かれ、Perryでネイティブバイナリにコンパイルされています。Electronなし、Webビューなし、JavaScriptランタイムなし。",
+    "typeScriptSource": "TypeScriptソース",
+    "typeScriptSourceDesc": "PerryのネイティブUI APIを使用した標準TypeScript",
+    "perryCompile": "Perry Compile",
+    "perryCompileDesc": "SWCパース → 型解決 → Craneliftコード生成",
+    "nativeBinary": "ネイティブバイナリ",
+    "nativeBinaryDesc": "ランタイム依存のないスタンドアロン実行ファイル",
+    "platformSupport": "プラットフォームサポート",
+    "nativeWidgets": "ネイティブ{framework}ウィジェット",
+    "available": "利用可能",
+    "screenshots": "スクリーンショット",
+    "macOsScreenshot": "macOSスクリーンショット——近日公開",
+    "iosScreenshot": "iOSスクリーンショット——近日公開",
+    "screenshotsNote": "スクリーンショットはPryの開発が進むにつれて追加されます。最新情報はGitHubリポジトリをご確認ください。"
+  },
+  "blog": {
+    "title": "ブログ",
+    "subtitle": "Perryによるネイティブアプリ開発のニュース、チュートリアル、技術的な深掘り。",
+    "englishOnly": "この記事は英語のみで提供されています。"
+  },
+  "languageSwitcher": {
+    "label": "言語"
+  },
+  "blogPosts": {
+    "introducing-perry": {
+      "title": "Perry の紹介",
+      "excerpt": "Perry は Rust で書かれたネイティブ TypeScript コンパイラで、TypeScript を直接スタンドアロンの実行ファイルにコンパイルします。ランタイム不要、Electron 不要、妥協なし。"
+    },
+    "cross-platform-native-ui": {
+      "title": "TypeScript からクロスプラットフォームのネイティブ UI を実現",
+      "excerpt": "Perry がひとつの TypeScript コードベースを AppKit、UIKit、Android Views、GTK4、Win32 にマッピングし、すべてのプラットフォームで真のネイティブ UI を提供する仕組み。"
+    },
+    "building-pry": {
+      "title": "Pry の開発：TypeScript によるネイティブ JSON ビューア",
+      "excerpt": "Pry の開発ウォークスルー——TypeScript からネイティブ ARM64 バイナリにコンパイルされるネイティブ JSON ビューア。ランタイム不要、Web ビュー不要。"
+    },
+    "plugin-systems-are-a-performance-tax": {
+      "title": "プラグインシステムはパフォーマンスへの課税",
+      "excerpt": "プラグインアーキテクチャは拡張性と引き換えにパフォーマンスを犠牲にします。もし拡張性がランタイムではなくビルド時に実現できたら？コンパイル時合成なら両方手に入ります——オーバーヘッドゼロ、完全な柔軟性。"
+    },
+    "compiling-hono-trpc-strapi": {
+      "title": "Hono、tRPC、Strapi をネイティブバイナリにコンパイル",
+      "excerpt": "Perry は 3 つの主要な TypeScript フレームワーク——Hono、tRPC、Strapi——をネイティブ ARM64 実行ファイルにコンパイルできるようになりました。1 秒未満でコンパイルし、2 MB 未満のバイナリを生成し、クラッシュなしで動作します。"
+    },
+    "all-six-platforms-ui-parity": {
+      "title": "6 つのプラットフォームすべてで完全な機能パリティ",
+      "excerpt": "20 以上のネイティブ UI ウィジェット、Canvas ウィジェット、テーブルビュー、システム通知、キーチェーンアクセス、マルチウィンドウサポート、そして macOS、iOS、iPadOS、Android、Linux、Windows での完全な機能パリティ——すべてひとつの TypeScript コードベースから。"
+    },
+    "from-compiler-to-ecosystem": {
+      "title": "コンパイラからエコシステムへ：React、データベース、クラウドビルド",
+      "excerpt": "Perry はコンパイラから完全なエコシステムへと成長しました。perry/ui を中核に、MySQL/PostgreSQL/SQLite 対応の Prisma 互換 ORM、ユニバーサルプッシュ通知、App Store 公開付き分散ビルド、React 互換レイヤー——すべて 1 週間で。"
+    },
+    "the-full-pipeline": {
+      "title": "完全なパイプライン：ドキュメント、配布、WidgetKit",
+      "excerpt": "1 週間で 82 コミット：49 ページのドキュメントサイト、App Store と Play Store への自動公開、Homebrew と APT パッケージ、TypeScript からのネイティブ WidgetKit エクステンション、新しいウィジェット、http/https モジュール、セルフホスティング LLVM コンパイラ。"
+    },
+    "cross-compile-windows-game-loops-and-parity": {
+      "title": "Windows へのクロスコンパイル、iOS ゲームループ、100% テストパリティ",
+      "excerpt": "1 週間で 103 コミット：lld-link 経由で Linux から Windows へのクロスコンパイル、iOS ゲームループサポート、クラッシュレポート、2 段階 Hub ビルドパイプライン、セルフホスティングコンパイラが 68/68 の決定論的テストパリティを達成。"
+    },
+    "true-multithreading-i18n-and-watchos": {
+      "title": "真のマルチスレッド、コンパイル時 i18n、watchOS",
+      "excerpt": "Perry v0.4.0：コンパイル時の安全性を備えた本物の OS スレッド、30 以上のロケール向けゼロセレモニー国際化システム、9 番目のコンパイルターゲットとしての watchOS、オーディオ・カメラ API、並列コンパイラパイプライン。"
+    },
+    "tvos-cross-compile-and-perry-login": {
+      "title": "tvOS、Linux からの iOS クロスコンパイル、Perry Login",
+      "excerpt": "Perry v0.4.24：10 番目のコンパイルターゲットとしての tvOS、ld64.lld 経由で Linux から iOS・macOS へのクロスコンパイル、従量課金制の perry login、Windows UI 刷新、macOS 公証、5 日間で 120 コミット。"
+    }
+  }
+}

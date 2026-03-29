@@ -1,27 +1,40 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
+import { locales } from "@/i18n/routing";
 
 export const dynamic = "force-static";
 
 const BASE = "https://perryts.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${BASE}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE}/roadmap`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/showcase`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/showcase/pry`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE}/publish`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE}/internals`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+  const staticPaths = [
+    "",
+    "/blog",
+    "/roadmap",
+    "/showcase",
+    "/showcase/pry",
+    "/publish",
+    "/pricing",
+    "/internals",
   ];
 
-  const postPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${BASE}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "yearly",
-    priority: 0.7,
-  }));
+  const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    staticPaths.map((path) => ({
+      url: `${BASE}/${locale}${path}`,
+      lastModified: new Date(),
+      changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
+      priority: path === "" ? 1 : 0.7,
+    }))
+  );
+
+  const postPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    blogPosts.map((post) => ({
+      url: `${BASE}/${locale}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    }))
+  );
 
   return [...staticPages, ...postPages];
 }
