@@ -11,6 +11,7 @@ import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
 import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
+import { AppShowcase } from "@/components/AppShowcase";
 import { Footer } from "@/components/Footer";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
@@ -21,6 +22,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Header />
       <Hero />
       <Features />
+      <AppShowcase />
       <PlatformSupport />
       <ComparisonMatrix />
       <CodeExample />

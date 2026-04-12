@@ -1,11 +1,7 @@
 import { ImageResponse } from "next/og";
-import { locales } from "@/i18n/routing";
 
 export const dynamic = "force-static";
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

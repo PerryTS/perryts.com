@@ -41,7 +41,7 @@ export async function Architecture() {
               </div>
               <div className="relative flex flex-col items-center">
                 <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-orange-400 z-10">
-                  <span className="text-sm font-bold leading-tight text-center">Crane<br />lift</span>
+                  <span className="text-lg font-bold">LLVM</span>
                 </div>
                 <span className="mt-3 text-sm font-medium text-slate-300">{t("codegen")}</span>
                 <span className="text-xs text-slate-500">{t("machineCode")}</span>

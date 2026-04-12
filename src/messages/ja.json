@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOSターゲット、LinuxからのiOS/macOSクロスコンパイル、perry login",
+    "badge": "v0.5.x — LLVMバックエンド、Node.jsより最大24倍高速",
     "headline1": "ひとつのコードベース。すべてのプラットフォーム。",
     "headline2": "ネイティブパフォーマンス。",
     "subheadline": "PerryはTypeScriptを<platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web</platforms>向けのネイティブGUI・CLIアプリにコンパイルします。ランタイム不要。Electron不要。ネイティブバイナリのみ。",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "高速コンパイル",
-      "description": "SWCによるパースとCraneliftによるコード生成で、TypeScriptからネイティブコードへ直接コンパイルします。中間JavaScriptは不要です。"
+      "description": "SWCによるパースとLLVMによる最適化されたコード生成で、TypeScriptからネイティブコードへ直接コンパイルします。中間JavaScriptは不要です。"
     },
     "smallBinaries": {
       "title": "コンパクトなバイナリ",
@@ -114,8 +114,8 @@
     "memoryOverhead": "メモリオーバーヘッド",
     "none": "なし",
     "minimal": "最小限",
-    "benchmarkTitle": "ベンチマーク結果: <gradient>2.2倍高速</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24（macOS ARM64、低いほど良い）",
+    "benchmarkTitle": "ベンチマーク結果: <gradient>最大24倍高速</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25（macOS ARM64、低いほど良い）",
     "lowerIsBetter": "低いほど良い"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "ディスカッション",
     "contributing": "コントリビューション",
-    "tagline": "Rust、SWC、Craneliftで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています"
+    "tagline": "Rust、SWC、LLVMで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScriptの型システムはコンパイル時にのみ存在し、Perryはこれを文字通りに実装します。インターフェースはランタイムコードを一切生成しません。クラス階層はフラット化されます。ジェネリック制約は具体的な型に解決されます。コンパイルされたバイナリには実際のロジックのみが含まれ、インタプリタが通常持つ抽象化の仕組みは含まれません。"
     }
   },
+  "appShowcase": {
+    "title": "みんなが<gradient>作っている</gradient>もの",
+    "subtitle": "TypeScriptからコンパイルされた本物のネイティブアプリ。Electronなし、WebViewなし — すべてのプラットフォームでネイティブUI。",
+    "mangoTagline": "ネイティブMongoDB GUI — TypeScriptで完全構築",
+    "honeTagline": "ネイティブAIコードエディタ — TypeScriptからネイティブバイナリへ",
+    "viewAll": "すべてのプロジェクトを見る"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Perryで構築された実際のプロジェクト。ネイティブGUIアプリからCLIツールまで、ネイティブTypeScriptコンパイルの可能性をご覧ください。"
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScriptソース",
     "typeScriptSourceDesc": "PerryのネイティブUI APIを使用した標準TypeScript",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWCパース → 型解決 → Craneliftコード生成",
+    "perryCompileDesc": "SWCパース → 型解決 → LLVMコード生成",
     "nativeBinary": "ネイティブバイナリ",
     "nativeBinaryDesc": "ランタイム依存のないスタンドアロン実行ファイル",
     "platformSupport": "プラットフォームサポート",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS、Linux からの iOS クロスコンパイル、Perry Login",
       "excerpt": "Perry v0.4.24：10 番目のコンパイルターゲットとしての tvOS、ld64.lld 経由で Linux から iOS・macOS へのクロスコンパイル、従量課金制の perry login、Windows UI 刷新、macOS 公証、5 日間で 120 コミット。"
+    },
+    "cranelift-to-llvm": {
+      "title": "CraneliftからLLVMへ：Perryが24倍高速になるまで",
+      "excerpt": "PerryのバックエンドがCraneliftからLLVMに移行完了。初回の切り替えではベンチマークが70倍遅くなりましたが、6つのターゲット最適化により、Node.jsに対して14/15勝、最大24.6倍の高速化を達成しました。"
     }
   }
 }

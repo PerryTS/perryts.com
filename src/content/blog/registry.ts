@@ -15,6 +15,7 @@ const slugs = [
   "cross-compile-windows-game-loops-and-parity",
   "true-multithreading-i18n-and-watchos",
   "tvos-cross-compile-and-perry-login",
+  "cranelift-to-llvm",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -184,6 +185,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./tvos-cross-compile-and-perry-login/vi"),
     id: () => import("./tvos-cross-compile-and-perry-login/id"),
     "zh-Hans": () => import("./tvos-cross-compile-and-perry-login/zh-Hans"),
+  },
+  "cranelift-to-llvm": {
+    en: () => import("./cranelift-to-llvm/en"),
+    de: () => import("./cranelift-to-llvm/de"),
+    es: () => import("./cranelift-to-llvm/es"),
+    fr: () => import("./cranelift-to-llvm/fr"),
+    it: () => import("./cranelift-to-llvm/it"),
+    ja: () => import("./cranelift-to-llvm/ja"),
+    ko: () => import("./cranelift-to-llvm/ko"),
+    pt: () => import("./cranelift-to-llvm/pt"),
+    th: () => import("./cranelift-to-llvm/th"),
+    tr: () => import("./cranelift-to-llvm/tr"),
+    vi: () => import("./cranelift-to-llvm/vi"),
+    id: () => import("./cranelift-to-llvm/id"),
+    "zh-Hans": () => import("./cranelift-to-llvm/zh-Hans"),
   },
 };
 

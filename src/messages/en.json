@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOS target, cross-compile iOS/macOS from Linux, perry login",
+    "badge": "v0.5.x — LLVM backend, up to 24x faster than Node.js",
     "headline1": "One Codebase. Every Platform.",
     "headline2": "Native Performance.",
     "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Fast Compilation",
-      "description": "Direct TypeScript to native code compilation using SWC for parsing and Cranelift for code generation. No intermediate JavaScript."
+      "description": "Direct TypeScript to native code compilation using SWC for parsing and LLVM for optimized code generation. No intermediate JavaScript."
     },
     "smallBinaries": {
       "title": "Small Binaries",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Memory Overhead",
     "none": "None",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark Results: <gradient>2.2x Faster</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 on macOS ARM64 (lower is better)",
+    "benchmarkTitle": "Benchmark Results: <gradient>Up to 24x Faster</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 on macOS ARM64 (lower is better)",
     "lowerIsBetter": "Lower is better"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "Discussions",
     "contributing": "Contributing",
-    "tagline": "Built with Rust, SWC, and Cranelift — and yes, this website is served by a Perry-compiled binary"
+    "tagline": "Built with Rust, SWC, and LLVM — and yes, this website is served by a Perry-compiled binary"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScript's type system exists only at compile time — and Perry takes this literally. Interfaces produce zero runtime code. Class hierarchies are flattened. Generic constraints are resolved to concrete types. The compiled binary contains only the actual logic, with none of the abstraction machinery that interpreters typically carry."
     }
   },
+  "appShowcase": {
+    "title": "See What People <gradient>Build</gradient>",
+    "subtitle": "Real native apps, compiled from TypeScript. No Electron, no web views — just native UI on every platform.",
+    "mangoTagline": "Native MongoDB GUI — built entirely in TypeScript",
+    "honeTagline": "Native AI-powered code editor — TypeScript to native binary",
+    "viewAll": "View all showcase projects"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Real projects built with Perry. From native GUI apps to CLI tools, see what's possible with native TypeScript compilation."
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScript Source",
     "typeScriptSourceDesc": "Standard TypeScript with Perry's native UI API",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC parse → type resolution → Cranelift codegen",
+    "perryCompileDesc": "SWC parse → type resolution → LLVM codegen",
     "nativeBinary": "Native Binary",
     "nativeBinaryDesc": "Standalone executable with zero runtime dependencies",
     "platformSupport": "Platform Support",
@@ -397,6 +404,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, Cross-Compile iOS from Linux, and Perry Login",
       "excerpt": "Perry v0.4.24: tvOS as the 10th compilation target, cross-compile iOS and macOS from Linux via ld64.lld, perry login with usage-based billing, Windows UI overhaul, macOS notarization, and 120 commits in 5 days."
+    },
+    "cranelift-to-llvm": {
+      "title": "From Cranelift to LLVM: How Perry Got 24x Faster",
+      "excerpt": "Perry's backend migration from Cranelift to LLVM is finished. The initial cutover made benchmarks 70x slower — then six targeted optimizations brought Perry to 14/15 wins against Node.js, with up to 24.6x speedups."
     }
   },
   "languageSwitcher": {

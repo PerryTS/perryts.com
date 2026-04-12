@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — target tvOS, biên dịch chéo iOS/macOS từ Linux, perry login",
+    "badge": "v0.5.x — backend LLVM, nhanh hơn Node.js tới 24 lần",
     "headline1": "Một mã nguồn. Mọi nền tảng.",
     "headline2": "Hiệu năng gốc.",
     "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Biên dịch nhanh",
-      "description": "Biên dịch trực tiếp TypeScript sang mã gốc sử dụng SWC để phân tích cú pháp và Cranelift để sinh mã. Không có JavaScript trung gian."
+      "description": "Biên dịch trực tiếp TypeScript sang mã gốc sử dụng SWC để phân tích cú pháp và LLVM để sinh mã tối ưu. Không có JavaScript trung gian."
     },
     "smallBinaries": {
       "title": "Binary nhỏ gọn",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Chi phí bộ nhớ",
     "none": "Không có",
     "minimal": "Tối thiểu",
-    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn 2,2 lần</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 trên macOS ARM64 (thấp hơn là tốt hơn)",
+    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 24 lần</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 trên macOS ARM64 (thấp hơn là tốt hơn)",
     "lowerIsBetter": "Thấp hơn là tốt hơn"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "Thảo luận",
     "contributing": "Đóng góp",
-    "tagline": "Được xây dựng với Rust, SWC và Cranelift — và đúng vậy, trang web này được phục vụ bởi binary được biên dịch bằng Perry"
+    "tagline": "Được xây dựng với Rust, SWC và LLVM — và đúng vậy, trang web này được phục vụ bởi binary được biên dịch bằng Perry"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "Hệ thống kiểu của TypeScript chỉ tồn tại tại thời điểm biên dịch — và Perry thực hiện điều này đúng nghĩa đen. Interface không tạo mã runtime. Phân cấp lớp được làm phẳng. Ràng buộc generic được giải quyết thành kiểu cụ thể. Binary đã biên dịch chỉ chứa logic thực tế, không có bộ máy trừu tượng mà các trình thông dịch thường mang theo."
     }
   },
+  "appShowcase": {
+    "title": "Xem mọi người <gradient>xây dựng</gradient> gì",
+    "subtitle": "Ứng dụng native thực sự, biên dịch từ TypeScript. Không Electron, không web view — chỉ UI native trên mọi nền tảng.",
+    "mangoTagline": "GUI MongoDB native — xây dựng hoàn toàn bằng TypeScript",
+    "honeTagline": "Trình soạn thảo code native hỗ trợ AI — TypeScript sang binary native",
+    "viewAll": "Xem tất cả dự án"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Các dự án thực được xây dựng với Perry. Từ ứng dụng GUI gốc đến công cụ CLI, xem những gì có thể với biên dịch TypeScript gốc."
@@ -337,7 +344,7 @@
     "typeScriptSource": "Mã nguồn TypeScript",
     "typeScriptSourceDesc": "TypeScript tiêu chuẩn với API UI gốc của Perry",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "Phân tích SWC → giải quyết kiểu → sinh mã Cranelift",
+    "perryCompileDesc": "Phân tích SWC → giải quyết kiểu → sinh mã LLVM",
     "nativeBinary": "Binary gốc",
     "nativeBinaryDesc": "Tệp thực thi độc lập không phụ thuộc runtime",
     "platformSupport": "Hỗ trợ nền tảng",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, biên dịch chéo iOS từ Linux và Perry Login",
       "excerpt": "Perry v0.4.24: tvOS là mục tiêu biên dịch thứ 10, biên dịch chéo iOS và macOS từ Linux qua ld64.lld, perry login với thanh toán theo sử dụng, cải tiến UI Windows, công chứng macOS và 120 commit trong 5 ngày."
+    },
+    "cranelift-to-llvm": {
+      "title": "Từ Cranelift đến LLVM: Perry nhanh hơn 24 lần như thế nào",
+      "excerpt": "Quá trình chuyển backend của Perry từ Cranelift sang LLVM đã hoàn tất. Lần chuyển đổi đầu tiên khiến benchmark chậm đi 70 lần — sau đó sáu tối ưu hóa có mục tiêu đã đưa Perry đạt 14/15 chiến thắng trước Node.js, với tốc độ nhanh hơn tới 24,6 lần."
     }
   }
 }

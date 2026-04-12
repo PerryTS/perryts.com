@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — target tvOS, kompilasi silang iOS/macOS dari Linux, perry login",
+    "badge": "v0.5.x — backend LLVM, hingga 24x lebih cepat dari Node.js",
     "headline1": "Satu Kode Sumber. Semua Platform.",
     "headline2": "Performa Native.",
     "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Kompilasi Cepat",
-      "description": "Kompilasi langsung dari TypeScript ke kode native menggunakan SWC untuk parsing dan Cranelift untuk pembuatan kode. Tanpa JavaScript perantara."
+      "description": "Kompilasi langsung dari TypeScript ke kode native menggunakan SWC untuk parsing dan LLVM untuk pembuatan kode yang dioptimalkan. Tanpa JavaScript perantara."
     },
     "smallBinaries": {
       "title": "Binary Kecil",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead Memori",
     "none": "Tidak ada",
     "minimal": "Minimal",
-    "benchmarkTitle": "Hasil Benchmark: <gradient>2,2x Lebih Cepat</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 di macOS ARM64 (lebih rendah lebih baik)",
+    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 24x Lebih Cepat</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 di macOS ARM64 (lebih rendah lebih baik)",
     "lowerIsBetter": "Lebih rendah lebih baik"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "Diskusi",
     "contributing": "Kontribusi",
-    "tagline": "Dibangun dengan Rust, SWC, dan Cranelift — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry"
+    "tagline": "Dibangun dengan Rust, SWC, dan LLVM — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "Sistem tipe TypeScript hanya ada pada waktu kompilasi — dan Perry mengambil ini secara literal. Interface tidak menghasilkan kode runtime. Hierarki kelas diratakan. Constraint generic diselesaikan menjadi tipe konkret. Binary yang dikompilasi hanya berisi logika aktual, tanpa mesin abstraksi yang biasanya dibawa oleh interpreter."
     }
   },
+  "appShowcase": {
+    "title": "Lihat Apa yang Orang <gradient>Bangun</gradient>",
+    "subtitle": "Aplikasi native nyata, dikompilasi dari TypeScript. Tanpa Electron, tanpa web view — hanya UI native di setiap platform.",
+    "mangoTagline": "GUI MongoDB native — dibangun sepenuhnya dengan TypeScript",
+    "honeTagline": "Editor kode native bertenaga AI — TypeScript ke binary native",
+    "viewAll": "Lihat semua proyek showcase"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Proyek nyata yang dibangun dengan Perry. Dari aplikasi GUI native hingga tool CLI, lihat apa yang mungkin dengan kompilasi TypeScript native."
@@ -337,7 +344,7 @@
     "typeScriptSource": "Kode Sumber TypeScript",
     "typeScriptSourceDesc": "TypeScript standar dengan API UI native Perry",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "Parsing SWC → resolusi tipe → codegen Cranelift",
+    "perryCompileDesc": "Parsing SWC → resolusi tipe → codegen LLVM",
     "nativeBinary": "Binary Native",
     "nativeBinaryDesc": "Executable standalone tanpa dependensi runtime",
     "platformSupport": "Dukungan Platform",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, Kompilasi Silang iOS dari Linux, dan Perry Login",
       "excerpt": "Perry v0.4.24: tvOS sebagai target kompilasi ke-10, kompilasi silang iOS dan macOS dari Linux via ld64.lld, perry login dengan penagihan berbasis penggunaan, perombakan UI Windows, notarisasi macOS, dan 120 commit dalam 5 hari."
+    },
+    "cranelift-to-llvm": {
+      "title": "Dari Cranelift ke LLVM: Bagaimana Perry Menjadi 24x Lebih Cepat",
+      "excerpt": "Migrasi backend Perry dari Cranelift ke LLVM telah selesai. Peralihan awal membuat benchmark 70x lebih lambat — kemudian enam optimasi terarah membawa Perry meraih 14/15 kemenangan melawan Node.js, dengan percepatan hingga 24,6x."
     }
   }
 }

@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOS 타겟, Linux에서 iOS/macOS 크로스 컴파일, perry login",
+    "badge": "v0.5.x — LLVM 백엔드, Node.js보다 최대 24배 빠름",
     "headline1": "하나의 코드베이스. 모든 플랫폼.",
     "headline2": "네이티브 성능.",
     "subheadline": "Perry는 TypeScript를 <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 그리고 웹</platforms>에서 네이티브 GUI 및 CLI 앱으로 컴파일합니다. 런타임 없음. Electron 없음. 네이티브 바이너리만.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "빠른 컴파일",
-      "description": "SWC 파싱과 Cranelift 코드 생성을 통한 TypeScript에서 네이티브 코드로의 직접 컴파일. 중간 JavaScript 없음."
+      "description": "SWC 파싱과 LLVM 최적화 코드 생성을 통한 TypeScript에서 네이티브 코드로의 직접 컴파일. 중간 JavaScript 없음."
     },
     "smallBinaries": {
       "title": "작은 바이너리",
@@ -114,8 +114,8 @@
     "memoryOverhead": "메모리 오버헤드",
     "none": "없음",
     "minimal": "최소",
-    "benchmarkTitle": "벤치마크 결과: <gradient>2.2배 빠름</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 (macOS ARM64, 낮을수록 좋음)",
+    "benchmarkTitle": "벤치마크 결과: <gradient>최대 24배 빠름</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 (macOS ARM64, 낮을수록 좋음)",
     "lowerIsBetter": "낮을수록 좋음"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "토론",
     "contributing": "기여하기",
-    "tagline": "Rust, SWC, Cranelift로 구축 — 그리고 이 웹사이트도 Perry로 컴파일된 바이너리가 서빙합니다"
+    "tagline": "Rust, SWC, LLVM으로 구축 — 그리고 이 웹사이트도 Perry로 컴파일된 바이너리가 서빙합니다"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScript의 타입 시스템은 컴파일 타임에만 존재하며, Perry는 이를 그대로 구현합니다. 인터페이스는 런타임 코드를 전혀 생성하지 않습니다. 클래스 계층은 평탄화됩니다. 제네릭 제약은 구체적인 타입으로 해결됩니다. 컴파일된 바이너리에는 실제 로직만 포함되며, 인터프리터가 일반적으로 가지고 있는 추상화 메커니즘은 포함되지 않습니다."
     }
   },
+  "appShowcase": {
+    "title": "사람들이 <gradient>만드는</gradient> 것",
+    "subtitle": "TypeScript로 컴파일된 진짜 네이티브 앱. Electron 없이, 웹뷰 없이 — 모든 플랫폼에서 네이티브 UI.",
+    "mangoTagline": "네이티브 MongoDB GUI — TypeScript로 완전히 구축",
+    "honeTagline": "네이티브 AI 코드 에디터 — TypeScript에서 네이티브 바이너리로",
+    "viewAll": "모든 쇼케이스 프로젝트 보기"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Perry로 구축된 실제 프로젝트. 네이티브 GUI 앱부터 CLI 도구까지, 네이티브 TypeScript 컴파일의 가능성을 확인하세요."
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScript 소스",
     "typeScriptSourceDesc": "Perry의 네이티브 UI API를 사용한 표준 TypeScript",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC 파싱 → 타입 해결 → Cranelift 코드 생성",
+    "perryCompileDesc": "SWC 파싱 → 타입 해결 → LLVM 코드 생성",
     "nativeBinary": "네이티브 바이너리",
     "nativeBinaryDesc": "런타임 종속성 없는 독립형 실행 파일",
     "platformSupport": "플랫폼 지원",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, Linux에서 iOS 크로스 컴파일, Perry Login",
       "excerpt": "Perry v0.4.24: 10번째 컴파일 타겟인 tvOS, ld64.lld를 통한 Linux에서 iOS 및 macOS 크로스 컴파일, 사용량 기반 과금의 perry login, Windows UI 개편, macOS 공증, 5일간 120개 커밋."
+    },
+    "cranelift-to-llvm": {
+      "title": "Cranelift에서 LLVM으로: Perry가 24배 빨라진 과정",
+      "excerpt": "Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. 초기 전환 시 벤치마크가 70배 느려졌지만, 6가지 최적화를 통해 Node.js 대비 14/15 승리, 최대 24.6배 속도 향상을 달성했습니다."
     }
   }
 }

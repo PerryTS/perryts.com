@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — เป้าหมาย tvOS, คอมไพล์ข้ามแพลตฟอร์ม iOS/macOS จาก Linux, perry login",
+    "badge": "v0.5.x — แบ็กเอนด์ LLVM เร็วกว่า Node.js สูงสุด 24 เท่า",
     "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
     "headline2": "ประสิทธิภาพระดับเนทีฟ",
     "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "คอมไพล์เร็ว",
-      "description": "คอมไพล์ TypeScript เป็นโค้ดเนทีฟโดยตรง ใช้ SWC สำหรับการแยกวิเคราะห์และ Cranelift สำหรับการสร้างโค้ด ไม่มี JavaScript ตัวกลาง"
+      "description": "คอมไพล์ TypeScript เป็นโค้ดเนทีฟโดยตรง ใช้ SWC สำหรับการแยกวิเคราะห์และ LLVM สำหรับการสร้างโค้ดที่ปรับแต่ง ไม่มี JavaScript ตัวกลาง"
     },
     "smallBinaries": {
       "title": "ไบนารีขนาดเล็ก",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead หน่วยความจำ",
     "none": "ไม่มี",
     "minimal": "น้อยมาก",
-    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่า 2.2 เท่า</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 บน macOS ARM64 (ยิ่งต่ำยิ่งดี)",
+    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่าสูงสุด 24 เท่า</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 บน macOS ARM64 (ยิ่งต่ำยิ่งดี)",
     "lowerIsBetter": "ยิ่งต่ำยิ่งดี"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "การสนทนา",
     "contributing": "การมีส่วนร่วม",
-    "tagline": "สร้างด้วย Rust, SWC และ Cranelift — และใช่ เว็บไซต์นี้ให้บริการโดยไบนารีที่คอมไพล์ด้วย Perry"
+    "tagline": "สร้างด้วย Rust, SWC และ LLVM — และใช่ เว็บไซต์นี้ให้บริการโดยไบนารีที่คอมไพล์ด้วย Perry"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "ระบบ type ของ TypeScript มีอยู่เฉพาะเวลาคอมไพล์ — และ Perry รับเรื่องนี้อย่างตรงตัว Interface ไม่สร้างโค้ดรันไทม์ ลำดับชั้นของคลาสถูกทำให้แบน Generic constraint ถูกแก้ไขเป็น type ที่เป็นรูปธรรม ไบนารีที่คอมไพล์แล้วมีเพียงลอจิกจริง โดยไม่มีกลไกนามธรรมที่ interpreter มักแบกรับ"
     }
   },
+  "appShowcase": {
+    "title": "ดูสิ่งที่ผู้คน<gradient>สร้าง</gradient>",
+    "subtitle": "แอปเนทีฟจริง คอมไพล์จาก TypeScript ไม่มี Electron ไม่มี Web View — แค่ UI เนทีฟบนทุกแพลตฟอร์ม",
+    "mangoTagline": "GUI MongoDB เนทีฟ — สร้างด้วย TypeScript ทั้งหมด",
+    "honeTagline": "โค้ดเอดิเตอร์เนทีฟขับเคลื่อนด้วย AI — TypeScript สู่ไบนารีเนทีฟ",
+    "viewAll": "ดูโปรเจกต์ทั้งหมด"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "โปรเจกต์จริงที่สร้างด้วย Perry จากแอป GUI เนทีฟไปจนถึงเครื่องมือ CLI ดูว่าอะไรเป็นไปได้ด้วยการคอมไพล์ TypeScript แบบเนทีฟ"
@@ -337,7 +344,7 @@
     "typeScriptSource": "ซอร์สโค้ด TypeScript",
     "typeScriptSourceDesc": "TypeScript มาตรฐานพร้อม API UI เนทีฟของ Perry",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC parse → แก้ไข type → Cranelift codegen",
+    "perryCompileDesc": "SWC parse → แก้ไข type → LLVM codegen",
     "nativeBinary": "ไบนารีเนทีฟ",
     "nativeBinaryDesc": "ไฟล์ปฏิบัติการ standalone ไม่มี dependency ที่รันไทม์",
     "platformSupport": "รองรับแพลตฟอร์ม",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, คอมไพล์ข้าม iOS จาก Linux และ Perry Login",
       "excerpt": "Perry v0.4.24: tvOS เป็นเป้าหมายการคอมไพล์ลำดับที่ 10, คอมไพล์ข้าม iOS และ macOS จาก Linux ผ่าน ld64.lld, perry login พร้อมการเรียกเก็บเงินตามการใช้งาน, ปรับปรุง UI บน Windows, การรับรอง macOS และ 120 commit ใน 5 วัน"
+    },
+    "cranelift-to-llvm": {
+      "title": "จาก Cranelift สู่ LLVM: Perry เร็วขึ้น 24 เท่าได้อย่างไร",
+      "excerpt": "การย้าย backend ของ Perry จาก Cranelift ไปยัง LLVM เสร็จสมบูรณ์แล้ว การเปลี่ยนครั้งแรกทำให้เบนช์มาร์กช้าลง 70 เท่า — จากนั้นการปรับแต่ง 6 รายการทำให้ Perry ชนะ Node.js 14/15 รายการ โดยเร็วกว่าสูงสุด 24.6 เท่า"
     }
   }
 }

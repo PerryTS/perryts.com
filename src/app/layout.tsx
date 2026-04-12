@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Perry — TypeScript → Native",
     description:
-      "Compile TypeScript to native executables. 6 platforms, 20+ UI widgets, 0 ms startup.",
+      "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
     url: "https://perryts.com",
     siteName: "Perry",
     type: "website",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Perry — TypeScript → Native",
     description:
-      "Compile TypeScript to native executables. 6 platforms, 20+ UI widgets, 0 ms startup.",
+      "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
   },
 };
 

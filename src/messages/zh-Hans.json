@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOS 目标平台、从 Linux 交叉编译 iOS/macOS、perry login",
+    "badge": "v0.5.x — LLVM 后端，比 Node.js 快最高 24 倍",
     "headline1": "一套代码。所有平台。",
     "headline2": "原生性能。",
     "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "快速编译",
-      "description": "使用 SWC 解析和 Cranelift 代码生成，将 TypeScript 直接编译为原生代码。无中间 JavaScript。"
+      "description": "使用 SWC 解析和 LLVM 优化代码生成，将 TypeScript 直接编译为原生代码。无中间 JavaScript。"
     },
     "smallBinaries": {
       "title": "体积小巧",
@@ -114,8 +114,8 @@
     "memoryOverhead": "内存开销",
     "none": "无",
     "minimal": "极少",
-    "benchmarkTitle": "基准测试结果：<gradient>快 2.2 倍</gradient>",
-    "benchmarkSubtitle": "Perry 对比 Node.js v24（macOS ARM64，越低越好）",
+    "benchmarkTitle": "基准测试结果：<gradient>快最高 24 倍</gradient>",
+    "benchmarkSubtitle": "Perry 对比 Node.js v25（macOS ARM64，越低越好）",
     "lowerIsBetter": "越低越好"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "讨论",
     "contributing": "贡献",
-    "tagline": "使用 Rust、SWC 和 Cranelift 构建——没错，这个网站由 Perry 编译的二进制文件提供服务"
+    "tagline": "使用 Rust、SWC 和 LLVM 构建——没错，这个网站由 Perry 编译的二进制文件提供服务"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScript 的类型系统仅存在于编译时——Perry 将此贯彻到底。接口不产生任何运行时代码。类层次结构被扁平化。泛型约束被解析为具体类型。编译后的二进制文件仅包含实际逻辑，没有解释器通常携带的抽象机制。"
     }
   },
+  "appShowcase": {
+    "title": "看看人们在<gradient>构建</gradient>什么",
+    "subtitle": "真正的原生应用，从 TypeScript 编译。没有 Electron，没有 Web View — 每个平台上都是原生 UI。",
+    "mangoTagline": "原生 MongoDB GUI — 完全用 TypeScript 构建",
+    "honeTagline": "原生 AI 代码编辑器 — TypeScript 编译为原生二进制",
+    "viewAll": "查看所有展示项目"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "使用 Perry 构建的真实项目。从原生 GUI 应用到 CLI 工具，了解原生 TypeScript 编译的无限可能。"
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScript 源码",
     "typeScriptSourceDesc": "使用 Perry 原生 UI API 的标准 TypeScript",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC 解析 → 类型解析 → Cranelift 代码生成",
+    "perryCompileDesc": "SWC 解析 → 类型解析 → LLVM 代码生成",
     "nativeBinary": "原生二进制文件",
     "nativeBinaryDesc": "无运行时依赖的独立可执行文件",
     "platformSupport": "平台支持",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS、从 Linux 交叉编译 iOS 和 Perry Login",
       "excerpt": "Perry v0.4.24：tvOS 作为第 10 个编译目标，通过 ld64.lld 从 Linux 交叉编译 iOS 和 macOS，perry login 支持按量计费，Windows UI 改版，macOS 公证，5 天内 120 次提交。"
+    },
+    "cranelift-to-llvm": {
+      "title": "从 Cranelift 到 LLVM：Perry 如何变快 24 倍",
+      "excerpt": "Perry 从 Cranelift 到 LLVM 的后端迁移已完成。初始切换使基准测试慢了 70 倍——随后六项针对性优化使 Perry 在 15 项基准测试中赢得 14 项，最高加速达 24.6 倍。"
     }
   }
 }

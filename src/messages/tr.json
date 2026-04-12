@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOS hedefi, Linux'tan iOS/macOS çapraz derleme, perry login",
+    "badge": "v0.5.x — LLVM backend, Node.js'den 24 kata kadar daha hızlı",
     "headline1": "Tek Kod Tabanı. Her Platform.",
     "headline2": "Yerel Performans.",
     "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Hızlı Derleme",
-      "description": "SWC ile ayrıştırma ve Cranelift ile kod üretimi kullanarak TypeScript'ten yerel koda doğrudan derleme. Ara JavaScript yok."
+      "description": "SWC ile ayrıştırma ve LLVM ile optimize edilmiş kod üretimi kullanarak TypeScript'ten yerel koda doğrudan derleme. Ara JavaScript yok."
     },
     "smallBinaries": {
       "title": "Küçük İkili Dosyalar",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Bellek Yükü",
     "none": "Yok",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark Sonuçları: <gradient>2,2x Daha Hızlı</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24, macOS ARM64 (düşük olan daha iyi)",
+    "benchmarkTitle": "Benchmark Sonuçları: <gradient>24 Kata Kadar Daha Hızlı</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25, macOS ARM64 (düşük olan daha iyi)",
     "lowerIsBetter": "Düşük olan daha iyi"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Sorunlar",
     "discussions": "Tartışmalar",
     "contributing": "Katkıda Bulunma",
-    "tagline": "Rust, SWC ve Cranelift ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır"
+    "tagline": "Rust, SWC ve LLVM ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScript'in tip sistemi yalnızca derleme zamanında var olur — ve Perry bunu kelimesi kelimesine uygular. Arayüzler hiçbir runtime kodu üretmez. Sınıf hiyerarşileri düzleştirilir. Generic kısıtlamalar somut tiplere çözümlenir. Derlenen ikili dosya yalnızca gerçek mantığı içerir, yorumlayıcıların tipik olarak taşıdığı soyutlama mekanizması olmadan."
     }
   },
+  "appShowcase": {
+    "title": "İnsanların neler <gradient>ürettiğini</gradient> görün",
+    "subtitle": "TypeScript'ten derlenen gerçek native uygulamalar. Electron yok, web view yok — her platformda native UI.",
+    "mangoTagline": "Native MongoDB GUI — tamamen TypeScript ile yapılmış",
+    "honeTagline": "Native AI destekli kod editörü — TypeScript'ten native binary'ye",
+    "viewAll": "Tüm projeleri gör"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Perry ile inşa edilmiş gerçek projeler. Yerel GUI uygulamalarından CLI araçlarına, yerel TypeScript derleme ile nelerin mümkün olduğunu görün."
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScript Kaynağı",
     "typeScriptSourceDesc": "Perry'nin yerel UI API'si ile standart TypeScript",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC ayrıştırma → tip çözümleme → Cranelift kod üretimi",
+    "perryCompileDesc": "SWC ayrıştırma → tip çözümleme → LLVM kod üretimi",
     "nativeBinary": "Yerel İkili Dosya",
     "nativeBinaryDesc": "Sıfır runtime bağımlılığı ile bağımsız çalıştırılabilir",
     "platformSupport": "Platform Desteği",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, Linux'tan iOS Çapraz Derleme ve Perry Login",
       "excerpt": "Perry v0.4.24: 10. derleme hedefi olarak tvOS, ld64.lld ile Linux'tan iOS ve macOS çapraz derleme, kullanım bazlı faturalandırma ile perry login, Windows UI yenilemesi, macOS noter onayı ve 5 günde 120 commit."
+    },
+    "cranelift-to-llvm": {
+      "title": "Cranelift'ten LLVM'ye: Perry Nasıl 24 Kat Hızlandı",
+      "excerpt": "Perry'nin Cranelift'ten LLVM'ye backend geçişi tamamlandı. İlk geçiş benchmark'ları 70 kat yavaşlattı — ardından altı hedefli optimizasyon Perry'yi Node.js'e karşı 14/15 galibiyete taşıdı, 24,6 kata kadar hızlanma sağladı."
     }
   }
 }

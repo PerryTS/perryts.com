@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — objetivo tvOS, compilación cruzada iOS/macOS desde Linux, perry login",
+    "badge": "v0.5.x — backend LLVM, hasta 24x más rápido que Node.js",
     "headline1": "Un código fuente. Todas las plataformas.",
     "headline2": "Rendimiento nativo.",
     "subheadline": "Perry compila TypeScript a aplicaciones nativas GUI y CLI en <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly y la Web.</platforms> Sin runtime. Sin Electron. Solo binarios nativos.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Compilación rápida",
-      "description": "Compilación directa de TypeScript a código nativo usando SWC para el análisis y Cranelift para la generación de código. Sin JavaScript intermedio."
+      "description": "Compilación directa de TypeScript a código nativo usando SWC para el análisis y LLVM para la generación de código optimizado. Sin JavaScript intermedio."
     },
     "smallBinaries": {
       "title": "Binarios pequeños",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead de memoria",
     "none": "Ninguna",
     "minimal": "Mínimo",
-    "benchmarkTitle": "Resultados del benchmark: <gradient>2,2x más rápido</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 en macOS ARM64 (menor es mejor)",
+    "benchmarkTitle": "Resultados del benchmark: <gradient>Hasta 24x más rápido</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 en macOS ARM64 (menor es mejor)",
     "lowerIsBetter": "Menor es mejor"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "Discusiones",
     "contributing": "Contribuir",
-    "tagline": "Construido con Rust, SWC y Cranelift — y sí, este sitio web es servido por un binario compilado con Perry"
+    "tagline": "Construido con Rust, SWC y LLVM — y sí, este sitio web es servido por un binario compilado con Perry"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "El sistema de tipos de TypeScript existe solo en tiempo de compilación — y Perry lo toma literalmente. Las interfaces no producen código en runtime. Las jerarquías de clases se aplanan. Las restricciones genéricas se resuelven a tipos concretos. El binario compilado contiene solo la lógica real, sin la maquinaria de abstracción que los intérpretes típicamente cargan."
     }
   },
+  "appShowcase": {
+    "title": "Mira lo que la gente <gradient>construye</gradient>",
+    "subtitle": "Apps nativas reales, compiladas desde TypeScript. Sin Electron, sin web views — solo UI nativa en cada plataforma.",
+    "mangoTagline": "GUI nativa para MongoDB — construida completamente en TypeScript",
+    "honeTagline": "Editor de código nativo con IA — TypeScript a binario nativo",
+    "viewAll": "Ver todos los proyectos"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Proyectos reales construidos con Perry. Desde apps GUI nativas hasta herramientas CLI, descubre lo que es posible con la compilación nativa de TypeScript."
@@ -337,7 +344,7 @@
     "typeScriptSource": "Código fuente TypeScript",
     "typeScriptSourceDesc": "TypeScript estándar con la API de UI nativa de Perry",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "Análisis SWC → resolución de tipos → codegen Cranelift",
+    "perryCompileDesc": "Análisis SWC → resolución de tipos → codegen LLVM",
     "nativeBinary": "Binario nativo",
     "nativeBinaryDesc": "Ejecutable independiente sin dependencias de runtime",
     "platformSupport": "Soporte de plataformas",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, compilación cruzada de iOS desde Linux y Perry Login",
       "excerpt": "Perry v0.4.24: tvOS como 10.º objetivo de compilación, compilación cruzada de iOS y macOS desde Linux vía ld64.lld, perry login con facturación por uso, renovación de la UI de Windows, notarización de macOS y 120 commits en 5 días."
+    },
+    "cranelift-to-llvm": {
+      "title": "De Cranelift a LLVM: Cómo Perry se volvió 24x más rápido",
+      "excerpt": "La migración del backend de Perry de Cranelift a LLVM está completa. La transición inicial hizo los benchmarks 70x más lentos — luego seis optimizaciones específicas llevaron a Perry a 14/15 victorias contra Node.js, con aceleraciones de hasta 24,6x."
     }
   }
 }

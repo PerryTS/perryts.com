@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.4.24 — tvOS-Ziel, Cross-Compile iOS/macOS von Linux, perry login",
+    "badge": "v0.5.x — LLVM-Backend, bis zu 24x schneller als Node.js",
     "headline1": "Eine Codebasis. Jede Plattform.",
     "headline2": "Native Performance.",
     "subheadline": "Perry kompiliert TypeScript zu nativen GUI- und CLI-Apps auf <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly und dem Web.</platforms> Keine Laufzeitumgebung. Kein Electron. Einfach native Binaries.",
@@ -44,7 +44,7 @@
     },
     "fastCompilation": {
       "title": "Schnelle Kompilierung",
-      "description": "Direkte TypeScript-zu-nativem-Code-Kompilierung mit SWC zum Parsen und Cranelift zur Codegenerierung. Kein Zwischen-JavaScript."
+      "description": "Direkte TypeScript-zu-nativem-Code-Kompilierung mit SWC zum Parsen und LLVM zur optimierten Codegenerierung. Kein Zwischen-JavaScript."
     },
     "smallBinaries": {
       "title": "Kleine Binaries",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Speicher-Overhead",
     "none": "Keine",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark-Ergebnisse: <gradient>2,2x schneller</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v24 auf macOS ARM64 (niedriger ist besser)",
+    "benchmarkTitle": "Benchmark-Ergebnisse: <gradient>Bis zu 24x schneller</gradient>",
+    "benchmarkSubtitle": "Perry vs Node.js v25 auf macOS ARM64 (niedriger ist besser)",
     "lowerIsBetter": "Niedriger ist besser"
   },
   "installation": {
@@ -207,7 +207,7 @@
     "issues": "Issues",
     "discussions": "Diskussionen",
     "contributing": "Mitwirken",
-    "tagline": "Gebaut mit Rust, SWC und Cranelift — und ja, diese Website wird von einem Perry-kompilierten Binary ausgeliefert"
+    "tagline": "Gebaut mit Rust, SWC und LLVM — und ja, diese Website wird von einem Perry-kompilierten Binary ausgeliefert"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -313,6 +313,13 @@
       "p2": "TypeScripts Typsystem existiert nur zur Compile-Zeit — und Perry nimmt das wörtlich. Interfaces erzeugen keinen Laufzeit-Code. Klassenhierarchien werden abgeflacht. Generische Einschränkungen werden zu konkreten Typen aufgelöst. Das kompilierte Binary enthält nur die tatsächliche Logik, ohne den Abstraktionsapparat, den Interpreter typischerweise mitbringen."
     }
   },
+  "appShowcase": {
+    "title": "Was Menschen damit <gradient>bauen</gradient>",
+    "subtitle": "Echte native Apps, kompiliert aus TypeScript. Kein Electron, keine Web Views — einfach native UI auf jeder Plattform.",
+    "mangoTagline": "Native MongoDB-GUI — komplett in TypeScript gebaut",
+    "honeTagline": "Nativer KI-Code-Editor — TypeScript zu nativer Binary",
+    "viewAll": "Alle Showcase-Projekte ansehen"
+  },
   "showcase": {
     "title": "Showcase",
     "subtitle": "Echte Projekte, gebaut mit Perry. Von nativen GUI-Apps bis zu CLI-Tools — sieh, was mit nativer TypeScript-Kompilierung möglich ist."
@@ -337,7 +344,7 @@
     "typeScriptSource": "TypeScript-Quellcode",
     "typeScriptSourceDesc": "Standard-TypeScript mit Perrys nativer UI-API",
     "perryCompile": "Perry Compile",
-    "perryCompileDesc": "SWC-Parse → Typauflösung → Cranelift-Codegen",
+    "perryCompileDesc": "SWC-Parse → Typauflösung → LLVM-Codegen",
     "nativeBinary": "Natives Binary",
     "nativeBinaryDesc": "Eigenständige Datei ohne Laufzeitabhängigkeiten",
     "platformSupport": "Plattformunterstützung",
@@ -400,6 +407,10 @@
     "tvos-cross-compile-and-perry-login": {
       "title": "tvOS, Cross-Compile für iOS von Linux und Perry Login",
       "excerpt": "Perry v0.4.24: tvOS als 10. Kompilierungsziel, Cross-Compile für iOS und macOS von Linux via ld64.lld, perry login mit nutzungsbasierter Abrechnung, Windows-UI-Überarbeitung, macOS-Notarisierung und 120 Commits in 5 Tagen."
+    },
+    "cranelift-to-llvm": {
+      "title": "Von Cranelift zu LLVM: Wie Perry 24x schneller wurde",
+      "excerpt": "Perrys Backend-Migration von Cranelift zu LLVM ist abgeschlossen. Die anfängliche Umstellung machte Benchmarks 70x langsamer — dann brachten sechs gezielte Optimierungen Perry auf 14/15 Siege gegen Node.js, mit bis zu 24,6-facher Beschleunigung."
     }
   }
 }
