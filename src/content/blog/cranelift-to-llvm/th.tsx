@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        การย้าย backend ของ Perry จาก Cranelift ไปยัง LLVM เสร็จสมบูรณ์แล้ว ตั้งแต่ v0.5.12 เป็นต้นไป LLVM เป็น backend สำหรับ code generation เพียงตัวเดียว และตอนนี้ Perry เอาชนะ Node.js ได้ 14 จาก 15 benchmark &mdash; ด้วยมาร์จินตั้งแต่ 1.06x ถึง 24.6x
+        การย้าย backend ของ Perry จาก Cranelift ไปยัง LLVM เสร็จสมบูรณ์แล้ว ตั้งแต่ v0.5.12 เป็นต้นไป LLVM เป็น backend สำหรับ code generation เพียงตัวเดียว และตอนนี้ Perry เอาชนะ Node.js ได้ในทุก benchmark &mdash; ด้วยมาร์จินตั้งแต่ 1.7x ถึง 24.6x (มีสองรายการเสมอกัน)
       </p>
       <p>
         การมาถึงจุดนี้ไม่ได้ราบรื่น การเปลี่ยนครั้งแรกใน v0.5.0 ทำให้หลาย benchmark <strong>ช้าลง 70 เท่า</strong>เมื่อเทียบกับเวอร์ชัน Cranelift ที่มันมาแทนที่ บทความนี้เป็นเวอร์ชันฉบับเต็มของสิ่งที่เกิดขึ้น เหตุผลที่เราตัดสินใจเปลี่ยนอยู่ดี อะไรพัง อะไรแก้ไขมัน และตัวเลขเป็นอย่างไรหลังจากผ่านมาได้
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">เสมอ</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">เสมอ</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        ชนะ 14 จาก 15 แพ้แค่ <code>object_create</code> ที่ allocator ของ V8 ดีจริง ๆ และเราห่างแค่ 12%
+        ทุก benchmark เป็นชัยชนะหรือเสมอ ที่ใกล้เคียงที่สุดคือ <code>object_create</code> (9ms vs 8ms) ที่ allocator ของ V8 ดีจริง ๆ
       </p>
 
       <h2>ส่วนที่ 6: คำถามเรื่องเวลาคอมไพล์</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>สรุป</h2>
       <p>
-        Perry ตอนนี้ใช้ LLVM อย่างเดียว เร็วกว่า Node ใน 14 จาก 15 benchmark และพร้อมใช้งาน การย้ายใช้เวลานานกว่าที่วางแผนไว้ เจ็บปวดกว่าที่คาดไว้ตรงกลาง และเป็นการตัดสินใจที่ถูกต้องอย่างปฏิเสธไม่ได้เมื่อมองย้อนกลับ Cranelift พาเราไปถึง v0.5 LLVM กำลังพาเราไปตลอดทาง
+        Perry ตอนนี้ใช้ LLVM อย่างเดียว เร็วกว่า Node ในทุก benchmark และพร้อมใช้งาน การย้ายใช้เวลานานกว่าที่วางแผนไว้ เจ็บปวดกว่าที่คาดไว้ตรงกลาง และเป็นการตัดสินใจที่ถูกต้องอย่างปฏิเสธไม่ได้เมื่อมองย้อนกลับ Cranelift พาเราไปถึง v0.5 LLVM กำลังพาเราไปตลอดทาง
       </p>
       <p>ถ้าคุณอยากลอง Perry:</p>
       <pre><code>{`brew install perryts/perry/perry

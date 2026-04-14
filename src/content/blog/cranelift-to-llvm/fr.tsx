@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        La migration du backend de Perry de Cranelift vers LLVM est terminée. À partir de v0.5.12, LLVM est le seul backend de génération de code, et Perry bat désormais Node.js sur 14 des 15 benchmarks — avec des marges allant de 1,06x à 24,6x.
+        La migration du backend de Perry de Cranelift vers LLVM est terminée. À partir de v0.5.12, LLVM est le seul backend de génération de code, et Perry bat désormais Node.js sur chaque benchmark — avec des marges allant de 1,7x à 24,6x (avec deux égalités).
       </p>
       <p>
         Le chemin n&apos;a pas été une ligne droite. La bascule initiale en v0.5.0 a rendu plusieurs benchmarks <strong>70x plus lents</strong> que la version Cranelift qu&apos;elle remplaçait. Ce billet est la version longue de ce qui s&apos;est passé, pourquoi nous avons quand même fait le changement, ce qui a cassé, ce qui a réparé, et à quoi ressemblent les chiffres de l&apos;autre côté.
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        14 victoires sur 15. La seule défaite est <code>object_create</code>, où l&apos;allocateur de V8 est véritablement excellent et nous sommes à 12% d&apos;écart.
+        Chaque benchmark est une victoire ou une égalité. Le plus serré est <code>object_create</code> (9ms vs 8ms), où l&apos;allocateur de V8 est véritablement excellent.
       </p>
 
       <h2>Partie 6 : La question du temps de compilation</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>Pour conclure</h2>
       <p>
-        Perry est désormais uniquement LLVM, plus rapide que Node sur 14 des 15 benchmarks, et en production. La migration a pris plus de temps que prévu, a fait plus mal que je ne l&apos;attendais en cours de route, et est sans ambiguïté la bonne décision avec le recul. Cranelift nous a amenés jusqu&apos;à v0.5 ; LLVM nous emmène pour le reste du chemin.
+        Perry est désormais uniquement LLVM, plus rapide que Node sur chaque benchmark, et en production. La migration a pris plus de temps que prévu, a fait plus mal que je ne l&apos;attendais en cours de route, et est sans ambiguïté la bonne décision avec le recul. Cranelift nous a amenés jusqu&apos;à v0.5 ; LLVM nous emmène pour le reste du chemin.
       </p>
       <p>Si vous voulez essayer Perry :</p>
       <pre><code>{`brew install perryts/perry/perry

@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        Perry&apos;s backend migration from Cranelift to LLVM is finished. As of v0.5.12, LLVM is the sole code generation backend, and Perry now beats Node.js on 14 of 15 benchmarks — by margins ranging from 1.06x to 24.6x.
+        Perry&apos;s backend migration from Cranelift to LLVM is finished. As of v0.5.12, LLVM is the sole code generation backend, and Perry now beats Node.js on every benchmark — by margins ranging from 1.7x to 24.6x (with two ties).
       </p>
       <p>
         Getting here was not a straight line. The initial cutover in v0.5.0 made several benchmarks <strong>70x slower</strong> than the Cranelift version it replaced. This post is the long version of what happened, why we made the switch anyway, what broke, what fixed it, and what the numbers look like on the other side.
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        14 of 15 wins. The one loss is <code>object_create</code>, where V8&apos;s allocator is genuinely excellent and we&apos;re within 12%.
+        Every benchmark is a win or a tie. The closest is <code>object_create</code> (9ms vs 8ms), where V8&apos;s allocator is genuinely excellent.
       </p>
 
       <h2>Part 6: The Compile-Time Question</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>Wrapping Up</h2>
       <p>
-        Perry is now LLVM-only, faster than Node on 14 of 15 benchmarks, and shipping. The migration took longer than I planned, hurt more than I expected in the middle, and is unambiguously the right call in retrospect. Cranelift got us to v0.5; LLVM is taking us the rest of the way.
+        Perry is now LLVM-only, faster than Node on every benchmark, and shipping. The migration took longer than I planned, hurt more than I expected in the middle, and is unambiguously the right call in retrospect. Cranelift got us to v0.5; LLVM is taking us the rest of the way.
       </p>
       <p>If you want to try Perry:</p>
       <pre><code>{`brew install perryts/perry/perry

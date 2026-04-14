@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. v0.5.12 기준으로 LLVM이 유일한 코드 생성 백엔드이며, Perry는 이제 15개 벤치마크 중 14개에서 Node.js를 능가합니다. 그 차이는 1.06배에서 24.6배에 이릅니다.
+        Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. v0.5.12 기준으로 LLVM이 유일한 코드 생성 백엔드이며, Perry는 이제 모든 벤치마크에서 Node.js를 능가합니다. 그 차이는 1.7배에서 24.6배에 이릅니다(2개는 동점).
       </p>
       <p>
         여기까지 오는 길은 순탄하지 않았습니다. v0.5.0에서의 초기 전환은 여러 벤치마크를 이전 Cranelift 버전보다 <strong>70배 느리게</strong> 만들었습니다. 이 글은 무슨 일이 있었는지, 그럼에도 왜 전환했는지, 무엇이 깨졌는지, 무엇이 고쳤는지, 그리고 지금 수치가 어떤지에 대한 상세한 이야기입니다.
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">tied</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        15전 14승. 유일한 패배는 <code>object_create</code>이며, V8의 할당자가 정말로 우수하고 그 차이는 12% 이내입니다.
+        모든 벤치마크가 승리 또는 동점입니다. 가장 근소한 차이는 <code>object_create</code>(9ms vs 8ms)이며, V8의 할당자가 정말로 우수합니다.
       </p>
 
       <h2>파트 6: 컴파일 시간 문제</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>마무리</h2>
       <p>
-        Perry는 이제 LLVM 전용이며, 15개 벤치마크 중 14개에서 Node.js보다 빠르고, 출시를 계속하고 있습니다. 마이그레이션은 계획보다 오래 걸렸고, 중간에 예상보다 더 아팠으며, 돌이켜 보면 의심할 여지 없이 올바른 결정이었습니다. Cranelift가 v0.5까지 이끌어 주었고, LLVM이 나머지 길을 함께합니다.
+        Perry는 이제 LLVM 전용이며, 모든 벤치마크에서 Node.js보다 빠르고, 출시를 계속하고 있습니다. 마이그레이션은 계획보다 오래 걸렸고, 중간에 예상보다 더 아팠으며, 돌이켜 보면 의심할 여지 없이 올바른 결정이었습니다. Cranelift가 v0.5까지 이끌어 주었고, LLVM이 나머지 길을 함께합니다.
       </p>
       <p>Perry를 사용해 보고 싶다면:</p>
       <pre><code>{`brew install perryts/perry/perry

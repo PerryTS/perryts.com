@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        Perry&apos;nin Cranelift&apos;ten LLVM&apos;ye backend ge&ccedil;i&scedil;i tamamland&inodot;. v0.5.12 itibar&inodot;yla LLVM tek kod &uuml;retim backend&apos;i ve Perry art&inodot;k 15 benchmark&apos;&inodot;n 14&apos;&uuml;nde Node.js&apos;i yeniyor &mdash; 1,06x ile 24,6x aras&inodot;nda de&gbreve;i&scedil;en marjlarla.
+        Perry&apos;nin Cranelift&apos;ten LLVM&apos;ye backend ge&ccedil;i&scedil;i tamamland&inodot;. v0.5.12 itibar&inodot;yla LLVM tek kod &uuml;retim backend&apos;i ve Perry art&inodot;k her benchmark&apos;ta Node.js&apos;i yeniyor &mdash; 1,7x ile 24,6x aras&inodot;nda de&gbreve;i&scedil;en marjlarla (iki beraberlikle).
       </p>
       <p>
         Buraya gelmek d&uuml;z bir yol de&gbreve;ildi. v0.5.0&apos;daki ilk ge&ccedil;i&scedil;, birka&ccedil; benchmark&apos;&inodot; yerini ald&inodot;&gbreve;&inodot; Cranelift s&uuml;r&uuml;m&uuml;nden <strong>70 kat daha yava&scedil;</strong> hale getirdi. Bu yaz&inodot; ne oldu&gbreve;unun, neden yine de ge&ccedil;i&scedil; yapt&inodot;&gbreve;&inodot;m&inodot;z&inodot;n, neyin bozuldu&gbreve;unun, neyin d&uuml;zeltti&gbreve;inin ve rakamlar&inodot;n di&gbreve;er tarafta nas&inodot;l g&ouml;r&uuml;nd&uuml;&gbreve;&uuml;n&uuml;n uzun versiyonudur.
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">berabere</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">berabere</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        15&apos;te 14 galibiyet. Tek kay&inodot;p <code>object_create</code>; burada V8&apos;in allocator&apos;&uuml; ger&ccedil;ekten m&uuml;kemmel ve %12 i&ccedil;indeyiz.
+        Her benchmark bir galibiyet veya berabere. En yak&inodot;n sonu&ccedil; <code>object_create</code> (9ms vs 8ms); burada V8&apos;in allocator&apos;&uuml; ger&ccedil;ekten m&uuml;kemmel.
       </p>
 
       <h2>B&ouml;l&uuml;m 6: Derleme S&uuml;resi Sorusu</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>Sonu&ccedil;</h2>
       <p>
-        Perry art&inodot;k yaln&inodot;zca LLVM, 15 benchmark&apos;&inodot;n 14&apos;&uuml;nde Node&apos;dan h&inodot;zl&inodot; ve yay&inodot;nda. Ge&ccedil;i&scedil; planlad&inodot;&gbreve;&inodot;mdan uzun s&uuml;rd&uuml;, ortada bekledi&gbreve;imden fazla ac&inodot;tt&inodot; ve geriye d&ouml;n&uuml;p bak&inodot;ld&inodot;&gbreve;&inodot;nda kesin olarak do&gbreve;ru karar. Cranelift bizi v0.5&apos;e getirdi; LLVM bizi geri kalan yolda ta&scedil;&inodot;yor.
+        Perry art&inodot;k yaln&inodot;zca LLVM, her benchmark&apos;ta Node&apos;dan h&inodot;zl&inodot; ve yay&inodot;nda. Ge&ccedil;i&scedil; planlad&inodot;&gbreve;&inodot;mdan uzun s&uuml;rd&uuml;, ortada bekledi&gbreve;imden fazla ac&inodot;tt&inodot; ve geriye d&ouml;n&uuml;p bak&inodot;ld&inodot;&gbreve;&inodot;nda kesin olarak do&gbreve;ru karar. Cranelift bizi v0.5&apos;e getirdi; LLVM bizi geri kalan yolda ta&scedil;&inodot;yor.
       </p>
       <p>Perry&apos;yi denemek istiyorsan&inodot;z:</p>
       <pre><code>{`brew install perryts/perry/perry

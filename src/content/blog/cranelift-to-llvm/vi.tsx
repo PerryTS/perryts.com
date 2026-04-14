@@ -2,7 +2,7 @@ export default function Content() {
   return (
     <>
       <p>
-        Qu&aacute; tr&igrave;nh chuyển backend của Perry từ Cranelift sang LLVM đ&atilde; ho&agrave;n tất. Kể từ v0.5.12, LLVM l&agrave; backend sinh m&atilde; duy nhất, v&agrave; Perry giờ đ&acirc;y đ&aacute;nh bại Node.js tr&ecirc;n 14 trong 15 benchmark &mdash; với bi&ecirc;n độ từ 1,06x đến 24,6x.
+        Qu&aacute; tr&igrave;nh chuyển backend của Perry từ Cranelift sang LLVM đ&atilde; ho&agrave;n tất. Kể từ v0.5.12, LLVM l&agrave; backend sinh m&atilde; duy nhất, v&agrave; Perry giờ đ&acirc;y đ&aacute;nh bại Node.js tr&ecirc;n mọi benchmark &mdash; với bi&ecirc;n độ từ 1,7x đến 24,6x (với hai kết quả h&ograve;a).
       </p>
       <p>
         H&agrave;nh tr&igrave;nh đến đ&acirc;y kh&ocirc;ng hề thẳng tắp. Lần chuyển đổi ban đầu trong v0.5.0 khiến một số benchmark <strong>chậm hơn 70 lần</strong> so với phi&ecirc;n bản Cranelift m&agrave; n&oacute; thay thế. B&agrave;i viết n&agrave;y l&agrave; phi&ecirc;n bản chi tiết về những g&igrave; đ&atilde; xảy ra, tại sao ch&uacute;ng t&ocirc;i vẫn chuyển, c&aacute;i g&igrave; hỏng, c&aacute;i g&igrave; sửa được, v&agrave; c&aacute;c con số tr&ocirc;ng như thế n&agrave;o ở ph&iacute;a b&ecirc;n kia.
@@ -197,7 +197,7 @@ slow:
             <tr className="border-b border-slate-800"><td className="py-2 px-3">nested_loops</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">16ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">prime_sieve</td><td className="text-right py-2 px-3">4ms</td><td className="text-right py-2 px-3">7ms</td><td className="text-right py-2 px-3 text-green-400">1.7x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">matrix_multiply</td><td className="text-right py-2 px-3">21ms</td><td className="text-right py-2 px-3">34ms</td><td className="text-right py-2 px-3 text-green-400">1.6x</td></tr>
-            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">932ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">1.06x</td></tr>
+            <tr className="border-b border-slate-800"><td className="py-2 px-3">fibonacci(40)</td><td className="text-right py-2 px-3">401ms</td><td className="text-right py-2 px-3">991ms</td><td className="text-right py-2 px-3 text-green-400">2.5x</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">binary_trees</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3 text-slate-400">h&ograve;a</td></tr>
             <tr className="border-b border-slate-800"><td className="py-2 px-3">mandelbrot</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3">24ms</td><td className="text-right py-2 px-3 text-slate-400">h&ograve;a</td></tr>
             <tr><td className="py-2 px-3">object_create</td><td className="text-right py-2 px-3">9ms</td><td className="text-right py-2 px-3">8ms</td><td className="text-right py-2 px-3 text-red-400">0.9x</td></tr>
@@ -206,7 +206,7 @@ slow:
       </div>
 
       <p>
-        Thắng 14 tr&ecirc;n 15. Thua duy nhất l&agrave; <code>object_create</code>, nơi allocator của V8 thực sự xuất sắc v&agrave; ch&uacute;ng t&ocirc;i chỉ c&aacute;ch 12%.
+        Mọi benchmark đều l&agrave; chiến thắng hoặc h&ograve;a. Sát nhất l&agrave; <code>object_create</code> (9ms vs 8ms), nơi allocator của V8 thực sự xuất sắc.
       </p>
 
       <h2>Phần 6: C&acirc;u Hỏi Thời Gian Bi&ecirc;n Dịch</h2>
@@ -243,7 +243,7 @@ slow:
 
       <h2>Tổng Kết</h2>
       <p>
-        Perry giờ chỉ sử dụng LLVM, nhanh hơn Node tr&ecirc;n 14 trong 15 benchmark, v&agrave; đ&atilde; ph&aacute;t h&agrave;nh. Qu&aacute; tr&igrave;nh chuyển đổi mất nhiều thời gian hơn t&ocirc;i dự t&iacute;nh, đau đớn hơn t&ocirc;i kỳ vọng ở giữa chặng đường, v&agrave; r&otilde; r&agrave;ng l&agrave; quyết định đ&uacute;ng khi nh&igrave;n lại. Cranelift đưa ch&uacute;ng t&ocirc;i đến v0.5; LLVM đang đưa ch&uacute;ng t&ocirc;i đi tiếp.
+        Perry giờ chỉ sử dụng LLVM, nhanh hơn Node tr&ecirc;n mọi benchmark, v&agrave; đ&atilde; ph&aacute;t h&agrave;nh. Qu&aacute; tr&igrave;nh chuyển đổi mất nhiều thời gian hơn t&ocirc;i dự t&iacute;nh, đau đớn hơn t&ocirc;i kỳ vọng ở giữa chặng đường, v&agrave; r&otilde; r&agrave;ng l&agrave; quyết định đ&uacute;ng khi nh&igrave;n lại. Cranelift đưa ch&uacute;ng t&ocirc;i đến v0.5; LLVM đang đưa ch&uacute;ng t&ocirc;i đi tiếp.
       </p>
       <p>Nếu bạn muốn thử Perry:</p>
       <pre><code>{`brew install perryts/perry/perry
