@@ -118,6 +118,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["compilers", "llvm", "cranelift", "performance", "milestone"],
     content: () => null,
   },
+  {
+    slug: "optimizing-everything",
+    title: "Optimizing Everything: One Week, 68 Releases, and a 547x JSON Speedup",
+    date: "2026-04-17",
+    excerpt:
+      "Perry v0.5.13 → v0.5.80 in seven days. JSON.parse closes a 547x gap to Node. mimalloc lands as the global allocator. Inline caches, shape transitions, typed buffer slots, i32-native bitwise ops, scalar replacement, and a native event loop that keeps Fastify and WebSocket servers alive.",
+    tags: ["performance", "llvm", "JSON", "GC", "server", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

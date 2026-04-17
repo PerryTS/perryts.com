@@ -16,6 +16,7 @@ const slugs = [
   "true-multithreading-i18n-and-watchos",
   "tvos-cross-compile-and-perry-login",
   "cranelift-to-llvm",
+  "optimizing-everything",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -200,6 +201,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./cranelift-to-llvm/vi"),
     id: () => import("./cranelift-to-llvm/id"),
     "zh-Hans": () => import("./cranelift-to-llvm/zh-Hans"),
+  },
+  "optimizing-everything": {
+    en: () => import("./optimizing-everything/en"),
+    de: () => import("./optimizing-everything/de"),
+    es: () => import("./optimizing-everything/es"),
+    fr: () => import("./optimizing-everything/fr"),
+    it: () => import("./optimizing-everything/it"),
+    ja: () => import("./optimizing-everything/ja"),
+    ko: () => import("./optimizing-everything/ko"),
+    pt: () => import("./optimizing-everything/pt"),
+    th: () => import("./optimizing-everything/th"),
+    tr: () => import("./optimizing-everything/tr"),
+    vi: () => import("./optimizing-everything/vi"),
+    id: () => import("./optimizing-everything/id"),
+    "zh-Hans": () => import("./optimizing-everything/zh-Hans"),
   },
 };
 

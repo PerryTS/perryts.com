@@ -411,6 +411,10 @@
     "cranelift-to-llvm": {
       "title": "从 Cranelift 到 LLVM：Perry 如何变快 24 倍",
       "excerpt": "Perry 从 Cranelift 到 LLVM 的后端迁移已完成。初始切换使基准测试慢了 70 倍——随后六项针对性优化使 Perry 在 15 项基准测试中赢得 14 项，最高加速达 24.6 倍。"
+    },
+    "optimizing-everything": {
+      "title": "优化一切：一周、68 个版本，以及 547 倍的 JSON 加速",
+      "excerpt": "Perry 在七天内从 v0.5.13 升级到 v0.5.80。JSON.parse 将与 Node 的差距从 547 倍缩小。mimalloc 成为全局分配器。内联缓存、shape 转换、类型化 Buffer 槽、i32 原生位运算、标量替换，以及一个让 Fastify 和 WebSocket 服务器保持运行的原生事件循环。"
     }
   }
 }

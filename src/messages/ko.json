@@ -411,6 +411,10 @@
     "cranelift-to-llvm": {
       "title": "Cranelift에서 LLVM으로: Perry가 24배 빨라진 과정",
       "excerpt": "Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. 초기 전환 시 벤치마크가 70배 느려졌지만, 6가지 최적화를 통해 Node.js 대비 14/15 승리, 최대 24.6배 속도 향상을 달성했습니다."
+    },
+    "optimizing-everything": {
+      "title": "모든 것을 최적화하기: 일주일, 68개 릴리스, 그리고 547배 빨라진 JSON",
+      "excerpt": "Perry v0.5.13 → v0.5.80을 7일 만에 달성. JSON.parse가 Node 대비 547배 격차를 좁혔습니다. mimalloc이 글로벌 할당자로 합류. 인라인 캐시, shape 전이, 타입화된 Buffer 슬롯, i32 네이티브 비트 연산, 스칼라 치환, 그리고 Fastify와 WebSocket 서버를 살아 있게 하는 네이티브 이벤트 루프."
     }
   }
 }

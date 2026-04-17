@@ -411,6 +411,10 @@
     "cranelift-to-llvm": {
       "title": "Cranelift'ten LLVM'ye: Perry Nasıl 24 Kat Hızlandı",
       "excerpt": "Perry'nin Cranelift'ten LLVM'ye backend geçişi tamamlandı. İlk geçiş benchmark'ları 70 kat yavaşlattı — ardından altı hedefli optimizasyon Perry'yi Node.js'e karşı 14/15 galibiyete taşıdı, 24,6 kata kadar hızlanma sağladı."
+    },
+    "optimizing-everything": {
+      "title": "Her Şeyi Optimize Etmek: Bir Hafta, 68 Sürüm ve 547x JSON Hızlanması",
+      "excerpt": "Perry v0.5.13 → v0.5.80 yedi günde. JSON.parse Node'a olan 547x farkı kapatıyor. mimalloc global allocator olarak geliyor. Inline cache'ler, shape geçişleri, typed Buffer slot'ları, i32-native bitwise işlemleri, scalar replacement ve Fastify ile WebSocket sunucularını ayakta tutan native bir event loop."
     }
   }
 }

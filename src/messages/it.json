@@ -411,6 +411,10 @@
     "cranelift-to-llvm": {
       "title": "Da Cranelift a LLVM: come Perry è diventato 24x più veloce",
       "excerpt": "La migrazione del backend di Perry da Cranelift a LLVM è completata. Il passaggio iniziale ha reso i benchmark 70x più lenti — poi sei ottimizzazioni mirate hanno portato Perry a 14/15 vittorie contro Node.js, con accelerazioni fino a 24,6x."
+    },
+    "optimizing-everything": {
+      "title": "Ottimizzare tutto: una settimana, 68 release e uno speedup JSON 547x",
+      "excerpt": "Perry v0.5.13 → v0.5.80 in sette giorni. JSON.parse chiude un divario 547x con Node. mimalloc diventa l'allocatore globale. Inline cache, transizioni di shape, slot Buffer tipizzati, operazioni bitwise native in i32, scalar replacement e un event loop nativo che tiene vivi i server Fastify e WebSocket."
     }
   }
 }
