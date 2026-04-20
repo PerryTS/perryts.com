@@ -24,8 +24,8 @@ export function Installation() {
     apt: {
       label: t("apt"),
       commands: [
-        "curl -fsSL https://perry.dev/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/perry.gpg",
-        "echo 'deb [signed-by=/usr/share/keyrings/perry.gpg] https://perry.dev/apt stable main' | sudo tee /etc/apt/sources.list.d/perry.list",
+        "curl -fsSL https://perryts.github.io/perry-apt/perry.gpg.pub | sudo gpg --dearmor -o /usr/share/keyrings/perry.gpg",
+        "echo 'deb [signed-by=/usr/share/keyrings/perry.gpg] https://perryts.github.io/perry-apt stable main' | sudo tee /etc/apt/sources.list.d/perry.list",
         "sudo apt update && sudo apt install perry",
       ],
       note: t("aptNote"),
