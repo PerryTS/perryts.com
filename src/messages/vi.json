@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, nhanh hơn Node.js tới 24 lần",
+    "badge": "v0.5.x — backend LLVM, nhanh hơn Node.js tới 31 lần",
     "headline1": "Một mã nguồn. Mọi nền tảng.",
     "headline2": "Hiệu năng gốc.",
     "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
@@ -114,7 +114,7 @@
     "memoryOverhead": "Chi phí bộ nhớ",
     "none": "Không có",
     "minimal": "Tối thiểu",
-    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 24 lần</gradient>",
+    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 31 lần</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25 trên macOS ARM64 (thấp hơn là tốt hơn)",
     "lowerIsBetter": "Thấp hơn là tốt hơn"
   },
@@ -125,9 +125,11 @@
     "step2": "Sử dụng",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "Từ mã nguồn",
     "homebrewNote": "Yêu cầu Homebrew. Hỗ trợ macOS arm64 và x86_64.",
     "aptNote": "Hỗ trợ Linux x86_64 và arm64.",
+    "windowsNote": "Yêu cầu Windows Package Manager. Hỗ trợ Windows x86_64 và arm64.",
     "sourceNote": "Yêu cầu Rust toolchain. Binary sẽ ở target/release/perry.",
     "compileFile": "Biên dịch tệp",
     "compileFileDesc": "Biên dịch main.ts thành tệp thực thi gốc",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "Tối ưu hóa mọi thứ: Một tuần, 68 bản phát hành, và JSON nhanh hơn 547 lần",
       "excerpt": "Perry v0.5.13 → v0.5.80 trong bảy ngày. JSON.parse thu hẹp khoảng cách 547 lần với Node. mimalloc trở thành allocator toàn cục. Inline cache, shape transition, typed Buffer slot, bitwise i32-native, scalar replacement, và event loop native giữ cho máy chủ Fastify và WebSocket luôn hoạt động."
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "Phân phối npm, perry dev, và thắng mọi benchmark",
+      "excerpt": "Perry v0.5.80 → v0.5.174 trong sáu ngày. @perryts/perry được phát hành trên npm cho tất cả bảy nền tảng được hỗ trợ. perry dev thêm tự động biên dịch lại ở watch-mode trên nền AST cache trong bộ nhớ và object cache trên đĩa theo từng module. json_roundtrip đóng lại khoảng cách cuối cùng — Perry giờ thắng mọi benchmark trước cả Node.js và Bun."
     }
   }
 }

@@ -17,6 +17,7 @@ const slugs = [
   "tvos-cross-compile-and-perry-login",
   "cranelift-to-llvm",
   "optimizing-everything",
+  "npm-perry-dev-and-beating-bun",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -216,6 +217,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./optimizing-everything/vi"),
     id: () => import("./optimizing-everything/id"),
     "zh-Hans": () => import("./optimizing-everything/zh-Hans"),
+  },
+  "npm-perry-dev-and-beating-bun": {
+    en: () => import("./npm-perry-dev-and-beating-bun/en"),
+    de: () => import("./npm-perry-dev-and-beating-bun/de"),
+    es: () => import("./npm-perry-dev-and-beating-bun/es"),
+    fr: () => import("./npm-perry-dev-and-beating-bun/fr"),
+    it: () => import("./npm-perry-dev-and-beating-bun/it"),
+    ja: () => import("./npm-perry-dev-and-beating-bun/ja"),
+    ko: () => import("./npm-perry-dev-and-beating-bun/ko"),
+    pt: () => import("./npm-perry-dev-and-beating-bun/pt"),
+    th: () => import("./npm-perry-dev-and-beating-bun/th"),
+    tr: () => import("./npm-perry-dev-and-beating-bun/tr"),
+    vi: () => import("./npm-perry-dev-and-beating-bun/vi"),
+    id: () => import("./npm-perry-dev-and-beating-bun/id"),
+    "zh-Hans": () => import("./npm-perry-dev-and-beating-bun/zh-Hans"),
   },
 };
 

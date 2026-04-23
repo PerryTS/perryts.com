@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM backend, Node.js'den 24 kata kadar daha hızlı",
+    "badge": "v0.5.x — LLVM backend, Node.js'den 31 kata kadar daha hızlı",
     "headline1": "Tek Kod Tabanı. Her Platform.",
     "headline2": "Yerel Performans.",
     "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
@@ -114,7 +114,7 @@
     "memoryOverhead": "Bellek Yükü",
     "none": "Yok",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark Sonuçları: <gradient>24 Kata Kadar Daha Hızlı</gradient>",
+    "benchmarkTitle": "Benchmark Sonuçları: <gradient>31 Kata Kadar Daha Hızlı</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25, macOS ARM64 (düşük olan daha iyi)",
     "lowerIsBetter": "Düşük olan daha iyi"
   },
@@ -125,9 +125,11 @@
     "step2": "Kullanım",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "Kaynak Koddan",
     "homebrewNote": "Homebrew gerektirir. macOS arm64 ve x86_64 desteklenir.",
     "aptNote": "x86_64 ve arm64 Linux desteklenir.",
+    "windowsNote": "Windows Paket Yöneticisi gerektirir. x86_64 ve arm64 Windows desteklenir.",
     "sourceNote": "Rust araç zinciri gerektirir. İkili dosya target/release/perry konumunda olacaktır.",
     "compileFile": "Dosya derle",
     "compileFileDesc": "main.ts'yi yerel bir çalıştırılabilir dosyaya derler",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "Her Şeyi Optimize Etmek: Bir Hafta, 68 Sürüm ve 547x JSON Hızlanması",
       "excerpt": "Perry v0.5.13 → v0.5.80 yedi günde. JSON.parse Node'a olan 547x farkı kapatıyor. mimalloc global allocator olarak geliyor. Inline cache'ler, shape geçişleri, typed Buffer slot'ları, i32-native bitwise işlemleri, scalar replacement ve Fastify ile WebSocket sunucularını ayakta tutan native bir event loop."
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "npm Dağıtımı, perry dev ve Her Benchmark'ı Kazanmak",
+      "excerpt": "Perry v0.5.80 → v0.5.174 altı günde. @perryts/perry, desteklenen tüm yedi platform için npm'de yayında. perry dev, bellek içi AST cache'i ve modül başına disk üstü nesne cache'inin üstüne watch-mode otomatik yeniden derleme ekliyor. json_roundtrip son açığını kapatıyor — Perry artık hem Node.js hem de Bun'a karşı her benchmark'ı kazanıyor."
     }
   }
 }

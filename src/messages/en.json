@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM backend, up to 24x faster than Node.js",
+    "badge": "v0.5.x — LLVM backend, up to 31x faster than Node.js",
     "headline1": "One Codebase. Every Platform.",
     "headline2": "Native Performance.",
     "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
@@ -114,7 +114,7 @@
     "memoryOverhead": "Memory Overhead",
     "none": "None",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark Results: <gradient>Up to 24x Faster</gradient>",
+    "benchmarkTitle": "Benchmark Results: <gradient>Up to 31x Faster</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25 on macOS ARM64 (lower is better)",
     "lowerIsBetter": "Lower is better"
   },
@@ -125,9 +125,11 @@
     "step2": "Usage",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "From Source",
     "homebrewNote": "Requires Homebrew. Supports macOS arm64 and x86_64.",
     "aptNote": "Supports x86_64 and arm64 Linux.",
+    "windowsNote": "Requires Windows Package Manager. Supports Windows x86_64 and arm64.",
     "sourceNote": "Requires Rust toolchain. Binary will be at target/release/perry.",
     "compileFile": "Compile a file",
     "compileFileDesc": "Compiles main.ts to a native executable",
@@ -412,6 +414,10 @@
     "optimizing-everything": {
       "title": "Optimizing Everything: One Week, 68 Releases, and a 547x JSON Speedup",
       "excerpt": "Perry v0.5.13 → v0.5.80 in seven days. JSON.parse closes a 547x gap to Node. mimalloc lands as the global allocator. Inline caches, shape transitions, typed buffer slots, i32-native bitwise ops, scalar replacement, and a native event loop that keeps Fastify and WebSocket servers alive."
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "npm Distribution, perry dev, and Winning Every Benchmark",
+      "excerpt": "Perry v0.5.80 → v0.5.174 in six days. @perryts/perry ships on npm for all seven supported platforms. perry dev adds watch-mode auto-recompile on top of an in-memory AST cache and on-disk per-module object cache. json_roundtrip closes its last gap — Perry now wins every benchmark against both Node.js and Bun."
     }
   },
   "languageSwitcher": {

@@ -4,16 +4,18 @@ export async function Performance() {
   const t = await getTranslations("performance");
 
   const benchmarks = [
-    { name: "factorial", perry: 24, node: 591, speedup: "24.6x" },
-    { name: "method_calls", perry: 1, node: 11, speedup: "11.0x" },
-    { name: "loop_overhead", perry: 12, node: 53, speedup: "4.4x" },
-    { name: "math_intensive", perry: 14, node: 49, speedup: "3.5x" },
-    { name: "array_read", perry: 4, node: 13, speedup: "3.2x" },
-    { name: "closure", perry: 97, node: 303, speedup: "3.1x" },
-    { name: "array_write", perry: 3, node: 8, speedup: "2.6x" },
-    { name: "nested_loops", perry: 9, node: 16, speedup: "1.8x" },
-    { name: "prime_sieve", perry: 4, node: 7, speedup: "1.7x" },
-    { name: "matrix_multiply", perry: 21, node: 34, speedup: "1.6x" },
+    { name: "closure", perry: 10, node: 309, speedup: "31x" },
+    { name: "factorial", perry: 31, node: 596, speedup: "19x" },
+    { name: "method_calls", perry: 1, node: 11, speedup: "11x" },
+    { name: "loop_overhead", perry: 15, node: 61, speedup: "4x" },
+    { name: "math_intensive", perry: 14, node: 52, speedup: "3.7x" },
+    { name: "binary_trees", perry: 3, node: 10, speedup: "3.3x" },
+    { name: "fibonacci", perry: 320, node: 1033, speedup: "3.2x" },
+    { name: "object_create", perry: 3, node: 9, speedup: "3x" },
+    { name: "array_read", perry: 5, node: 13, speedup: "2.6x" },
+    { name: "array_write", perry: 4, node: 9, speedup: "2.3x" },
+    { name: "nested_loops", perry: 9, node: 20, speedup: "2.2x" },
+    { name: "matrix_multiply", perry: 24, node: 34, speedup: "1.4x" },
   ];
 
   const comparisons = [

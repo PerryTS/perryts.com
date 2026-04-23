@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM 백엔드, Node.js보다 최대 24배 빠름",
+    "badge": "v0.5.x — LLVM 백엔드, Node.js보다 최대 31배 빠름",
     "headline1": "하나의 코드베이스. 모든 플랫폼.",
     "headline2": "네이티브 성능.",
     "subheadline": "Perry는 TypeScript를 <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 그리고 웹</platforms>에서 네이티브 GUI 및 CLI 앱으로 컴파일합니다. 런타임 없음. Electron 없음. 네이티브 바이너리만.",
@@ -114,7 +114,7 @@
     "memoryOverhead": "메모리 오버헤드",
     "none": "없음",
     "minimal": "최소",
-    "benchmarkTitle": "벤치마크 결과: <gradient>최대 24배 빠름</gradient>",
+    "benchmarkTitle": "벤치마크 결과: <gradient>최대 31배 빠름</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25 (macOS ARM64, 낮을수록 좋음)",
     "lowerIsBetter": "낮을수록 좋음"
   },
@@ -125,9 +125,11 @@
     "step2": "사용법",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "소스에서 빌드",
     "homebrewNote": "Homebrew가 필요합니다. macOS arm64 및 x86_64 지원.",
     "aptNote": "x86_64 및 arm64 Linux 지원.",
+    "windowsNote": "Windows Package Manager가 필요합니다. Windows x86_64 및 arm64 지원.",
     "sourceNote": "Rust 툴체인이 필요합니다. 바이너리는 target/release/perry에 생성됩니다.",
     "compileFile": "파일 컴파일",
     "compileFileDesc": "main.ts를 네이티브 실행 파일로 컴파일합니다",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "모든 것을 최적화하기: 일주일, 68개 릴리스, 그리고 547배 빨라진 JSON",
       "excerpt": "Perry v0.5.13 → v0.5.80을 7일 만에 달성. JSON.parse가 Node 대비 547배 격차를 좁혔습니다. mimalloc이 글로벌 할당자로 합류. 인라인 캐시, shape 전이, 타입화된 Buffer 슬롯, i32 네이티브 비트 연산, 스칼라 치환, 그리고 Fastify와 WebSocket 서버를 살아 있게 하는 네이티브 이벤트 루프."
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "npm 배포, perry dev, 그리고 모든 벤치마크에서 승리",
+      "excerpt": "Perry v0.5.80 → v0.5.174를 6일 만에 달성. @perryts/perry가 지원되는 7개 플랫폼 모두에 npm으로 출시. perry dev가 인메모리 AST 캐시와 모듈별 디스크 오브젝트 캐시 위에 워치 모드 자동 재컴파일을 추가. json_roundtrip의 마지막 격차가 닫힘 — 이제 Perry는 Node.js와 Bun을 상대로 모든 벤치마크에서 승리."
     }
   }
 }

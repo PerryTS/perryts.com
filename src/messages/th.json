@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — แบ็กเอนด์ LLVM เร็วกว่า Node.js สูงสุด 24 เท่า",
+    "badge": "v0.5.x — แบ็กเอนด์ LLVM เร็วกว่า Node.js สูงสุด 31 เท่า",
     "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
     "headline2": "ประสิทธิภาพระดับเนทีฟ",
     "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
@@ -114,7 +114,7 @@
     "memoryOverhead": "Overhead หน่วยความจำ",
     "none": "ไม่มี",
     "minimal": "น้อยมาก",
-    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่าสูงสุด 24 เท่า</gradient>",
+    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่าสูงสุด 31 เท่า</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25 บน macOS ARM64 (ยิ่งต่ำยิ่งดี)",
     "lowerIsBetter": "ยิ่งต่ำยิ่งดี"
   },
@@ -125,9 +125,11 @@
     "step2": "การใช้งาน",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "จากซอร์สโค้ด",
     "homebrewNote": "ต้องมี Homebrew รองรับ macOS arm64 และ x86_64",
     "aptNote": "รองรับ Linux x86_64 และ arm64",
+    "windowsNote": "ต้องมี Windows Package Manager รองรับ Windows x86_64 และ arm64",
     "sourceNote": "ต้องมี Rust toolchain ไบนารีจะอยู่ที่ target/release/perry",
     "compileFile": "คอมไพล์ไฟล์",
     "compileFileDesc": "คอมไพล์ main.ts เป็นไฟล์ปฏิบัติการเนทีฟ",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "ปรับแต่งทุกอย่าง: หนึ่งสัปดาห์, 68 รุ่น, และ JSON เร็วขึ้น 547 เท่า",
       "excerpt": "Perry v0.5.13 → v0.5.80 ภายในเจ็ดวัน JSON.parse ปิดช่องว่าง 547 เท่ากับ Node mimalloc มาเป็น allocator หลัก มี inline cache, shape transition, typed Buffer slot, i32-native bitwise ops, scalar replacement และ native event loop ที่ทำให้เซิร์ฟเวอร์ Fastify และ WebSocket ทำงานต่อเนื่อง"
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "การกระจายผ่าน npm, perry dev, และชนะทุกเบนช์มาร์ก",
+      "excerpt": "Perry v0.5.80 → v0.5.174 ภายในหกวัน @perryts/perry ส่งขึ้น npm สำหรับทั้งเจ็ดแพลตฟอร์มที่รองรับ perry dev เพิ่ม watch-mode auto-recompile บนโครง in-memory AST cache และ on-disk per-module object cache json_roundtrip ปิดช่องว่างสุดท้าย — Perry ตอนนี้ชนะทุกเบนช์มาร์กเทียบกับทั้ง Node.js และ Bun"
     }
   }
 }

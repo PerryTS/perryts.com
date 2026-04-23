@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM 后端，比 Node.js 快最高 24 倍",
+    "badge": "v0.5.x — LLVM 后端，比 Node.js 快最高 31 倍",
     "headline1": "一套代码。所有平台。",
     "headline2": "原生性能。",
     "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
@@ -114,7 +114,7 @@
     "memoryOverhead": "内存开销",
     "none": "无",
     "minimal": "极少",
-    "benchmarkTitle": "基准测试结果：<gradient>快最高 24 倍</gradient>",
+    "benchmarkTitle": "基准测试结果：<gradient>快最高 31 倍</gradient>",
     "benchmarkSubtitle": "Perry 对比 Node.js v25（macOS ARM64，越低越好）",
     "lowerIsBetter": "越低越好"
   },
@@ -125,9 +125,11 @@
     "step2": "使用",
     "homebrew": "Homebrew（macOS）",
     "apt": "APT（Debian/Ubuntu）",
+    "windows": "Windows（winget）",
     "source": "从源码构建",
     "homebrewNote": "需要 Homebrew。支持 macOS arm64 和 x86_64。",
     "aptNote": "支持 x86_64 和 arm64 Linux。",
+    "windowsNote": "需要 Windows 包管理器。支持 Windows x86_64 和 arm64。",
     "sourceNote": "需要 Rust 工具链。二进制文件将位于 target/release/perry。",
     "compileFile": "编译文件",
     "compileFileDesc": "将 main.ts 编译为原生可执行文件",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "优化一切：一周、68 个版本，以及 547 倍的 JSON 加速",
       "excerpt": "Perry 在七天内从 v0.5.13 升级到 v0.5.80。JSON.parse 将与 Node 的差距从 547 倍缩小。mimalloc 成为全局分配器。内联缓存、shape 转换、类型化 Buffer 槽、i32 原生位运算、标量替换，以及一个让 Fastify 和 WebSocket 服务器保持运行的原生事件循环。"
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "npm 分发、perry dev，以及在每一项基准上取胜",
+      "excerpt": "Perry 在六天内从 v0.5.80 升级到 v0.5.174。@perryts/perry 在 npm 上为全部七个受支持的平台发布。perry dev 在内存 AST 缓存和磁盘上每模块 object 缓存之上加入了 watch 模式的自动重编译。json_roundtrip 关闭了最后一道缺口——Perry 现在在每一项基准上同时击败 Node.js 和 Bun。"
     }
   }
 }

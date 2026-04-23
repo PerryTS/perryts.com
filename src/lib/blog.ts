@@ -127,6 +127,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["performance", "llvm", "JSON", "GC", "server", "milestone"],
     content: () => null,
   },
+  {
+    slug: "npm-perry-dev-and-beating-bun",
+    title: "npm Distribution, perry dev, and Winning Every Benchmark",
+    date: "2026-04-23",
+    excerpt:
+      "Perry v0.5.80 → v0.5.174 in six days. @perryts/perry ships on npm for all seven supported platforms. perry dev adds watch-mode auto-recompile on top of an in-memory AST cache and on-disk per-module object cache. json_roundtrip closes its last gap — Perry now wins every benchmark against both Node.js and Bun.",
+    tags: ["npm", "developer-experience", "performance", "watch-mode", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

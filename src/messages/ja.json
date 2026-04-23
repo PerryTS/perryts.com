@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVMバックエンド、Node.jsより最大24倍高速",
+    "badge": "v0.5.x — LLVMバックエンド、Node.jsより最大31倍高速",
     "headline1": "ひとつのコードベース。すべてのプラットフォーム。",
     "headline2": "ネイティブパフォーマンス。",
     "subheadline": "PerryはTypeScriptを<platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web</platforms>向けのネイティブGUI・CLIアプリにコンパイルします。ランタイム不要。Electron不要。ネイティブバイナリのみ。",
@@ -114,7 +114,7 @@
     "memoryOverhead": "メモリオーバーヘッド",
     "none": "なし",
     "minimal": "最小限",
-    "benchmarkTitle": "ベンチマーク結果: <gradient>最大24倍高速</gradient>",
+    "benchmarkTitle": "ベンチマーク結果: <gradient>最大31倍高速</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25（macOS ARM64、低いほど良い）",
     "lowerIsBetter": "低いほど良い"
   },
@@ -125,9 +125,11 @@
     "step2": "使い方",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "ソースから",
     "homebrewNote": "Homebrewが必要です。macOS arm64とx86_64に対応。",
     "aptNote": "x86_64およびarm64 Linuxに対応。",
+    "windowsNote": "Windows Package Managerが必要です。Windows x86_64とarm64に対応。",
     "sourceNote": "Rustツールチェーンが必要です。バイナリはtarget/release/perryに生成されます。",
     "compileFile": "ファイルをコンパイル",
     "compileFileDesc": "main.tsをネイティブ実行ファイルにコンパイルします",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "すべてを最適化する：一週間、68リリース、そしてJSONの547倍高速化",
       "excerpt": "Perry v0.5.13 → v0.5.80を7日間で達成。JSON.parseがNodeとの547倍のギャップを解消。mimallocがグローバルアロケータとして採用。インラインキャッシュ、シェイプ遷移、型付きBufferスロット、i32ネイティブビット演算、スカラー置換、そしてFastifyとWebSocketサーバを稼働し続けるネイティブイベントループ。"
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "npm配布、perry dev、そしてすべてのベンチマークで勝利",
+      "excerpt": "Perry v0.5.80 → v0.5.174を6日間で達成。@perryts/perryがサポートされている7つのすべてのプラットフォーム向けにnpmで出荷。perry devがインメモリASTキャッシュとディスク上のモジュール単位オブジェクトキャッシュの上にウォッチモードでの自動再コンパイルを追加。json_roundtripが最後のギャップを閉じる――Perryは今やNode.jsとBunの両方に対してすべてのベンチマークで勝利。"
     }
   }
 }

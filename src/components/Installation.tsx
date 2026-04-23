@@ -13,7 +13,7 @@ export function Installation() {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const [installMethod, setInstallMethod] = useState<"homebrew" | "apt" | "source">("homebrew");
+  const [installMethod, setInstallMethod] = useState<"homebrew" | "apt" | "windows" | "source">("homebrew");
 
   const installMethods = {
     homebrew: {
@@ -29,6 +29,11 @@ export function Installation() {
         "sudo apt update && sudo apt install perry",
       ],
       note: t("aptNote"),
+    },
+    windows: {
+      label: t("windows"),
+      commands: ["winget install PerryTS.Perry"],
+      note: t("windowsNote"),
     },
     source: {
       label: t("source"),

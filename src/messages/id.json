@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, hingga 24x lebih cepat dari Node.js",
+    "badge": "v0.5.x — backend LLVM, hingga 31x lebih cepat dari Node.js",
     "headline1": "Satu Kode Sumber. Semua Platform.",
     "headline2": "Performa Native.",
     "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
@@ -114,7 +114,7 @@
     "memoryOverhead": "Overhead Memori",
     "none": "Tidak ada",
     "minimal": "Minimal",
-    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 24x Lebih Cepat</gradient>",
+    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 31x Lebih Cepat</gradient>",
     "benchmarkSubtitle": "Perry vs Node.js v25 di macOS ARM64 (lebih rendah lebih baik)",
     "lowerIsBetter": "Lebih rendah lebih baik"
   },
@@ -125,9 +125,11 @@
     "step2": "Penggunaan",
     "homebrew": "Homebrew (macOS)",
     "apt": "APT (Debian/Ubuntu)",
+    "windows": "Windows (winget)",
     "source": "Dari Kode Sumber",
     "homebrewNote": "Memerlukan Homebrew. Mendukung macOS arm64 dan x86_64.",
     "aptNote": "Mendukung Linux x86_64 dan arm64.",
+    "windowsNote": "Memerlukan Windows Package Manager. Mendukung Windows x86_64 dan arm64.",
     "sourceNote": "Memerlukan Rust toolchain. Binary akan berada di target/release/perry.",
     "compileFile": "Kompilasi file",
     "compileFileDesc": "Mengompilasi main.ts menjadi executable native",
@@ -415,6 +417,10 @@
     "optimizing-everything": {
       "title": "Mengoptimalkan Semuanya: Satu Minggu, 68 Rilis, dan Percepatan JSON 547x",
       "excerpt": "Perry v0.5.13 → v0.5.80 dalam tujuh hari. JSON.parse menutup jarak 547x dengan Node. mimalloc hadir sebagai allocator global. Inline cache, transisi shape, slot Buffer bertipe, operasi bitwise i32-native, scalar replacement, dan event loop native yang menjaga server Fastify dan WebSocket tetap hidup."
+    },
+    "npm-perry-dev-and-beating-bun": {
+      "title": "Distribusi npm, perry dev, dan Memenangkan Setiap Benchmark",
+      "excerpt": "Perry v0.5.80 → v0.5.174 dalam enam hari. @perryts/perry dirilis di npm untuk ketujuh platform yang didukung. perry dev menambahkan auto-recompile mode watch di atas cache AST in-memory dan cache objek per-modul di-disk. json_roundtrip menutup celah terakhirnya — Perry sekarang memenangkan setiap benchmark melawan Node.js dan Bun."
     }
   }
 }

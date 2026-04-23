@@ -33,7 +33,7 @@ const sections: RoadmapSection[] = [
     milestones: [
       {
         title: "Native TS \u2192 executable compilation",
-        description: "SWC parsing + Cranelift code generation for AOT compilation of TypeScript to native machine code.",
+        description: "SWC parsing + LLVM code generation for AOT compilation of TypeScript to native machine code.",
       },
       {
         title: "10-target compilation: 8 native platforms + WASM + Web",
