@@ -43,9 +43,9 @@ export function Installation() {
   };
 
   const usageExamples = [
-    { id: "build", label: t("compileFile"), command: "perry build main.ts", description: t("compileFileDesc") },
-    { id: "output", label: t("customOutput"), command: "perry build main.ts -o myapp", description: t("customOutputDesc") },
-    { id: "jsruntime", label: t("withV8"), command: "perry build main.ts --enable-js-runtime", description: t("withV8Desc") },
+    { id: "build", label: t("compileFile"), command: "perry compile main.ts", description: t("compileFileDesc") },
+    { id: "output", label: t("customOutput"), command: "perry compile main.ts -o myapp", description: t("customOutputDesc") },
+    { id: "jsruntime", label: t("withV8"), command: "perry compile main.ts --enable-js-runtime", description: t("withV8Desc") },
     { id: "check", label: t("checkCompat"), command: "perry check ./src", description: t("checkCompatDesc") },
   ];
 

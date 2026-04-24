@@ -25,7 +25,7 @@ export async function ShipIt() {
                 <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-perry-400 z-10">
                   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 </div>
-                <span className="mt-3 text-sm font-medium text-slate-300">perry build</span>
+                <span className="mt-3 text-sm font-medium text-slate-300">perry compile</span>
                 <span className="text-xs text-slate-500">{t("compileSign")}</span>
               </div>
               <div className="relative flex flex-col items-center">
@@ -54,7 +54,7 @@ export async function ShipIt() {
             {/* Mobile pipeline */}
             <div className="md:hidden flex flex-col items-center gap-2">
               {[
-                { label: "perry build", sub: t("compileSign"), color: "text-perry-400", gradient: false },
+                { label: "perry compile", sub: t("compileSign"), color: "text-perry-400", gradient: false },
                 { label: "perry publish", sub: t("packageSubmit"), color: "text-cyan-400", gradient: false },
                 { label: t("storesDownloads"), sub: t("storesList"), color: "text-white", gradient: true },
                 { label: "perry verify", sub: t("testEveryPlatform"), color: "text-purple-400", gradient: false },
