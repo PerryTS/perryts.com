@@ -18,6 +18,7 @@ const slugs = [
   "cranelift-to-llvm",
   "optimizing-everything",
   "npm-perry-dev-and-beating-bun",
+  "gen-gc-lazy-json-and-defensible-benchmarks",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -232,6 +233,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./npm-perry-dev-and-beating-bun/vi"),
     id: () => import("./npm-perry-dev-and-beating-bun/id"),
     "zh-Hans": () => import("./npm-perry-dev-and-beating-bun/zh-Hans"),
+  },
+  "gen-gc-lazy-json-and-defensible-benchmarks": {
+    en: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/en"),
+    de: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/de"),
+    es: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/es"),
+    fr: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/fr"),
+    it: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/it"),
+    ja: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/ja"),
+    ko: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/ko"),
+    pt: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/pt"),
+    th: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/th"),
+    tr: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/tr"),
+    vi: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/vi"),
+    id: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/id"),
+    "zh-Hans": () => import("./gen-gc-lazy-json-and-defensible-benchmarks/zh-Hans"),
   },
 };
 

@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, hingga 31x lebih cepat dari Node.js",
+    "badge": "v0.5.306 — GC generasional + lazy JSON tape default, lebih cepat dari Node dan Bun di sebagian besar benchmark",
     "headline1": "Satu Kode Sumber. Semua Platform.",
     "headline2": "Performa Native.",
     "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead Memori",
     "none": "Tidak ada",
     "minimal": "Minimal",
-    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 31x Lebih Cepat</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 di macOS ARM64 (lebih rendah lebih baik)",
+    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 18x Lebih Cepat</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — median RUNS=11, Apple M1 Max (lebih rendah lebih baik)",
     "lowerIsBetter": "Lebih rendah lebih baik"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "Distribusi npm, perry dev, dan Memenangkan Setiap Benchmark",
       "excerpt": "Perry v0.5.80 → v0.5.174 dalam enam hari. @perryts/perry dirilis di npm untuk ketujuh platform yang didukung. perry dev menambahkan auto-recompile mode watch di atas cache AST in-memory dan cache objek per-modul di-disk. json_roundtrip menutup celah terakhirnya — Perry sekarang memenangkan setiap benchmark melawan Node.js dan Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "GC Generasional, Lazy JSON, dan Benchmark yang Tahan Pemeriksaan",
+      "excerpt": "Perry v0.5.174 → v0.5.306 dalam tiga hari, plus pekerjaan GC dan JSON yang mendarat bersamanya. GC generasional kini default. Small String Optimization kini default. Pipeline JSON mendapatkan lazy tape yang mendarat di median 75 ms pada validate-and-roundtrip — terbaik di kelompok dynamic typing. Halaman benchmark ditulis ulang dengan median RUNS=11 + p95 + σ, simdjson dan AssemblyScript+json-as ditambahkan sebagai peer, dan setiap kelemahan Perry diungkap secara jujur."
     }
   }
 }

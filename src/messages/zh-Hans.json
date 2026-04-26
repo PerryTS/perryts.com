@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM 后端，比 Node.js 快最高 31 倍",
+    "badge": "v0.5.306 — 分代 GC + 惰性 JSON 磁带为默认，在大多数基准上比 Node 与 Bun 更快",
     "headline1": "一套代码。所有平台。",
     "headline2": "原生性能。",
     "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
@@ -114,8 +114,8 @@
     "memoryOverhead": "内存开销",
     "none": "无",
     "minimal": "极少",
-    "benchmarkTitle": "基准测试结果：<gradient>快最高 31 倍</gradient>",
-    "benchmarkSubtitle": "Perry 对比 Node.js v25（macOS ARM64，越低越好）",
+    "benchmarkTitle": "基准测试结果：<gradient>快最高 18 倍</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 对比 Node.js v25 — RUNS=11 中位数，Apple M1 Max（越低越好）",
     "lowerIsBetter": "越低越好"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "npm 分发、perry dev，以及在每一项基准上取胜",
       "excerpt": "Perry 在六天内从 v0.5.80 升级到 v0.5.174。@perryts/perry 在 npm 上为全部七个受支持的平台发布。perry dev 在内存 AST 缓存和磁盘上每模块 object 缓存之上加入了 watch 模式的自动重编译。json_roundtrip 关闭了最后一道缺口——Perry 现在在每一项基准上同时击败 Node.js 和 Bun。"
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "分代 GC、惰性 JSON，以及经得起推敲的基准",
+      "excerpt": "Perry 在三天内从 v0.5.174 升级到 v0.5.306，外加并行落地的 GC 与 JSON 工作。分代 GC 成为默认。Small String Optimization 成为默认。JSON 流水线获得惰性 tape，validate-and-roundtrip 中位数落在 75 毫秒——动态类型运行时阵营中的最佳。基准页面以 RUNS=11 中位数 + p95 + σ 重写，simdjson 与 AssemblyScript+json-as 加入对照，Perry 的每一处弱点都被诚实地摆上台面。"
     }
   }
 }

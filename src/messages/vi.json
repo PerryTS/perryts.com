@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, nhanh hơn Node.js tới 31 lần",
+    "badge": "v0.5.306 — GC theo thế hệ + lazy JSON tape mặc định, nhanh hơn Node và Bun ở hầu hết benchmark",
     "headline1": "Một mã nguồn. Mọi nền tảng.",
     "headline2": "Hiệu năng gốc.",
     "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Chi phí bộ nhớ",
     "none": "Không có",
     "minimal": "Tối thiểu",
-    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 31 lần</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 trên macOS ARM64 (thấp hơn là tốt hơn)",
+    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 18 lần</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — trung vị RUNS=11, Apple M1 Max (thấp hơn là tốt hơn)",
     "lowerIsBetter": "Thấp hơn là tốt hơn"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "Phân phối npm, perry dev, và thắng mọi benchmark",
       "excerpt": "Perry v0.5.80 → v0.5.174 trong sáu ngày. @perryts/perry được phát hành trên npm cho tất cả bảy nền tảng được hỗ trợ. perry dev thêm tự động biên dịch lại ở watch-mode trên nền AST cache trong bộ nhớ và object cache trên đĩa theo từng module. json_roundtrip đóng lại khoảng cách cuối cùng — Perry giờ thắng mọi benchmark trước cả Node.js và Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "GC theo thế hệ, JSON lười và benchmark chịu được soi xét",
+      "excerpt": "Perry v0.5.174 → v0.5.306 trong ba ngày, cộng với công việc GC và JSON đáp xuống cùng lúc. GC theo thế hệ trở thành mặc định. Small String Optimization trở thành mặc định. Đường ống JSON nhận một lazy tape, đáp ở 75 ms trung vị trên validate-and-roundtrip — tốt nhất trong nhóm runtime kiểu động. Trang benchmark được viết lại với trung vị RUNS=11 + p95 + σ, thêm simdjson và AssemblyScript+json-as làm peer, và mọi điểm yếu của Perry được nêu thẳng thắn."
     }
   }
 }

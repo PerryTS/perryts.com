@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, até 31x mais rápido que Node.js",
+    "badge": "v0.5.306 — GC geracional + tape JSON preguiçosa por padrão, mais rápido que Node e Bun na maioria dos benchmarks",
     "headline1": "Um único código. Todas as plataformas.",
     "headline2": "Desempenho nativo.",
     "subheadline": "Perry compila TypeScript para aplicações GUI e CLI nativas em <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly e Web.</platforms> Sem runtime. Sem Electron. Apenas binários nativos.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead de memória",
     "none": "Nenhuma",
     "minimal": "Mínimo",
-    "benchmarkTitle": "Resultados do benchmark: <gradient>Até 31x mais rápido</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 no macOS ARM64 (menor é melhor)",
+    "benchmarkTitle": "Resultados do benchmark: <gradient>Até 18x mais rápido</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — mediana de RUNS=11, Apple M1 Max (menor é melhor)",
     "lowerIsBetter": "Menor é melhor"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "Distribuição npm, perry dev e vencer todos os benchmarks",
       "excerpt": "Perry v0.5.80 → v0.5.174 em seis dias. @perryts/perry é publicado no npm para todas as sete plataformas suportadas. perry dev adiciona auto-recompilação em modo watch sobre uma cache de AST em memória e uma cache de objetos por módulo em disco. json_roundtrip fecha a sua última lacuna — o Perry agora vence todos os benchmarks contra o Node.js e o Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "GC geracional, JSON preguiçoso e benchmarks que aguentam escrutínio",
+      "excerpt": "Perry v0.5.174 → v0.5.306 em três dias, mais o trabalho de GC e JSON que aterrou em paralelo. O GC geracional vira o padrão. A Small String Optimization vira o padrão. A pipeline de JSON ganha uma tape preguiçosa que aterra em 75 ms de mediana em validate-and-roundtrip — a melhor do pelotão de tipagem dinâmica. A página de benchmarks foi reescrita com mediana RUNS=11 + p95 + σ, simdjson e AssemblyScript+json-as adicionados como pares, e cada fraqueza do Perry exposta com honestidade."
     }
   }
 }

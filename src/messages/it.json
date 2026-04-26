@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, fino a 31x più veloce di Node.js",
+    "badge": "v0.5.306 — GC generazionale + tape JSON lazy di default, più veloce di Node e Bun nella maggior parte dei benchmark",
     "headline1": "Un solo codice. Ogni piattaforma.",
     "headline2": "Prestazioni native.",
     "subheadline": "Perry compila TypeScript in applicazioni GUI e CLI native su <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly e il Web.</platforms> Nessun runtime. Nessun Electron. Solo binari nativi.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead memoria",
     "none": "Nessuna",
     "minimal": "Minimo",
-    "benchmarkTitle": "Risultati benchmark: <gradient>Fino a 31x più veloce</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 su macOS ARM64 (più basso è meglio)",
+    "benchmarkTitle": "Risultati benchmark: <gradient>Fino a 18x più veloce</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — mediana RUNS=11, Apple M1 Max (più basso è meglio)",
     "lowerIsBetter": "Più basso è meglio"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "Distribuzione npm, perry dev e vincere ogni benchmark",
       "excerpt": "Perry v0.5.80 → v0.5.174 in sei giorni. @perryts/perry viene distribuito su npm per tutte e sette le piattaforme supportate. perry dev aggiunge la ricompilazione automatica in watch-mode sopra una cache AST in memoria e una cache degli oggetti per-modulo su disco. json_roundtrip chiude la sua ultima lacuna — Perry ora vince ogni benchmark contro Node.js e Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "GC generazionale, JSON lazy e benchmark che reggono il controllo",
+      "excerpt": "Perry v0.5.174 → v0.5.306 in tre giorni, più il lavoro su GC e JSON atterrato in parallelo. Il GC generazionale diventa il default. La Small String Optimization diventa il default. La pipeline JSON ottiene una tape lazy che atterra a 75 ms di mediana su validate-and-roundtrip — la migliore del gruppo a tipizzazione dinamica. La pagina benchmark è riscritta con mediana RUNS=11 + p95 + σ, simdjson e AssemblyScript+json-as aggiunti come peer, e ogni debolezza di Perry esposta onestamente."
     }
   }
 }

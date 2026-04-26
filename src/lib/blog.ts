@@ -136,6 +136,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["npm", "developer-experience", "performance", "watch-mode", "milestone"],
     content: () => null,
   },
+  {
+    slug: "gen-gc-lazy-json-and-defensible-benchmarks",
+    title: "Generational GC, Lazy JSON, and Benchmarks That Hold Up to Scrutiny",
+    date: "2026-04-26",
+    excerpt:
+      "Perry v0.5.174 → v0.5.306 in three days, plus the GC and JSON work that landed alongside. The generational GC ships as default. The Small String Optimization ships as default. The JSON pipeline gets a lazy tape that lands at 75 ms median on validate-and-roundtrip — best in the dynamic-typing pack. The benchmarks page is rewritten with RUNS=11 median + p95 + σ, simdjson and AssemblyScript+json-as added as peers, and every weakness Perry has surfaced honestly.",
+    tags: ["GC", "JSON", "performance", "benchmarks", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVMバックエンド、Node.jsより最大31倍高速",
+    "badge": "v0.5.306 — 世代別GC + 遅延JSONテープがデフォルト、ほとんどのベンチマークでNodeとBunより高速",
     "headline1": "ひとつのコードベース。すべてのプラットフォーム。",
     "headline2": "ネイティブパフォーマンス。",
     "subheadline": "PerryはTypeScriptを<platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web</platforms>向けのネイティブGUI・CLIアプリにコンパイルします。ランタイム不要。Electron不要。ネイティブバイナリのみ。",
@@ -114,8 +114,8 @@
     "memoryOverhead": "メモリオーバーヘッド",
     "none": "なし",
     "minimal": "最小限",
-    "benchmarkTitle": "ベンチマーク結果: <gradient>最大31倍高速</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25（macOS ARM64、低いほど良い）",
+    "benchmarkTitle": "ベンチマーク結果: <gradient>最大18倍高速</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — RUNS=11 中央値、Apple M1 Max（低いほど良い）",
     "lowerIsBetter": "低いほど良い"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "npm配布、perry dev、そしてすべてのベンチマークで勝利",
       "excerpt": "Perry v0.5.80 → v0.5.174を6日間で達成。@perryts/perryがサポートされている7つのすべてのプラットフォーム向けにnpmで出荷。perry devがインメモリASTキャッシュとディスク上のモジュール単位オブジェクトキャッシュの上にウォッチモードでの自動再コンパイルを追加。json_roundtripが最後のギャップを閉じる――Perryは今やNode.jsとBunの両方に対してすべてのベンチマークで勝利。"
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "世代別GC、遅延JSON、そして精査に耐えるベンチマーク",
+      "excerpt": "Perry v0.5.174 → v0.5.306を3日間で達成。並行して投入されたGCとJSONの作業も含む。世代別GCがデフォルトに昇格。Small String Optimizationもデフォルトに昇格。JSONパイプラインに遅延テープが入り、validate-and-roundtripで中央値75ms――動的型付けランタイム勢では最速。ベンチマークページもRUNS=11の中央値+p95+σで書き直され、simdjsonとAssemblyScript+json-asがピアとして追加され、Perryのあらゆる弱点が正直に提示されている。"
     }
   }
 }

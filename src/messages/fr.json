@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — backend LLVM, jusqu'à 31x plus rapide que Node.js",
+    "badge": "v0.5.306 — GC générationnel + tape JSON paresseuse par défaut, plus rapide que Node et Bun sur la plupart des benchmarks",
     "headline1": "Un seul code. Toutes les plateformes.",
     "headline2": "Performance native.",
     "subheadline": "Perry compile TypeScript en applications GUI et CLI natives sur <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly et le Web.</platforms> Pas de runtime. Pas d'Electron. Juste des binaires natifs.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead mémoire",
     "none": "Aucune",
     "minimal": "Minimal",
-    "benchmarkTitle": "Résultats du benchmark : <gradient>Jusqu'à 31x plus rapide</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 sur macOS ARM64 (plus bas est mieux)",
+    "benchmarkTitle": "Résultats du benchmark : <gradient>Jusqu'à 18x plus rapide</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — médiane RUNS=11, Apple M1 Max (plus bas est mieux)",
     "lowerIsBetter": "Plus bas est mieux"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "Distribution npm, perry dev, et gagner chaque benchmark",
       "excerpt": "Perry v0.5.80 → v0.5.174 en six jours. @perryts/perry est livré sur npm pour les sept plateformes supportées. perry dev ajoute la recompilation automatique en mode watch au-dessus d'un cache d'AST en mémoire et d'un cache d'objets sur disque par module. json_roundtrip ferme son dernier écart — Perry gagne maintenant chaque benchmark contre Node.js et Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "GC générationnel, JSON paresseux et benchmarks qui résistent à l'examen",
+      "excerpt": "Perry v0.5.174 → v0.5.306 en trois jours, plus le travail GC et JSON livré en parallèle. Le GC générationnel devient le défaut. La Small String Optimization devient le défaut. La pipeline JSON gagne une tape paresseuse qui atterrit à 75 ms de médiane sur validate-and-roundtrip — meilleure du peloton à typage dynamique. La page benchmarks est réécrite avec médiane RUNS=11 + p95 + σ, simdjson et AssemblyScript+json-as ajoutés comme pairs, et chaque faiblesse de Perry exposée honnêtement."
     }
   }
 }

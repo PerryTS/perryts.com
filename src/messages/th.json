@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — แบ็กเอนด์ LLVM เร็วกว่า Node.js สูงสุด 31 เท่า",
+    "badge": "v0.5.306 — generational GC + lazy JSON tape เป็นค่าเริ่มต้น เร็วกว่า Node และ Bun ในเบนช์มาร์กส่วนใหญ่",
     "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
     "headline2": "ประสิทธิภาพระดับเนทีฟ",
     "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Overhead หน่วยความจำ",
     "none": "ไม่มี",
     "minimal": "น้อยมาก",
-    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่าสูงสุด 31 เท่า</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 บน macOS ARM64 (ยิ่งต่ำยิ่งดี)",
+    "benchmarkTitle": "ผลเบนช์มาร์ก: <gradient>เร็วกว่าสูงสุด 18 เท่า</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — ค่ากลาง RUNS=11, Apple M1 Max (ยิ่งต่ำยิ่งดี)",
     "lowerIsBetter": "ยิ่งต่ำยิ่งดี"
   },
   "installation": {
@@ -421,6 +421,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "การกระจายผ่าน npm, perry dev, และชนะทุกเบนช์มาร์ก",
       "excerpt": "Perry v0.5.80 → v0.5.174 ภายในหกวัน @perryts/perry ส่งขึ้น npm สำหรับทั้งเจ็ดแพลตฟอร์มที่รองรับ perry dev เพิ่ม watch-mode auto-recompile บนโครง in-memory AST cache และ on-disk per-module object cache json_roundtrip ปิดช่องว่างสุดท้าย — Perry ตอนนี้ชนะทุกเบนช์มาร์กเทียบกับทั้ง Node.js และ Bun"
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "Generational GC, Lazy JSON และเบนช์มาร์กที่ทนต่อการตรวจสอบ",
+      "excerpt": "Perry v0.5.174 → v0.5.306 ภายในสามวัน พร้อมงาน GC และ JSON ที่ลงควบคู่กัน Generational GC กลายเป็นค่าเริ่มต้น Small String Optimization กลายเป็นค่าเริ่มต้น JSON pipeline ได้ lazy tape ที่ลงตัวที่ค่ากลาง 75 ms บน validate-and-roundtrip — ดีที่สุดในกลุ่ม dynamic typing หน้าเบนช์มาร์กเขียนใหม่ด้วยค่ากลาง RUNS=11 + p95 + σ เพิ่ม simdjson และ AssemblyScript+json-as เป็นเพียร์ และทุกจุดอ่อนของ Perry ถูกเปิดเผยอย่างตรงไปตรงมา"
     }
   }
 }

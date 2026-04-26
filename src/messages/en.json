@@ -21,7 +21,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.x — LLVM backend, up to 31x faster than Node.js",
+    "badge": "v0.5.306 — generational GC + lazy JSON tape default, faster than Node and Bun on most benchmarks",
     "headline1": "One Codebase. Every Platform.",
     "headline2": "Native Performance.",
     "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
@@ -114,8 +114,8 @@
     "memoryOverhead": "Memory Overhead",
     "none": "None",
     "minimal": "Minimal",
-    "benchmarkTitle": "Benchmark Results: <gradient>Up to 31x Faster</gradient>",
-    "benchmarkSubtitle": "Perry vs Node.js v25 on macOS ARM64 (lower is better)",
+    "benchmarkTitle": "Benchmark Results: <gradient>Up to 18x Faster</gradient>",
+    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — RUNS=11 median, Apple M1 Max (lower is better)",
     "lowerIsBetter": "Lower is better"
   },
   "installation": {
@@ -418,6 +418,10 @@
     "npm-perry-dev-and-beating-bun": {
       "title": "npm Distribution, perry dev, and Winning Every Benchmark",
       "excerpt": "Perry v0.5.80 → v0.5.174 in six days. @perryts/perry ships on npm for all seven supported platforms. perry dev adds watch-mode auto-recompile on top of an in-memory AST cache and on-disk per-module object cache. json_roundtrip closes its last gap — Perry now wins every benchmark against both Node.js and Bun."
+    },
+    "gen-gc-lazy-json-and-defensible-benchmarks": {
+      "title": "Generational GC, Lazy JSON, and Benchmarks That Hold Up to Scrutiny",
+      "excerpt": "Perry v0.5.174 → v0.5.306 in three days, plus the GC and JSON work that landed alongside. The generational GC ships as default. The Small String Optimization ships as default. The JSON pipeline gets a lazy tape that lands at 75 ms median on validate-and-roundtrip — best in the dynamic-typing pack. The benchmarks page is rewritten with RUNS=11 median + p95 + σ, simdjson and AssemblyScript+json-as added as peers, and every weakness Perry has surfaced honestly."
     }
   },
   "languageSwitcher": {
