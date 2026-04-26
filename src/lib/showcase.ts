@@ -54,7 +54,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     description:
       "A fast, native JSON viewer with tree navigation, search, keyboard shortcuts, and clipboard support. Compiles from TypeScript to native macOS, iOS, and Android apps.",
     platforms: ["macOS", "iOS", "Android"],
-    githubUrl: "https://github.com/nicktrebes/perry-pry",
+    githubUrl: "https://github.com/perryts/pry",
     tags: ["developer-tools", "native-ui", "JSON"],
     hasFeaturePage: true,
   },
