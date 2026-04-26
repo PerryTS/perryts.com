@@ -13,6 +13,7 @@
   "nav": {
     "showcase": "Showcase",
     "blog": "블로그",
+    "compare": "비교",
     "roadmap": "로드맵",
     "publish": "배포",
     "overview": "개요",
@@ -425,6 +426,258 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "세대별 GC, 지연 JSON, 그리고 검증을 견디는 벤치마크",
       "excerpt": "Perry v0.5.174 → v0.5.306을 3일 만에 달성. 함께 머지된 GC와 JSON 작업도 포함. 세대별 GC가 기본값으로 승격. Small String Optimization도 기본값으로 승격. JSON 파이프라인은 지연 테이프를 도입해 validate-and-roundtrip에서 75ms 중앙값에 안착 — 동적 타입 런타임 그룹 중 최고. 벤치마크 페이지는 RUNS=11 중앙값 + p95 + σ로 다시 작성되었고, simdjson과 AssemblyScript+json-as가 동급 비교 대상으로 추가되었으며, Perry의 모든 약점이 솔직히 드러나 있습니다."
+    }
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry vs. 대안들",
+      "indexSubtitle": "TypeScript를 배포하는 다른 방법들 — 런타임, 컴파일러, 크로스 플랫폼 UI 프레임워크 — 과 Perry를 비교합니다. 솔직하고, 출처가 명시되어 있으며, 측정 가능한 수치는 그대로 제시합니다.",
+      "indexMetaTitle": "Perry를 Bun, Deno, Electron, Tauri, React Native, Static Hermes와 비교하기",
+      "indexMetaDescription": "개발자들이 선택하는 대안들에 대한 Perry의 나란한 비교: TypeScript 런타임 (Bun, Deno), AOT TS 컴파일러 (Static Hermes), 크로스 플랫폼 UI 프레임워크 (Electron, Tauri, React Native).",
+      "backToCompare": "비교 목록으로 돌아가기",
+      "lastUpdated": "최종 업데이트",
+      "whatIs": "{name}란 무엇인가?",
+      "sideBySide": "나란히 비교",
+      "feature": "기능",
+      "wherePerryWins": "Perry가 앞서는 점",
+      "whereCompetitorWins": "{name}이 앞서는 점",
+      "whenChoose": "{name}을 선택해야 할 때",
+      "verdict": "결론",
+      "ctaTitle": "Perry 사용해보기",
+      "ctaSubtitle": "오늘 바로 TypeScript를 네이티브로 컴파일하세요.",
+      "category": {
+        "runtime": "TypeScript 런타임",
+        "compiler": "TS-네이티브 컴파일러",
+        "ui-framework": "크로스 플랫폼 UI"
+      }
+    },
+    "items": {
+      "bun": {
+        "title": "Perry vs Bun",
+        "metaTitle": "Perry vs Bun: TypeScript-네이티브 컴파일 vs 올인원 런타임",
+        "metaDescription": "Bun은 TypeScript를 Bun 런타임과 함께 단일 실행 파일로 번들링합니다. Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. 아키텍처, 출력 크기, 성능, 플랫폼 지원을 비교하세요.",
+        "tldr": "Bun은 JavaScript/TypeScript 런타임이자 번들러, 패키지 매니저, 테스트 러너를 모두 갖춘 올인원 도구로, 자체 런타임을 코드와 함께 묶어 단일 실행 파일을 만들 수도 있습니다. Perry는 다른 길을 택합니다 — LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. 바이너리 안에는 JavaScript 엔진도, 런타임도 없으며 작은 네이티브 실행 파일만 남습니다. Bun과 Perry는 TS-바이너리 출력이라는 점에서는 겹치지만, 그 바이너리에 JavaScript 엔진이 들어가야 하는지에 대해서는 의견이 갈립니다.",
+        "competitorWhat": "Bun은 Zig로 작성된 빠른 올인원 JavaScript·TypeScript 툴킷입니다. `.ts` 소스를 사전 컴파일 단계 없이 바로 실행하며, JS 엔진으로 JavaScriptCore를 사용하고 번들러, 패키지 매니저, 테스트 러너를 내장하고 있습니다. `bun build --compile`은 Bun 런타임을 애플리케이션과 함께 단일 실행 파일로 번들링합니다. Bun은 x64 및 arm64 환경의 Linux, macOS, Windows를 타겟으로 합니다.",
+        "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러입니다. LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다 — JavaScript 엔진도, 런타임도, JIT도 없습니다. 출력은 단일 바이너리로, hello world의 경우 약 330 KB이며 Fastify 서버처럼 표준 라이브러리를 모두 포함하는 앱은 약 48 MB 정도입니다. Perry는 macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 웹을 포함한 10개 플랫폼을 타겟으로 합니다.",
+        "table": [
+          { "feature": "출력 형태", "perry": "네이티브 머신 코드 (LLVM)", "competitor": "사용자 코드 + Bun 런타임이 하나의 바이너리에 번들링됨" },
+          { "feature": "바이너리 내 JavaScript 엔진", "perry": "기본값 없음. --enable-js-runtime 옵션으로 V8 추가 가능 (+~15 MB)", "competitor": "JavaScriptCore, 항상 포함" },
+          { "feature": "Hello-world 바이너리 크기", "perry": "약 330 KB", "competitor": "약 50–100 MB (Bun 런타임 포함)" },
+          { "feature": "JIT", "perry": "없음 (AOT 컴파일)", "competitor": "있음 (JavaScriptCore JIT)" },
+          { "feature": "모바일 타겟 (iOS, Android)", "perry": "지원 — UIKit/JNI를 통한 네이티브 UI", "competitor": "지원하지 않음" },
+          { "feature": "워치·TV 타겟", "perry": "watchOS, tvOS, Wear OS", "competitor": "지원하지 않음" },
+          { "feature": "네이티브 UI 위젯", "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상", "competitor": "없음 (서버·CLI 중심)" },
+          { "feature": "npm 생태계", "perry": "순수 TS/JS 패키지는 네이티브 컴파일 가능, 그 외에는 선택적 V8을 통해 지원", "competitor": "Node 호환 npm 전체 지원" },
+          { "feature": "안정성", "perry": "1.0 이전 (알파)", "competitor": "안정 (1.x)" },
+          { "feature": "구현 언어", "perry": "Rust", "competitor": "Zig" }
+        ],
+        "perryWins": [
+          "더 작은 바이너리 — Perry의 hello world는 약 330 KB이며, Bun --compile로 만든 hello world는 Bun 런타임을 포함해 수십 MB에 이릅니다.",
+          "JavaScript 엔진 비용이 없습니다. Perry로 컴파일된 바이너리에는 인터프리터나 JIT가 들어가지 않습니다 — TypeScript 자체가 실행 파일이 됩니다.",
+          "모바일, 워치, TV. Perry는 iOS, iPadOS, Android, watchOS, tvOS, WebAssembly로 컴파일됩니다. Bun은 서버·데스크톱 전용입니다.",
+          "네이티브 UI. Perry의 perry/ui 모듈은 실제 플랫폼 위젯으로 컴파일됩니다 (macOS의 AppKit, iOS의 UIKit, Linux의 GTK4, Windows의 Win32, Android의 JNI). Bun은 UI에 대한 답이 없습니다.",
+          "M1 Max에서 동일 조건으로 측정한 대부분의 연산 마이크로벤치마크에서 더 빠릅니다 (RUNS=11, v0.5.279, 2026-04-25): fibonacci 318 ms vs Bun 589 ms; object_create 1 ms vs 6 ms; nested_loops 18 ms vs 21 ms. 전체 표는 perry/benchmarks를 참고하세요.",
+          "동적 타입 런타임 그룹의 JSON validate-and-roundtrip에서 더 빠릅니다: 동일한 1만 레코드 워크로드에서 Perry의 지연 JSON 테이프는 중앙값 75 ms를 기록한 반면 Bun은 259 ms입니다."
+        ],
+        "competitorWins": [
+          "1.x 릴리스를 가진 성숙하고 안정적인 런타임. Perry는 1.0 이전입니다.",
+          "JSON parse-and-iterate (모든 값을 실제로 순회하는 워크로드)에서 더 빠릅니다: 동일 워크로드 기준 Bun 254 ms vs Perry 466 ms 중앙값 — 순회가 강제되면 Perry의 지연 테이프는 지름길을 쓸 수 없습니다.",
+          "기본 제공되는 Node 호환 npm 생태계 전체. Perry는 일부를 네이티브로 실행하고 나머지는 선택적으로 임베디드 V8로 폴백합니다.",
+          "내장 테스트 러너, 번들러, 패키지 매니저. Perry는 컴파일러이며 부가 도구는 별도입니다.",
+          "JIT 워밍업 후의 성능은 핫 이너 루프가 많은 반복 위주 코드에서 AOT를 앞설 수 있습니다. Perry에는 JIT가 없습니다.",
+          "`loop_data_dependent`에서는 실행 간 노이즈 범위 안에서 Perry와 동률입니다 (232 ms vs 235 ms) — 양쪽 컴파일러 모두 명령어 재배치가 불가능한 진정으로 폴딩 불가능한 f64 커널입니다. 출처: perry/benchmarks RUNS=11."
+        ],
+        "whenPerry": "바이너리 크기가 중요할 때 (모바일 배포, 임베디드 환경, 빠른 콜드 스타트), 하나의 TypeScript 코드베이스로 모바일·워치·TV에 배포하고 싶을 때, 네이티브 UI 위젯이 필요할 때, 또는 배포되는 산출물에 JavaScript 엔진이 들어가는 것 자체를 원치 않을 때 Perry를 선택하세요.",
+        "whenCompetitor": "지금 당장 안정적이고 성숙한 런타임이 필요할 때, npm 호환성이 절대적으로 중요할 때, 런타임 + 번들러 + 패키지 매니저 + 테스트 러너를 단일 도구로 쓰고 싶을 때, 또는 콜드 스타트 크기보다 장기 실행 워크로드의 JIT 워밍업 후 성능이 더 중요할 때 Bun을 선택하세요.",
+        "verdict": "Bun과 Perry는 모두 TypeScript 프로그램을 단일 바이너리로 배포할 수 있게 해주지만, 답하는 질문이 다릅니다. Bun의 바이너리는 Bun 런타임을 포함하며 JIT와 완전한 Node 호환성이 강점이 되는 백엔드·CLI 워크로드에 최적화되어 있습니다. Perry의 바이너리는 JS 엔진을 포함하지 않으며 크기, 콜드 스타트, 모바일, 네이티브 UI에 최적화되어 있습니다. 서버를 배포한다면 오늘날 Bun이 더 검증되어 있습니다. 네이티브 앱을 배포하거나 바이너리 크기가 중요하다면 Perry가 그 용도로 만들어진 도구입니다."
+      },
+      "deno": {
+        "title": "Perry vs Deno",
+        "metaTitle": "Perry vs Deno: AOT 컴파일된 네이티브 바이너리 vs Deno compile",
+        "metaDescription": "Deno의 `deno compile`은 V8과 TypeScript를 단일 실행 파일로 묶습니다. Perry는 LLVM을 통해 TypeScript를 곧바로 네이티브 코드로 컴파일합니다. 출력, 런타임 모델, 보안, 플랫폼 지원을 비교하세요.",
+        "tldr": "Deno는 V8 기반의 현대적인 JavaScript·TypeScript 런타임으로, 일급 TypeScript 지원, 권한 기반 보안 모델, 그리고 V8을 애플리케이션과 함께 단일 실행 파일로 번들링하는 `deno compile` 명령어를 제공합니다. Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다 — 출력에 V8이 없고, 런타임 계층도 없으며, 작은 네이티브 바이너리만 남습니다.",
+        "competitorWhat": "Deno는 Rust로 작성되었으며 V8과 Tokio를 기반으로 하는 TypeScript·JavaScript 런타임입니다. `.ts` 소스를 직접 실행하고, 포매터·린터·테스트 러너·언어 서버 같은 도구를 내장하고 있으며, 네트워크·파일·환경 변수 접근에 명시적인 권한 부여를 요구하는 권한 모델을 사용합니다. `deno compile`은 V8을 포함한 Deno 런타임을 사용자의 코드와 함께 묶어 자체 실행 파일을 생성합니다. Deno는 x64 및 arm64 환경의 Linux, macOS, Windows를 타겟으로 합니다.",
+        "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러입니다. LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다 — V8도, JIT도, 런타임도 없습니다. 출력은 단일 바이너리로, 네이티브 코드는 보통 수백 KB에서 수 MB이며, JS 엔진이 필요한 npm 패키지를 위해 임베디드 V8 런타임을 선택적으로 포함시키면 더 커질 수 있습니다.",
+        "table": [
+          { "feature": "출력 형태", "perry": "네이티브 머신 코드 (LLVM)", "competitor": "사용자 코드 + Deno 런타임 (V8) 번들링" },
+          { "feature": "바이너리 내 JavaScript 엔진", "perry": "기본값 없음, 선택적 V8", "competitor": "V8, 항상 포함" },
+          { "feature": "Hello-world 바이너리 크기", "perry": "약 330 KB", "competitor": "약 80–100 MB (V8 포함)" },
+          { "feature": "JIT", "perry": "없음 (AOT 컴파일)", "competitor": "있음 (V8 TurboFan)" },
+          { "feature": "모바일 타겟", "perry": "iOS, iPadOS, Android", "competitor": "지원하지 않음" },
+          { "feature": "워치·TV·WASM·웹", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "지원하지 않음" },
+          { "feature": "네이티브 UI", "perry": "네이티브 플랫폼 API 기반 25개 이상의 위젯", "competitor": "없음" },
+          { "feature": "권한 모델", "perry": "표준 OS 프로세스 권한", "competitor": "런타임 단위의 세분화된 권한 (--allow-net, --allow-read 등)" },
+          { "feature": "안정성", "perry": "1.0 이전", "competitor": "안정 (1.x / 2.x)" },
+          { "feature": "구현 언어", "perry": "Rust", "competitor": "Rust (V8 위에서 동작)" }
+        ],
+        "perryWins": [
+          "현저히 작은 바이너리. Perry의 hello world는 약 330 KB입니다. `deno compile` 결과물은 V8을 포함해 80–100 MB 수준입니다.",
+          "바이너리 안에 JavaScript 엔진이 없습니다. TypeScript는 런타임에 V8이 해석하는 것이 아니라 네이티브 머신 코드로 컴파일됩니다.",
+          "모바일, 워치, TV, WASM, 웹 타겟 지원. Deno는 서버·데스크톱 전용입니다.",
+          "AppKit, UIKit, GTK4, Win32, JNI에 매핑되는 네이티브 UI 위젯 — Deno에는 대응 기능이 없습니다.",
+          "더 빠른 콜드 스타트. AOT 컴파일된 네이티브 바이너리는 V8 시작 비용을 지불하지 않습니다.",
+          "M1 Max에서 동일 조건으로 측정한 연산 마이크로벤치마크에서 우위 — Perry의 `reassoc contract` fast-math 기본값 덕분에 LLVM이 자동 벡터화하고 자명하게 폴딩 가능한 누산기를 접을 수 있습니다 (예: loop_overhead 12 ms, math_intensive 14 ms; perry/benchmarks 참고)."
+        ],
+        "competitorWins": [
+          "긴 운영 실적과 활발한 2.x 라인을 가진 성숙하고 안정적인 런타임.",
+          "세분화된 권한 모델. Deno는 명시적인 `--allow-net`, `--allow-read` 등을 요구합니다 — 샌드박스 스크립트와 신뢰할 수 없는 코드에 유용합니다.",
+          "내장 도구: 포매터, 린터, 테스트 러너, 문서 생성기, LSP 등이 모두 런타임에 포함되어 있습니다.",
+          "런타임 차원의 완전한 V8 생태계 — V8에서 돌아가는 모든 것이 Deno에서 동작하며, 장기 실행 핫패스에서의 JIT 최적화도 함께 누립니다.",
+          "개발 중 별도의 컴파일러 단계 없이 일급 TypeScript 지원과 완전 관리되는 타입 검사 파이프라인.",
+          "런타임에 네이티브로 구현된 표준 웹 플랫폼 API (fetch, Web Streams, Web Crypto)."
+        ],
+        "whenPerry": "작고 빠르게 시작하는 네이티브 바이너리가 필요할 때, 모바일이나 비서버 타겟으로 배포할 때, 네이티브 UI가 필요할 때, 또는 JS 엔진이 들어가지 않은 바이너리로 TypeScript를 컴파일하고 싶을 때 Perry를 선택하세요.",
+        "whenCompetitor": "안정적이고 도구가 모두 갖춰진 TypeScript 런타임을 원할 때, 권한 샌드박스를 중요하게 여길 때, 서버 사이드나 스크립팅 워크로드를 만들 때, 또는 런타임 단위의 완전한 V8 생태계 호환성이 필요할 때 Deno를 선택하세요.",
+        "verdict": "둘 다 TypeScript 프로그램을 단일 바이너리로 배포할 수 있게 해주지만, 그 바이너리 안에 들어가는 것이 다릅니다. Deno는 V8 + 잘 정돈된 런타임 + 권한 샌드박스를 제공합니다. Perry는 엔진이 없는 네이티브 머신 코드를 제공합니다. 생태계와 권한 모델이 중요한 서버 사이드와 스크립팅 작업에는 Deno가 더 좋은 선택입니다. 작고 빠르게 시작하는 바이너리, 모바일 타겟, 네이티브 UI가 필요하다면 Perry가 더 나은 선택입니다."
+      },
+      "static-hermes": {
+        "title": "Perry vs Static Hermes",
+        "metaTitle": "Perry vs Static Hermes (shermes): 프로덕션 가능 vs 연구 단계 컴파일러",
+        "metaDescription": "Static Hermes는 Meta의 실험적인 사전 컴파일 TypeScript-네이티브 컴파일러입니다. Perry는 오늘 바로 출시되어 있는 프로덕션 트랙의 TS-네이티브 컴파일러입니다. 성숙도, 적용 범위, 출력, 플랫폼 지원을 비교하세요.",
+        "tldr": "Static Hermes (`shermes`)는 Hermes 엔진을 통해 강타입화된 JavaScript/TypeScript 부분 집합을 사전 컴파일하려는 Meta의 연구 단계 시도로, 주로 React Native를 겨냥합니다. Perry는 같은 일반 아이디어 — TypeScript를 네이티브로 컴파일하기 — 를 다른 방식으로 풀고 있습니다. Rust로 독립적으로 만들어졌고 LLVM을 백엔드로 사용하며, 현재 동작하는 컴파일러, 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟이 출시되어 있습니다. 2026년 4월 기준, Perry의 자체 벤치마크 슈트는 Static Hermes를 동급 비교 대상으로 시도했지만 표준 패키지 매니저로는 깔끔하게 설치되지 않았다고 보고합니다.",
+        "competitorWhat": "Hermes는 Meta가 React Native를 위해 만든 JavaScript 엔진으로, 바이트코드 기반이고 사전 컴파일되며 모바일 시작 시간에 최적화되어 있습니다. Static Hermes는 타입화된 JavaScript 부분 집합의 사전 네이티브 컴파일을 통해 React Native에 진정한 네이티브 코드 경로를 제공하려는 Hermes의 확장 연구입니다. 주로 컴파일러 R&D 프로젝트이며, Perry의 벤치마크 노트에 따르면 macOS arm64에서 일상적인 설치를 위해 패키징되어 있지 않습니다 (`shermes`는 폴리글랏 벤치에서 'macOS arm64에 깔끔하게 설치되는 형태로 Homebrew나 npm에 제공되지 않는다'는 메모와 함께 제외됨 — perry/benchmarks/README.md 참고).",
+        "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러로, 파싱에 SWC를 사용하고 코드 생성에 LLVM을 사용합니다. 동작하는 CLI (`perry compile`, `perry run`, `perry publish`), 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟, 셀프 호스팅 런타임, 그리고 투명한 조건 (M1 Max, RUNS=11)으로 측정한 벤치마크 슈트를 제공합니다. Perry는 1.0 이전이지만 프로덕션 트랙입니다 — Bloom Engine, Mango, Hone, Pry, dB Meter 같은 앱이 Perry로 만들어져 출시되고 있습니다 (perryts.com 참고).",
+        "table": [
+          { "feature": "상태", "perry": "1.0 이전 (알파) — 프로덕션 트랙", "competitor": "연구·실험 단계" },
+          { "feature": "설치 경로 (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "현재 깔끔한 설치를 위한 패키지 없음 (perry/benchmarks 기준)" },
+          { "feature": "백엔드", "perry": "LLVM", "competitor": "자체 (Hermes 기반 코드 생성)" },
+          { "feature": "입력", "perry": "TypeScript (전체)", "competitor": "타입화된 JS/TS 부분 집합" },
+          { "feature": "컴파일 타겟", "perry": "10개: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "주로 모바일 (React Native 맥락)" },
+          { "feature": "네이티브 UI", "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상의 위젯", "competitor": "React Native 브리지를 통해 (통합되었을 때)" },
+          { "feature": "독립형 CLI 앱 워크플로", "perry": "지원 — `perry compile main.ts`로 바이너리 생성", "competitor": "React Native 맥락에 종속됨" },
+          { "feature": "공개 벤치마크 슈트", "perry": "있음 — Node, Bun, Rust, C++, Go, Swift, Java를 상대로 한 RUNS=11", "competitor": "내부 자료·연구 논문" }
+        ],
+        "perryWins": [
+          "사용 가능한 도구로 존재합니다. Perry는 오늘 바로 Homebrew, APT, 또는 `npm install @perryts/perry`로 설치할 수 있고, `perry compile main.ts`로 첫 시도에 바이너리를 만들 수 있습니다.",
+          "더 넓은 적용 범위. Perry는 하나의 TypeScript 코드베이스로 독립형 CLI 앱, 네이티브 데스크톱 앱, 모바일 앱, 워치 앱, TV 앱, WASM, 웹을 컴파일합니다. Static Hermes는 React Native의 네이티브 코드 경로에 초점이 맞춰져 있습니다.",
+          "내장된 네이티브 UI. Perry의 perry/ui 모듈은 AppKit/UIKit/GTK4/Win32/JNI 위젯으로 컴파일되는 SwiftUI 스타일의 선언적 UI 레이어입니다. Static Hermes는 UI를 호스트 (React Native)에 맡깁니다.",
+          "공개되어 있고 재현 가능하며 방법론이 문서화된 벤치마크 슈트 — perry/benchmarks는 명시된 컴파일러·런타임을 상대로 RUNS=11에서의 중앙값 + p95 + σ를 보여줍니다.",
+          "LLVM 백엔드를 통해 Perry는 수십 년간 검증된 최적화 패스 (자동 벡터화, IndVarSimplify, 스칼라 치환)를 물려받고 LLVM이 타겟하는 모든 플랫폼을 지원합니다."
+        ],
+        "competitorWins": [
+          "Meta의 든든한 지원 — 막대한 엔지니어링 리소스와 React Native라는 명확한 전략적 거점.",
+          "Hermes는 이미 바이트코드 엔진으로 프로덕션의 React Native 앱에 탑재되어 있으며, Static Hermes는 그 생태계와 도구를 그대로 물려받습니다.",
+          "AOT 타이핑 규칙과 JS 부분 집합 의미론에 대한 진정으로 새로운 연구 수준의 작업.",
+          "이미 React Native를 사용 중이라면, Static Hermes (이용 가능해질 때)는 다른 컴파일러로 다시 작성하는 것보다 더 점진적인 경로입니다."
+        ],
+        "whenPerry": "오늘 바로 동작하는 TS-네이티브 컴파일러가 필요할 때, 하나의 TypeScript 코드베이스로 데스크톱·모바일·워치·TV·WASM·웹을 타겟하고 싶을 때, 또는 React Native의 브리지 없이 네이티브 UI 위젯이 필요할 때 Perry를 선택하세요.",
+        "whenCompetitor": "이미 React Native에 투자했고, 모바일에서 JavaScript/TypeScript에서 사전 컴파일된 네이티브 코드로 가는 경로를 원하며, 연구 단계 도구의 가장자리에서 작업하는 데 거부감이 없다면 Static Hermes (이용 가능해질 때)를 선택하세요.",
+        "verdict": "Static Hermes는 신뢰할 만한 팀이 진행하는 흥미로운 연구입니다. Perry는 같은 일반 아이디어를 모바일보다 훨씬 넓은 범위로 풀고 있는, 오늘 바로 출시되어 있는 동작하는 제품입니다. 지금 손에 잡히는 TS-네이티브 컴파일러가 필요하다면 Perry가 답입니다. 이미 React Native에 있고 연구 프로젝트를 따라갈 의향이 있다면 Static Hermes를 지켜보세요."
+      },
+      "electron": {
+        "title": "Perry vs Electron",
+        "metaTitle": "Perry vs Electron: 네이티브 TypeScript 앱 vs 번들된 Chromium",
+        "metaDescription": "Electron은 모든 앱과 함께 Chromium과 Node.js를 배포합니다. Perry는 TypeScript를 작고 네이티브한 바이너리에 네이티브 UI 위젯과 함께 곧바로 컴파일합니다. 바이너리 크기, 성능, UI 충실도, 플랫폼 적용 범위를 비교하세요.",
+        "tldr": "Electron은 Chromium과 Node.js를 앱과 함께 묶어 웹 기술 (HTML/CSS/JS)로 크로스 플랫폼 데스크톱 앱을 만들 수 있게 해줍니다. Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일하고, UI는 실제 플랫폼 위젯 — AppKit, UIKit, GTK4, Win32, JNI — 을 통해 그립니다. Electron의 메시지는 웹 기술 재사용이고, Perry의 메시지는 TypeScript에서 작은 네이티브 바이너리와 네이티브 UI를 만드는 것입니다.",
+        "competitorWhat": "Electron은 렌더링에 Chromium, 시스템 접근에 Node.js를 사용해 크로스 플랫폼 데스크톱 애플리케이션을 만드는 오픈소스 프레임워크입니다. 모든 Electron 앱은 자체 Chromium과 Node 사본을 함께 배포하기 때문에 hello world 수준이라도 설치 파일이 보통 80–150 MB에 달합니다. Electron은 VS Code, Slack, Discord, Figma 데스크톱 클라이언트 등 널리 쓰이는 앱을 구동해 왔습니다. 타겟은 Linux, macOS, Windows 데스크톱이며, 공식적인 모바일·워치·TV 지원은 없습니다.",
+        "perryWhat": "Perry는 브라우저 엔진도, Chromium도, Node 런타임도 없이 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. UI 레이어 (perry/ui)는 SwiftUI 스타일의 선언적 시스템으로, macOS의 AppKit, iOS/iPadOS/tvOS의 UIKit, Linux의 GTK4, Windows의 Win32, Android의 JNI를 통해 네이티브 플랫폼 위젯에 매핑됩니다. hello world 바이너리는 약 330 KB이며, 표준 라이브러리를 모두 포함한 풀 앱 (Fastify, mysql2 등)도 약 48 MB 수준입니다.",
+        "table": [
+          { "feature": "렌더링", "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "번들된 Chromium (HTML/CSS/JS)" },
+          { "feature": "번들된 엔진", "perry": "없음 (--enable-js-runtime 시에만 V8)", "competitor": "Chromium + Node.js" },
+          { "feature": "Hello-world 설치 파일 크기", "perry": "약 330 KB", "competitor": "약 80–150 MB" },
+          { "feature": "풀 앱 설치 파일 (표준 라이브러리 + 프레임워크)", "perry": "약 48 MB", "competitor": "보통 100–200 MB 이상" },
+          { "feature": "RAM 사용량", "perry": "네이티브 (보통 수십 MB)", "competitor": "여러 Chromium 프로세스 (보통 수백 MB)" },
+          { "feature": "모바일·워치·TV", "perry": "지원 — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "지원하지 않음 (데스크톱 전용)" },
+          { "feature": "UI 언어", "perry": "선언적 SwiftUI 스타일 API의 TypeScript", "competitor": "HTML/CSS/JS (웹 스택)" },
+          { "feature": "자동 업데이트·패키징", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (성숙한 생태계)" },
+          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정, 10년 이상 프로덕션 운영" }
+        ],
+        "perryWins": [
+          "바이너리 크기. Perry hello world는 약 330 KB이고, Electron hello world는 모든 앱이 자체 Chromium을 함께 배포하기 때문에 보통 80–150 MB입니다.",
+          "메모리 사용량. Perry 앱은 단일 네이티브 프로세스로 실행되지만 Electron 앱은 여러 Chromium 프로세스 (렌더러, GPU, 유틸리티 등)를 띄우고 유휴 상태에서도 수백 MB의 RAM을 사용합니다.",
+          "네이티브한 보임새와 동작. Perry는 실제 플랫폼 위젯으로 그리기 때문에 OS 관습 (포커스 링, 접근성, IME, 스크롤 물리)을 자동으로 물려받습니다.",
+          "모바일, 워치, TV. 하나의 Perry 코드베이스가 iOS/iPadOS/Android/watchOS/tvOS/Wear OS로 컴파일됩니다. Electron은 데스크톱 전용입니다.",
+          "콜드 스타트. 네이티브 바이너리는 Chromium과 Node 시작 비용을 지불하지 않습니다.",
+          "타이트한 코드에서의 실제 CPU 성능. Perry는 (Electron이 사용하는) Node 대비 대부분의 커널에서 연산 마이크로벤치마크를 몇 배의 차이로 앞섭니다 (perry/benchmarks 참고)."
+        ],
+        "competitorWins": [
+          "성숙도. Electron은 10년 넘게 프로덕션에 있어 왔고 VS Code, Slack, Discord 등 수많은 앱을 검증된 도구와 함께 구동합니다.",
+          "웹 스택 재사용. 팀이 이미 웹 UI를 만들고 있다면, Electron은 그것을 다시 작성하지 않고 데스크톱 앱으로 배포하게 해줍니다.",
+          "플랫폼 간 UI 일관성을 쉽게 얻을 수 있습니다 — Chromium은 모든 OS에서 동일하게 그리며, 일부 제품에는 바로 그것이 필요한 특성입니다.",
+          "런타임에 작동하는 방대한 npm 라이브러리 생태계. Perry는 일부를 네이티브로 실행하고 옵트인 V8이 나머지를 처리합니다.",
+          "성숙한 패키징 도구 (electron-builder, electron-updater, 코드 서명 헬퍼)와 폭넓은 커뮤니티 지원.",
+          "DevTools, 핫 리로드, 유연한 CSS/HTML 반복 속도 같은 웹 네이티브 기능의 속도는 따라가기 어렵습니다."
+        ],
+        "whenPerry": "작은 네이티브 바이너리, 낮은 메모리 사용량, 플랫폼별 네이티브한 보임새와 동작이 필요할 때, 또는 데스크톱 외에 모바일·워치·TV에도 배포되는 하나의 TypeScript 코드베이스가 필요할 때 Perry를 선택하세요.",
+        "whenCompetitor": "이미 웹 UI가 있고 최소한의 재작성으로 그것을 데스크톱 앱으로 배포하고 싶을 때, 데스크톱에서 최대한의 크로스 플랫폼 UI 일관성이 필요할 때, 또는 런타임에 광범위한 순수 JS 라이브러리에 의존할 때 Electron을 선택하세요.",
+        "verdict": "Electron과 Perry는 크로스 플랫폼 스펙트럼의 양 끝에 있습니다. Electron은 웹 기술 재사용을 위해 바이너리 크기와 메모리를 양보하고, Perry는 네이티브 바이너리와 네이티브 UI를 위해 웹 스택을 양보합니다. Electron 앱의 설치 파일이 150 MB를 넘기거나 유휴 RAM이 0.5 GB를 넘는 것을 본 적이 있다면, Perry가 바로 그 문제에 대한 답입니다 — 그 대가는 다른, 네이티브 스타일의 UI 모델입니다."
+      },
+      "tauri": {
+        "title": "Perry vs Tauri",
+        "metaTitle": "Perry vs Tauri: 네이티브 위젯 vs 시스템 웹뷰",
+        "metaDescription": "Tauri는 Rust 셸 안에서 시스템 웹뷰를 사용해 웹 UI를 그립니다. Perry는 TypeScript를 곧바로 네이티브 위젯으로 컴파일합니다 — 웹뷰도, HTML 렌더링도 없습니다. 아키텍처, 출력 크기, 플랫폼 지원을 비교하세요.",
+        "tldr": "Tauri는 Rust 백엔드와, 운영체제에 내장된 웹뷰 — Windows의 WebView2, macOS의 WKWebView, Linux의 WebKitGTK — 안에서 동작하는 프런트엔드로 크로스 플랫폼 데스크톱 (그리고 점차 모바일) 앱을 만드는 프레임워크입니다. Tauri 앱은 OS 웹뷰가 번들되지 않기 때문에 Electron보다 훨씬 작습니다. Perry는 다른 길을 택합니다 — 웹뷰 자체를 쓰지 않고, HTML 렌더링도 없이, TypeScript를 곧바로 네이티브 머신 코드로 컴파일하여 실제 플랫폼 위젯을 구동합니다.",
+        "competitorWhat": "Tauri는 Rust로 작성된 오픈소스 프레임워크로, 웹 프런트엔드 (React, Vue, Svelte 등 어떤 프레임워크든)와 Rust 백엔드로 크로스 플랫폼 애플리케이션을 만들 수 있게 해줍니다. Chromium을 번들링하는 대신 시스템에 내장된 웹뷰를 사용하기 때문에, Linux/Windows/macOS에서 앱 설치 파일이 한 자릿수 MB 수준에 머무릅니다. Tauri 2부터 모바일 (iOS와 Android) 지원이 추가되었습니다. 프런트엔드는 시스템 웹뷰가 HTML/CSS/JS로 그리며, Rust 백엔드와의 통신은 IPC 브리지를 통해 이루어집니다.",
+        "perryWhat": "Perry는 LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. UI 레이어 (perry/ui)는 웹뷰가 그리는 HTML이 아니라 네이티브 플랫폼 위젯에 매핑되는 SwiftUI 스타일의 선언적 API입니다. Perry로 작성된 앱은 JavaScript 엔진을 동반하지 않고, WebKit/WebView2 안에서 돌지 않으며, UI와 로직 사이에 IPC 브리지도 필요 없습니다. Perry는 모바일, 워치, TV를 포함해 10개 플랫폼을 타겟합니다.",
+        "table": [
+          { "feature": "UI 렌더링", "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "시스템 웹뷰 (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
+          { "feature": "프런트엔드 언어", "perry": "TypeScript (선언적 위젯 API)", "competitor": "어떤 웹 프레임워크든 (React, Vue 등) HTML/CSS/JS" },
+          { "feature": "백엔드 언어", "perry": "TypeScript", "competitor": "Rust" },
+          { "feature": "UI와 로직 간 IPC", "perry": "없음 — 단일 프로세스, 직접 호출", "competitor": "필요 (UI는 웹뷰, 로직은 Rust 프로세스)" },
+          { "feature": "Hello-world 설치 파일", "perry": "약 330 KB", "competitor": "약 3–10 MB (웹뷰는 OS에서 제공)" },
+          { "feature": "모바일 (iOS, Android)", "perry": "지원 — 네이티브 UI", "competitor": "지원 — 웹뷰 기반 (Tauri 2)" },
+          { "feature": "워치·TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "지원하지 않음" },
+          { "feature": "WebAssembly 타겟", "perry": "지원 (DOM 브리지를 통한 perry/ui)", "competitor": "해당 없음 (Tauri 자체가 웹뷰를 네이티브로 사용)" },
+          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정 (1.x / 2.x)" }
+        ],
+        "perryWins": [
+          "진정한 네이티브 UI — Perry는 HTML을 그리지 않고 실제 플랫폼 위젯을 구동하므로, 앱이 네이티브 스크롤 물리, 포커스, 접근성, IME, OS 테마를 무료로 물려받습니다.",
+          "더 작은 hello world (Tauri의 한 자릿수 MB 대비 약 330 KB), 그리고 런타임에 시스템 웹뷰 의존성이 없습니다.",
+          "단일 언어, 단일 프로세스. UI와 로직 모두 TypeScript이며, 설계하거나 디버깅할 IPC 브리지가 없습니다.",
+          "watchOS, tvOS, Wear OS, 그리고 번들된 웹뷰가 아닌 진짜 네이티브 컴파일 파이프라인을 갖춘 완전한 Web/JS 타겟.",
+          "플랫폼 간 웹뷰 동작 차이가 없습니다. Tauri는 WKWebView vs WebView2 vs WebKitGTK의 변덕을 그대로 물려받지만, Perry는 각 OS에서 네이티브 위젯 경로를 택합니다.",
+          "연산 성능은 웹뷰 JIT가 아니라 AOT 네이티브입니다. M1 Max에서 동일 조건으로 측정한 연산 마이크로벤치마크에서 Perry가 우위에 있습니다 (perry/benchmarks)."
+        ],
+        "competitorWins": [
+          "활발한 2.x 라인과 큰 커뮤니티를 가진 성숙하고 안정적인 프레임워크.",
+          "프런트엔드 유연성 — 이미 알고 있는 어떤 웹 프레임워크든 (React, Vue, Svelte, Solid 등) 사용할 수 있습니다.",
+          "Tauri는 Chromium을 번들링하는 대신 OS가 제공하는 웹뷰에 의존하기 때문에 Electron보다 설치 파일이 작습니다.",
+          "시스템 수준 작업 (파일 시스템, 네이티브 API)을 처리해야 하고 거기서 컴파일 타임 보장을 원한다면 Rust 백엔드는 이상적입니다.",
+          "웹뷰 렌더링 덕분에 CSS/HTML 반복 속도와 DevTools가 웹 개발에서 기대하는 그대로 작동합니다.",
+          "확립된 패키징, 코드 서명, 업데이터 파이프라인."
+        ],
+        "whenPerry": "(웹뷰가 그리는 HTML이 아닌) 진정한 네이티브 UI가 필요할 때, 웹뷰 의존성이 없는 작은 네이티브 바이너리가 필요할 때, 데스크톱·모바일·워치·TV를 아우르는 하나의 TypeScript 코드베이스가 필요할 때, 또는 컴파일 타임에 검증되는 크로스 플랫폼 위젯 코드가 필요할 때 Perry를 선택하세요.",
+        "whenCompetitor": "이미 있거나 계획 중인 웹 프런트엔드가 있을 때, Rust 백엔드 기반의 작은 설치 파일을 가진 데스크톱 앱을 원할 때, UI를 HTML/CSS로 만드는 것이 만족스러울 때, 또는 웹 프레임워크와 도구의 폭넓은 생태계를 활용하고 싶을 때 Tauri를 선택하세요.",
+        "verdict": "Tauri는 훨씬 더 좋은 Electron입니다 — 같은 웹 기술 접근 방식이지만 OS 웹뷰가 번들되지 않기 때문에 설치 파일이 극적으로 작습니다. 하지만 여전히 웹뷰 기반 아키텍처이며, 그 말은 HTML/CSS/JS 렌더링과 IPC 브리지가 따라온다는 뜻입니다. Perry는 다른 자리를 택합니다: 웹뷰 자체가 없고, 네이티브 플랫폼 위젯, 단일 프로세스. 웹 스택을 유지하면서 Electron보다 작은 바이너리를 원한다면 Tauri가 정답입니다. TypeScript에서 웹 스택을 떠나 네이티브 위젯으로 가고 싶다면 Perry가 정답입니다."
+      },
+      "react-native": {
+        "title": "Perry vs React Native",
+        "metaTitle": "Perry vs React Native: AOT 컴파일된 TypeScript vs 네이티브 UI로 가는 JS 브리지",
+        "metaDescription": "React Native는 JavaScript 번들과, 네이티브 위젯으로 연결되는 JS 엔진을 함께 배포합니다. Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일하며 네이티브 UI가 내장되어 있습니다. 아키텍처, 성능, 플랫폼 지원을 비교하세요.",
+        "tldr": "React Native는 JavaScript/TypeScript로 iOS와 Android의 네이티브 UI를 구동할 수 있게 해줍니다 — UI 컴포넌트는 JS-to-네이티브 브리지 (또는 New Architecture에서는 같은 개념적 형태의 JSI/Fabric 레이어)를 통해 플랫폼 위젯에 매핑됩니다. Perry는 다른 접근을 택합니다: TypeScript를 사전에 네이티브 머신 코드로 컴파일하고, 네이티브 UI는 런타임 브리지가 아니라 컴파일된 바이너리의 일부가 됩니다.",
+        "competitorWhat": "React Native는 React로 모바일 앱을 만들기 위한 Meta의 프레임워크입니다. JavaScript는 임베디드 엔진 — 기본값은 Hermes, 또는 JavaScriptCore — 에서 실행되고, 브리지 (레거시) 또는 JSI/Fabric (New Architecture)을 통해 네이티브 iOS/Android 위젯과 상호작용합니다. 프레임워크는 모바일 우선 (iOS와 Android)이며, Microsoft가 Windows와 macOS용 커뮤니티 포크를 유지하고 있습니다. React Native는 Meta, Microsoft, Shopify, Discord 등 여러 회사의 앱을 구동해 왔습니다.",
+        "perryWhat": "Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. perry/ui 모듈은 SwiftUI 스타일의 선언적 UI 시스템으로, 빌드 타임에 네이티브 플랫폼 위젯으로 컴파일됩니다 — 바이너리 안에 JS 런타임도, 브리지도, JSI도 없습니다. 같은 TypeScript 코드베이스가 macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly, 웹으로 컴파일됩니다.",
+        "table": [
+          { "feature": "실행 모델", "perry": "AOT 컴파일된 네이티브 머신 코드", "competitor": "JS 엔진 (Hermes/JSC) + 네이티브 브리지 (또는 JSI/Fabric)" },
+          { "feature": "앱 내 JS 엔진", "perry": "없음", "competitor": "Hermes (기본) 또는 JavaScriptCore" },
+          { "feature": "UI", "perry": "네이티브 위젯 — SwiftUI 스타일 선언적 API", "competitor": "React + 브리지·Fabric을 통한 네이티브 위젯" },
+          { "feature": "주요 타겟", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, 웹", "competitor": "iOS, Android (Windows/macOS는 커뮤니티 포크)" },
+          { "feature": "서버·CLI·데스크톱 바이너리", "perry": "지원 (CLI 도구, 서버, 데스크톱 앱)", "competitor": "지원하지 않음 (모바일 UI 프레임워크)" },
+          { "feature": "JS와 네이티브 사이의 브리지", "perry": "브리지 없음 — 네이티브 코드 자체가 프로그램", "competitor": "있음 (레거시 브리지 또는 JSI/Fabric)" },
+          { "feature": "개발 중 핫 리로드", "perry": "perry dev (워치 모드 자동 재컴파일)", "competitor": "Fast Refresh (매우 빠름)" },
+          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정, 프로덕션에 폭넓게 배포됨" },
+          { "feature": "컴포넌트 라이브러리", "perry": "perry/ui 코어 위젯 + perry-react React 호환 레이어", "competitor": "방대함 — React Native + 커뮤니티 패키지" }
+        ],
+        "perryWins": [
+          "배포되는 앱에 JS 엔진이 없습니다. Perry로 컴파일된 바이너리는 Hermes나 JSC를 동반하지 않습니다 — TypeScript가 곧 실행 파일입니다.",
+          "브리지·JSI 비용이 없습니다. 네이티브 UI 호출은 JS-네이티브 마샬링이 아니라 직접적인 컴파일된 함수 호출입니다.",
+          "더 넓은 플랫폼 적용 범위. 하나의 Perry 코드베이스가 데스크톱 (macOS/Linux/Windows), 모바일 (iOS/iPadOS/Android), 웨어러블 (watchOS/Wear OS), TV (tvOS), WASM, 웹으로 컴파일됩니다. React Native는 모바일 우선입니다.",
+          "같은 컴파일러로 만드는 서버 사이드와 CLI 바이너리 — Perry는 UI 프레임워크일 뿐만 아니라 서버 런타임이기도 합니다.",
+          "AOT 컴파일된 연산 성능 — 워밍업도, JIT도, 브리지 라운드트립도 없습니다.",
+          "perry-react는 네이티브 위젯으로 컴파일되는 React/JSX를 제공하므로, 바이너리에 JS 엔진을 넣지 않고도 React의 정신 모델을 그대로 사용할 수 있습니다."
+        ],
+        "competitorWins": [
+          "방대한 커뮤니티 지원, 라이브러리, 도구를 갖춘 성숙하고 검증된 생태계.",
+          "개발 중의 Fast Refresh는 업계 최고 수준입니다 — 코드 변경이 재빌드 없이 밀리초 안에 반영됩니다.",
+          "거대한 인재 풀. React Native 개발자를 채용하기는 쉽지만, Perry는 새로운 도구입니다.",
+          "확립된 CI/CD, App Store·Play Store 배포 파이프라인과 codepush 스타일의 OTA 업데이트.",
+          "JSI/Fabric과 New Architecture는 React 프로그래밍 모델을 유지하면서 네이티브와의 역사적 성능 격차를 상당히 좁혀 왔습니다.",
+          "Meta와 주요 채택 기업 (Microsoft, Shopify, Amazon)의 직접적인 지원이 프레임워크의 발전을 지속시킵니다."
+        ],
+        "whenPerry": "모바일·데스크톱·워치·TV·WASM·웹을 아우르는 하나의 TypeScript 코드베이스를 원할 때, 배포되는 앱에 JS 런타임이 없기를 원할 때, 브리지 없는 네이티브 UI를 원할 때, 또는 이미 TypeScript에 투자했고 JS 엔진 대신 네이티브 컴파일을 원할 때 Perry를 선택하세요.",
+        "whenCompetitor": "모바일 앱을 만들고 가장 성숙한 크로스 플랫폼 네이티브 UI 프레임워크를 원할 때, 이미 React 팀이 있을 때, React Native 라이브러리 생태계에 의존할 때, 또는 오늘날 업계 표준의 모바일 크로스 플랫폼 스택이 필요할 때 React Native를 선택하세요.",
+        "verdict": "React Native는 JS 런타임과 (지금은 개선된) 브리지를 가진 모바일 우선 프레임워크입니다. Perry는 TypeScript에서 네이티브 바이너리를 만드는 컴파일러로, 네이티브 UI는 컴파일 출력의 일부입니다. 가장 깊은 생태계를 가진 모바일 React를 원한다면 오늘날 React Native가 답입니다. 모바일 + 데스크톱 + 워치 + TV로 컴파일되는 하나의 TypeScript 코드베이스를 앱 안에 JS 런타임 없이 원한다면 Perry가 답입니다."
+      }
     }
   }
 }

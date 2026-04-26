@@ -13,6 +13,7 @@
   "nav": {
     "showcase": "Showcase",
     "blog": "ブログ",
+    "compare": "比較",
     "roadmap": "ロードマップ",
     "publish": "公開",
     "overview": "概要",
@@ -425,6 +426,258 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "世代別GC、遅延JSON、そして精査に耐えるベンチマーク",
       "excerpt": "Perry v0.5.174 → v0.5.306を3日間で達成。並行して投入されたGCとJSONの作業も含む。世代別GCがデフォルトに昇格。Small String Optimizationもデフォルトに昇格。JSONパイプラインに遅延テープが入り、validate-and-roundtripで中央値75ms――動的型付けランタイム勢では最速。ベンチマークページもRUNS=11の中央値+p95+σで書き直され、simdjsonとAssemblyScript+json-asがピアとして追加され、Perryのあらゆる弱点が正直に提示されている。"
+    }
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry と他の選択肢を比較",
+      "indexSubtitle": "TypeScript を出荷するさまざまな手段（ランタイム、コンパイラ、クロスプラットフォーム UI フレームワーク）と Perry を比較します。出典を明示し、計測値があるところは実数で、誠実にお伝えします。",
+      "indexMetaTitle": "Perry を Bun、Deno、Electron、Tauri、React Native、Static Hermes と比較",
+      "indexMetaDescription": "開発者がよく選ぶ選択肢――TypeScript ランタイム（Bun、Deno）、AOT TS コンパイラ（Static Hermes）、クロスプラットフォーム UI フレームワーク（Electron、Tauri、React Native）――と Perry を並べて比較します。",
+      "backToCompare": "比較一覧に戻る",
+      "lastUpdated": "最終更新",
+      "whatIs": "{name} とは？",
+      "sideBySide": "並べて比較",
+      "feature": "機能",
+      "wherePerryWins": "Perry が優れている点",
+      "whereCompetitorWins": "{name} が優れている点",
+      "whenChoose": "{name} を選ぶべきとき",
+      "verdict": "結論",
+      "ctaTitle": "Perry を試す",
+      "ctaSubtitle": "今日から TypeScript をネイティブにコンパイルしましょう。",
+      "category": {
+        "runtime": "TypeScript ランタイム",
+        "compiler": "TS-to-native コンパイラ",
+        "ui-framework": "クロスプラットフォーム UI"
+      }
+    },
+    "items": {
+      "bun": {
+        "title": "Perry vs Bun",
+        "metaTitle": "Perry vs Bun：TypeScript-to-native とオールインワンランタイム",
+        "metaDescription": "Bun は TypeScript と Bun ランタイムを単一の実行ファイルにバンドルします。Perry は TypeScript を直接ネイティブマシンコードへコンパイルします。アーキテクチャ、出力サイズ、パフォーマンス、プラットフォーム対応を比較します。",
+        "tldr": "Bun はオールインワンの JavaScript / TypeScript ランタイム、バンドラ、パッケージマネージャ、テストランナーであり、自身のランタイムをコードと一緒にバンドルすることで単一ファイルの実行ファイルも生成できます。Perry は別の道を選びました――TypeScript を LLVM 経由で直接ネイティブマシンコードにコンパイルします。バイナリの中に JavaScript エンジンはなく、ランタイムもなく、小さなネイティブ実行ファイルがあるだけです。Bun と Perry は「TS から単一バイナリ」という出力では重なりますが、そのバイナリの中に JavaScript エンジンを入れるべきかどうかで意見が分かれています。",
+        "competitorWhat": "Bun は Zig で書かれた高速なオールインワンの JavaScript / TypeScript ツールキットです。`.ts` ソースを直接実行し（事前コンパイル不要）、JS エンジンには JavaScriptCore を採用、バンドラ・パッケージマネージャ・テストランナーも内蔵しています。`bun build --compile` は Bun ランタイムをアプリケーションと一緒に単一の実行ファイルへバンドルします。Bun は x64 と arm64 上の Linux、macOS、Windows をターゲットにしています。",
+        "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラです。TypeScript を LLVM 経由で直接ネイティブマシンコードへコンパイルします――JavaScript エンジンも、ランタイムも、JIT もありません。出力は単一のバイナリで、hello world で約 330 KB、Fastify サーバのような stdlib をフル活用したアプリでも ~48 MB 程度です。Perry は macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web を含む 10 のプラットフォームをターゲットにしています。",
+        "table": [
+          { "feature": "出力", "perry": "ネイティブマシンコード（LLVM）", "competitor": "あなたのコード + Bun ランタイムを 1 つのバイナリにバンドル" },
+          { "feature": "バイナリ内の JavaScript エンジン", "perry": "デフォルトではなし。--enable-js-runtime でオプションの V8（+ ~15 MB）", "competitor": "JavaScriptCore（常時）" },
+          { "feature": "hello-world バイナリサイズ", "perry": "~330 KB", "competitor": "~50–100 MB（Bun ランタイムを含む）" },
+          { "feature": "JIT", "perry": "なし（AOT コンパイル）", "competitor": "あり（JavaScriptCore JIT）" },
+          { "feature": "モバイルターゲット（iOS、Android）", "perry": "あり――UIKit / JNI 経由のネイティブ UI", "competitor": "なし" },
+          { "feature": "ウォッチ / TV ターゲット", "perry": "watchOS、tvOS、Wear OS", "competitor": "なし" },
+          { "feature": "ネイティブ UI ウィジェット", "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+", "competitor": "なし（サーバ / CLI 中心）" },
+          { "feature": "npm エコシステム", "perry": "純粋な TS / JS パッケージはネイティブにコンパイル可能。それ以外はオプションの V8 経由", "competitor": "Node 互換の npm をフルサポート" },
+          { "feature": "安定性", "perry": "1.0 未満（アルファ）", "competitor": "安定版（1.x）" },
+          { "feature": "実装言語", "perry": "Rust", "competitor": "Zig" }
+        ],
+        "perryWins": [
+          "バイナリが小さい――Perry の hello world は ~330 KB ですが、Bun の --compile による hello world は Bun ランタイムを含み数十 MB になります。",
+          "JavaScript エンジンのコストがありません。Perry でコンパイルされたバイナリにはインタプリタも JIT も入っておらず、TypeScript そのものが実行ファイルです。",
+          "モバイル、ウォッチ、TV。Perry は iOS、iPadOS、Android、watchOS、tvOS、WebAssembly にコンパイルできます。Bun はサーバ / デスクトップ専用です。",
+          "ネイティブ UI。Perry の perry/ui モジュールは実プラットフォームのウィジェット（macOS の AppKit、iOS の UIKit、Linux の GTK4、Windows の Win32、Android の JNI）にコンパイルされます。Bun に UI のストーリーはありません。",
+          "M1 Max 上で条件を揃えた計測（RUNS=11、v0.5.279、2026-04-25）の主要な計算系マイクロベンチで高速：fibonacci 318 ms 対 Bun 589 ms、object_create 1 ms 対 6 ms、nested_loops 18 ms 対 21 ms。完全な表は perry/benchmarks を参照してください。",
+          "動的型付けパックの JSON validate-and-roundtrip も高速：同じ 1 万件レコードのワークロードで Perry の遅延 JSON テープは中央値 75 ms、Bun は 259 ms です。"
+        ],
+        "competitorWins": [
+          "1.x リリースを擁する成熟した安定ランタイム。Perry は 1.0 未満です。",
+          "JSON parse-and-iterate（すべての値に触れる）が高速：同じワークロードで Bun 254 ms 対 Perry 466 ms（中央値）――反復が強制されると Perry の遅延テープはショートカットできません。",
+          "標準で Node 互換の完全な npm エコシステムが使えます。Perry は一部をネイティブ実行し、残りはオプションの組み込み V8 にフォールバックします。",
+          "テストランナー、バンドラ、パッケージマネージャを内蔵。Perry はコンパイラであり、周辺ツールは別物です。",
+          "ホットな内ループを含む反復重視のコードでは、JIT がウォームアップ後に AOT を上回ることがあります。Perry に JIT はありません。",
+          "`loop_data_dependent` では実行ごとのノイズの範囲内で Perry と互角（232 ms 対 235 ms）――どちらのコンパイラも並べ替えられない、純粋に畳み込み不能な f64 カーネルです。出典：perry/benchmarks RUNS=11。"
+        ],
+        "whenPerry": "バイナリサイズが重要なとき（モバイル配布、組込み用途、高速なコールドスタート）、ひとつの TypeScript コードベースからモバイル / ウォッチ / TV へ出荷したいとき、ネイティブ UI ウィジェットが欲しいとき、または出荷物の中に JavaScript エンジンをまったく入れたくないときに Perry を選んでください。",
+        "whenCompetitor": "今すぐ安定した成熟したランタイムが必要なとき、npm の完全互換が譲れないとき、ランタイム + バンドラ + パッケージマネージャ + テストランナーを 1 つのツールで済ませたいとき、または長時間稼働するワークロードでの JIT ウォーム後のパフォーマンスがコールドスタートのサイズより重要なときは Bun を選んでください。",
+        "verdict": "Bun と Perry はどちらも TypeScript プログラムを単一バイナリとして出荷できますが、答えている問いが異なります。Bun のバイナリには Bun ランタイムが含まれ、JIT と Node 互換が効くバックエンド / CLI ワークロード向けに最適化されています。Perry のバイナリには JS エンジンが含まれず、サイズ、コールドスタート、モバイル、ネイティブ UI のために最適化されています。サーバを出荷するなら今は Bun のほうが実績豊富です。ネイティブアプリを出荷する、あるいはバイナリサイズを気にするなら、Perry はその用途のために作られています。"
+      },
+      "deno": {
+        "title": "Perry vs Deno",
+        "metaTitle": "Perry vs Deno：AOT コンパイル済みネイティブバイナリ vs deno compile",
+        "metaDescription": "Deno の `deno compile` は V8 と TypeScript を単一の実行ファイルにバンドルします。Perry は LLVM 経由で TypeScript を直接ネイティブコードにコンパイルします。出力、ランタイムモデル、セキュリティ、プラットフォーム対応を比較します。",
+        "tldr": "Deno は V8 上に構築されたモダンな JavaScript / TypeScript ランタイムで、TypeScript のファーストクラス対応、パーミッションベースのセキュリティモデル、そして V8 をアプリと一緒にバンドルして単一の実行ファイルを生成する `deno compile` コマンドを備えています。Perry は TypeScript を直接ネイティブマシンコードへコンパイルします――出力に V8 はなく、ランタイム層もなく、小さなネイティブバイナリだけです。",
+        "competitorWhat": "Deno は Rust で書かれ、V8 と Tokio の上に構築された TypeScript / JavaScript ランタイムです。`.ts` ソースを直接実行し、フォーマッタ・リンタ・テストランナー・言語サーバなどのツールを内蔵し、ネットワーク・ファイル・環境変数アクセスに明示的な許可を求めるパーミッションモデルを採用しています。`deno compile` は Deno ランタイム（V8 を含む）をコードと一緒にバンドルし、自己完結型の実行ファイルを生成します。Deno は x64 と arm64 上の Linux、macOS、Windows をターゲットにしています。",
+        "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラです。TypeScript を LLVM 経由で直接ネイティブマシンコードへコンパイルします――V8 も、JIT も、ランタイムもありません。出力は単一のバイナリで、ネイティブコードであれば通常数百 KB から数 MB 程度、JS エンジンを必要とする npm パッケージのために組み込み V8 ランタイムをオプトインすればより大きくなります。",
+        "table": [
+          { "feature": "出力", "perry": "ネイティブマシンコード（LLVM）", "competitor": "あなたのコード + Deno ランタイム（V8）をバンドル" },
+          { "feature": "バイナリ内の JavaScript エンジン", "perry": "デフォルトではなし。オプションの V8", "competitor": "V8（常時）" },
+          { "feature": "hello-world バイナリサイズ", "perry": "~330 KB", "competitor": "~80–100 MB（V8 を含む）" },
+          { "feature": "JIT", "perry": "なし（AOT コンパイル）", "competitor": "あり（V8 TurboFan）" },
+          { "feature": "モバイルターゲット", "perry": "iOS、iPadOS、Android", "competitor": "なし" },
+          { "feature": "ウォッチ / TV / WASM / Web", "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS", "competitor": "なし" },
+          { "feature": "ネイティブ UI", "perry": "ネイティブプラットフォーム API 経由で 25+ ウィジェット", "competitor": "なし" },
+          { "feature": "パーミッションモデル", "perry": "標準的な OS プロセスのパーミッション", "competitor": "粒度の細かいランタイムパーミッション（--allow-net、--allow-read など）" },
+          { "feature": "安定性", "perry": "1.0 未満", "competitor": "安定版（1.x / 2.x）" },
+          { "feature": "実装言語", "perry": "Rust", "competitor": "Rust（V8 上）" }
+        ],
+        "perryWins": [
+          "バイナリが圧倒的に小さい。Perry の hello world は ~330 KB。`deno compile` の出力は V8 を含み 80–100 MB の範囲になります。",
+          "バイナリ内に JavaScript エンジンがありません。TypeScript はネイティブマシンコードにコンパイルされ、ランタイムで V8 によって解釈されることはありません。",
+          "モバイル、ウォッチ、TV、WASM、Web ターゲット。Deno はサーバ / デスクトップ専用です。",
+          "AppKit、UIKit、GTK4、Win32、JNI にマップされるネイティブ UI ウィジェット――Deno に同等のものはありません。",
+          "コールドスタートが高速。AOT コンパイル済みのネイティブバイナリは V8 の起動コストを払いません。",
+          "M1 Max 上で条件を揃えた計算系マイクロベンチでは、Perry の `reassoc contract` fast-math デフォルトにより LLVM が自動ベクトル化と自明な畳み込み可能な累算器の畳み込みを行えるため、Perry がリードしています（例：loop_overhead 12 ms、math_intensive 14 ms。perry/benchmarks 参照）。"
+        ],
+        "competitorWins": [
+          "長い実績と活発な 2.x ラインを持つ成熟した安定ランタイム。",
+          "粒度の細かいパーミッションモデル。Deno は `--allow-net`、`--allow-read` などを明示的に要求します――サンドボックス化したスクリプトや信頼できないコードに有用です。",
+          "ツール内蔵：フォーマッタ、リンタ、テストランナー、ドキュメントジェネレータ、LSP がすべてランタイムに含まれています。",
+          "ランタイムでフルの V8 エコシステム――V8 上で動くものは Deno でも動き、長時間稼働のホットパスでは JIT 最適化が効きます。",
+          "開発時に別途コンパイラステップが不要なファーストクラスの TypeScript と、フルマネージドな型チェックパイプライン。",
+          "ランタイム内にネイティブ実装された標準化された Web プラットフォーム API（fetch、Web Streams、Web Crypto）。"
+        ],
+        "whenPerry": "小さく起動の速いネイティブバイナリが欲しいとき、モバイルやその他の非サーバ向けに出荷するとき、ネイティブ UI が欲しいとき、または JS エンジンを含まないバイナリに TypeScript をコンパイルしたいときは Perry を選んでください。",
+        "whenCompetitor": "安定していてバッテリー同梱の TypeScript ランタイムが欲しいとき、パーミッションサンドボックスを評価するとき、サーバサイドやスクリプティングのワークロードを構築しているとき、またはランタイムでフル V8 エコシステム互換性が必要なときは Deno を選んでください。",
+        "verdict": "どちらも TypeScript プログラムを単一バイナリとして出荷できますが、違いはそのバイナリの中身です。Deno は V8 + 厳選されたランタイム + パーミッションサンドボックスを提供します。Perry はエンジンなしのネイティブマシンコードを提供します。エコシステムとパーミッションモデルが効くサーバサイド / スクリプティング作業には Deno のほうが適しています。小さく起動の速いバイナリ、モバイルターゲット、またはネイティブ UI が必要な場合は Perry のほうが適しています。"
+      },
+      "static-hermes": {
+        "title": "Perry vs Static Hermes",
+        "metaTitle": "Perry vs Static Hermes（shermes）：プロダクション志向 vs リサーチコンパイラ",
+        "metaDescription": "Static Hermes は Meta による実験的な事前コンパイル型 TypeScript-to-native コンパイラです。Perry は今日出荷されているプロダクション志向の TS-to-native コンパイラです。成熟度、スコープ、出力、プラットフォーム到達範囲を比較します。",
+        "tldr": "Static Hermes（`shermes`）は Meta によるリサーチ段階の取り組みで、強い型を持つ JavaScript / TypeScript のサブセットを Hermes エンジン経由で事前コンパイルすることを目指しており、主に React Native を狙っています。Perry は同じ一般的なアイデア――TypeScript をネイティブにコンパイル――に対する別の賭けですが、Rust と LLVM の上で独立して構築されており、動作するコンパイラ、25+ のネイティブ UI ウィジェット、10 のコンパイレーションターゲットを今日出荷しています。2026 年 4 月時点で、Perry 自身のベンチマークスイートは Static Hermes をピアとして試したものの、テストした標準パッケージマネージャからクリーンにインストールできなかったと報告しています。",
+        "competitorWhat": "Hermes は Meta が React Native のために構築した JavaScript エンジンで――バイトコードベース、AOT 事前コンパイル、モバイルの起動時間に最適化されています。Static Hermes は Hermes に型付き JavaScript サブセットの事前ネイティブコンパイルを拡張するリサーチ的な取り組みで、React Native に真のネイティブコードへの道筋を与えることを意図しています。主にコンパイラの研究開発プロジェクトです。Perry のベンチマークノートによれば、現時点では macOS arm64 上で日常的にインストールできるパッケージにはなっていません（`shermes` は polyglot ベンチからスキップされ、「Homebrew や npm 経由で macOS arm64 にクリーンにインストールできる形では提供されていない」と注記されています――perry/benchmarks/README.md を参照）。",
+        "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラで、パースに SWC、コード生成に LLVM を使用します。動作する CLI（`perry compile`、`perry run`、`perry publish`）、25+ のネイティブ UI ウィジェット、10 のコンパイレーションターゲット、セルフホストランタイム、そして透明な条件で計測されたベンチマークスイート（M1 Max、RUNS=11）を出荷しています。Perry は 1.0 未満ですがプロダクション志向で、すでに Perry で構築されたアプリが出荷されています（Bloom Engine、Mango、Hone、Pry、dB Meter――perryts.com 参照）。",
+        "table": [
+          { "feature": "ステータス", "perry": "1.0 未満（アルファ）――プロダクション志向", "competitor": "リサーチ / 実験的" },
+          { "feature": "インストール経路（macOS arm64）", "perry": "Homebrew、APT、npm（@perryts/perry）", "competitor": "執筆時点でクリーンインストール用にパッケージ化されていない（perry/benchmarks による）" },
+          { "feature": "バックエンド", "perry": "LLVM", "competitor": "独自（Hermes ベースの codegen）" },
+          { "feature": "入力", "perry": "TypeScript（フル）", "competitor": "型付き JS / TS のサブセット" },
+          { "feature": "コンパイレーションターゲット", "perry": "10：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS", "competitor": "主にモバイル（React Native コンテキスト）" },
+          { "feature": "ネイティブ UI", "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+ ウィジェット", "competitor": "React Native ブリッジ経由（統合時）" },
+          { "feature": "スタンドアロン CLI アプリのワークフロー", "perry": "あり――`perry compile main.ts` がバイナリを生成", "competitor": "React Native コンテキストに紐付く" },
+          { "feature": "公開ベンチマークスイート", "perry": "あり――Node、Bun、Rust、C++、Go、Swift、Java に対して RUNS=11", "competitor": "内部 / リサーチ論文" }
+        ],
+        "perryWins": [
+          "実用ツールとして存在しています。Perry は今日 Homebrew、APT、または `npm install @perryts/perry` でインストールでき、`perry compile main.ts` は最初の試行でバイナリを生成します。",
+          "より広いスコープ。Perry はひとつの TypeScript コードベースから、スタンドアロン CLI アプリ、ネイティブデスクトップアプリ、モバイルアプリ、ウォッチアプリ、TV アプリ、WASM、Web をコンパイルします。Static Hermes は React Native のネイティブコード経路に焦点を当てています。",
+          "ネイティブ UI が組込み済み。Perry の perry/ui モジュールは動作する SwiftUI スタイルの宣言的 UI レイヤで、AppKit / UIKit / GTK4 / Win32 / JNI ウィジェットにコンパイルされます。Static Hermes は UI をホスト（React Native）に委ねます。",
+          "公開かつ再現可能なベンチマークスイートと文書化された方法論――perry/benchmarks は名指しされたコンパイラとランタイムに対し、RUNS=11 にわたる中央値 + p95 + σ を示しています。",
+          "LLVM バックエンドにより、Perry は数十年にわたる成熟した最適化パス（自動ベクトル化、IndVarSimplify、scalar replacement）を継承し、LLVM がターゲットとするすべてのプラットフォームをサポートします。"
+        ],
+        "competitorWins": [
+          "Meta がバックアップ――潤沢なエンジニアリングリソースと React Native という明確な戦略的アンカーがあります。",
+          "Hermes はすでにプロダクションの React Native アプリでバイトコードエンジンとして出荷されており、Static Hermes はそのエコシステムとツールを継承します。",
+          "AOT 型付け規則と JS サブセットのセマンティクスに関するリサーチグレードの取り組みは真に新規性があります。",
+          "すでに React Native に乗っているなら、Static Hermes は（利用可能になれば）別のコンパイラに対して書き直すよりも漸進的な経路です。"
+        ],
+        "whenPerry": "今日動作する TS-to-native コンパイラが必要なとき、ひとつの TypeScript コードベースでデスクトップ、モバイル、ウォッチ、TV、WASM、Web をターゲットにしたいとき、または React Native のブリッジなしでネイティブ UI ウィジェットが欲しいときは Perry を選んでください。",
+        "whenCompetitor": "React Native にコミットしており、JavaScript / TypeScript からモバイル上の事前コンパイル済みネイティブコードへの経路が欲しく、リサーチツールの最先端で作業することに抵抗がない場合は Static Hermes（利用可能になれば）を選んでください。",
+        "verdict": "Static Hermes は信頼できるチームによる興味深いリサーチです。Perry は同じ一般的なアイデアに対する動作する製品で、モバイルよりはるかに広いスコープで、今日出荷されています。今すぐ手元に TS-to-native コンパイラが必要なら、Perry が選択肢です。React Native に乗っていてリサーチプロジェクトを追える余裕があるなら、Static Hermes を見守ってください。"
+      },
+      "electron": {
+        "title": "Perry vs Electron",
+        "metaTitle": "Perry vs Electron：ネイティブ TypeScript アプリ vs バンドルされた Chromium",
+        "metaDescription": "Electron はすべてのアプリと一緒に Chromium と Node.js を出荷します。Perry は TypeScript を直接小さなネイティブバイナリにコンパイルし、ネイティブ UI ウィジェットを伴います。バイナリサイズ、パフォーマンス、UI 忠実度、プラットフォーム到達範囲を比較します。",
+        "tldr": "Electron は Web 技術（HTML / CSS / JS）でクロスプラットフォームのデスクトップアプリを構築できるよう、Chromium と Node.js をアプリと一緒にバンドルします。Perry は TypeScript を直接ネイティブマシンコードへコンパイルし、UI を実プラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）でレンダリングします。Electron の売りは Web 技術の再利用、Perry の売りは TypeScript からのネイティブ UI 付き小型ネイティブバイナリです。",
+        "competitorWhat": "Electron はレンダリングに Chromium、システムアクセスに Node.js を使用してクロスプラットフォームデスクトップアプリケーションを構築するためのオープンソースフレームワークです。各 Electron アプリは Chromium と Node の独自コピーを出荷するため、hello world でも Electron アプリのインストーラは通常 80–150 MB になります。Electron は VS Code、Slack、Discord、Figma のデスクトップクライアントなど、広く使用されているアプリを支えてきました。Linux、macOS、Windows のデスクトップをターゲットにしています。モバイル、ウォッチ、TV のファーストパーティの選択肢はありません。",
+        "perryWhat": "Perry はブラウザエンジンも、Chromium も、Node ランタイムもなしに TypeScript を直接ネイティブマシンコードへコンパイルします。UI レイヤ（perry/ui）は SwiftUI スタイルの宣言的システムで、macOS の AppKit、iOS / iPadOS / tvOS の UIKit、Linux の GTK4、Windows の Win32、Android の JNI 経由でネイティブプラットフォームウィジェットにマップされます。hello-world バイナリは ~330 KB、stdlib（Fastify、mysql2 など）を伴うフルアプリでも約 48 MB です。",
+        "table": [
+          { "feature": "レンダリング", "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "バンドルされた Chromium（HTML / CSS / JS）" },
+          { "feature": "バンドルされるエンジン", "perry": "なし（--enable-js-runtime のときのみオプションの V8）", "competitor": "Chromium + Node.js" },
+          { "feature": "hello-world インストーラサイズ", "perry": "~330 KB", "competitor": "~80–150 MB" },
+          { "feature": "フルアプリのインストーラ（stdlib + フレームワーク）", "perry": "~48 MB", "competitor": "通常 100–200+ MB" },
+          { "feature": "RAM 使用量", "perry": "ネイティブ（典型値：数十 MB）", "competitor": "複数の Chromium プロセス（典型値：数百 MB）" },
+          { "feature": "モバイル / ウォッチ / TV", "perry": "あり――iOS、iPadOS、Android、watchOS、tvOS、Wear OS", "competitor": "なし（デスクトップ専用）" },
+          { "feature": "UI 言語", "perry": "宣言的 SwiftUI スタイル API を伴う TypeScript", "competitor": "HTML / CSS / JS（Web スタック）" },
+          { "feature": "自動更新 / パッケージング", "perry": "perry publish（Homebrew、APT、App Store、Play Store）", "competitor": "electron-builder、electron-updater（成熟したエコシステム）" },
+          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版、10 年以上のプロダクション実績" }
+        ],
+        "perryWins": [
+          "バイナリサイズ。Perry の hello world は ~330 KB ですが、Electron の hello world は通常 80–150 MB――各アプリが独自の Chromium を出荷するためです。",
+          "メモリフットプリント。Perry アプリは単一のネイティブプロセスとして動作します。Electron アプリは複数の Chromium プロセス（レンダラ、GPU、ユーティリティなど）を実行し、アイドル時に数百 MB の RAM を消費します。",
+          "ネイティブのルックアンドフィール。Perry は実プラットフォームウィジェットでレンダリングするため、アプリは OS のお作法（フォーカスリング、アクセシビリティ、IME、スクロールの物理）を自動的に継承します。",
+          "モバイル、ウォッチ、TV。ひとつの Perry コードベースが iOS / iPadOS / Android / watchOS / tvOS / Wear OS にコンパイルされます。Electron はデスクトップ専用です。",
+          "コールドスタート。ネイティブバイナリは Chromium と Node の起動コストを払いません。",
+          "タイトなコードでの実 CPU パフォーマンス。Perry は計算系マイクロベンチで Node（Electron が使用）に対し、ほとんどのカーネルで倍数差でリードしています（perry/benchmarks 参照）。"
+        ],
+        "competitorWins": [
+          "成熟度。Electron は 10 年以上にわたりプロダクションで使用され、VS Code、Slack、Discord、その他多くのアプリを実戦投入されたツールで支えています。",
+          "Web スタックの再利用。チームがすでに Web UI を構築しているなら、Electron は書き直しなしにそれをデスクトップアプリとして出荷できます。",
+          "プラットフォーム間の UI の一貫性が容易――Chromium はどの OS でも同じ描画をします。一部のプロダクトはまさにそれを望みます。",
+          "膨大な npm ライブラリのエコシステムがランタイムで動作します。Perry は一部をネイティブ実行し、オプトインの V8 で残りをカバーします。",
+          "成熟したパッケージングツール（electron-builder、electron-updater、コード署名ヘルパー）と幅広いコミュニティサポート。",
+          "devtools、ホットリロード、流麗な CSS / HTML イテレーションなど、Web ネイティブの機能と速度は無類です。"
+        ],
+        "whenPerry": "小さなネイティブバイナリ、低メモリ使用量、プラットフォームごとのネイティブなルックアンドフィール、またはデスクトップに加えてモバイル / ウォッチ / TV にも出荷するひとつの TypeScript コードベースが欲しいなら Perry を選んでください。",
+        "whenCompetitor": "既存の Web UI があり最小の書き直しでデスクトップアプリとして出荷したいとき、デスクトップで最大限のクロスプラットフォーム UI 一貫性が必要なとき、または幅広い純粋 JS ライブラリにランタイム依存するときは Electron を選んでください。",
+        "verdict": "Electron と Perry はクロスプラットフォーム軸の両端に位置します。Electron はバイナリサイズとメモリを Web 技術の再利用と引き換えます。Perry は Web スタックをネイティブバイナリとネイティブ UI と引き換えます。Electron アプリのインストーラが 150 MB を超えて膨らむのを、あるいはアイドル時の RAM が 0.5 GB を超えるのを目にしたことがあるなら、Perry はその特定の問題への答えです――ただし別の、ネイティブ志向の UI モデルを引き換えに。"
+      },
+      "tauri": {
+        "title": "Perry vs Tauri",
+        "metaTitle": "Perry vs Tauri：ネイティブウィジェット vs システム webview",
+        "metaDescription": "Tauri は Rust シェル上でシステムの webview を使って Web UI をレンダリングします。Perry は TypeScript を直接ネイティブウィジェットへコンパイルします――webview なし、HTML レンダリングなし。アーキテクチャ、出力サイズ、プラットフォーム対応を比較します。",
+        "tldr": "Tauri は Rust バックエンドと、OS 組込みの webview（Windows の WebView2、macOS の WKWebView、Linux の WebKitGTK）の中で動作するフロントエンドで、クロスプラットフォームのデスクトップ（および徐々にモバイル）アプリを構築するためのフレームワークです。Tauri アプリは OS の webview をバンドルしないため Electron より劇的に小さくなります。Perry は別の道を選びます――webview はまったくなし、HTML レンダリングもなし、TypeScript を実プラットフォームウィジェットを駆動するネイティブマシンコードへコンパイルするだけです。",
+        "competitorWhat": "Tauri は Rust で書かれたオープンソースフレームワークで、Web フロントエンド（React、Vue、Svelte などのフレームワーク）と Rust バックエンドでクロスプラットフォームアプリケーションを構築できます。Chromium をバンドルする代わりに、Tauri は OS 組込みの webview を使用するため、Linux / Windows / macOS でアプリインストーラは 1 桁 MB の範囲に収まります。Tauri 2 ではモバイル（iOS と Android）対応が追加されました。フロントエンドはシステムの webview によって HTML / CSS / JS としてレンダリングされ、Rust バックエンドとの通信は IPC ブリッジ経由で行われます。",
+        "perryWhat": "Perry は LLVM 経由で TypeScript を直接ネイティブマシンコードへコンパイルします。UI レイヤ（perry/ui）は宣言的 SwiftUI スタイルの API で、webview がレンダリングする HTML ではなく、ネイティブプラットフォームウィジェットにマップされます。Perry で書かれたアプリは JavaScript エンジンを持ち運ばず、WebKit / WebView2 の中で動作せず、UI とロジックの間に IPC ブリッジを必要としません。Perry はモバイル、ウォッチ、TV を含む 10 のプラットフォームをターゲットにしています。",
+        "table": [
+          { "feature": "UI レンダリング", "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "システム webview（WKWebView、WebView2、WebKitGTK）――HTML / CSS / JS" },
+          { "feature": "フロントエンド言語", "perry": "TypeScript（宣言的ウィジェット API）", "competitor": "任意の Web フレームワーク（React、Vue など）経由の HTML / CSS / JS" },
+          { "feature": "バックエンド言語", "perry": "TypeScript", "competitor": "Rust" },
+          { "feature": "UI とロジックの間の IPC", "perry": "なし――単一プロセス、直接呼出し", "competitor": "必要（UI は webview、ロジックは Rust プロセス）" },
+          { "feature": "hello-world インストーラ", "perry": "~330 KB", "competitor": "~3–10 MB（webview は OS 提供）" },
+          { "feature": "モバイル（iOS、Android）", "perry": "あり――ネイティブ UI", "competitor": "あり――webview ベース（Tauri 2）" },
+          { "feature": "ウォッチ / TV", "perry": "watchOS、tvOS、Wear OS", "competitor": "なし" },
+          { "feature": "WebAssembly ターゲット", "perry": "あり（DOM ブリッジ経由の perry/ui）", "competitor": "該当なし（Tauri 自体がネイティブに webview を使用）" },
+          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版（1.x / 2.x）" }
+        ],
+        "perryWins": [
+          "本当にネイティブな UI――Perry は HTML をレンダリングしません。実プラットフォームウィジェットを駆動するため、アプリはネイティブのスクロール物理、フォーカス、アクセシビリティ、IME、OS テーマを自動で継承します。",
+          "より小さい hello-world（~330 KB 対 Tauri の 1 桁 MB）、ランタイムでシステム webview への依存もありません。",
+          "単一言語、単一プロセス。アプリ全体――UI とロジック――が TypeScript で、設計やデバッグが必要な IPC ブリッジはありません。",
+          "watchOS、tvOS、Wear OS、そしてバンドルされた webview ではなく実ネイティブコンパイルパイプラインを伴うフル Web/JS ターゲット。",
+          "プラットフォーム間で webview の挙動差がありません。Tauri は WKWebView 対 WebView2 対 WebKitGTK のクセを継承しますが、Perry は各 OS でネイティブウィジェットの道を選びます。",
+          "計算性能は AOT-native であり、webview-JIT ではありません。Perry は M1 Max 上で条件を揃えた計算系マイクロベンチでリードしています（perry/benchmarks）。"
+        ],
+        "competitorWins": [
+          "活発な 2.x ラインと大きなコミュニティを擁する成熟した安定フレームワーク。",
+          "フロントエンドの柔軟性――すでに知っている任意の Web フレームワーク（React、Vue、Svelte、Solid など）を使えます。",
+          "Tauri は Chromium をバンドルせず OS 提供の webview に乗るため、Electron より小さなインストーラ。",
+          "システムレベルの作業（ファイルシステム、ネイティブ API）があり、そこで型付きコンパイル時保証が欲しい場合、Rust バックエンドは理想的です。",
+          "webview レンダリングなので CSS / HTML のイテレーション速度と devtools が Web 開発と同様に動作します。",
+          "確立されたパッケージング、コード署名、アップデータパイプライン。"
+        ],
+        "whenPerry": "本当にネイティブな UI（webview 内でレンダリングされる HTML ではなく）が欲しいとき、webview 依存なしの小さなネイティブバイナリが欲しいとき、デスクトップ + モバイル + ウォッチ + TV にまたがるひとつの TypeScript コードベースが欲しいとき、またはコンパイル時に検証されるクロスプラットフォームウィジェットコードが欲しいときは Perry を選んでください。",
+        "whenCompetitor": "既存または計画中の Web フロントエンドがあるとき、Rust バックエンドのインストーラの小さなデスクトップアプリが欲しいとき、UI に HTML / CSS で満足しているとき、または Web フレームワークとツールの広いエコシステムが欲しいときは Tauri を選んでください。",
+        "verdict": "Tauri は Electron のはるかに優れた版です――同じ Web 技術アプローチで、OS の webview をバンドルしないためインストーラが劇的に小さくなります。しかしそれでも依然として webview ベースのアーキテクチャであり、HTML / CSS / JS レンダリングと IPC ブリッジを伴います。Perry は別の立場を取ります：webview はまったくなし、ネイティブプラットフォームウィジェット、単一プロセス。Web スタックのまま Electron より小さなバイナリにしたいなら、Tauri が正解です。Web スタックを後にして TypeScript でネイティブウィジェットに進みたいなら、Perry です。"
+      },
+      "react-native": {
+        "title": "Perry vs React Native",
+        "metaTitle": "Perry vs React Native：AOT コンパイル済み TypeScript vs ネイティブ UI への JS ブリッジ",
+        "metaDescription": "React Native は JavaScript バンドルとネイティブウィジェットへブリッジする JS エンジンを出荷します。Perry は TypeScript を直接ネイティブマシンコードへコンパイルし、ネイティブ UI を内蔵しています。アーキテクチャ、パフォーマンス、プラットフォーム対応を比較します。",
+        "tldr": "React Native では JavaScript / TypeScript で書いたコードが iOS と Android のネイティブ UI を駆動します――UI コンポーネントは JS-to-native ブリッジ（あるいは New Architecture では同じ概念形状の JSI / Fabric レイヤ）経由でプラットフォームウィジェットにマップされます。Perry は別のアプローチを取ります：TypeScript は事前にネイティブマシンコードへコンパイルされ、ネイティブ UI はランタイムブリッジではなくコンパイル済みバイナリの一部です。",
+        "competitorWhat": "React Native は React を使ってモバイルアプリを構築するための Meta のフレームワークです。JavaScript は組込みエンジン――デフォルトで Hermes、または JavaScriptCore――で実行され、ブリッジ（レガシー）または JSI / Fabric（New Architecture）経由でネイティブの iOS / Android ウィジェットと相互作用します。フレームワークはモバイルファースト（iOS と Android）です。Microsoft が Windows と macOS のコミュニティフォークを保守しています。React Native は Meta、Microsoft、Shopify、Discord などのアプリを支えてきました。",
+        "perryWhat": "Perry は TypeScript を直接ネイティブマシンコードへコンパイルします。perry/ui モジュールは SwiftUI スタイルの宣言的 UI システムで、ビルド時にネイティブプラットフォームウィジェットへコンパイルされます――バイナリ内に JS ランタイムはなく、ブリッジもなく、JSI もありません。同じ TypeScript コードベースが macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、Wear OS、WebAssembly、Web へコンパイルされます。",
+        "table": [
+          { "feature": "実行モデル", "perry": "AOT コンパイル済みネイティブマシンコード", "competitor": "JS エンジン（Hermes / JSC）+ ネイティブブリッジ（または JSI / Fabric）" },
+          { "feature": "アプリ内の JS エンジン", "perry": "なし", "competitor": "Hermes（デフォルト）または JavaScriptCore" },
+          { "feature": "UI", "perry": "ネイティブウィジェット――SwiftUI スタイルの宣言的 API", "competitor": "React + ブリッジ / Fabric 経由のネイティブウィジェット" },
+          { "feature": "主要ターゲット", "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web", "competitor": "iOS、Android（Windows / macOS はコミュニティフォーク経由）" },
+          { "feature": "サーバ / CLI / デスクトップバイナリ", "perry": "あり（CLI ツール、サーバ、デスクトップアプリ）", "competitor": "なし（モバイル UI フレームワーク）" },
+          { "feature": "JS とネイティブの間のブリッジ", "perry": "ブリッジなし――ネイティブコードがプログラム本体", "competitor": "あり（レガシーブリッジまたは JSI / Fabric）" },
+          { "feature": "開発時のホットリロード", "perry": "perry dev（ウォッチモードの自動再コンパイル）", "competitor": "Fast Refresh（非常に高速）" },
+          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版、プロダクションで広く展開済み" },
+          { "feature": "コンポーネントライブラリ", "perry": "perry/ui コアウィジェット + perry-react React 互換レイヤ", "competitor": "膨大――React Native + コミュニティパッケージ" }
+        ],
+        "perryWins": [
+          "出荷アプリに JS エンジンがありません。Perry でコンパイルされたバイナリは Hermes も JSC も持ち運ばず、TypeScript そのものが実行ファイルです。",
+          "ブリッジ / JSI のコストがありません。ネイティブ UI 呼出しは直接コンパイルされた関数呼出しであり、JS-to-native のマーシャリングではありません。",
+          "より広いプラットフォーム到達。ひとつの Perry コードベースがデスクトップ（macOS / Linux / Windows）、モバイル（iOS / iPadOS / Android）、ウェアラブル（watchOS / Wear OS）、TV（tvOS）、WASM、Web にコンパイルされます。React Native はモバイルファーストです。",
+          "同じコンパイラからのサーバサイド・CLI バイナリ――Perry は UI フレームワークだけでなくサーバランタイムでもあります。",
+          "AOT コンパイル済みの計算性能――ウォームアップなし、JIT なし、ブリッジのラウンドトリップなし。",
+          "perry-react はネイティブウィジェットにコンパイルされる React / JSX を提供します。バイナリに JS エンジンを入れずに React のメンタルモデルが利用できます。"
+        ],
+        "competitorWins": [
+          "成熟した実戦投入済みエコシステムと、巨大なコミュニティサポート、ライブラリ、ツール。",
+          "開発時の Fast Refresh はクラス最高――コード変更がリビルドなしにミリ秒で反映されます。",
+          "巨大な人材プール。React Native 開発者の採用は容易です。Perry は新参です。",
+          "確立された CI / CD、App Store / Play Store の公開パイプライン、codepush スタイルの OTA 更新。",
+          "JSI / Fabric と New Architecture により、React のプログラミングモデルを保ちつつネイティブとの歴史的なパフォーマンスギャップの大半を埋めました。",
+          "Meta および主要採用者（Microsoft、Shopify、Amazon）からの直接サポートがフレームワークを推進し続けています。"
+        ],
+        "whenPerry": "モバイル、デスクトップ、ウォッチ、TV、WASM、Web にまたがるひとつの TypeScript コードベースが欲しいとき、出荷アプリに JS ランタイムを入れたくないとき、ブリッジなしのネイティブ UI が欲しいとき、またはすでに TypeScript に投資しており JS エンジンではなくネイティブコンパイルが欲しいときは Perry を選んでください。",
+        "whenCompetitor": "モバイルアプリを構築しており、最も成熟したクロスプラットフォームのネイティブ UI フレームワークが欲しいとき、既存の React チームがあるとき、React Native のライブラリエコシステムに依存しているとき、または今日の業界標準であるモバイルクロスプラットフォームスタックが必要なときは React Native を選んでください。",
+        "verdict": "React Native はモバイルファーストのフレームワークで、JS ランタイムと（現在は改善された）ブリッジを伴います。Perry は TypeScript からネイティブバイナリを生成するコンパイラで、ネイティブ UI はコンパイル出力の一部です。最も深いエコシステムを伴うモバイル上の React が欲しいなら、今日は React Native が答えです。アプリ内に JS ランタイムなしでモバイル + デスクトップ + ウォッチ + TV へコンパイルされるひとつの TypeScript コードベースが欲しいなら、Perry が答えです。"
+      }
     }
   }
 }

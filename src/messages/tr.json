@@ -13,6 +13,7 @@
   "nav": {
     "showcase": "Showcase",
     "blog": "Blog",
+    "compare": "Karşılaştır",
     "roadmap": "Yol Haritası",
     "publish": "Yayınla",
     "overview": "Genel Bakış",
@@ -425,6 +426,258 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "Kuşaksal GC, Lazy JSON ve İncelemeye Dayanan Benchmark'lar",
       "excerpt": "Perry v0.5.174 → v0.5.306 üç günde. Birlikte inen GC ve JSON çalışmasıyla. Kuşaksal GC artık varsayılan. Small String Optimization artık varsayılan. JSON pipeline, validate-and-roundtrip'te 75 ms medyana inen bir lazy tape kazanıyor — dinamik tipli runtime grubunun en iyisi. Benchmark sayfası RUNS=11 medyan + p95 + σ ile yeniden yazıldı, simdjson ve AssemblyScript+json-as eş olarak eklendi ve Perry'nin her zayıflığı dürüstçe sergilendi."
+    }
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry ve alternatifleri",
+      "indexSubtitle": "Perry, TypeScript göndermenin diğer yollarıyla nasıl karşılaştırılır: çalışma zamanları, derleyiciler ve çapraz platform UI framework'leri. Dürüst, kaynaklı ve mevcut olduğu yerde ölçülmüş sayılarla.",
+      "indexMetaTitle": "Perry'yi Bun, Deno, Electron, Tauri, React Native ve Static Hermes ile karşılaştırın",
+      "indexMetaDescription": "Geliştiricilerin başvurduğu alternatiflere karşı Perry'nin yan yana karşılaştırmaları: TypeScript çalışma zamanları (Bun, Deno), AOT TS derleyicileri (Static Hermes) ve çapraz platform UI framework'leri (Electron, Tauri, React Native).",
+      "backToCompare": "Karşılaştırmalara geri dön",
+      "lastUpdated": "Son güncelleme",
+      "whatIs": "{name} nedir?",
+      "sideBySide": "Yan yana",
+      "feature": "Özellik",
+      "wherePerryWins": "Perry'nin kazandığı yerler",
+      "whereCompetitorWins": "{name}'in kazandığı yerler",
+      "whenChoose": "{name}'i ne zaman seçmeli",
+      "verdict": "Karar",
+      "ctaTitle": "Perry'yi deneyin",
+      "ctaSubtitle": "TypeScript'inizi bugün yerel koda derleyin.",
+      "category": {
+        "runtime": "TypeScript çalışma zamanı",
+        "compiler": "TS-yerel derleyici",
+        "ui-framework": "Çapraz platform UI"
+      }
+    },
+    "items": {
+      "bun": {
+        "title": "Perry vs Bun",
+        "metaTitle": "Perry vs Bun: TypeScript-yerel vs hepsi-bir-arada çalışma zamanı",
+        "metaDescription": "Bun, TypeScript'inizi Bun çalışma zamanı ile birlikte tek bir çalıştırılabilir dosyaya paketler. Perry ise TypeScript'i doğrudan yerel makine koduna derler. Mimariyi, çıktı boyutunu, performansı ve platform desteğini karşılaştırın.",
+        "tldr": "Bun; çalışma zamanını kodunuzla birlikte paketleyerek tek dosyalı çalıştırılabilir dosyalar da üretebilen, hepsi-bir-arada bir JavaScript/TypeScript çalışma zamanı, bundler, paket yöneticisi ve test koşturucusudur. Perry farklı bir yol izler: TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler — ikili dosyada JavaScript motoru yok, çalışma zamanı yok, sadece küçük bir yerel çalıştırılabilir dosya. Bun ve Perry, TS'i ikili dosyaya çevirme noktasında örtüşür ama o ikili dosyada bir JavaScript motorunun olup olmaması konusunda anlaşamazlar.",
+        "competitorWhat": "Bun, Zig ile yazılmış hızlı, hepsi-bir-arada bir JavaScript ve TypeScript araç setidir. `.ts` kaynağını doğrudan çalıştırır (ön-derleme adımı yok), JS motoru olarak JavaScriptCore kullanır ve bir bundler, paket yöneticisi ve test koşturucusu içerir. `bun build --compile`, Bun çalışma zamanını uygulamanızla birlikte tek bir çalıştırılabilir dosyada paketler. Bun; Linux, macOS ve Windows'u x64 ve arm64 üzerinde hedefler.",
+        "perryWhat": "Perry, Rust ile yazılmış yerel bir TypeScript derleyicisidir. TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler — JavaScript motoru yok, çalışma zamanı yok, JIT yok. Çıktı tek bir ikili dosyadır (hello world için yaklaşık 330 KB; Fastify sunucusu gibi tam stdlib bir uygulama için ~48 MB). Perry; macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web dahil 10 platformu hedefler.",
+        "table": [
+          { "feature": "Çıktı", "perry": "Yerel makine kodu (LLVM)", "competitor": "Kodunuz + Bun çalışma zamanı tek ikili dosyada paketlenir" },
+          { "feature": "İkili dosyada JavaScript motoru", "perry": "Varsayılan olarak yok; --enable-js-runtime ile isteğe bağlı V8 (+~15 MB)", "competitor": "Her zaman JavaScriptCore" },
+          { "feature": "Hello-world ikili dosya boyutu", "perry": "~330 KB", "competitor": "~50–100 MB (Bun çalışma zamanı dahil)" },
+          { "feature": "JIT", "perry": "Hayır (AOT derlenmiş)", "competitor": "Evet (JavaScriptCore JIT)" },
+          { "feature": "Mobil hedefler (iOS, Android)", "perry": "Evet — UIKit/JNI ile yerel UI", "competitor": "Hayır" },
+          { "feature": "Watch / TV hedefleri", "perry": "watchOS, tvOS, Wear OS", "competitor": "Hayır" },
+          { "feature": "Yerel UI widget'ları", "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+", "competitor": "Hayır (sunucu/CLI odaklı)" },
+          { "feature": "npm ekosistemi", "perry": "Saf TS/JS paketleri yerel olarak derlenebilir; diğerleri isteğe bağlı V8 ile", "competitor": "Tam Node uyumlu npm" },
+          { "feature": "Kararlılık", "perry": "1.0 öncesi (alfa)", "competitor": "Kararlı (1.x)" },
+          { "feature": "Yazıldığı dil", "perry": "Rust", "competitor": "Zig" }
+        ],
+        "perryWins": [
+          "Daha küçük ikili dosyalar — bir Perry hello world ~330 KB; bir Bun --compile hello world Bun çalışma zamanını içerir ve onlarca megabayt boyutuna çıkar.",
+          "JavaScript motoru maliyeti yok. Perry ile derlenmiş ikili dosyalar yorumlayıcı veya JIT taşımaz — TypeScript'iniz çalıştırılabilir dosyanın kendisidir.",
+          "Mobil, watch ve TV. Perry; iOS, iPadOS, Android, watchOS, tvOS ve WebAssembly'ye derler. Bun yalnızca sunucu/masaüstü içindir.",
+          "Yerel UI. Perry'nin perry/ui modülü gerçek platform widget'larına derlenir (macOS'ta AppKit, iOS'ta UIKit, Linux'ta GTK4, Windows'ta Win32, Android'de JNI). Bun'ın bir UI hikâyesi yok.",
+          "M1 Max üzerinde eşleştirilmiş koşullar altında ölçülen çoğu hesaplama mikro-benchmark'ında daha hızlı (RUNS=11, v0.5.279, 2026-04-25): fibonacci 318 ms vs Bun 589 ms; object_create 1 ms vs 6 ms; nested_loops 18 ms vs 21 ms. Tam tablo için perry/benchmarks'a bakın.",
+          "Dinamik tipli runtime grubunda JSON validate-and-roundtrip'te daha hızlı: Perry'nin lazy JSON tape'i aynı 10k kayıtlık iş yükünde Bun'ın 259 ms'sine karşı 75 ms medyanda."
+        ],
+        "competitorWins": [
+          "1.x sürümleriyle olgun, kararlı çalışma zamanı. Perry 1.0 öncesidir.",
+          "JSON parse-and-iterate'te daha hızlı (her değere dokunulan): aynı iş yükünde Bun 254 ms vs Perry 466 ms medyan — Perry'nin lazy tape'i iterasyon zorunlu olduğunda kestirme yapamaz.",
+          "Kutudan çıkar çıkmaz tam Node uyumlu npm ekosistemi. Perry bir alt kümeyi yerel olarak çalıştırır ve geri kalan için isteğe bağlı gömülü V8'e başvurur.",
+          "Yerleşik test koşturucusu, bundler ve paket yöneticisi. Perry bir derleyicidir — çevre araçları ayrıdır.",
+          "JIT-sıcak performansı, sıcak iç döngülere sahip iterasyon ağırlıklı kodlarda AOT'u geçebilir; Perry'nin JIT'i yoktur.",
+          "`loop_data_dependent` üzerinde Perry ile koşma-arası gürültü sınırları içinde berabere (232 ms vs 235 ms) — hiçbir tarafın derleyicisinin yeniden sıralayamayacağı, gerçekten katlanamayan f64 çekirdeği. Kaynak: perry/benchmarks RUNS=11."
+        ],
+        "whenPerry": "İkili dosya boyutu önemliyse (mobil dağıtım, gömülü bağlamlar, hızlı soğuk başlatma), tek bir TypeScript kod tabanından mobile/watch/TV'ye göndermek istiyorsanız, yerel UI widget'ları istiyorsanız veya gönderdiğiniz yapıtta hiçbir JavaScript motoru istemiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "Bugün kararlı, olgun bir çalıştırma zamanına ihtiyacınız varsa, tam npm uyumluluğu pazarlık konusu değilse, çalıştırma zamanı + bundler + paket yöneticisi + test koşturucusu için tek bir araç istiyorsanız ya da uzun süreli iş yüklerinde JIT-sıcak performansı sizin için soğuk-başlatma boyutundan daha önemliyse Bun'ı seçin.",
+        "verdict": "Bun ve Perry'nin her ikisi de bir TypeScript programını tek bir ikili dosya olarak göndermenizi sağlar, ancak farklı sorulara yanıt verirler. Bun'ın ikili dosyası Bun çalışma zamanını içerir ve JIT ile tam Node uyumluluğunun kazandığı backend/CLI iş yükleri için optimize edilmiştir. Perry'nin ikili dosyası ise hiç JS motoru içermez ve boyut, soğuk başlatma, mobil ve yerel UI için optimize edilmiştir. Bir sunucu gönderiyorsanız Bun bugün daha kanıtlanmıştır. Yerel bir uygulama gönderiyorsanız veya ikili dosya boyutunu önemsiyorsanız Perry tam da bu durum için yapılmıştır."
+      },
+      "deno": {
+        "title": "Perry vs Deno",
+        "metaTitle": "Perry vs Deno: AOT-derlenmiş yerel ikili dosyalar vs Deno compile",
+        "metaDescription": "Deno'nun `deno compile` komutu V8 ve TypeScript'inizi tek bir çalıştırılabilir dosyaya paketler. Perry ise TypeScript'i LLVM aracılığıyla doğrudan yerel koda derler. Çıktıyı, çalışma zamanı modelini, güvenliği ve platform desteğini karşılaştırın.",
+        "tldr": "Deno; V8 üzerine inşa edilmiş, birinci sınıf TypeScript desteği, izin tabanlı bir güvenlik modeli ve V8'i uygulamanızla birlikte paketleyerek tek bir çalıştırılabilir dosya üreten bir `deno compile` komutu sunan modern bir JavaScript ve TypeScript çalışma zamanıdır. Perry, TypeScript'i doğrudan yerel makine koduna derler — çıktıda V8 yok, çalışma zamanı katmanı yok, sadece küçük bir yerel ikili dosya.",
+        "competitorWhat": "Deno; Rust ile, V8 ve Tokio'nun üzerine inşa edilmiş bir TypeScript ve JavaScript çalışma zamanıdır. `.ts` kaynağını doğrudan çalıştırır, yerleşik araçlara sahiptir (formatlayıcı, linter, test koşturucusu, dil sunucusu) ve ağ, dosya ve ortam erişimi için açık izinler gerektiren bir izin modeli kullanır. `deno compile`, kodunuzla birlikte Deno çalışma zamanını (V8 dahil) paketleyerek bağımsız bir çalıştırılabilir dosya üretir. Deno; Linux, macOS ve Windows'u x64 ve arm64 üzerinde hedefler.",
+        "perryWhat": "Perry, Rust ile yazılmış yerel bir TypeScript derleyicisidir. TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler — V8 yok, JIT yok, çalışma zamanı yok. Çıktı tek bir ikili dosyadır; yerel kod için tipik olarak birkaç yüz KB ile birkaç MB arasında, JS motoru gereken npm paketleri için isteğe bağlı gömülü V8 çalışma zamanını seçerseniz daha büyüktür.",
+        "table": [
+          { "feature": "Çıktı", "perry": "Yerel makine kodu (LLVM)", "competitor": "Kodunuz + Deno çalışma zamanı (V8) paketlenmiş" },
+          { "feature": "İkili dosyada JavaScript motoru", "perry": "Varsayılan olarak yok; isteğe bağlı V8", "competitor": "Her zaman V8" },
+          { "feature": "Hello-world ikili dosya boyutu", "perry": "~330 KB", "competitor": "~80–100 MB (V8 dahil)" },
+          { "feature": "JIT", "perry": "Hayır (AOT derlenmiş)", "competitor": "Evet (V8 TurboFan)" },
+          { "feature": "Mobil hedefler", "perry": "iOS, iPadOS, Android", "competitor": "Hayır" },
+          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "Hayır" },
+          { "feature": "Yerel UI", "perry": "Yerel platform API'leri ile 25+ widget", "competitor": "Hayır" },
+          { "feature": "İzin modeli", "perry": "Standart işletim sistemi süreç izinleri", "competitor": "Granüler çalıştırma zamanı izinleri (--allow-net, --allow-read, vb.)" },
+          { "feature": "Kararlılık", "perry": "1.0 öncesi", "competitor": "Kararlı (1.x / 2.x)" },
+          { "feature": "Yazıldığı dil", "perry": "Rust", "competitor": "Rust (V8 üzerinde)" }
+        ],
+        "perryWins": [
+          "Çarpıcı şekilde daha küçük ikili dosyalar. Bir Perry hello world ~330 KB. `deno compile` çıktıları V8'i içerir ve 80–100 MB aralığına çıkar.",
+          "İkili dosyada JavaScript motoru yok. TypeScript'iniz çalışma zamanında V8 tarafından yorumlanmak yerine yerel makine koduna derlenir.",
+          "Mobil, watch, TV, WASM ve Web hedefleri. Deno yalnızca sunucu/masaüstüdür.",
+          "AppKit, UIKit, GTK4, Win32 ve JNI'ya eşlenen yerel UI widget'ları — Deno'da eşdeğeri yok.",
+          "Daha hızlı soğuk başlatma. AOT-derlenmiş yerel ikili dosyalar V8 başlatma maliyeti ödemez.",
+          "M1 Max üzerinde eşleştirilmiş koşullarda Perry'nin `reassoc contract` fast-math varsayılanlarının LLVM'in autovectorize etmesine ve önemsiz şekilde katlanabilir akümülatörleri katlamasına izin verdiği hesaplama mikro-benchmark liderliği (örn., loop_overhead 12 ms, math_intensive 14 ms; perry/benchmarks'a bakın)."
+        ],
+        "competitorWins": [
+          "Uzun bir geçmişe ve aktif 2.x serisine sahip olgun, kararlı çalışma zamanı.",
+          "Granüler izin modeli. Deno açık `--allow-net`, `--allow-read` vb. gerektirir — sandbox'lı betikler ve güvenilmeyen kod için faydalı.",
+          "Yerleşik araçlar: formatlayıcı, linter, test koşturucusu, doc oluşturucusu, LSP — hepsi çalışma zamanında.",
+          "Çalışma zamanında tam V8 ekosistemi — V8 üzerinde çalışan her şey Deno'da çalışır, uzun süreli sıcak yollardaki JIT optimizasyonları dahil.",
+          "Geliştirme sırasında ayrı bir derleyici adımı olmadan birinci sınıf TypeScript, tamamen yönetilen bir tip kontrol pipeline'ı ile.",
+          "Standart web platformu API'leri (fetch, Web Streams, Web Crypto) çalışma zamanında yerel olarak implemente edilir."
+        ],
+        "whenPerry": "Küçük, hızlı başlayan bir yerel ikili dosya istiyorsanız, mobil veya başka sunucu-dışı hedeflere gönderiyorsanız, yerel UI istiyorsanız veya TypeScript'i JS motoru içermeyen bir ikili dosyaya derlemek istiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "Kararlı, her şey dahil bir TypeScript çalışma zamanı istiyorsanız, izin sandbox'ına değer veriyorsanız, sunucu tarafı veya betikleme iş yükleri inşa ediyorsanız ya da çalışma zamanında tam V8 ekosistemi uyumluluğuna ihtiyacınız varsa Deno'yu seçin.",
+        "verdict": "Her ikisi de bir TypeScript programını tek bir ikili dosya olarak göndermenizi sağlar; fark, o ikili dosyanın içinde ne olduğudur. Deno size V8 + bir derlenmiş çalışma zamanı + izin sandbox'ı verir. Perry size motor içermeyen yerel makine kodu verir. Ekosistemin ve izin modelinin önemli olduğu sunucu tarafı ve betikleme çalışmaları için Deno daha iyi bir seçimdir. Küçük, hızlı başlayan bir ikili dosya, mobil hedefler veya yerel UI'ya ihtiyacınız olduğunda ise Perry daha iyi bir seçimdir."
+      },
+      "static-hermes": {
+        "title": "Perry vs Static Hermes",
+        "metaTitle": "Perry vs Static Hermes (shermes): üretime hazır vs araştırma derleyicisi",
+        "metaDescription": "Static Hermes, Meta'nın deneysel ahead-of-time TypeScript-yerel derleyicisidir. Perry ise bugün gönderilen üretim hattı bir TS-yerel derleyicisidir. Olgunluğu, kapsamı, çıktıyı ve platform erişimini karşılaştırın.",
+        "tldr": "Static Hermes (`shermes`), Meta'nın güçlü tipli bir JavaScript/TypeScript alt kümesini Hermes motoru üzerinden ahead-of-time derlemeyi amaçlayan, esas olarak React Native'i hedefleyen araştırma aşamasındaki çabasıdır. Perry, aynı genel fikre — TypeScript yerel koda derleniyor — yapılan farklı bir bahistir, ancak bağımsız olarak Rust üzerine LLVM ile inşa edilmiştir; bugün çalışan bir derleyici, 25+ yerel UI widget'ı ve 10 derleme hedefi göndermektedir. Nisan 2026 itibarıyla, Perry'nin kendi benchmark suite'i Static Hermes'in eş olarak denendiğini ve test ettiği standart paket yöneticileri aracılığıyla temiz bir şekilde kurulamadığını rapor etmektedir.",
+        "competitorWhat": "Hermes, Meta'nın React Native için inşa ettiği JavaScript motorudur — bytecode tabanlı, AOT-ön derlenmiş, mobil başlatma süresi için optimize edilmiştir. Static Hermes, Hermes'i tipli bir JavaScript alt kümesinin ahead-of-time yerel derlemesiyle genişletme araştırma çabasıdır ve React Native'e gerçek yerel koda giden bir yol sağlamayı amaçlar. Esas olarak bir derleyici Ar-Ge projesidir; Perry'nin benchmark notlarına göre macOS arm64 üzerinde rutin kurulum için henüz paketlenmemiştir (`shermes`, polyglot benchmark'tan 'macOS arm64 üzerinde temiz bir şekilde kurulan bir biçimde Homebrew veya npm üzerinde mevcut değildir' notuyla atlanmıştır — perry/benchmarks/README.md'ye bakın).",
+        "perryWhat": "Perry; Rust ile yazılmış, ayrıştırma için SWC ve kod üretimi için LLVM kullanan yerel bir TypeScript derleyicisidir. Çalışan bir CLI (`perry compile`, `perry run`, `perry publish`), 25+ yerel UI widget'ı, 10 derleme hedefi, kendi kendini barındıran bir çalışma zamanı ve şeffaf koşullar altında ölçülen bir benchmark suite'i (M1 Max, RUNS=11) gönderir. Perry 1.0 öncesidir ama üretim hattıdır: insanlar onunla inşa edilmiş uygulamaları gönderiyor (Bloom Engine, Mango, Hone, Pry, dB Meter — perryts.com'a bakın).",
+        "table": [
+          { "feature": "Durum", "perry": "1.0 öncesi (alfa) — üretim hattı", "competitor": "Araştırma / deneysel" },
+          { "feature": "Kurulum yolu (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "Yazıldığı sırada temiz kurulum için paketlenmemiş (perry/benchmarks'a göre)" },
+          { "feature": "Backend", "perry": "LLVM", "competitor": "Özel (Hermes tabanlı kod üretimi)" },
+          { "feature": "Girdi", "perry": "TypeScript (tam)", "competitor": "Tipli JS/TS alt kümesi" },
+          { "feature": "Derleme hedefleri", "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "Esas olarak mobil (React Native bağlamı)" },
+          { "feature": "Yerel UI", "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+ widget", "competitor": "React Native köprüsü aracılığıyla (entegre edildiğinde)" },
+          { "feature": "Bağımsız CLI uygulama akışı", "perry": "Evet — `perry compile main.ts` bir ikili dosya üretir", "competitor": "React Native bağlamına bağlı" },
+          { "feature": "Genel benchmark suite'i", "perry": "Evet — Node, Bun, Rust, C++, Go, Swift, Java'ya karşı RUNS=11", "competitor": "Dahili / araştırma makaleleri" }
+        ],
+        "perryWins": [
+          "Kullanılabilir bir araç olarak mevcuttur. Perry bugün Homebrew, APT veya `npm install @perryts/perry` ile kurulabilir ve `perry compile main.ts` ilk denemede bir ikili dosya üretir.",
+          "Daha geniş kapsam. Perry; tek bir TypeScript kod tabanından bağımsız CLI uygulamaları, yerel masaüstü uygulamaları, mobil uygulamalar, watch uygulamaları, TV uygulamaları, WASM ve web derler. Static Hermes ise React Native'in yerel kod yoluna odaklanmıştır.",
+          "Yerleşik yerel UI. Perry'nin perry/ui modülü AppKit/UIKit/GTK4/Win32/JNI widget'larına derlenen, çalışan bir SwiftUI tarzı bildirimsel UI katmanıdır. Static Hermes UI'yı host'una (React Native) bırakır.",
+          "Belgelenmiş metodolojiyle açık, tekrarlanabilir benchmark suite'i — perry/benchmarks adlandırılmış derleyiciler ve çalışma zamanlarına karşı RUNS=11 boyunca medyan + p95 + σ gösterir.",
+          "LLVM backend, Perry'nin onlarca yıllık olgun optimizasyon geçişlerini (autovectorization, IndVarSimplify, scalar replacement) miras almasını ve LLVM'in hedeflediği her platformu desteklemesini sağlar."
+        ],
+        "competitorWins": [
+          "Meta tarafından destekleniyor — önemli mühendislik kaynakları ve React Native'de net bir stratejik bağlantı.",
+          "Hermes, üretim React Native uygulamalarında zaten bir bytecode motoru olarak gönderilmektedir; Static Hermes bu ekosistemi ve araçları miras alır.",
+          "AOT tipleme kuralları ve JS-alt-kümesi semantiği üzerinde gerçekten yenilikçi araştırma kalitesinde çalışma.",
+          "Zaten React Native üzerindeyseniz, Static Hermes (mevcut olduğunda) farklı bir derleyiciye karşı yeniden yazmaktan daha kademeli bir yoldur."
+        ],
+        "whenPerry": "Bugün çalışan bir TS-yerel derleyiciye ihtiyacınız varsa, masaüstü, mobil, watch, TV, WASM ve web'i hedeflemek için tek bir TypeScript kod tabanı istiyorsanız ya da React Native'in köprüsü olmadan yerel UI widget'ları istiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "React Native'e bağlıysanız ve mobil üzerinde JavaScript/TypeScript'ten ahead-of-time derlenmiş yerel koda giden bir yol istiyorsanız ve araştırma araçları sınırında çalışmaktan rahatsanız (mevcut olduğunda) Static Hermes'i seçin.",
+        "verdict": "Static Hermes, güvenilir bir ekipten ilginç araştırmadır. Perry, aynı genel fikir üzerinde çalışan, mobilden çok daha geniş kapsamlı ve bugün gönderilen bir üründür. Şu anda elinizde bir TS-yerel derleyiciye ihtiyacınız varsa, Perry tercihtir. React Native üzerindeyseniz ve bir araştırma projesini takip etmeye istekliyseniz, Static Hermes'i izleyin."
+      },
+      "electron": {
+        "title": "Perry vs Electron",
+        "metaTitle": "Perry vs Electron: yerel TypeScript uygulamaları vs paketlenmiş Chromium",
+        "metaDescription": "Electron her uygulamayla Chromium ve Node.js gönderir. Perry ise TypeScript'i doğrudan yerel UI widget'ları olan küçük yerel ikili dosyalara derler. İkili dosya boyutunu, performansı, UI doğruluğunu ve platform erişimini karşılaştırın.",
+        "tldr": "Electron, Chromium ve Node.js'i uygulamanızla birlikte paketleyerek web teknolojileri (HTML/CSS/JS) ile çapraz platform masaüstü uygulamaları inşa etmenizi sağlar. Perry, TypeScript'i doğrudan yerel makine koduna derler ve UI'ı gerçek platform widget'ları aracılığıyla render eder — AppKit, UIKit, GTK4, Win32, JNI. Electron'un sunduğu, web teknolojisinin yeniden kullanımıdır; Perry'nin sunduğu ise TypeScript'ten küçük yerel ikili dosyalar ve yerel UI'dır.",
+        "competitorWhat": "Electron; render için Chromium'u ve sistem erişimi için Node.js'i kullanarak çapraz platform masaüstü uygulamaları inşa etmek için açık kaynak bir framework'tür. Her Electron uygulaması kendi Chromium ve Node kopyasıyla gönderilir; bu nedenle Electron uygulamasının yükleyicileri tipik olarak hello world için bile 80–150 MB civarındadır. Electron; VS Code, Slack, Discord ve Figma'nın masaüstü istemcisi dahil yaygın olarak kullanılan uygulamaları çalıştırmıştır. Linux, macOS ve Windows masaüstlerini hedefler; birinci taraf bir mobil, watch veya TV hikâyesi yoktur.",
+        "perryWhat": "Perry, TypeScript'i tarayıcı motoru, Chromium ve Node çalışma zamanı olmaksızın doğrudan yerel makine koduna derler. UI katmanı (perry/ui), macOS'ta AppKit, iOS/iPadOS/tvOS'ta UIKit, Linux'ta GTK4, Windows'ta Win32 ve Android'de JNI aracılığıyla yerel platform widget'larına eşlenen SwiftUI tarzı bildirimsel bir sistemdir. Hello-world ikili dosyaları ~330 KB; stdlib ile (Fastify, mysql2, vb.) tam uygulamalar yaklaşık 48 MB'dir.",
+        "table": [
+          { "feature": "Render", "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Paketlenmiş Chromium (HTML/CSS/JS)" },
+          { "feature": "Paketlenmiş motorlar", "perry": "Yok (sadece --enable-js-runtime ile isteğe bağlı V8)", "competitor": "Chromium + Node.js" },
+          { "feature": "Hello-world yükleyici boyutu", "perry": "~330 KB", "competitor": "~80–150 MB" },
+          { "feature": "Tam uygulama yükleyicisi (stdlib + framework'ler)", "perry": "~48 MB", "competitor": "Tipik olarak 100–200+ MB" },
+          { "feature": "RAM kullanımı", "perry": "Yerel (tipik: onlarca MB)", "competitor": "Birden fazla Chromium süreci (tipik: yüzlerce MB)" },
+          { "feature": "Mobil / watch / TV", "perry": "Evet — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "Hayır (yalnızca masaüstü)" },
+          { "feature": "UI dili", "perry": "Bildirimsel SwiftUI tarzı API ile TypeScript", "competitor": "HTML/CSS/JS (web yığını)" },
+          { "feature": "Otomatik güncelleme / paketleme", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (olgun ekosistem)" },
+          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı, üretimde 10+ yıl" }
+        ],
+        "perryWins": [
+          "İkili dosya boyutu. Bir Perry hello world ~330 KB; bir Electron hello world ise her uygulama kendi Chromium'unu gönderdiği için tipik olarak 80–150 MB'dir.",
+          "Bellek ayak izi. Perry uygulamaları tek bir yerel süreç olarak çalışır; Electron uygulamaları birden fazla Chromium sürecini (renderer, GPU, utility, vb.) çalıştırır ve boştayken yüzlerce MB RAM tüketir.",
+          "Yerel görünüm ve his. Perry gerçek platform widget'ları aracılığıyla render eder, böylece uygulamalar OS kurallarını (focus halkaları, erişilebilirlik, IME, kaydırma fiziği) otomatik olarak miras alır.",
+          "Mobil, watch, TV. Tek bir Perry kod tabanı iOS/iPadOS/Android/watchOS/tvOS/Wear OS'a derlenir. Electron yalnızca masaüstüdür.",
+          "Soğuk başlatma. Yerel ikili dosyalar Chromium ve Node başlatma maliyetini ödemez.",
+          "Sıkı kodda gerçek CPU performansı. Perry, Node'a (Electron'un kullandığı) karşı çoğu çekirdekte hesaplama mikro-benchmark'larında kat kat öndedir (perry/benchmarks'a bakın)."
+        ],
+        "competitorWins": [
+          "Olgunluk. Electron on yıldan fazla süredir üretimde; VS Code, Slack, Discord ve birçok başka uygulamayı savaşta test edilmiş araçlarla çalıştırır.",
+          "Web yığını yeniden kullanımı. Ekibiniz zaten web UI'ları inşa ediyorsa, Electron onları yeniden yazmadan masaüstü uygulaması olarak göndermenizi sağlar.",
+          "Platformlar arası UI tutarlılığı kolaydır — Chromium her OS'ta aynı şekilde render eder, ki bazı ürünlerin tam istediği şey budur.",
+          "Çalıştırma zamanında devasa npm kütüphane ekosistemi çalışır; Perry bir alt kümeyi yerel olarak çalıştırır ve isteğe bağlı V8 geri kalanını kapsar.",
+          "Olgun paketleme araçları (electron-builder, electron-updater, kod imzalama yardımcıları) ile geniş topluluk desteği.",
+          "Devtools, hot reload ve akıcı CSS/HTML iterasyon hızı gibi web-yerel özellikler eşsizdir."
+        ],
+        "whenPerry": "Küçük yerel ikili dosyalar, düşük bellek kullanımı, platform başına yerel görünüm ve his veya masaüstüne ek olarak mobile/watch/TV'ye gönderen tek bir TypeScript kod tabanı istiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "Mevcut bir web UI'ınız varsa ve onu minimum yeniden yazmayla masaüstü uygulaması olarak göndermek istiyorsanız, masaüstünde maksimum çapraz platform UI tutarlılığı istiyorsanız ya da çalıştırma zamanında geniş bir saf JS kütüphanesi yelpazesine bağımlıysanız Electron'u seçin.",
+        "verdict": "Electron ve Perry, çapraz platform spektrumunun zıt uçlarında durur. Electron, ikili dosya boyutunu ve belleği web teknolojisi yeniden kullanımı için takas eder; Perry ise web yığınını yerel ikili dosyalar ve yerel UI için takas eder. Electron uygulamanızın yükleyicisinin 150 MB'ı geçtiğini veya boştaki RAM'inin yarım gigabaytı aştığını izlediyseniz, Perry tam da bu spesifik soruna cevaptır — farklı, yerel tarzı bir UI modeli pahasına."
+      },
+      "tauri": {
+        "title": "Perry vs Tauri",
+        "metaTitle": "Perry vs Tauri: yerel widget'lar vs sistem webview'i",
+        "metaDescription": "Tauri, web UI'larını bir Rust kabuğu içinde sistemin webview'ini kullanarak render eder. Perry ise TypeScript'i doğrudan yerel widget'lara derler — webview yok, HTML render etme yok. Mimariyi, çıktı boyutunu ve platform desteğini karşılaştırın.",
+        "tldr": "Tauri; Rust backend ve işletim sisteminin yerleşik webview'i içinde çalışan bir frontend ile çapraz platform masaüstü (ve giderek mobil) uygulamalar inşa etmek için bir framework'tür — Windows'ta WebView2, macOS'ta WKWebView, Linux'ta WebKitGTK. Tauri uygulamaları, OS webview'i paketlenmediği için Electron'dan çarpıcı şekilde daha küçüktür. Perry farklı bir yol izler: hiç webview yok, HTML render yok, sadece gerçek platform widget'larını süren yerel makine koduna derlenmiş TypeScript.",
+        "competitorWhat": "Tauri, web frontend (herhangi bir framework — React, Vue, Svelte, vb.) ve Rust backend ile çapraz platform uygulamalar inşa etmenize izin veren, Rust ile yazılmış açık kaynak bir framework'tür. Chromium paketlemek yerine Tauri sistemin yerleşik webview'ini kullanır; bu da Linux/Windows/macOS'ta uygulama yükleyicilerini tek haneli MB aralığında tutar. Tauri 2 mobil (iOS ve Android) desteği ekledi. Frontend, sistem webview'i tarafından HTML/CSS/JS olarak render edilir; Rust backend ile iletişim bir IPC köprüsü üzerinden olur.",
+        "perryWhat": "Perry, TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler. UI katmanı (perry/ui), webview tarafından render edilen HTML değil, yerel platform widget'larına eşlenen bildirimsel SwiftUI tarzı bir API'dir. Perry ile yazılmış uygulamalar bir JavaScript motoru taşımaz, WebKit/WebView2 içinde çalışmaz ve UI ile mantık arasında bir IPC köprüsü gerektirmez. Perry; mobil, watch ve TV dahil 10 platformu hedefler.",
+        "table": [
+          { "feature": "UI render", "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Sistem webview'i (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
+          { "feature": "Frontend dili", "perry": "TypeScript (bildirimsel widget API'si)", "competitor": "Herhangi bir web framework'ü ile HTML/CSS/JS (React, Vue, vb.)" },
+          { "feature": "Backend dili", "perry": "TypeScript", "competitor": "Rust" },
+          { "feature": "UI ve mantık arasında IPC", "perry": "Yok — tek süreç, doğrudan çağrılar", "competitor": "Gerekli (UI webview'de, mantık Rust sürecinde)" },
+          { "feature": "Hello-world yükleyici", "perry": "~330 KB", "competitor": "~3–10 MB (webview OS tarafından sağlanır)" },
+          { "feature": "Mobil (iOS, Android)", "perry": "Evet — yerel UI", "competitor": "Evet — webview tabanlı (Tauri 2)" },
+          { "feature": "Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Hayır" },
+          { "feature": "WebAssembly hedefi", "perry": "Evet (DOM köprüsü ile perry/ui)", "competitor": "Yok (Tauri'nin kendisi yerel olarak webview kullanır)" },
+          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı (1.x / 2.x)" }
+        ],
+        "perryWins": [
+          "Gerçekten yerel UI — Perry HTML render etmez; gerçek platform widget'larını sürer, böylece uygulamalar yerel kaydırma fiziğini, focus, erişilebilirlik, IME ve OS temalandırmasını ücretsiz olarak miras alır.",
+          "Daha küçük hello-world (~330 KB vs Tauri'nin tek haneli MB'si) ve çalıştırma zamanında sistem webview bağımlılığı yok.",
+          "Tek dil, tek süreç. Tüm uygulama — UI ve mantık — TypeScript'tir; tasarlanacak veya hata ayıklanacak bir IPC köprüsü yoktur.",
+          "watchOS, tvOS, Wear OS ve paketlenmiş webview'ler değil, gerçek yerel derleme pipeline'larıyla tam bir Web/JS hedefi.",
+          "Platformlar arasında webview davranışı farklılıkları yok. Tauri WKWebView vs WebView2 vs WebKitGTK'nın tuhaflıklarını miras alır; Perry her OS'ta yerel widget yolunu seçer.",
+          "Hesaplama performansı AOT-yereldir, webview-JIT değil. Perry, M1 Max üzerinde eşleştirilmiş koşullarda hesaplama mikro-benchmark'larında öndedir (perry/benchmarks)."
+        ],
+        "competitorWins": [
+          "Aktif 2.x serisi ve büyük bir topluluğa sahip olgun, kararlı framework.",
+          "Frontend esnekliği — zaten bildiğiniz herhangi bir web framework'ünü (React, Vue, Svelte, Solid, vb.) kullanın.",
+          "Tauri Chromium paketlemek yerine OS tarafından sağlanan webview'e dayandığı için Electron'dan daha küçük yükleyiciler.",
+          "Sistem düzeyinde işiniz varsa (dosya sistemi, yerel API'ler) ve orada derleme zamanı garantileri istiyorsanız Rust backend idealdir.",
+          "Webview render etme, web geliştirmesinden beklediğiniz gibi CSS/HTML iterasyon hızının ve devtools'un çalışması anlamına gelir.",
+          "Yerleşik paketleme, kod imzalama ve güncelleyici pipeline'ı."
+        ],
+        "whenPerry": "Gerçekten yerel UI istiyorsanız (webview'de render edilen HTML değil), webview bağımlılığı olmayan küçük yerel ikili dosyalar istiyorsanız, masaüstü + mobil + watch + TV genelinde tek bir TypeScript kod tabanı istiyorsanız ya da derleme zamanında doğrulanmış çapraz platform widget kodu istiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "Mevcut veya planlanmış bir web frontend'iniz varsa, küçük yükleyicili Rust destekli bir masaüstü uygulaması istiyorsanız, UI için HTML/CSS'tan memnunsanız ya da geniş web framework'leri ve araçları ekosistemini istiyorsanız Tauri'yi seçin.",
+        "verdict": "Tauri çok daha iyi bir Electron'dur — aynı web teknolojisi yaklaşımı, OS webview'i paketlenmediği için çarpıcı şekilde daha küçük yükleyici. Ama yine de webview tabanlı bir mimari, yani HTML/CSS/JS render etme ve bir IPC köprüsü demektir. Perry farklı bir konumda durur: hiç webview yok, yerel platform widget'ları, tek süreç. Web yığınını Electron'dan daha küçük ikili dosyalarla tutmak istiyorsanız, Tauri doğru cevaptır. Web yığınını TypeScript'te yerel widget'lar lehine bırakmak istiyorsanız, cevap Perry'dir."
+      },
+      "react-native": {
+        "title": "Perry vs React Native",
+        "metaTitle": "Perry vs React Native: AOT-derlenmiş TypeScript vs yerel UI'a JS köprüsü",
+        "metaDescription": "React Native bir JavaScript paketi artı yerel widget'lara köprü kuran bir JS motoru gönderir. Perry ise TypeScript'i doğrudan yerel UI'la yerel makine koduna derler. Mimariyi, performansı ve platform desteğini karşılaştırın.",
+        "tldr": "React Native; iOS ve Android'de yerel UI'ı süren JavaScript/TypeScript yazmanıza izin verir — UI bileşenleri bir JS-yerel köprü (veya Yeni Mimari'de aynı kavramsal şekle sahip bir JSI / Fabric katmanı) aracılığıyla platform widget'larına eşlenir. Perry farklı bir yaklaşım benimser: TypeScript ahead-of-time olarak yerel makine koduna derlenir ve yerel UI, çalıştırma zamanı köprüsü değil, derlenmiş ikili dosyanın bir parçasıdır.",
+        "competitorWhat": "React Native, Meta'nın React kullanarak mobil uygulamalar inşa etmek için framework'üdür. JavaScript gömülü bir motorda çalışır — varsayılan olarak Hermes veya JavaScriptCore — ve yerel iOS/Android widget'larıyla bir köprü (eski) veya JSI/Fabric (Yeni Mimari) aracılığıyla etkileşime girer. Framework mobil önceliklidir (iOS ve Android); Microsoft, Windows ve macOS için topluluk fork'larını korur. React Native; Meta, Microsoft, Shopify, Discord ve daha birçok yerde uygulamaları çalıştırmıştır.",
+        "perryWhat": "Perry, TypeScript'i doğrudan yerel makine koduna derler. perry/ui modülü, derleme zamanında yerel platform widget'larına derlenen SwiftUI tarzı bildirimsel bir UI sistemidir — ikili dosyada JS çalıştırma zamanı yok, köprü yok ve JSI yok. Aynı TypeScript kod tabanı; macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly ve Web'e derlenir.",
+        "table": [
+          { "feature": "Yürütme modeli", "perry": "AOT-derlenmiş yerel makine kodu", "competitor": "JS motoru (Hermes/JSC) + yerel köprü (veya JSI/Fabric)" },
+          { "feature": "Uygulamada JS motoru", "perry": "Yok", "competitor": "Hermes (varsayılan) veya JavaScriptCore" },
+          { "feature": "UI", "perry": "Yerel widget'lar — SwiftUI tarzı bildirimsel API", "competitor": "React + köprü / Fabric ile yerel widget'lar" },
+          { "feature": "Birincil hedefler", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web", "competitor": "iOS, Android (Windows/macOS topluluk fork'ları aracılığıyla)" },
+          { "feature": "Sunucu / CLI / masaüstü ikili dosyaları", "perry": "Evet (CLI araçları, sunucular, masaüstü uygulamaları)", "competitor": "Hayır (mobil UI framework'ü)" },
+          { "feature": "JS ve yerel arasında köprü", "perry": "Köprü yok — yerel kod programın kendisidir", "competitor": "Evet (eski köprü veya JSI/Fabric)" },
+          { "feature": "Geliştirme sırasında hot reload", "perry": "perry dev (watch-mode otomatik yeniden derleme)", "competitor": "Fast Refresh (çok hızlı)" },
+          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı, üretimde geniş çapta dağıtılmış" },
+          { "feature": "Bileşen kütüphanesi", "perry": "perry/ui temel widget'lar + perry-react React-uyum katmanı", "competitor": "Devasa — React Native + topluluk paketleri" }
+        ],
+        "perryWins": [
+          "Gönderilen uygulamada JS motoru yok. Perry ile derlenmiş ikili dosyalar Hermes veya JSC taşımaz; TypeScript çalıştırılabilir dosyanın kendisidir.",
+          "Köprü / JSI maliyeti yok. Yerel UI çağrıları doğrudan derlenmiş fonksiyon çağrılarıdır, JS-yerel marshaling değil.",
+          "Daha geniş platform erişimi. Tek bir Perry kod tabanı; masaüstü (macOS/Linux/Windows), mobil (iOS/iPadOS/Android), giyilebilir (watchOS/Wear OS), TV (tvOS), WASM ve Web'e derlenir. React Native mobil önceliklidir.",
+          "Aynı derleyiciden sunucu tarafı ve CLI ikili dosyaları — Perry sadece bir UI framework'ü değil, aynı zamanda bir sunucu çalışma zamanıdır.",
+          "AOT-derlenmiş hesaplama performansı — ısınma yok, JIT yok, köprü gidiş-dönüşleri yok.",
+          "perry-react size yerel widget'lara derlenen React/JSX verir; böylece React zihinsel modeli, ikili dosyada JS motoru olmadan kullanılabilir."
+        ],
+        "competitorWins": [
+          "Devasa topluluk desteği, kütüphaneler ve araçlarla olgun, savaşta test edilmiş ekosistem.",
+          "Geliştirme sırasında Fast Refresh sınıfının en iyisidir — kod değişiklikleri yeniden derleme olmadan milisaniyeler içinde görünür.",
+          "Geniş yetenek havuzu. React Native geliştirici işe almak kolaydır; Perry yenidir.",
+          "Yerleşik CI/CD, App Store / Play Store yayınlama pipeline'ları ve codepush tarzı OTA güncellemeler.",
+          "JSI/Fabric ve Yeni Mimari, React programlama modelini koruyarak yerel ile arasındaki tarihsel performans farkının çoğunu kapatmıştır.",
+          "Meta ve büyük benimseyenlerden (Microsoft, Shopify, Amazon) doğrudan destek framework'ü hareket halinde tutar."
+        ],
+        "whenPerry": "Mobil, masaüstü, watch, TV, WASM ve web genelinde tek bir TypeScript kod tabanı istiyorsanız; gönderilen uygulamanızda JS çalıştırma zamanı istemiyorsanız; köprü olmadan yerel UI istiyorsanız ya da zaten TypeScript'e yatırım yaptıysanız ve JS motoru yerine yerel derleme istiyorsanız Perry'yi seçin.",
+        "whenCompetitor": "Mobil uygulamalar inşa ediyorsanız ve en olgun çapraz platform yerel-UI framework'ünü istiyorsanız, mevcut bir React ekibiniz varsa, React Native kütüphane ekosistemine bağımlıysanız ya da bugünkü endüstri standardı mobil çapraz platform yığınına ihtiyacınız varsa React Native'i seçin.",
+        "verdict": "React Native, JS çalıştırma zamanı ve (artık iyileştirilmiş) bir köprüsü olan mobil öncelikli bir framework'tür. Perry ise TypeScript'ten yerel ikili dosyalar üreten ve yerel UI'ı derleme çıktısının bir parçası olarak veren bir derleyicidir. Mobil üzerinde en derin ekosisteme sahip React istiyorsanız, bugünkü cevap React Native'dir. Uygulamada JS çalıştırma zamanı olmadan mobil + masaüstü + watch + TV'ye derlenen tek bir TypeScript kod tabanı istiyorsanız, cevap Perry'dir."
+      }
     }
   }
 }

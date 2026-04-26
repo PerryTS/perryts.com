@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
+import { compareItems } from "@/lib/compare";
 import { locales } from "@/i18n/routing";
 
 export const dynamic = "force-static";
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
     "/blog",
+    "/compare",
     "/roadmap",
     "/showcase",
     "/showcase/pry",
@@ -36,5 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...postPages];
+  const comparePages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    compareItems.map((item) => ({
+      url: `${BASE}/${locale}/compare/${item.slug}`,
+      lastModified: new Date(item.updated),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  );
+
+  return [...staticPages, ...postPages, ...comparePages];
 }

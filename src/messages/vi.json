@@ -13,6 +13,7 @@
   "nav": {
     "showcase": "Showcase",
     "blog": "Blog",
+    "compare": "So sánh",
     "roadmap": "Lộ trình",
     "publish": "Xuất bản",
     "overview": "Tổng quan",
@@ -425,6 +426,258 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "GC theo thế hệ, JSON lười và benchmark chịu được soi xét",
       "excerpt": "Perry v0.5.174 → v0.5.306 trong ba ngày, cộng với công việc GC và JSON đáp xuống cùng lúc. GC theo thế hệ trở thành mặc định. Small String Optimization trở thành mặc định. Đường ống JSON nhận một lazy tape, đáp ở 75 ms trung vị trên validate-and-roundtrip — tốt nhất trong nhóm runtime kiểu động. Trang benchmark được viết lại với trung vị RUNS=11 + p95 + σ, thêm simdjson và AssemblyScript+json-as làm peer, và mọi điểm yếu của Perry được nêu thẳng thắn."
+    }
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry so với các lựa chọn thay thế",
+      "indexSubtitle": "Cách Perry so sánh với các phương thức xuất bản TypeScript khác: runtime, trình biên dịch và framework UI đa nền tảng. Trung thực, có nguồn dẫn, kèm số liệu đo được khi có.",
+      "indexMetaTitle": "So sánh Perry với Bun, Deno, Electron, Tauri, React Native và Static Hermes",
+      "indexMetaDescription": "So sánh song song Perry với các lựa chọn thay thế mà nhà phát triển thường dùng: runtime TypeScript (Bun, Deno), trình biên dịch TS-to-native AOT (Static Hermes) và framework UI đa nền tảng (Electron, Tauri, React Native).",
+      "backToCompare": "Quay lại các so sánh",
+      "lastUpdated": "Cập nhật lần cuối",
+      "whatIs": "{name} là gì?",
+      "sideBySide": "So sánh song song",
+      "feature": "Tính năng",
+      "wherePerryWins": "Perry thắng ở đâu",
+      "whereCompetitorWins": "{name} thắng ở đâu",
+      "whenChoose": "Khi nào nên chọn {name}",
+      "verdict": "Kết luận",
+      "ctaTitle": "Thử Perry",
+      "ctaSubtitle": "Biên dịch TypeScript của bạn thành mã gốc ngay hôm nay.",
+      "category": {
+        "runtime": "Runtime TypeScript",
+        "compiler": "Trình biên dịch TS-to-native",
+        "ui-framework": "UI đa nền tảng"
+      }
+    },
+    "items": {
+      "bun": {
+        "title": "Perry vs Bun",
+        "metaTitle": "Perry vs Bun: TypeScript-to-native vs runtime tất-cả-trong-một",
+        "metaDescription": "Bun đóng gói TypeScript của bạn cùng runtime Bun thành một tệp thực thi duy nhất. Perry biên dịch TypeScript trực tiếp thành mã máy gốc. So sánh kiến trúc, kích thước đầu ra, hiệu năng và hỗ trợ nền tảng.",
+        "tldr": "Bun là một runtime JavaScript/TypeScript tất-cả-trong-một, kèm bundler, trình quản lý gói và test runner; nó cũng có thể tạo tệp thực thi đơn lẻ bằng cách đóng gói runtime của mình cùng mã của bạn. Perry đi theo một con đường khác: biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có engine JavaScript trong binary, không có runtime, chỉ là một tệp thực thi gốc nhỏ gọn. Bun và Perry chồng lấn ở đầu ra TS-to-binary nhưng bất đồng về việc có nên có engine JavaScript trong binary đó hay không.",
+        "competitorWhat": "Bun là một bộ công cụ JavaScript và TypeScript tất-cả-trong-một, nhanh, được xây dựng bằng Zig. Nó chạy trực tiếp mã nguồn `.ts` (không cần bước tiền biên dịch), sử dụng JavaScriptCore làm engine JS, và bao gồm bundler, trình quản lý gói và test runner. `bun build --compile` đóng gói runtime Bun cùng ứng dụng của bạn thành một tệp thực thi duy nhất. Bun nhắm đến Linux, macOS và Windows trên x64 và arm64.",
+        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust. Nó biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có engine JavaScript, không có runtime, không có JIT. Đầu ra là một binary đơn lẻ (khoảng 330 KB cho hello world; ~48 MB cho một ứng dụng đầy đủ stdlib như máy chủ Fastify). Perry nhắm đến 10 nền tảng bao gồm macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.",
+        "table": [
+          { "feature": "Đầu ra", "perry": "Mã máy gốc (LLVM)", "competitor": "Mã của bạn + runtime Bun đóng gói trong một binary" },
+          { "feature": "Engine JavaScript trong binary", "perry": "Không có mặc định; tùy chọn V8 với --enable-js-runtime (+~15 MB)", "competitor": "JavaScriptCore, luôn luôn" },
+          { "feature": "Kích thước binary hello-world", "perry": "~330 KB", "competitor": "~50–100 MB (bao gồm runtime Bun)" },
+          { "feature": "JIT", "perry": "Không (biên dịch AOT)", "competitor": "Có (JIT của JavaScriptCore)" },
+          { "feature": "Mục tiêu di động (iOS, Android)", "perry": "Có — UI gốc qua UIKit/JNI", "competitor": "Không" },
+          { "feature": "Mục tiêu Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Không" },
+          { "feature": "Widget UI gốc", "perry": "25+ qua AppKit, UIKit, GTK4, Win32, JNI", "competitor": "Không (tập trung server/CLI)" },
+          { "feature": "Hệ sinh thái npm", "perry": "Các gói TS/JS thuần có thể biên dịch gốc; gói khác qua V8 tùy chọn", "competitor": "npm tương thích Node đầy đủ" },
+          { "feature": "Độ ổn định", "perry": "Trước 1.0 (alpha)", "competitor": "Ổn định (1.x)" },
+          { "feature": "Được xây dựng bằng", "perry": "Rust", "competitor": "Zig" }
+        ],
+        "perryWins": [
+          "Binary nhỏ hơn — hello world của Perry chỉ ~330 KB; hello world Bun --compile bao gồm runtime Bun và lên tới hàng chục megabyte.",
+          "Không có chi phí engine JavaScript. Binary Perry biên dịch không mang theo trình thông dịch hay JIT — TypeScript của bạn chính là tệp thực thi.",
+          "Di động, watch và TV. Perry biên dịch sang iOS, iPadOS, Android, watchOS, tvOS và WebAssembly. Bun chỉ dành cho server/desktop.",
+          "UI gốc. Module perry/ui của Perry biên dịch thành widget nền tảng thực sự (AppKit trên macOS, UIKit trên iOS, GTK4 trên Linux, Win32 trên Windows, JNI trên Android). Bun không có giải pháp UI.",
+          "Nhanh hơn ở hầu hết microbench tính toán đo trong điều kiện tương đương trên M1 Max (RUNS=11, v0.5.279, 2026-04-25): fibonacci 318 ms vs Bun 589 ms; object_create 1 ms vs 6 ms; nested_loops 18 ms vs 21 ms. Xem perry/benchmarks để có bảng đầy đủ.",
+          "Nhanh hơn ở JSON validate-and-roundtrip trong nhóm runtime kiểu động: lazy JSON tape của Perry đáp ở 75 ms trung vị so với 259 ms của Bun trên cùng workload 10k bản ghi."
+        ],
+        "competitorWins": [
+          "Runtime trưởng thành, ổn định với các bản phát hành 1.x. Perry còn ở giai đoạn trước 1.0.",
+          "Nhanh hơn ở JSON parse-and-iterate (nơi mọi giá trị đều được duyệt qua): Bun 254 ms vs Perry 466 ms trung vị trên cùng workload — lazy tape của Perry không thể đi tắt khi việc lặp được bắt buộc.",
+          "Hệ sinh thái npm tương thích Node đầy đủ ngay từ đầu. Perry chạy gốc một tập con và quay lại V8 nhúng tùy chọn cho phần còn lại.",
+          "Tích hợp sẵn test runner, bundler và trình quản lý gói. Perry là một trình biên dịch — công cụ kề cận thì tách biệt.",
+          "Hiệu năng JIT đã làm nóng có thể vượt qua AOT trên mã thiên về lặp với vòng lặp bên trong nóng; Perry không có JIT.",
+          "Ngang bằng với Perry trong khoảng nhiễu giữa các lần chạy trên `loop_data_dependent` (232 ms vs 235 ms) — kernel f64 thực sự không thể fold mà cả hai bên trình biên dịch đều không thể đảo thứ tự. Nguồn: perry/benchmarks RUNS=11."
+        ],
+        "whenPerry": "Chọn Perry khi kích thước binary quan trọng (phân phối di động, ngữ cảnh nhúng, khởi động nguội nhanh), khi bạn muốn xuất bản đến mobile/watch/TV từ một mã nguồn TypeScript duy nhất, khi bạn muốn widget UI gốc, hoặc khi bạn không muốn có engine JavaScript trong artifact đã xuất bản.",
+        "whenCompetitor": "Chọn Bun khi bạn cần một runtime ổn định, trưởng thành ngay hôm nay, khi tương thích npm đầy đủ là không thể thương lượng, khi bạn muốn một công cụ duy nhất cho runtime + bundler + trình quản lý gói + test runner, hoặc khi hiệu năng JIT đã làm nóng trên workload chạy lâu quan trọng với bạn hơn kích thước khởi động nguội.",
+        "verdict": "Bun và Perry đều cho phép xuất bản chương trình TypeScript dưới dạng một binary đơn lẻ, nhưng chúng trả lời những câu hỏi khác nhau. Binary của Bun chứa runtime Bun và được tối ưu cho workload backend/CLI nơi JIT và tương thích Node đầy đủ chiến thắng. Binary của Perry không chứa engine JS và được tối ưu cho kích thước, khởi động nguội, di động và UI gốc. Nếu bạn xuất bản máy chủ, Bun đã được chứng minh hơn hiện tại. Nếu bạn xuất bản ứng dụng gốc hoặc quan tâm đến kích thước binary, Perry được xây dựng cho trường hợp đó."
+      },
+      "deno": {
+        "title": "Perry vs Deno",
+        "metaTitle": "Perry vs Deno: binary gốc biên dịch AOT vs Deno compile",
+        "metaDescription": "`deno compile` của Deno đóng gói V8 và TypeScript của bạn thành một tệp thực thi duy nhất. Perry biên dịch TypeScript trực tiếp thành mã gốc qua LLVM. So sánh đầu ra, mô hình runtime, bảo mật và hỗ trợ nền tảng.",
+        "tldr": "Deno là một runtime JavaScript và TypeScript hiện đại được xây dựng trên V8, với hỗ trợ TypeScript hạng nhất, mô hình bảo mật dựa trên quyền và lệnh `deno compile` tạo ra một tệp thực thi duy nhất bằng cách đóng gói V8 với ứng dụng của bạn. Perry biên dịch TypeScript trực tiếp thành mã máy gốc — không có V8 trong đầu ra, không có lớp runtime, chỉ là một binary gốc nhỏ.",
+        "competitorWhat": "Deno là một runtime TypeScript và JavaScript được xây dựng bằng Rust trên V8 và Tokio. Nó thực thi trực tiếp mã nguồn `.ts`, có công cụ tích hợp (formatter, linter, test runner, language server) và sử dụng mô hình quyền yêu cầu cấp quyền tường minh cho truy cập mạng, tệp và môi trường. `deno compile` tạo một tệp thực thi tự chứa bằng cách đóng gói runtime Deno (bao gồm V8) cùng mã của bạn. Deno nhắm đến Linux, macOS và Windows trên x64 và arm64.",
+        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust. Nó biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có V8, không có JIT, không có runtime. Đầu ra là một binary đơn lẻ, thường là vài trăm KB đến vài MB cho mã gốc, có thể lớn hơn nếu bạn chọn dùng V8 runtime nhúng cho các gói npm cần engine JS.",
+        "table": [
+          { "feature": "Đầu ra", "perry": "Mã máy gốc (LLVM)", "competitor": "Mã của bạn + runtime Deno (V8) đóng gói" },
+          { "feature": "Engine JavaScript trong binary", "perry": "Không có mặc định; tùy chọn V8", "competitor": "V8, luôn luôn" },
+          { "feature": "Kích thước binary hello-world", "perry": "~330 KB", "competitor": "~80–100 MB (bao gồm V8)" },
+          { "feature": "JIT", "perry": "Không (biên dịch AOT)", "competitor": "Có (V8 TurboFan)" },
+          { "feature": "Mục tiêu di động", "perry": "iOS, iPadOS, Android", "competitor": "Không" },
+          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "Không" },
+          { "feature": "UI gốc", "perry": "25+ widget qua API nền tảng gốc", "competitor": "Không" },
+          { "feature": "Mô hình quyền", "perry": "Quyền tiến trình OS tiêu chuẩn", "competitor": "Quyền runtime chi tiết (--allow-net, --allow-read, v.v.)" },
+          { "feature": "Độ ổn định", "perry": "Trước 1.0", "competitor": "Ổn định (1.x / 2.x)" },
+          { "feature": "Được xây dựng bằng", "perry": "Rust", "competitor": "Rust (trên V8)" }
+        ],
+        "perryWins": [
+          "Binary nhỏ hơn đáng kể. Hello world của Perry chỉ ~330 KB. Đầu ra `deno compile` bao gồm V8 và đạt mức 80–100 MB.",
+          "Không có engine JavaScript trong binary. TypeScript của bạn được biên dịch thành mã máy gốc, không bị V8 thông dịch tại runtime.",
+          "Mục tiêu di động, watch, TV, WASM và Web. Deno chỉ dành cho server/desktop.",
+          "Widget UI gốc ánh xạ sang AppKit, UIKit, GTK4, Win32 và JNI — không có tương đương trong Deno.",
+          "Khởi động nguội nhanh hơn. Binary gốc biên dịch AOT không trả chi phí khởi động V8.",
+          "Dẫn đầu microbench tính toán trong điều kiện tương đương trên M1 Max nơi mặc định fast-math `reassoc contract` của Perry cho phép LLVM tự động vector hóa và fold các bộ tích lũy có thể fold đơn giản (ví dụ loop_overhead 12 ms, math_intensive 14 ms; xem perry/benchmarks)."
+        ],
+        "competitorWins": [
+          "Runtime trưởng thành, ổn định với lịch sử lâu dài và dòng 2.x đang hoạt động.",
+          "Mô hình quyền chi tiết. Deno yêu cầu `--allow-net`, `--allow-read` tường minh, v.v. — hữu ích cho script trong sandbox và mã không đáng tin.",
+          "Công cụ tích hợp: formatter, linter, test runner, doc generator, LSP, tất cả trong runtime.",
+          "Hệ sinh thái V8 đầy đủ tại runtime — bất cứ thứ gì chạy trên V8 đều chạy trên Deno, bao gồm tối ưu JIT trên các đường nóng chạy lâu.",
+          "TypeScript hạng nhất không cần bước biên dịch riêng trong quá trình phát triển, với pipeline kiểm tra kiểu được quản lý đầy đủ.",
+          "API nền tảng web tiêu chuẩn (fetch, Web Streams, Web Crypto) được triển khai gốc trong runtime."
+        ],
+        "whenPerry": "Chọn Perry nếu bạn muốn một binary gốc nhỏ, khởi động nhanh, bạn xuất bản đến di động hoặc các mục tiêu phi-server khác, bạn muốn UI gốc, hoặc bạn muốn biên dịch TypeScript thành một binary không chứa engine JS.",
+        "whenCompetitor": "Chọn Deno nếu bạn muốn một runtime TypeScript ổn định, đầy đủ pin, bạn coi trọng sandbox quyền, bạn xây dựng workload phía server hoặc kịch bản, hoặc bạn cần tương thích đầy đủ hệ sinh thái V8 tại runtime.",
+        "verdict": "Cả hai đều cho phép xuất bản chương trình TypeScript dưới dạng một binary đơn lẻ; sự khác biệt là những gì bên trong binary đó. Deno cho bạn V8 + runtime được tuyển chọn + sandbox quyền. Perry cho bạn mã máy gốc không có engine. Deno là lựa chọn tốt hơn cho công việc phía server và kịch bản nơi hệ sinh thái và mô hình quyền quan trọng. Perry là lựa chọn tốt hơn khi bạn cần binary nhỏ, khởi động nhanh, mục tiêu di động hoặc UI gốc."
+      },
+      "static-hermes": {
+        "title": "Perry vs Static Hermes",
+        "metaTitle": "Perry vs Static Hermes (shermes): sẵn sàng sản xuất vs trình biên dịch nghiên cứu",
+        "metaDescription": "Static Hermes là trình biên dịch TypeScript-to-native ahead-of-time thử nghiệm của Meta. Perry là trình biên dịch TS-to-native theo hướng sản xuất đang phát hành ngay hôm nay. So sánh độ trưởng thành, phạm vi, đầu ra và độ phủ nền tảng.",
+        "tldr": "Static Hermes (`shermes`) là nỗ lực ở giai đoạn nghiên cứu của Meta nhằm biên dịch ahead-of-time một tập con JavaScript/TypeScript có kiểu mạnh thông qua engine Hermes, chủ yếu nhắm đến React Native. Perry là một canh bạc khác trên cùng ý tưởng chung — TypeScript biên dịch sang gốc — nhưng được xây dựng độc lập bằng Rust trên LLVM, với một trình biên dịch hoạt động được, hơn 25 widget UI gốc và 10 mục tiêu biên dịch đang phát hành ngay hôm nay. Tính đến tháng 4/2026, bộ benchmark riêng của Perry báo cáo rằng Static Hermes đã được thử như một peer và không thể cài đặt sạch sẽ qua các trình quản lý gói tiêu chuẩn được thử.",
+        "competitorWhat": "Hermes là engine JavaScript mà Meta xây dựng cho React Native — dựa trên bytecode, biên dịch AOT trước, tối ưu cho thời gian khởi động trên di động. Static Hermes là nỗ lực nghiên cứu để mở rộng Hermes với biên dịch gốc ahead-of-time của một tập con JavaScript có kiểu, nhằm cho React Native một con đường đến mã gốc thực sự. Đây chủ yếu là dự án R&D về trình biên dịch; theo ghi chú benchmark của Perry, nó chưa được đóng gói để cài đặt thường quy trên macOS arm64 (`shermes` đã bị bỏ qua khỏi benchmark đa ngôn ngữ với ghi chú rằng nó 'không có sẵn trên Homebrew hoặc npm theo cách cài đặt sạch sẽ trên macOS arm64' — xem perry/benchmarks/README.md).",
+        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust, sử dụng SWC để phân tích cú pháp và LLVM để sinh mã. Nó cung cấp một CLI hoạt động (`perry compile`, `perry run`, `perry publish`), hơn 25 widget UI gốc, 10 mục tiêu biên dịch, runtime tự lưu trữ và một bộ benchmark được đo trong điều kiện minh bạch (M1 Max, RUNS=11). Perry còn ở giai đoạn trước 1.0 nhưng đang theo hướng sản xuất: mọi người đang xuất bản ứng dụng được xây dựng với nó (Bloom Engine, Mango, Hone, Pry, dB Meter — xem perryts.com).",
+        "table": [
+          { "feature": "Trạng thái", "perry": "Trước 1.0 (alpha) — theo hướng sản xuất", "competitor": "Nghiên cứu / thử nghiệm" },
+          { "feature": "Đường cài đặt (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "Chưa được đóng gói để cài đặt sạch tại thời điểm viết (theo perry/benchmarks)" },
+          { "feature": "Backend", "perry": "LLVM", "competitor": "Tùy chỉnh (sinh mã dựa trên Hermes)" },
+          { "feature": "Đầu vào", "perry": "TypeScript (đầy đủ)", "competitor": "Tập con JS/TS có kiểu" },
+          { "feature": "Mục tiêu biên dịch", "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "Chủ yếu là di động (ngữ cảnh React Native)" },
+          { "feature": "UI gốc", "perry": "25+ widget qua AppKit, UIKit, GTK4, Win32, JNI", "competitor": "Qua bridge React Native (khi tích hợp)" },
+          { "feature": "Quy trình ứng dụng CLI độc lập", "perry": "Có — `perry compile main.ts` tạo ra một binary", "competitor": "Gắn với ngữ cảnh React Native" },
+          { "feature": "Bộ benchmark công khai", "perry": "Có — RUNS=11 vs Node, Bun, Rust, C++, Go, Swift, Java", "competitor": "Nội bộ / bài báo nghiên cứu" }
+        ],
+        "perryWins": [
+          "Nó tồn tại như một công cụ có thể dùng được. Perry có thể được cài đặt ngay hôm nay qua Homebrew, APT hoặc `npm install @perryts/perry`, và `perry compile main.ts` tạo ra một binary ngay lần thử đầu tiên.",
+          "Phạm vi rộng hơn. Perry biên dịch ứng dụng CLI độc lập, ứng dụng desktop gốc, ứng dụng di động, ứng dụng watch, ứng dụng TV, WASM và web từ một mã nguồn TypeScript. Static Hermes tập trung vào con đường mã gốc của React Native.",
+          "UI gốc tích hợp sẵn. Module perry/ui của Perry là một lớp UI khai báo phong cách SwiftUI hoạt động được, biên dịch thành widget AppKit/UIKit/GTK4/Win32/JNI. Static Hermes để UI cho host của nó (React Native).",
+          "Bộ benchmark công khai, có thể tái lập với phương pháp được tài liệu hóa — perry/benchmarks hiển thị trung vị + p95 + σ qua RUNS=11 so với các trình biên dịch và runtime được nêu tên.",
+          "Backend LLVM nghĩa là Perry kế thừa hàng thập kỷ tối ưu hóa trưởng thành (autovectorization, IndVarSimplify, scalar replacement) và hỗ trợ mọi nền tảng mà LLVM nhắm đến."
+        ],
+        "competitorWins": [
+          "Được hậu thuẫn bởi Meta — nguồn lực kỹ thuật đáng kể và một điểm tựa chiến lược rõ ràng ở React Native.",
+          "Hermes đã được phát hành trong các ứng dụng React Native sản xuất với tư cách engine bytecode; Static Hermes kế thừa hệ sinh thái và công cụ đó.",
+          "Công việc nghiên cứu cấp cao về quy tắc kiểu AOT và ngữ nghĩa tập con JS thực sự mới mẻ.",
+          "Nếu bạn đã ở trên React Native, Static Hermes (khi có sẵn) là con đường gia tăng dần hơn so với việc viết lại với một trình biên dịch khác."
+        ],
+        "whenPerry": "Chọn Perry nếu bạn cần một trình biên dịch TS-to-native hoạt động ngay hôm nay, bạn muốn một mã nguồn TypeScript duy nhất nhắm đến desktop, di động, watch, TV, WASM và web, hoặc bạn muốn widget UI gốc mà không cần bridge của React Native.",
+        "whenCompetitor": "Chọn Static Hermes (khi có sẵn) nếu bạn cam kết với React Native và muốn một con đường từ JavaScript/TypeScript đến mã gốc biên dịch ahead-of-time trên di động, và bạn thoải mái làm việc ở rìa công cụ nghiên cứu.",
+        "verdict": "Static Hermes là nghiên cứu thú vị từ một đội đáng tin cậy. Perry là một sản phẩm hoạt động được trên cùng ý tưởng chung, có phạm vi rộng hơn nhiều so với chỉ di động và đang phát hành ngay hôm nay. Nếu bạn cần một trình biên dịch TS-to-native trong tay ngay bây giờ, Perry là lựa chọn. Nếu bạn ở trên React Native và sẵn sàng theo dõi một dự án nghiên cứu, hãy theo dõi Static Hermes."
+      },
+      "electron": {
+        "title": "Perry vs Electron",
+        "metaTitle": "Perry vs Electron: ứng dụng TypeScript gốc vs Chromium đóng gói",
+        "metaDescription": "Electron đóng gói Chromium và Node.js cùng mỗi ứng dụng. Perry biên dịch TypeScript trực tiếp thành binary gốc nhỏ với widget UI gốc. So sánh kích thước binary, hiệu năng, độ trung thực UI và độ phủ nền tảng.",
+        "tldr": "Electron cho phép bạn xây dựng ứng dụng desktop đa nền tảng bằng công nghệ web (HTML/CSS/JS) bằng cách đóng gói Chromium và Node.js cùng ứng dụng. Perry biên dịch TypeScript trực tiếp thành mã máy gốc và render UI qua widget nền tảng thực sự — AppKit, UIKit, GTK4, Win32, JNI. Lập trường của Electron là tái sử dụng công nghệ web; lập trường của Perry là binary gốc nhỏ với UI gốc từ TypeScript.",
+        "competitorWhat": "Electron là một framework mã nguồn mở để xây dựng ứng dụng desktop đa nền tảng, sử dụng Chromium để render và Node.js để truy cập hệ thống. Mỗi ứng dụng Electron đi kèm bản sao Chromium và Node của riêng nó, đó là lý do trình cài đặt Electron thường có kích thước 80–150 MB ngay cả với hello world. Electron đã hỗ trợ các ứng dụng được sử dụng rộng rãi bao gồm VS Code, Slack, Discord và client desktop của Figma. Nó nhắm đến desktop Linux, macOS và Windows; không có giải pháp di động, watch hay TV chính thức.",
+        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc, không có engine trình duyệt, không có Chromium và không có runtime Node. Lớp UI (perry/ui) là một hệ thống khai báo kiểu SwiftUI ánh xạ đến widget nền tảng gốc qua AppKit trên macOS, UIKit trên iOS/iPadOS/tvOS, GTK4 trên Linux, Win32 trên Windows và JNI trên Android. Binary hello-world chỉ ~330 KB; ứng dụng đầy đủ với stdlib (Fastify, mysql2, v.v.) khoảng 48 MB.",
+        "table": [
+          { "feature": "Render", "perry": "Widget nền tảng gốc (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Chromium đóng gói (HTML/CSS/JS)" },
+          { "feature": "Engine đóng gói", "perry": "Không có (chỉ V8 tùy chọn khi --enable-js-runtime)", "competitor": "Chromium + Node.js" },
+          { "feature": "Kích thước trình cài đặt hello-world", "perry": "~330 KB", "competitor": "~80–150 MB" },
+          { "feature": "Trình cài đặt ứng dụng đầy đủ (stdlib + framework)", "perry": "~48 MB", "competitor": "Thông thường 100–200+ MB" },
+          { "feature": "Sử dụng RAM", "perry": "Gốc (thông thường: hàng chục MB)", "competitor": "Nhiều tiến trình Chromium (thông thường: hàng trăm MB)" },
+          { "feature": "Di động / watch / TV", "perry": "Có — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "Không (chỉ desktop)" },
+          { "feature": "Ngôn ngữ UI", "perry": "TypeScript với API khai báo kiểu SwiftUI", "competitor": "HTML/CSS/JS (web stack)" },
+          { "feature": "Tự động cập nhật / đóng gói", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (hệ sinh thái trưởng thành)" },
+          { "feature": "Độ trưởng thành", "perry": "Trước 1.0", "competitor": "Ổn định, hơn một thập kỷ trong sản xuất" }
+        ],
+        "perryWins": [
+          "Kích thước binary. Hello world của Perry ~330 KB; hello world Electron thường 80–150 MB vì mỗi ứng dụng đi kèm Chromium riêng.",
+          "Dấu chân bộ nhớ. Ứng dụng Perry chạy như một tiến trình gốc duy nhất; ứng dụng Electron chạy nhiều tiến trình Chromium (renderer, GPU, utility, v.v.) và tiêu thụ hàng trăm MB RAM khi nhàn rỗi.",
+          "Diện mạo và cảm giác gốc. Perry render qua widget nền tảng thực sự, vì vậy ứng dụng kế thừa các quy ước OS (focus ring, accessibility, IME, vật lý cuộn) tự động.",
+          "Di động, watch, TV. Một mã nguồn Perry biên dịch sang iOS/iPadOS/Android/watchOS/tvOS/Wear OS. Electron chỉ desktop.",
+          "Khởi động nguội. Binary gốc không trả chi phí khởi động Chromium và Node.",
+          "Hiệu năng CPU thực sự trên mã chặt chẽ. Perry dẫn đầu microbench tính toán so với Node (mà Electron sử dụng) gấp nhiều lần trên hầu hết kernel (xem perry/benchmarks)."
+        ],
+        "competitorWins": [
+          "Độ trưởng thành. Electron đã ở sản xuất hơn một thập kỷ và hỗ trợ VS Code, Slack, Discord và nhiều ứng dụng khác với công cụ đã được thử thách.",
+          "Tái sử dụng web stack. Nếu nhóm của bạn đã xây dựng UI web, Electron cho phép bạn xuất bản chúng dưới dạng ứng dụng desktop mà không cần viết lại.",
+          "Tính nhất quán UI giữa các nền tảng dễ dàng — Chromium render giống nhau trên mọi OS, đó chính xác là điều một số sản phẩm muốn.",
+          "Hệ sinh thái rộng lớn các thư viện npm hoạt động tại runtime; Perry chạy gốc một tập con và V8 tùy chọn bao phủ phần còn lại.",
+          "Công cụ đóng gói trưởng thành (electron-builder, electron-updater, trình hỗ trợ ký mã) với hỗ trợ cộng đồng rộng.",
+          "Các tính năng web-native như devtools, hot reload và tốc độ lặp CSS/HTML mượt mà không gì sánh được."
+        ],
+        "whenPerry": "Chọn Perry nếu bạn muốn binary gốc nhỏ, sử dụng bộ nhớ thấp, diện mạo và cảm giác gốc theo từng nền tảng, hoặc một mã nguồn TypeScript duy nhất xuất bản đến di động/watch/TV ngoài desktop.",
+        "whenCompetitor": "Chọn Electron nếu bạn có UI web hiện có và muốn xuất bản nó dưới dạng ứng dụng desktop với việc viết lại tối thiểu, nếu bạn cần tính nhất quán UI đa nền tảng tối đa trên desktop, hoặc nếu bạn phụ thuộc vào nhiều thư viện JS thuần tại runtime.",
+        "verdict": "Electron và Perry nằm ở hai đầu đối lập của phổ đa nền tảng. Electron đánh đổi kích thước binary và bộ nhớ lấy tái sử dụng công nghệ web; Perry đánh đổi web stack lấy binary gốc và UI gốc. Nếu bạn đã thấy trình cài đặt Electron của mình phình lên hơn 150 MB hoặc RAM nhàn rỗi của nó vượt nửa gigabyte, Perry là câu trả lời cho vấn đề cụ thể đó — với cái giá là một mô hình UI khác, kiểu gốc."
+      },
+      "tauri": {
+        "title": "Perry vs Tauri",
+        "metaTitle": "Perry vs Tauri: widget gốc vs webview hệ thống",
+        "metaDescription": "Tauri sử dụng webview của hệ thống để render UI web trong vỏ Rust. Perry biên dịch TypeScript trực tiếp thành widget gốc — không có webview, không render HTML. So sánh kiến trúc, kích thước đầu ra và hỗ trợ nền tảng.",
+        "tldr": "Tauri là một framework để xây dựng ứng dụng desktop đa nền tảng (và ngày càng nhiều cho di động) với backend Rust và frontend chạy bên trong webview tích hợp của hệ điều hành — WebView2 trên Windows, WKWebView trên macOS, WebKitGTK trên Linux. Ứng dụng Tauri nhỏ hơn đáng kể so với Electron vì webview của OS không được đóng gói. Perry đi theo một con đường khác: hoàn toàn không có webview, không render HTML, chỉ là TypeScript được biên dịch thành mã máy gốc điều khiển widget nền tảng thực sự.",
+        "competitorWhat": "Tauri là một framework mã nguồn mở được viết bằng Rust cho phép bạn xây dựng ứng dụng đa nền tảng với frontend web (bất kỳ framework nào — React, Vue, Svelte, v.v.) và backend Rust. Thay vì đóng gói Chromium, Tauri sử dụng webview tích hợp của hệ thống, giúp giữ trình cài đặt ứng dụng ở mức một chữ số MB trên Linux/Windows/macOS. Tauri 2 đã thêm hỗ trợ di động (iOS và Android). Frontend được render dưới dạng HTML/CSS/JS bởi webview hệ thống; giao tiếp với backend Rust đi qua một bridge IPC.",
+        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM. Lớp UI (perry/ui) là một API khai báo kiểu SwiftUI ánh xạ đến widget nền tảng gốc — không phải HTML được render bởi webview. Ứng dụng viết bằng Perry không mang theo engine JavaScript, không chạy bên trong WebKit/WebView2 và không cần bridge IPC giữa UI và logic. Perry nhắm đến 10 nền tảng bao gồm di động, watch và TV.",
+        "table": [
+          { "feature": "Render UI", "perry": "Widget nền tảng gốc (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Webview hệ thống (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
+          { "feature": "Ngôn ngữ frontend", "perry": "TypeScript (API widget khai báo)", "competitor": "HTML/CSS/JS qua bất kỳ framework web nào (React, Vue, v.v.)" },
+          { "feature": "Ngôn ngữ backend", "perry": "TypeScript", "competitor": "Rust" },
+          { "feature": "IPC giữa UI và logic", "perry": "Không — một tiến trình, gọi trực tiếp", "competitor": "Bắt buộc (UI trong webview, logic trong tiến trình Rust)" },
+          { "feature": "Trình cài đặt hello-world", "perry": "~330 KB", "competitor": "~3–10 MB (webview do OS cung cấp)" },
+          { "feature": "Di động (iOS, Android)", "perry": "Có — UI gốc", "competitor": "Có — dựa trên webview (Tauri 2)" },
+          { "feature": "Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Không" },
+          { "feature": "Mục tiêu WebAssembly", "perry": "Có (perry/ui qua bridge DOM)", "competitor": "N/A (Tauri tự sử dụng webview gốc)" },
+          { "feature": "Độ trưởng thành", "perry": "Trước 1.0", "competitor": "Ổn định (1.x / 2.x)" }
+        ],
+        "perryWins": [
+          "UI thực sự gốc — Perry không render HTML; nó điều khiển widget nền tảng thực sự, vì vậy ứng dụng kế thừa vật lý cuộn gốc, focus, accessibility, IME và theming OS miễn phí.",
+          "Hello-world nhỏ hơn (~330 KB so với mức một chữ số MB của Tauri), và không phụ thuộc webview hệ thống tại runtime.",
+          "Một ngôn ngữ, một tiến trình. Toàn bộ ứng dụng — UI và logic — là TypeScript, không có bridge IPC để thiết kế hay debug.",
+          "watchOS, tvOS, Wear OS và một mục tiêu Web/JS đầy đủ với pipeline biên dịch gốc thực sự, không phải webview đóng gói.",
+          "Không có sự khác biệt hành vi webview giữa các nền tảng. Tauri kế thừa các đặc thù của WKWebView vs WebView2 vs WebKitGTK; Perry chọn con đường widget gốc trên mỗi OS.",
+          "Hiệu năng tính toán là AOT-gốc, không phải JIT của webview. Perry dẫn đầu microbench tính toán trong điều kiện tương đương trên M1 Max (perry/benchmarks)."
+        ],
+        "competitorWins": [
+          "Framework trưởng thành, ổn định với dòng 2.x đang hoạt động và cộng đồng lớn.",
+          "Linh hoạt frontend — sử dụng bất kỳ framework web nào (React, Vue, Svelte, Solid, v.v.) bạn đã biết.",
+          "Trình cài đặt nhỏ hơn Electron vì Tauri dựa vào webview do OS cung cấp thay vì đóng gói Chromium.",
+          "Backend Rust lý tưởng nếu bạn có công việc cấp hệ thống cần làm (filesystem, API gốc) và muốn đảm bảo tại thời điểm biên dịch ở đó.",
+          "Render webview nghĩa là tốc độ lặp CSS/HTML và devtools hoạt động như bạn mong đợi từ phát triển web.",
+          "Pipeline đóng gói, ký mã và cập nhật đã được thiết lập."
+        ],
+        "whenPerry": "Chọn Perry nếu bạn muốn UI thực sự gốc (không phải HTML render trong webview), binary gốc nhỏ không phụ thuộc webview, một mã nguồn TypeScript duy nhất qua desktop + di động + watch + TV, hoặc mã widget đa nền tảng được xác thực tại thời điểm biên dịch.",
+        "whenCompetitor": "Chọn Tauri nếu bạn có frontend web hiện tại hoặc dự kiến, muốn ứng dụng desktop được hỗ trợ bởi Rust với trình cài đặt nhỏ, hài lòng với HTML/CSS cho UI, hoặc muốn hệ sinh thái rộng lớn của các framework và công cụ web.",
+        "verdict": "Tauri là một Electron tốt hơn rất nhiều — cùng cách tiếp cận công nghệ web, trình cài đặt nhỏ hơn đáng kể vì webview của OS không được đóng gói. Nhưng nó vẫn là một kiến trúc dựa trên webview, có nghĩa là render HTML/CSS/JS và một bridge IPC. Perry có một lập trường khác: hoàn toàn không có webview, widget nền tảng gốc, một tiến trình duy nhất. Nếu bạn muốn giữ web stack với binary nhỏ hơn Electron, Tauri là câu trả lời đúng. Nếu bạn muốn rời web stack để có widget gốc trong TypeScript, Perry là câu trả lời."
+      },
+      "react-native": {
+        "title": "Perry vs React Native",
+        "metaTitle": "Perry vs React Native: TypeScript biên dịch AOT vs bridge JS đến UI gốc",
+        "metaDescription": "React Native cung cấp một bundle JavaScript cộng với một engine JS làm cầu nối đến widget gốc. Perry biên dịch TypeScript trực tiếp thành mã máy gốc với UI gốc tích hợp. So sánh kiến trúc, hiệu năng và hỗ trợ nền tảng.",
+        "tldr": "React Native cho phép bạn viết JavaScript/TypeScript điều khiển UI gốc trên iOS và Android — các thành phần UI ánh xạ đến widget nền tảng qua một bridge JS-to-native (hoặc, trong New Architecture, một lớp JSI / Fabric với cùng hình dạng khái niệm). Perry đi theo một cách tiếp cận khác: TypeScript được biên dịch ahead-of-time thành mã máy gốc, và UI gốc là một phần của binary đã biên dịch, không phải bridge tại runtime.",
+        "competitorWhat": "React Native là framework của Meta để xây dựng ứng dụng di động bằng React. JavaScript chạy trong một engine nhúng — Hermes mặc định, hoặc JavaScriptCore — và tương tác với widget iOS/Android gốc qua một bridge (legacy) hoặc JSI/Fabric (New Architecture). Framework này ưu tiên di động (iOS và Android); Microsoft duy trì các fork cộng đồng cho Windows và macOS. React Native đã hỗ trợ ứng dụng tại Meta, Microsoft, Shopify, Discord và nhiều nơi khác.",
+        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc. Module perry/ui của nó là một hệ thống UI khai báo kiểu SwiftUI biên dịch thành widget nền tảng gốc tại thời điểm build — không có runtime JS trong binary, không có bridge và không có JSI. Cùng một mã nguồn TypeScript biên dịch đến macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly và Web.",
+        "table": [
+          { "feature": "Mô hình thực thi", "perry": "Mã máy gốc biên dịch AOT", "competitor": "Engine JS (Hermes/JSC) + bridge gốc (hoặc JSI/Fabric)" },
+          { "feature": "Engine JS trong ứng dụng", "perry": "Không có", "competitor": "Hermes (mặc định) hoặc JavaScriptCore" },
+          { "feature": "UI", "perry": "Widget gốc — API khai báo kiểu SwiftUI", "competitor": "Widget gốc qua React + bridge / Fabric" },
+          { "feature": "Mục tiêu chính", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web", "competitor": "iOS, Android (Windows/macOS qua fork cộng đồng)" },
+          { "feature": "Binary server / CLI / desktop", "perry": "Có (công cụ CLI, máy chủ, ứng dụng desktop)", "competitor": "Không (framework UI di động)" },
+          { "feature": "Bridge giữa JS và gốc", "perry": "Không có bridge — mã gốc chính là chương trình", "competitor": "Có (bridge legacy hoặc JSI/Fabric)" },
+          { "feature": "Hot reload trong phát triển", "perry": "perry dev (tự động biên dịch lại watch-mode)", "competitor": "Fast Refresh (rất nhanh)" },
+          { "feature": "Độ trưởng thành", "perry": "Trước 1.0", "competitor": "Ổn định, được triển khai rộng rãi trong sản xuất" },
+          { "feature": "Thư viện thành phần", "perry": "widget cốt lõi perry/ui + lớp tương thích React perry-react", "competitor": "Rất rộng — React Native + các gói cộng đồng" }
+        ],
+        "perryWins": [
+          "Không có engine JS trong ứng dụng được phát hành. Binary Perry biên dịch không mang theo Hermes hay JSC; TypeScript chính là tệp thực thi.",
+          "Không có chi phí bridge / JSI. Các lệnh gọi UI gốc là lệnh gọi hàm biên dịch trực tiếp, không phải marshaling JS-to-native.",
+          "Độ phủ nền tảng rộng hơn. Một mã nguồn Perry biên dịch sang desktop (macOS/Linux/Windows), di động (iOS/iPadOS/Android), thiết bị đeo (watchOS/Wear OS), TV (tvOS), WASM và Web. React Native ưu tiên di động.",
+          "Binary phía server và CLI từ cùng một trình biên dịch — Perry cũng là một runtime máy chủ, không chỉ là framework UI.",
+          "Hiệu năng tính toán biên dịch AOT — không có warmup, không có JIT, không có round trip qua bridge.",
+          "perry-react cho bạn React/JSX biên dịch thành widget gốc, vì vậy mô hình tư duy React có sẵn mà không cần engine JS trong binary."
+        ],
+        "competitorWins": [
+          "Hệ sinh thái trưởng thành, được thử thách trong trận chiến với cộng đồng, thư viện và công cụ hỗ trợ khổng lồ.",
+          "Fast Refresh trong phát triển là tốt nhất trong lớp — thay đổi mã xuất hiện trong mili giây mà không cần build lại.",
+          "Nguồn nhân lực khổng lồ. Tuyển dụng nhà phát triển React Native dễ dàng; Perry còn mới.",
+          "Pipeline CI/CD, xuất bản App Store / Play Store và cập nhật OTA kiểu codepush đã được thiết lập.",
+          "JSI/Fabric và New Architecture đã thu hẹp phần lớn khoảng cách hiệu năng lịch sử với gốc, đồng thời bảo toàn mô hình lập trình React.",
+          "Hỗ trợ trực tiếp từ Meta và các đơn vị áp dụng lớn (Microsoft, Shopify, Amazon) giữ cho framework tiếp tục tiến lên."
+        ],
+        "whenPerry": "Chọn Perry nếu bạn muốn một mã nguồn TypeScript duy nhất qua di động, desktop, watch, TV, WASM và web; nếu bạn không muốn có runtime JS trong ứng dụng được phát hành; nếu bạn muốn UI gốc không có bridge; hoặc nếu bạn đã đầu tư vào TypeScript và muốn biên dịch gốc thay vì một engine JS.",
+        "whenCompetitor": "Chọn React Native nếu bạn xây dựng ứng dụng di động và muốn framework UI gốc đa nền tảng trưởng thành nhất, bạn có một đội React hiện có, bạn phụ thuộc vào hệ sinh thái thư viện React Native, hoặc bạn cần stack đa nền tảng di động tiêu chuẩn ngành ngày nay.",
+        "verdict": "React Native là một framework ưu tiên di động với runtime JS và một bridge (hiện đã được cải thiện). Perry là một trình biên dịch tạo ra binary gốc từ TypeScript, với UI gốc là một phần của đầu ra biên dịch. Nếu bạn muốn React trên di động với hệ sinh thái sâu nhất, React Native là câu trả lời ngày nay. Nếu bạn muốn một mã nguồn TypeScript duy nhất biên dịch đến di động + desktop + watch + TV mà không có runtime JS trong ứng dụng, Perry là câu trả lời."
+      }
     }
   }
 }

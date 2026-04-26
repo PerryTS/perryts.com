@@ -13,6 +13,7 @@
   "nav": {
     "showcase": "Showcase",
     "blog": "博客",
+    "compare": "对比",
     "roadmap": "路线图",
     "publish": "发布",
     "overview": "概览",
@@ -425,6 +426,258 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "分代 GC、惰性 JSON，以及经得起推敲的基准",
       "excerpt": "Perry 在三天内从 v0.5.174 升级到 v0.5.306，外加并行落地的 GC 与 JSON 工作。分代 GC 成为默认。Small String Optimization 成为默认。JSON 流水线获得惰性 tape，validate-and-roundtrip 中位数落在 75 毫秒——动态类型运行时阵营中的最佳。基准页面以 RUNS=11 中位数 + p95 + σ 重写，simdjson 与 AssemblyScript+json-as 加入对照，Perry 的每一处弱点都被诚实地摆上台面。"
+    }
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry 与替代方案对比",
+      "indexSubtitle": "Perry 与其他交付 TypeScript 方式的对比：运行时、编译器以及跨平台 UI 框架。诚实、有出处，并在数据存在的地方给出实测数字。",
+      "indexMetaTitle": "将 Perry 与 Bun、Deno、Electron、Tauri、React Native 和 Static Hermes 进行对比",
+      "indexMetaDescription": "将 Perry 与开发者会选择的替代方案逐一并列对比:TypeScript 运行时(Bun、Deno)、AOT TS 编译器(Static Hermes),以及跨平台 UI 框架(Electron、Tauri、React Native)。",
+      "backToCompare": "返回对比页",
+      "lastUpdated": "最后更新",
+      "whatIs": "什么是 {name}？",
+      "sideBySide": "并排对比",
+      "feature": "特性",
+      "wherePerryWins": "Perry 胜出之处",
+      "whereCompetitorWins": "{name} 胜出之处",
+      "whenChoose": "何时选择 {name}",
+      "verdict": "结论",
+      "ctaTitle": "试用 Perry",
+      "ctaSubtitle": "今天就把你的 TypeScript 编译为原生代码。",
+      "category": {
+        "runtime": "TypeScript 运行时",
+        "compiler": "TS 转原生编译器",
+        "ui-framework": "跨平台 UI"
+      }
+    },
+    "items": {
+      "bun": {
+        "title": "Perry 对比 Bun",
+        "metaTitle": "Perry 对比 Bun：TypeScript 转原生 vs 一体化运行时",
+        "metaDescription": "Bun 将你的 TypeScript 与 Bun 运行时打包进单个可执行文件。Perry 则把 TypeScript 直接编译为原生机器码。比较二者在架构、产物体积、性能和平台支持上的差异。",
+        "tldr": "Bun 是用 Zig 编写的一体化 JavaScript/TypeScript 运行时、打包器、包管理器和测试运行器，它也可以通过把自身运行时与你的代码打包来生成单文件可执行程序。Perry 走的是另一条路：通过 LLVM 把 TypeScript 直接编译为原生机器码——二进制中没有 JavaScript 引擎、没有运行时，只有一个体积很小的原生可执行文件。Bun 与 Perry 在 TS 转二进制这一点上有重叠，但在“二进制里是否要带一个 JavaScript 引擎”上意见相左。",
+        "competitorWhat": "Bun 是一个用 Zig 编写的快速、一体化的 JavaScript 与 TypeScript 工具链。它直接运行 `.ts` 源码（无需预编译），使用 JavaScriptCore 作为 JS 引擎，并自带打包器、包管理器和测试运行器。`bun build --compile` 会把 Bun 运行时连同你的应用一起打包为单个可执行文件。Bun 面向 Linux、macOS 和 Windows 上的 x64 与 arm64。",
+        "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器。它通过 LLVM 把 TypeScript 直接编译为原生机器码——没有 JavaScript 引擎、没有运行时、没有 JIT。产物是单个二进制文件（hello world 大约 330 KB；带完整标准库的应用，例如 Fastify 服务器，约 48 MB）。Perry 面向 10 个平台，包括 macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web。",
+        "table": [
+          { "feature": "产物", "perry": "原生机器码（LLVM）", "competitor": "你的代码 + Bun 运行时打包在一个二进制中" },
+          { "feature": "二进制中的 JavaScript 引擎", "perry": "默认无；可选 V8，通过 --enable-js-runtime 启用（+约 15 MB）", "competitor": "始终内置 JavaScriptCore" },
+          { "feature": "hello world 二进制大小", "perry": "约 330 KB", "competitor": "约 50–100 MB（包含 Bun 运行时）" },
+          { "feature": "JIT", "perry": "无（AOT 编译）", "competitor": "有（JavaScriptCore JIT）" },
+          { "feature": "移动平台目标（iOS、Android）", "perry": "支持——通过 UIKit/JNI 提供原生 UI", "competitor": "不支持" },
+          { "feature": "Watch / TV 目标", "perry": "watchOS、tvOS、Wear OS", "competitor": "不支持" },
+          { "feature": "原生 UI 组件", "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个", "competitor": "无（聚焦服务端/CLI）" },
+          { "feature": "npm 生态", "perry": "纯 TS/JS 包可原生编译；其他通过可选 V8", "competitor": "完整的 Node 兼容 npm" },
+          { "feature": "稳定性", "perry": "Pre-1.0（alpha）", "competitor": "稳定（1.x）" },
+          { "feature": "实现语言", "perry": "Rust", "competitor": "Zig" }
+        ],
+        "perryWins": [
+          "更小的二进制——Perry 的 hello world 约 330 KB；Bun --compile 的 hello world 包含 Bun 运行时，落在数十 MB 量级。",
+          "无 JavaScript 引擎成本。Perry 编译出的二进制不携带解释器或 JIT——你的 TypeScript 就是可执行文件本身。",
+          "移动、手表、TV。Perry 可以编译到 iOS、iPadOS、Android、watchOS、tvOS 和 WebAssembly。Bun 仅限服务端/桌面。",
+          "原生 UI。Perry 的 perry/ui 模块可编译到真正的平台组件（macOS 上的 AppKit，iOS 上的 UIKit，Linux 上的 GTK4，Windows 上的 Win32，Android 上的 JNI）。Bun 没有 UI 方案。",
+          "在 M1 Max 上以匹配条件实测的多数计算微基准更快（RUNS=11，v0.5.279，2026-04-25）：fibonacci 318 ms vs Bun 589 ms；object_create 1 ms vs 6 ms；nested_loops 18 ms vs 21 ms。完整数据见 perry/benchmarks。",
+          "在动态类型运行时阵营的 JSON validate-and-roundtrip 上更快：在同一份 1 万条记录的负载上，Perry 的惰性 JSON tape 中位数 75 ms，Bun 为 259 ms。"
+        ],
+        "competitorWins": [
+          "成熟、稳定、已发布 1.x 版本的运行时。Perry 仍处于 Pre-1.0。",
+          "在 JSON parse-and-iterate（每个值都会被访问的场景）上更快：同一负载下 Bun 254 ms，Perry 中位数 466 ms——一旦强制遍历，Perry 的惰性 tape 无法走捷径。",
+          "开箱即用、完整的 Node 兼容 npm 生态。Perry 原生支持其中一个子集，其余则回退到可选嵌入的 V8。",
+          "内置测试运行器、打包器和包管理器。Perry 是一个编译器，相邻工具链是分开的。",
+          "在带有热点内层循环、迭代密集的代码上，JIT 预热后的性能可以超过 AOT；Perry 没有 JIT。",
+          "在 `loop_data_dependent` 上与 Perry 在多次运行噪声范围内打成平手（232 ms vs 235 ms）——这是真正不可折叠的 f64 内核，双方编译器都无法重排序。来源：perry/benchmarks RUNS=11。"
+        ],
+        "whenPerry": "在以下情况选择 Perry：二进制大小很重要（移动端分发、嵌入式场景、快速冷启动），希望从一份 TypeScript 代码同时交付到移动/手表/TV，希望使用原生 UI 组件，或完全不希望最终交付物里带 JavaScript 引擎。",
+        "whenCompetitor": "在以下情况选择 Bun：你今天就需要一个稳定、成熟的运行时；完整的 npm 兼容不可妥协；你想用一个工具同时承担运行时 + 打包器 + 包管理器 + 测试运行器；或者长时间运行负载下的 JIT 热态性能比冷启动体积更重要。",
+        "verdict": "Bun 和 Perry 都让你把 TypeScript 程序作为单个二进制交付，但它们回答的是不同的问题。Bun 的二进制内含 Bun 运行时，针对后端/CLI 场景做了优化，靠 JIT 与完整的 Node 兼容取胜。Perry 的二进制不含 JS 引擎，针对体积、冷启动、移动端和原生 UI 做了优化。如果你交付的是服务器，Bun 在今天更经得起考验；如果你交付的是原生应用或在意二进制大小，Perry 就是为这种场景而生的。"
+      },
+      "deno": {
+        "title": "Perry 对比 Deno",
+        "metaTitle": "Perry 对比 Deno：AOT 编译的原生二进制 vs deno compile",
+        "metaDescription": "Deno 的 `deno compile` 把 V8 与你的 TypeScript 一起打包到单个可执行文件中。Perry 通过 LLVM 把 TypeScript 直接编译为原生代码。比较产物形态、运行时模型、安全性和平台支持。",
+        "tldr": "Deno 是一个建立在 V8 之上的现代 JavaScript 与 TypeScript 运行时，原生支持 TypeScript，采用基于权限的安全模型，并提供 `deno compile` 命令——通过把 V8 与应用一起打包来生成单个可执行文件。Perry 则把 TypeScript 直接编译为原生机器码——产物里没有 V8、没有运行时层，只有一个小型的原生二进制。",
+        "competitorWhat": "Deno 是一个用 Rust 编写、构建于 V8 与 Tokio 之上的 TypeScript/JavaScript 运行时。它直接执行 `.ts` 源码，内置工具（格式化器、linter、测试运行器、语言服务器），并采用权限模型——网络、文件和环境访问都需要显式授权。`deno compile` 通过把 Deno 运行时（其中包含 V8）与你的代码一起打包，生成自包含的可执行文件。Deno 面向 Linux、macOS 和 Windows 上的 x64 与 arm64。",
+        "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器。它通过 LLVM 把 TypeScript 直接编译为原生机器码——没有 V8、没有 JIT、没有运行时。产物是单个二进制，原生代码通常为几百 KB 到几 MB；如果选择启用嵌入式 V8 运行时以兼容需要 JS 引擎的 npm 包，体积会更大。",
+        "table": [
+          { "feature": "产物", "perry": "原生机器码（LLVM）", "competitor": "你的代码 + Deno 运行时（V8）打包在一起" },
+          { "feature": "二进制中的 JavaScript 引擎", "perry": "默认无；可选 V8", "competitor": "始终内置 V8" },
+          { "feature": "hello world 二进制大小", "perry": "约 330 KB", "competitor": "约 80–100 MB（包含 V8）" },
+          { "feature": "JIT", "perry": "无（AOT 编译）", "competitor": "有（V8 TurboFan）" },
+          { "feature": "移动平台目标", "perry": "iOS、iPadOS、Android", "competitor": "不支持" },
+          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS", "competitor": "不支持" },
+          { "feature": "原生 UI", "perry": "通过原生平台 API 提供 25+ 个组件", "competitor": "不支持" },
+          { "feature": "权限模型", "perry": "标准操作系统进程权限", "competitor": "细粒度运行时权限（--allow-net、--allow-read 等）" },
+          { "feature": "稳定性", "perry": "Pre-1.0", "competitor": "稳定（1.x / 2.x）" },
+          { "feature": "实现语言", "perry": "Rust", "competitor": "Rust（基于 V8）" }
+        ],
+        "perryWins": [
+          "二进制显著更小。Perry 的 hello world 约 330 KB。`deno compile` 的产物包含 V8，落在 80–100 MB 区间。",
+          "二进制中没有 JavaScript 引擎。你的 TypeScript 被编译为原生机器码，而不是在运行时由 V8 解释执行。",
+          "支持移动、手表、TV、WASM 和 Web 目标。Deno 仅限服务端/桌面。",
+          "可映射到 AppKit、UIKit、GTK4、Win32 和 JNI 的原生 UI 组件——这是 Deno 没有的。",
+          "更快的冷启动。AOT 编译的原生二进制不需要支付 V8 的启动开销。",
+          "在 M1 Max 上以匹配条件运行时，由于 Perry 的 `reassoc contract` 快速数学默认值允许 LLVM 进行自动向量化并折叠可平凡折叠的累加器，因此在计算微基准上处于领先（例如 loop_overhead 12 ms、math_intensive 14 ms；见 perry/benchmarks）。"
+        ],
+        "competitorWins": [
+          "成熟、稳定、长期运营的运行时，2.x 线积极活跃。",
+          "细粒度权限模型。Deno 要求显式 `--allow-net`、`--allow-read` 等——对沙箱脚本和不受信任代码很有用。",
+          "内置工具：格式化器、linter、测试运行器、文档生成器、LSP 全部集成在运行时中。",
+          "运行时上的完整 V8 生态——能在 V8 上跑的都能跑在 Deno 上，包括长时间运行热路径上的 JIT 优化。",
+          "开发期对 TypeScript 的一等支持，无需独立的编译步骤，并提供完全托管的类型检查管道。",
+          "在运行时原生实现的标准化 Web 平台 API（fetch、Web Streams、Web Crypto）。"
+        ],
+        "whenPerry": "如果你想要一个体积小、启动快的原生二进制，要交付到移动或其他非服务端目标，要原生 UI，或希望编译出来的 TypeScript 二进制里没有 JS 引擎，就选 Perry。",
+        "whenCompetitor": "如果你想要一个稳定、自带电池的 TypeScript 运行时，看重权限沙箱，正在构建服务端或脚本类负载，或需要运行时层面的完整 V8 生态兼容，就选 Deno。",
+        "verdict": "两者都让你把 TypeScript 程序作为单个二进制交付；区别在于这个二进制里装的是什么。Deno 给你的是 V8 + 一套精心打磨的运行时 + 权限沙箱。Perry 给你的是不带任何引擎的原生机器码。在生态和权限模型重要的服务端与脚本类工作上，Deno 更合适；当你需要小体积、快冷启动的二进制、移动端目标或原生 UI 时，Perry 更合适。"
+      },
+      "static-hermes": {
+        "title": "Perry 对比 Static Hermes",
+        "metaTitle": "Perry 对比 Static Hermes（shermes）：可投入生产 vs 研究型编译器",
+        "metaDescription": "Static Hermes 是 Meta 实验性的 TypeScript 转原生提前编译器。Perry 则是今天就在交付的、走生产路线的 TS 转原生编译器。比较成熟度、覆盖范围、产物形态与平台覆盖。",
+        "tldr": "Static Hermes（`shermes`）是 Meta 处于研究阶段的尝试，目标是通过 Hermes 引擎对一类强类型化的 JavaScript/TypeScript 子集进行提前编译，主要面向 React Native。Perry 在同一类思路下押的是另一注——把 TypeScript 编译为原生——但它独立用 Rust 在 LLVM 之上构建，并已交付一个可工作的编译器、25+ 原生 UI 组件以及 10 个编译目标。截至 2026 年 4 月，Perry 自己的基准套件汇报：他们曾尝试把 Static Hermes 当作对照纳入，但发现它无法通过它所测试的标准包管理器干净地安装。",
+        "competitorWhat": "Hermes 是 Meta 为 React Native 打造的 JavaScript 引擎——基于字节码、AOT 预编译、为移动端启动时间做了优化。Static Hermes 是把 Hermes 扩展为对类型化 JavaScript 子集进行提前原生编译的研究项目，目的是给 React Native 一条通往真正原生代码的路径。它本质上是一个编译器研发项目；按 Perry 的基准说明所述，它目前还没有被打包为可在 macOS arm64 上常规安装的形态（`shermes` 在多语言基准对照中被跳过，并附注“在 Homebrew 或 npm 上没有以可在 macOS arm64 上干净安装的方式提供”——见 perry/benchmarks/README.md）。",
+        "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器，使用 SWC 解析、LLVM 生成代码。它已交付可用的 CLI（`perry compile`、`perry run`、`perry publish`）、25+ 原生 UI 组件、10 个编译目标、自托管的运行时，以及一个在透明条件下测得的基准套件（M1 Max，RUNS=11）。Perry 仍处于 Pre-1.0，但走的是生产路线：已经有人在用它构建并交付应用（Bloom Engine、Mango、Hone、Pry、dB Meter——见 perryts.com）。",
+        "table": [
+          { "feature": "状态", "perry": "Pre-1.0（alpha）——走生产路线", "competitor": "研究 / 实验性" },
+          { "feature": "安装路径（macOS arm64）", "perry": "Homebrew、APT、npm（@perryts/perry）", "competitor": "撰写本文时尚未打包为可干净安装的形式（依据 perry/benchmarks）" },
+          { "feature": "后端", "perry": "LLVM", "competitor": "自定义（基于 Hermes 的代码生成）" },
+          { "feature": "输入", "perry": "完整 TypeScript", "competitor": "类型化的 JS/TS 子集" },
+          { "feature": "编译目标", "perry": "10 个：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS", "competitor": "主要面向移动端（React Native 场景）" },
+          { "feature": "原生 UI", "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个组件", "competitor": "通过 React Native 桥接（在被集成时）" },
+          { "feature": "独立 CLI 应用工作流", "perry": "支持——`perry compile main.ts` 直接生成二进制", "competitor": "绑定 React Native 上下文" },
+          { "feature": "公开基准套件", "perry": "有——RUNS=11，对比 Node、Bun、Rust、C++、Go、Swift、Java", "competitor": "内部 / 研究论文" }
+        ],
+        "perryWins": [
+          "它作为一个可用工具是真实存在的。今天就可以通过 Homebrew、APT 或 `npm install @perryts/perry` 安装 Perry，而 `perry compile main.ts` 第一次就能生成二进制。",
+          "覆盖更广。Perry 可以从一份 TypeScript 代码同时编译出独立 CLI、原生桌面应用、移动应用、手表应用、TV 应用、WASM 和 Web。Static Hermes 聚焦在 React Native 的原生代码路径上。",
+          "原生 UI 内置。Perry 的 perry/ui 是一套可工作的、SwiftUI 风格的声明式 UI 层，会编译为 AppKit/UIKit/GTK4/Win32/JNI 组件。Static Hermes 把 UI 留给宿主（React Native）。",
+          "公开、可复现的基准套件，方法论有据可查——perry/benchmarks 给出了 RUNS=11 下针对具名编译器与运行时的中位数 + p95 + σ。",
+          "LLVM 后端意味着 Perry 直接继承了数十年成熟的优化遍（自动向量化、IndVarSimplify、标量替换），并支持 LLVM 所有目标平台。"
+        ],
+        "competitorWins": [
+          "由 Meta 支持——拥有可观的工程资源，并以 React Native 作为清晰的战略锚点。",
+          "Hermes 已经作为字节码引擎在生产中的 React Native 应用里运行；Static Hermes 继承了这套生态与工具链。",
+          "在 AOT 类型规则与 JS 子集语义上的研究级工作真正具有创新性。",
+          "如果你已经在 React Native 上，Static Hermes（在可用时）会比改写到另一个编译器是一条更增量的路径。"
+        ],
+        "whenPerry": "如果你今天就需要一个能用的 TS 转原生编译器，希望用一份 TypeScript 代码覆盖桌面、移动、手表、TV、WASM 和 Web，或者想要原生 UI 组件而不必依赖 React Native 的桥接，就选 Perry。",
+        "whenCompetitor": "如果你已经投入到 React Native，并想要一条从 JavaScript/TypeScript 到 AOT 编译原生代码的移动端路径，并且你能接受站在研究型工具链的前沿，就选择 Static Hermes（在它可用时）。",
+        "verdict": "Static Hermes 是来自一支有信誉团队的、有趣的研究工作。Perry 则是同一类思路下今天可用、可工作的产品，覆盖远不止移动端。如果你现在手里就需要一个 TS 转原生编译器，Perry 是答案；如果你在 React Native 上并愿意持续跟进研究项目，可以观察 Static Hermes。"
+      },
+      "electron": {
+        "title": "Perry 对比 Electron",
+        "metaTitle": "Perry 对比 Electron：原生 TypeScript 应用 vs 内置 Chromium",
+        "metaDescription": "Electron 让每个应用都带上 Chromium 和 Node.js。Perry 把 TypeScript 直接编译为体积小的原生二进制，并提供原生 UI 组件。比较二进制体积、性能、UI 表现和平台覆盖。",
+        "tldr": "Electron 让你用 Web 技术（HTML/CSS/JS）构建跨平台桌面应用，方法是把 Chromium 与 Node.js 一起打包进应用。Perry 则把 TypeScript 直接编译为原生机器码，并通过真正的平台组件——AppKit、UIKit、GTK4、Win32、JNI——来渲染 UI。Electron 的卖点是 Web 技术复用；Perry 的卖点是从 TypeScript 出发交付小体积原生二进制 + 原生 UI。",
+        "competitorWhat": "Electron 是一个开源的跨平台桌面应用框架，使用 Chromium 进行渲染、Node.js 进行系统访问。每个 Electron 应用都自带一份 Chromium 和 Node，因此即便是 hello world，Electron 应用安装包通常也有 80–150 MB。Electron 支撑了大量被广泛使用的应用，包括 VS Code、Slack、Discord 和 Figma 桌面客户端。它面向 Linux、macOS 和 Windows 桌面；没有官方的移动、手表或 TV 方案。",
+        "perryWhat": "Perry 把 TypeScript 直接编译为原生机器码，没有浏览器引擎、没有 Chromium，也没有 Node 运行时。UI 层（perry/ui）是一套 SwiftUI 风格的声明式系统，通过 macOS 上的 AppKit、iOS/iPadOS/tvOS 上的 UIKit、Linux 上的 GTK4、Windows 上的 Win32 以及 Android 上的 JNI 映射到原生平台组件。hello world 二进制约 330 KB；带完整标准库（Fastify、mysql2 等）的应用约 48 MB。",
+        "table": [
+          { "feature": "渲染", "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "内置 Chromium（HTML/CSS/JS）" },
+          { "feature": "内置引擎", "perry": "无（仅在 --enable-js-runtime 时可选 V8）", "competitor": "Chromium + Node.js" },
+          { "feature": "hello world 安装包大小", "perry": "约 330 KB", "competitor": "约 80–150 MB" },
+          { "feature": "完整应用安装包（标准库 + 框架）", "perry": "约 48 MB", "competitor": "通常 100–200+ MB" },
+          { "feature": "内存占用", "perry": "原生（典型为数十 MB）", "competitor": "多个 Chromium 进程（典型为数百 MB）" },
+          { "feature": "移动 / 手表 / TV", "perry": "支持——iOS、iPadOS、Android、watchOS、tvOS、Wear OS", "competitor": "不支持（仅限桌面）" },
+          { "feature": "UI 语言", "perry": "TypeScript，SwiftUI 风格的声明式 API", "competitor": "HTML/CSS/JS（Web 技术栈）" },
+          { "feature": "自动更新 / 打包", "perry": "perry publish（Homebrew、APT、App Store、Play Store）", "competitor": "electron-builder、electron-updater（生态成熟）" },
+          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定，已有十余年生产经验" }
+        ],
+        "perryWins": [
+          "二进制大小。Perry 的 hello world 约 330 KB；Electron 的 hello world 因为每个应用都自带一份 Chromium，通常在 80–150 MB。",
+          "内存占用。Perry 应用作为单个原生进程运行；Electron 应用会跑多个 Chromium 进程（渲染器、GPU、辅助进程等），空闲时也消耗数百 MB 内存。",
+          "原生外观与体感。Perry 通过真正的平台组件渲染，因此应用会自动继承操作系统约定（焦点环、可访问性、IME、滚动手感）。",
+          "移动、手表、TV。一份 Perry 代码可编译到 iOS/iPadOS/Android/watchOS/tvOS/Wear OS。Electron 仅限桌面。",
+          "冷启动。原生二进制不需要支付 Chromium 与 Node 的启动开销。",
+          "在紧凑代码上的真实 CPU 性能。在多数计算微基准里，Perry 都以多倍领先 Node（即 Electron 所用的 JS 引擎）（见 perry/benchmarks）。"
+        ],
+        "competitorWins": [
+          "成熟度。Electron 已在生产中跑了十多年，支撑着 VS Code、Slack、Discord 等众多应用，工具链经过实战检验。",
+          "Web 技术栈复用。如果你的团队已经在做 Web UI，Electron 让你直接把它作为桌面应用交付，无需重写。",
+          "跨平台 UI 一致性容易做到——Chromium 在每个 OS 上的渲染基本一致，这正是某些产品想要的。",
+          "海量 npm 库在运行时可用；Perry 原生支持其中一个子集，按需启用 V8 覆盖其余部分。",
+          "成熟的打包工具链（electron-builder、electron-updater、代码签名辅助工具）拥有广泛的社区支持。",
+          "Web 原生特性如 devtools、热重载，以及 CSS/HTML 的流畅迭代速度，都无可匹敌。"
+        ],
+        "whenPerry": "如果你想要小体积的原生二进制、低内存占用、各平台原生外观与体感，或者想要一份 TypeScript 代码同时交付到桌面之外的移动/手表/TV，就选 Perry。",
+        "whenCompetitor": "如果你已有现成的 Web UI，并想以最少的改写把它作为桌面应用交付；如果你需要桌面端最大化的跨平台 UI 一致性；或者你的运行时依赖广泛的纯 JS 库，就选 Electron。",
+        "verdict": "Electron 与 Perry 处在跨平台谱系的两端。Electron 用更大的二进制和更高的内存换取 Web 技术复用；Perry 用放弃 Web 技术栈换取原生二进制与原生 UI。如果你眼睁睁看着 Electron 应用安装包涨到 150 MB 以上、空闲内存涨到半个 GB，Perry 正是为那个具体问题准备的答案——代价是换上一种不一样的、原生风格的 UI 模型。"
+      },
+      "tauri": {
+        "title": "Perry 对比 Tauri",
+        "metaTitle": "Perry 对比 Tauri：原生组件 vs 系统 webview",
+        "metaDescription": "Tauri 借助系统 webview 在 Rust 外壳里渲染 Web UI。Perry 直接把 TypeScript 编译为原生组件——没有 webview，没有 HTML 渲染。比较架构、产物体积和平台支持。",
+        "tldr": "Tauri 是一个用于构建跨平台桌面（以及越来越多移动端）应用的框架，后端用 Rust，前端跑在操作系统内置的 webview 中——Windows 上的 WebView2、macOS 上的 WKWebView、Linux 上的 WebKitGTK。因为不打包系统 webview，Tauri 应用比 Electron 小得多。Perry 走的是另一条路：完全不用 webview，不渲染 HTML，只把 TypeScript 编译为驱动真正平台组件的原生机器码。",
+        "competitorWhat": "Tauri 是一个用 Rust 编写的开源框架，让你用 Web 前端（任意框架——React、Vue、Svelte 等）和 Rust 后端构建跨平台应用。它不打包 Chromium，而是使用系统内置的 webview，因此在 Linux/Windows/macOS 上的应用安装包通常在个位数 MB 量级。Tauri 2 增加了对移动端（iOS 与 Android）的支持。前端由系统 webview 以 HTML/CSS/JS 渲染；与 Rust 后端的通信通过一个 IPC 桥进行。",
+        "perryWhat": "Perry 通过 LLVM 把 TypeScript 直接编译为原生机器码。UI 层（perry/ui）是一套 SwiftUI 风格的声明式 API，映射到原生平台组件——而不是由 webview 渲染的 HTML。Perry 写的应用既不携带 JavaScript 引擎，也不跑在 WebKit/WebView2 里，更不需要 UI 与逻辑之间的 IPC 桥。Perry 面向 10 个平台，包括移动、手表和 TV。",
+        "table": [
+          { "feature": "UI 渲染", "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "系统 webview（WKWebView、WebView2、WebKitGTK）——HTML/CSS/JS" },
+          { "feature": "前端语言", "perry": "TypeScript（声明式组件 API）", "competitor": "通过任意 Web 框架（React、Vue 等）使用 HTML/CSS/JS" },
+          { "feature": "后端语言", "perry": "TypeScript", "competitor": "Rust" },
+          { "feature": "UI 与逻辑之间的 IPC", "perry": "无——单进程，直接调用", "competitor": "必需（UI 在 webview，逻辑在 Rust 进程中）" },
+          { "feature": "hello world 安装包", "perry": "约 330 KB", "competitor": "约 3–10 MB（webview 由 OS 提供）" },
+          { "feature": "移动（iOS、Android）", "perry": "支持——原生 UI", "competitor": "支持——基于 webview（Tauri 2）" },
+          { "feature": "Watch / TV", "perry": "watchOS、tvOS、Wear OS", "competitor": "不支持" },
+          { "feature": "WebAssembly 目标", "perry": "支持（perry/ui 通过 DOM 桥）", "competitor": "不适用（Tauri 自身原生使用 webview）" },
+          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定（1.x / 2.x）" }
+        ],
+        "perryWins": [
+          "真正的原生 UI——Perry 不渲染 HTML，而是直接驱动真正的平台组件，因此应用会自动获得原生滚动手感、焦点、可访问性、IME 与系统主题。",
+          "更小的 hello world（约 330 KB，相对 Tauri 的个位数 MB），且运行时不依赖系统 webview。",
+          "单一语言、单一进程。整个应用——UI 与逻辑——都是 TypeScript，没有需要设计或调试的 IPC 桥。",
+          "watchOS、tvOS、Wear OS，以及一个走真正原生编译流水线的 Web/JS 目标，而不是被打包的 webview。",
+          "不同平台之间没有 webview 行为差异。Tauri 会继承 WKWebView vs WebView2 vs WebKitGTK 的怪癖；Perry 在每个 OS 上都走原生组件路径。",
+          "计算性能是 AOT 原生而非 webview 中的 JIT。在 M1 Max 的匹配条件下，Perry 在计算微基准上领先（perry/benchmarks）。"
+        ],
+        "competitorWins": [
+          "成熟、稳定的框架，2.x 线积极活跃，社区庞大。",
+          "前端灵活——可以使用你已经熟悉的任意 Web 框架（React、Vue、Svelte、Solid 等）。",
+          "因为依赖系统提供的 webview 而非打包 Chromium，安装包比 Electron 小很多。",
+          "如果你需要做系统级工作（文件系统、原生 API）并希望在那一侧获得编译期保证，Rust 后端是理想选择。",
+          "webview 渲染意味着 CSS/HTML 的迭代速度与 devtools 都符合 Web 开发者的预期。",
+          "成熟的打包、代码签名与更新器流水线。"
+        ],
+        "whenPerry": "如果你想要真正的原生 UI（而不是 webview 里渲染的 HTML），想要不依赖 webview 的小体积原生二进制，想要一份 TypeScript 代码覆盖桌面 + 移动 + 手表 + TV，或者想要在编译期被验证的跨平台组件代码，就选 Perry。",
+        "whenCompetitor": "如果你已有或计划做 Web 前端，想要一个由 Rust 支撑的小安装包桌面应用，乐于用 HTML/CSS 做 UI，或者想要 Web 框架与工具的广阔生态，就选 Tauri。",
+        "verdict": "Tauri 是一个“好得多的 Electron”——同样的 Web 技术思路，但因为不打包系统 webview，安装包显著更小。但它本质上仍是基于 webview 的架构，意味着 HTML/CSS/JS 渲染与 IPC 桥。Perry 的立场不同：完全不用 webview，使用原生平台组件，单进程。如果你想保留 Web 技术栈但比 Electron 更小，Tauri 是正确答案；如果你想离开 Web 技术栈、用 TypeScript 走原生组件路线，那答案是 Perry。"
+      },
+      "react-native": {
+        "title": "Perry 对比 React Native",
+        "metaTitle": "Perry 对比 React Native：AOT 编译的 TypeScript vs JS 桥接到原生 UI",
+        "metaDescription": "React Native 交付的是一份 JavaScript 包加一个 JS 引擎，通过桥接驱动原生组件。Perry 直接把 TypeScript 编译为原生机器码，并内置原生 UI。比较架构、性能与平台支持。",
+        "tldr": "React Native 让你写 JavaScript/TypeScript 来驱动 iOS 与 Android 上的原生 UI——UI 组件通过 JS 与原生之间的桥（或在新架构下的 JSI / Fabric 层，概念形态相同）映射到平台组件。Perry 走的是另一条路：TypeScript 被提前编译为原生机器码，原生 UI 是编译后二进制的一部分，而非运行时的桥。",
+        "competitorWhat": "React Native 是 Meta 用 React 构建移动应用的框架。JavaScript 跑在嵌入式引擎里——默认 Hermes，或 JavaScriptCore——并通过桥（旧版）或 JSI/Fabric（新架构）与 iOS/Android 原生组件交互。该框架以移动优先（iOS 与 Android）；Microsoft 维护着 Windows 与 macOS 的社区分支。React Native 已经支撑了 Meta、Microsoft、Shopify、Discord 等众多公司的应用。",
+        "perryWhat": "Perry 把 TypeScript 直接编译为原生机器码。它的 perry/ui 模块是一套 SwiftUI 风格的声明式 UI 系统，会在构建时编译为原生平台组件——二进制中没有 JS 运行时、没有桥、也没有 JSI。同一份 TypeScript 代码可以同时编译到 macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、Wear OS、WebAssembly 和 Web。",
+        "table": [
+          { "feature": "执行模型", "perry": "AOT 编译的原生机器码", "competitor": "JS 引擎（Hermes/JSC）+ 原生桥（或 JSI/Fabric）" },
+          { "feature": "应用中的 JS 引擎", "perry": "无", "competitor": "Hermes（默认）或 JavaScriptCore" },
+          { "feature": "UI", "perry": "原生组件——SwiftUI 风格的声明式 API", "competitor": "通过 React + 桥 / Fabric 的原生组件" },
+          { "feature": "主要目标", "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web", "competitor": "iOS、Android（Windows/macOS 通过社区分支）" },
+          { "feature": "服务器 / CLI / 桌面二进制", "perry": "支持（CLI 工具、服务器、桌面应用）", "competitor": "不支持（移动 UI 框架）" },
+          { "feature": "JS 与原生之间的桥", "perry": "无桥——原生代码就是程序本身", "competitor": "有（旧版桥或 JSI/Fabric）" },
+          { "feature": "开发期热重载", "perry": "perry dev（watch 模式自动重编译）", "competitor": "Fast Refresh（非常快）" },
+          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定，在生产中被广泛部署" },
+          { "feature": "组件库", "perry": "perry/ui 核心组件 + perry-react React 兼容层", "competitor": "庞大——React Native + 社区包" }
+        ],
+        "perryWins": [
+          "交付的应用里没有 JS 引擎。Perry 编译出的二进制不携带 Hermes 或 JSC；TypeScript 就是可执行文件本身。",
+          "没有桥 / JSI 的成本。原生 UI 调用就是直接的编译后函数调用，而非 JS 与原生之间的编组。",
+          "更广的平台覆盖。一份 Perry 代码可同时编译到桌面（macOS/Linux/Windows）、移动（iOS/iPadOS/Android）、可穿戴（watchOS/Wear OS）、TV（tvOS）、WASM 和 Web。React Native 是移动优先。",
+          "用同一个编译器还能产出服务端与 CLI 二进制——Perry 不仅是一个 UI 框架，也是一个服务器运行时。",
+          "AOT 编译的计算性能——无需预热、无 JIT、也没有桥的往返。",
+          "perry-react 让你用 React/JSX 写出会被编译为原生组件的代码，因此可以在不让二进制带 JS 引擎的前提下，沿用 React 心智模型。"
+        ],
+        "competitorWins": [
+          "成熟、经过实战检验的生态，社区支持、库与工具链都极其丰富。",
+          "开发期的 Fast Refresh 是同类最佳——代码改动会在毫秒内反映出来，无需重建。",
+          "庞大的人才池。招 React Native 开发者很容易；Perry 还很新。",
+          "成熟的 CI/CD、App Store / Play Store 发布流水线，以及 codepush 风格的 OTA 更新。",
+          "JSI/Fabric 与新架构在保留 React 编程模型的同时，已经显著弥合了与原生之间的历史性能差距。",
+          "来自 Meta 与主要采用方（Microsoft、Shopify、Amazon）的直接支持持续推动该框架向前演进。"
+        ],
+        "whenPerry": "如果你希望用一份 TypeScript 代码覆盖移动、桌面、手表、TV、WASM 与 Web；希望交付的应用里没有 JS 运行时；希望使用没有桥的原生 UI；或者你已经投入到 TypeScript 并希望走原生编译而不是 JS 引擎路线，就选 Perry。",
+        "whenCompetitor": "如果你正在构建移动应用，并希望使用最成熟的跨平台原生 UI 框架；你已有现成的 React 团队；你依赖 React Native 的库生态；或者你需要当下行业标准的移动跨平台技术栈，就选 React Native。",
+        "verdict": "React Native 是一个移动优先、带 JS 运行时和（如今已显著改进的）桥的框架。Perry 是一个从 TypeScript 生成原生二进制的编译器，原生 UI 是编译输出的一部分。如果你想要在移动端使用 React 并拥有最深厚的生态，今天的答案是 React Native；如果你想要一份 TypeScript 代码同时编译到移动 + 桌面 + 手表 + TV 且应用中不带 JS 运行时，那答案是 Perry。"
+      }
     }
   }
 }
