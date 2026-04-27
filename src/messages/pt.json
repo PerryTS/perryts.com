@@ -51,9 +51,9 @@
       "title": "Binários pequenos",
       "description": "Os binários de saída são tipicamente 2-5 MB. Com o runtime V8 opcional para pacotes npm JS, 15-20 MB. Envie menos, faça deploy mais rápido."
     },
-    "typeSafe": {
-      "title": "Segurança de tipos",
-      "description": "Utiliza o sistema de tipos do TypeScript para otimização. Os tipos permitem melhor geração de código através de monomorphization."
+    "deterministicBuilds": {
+      "title": "Builds determinísticos",
+      "description": "Mesma entrada, mesmo binário. Reproduzível em qualquer máquina, em qualquer execução de CI, em qualquer equipe. Sem rebuilds misteriosos."
     },
     "stdLib": {
       "title": "Biblioteca padrão abrangente",
@@ -315,6 +315,10 @@
       "p1": "Classes, interfaces e generics TypeScript compilam para código nativo eficiente sem overhead de representação em runtime.",
       "p2": "O sistema de tipos do TypeScript existe apenas em tempo de compilação — e Perry leva isso literalmente. Interfaces não produzem código runtime. Hierarquias de classes são achatadas. Restrições genéricas são resolvidas para tipos concretos. O binário compilado contém apenas a lógica real, sem a maquinaria de abstração que interpretadores tipicamente carregam."
     }
+  },
+  "shipping": {
+    "eyebrow": "Em produção",
+    "subtitle": "Apps reais, compiladas a partir de TypeScript com Perry."
   },
   "appShowcase": {
     "title": "Veja o que as pessoas <gradient>constroem</gradient>",

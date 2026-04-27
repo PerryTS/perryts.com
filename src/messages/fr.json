@@ -51,9 +51,9 @@
       "title": "Petits binaires",
       "description": "Les binaires de sortie font généralement 2 à 5 Mo. Avec le runtime V8 optionnel pour les paquets npm JS, 15 à 20 Mo. Livrez moins, déployez plus vite."
     },
-    "typeSafe": {
-      "title": "Sûreté des types",
-      "description": "Exploite le système de types de TypeScript pour l'optimisation. Les types permettent une meilleure génération de code grâce à la monomorphization."
+    "deterministicBuilds": {
+      "title": "Builds déterministes",
+      "description": "Même entrée, même binaire. Reproductible d'une machine à l'autre, d'un build CI à l'autre, d'une équipe à l'autre. Pas de rebuild mystérieux."
     },
     "stdLib": {
       "title": "Bibliothèque standard complète",
@@ -315,6 +315,10 @@
       "p1": "Les classes, interfaces et génériques TypeScript se compilent en code natif efficace sans overhead de représentation runtime.",
       "p2": "Le système de types de TypeScript n'existe qu'au moment de la compilation — et Perry le prend littéralement. Les interfaces ne produisent aucun code runtime. Les hiérarchies de classes sont aplaties. Les contraintes génériques sont résolues en types concrets. Le binaire compilé ne contient que la logique réelle, sans la machinerie d'abstraction que les interpréteurs transportent habituellement."
     }
+  },
+  "shipping": {
+    "eyebrow": "En production",
+    "subtitle": "De vraies apps, compilées depuis TypeScript avec Perry."
   },
   "appShowcase": {
     "title": "Voyez ce que les gens <gradient>construisent</gradient>",

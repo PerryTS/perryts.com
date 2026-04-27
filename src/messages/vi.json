@@ -51,9 +51,9 @@
       "title": "Binary nhỏ gọn",
       "description": "Binary đầu ra thường chỉ 2-5 MB. Với V8 runtime tùy chọn cho các gói npm JS, 15-20 MB. Gửi ít hơn, triển khai nhanh hơn."
     },
-    "typeSafe": {
-      "title": "An toàn kiểu",
-      "description": "Tận dụng hệ thống kiểu của TypeScript để tối ưu hóa. Kiểu giúp tạo mã tốt hơn thông qua monomorphization."
+    "deterministicBuilds": {
+      "title": "Build có tính tất định",
+      "description": "Cùng đầu vào, cùng binary. Tái tạo được trên mọi máy, mọi lần chạy CI và mọi đội. Không có lần build lại bí ẩn."
     },
     "stdLib": {
       "title": "Thư viện chuẩn toàn diện",
@@ -315,6 +315,10 @@
       "p1": "Các lớp, interface và generic của TypeScript biên dịch thành mã gốc hiệu quả mà không có chi phí biểu diễn tại runtime.",
       "p2": "Hệ thống kiểu của TypeScript chỉ tồn tại tại thời điểm biên dịch — và Perry thực hiện điều này đúng nghĩa đen. Interface không tạo mã runtime. Phân cấp lớp được làm phẳng. Ràng buộc generic được giải quyết thành kiểu cụ thể. Binary đã biên dịch chỉ chứa logic thực tế, không có bộ máy trừu tượng mà các trình thông dịch thường mang theo."
     }
+  },
+  "shipping": {
+    "eyebrow": "Đang chạy trong sản xuất",
+    "subtitle": "Ứng dụng thực, biên dịch từ TypeScript với Perry."
   },
   "appShowcase": {
     "title": "Xem mọi người <gradient>xây dựng</gradient> gì",

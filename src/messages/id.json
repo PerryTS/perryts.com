@@ -51,9 +51,9 @@
       "title": "Binary Kecil",
       "description": "Binary output biasanya berukuran 2-5 MB. Dengan runtime V8 opsional untuk paket npm JS, 15-20 MB. Kirim lebih sedikit, deploy lebih cepat."
     },
-    "typeSafe": {
-      "title": "Type-Safe",
-      "description": "Memanfaatkan sistem tipe TypeScript untuk optimasi. Tipe memungkinkan pembuatan kode yang lebih baik melalui monomorphization."
+    "deterministicBuilds": {
+      "title": "Build deterministik",
+      "description": "Input sama, biner sama. Dapat direproduksi di mesin mana pun, di setiap proses CI, di tim mana pun. Tidak ada rebuild misterius."
     },
     "stdLib": {
       "title": "Standard Library Lengkap",
@@ -315,6 +315,10 @@
       "p1": "Kelas, interface, dan generic TypeScript dikompilasi menjadi kode native yang efisien tanpa overhead representasi runtime.",
       "p2": "Sistem tipe TypeScript hanya ada pada waktu kompilasi — dan Perry mengambil ini secara literal. Interface tidak menghasilkan kode runtime. Hierarki kelas diratakan. Constraint generic diselesaikan menjadi tipe konkret. Binary yang dikompilasi hanya berisi logika aktual, tanpa mesin abstraksi yang biasanya dibawa oleh interpreter."
     }
+  },
+  "shipping": {
+    "eyebrow": "Berjalan di produksi",
+    "subtitle": "Aplikasi nyata, dikompilasi dari TypeScript dengan Perry."
   },
   "appShowcase": {
     "title": "Lihat Apa yang Orang <gradient>Bangun</gradient>",

@@ -51,9 +51,9 @@
       "title": "ไบนารีขนาดเล็ก",
       "description": "ไบนารีเอาต์พุตโดยทั่วไปมีขนาด 2-5 MB พร้อม V8 runtime เสริมสำหรับแพ็กเกจ npm JS จะอยู่ที่ 15-20 MB ส่งน้อยลง ติดตั้งเร็วขึ้น"
     },
-    "typeSafe": {
-      "title": "Type-Safe",
-      "description": "ใช้ระบบ type ของ TypeScript เพื่อการเพิ่มประสิทธิภาพ type ช่วยให้สร้างโค้ดได้ดีขึ้นผ่าน monomorphization"
+    "deterministicBuilds": {
+      "title": "บิวด์แบบกำหนดผลล่วงหน้าได้",
+      "description": "อินพุตเหมือนกัน บิวด์ออกมาเหมือนกัน ทำซ้ำได้ในทุกเครื่อง ทุกการรัน CI และทุกทีม ไม่มีการบิวด์ใหม่แบบลึกลับ"
     },
     "stdLib": {
       "title": "Standard Library ที่ครอบคลุม",
@@ -315,6 +315,10 @@
       "p1": "คลาส, interface และ generic ของ TypeScript คอมไพล์เป็นโค้ดเนทีฟที่มีประสิทธิภาพโดยไม่มี overhead ของ runtime representation",
       "p2": "ระบบ type ของ TypeScript มีอยู่เฉพาะเวลาคอมไพล์ — และ Perry รับเรื่องนี้อย่างตรงตัว Interface ไม่สร้างโค้ดรันไทม์ ลำดับชั้นของคลาสถูกทำให้แบน Generic constraint ถูกแก้ไขเป็น type ที่เป็นรูปธรรม ไบนารีที่คอมไพล์แล้วมีเพียงลอจิกจริง โดยไม่มีกลไกนามธรรมที่ interpreter มักแบกรับ"
     }
+  },
+  "shipping": {
+    "eyebrow": "ใช้งานจริงในโปรดักชัน",
+    "subtitle": "แอปจริงที่คอมไพล์จาก TypeScript ด้วย Perry"
   },
   "appShowcase": {
     "title": "ดูสิ่งที่ผู้คน<gradient>สร้าง</gradient>",

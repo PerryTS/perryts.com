@@ -51,9 +51,9 @@
       "title": "体积小巧",
       "description": "输出的二进制文件通常只有 2-5 MB。搭配可选的 V8 运行时（用于 JS npm 包）为 15-20 MB。分发更少，部署更快。"
     },
-    "typeSafe": {
-      "title": "类型安全",
-      "description": "利用 TypeScript 的类型系统进行优化。类型通过 Monomorphization 实现更好的代码生成。"
+    "deterministicBuilds": {
+      "title": "可重现构建",
+      "description": "相同输入，相同二进制。换机器、换 CI、换团队都能复现。再也没有诡异的重新构建。"
     },
     "stdLib": {
       "title": "全面的标准库",
@@ -315,6 +315,10 @@
       "p1": "TypeScript 类、接口和泛型编译为高效的原生代码，无运行时表示开销。",
       "p2": "TypeScript 的类型系统仅存在于编译时——Perry 将此贯彻到底。接口不产生任何运行时代码。类层次结构被扁平化。泛型约束被解析为具体类型。编译后的二进制文件仅包含实际逻辑，没有解释器通常携带的抽象机制。"
     }
+  },
+  "shipping": {
+    "eyebrow": "已在生产环境运行",
+    "subtitle": "由 Perry 从 TypeScript 编译的真实应用。"
   },
   "appShowcase": {
     "title": "看看人们在<gradient>构建</gradient>什么",

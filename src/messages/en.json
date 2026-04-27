@@ -51,9 +51,9 @@
       "title": "Small Binaries",
       "description": "Output binaries are typically 2-5MB. With optional V8 runtime for JS npm packages, 15-20MB. Ship less, deploy faster."
     },
-    "typeSafe": {
-      "title": "Type-Safe",
-      "description": "Leverages TypeScript's type system for optimization. Types enable better code generation through monomorphization."
+    "deterministicBuilds": {
+      "title": "Deterministic Builds",
+      "description": "Same input, same binary. Reproducible across machines, across CI runs, across teams. No mystery rebuilds."
     },
     "stdLib": {
       "title": "Comprehensive Standard Library",
@@ -315,6 +315,10 @@
       "p1": "TypeScript classes, interfaces, and generics compile to efficient native code with no runtime representation overhead.",
       "p2": "TypeScript's type system exists only at compile time — and Perry takes this literally. Interfaces produce zero runtime code. Class hierarchies are flattened. Generic constraints are resolved to concrete types. The compiled binary contains only the actual logic, with none of the abstraction machinery that interpreters typically carry."
     }
+  },
+  "shipping": {
+    "eyebrow": "Shipping in production",
+    "subtitle": "Real apps, compiled from TypeScript with Perry."
   },
   "appShowcase": {
     "title": "See What People <gradient>Build</gradient>",

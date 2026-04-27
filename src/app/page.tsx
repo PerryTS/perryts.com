@@ -12,6 +12,7 @@ import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
 import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
+import { ShippingInProduction } from "@/components/ShippingInProduction";
 import { Footer } from "@/components/Footer";
 
 export default async function Home() {
@@ -23,15 +24,16 @@ export default async function Home() {
       <main className="min-h-screen">
         <Header />
         <Hero />
+        <ShippingInProduction />
         <Features />
         <PlatformSupport />
+        <ShipIt />
         <ComparisonMatrix />
         <CodeExample />
         <Performance />
         <Installation />
         <FeatureTable />
         <NativeLibraries />
-        <ShipIt />
         <Architecture />
         <Footer />
       </main>

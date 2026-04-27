@@ -51,9 +51,9 @@
       "title": "Kleine Binaries",
       "description": "Ausgabe-Binaries sind typischerweise 2–5 MB groß. Mit optionaler V8-Laufzeitumgebung für JS-npm-Pakete 15–20 MB. Weniger ausliefern, schneller deployen."
     },
-    "typeSafe": {
-      "title": "Typsicher",
-      "description": "Nutzt TypeScripts Typsystem zur Optimierung. Typen ermöglichen bessere Codegenerierung durch Monomorphization."
+    "deterministicBuilds": {
+      "title": "Deterministische Builds",
+      "description": "Gleicher Input, gleiches Binary. Reproduzierbar auf jeder Maschine, in jedem CI-Lauf, in jedem Team. Keine mysteriösen Rebuilds."
     },
     "stdLib": {
       "title": "Umfassende Standardbibliothek",
@@ -315,6 +315,10 @@
       "p1": "TypeScript-Klassen, Interfaces und Generics kompilieren zu effizientem nativem Code ohne Overhead durch Laufzeitdarstellung.",
       "p2": "TypeScripts Typsystem existiert nur zur Compile-Zeit — und Perry nimmt das wörtlich. Interfaces erzeugen keinen Laufzeit-Code. Klassenhierarchien werden abgeflacht. Generische Einschränkungen werden zu konkreten Typen aufgelöst. Das kompilierte Binary enthält nur die tatsächliche Logik, ohne den Abstraktionsapparat, den Interpreter typischerweise mitbringen."
     }
+  },
+  "shipping": {
+    "eyebrow": "Im Einsatz",
+    "subtitle": "Echte Apps, mit Perry aus TypeScript kompiliert."
   },
   "appShowcase": {
     "title": "Was Menschen damit <gradient>bauen</gradient>",

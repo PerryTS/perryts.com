@@ -51,9 +51,9 @@
       "title": "Küçük İkili Dosyalar",
       "description": "Çıktı ikili dosyaları genellikle 2-5 MB'dir. JS npm paketleri için isteğe bağlı V8 runtime ile 15-20 MB. Daha az gönder, daha hızlı dağıt."
     },
-    "typeSafe": {
-      "title": "Tip Güvenli",
-      "description": "Optimizasyon için TypeScript'in tip sistemini kullanır. Tipler, monomorphization aracılığıyla daha iyi kod üretimi sağlar."
+    "deterministicBuilds": {
+      "title": "Deterministik build'ler",
+      "description": "Aynı girdi, aynı ikili dosya. Makineler, CI çalıştırmaları ve takımlar arasında tekrar üretilebilir. Açıklanamayan yeniden derlemeler yok."
     },
     "stdLib": {
       "title": "Kapsamlı Standart Kütüphane",
@@ -315,6 +315,10 @@
       "p1": "TypeScript sınıfları, arayüzleri ve generic'leri runtime temsil yükü olmadan verimli yerel koda derlenir.",
       "p2": "TypeScript'in tip sistemi yalnızca derleme zamanında var olur — ve Perry bunu kelimesi kelimesine uygular. Arayüzler hiçbir runtime kodu üretmez. Sınıf hiyerarşileri düzleştirilir. Generic kısıtlamalar somut tiplere çözümlenir. Derlenen ikili dosya yalnızca gerçek mantığı içerir, yorumlayıcıların tipik olarak taşıdığı soyutlama mekanizması olmadan."
     }
+  },
+  "shipping": {
+    "eyebrow": "Üretimde çalışıyor",
+    "subtitle": "Perry ile TypeScript'ten derlenmiş gerçek uygulamalar."
   },
   "appShowcase": {
     "title": "İnsanların neler <gradient>ürettiğini</gradient> görün",

@@ -41,33 +41,12 @@ export function Header() {
             >
               {t("roadmap")}
             </Link>
-            <div className="relative group">
-              <Link
-                href="/publish"
-                className="text-slate-400 hover:text-white transition-colors flex items-center gap-1"
-              >
-                {t("publish")}
-                <svg className="w-3.5 h-3.5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </Link>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
-                <div className="bg-[#1a1a1e] border border-white/10 rounded-xl py-2 px-1 min-w-[140px] shadow-xl">
-                  <Link
-                    href="/publish"
-                    className="block px-3 py-1.5 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                  >
-                    {t("overview")}
-                  </Link>
-                  <Link
-                    href="/pricing"
-                    className="block px-3 py-1.5 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                  >
-                    {t("pricing")}
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <Link
+              href="/publish"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              {t("publish")}
+            </Link>
             <a
               href="https://docs.perryts.com"
               target="_blank"
@@ -182,12 +161,6 @@ export function Header() {
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 {t("publish")}
-              </Link>
-              <Link
-                href="/pricing"
-                className="text-slate-400 hover:text-white transition-colors pl-4 text-sm"
-              >
-                {t("pricing")}
               </Link>
               <a
                 href="https://docs.perryts.com"

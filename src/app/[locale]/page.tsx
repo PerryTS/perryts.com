@@ -11,6 +11,7 @@ import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
 import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
+import { ShippingInProduction } from "@/components/ShippingInProduction";
 import { AppShowcase } from "@/components/AppShowcase";
 import { Footer } from "@/components/Footer";
 
@@ -21,16 +22,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <main className="min-h-screen">
       <Header />
       <Hero />
+      <ShippingInProduction />
       <Features />
       <AppShowcase />
       <PlatformSupport />
+      <ShipIt />
       <ComparisonMatrix />
       <CodeExample />
       <Performance />
       <Installation />
       <FeatureTable />
       <NativeLibraries />
-      <ShipIt />
       <Architecture />
       <Footer />
     </main>
