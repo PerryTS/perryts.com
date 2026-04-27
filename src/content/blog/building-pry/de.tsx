@@ -242,7 +242,7 @@ export default function Content() {
       </p>
       <ul className="list-disc list-inside">
         <li>
-          <a href="https://github.com/nicktrebes/perry-pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">GitHub Repo</a>{" "}
+          <a href="https://github.com/perryts/pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">GitHub Repo</a>{" "}
           — vollständiger Quellcode und Build-Anleitungen
         </li>
         <li>

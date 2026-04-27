@@ -99,7 +99,7 @@ export default async function PryShowcase({ params }: { params: Promise<{ locale
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="https://github.com/nicktrebes/perry-pry"
+              href="https://github.com/perryts/pry"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary flex items-center gap-2"

@@ -223,7 +223,7 @@ export default function Content() {
       <h2>Code source et téléchargements</h2>
       <p>Pry est open source. Vous pouvez parcourir le code source complet, le compiler vous-même, ou simplement regarder le code pour comprendre comment une app d&apos;interface native Perry est structurée.</p>
       <ul className="list-disc list-inside">
-        <li><a href="https://github.com/nicktrebes/perry-pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">Dépôt GitHub</a>{" "} — code source complet et instructions de compilation</li>
+        <li><a href="https://github.com/perryts/pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">Dépôt GitHub</a>{" "} — code source complet et instructions de compilation</li>
         <li><Link href="/showcase/pry" className="text-perry-400 hover:text-perry-300">Page du showcase</Link>{" "} — captures d&apos;écran, liste des fonctionnalités et détails de plateforme</li>
       </ul>
       <p>

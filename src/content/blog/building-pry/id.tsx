@@ -242,7 +242,7 @@ export default function Content() {
       </p>
       <ul className="list-disc list-inside">
         <li>
-          <a href="https://github.com/nicktrebes/perry-pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
+          <a href="https://github.com/perryts/pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
             Repo GitHub
           </a>{" "}
           — source code lengkap dan instruksi build

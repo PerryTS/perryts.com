@@ -245,7 +245,7 @@ export default function Content() {
       <p>Pry 是开源的。你可以浏览完整源代码、自己构建，或只是查看代码来了解 Perry 原生 UI 应用的结构。</p>
       <ul className="list-disc list-inside">
         <li>
-          <a href="https://github.com/nicktrebes/perry-pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
+          <a href="https://github.com/perryts/pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
             GitHub 仓库
           </a>{" "}
           —— 完整源代码和构建说明

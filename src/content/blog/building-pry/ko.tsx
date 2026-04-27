@@ -321,7 +321,7 @@ export default function Content() {
       </p>
       <ul className="list-disc list-inside">
         <li>
-          <a href="https://github.com/nicktrebes/perry-pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
+          <a href="https://github.com/perryts/pry" target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-perry-300">
             GitHub 저장소
           </a>{" "}
           — 전체 소스 코드와 빌드 지침
