@@ -427,6 +427,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "Generational GC, Lazy JSON, and Benchmarks That Hold Up to Scrutiny",
       "excerpt": "Perry v0.5.174 → v0.5.306 in three days, plus the GC and JSON work that landed alongside. The generational GC ships as default. The Small String Optimization ships as default. The JSON pipeline gets a lazy tape that lands at 75 ms median on validate-and-roundtrip — best in the dynamic-typing pack. The benchmarks page is rewritten with RUNS=11 median + p95 + σ, simdjson and AssemblyScript+json-as added as peers, and every weakness Perry has surfaced honestly."
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "Auto-Update, a Live Inspector, and the Compiler That Halved Itself",
+      "excerpt": "Perry v0.5.306 → v0.5.359 in four days — 53 patch releases, ~30 issues closed, and three big things landed: perry/updater for desktop auto-update, a live inspector at localhost:7676, and a compiler refactor that shrank the four biggest files by 33–91%."
     }
   },
   "languageSwitcher": {

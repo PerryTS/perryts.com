@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "세대별 GC, 지연 JSON, 그리고 검증을 견디는 벤치마크",
       "excerpt": "Perry v0.5.174 → v0.5.306을 3일 만에 달성. 함께 머지된 GC와 JSON 작업도 포함. 세대별 GC가 기본값으로 승격. Small String Optimization도 기본값으로 승격. JSON 파이프라인은 지연 테이프를 도입해 validate-and-roundtrip에서 75ms 중앙값에 안착 — 동적 타입 런타임 그룹 중 최고. 벤치마크 페이지는 RUNS=11 중앙값 + p95 + σ로 다시 작성되었고, simdjson과 AssemblyScript+json-as가 동급 비교 대상으로 추가되었으며, Perry의 모든 약점이 솔직히 드러나 있습니다."
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "자동 업데이트, 라이브 인스펙터, 그리고 스스로 반으로 줄인 컴파일러",
+      "excerpt": "Perry v0.5.306 → v0.5.359 4일 만에 — 53번의 패치 릴리스, 약 30개 이슈 종결, 그리고 큰 세 가지가 도착: 데스크톱 자동 업데이트를 위한 perry/updater, localhost:7676의 라이브 인스펙터, 그리고 가장 큰 네 개 파일을 33–91% 줄인 컴파일러 리팩터링."
     }
   },
   "compare": {

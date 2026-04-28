@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "Kuşaksal GC, Lazy JSON ve İncelemeye Dayanan Benchmark'lar",
       "excerpt": "Perry v0.5.174 → v0.5.306 üç günde. Birlikte inen GC ve JSON çalışmasıyla. Kuşaksal GC artık varsayılan. Small String Optimization artık varsayılan. JSON pipeline, validate-and-roundtrip'te 75 ms medyana inen bir lazy tape kazanıyor — dinamik tipli runtime grubunun en iyisi. Benchmark sayfası RUNS=11 medyan + p95 + σ ile yeniden yazıldı, simdjson ve AssemblyScript+json-as eş olarak eklendi ve Perry'nin her zayıflığı dürüstçe sergilendi."
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "Otomatik Güncelleme, Canlı Inspector ve Kendini İkiye Bölen Derleyici",
+      "excerpt": "Perry v0.5.306 → v0.5.359 dört günde — 53 patch sürüm, ~30 issue kapandı ve üç büyük şey indi: masaüstü otomatik güncelleme için perry/updater, localhost:7676'da canlı bir inspector ve en büyük dört dosyayı %33–91 küçülten bir derleyici refactor'u."
     }
   },
   "compare": {

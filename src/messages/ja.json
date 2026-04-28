@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "世代別GC、遅延JSON、そして精査に耐えるベンチマーク",
       "excerpt": "Perry v0.5.174 → v0.5.306を3日間で達成。並行して投入されたGCとJSONの作業も含む。世代別GCがデフォルトに昇格。Small String Optimizationもデフォルトに昇格。JSONパイプラインに遅延テープが入り、validate-and-roundtripで中央値75ms――動的型付けランタイム勢では最速。ベンチマークページもRUNS=11の中央値+p95+σで書き直され、simdjsonとAssemblyScript+json-asがピアとして追加され、Perryのあらゆる弱点が正直に提示されている。"
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "自動アップデート、ライブインスペクター、そして自らを半分にしたコンパイラ",
+      "excerpt": "Perry v0.5.306 → v0.5.359 を 4 日で — 53 のパッチリリース、約 30 件の Issue クローズ、そして 3 つの大きなものが着地：デスクトップ自動アップデート用の perry/updater、localhost:7676 のライブインスペクター、そして最大の 4 ファイルを 33〜91% 縮めたコンパイラのリファクタリング。"
     }
   },
   "compare": {

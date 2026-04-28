@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "分代 GC、惰性 JSON，以及经得起推敲的基准",
       "excerpt": "Perry 在三天内从 v0.5.174 升级到 v0.5.306，外加并行落地的 GC 与 JSON 工作。分代 GC 成为默认。Small String Optimization 成为默认。JSON 流水线获得惰性 tape，validate-and-roundtrip 中位数落在 75 毫秒——动态类型运行时阵营中的最佳。基准页面以 RUNS=11 中位数 + p95 + σ 重写，simdjson 与 AssemblyScript+json-as 加入对照，Perry 的每一处弱点都被诚实地摆上台面。"
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "自动更新、实时 Inspector，以及把自己砍掉一半的编译器",
+      "excerpt": "Perry v0.5.306 → v0.5.359 用了四天 — 53 个补丁版本、约 30 个 issue 关闭，以及三件大事落地：面向桌面的 perry/updater 自动更新、localhost:7676 上的实时 inspector，以及把四个最大文件削减 33–91% 的编译器重构。"
     }
   },
   "compare": {

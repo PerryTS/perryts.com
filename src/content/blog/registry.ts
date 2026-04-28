@@ -19,6 +19,7 @@ const slugs = [
   "optimizing-everything",
   "npm-perry-dev-and-beating-bun",
   "gen-gc-lazy-json-and-defensible-benchmarks",
+  "updater-live-inspector-and-compiler-refactor",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -248,6 +249,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/vi"),
     id: () => import("./gen-gc-lazy-json-and-defensible-benchmarks/id"),
     "zh-Hans": () => import("./gen-gc-lazy-json-and-defensible-benchmarks/zh-Hans"),
+  },
+  "updater-live-inspector-and-compiler-refactor": {
+    en: () => import("./updater-live-inspector-and-compiler-refactor/en"),
+    de: () => import("./updater-live-inspector-and-compiler-refactor/de"),
+    es: () => import("./updater-live-inspector-and-compiler-refactor/es"),
+    fr: () => import("./updater-live-inspector-and-compiler-refactor/fr"),
+    it: () => import("./updater-live-inspector-and-compiler-refactor/it"),
+    ja: () => import("./updater-live-inspector-and-compiler-refactor/ja"),
+    ko: () => import("./updater-live-inspector-and-compiler-refactor/ko"),
+    pt: () => import("./updater-live-inspector-and-compiler-refactor/pt"),
+    th: () => import("./updater-live-inspector-and-compiler-refactor/th"),
+    tr: () => import("./updater-live-inspector-and-compiler-refactor/tr"),
+    vi: () => import("./updater-live-inspector-and-compiler-refactor/vi"),
+    id: () => import("./updater-live-inspector-and-compiler-refactor/id"),
+    "zh-Hans": () => import("./updater-live-inspector-and-compiler-refactor/zh-Hans"),
   },
 };
 

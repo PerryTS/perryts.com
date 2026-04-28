@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "Generational GC, Lazy JSON และเบนช์มาร์กที่ทนต่อการตรวจสอบ",
       "excerpt": "Perry v0.5.174 → v0.5.306 ภายในสามวัน พร้อมงาน GC และ JSON ที่ลงควบคู่กัน Generational GC กลายเป็นค่าเริ่มต้น Small String Optimization กลายเป็นค่าเริ่มต้น JSON pipeline ได้ lazy tape ที่ลงตัวที่ค่ากลาง 75 ms บน validate-and-roundtrip — ดีที่สุดในกลุ่ม dynamic typing หน้าเบนช์มาร์กเขียนใหม่ด้วยค่ากลาง RUNS=11 + p95 + σ เพิ่ม simdjson และ AssemblyScript+json-as เป็นเพียร์ และทุกจุดอ่อนของ Perry ถูกเปิดเผยอย่างตรงไปตรงมา"
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "อัปเดตอัตโนมัติ, inspector แบบ live และคอมไพเลอร์ที่ลดตัวเองลงครึ่งหนึ่ง",
+      "excerpt": "Perry v0.5.306 → v0.5.359 ใน 4 วัน — 53 patch release ปิด issue ราว 30 รายการ และของใหญ่ 3 อย่างลงจอด: perry/updater สำหรับ auto-update บน desktop, inspector แบบ live ที่ localhost:7676 และการ refactor คอมไพเลอร์ที่ลดไฟล์ใหญ่ที่สุด 4 ไฟล์ลง 33–91%"
     }
   },
   "compare": {

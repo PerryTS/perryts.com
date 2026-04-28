@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "GC theo thế hệ, JSON lười và benchmark chịu được soi xét",
       "excerpt": "Perry v0.5.174 → v0.5.306 trong ba ngày, cộng với công việc GC và JSON đáp xuống cùng lúc. GC theo thế hệ trở thành mặc định. Small String Optimization trở thành mặc định. Đường ống JSON nhận một lazy tape, đáp ở 75 ms trung vị trên validate-and-roundtrip — tốt nhất trong nhóm runtime kiểu động. Trang benchmark được viết lại với trung vị RUNS=11 + p95 + σ, thêm simdjson và AssemblyScript+json-as làm peer, và mọi điểm yếu của Perry được nêu thẳng thắn."
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "Auto-Update, một Inspector trực tiếp và Compiler tự cắt mình một nửa",
+      "excerpt": "Perry v0.5.306 → v0.5.359 trong bốn ngày — 53 patch release, ~30 issue được đóng, và ba thứ lớn hạ cánh: perry/updater cho auto-update desktop, inspector trực tiếp tại localhost:7676, và một cuộc refactor compiler khiến bốn file lớn nhất nhỏ đi 33–91%."
     }
   },
   "compare": {

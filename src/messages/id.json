@@ -430,6 +430,10 @@
     "gen-gc-lazy-json-and-defensible-benchmarks": {
       "title": "GC Generasional, Lazy JSON, dan Benchmark yang Tahan Pemeriksaan",
       "excerpt": "Perry v0.5.174 → v0.5.306 dalam tiga hari, plus pekerjaan GC dan JSON yang mendarat bersamanya. GC generasional kini default. Small String Optimization kini default. Pipeline JSON mendapatkan lazy tape yang mendarat di median 75 ms pada validate-and-roundtrip — terbaik di kelompok dynamic typing. Halaman benchmark ditulis ulang dengan median RUNS=11 + p95 + σ, simdjson dan AssemblyScript+json-as ditambahkan sebagai peer, dan setiap kelemahan Perry diungkap secara jujur."
+    },
+    "updater-live-inspector-and-compiler-refactor": {
+      "title": "Auto-Update, Inspector Live, dan Compiler yang Memotong Dirinya Sendiri",
+      "excerpt": "Perry v0.5.306 → v0.5.359 dalam empat hari — 53 patch release, ~30 issue ditutup, dan tiga hal besar mendarat: perry/updater untuk auto-update desktop, inspector live di localhost:7676, dan refactor compiler yang menyusutkan empat file terbesar sebesar 33–91%."
     }
   },
   "compare": {

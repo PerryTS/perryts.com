@@ -145,6 +145,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["GC", "JSON", "performance", "benchmarks", "milestone"],
     content: () => null,
   },
+  {
+    slug: "updater-live-inspector-and-compiler-refactor",
+    title: "Auto-Update, a Live Inspector, and the Compiler That Halved Itself",
+    date: "2026-04-28",
+    excerpt:
+      "Perry v0.5.306 → v0.5.359 in four days — 53 patch releases, ~30 issues closed, and three big things landed: perry/updater for desktop auto-update, a live inspector at localhost:7676, and a compiler refactor that shrank the four biggest files by 33–91%.",
+    tags: ["updater", "devtools", "refactor", "community", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
