@@ -76,7 +76,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     description:
       "A minimal project template to get started with Perry. Includes TypeScript configuration, build scripts, and example code for CLI and GUI applications.",
     platforms: ["macOS", "Linux", "Windows"],
-    githubUrl: "https://github.com/PerryTS/perry-starter",
+    githubUrl: "https://github.com/PerryTS/starter",
     tags: ["template", "starter"],
     hasFeaturePage: false,
   },
