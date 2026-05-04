@@ -210,7 +210,8 @@
     "issues": "Sorunlar",
     "discussions": "Tartışmalar",
     "contributing": "Katkıda Bulunma",
-    "tagline": "Rust, SWC ve LLVM ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır"
+    "tagline": "Rust, SWC ve LLVM ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "Evet. Perry derleyicisi, derleme sunucusu (perry-hub), doğrulama servisi ve derleme worker'ları tamamen açık kaynaktır. Repo'yu klonlayın, hub'ı kendi Mac Mini veya Linux makinenizde çalıştırın ve PERRY_HUB_SELF_HOSTED=true ayarlayarak hız sınırlamasını devre dışı bırakın. Sıfır maliyetle sınırsız derleme yaparsınız. hub.perryts.com'daki barındırılan servis kolaylık için vardır — yönetilecek altyapı yok, uğraşılacak imzalama sertifikaları yok, izlenecek derleme kuyruğu yok.",
       "q4": "Bir \"yayın\" neyi içerir?",
       "a4": "perry publish '<'platform'>' komutunun bir çağrısı. Her platform ayrı bir yayındır. Bir yayın derleme, kod imzalama, hafif doğrulama (uygulamanın başarıyla başlatılması) ve mağaza gönderimi veya yapıt oluşturmayı içerir."
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun, Zig ile yazılmış hızlı, hepsi-bir-arada bir JavaScript ve TypeScript araç setidir. `.ts` kaynağını doğrudan çalıştırır (ön-derleme adımı yok), JS motoru olarak JavaScriptCore kullanır ve bir bundler, paket yöneticisi ve test koşturucusu içerir. `bun build --compile`, Bun çalışma zamanını uygulamanızla birlikte tek bir çalıştırılabilir dosyada paketler. Bun; Linux, macOS ve Windows'u x64 ve arm64 üzerinde hedefler.",
         "perryWhat": "Perry, Rust ile yazılmış yerel bir TypeScript derleyicisidir. TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler — JavaScript motoru yok, çalışma zamanı yok, JIT yok. Çıktı tek bir ikili dosyadır (hello world için yaklaşık 330 KB; Fastify sunucusu gibi tam stdlib bir uygulama için ~48 MB). Perry; macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web dahil 10 platformu hedefler.",
         "table": [
-          { "feature": "Çıktı", "perry": "Yerel makine kodu (LLVM)", "competitor": "Kodunuz + Bun çalışma zamanı tek ikili dosyada paketlenir" },
-          { "feature": "İkili dosyada JavaScript motoru", "perry": "Varsayılan olarak yok; --enable-js-runtime ile isteğe bağlı V8 (+~15 MB)", "competitor": "Her zaman JavaScriptCore" },
-          { "feature": "Hello-world ikili dosya boyutu", "perry": "~330 KB", "competitor": "~50–100 MB (Bun çalışma zamanı dahil)" },
-          { "feature": "JIT", "perry": "Hayır (AOT derlenmiş)", "competitor": "Evet (JavaScriptCore JIT)" },
-          { "feature": "Mobil hedefler (iOS, Android)", "perry": "Evet — UIKit/JNI ile yerel UI", "competitor": "Hayır" },
-          { "feature": "Watch / TV hedefleri", "perry": "watchOS, tvOS, Wear OS", "competitor": "Hayır" },
-          { "feature": "Yerel UI widget'ları", "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+", "competitor": "Hayır (sunucu/CLI odaklı)" },
-          { "feature": "npm ekosistemi", "perry": "Saf TS/JS paketleri yerel olarak derlenebilir; diğerleri isteğe bağlı V8 ile", "competitor": "Tam Node uyumlu npm" },
-          { "feature": "Kararlılık", "perry": "1.0 öncesi (alfa)", "competitor": "Kararlı (1.x)" },
-          { "feature": "Yazıldığı dil", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "Çıktı",
+            "perry": "Yerel makine kodu (LLVM)",
+            "competitor": "Kodunuz + Bun çalışma zamanı tek ikili dosyada paketlenir"
+          },
+          {
+            "feature": "İkili dosyada JavaScript motoru",
+            "perry": "Varsayılan olarak yok; --enable-js-runtime ile isteğe bağlı V8 (+~15 MB)",
+            "competitor": "Her zaman JavaScriptCore"
+          },
+          {
+            "feature": "Hello-world ikili dosya boyutu",
+            "perry": "~330 KB",
+            "competitor": "~50–100 MB (Bun çalışma zamanı dahil)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "Hayır (AOT derlenmiş)",
+            "competitor": "Evet (JavaScriptCore JIT)"
+          },
+          {
+            "feature": "Mobil hedefler (iOS, Android)",
+            "perry": "Evet — UIKit/JNI ile yerel UI",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "Watch / TV hedefleri",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "Yerel UI widget'ları",
+            "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+",
+            "competitor": "Hayır (sunucu/CLI odaklı)"
+          },
+          {
+            "feature": "npm ekosistemi",
+            "perry": "Saf TS/JS paketleri yerel olarak derlenebilir; diğerleri isteğe bağlı V8 ile",
+            "competitor": "Tam Node uyumlu npm"
+          },
+          {
+            "feature": "Kararlılık",
+            "perry": "1.0 öncesi (alfa)",
+            "competitor": "Kararlı (1.x)"
+          },
+          {
+            "feature": "Yazıldığı dil",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "Daha küçük ikili dosyalar — bir Perry hello world ~330 KB; bir Bun --compile hello world Bun çalışma zamanını içerir ve onlarca megabayt boyutuna çıkar.",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno; Rust ile, V8 ve Tokio'nun üzerine inşa edilmiş bir TypeScript ve JavaScript çalışma zamanıdır. `.ts` kaynağını doğrudan çalıştırır, yerleşik araçlara sahiptir (formatlayıcı, linter, test koşturucusu, dil sunucusu) ve ağ, dosya ve ortam erişimi için açık izinler gerektiren bir izin modeli kullanır. `deno compile`, kodunuzla birlikte Deno çalışma zamanını (V8 dahil) paketleyerek bağımsız bir çalıştırılabilir dosya üretir. Deno; Linux, macOS ve Windows'u x64 ve arm64 üzerinde hedefler.",
         "perryWhat": "Perry, Rust ile yazılmış yerel bir TypeScript derleyicisidir. TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler — V8 yok, JIT yok, çalışma zamanı yok. Çıktı tek bir ikili dosyadır; yerel kod için tipik olarak birkaç yüz KB ile birkaç MB arasında, JS motoru gereken npm paketleri için isteğe bağlı gömülü V8 çalışma zamanını seçerseniz daha büyüktür.",
         "table": [
-          { "feature": "Çıktı", "perry": "Yerel makine kodu (LLVM)", "competitor": "Kodunuz + Deno çalışma zamanı (V8) paketlenmiş" },
-          { "feature": "İkili dosyada JavaScript motoru", "perry": "Varsayılan olarak yok; isteğe bağlı V8", "competitor": "Her zaman V8" },
-          { "feature": "Hello-world ikili dosya boyutu", "perry": "~330 KB", "competitor": "~80–100 MB (V8 dahil)" },
-          { "feature": "JIT", "perry": "Hayır (AOT derlenmiş)", "competitor": "Evet (V8 TurboFan)" },
-          { "feature": "Mobil hedefler", "perry": "iOS, iPadOS, Android", "competitor": "Hayır" },
-          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "Hayır" },
-          { "feature": "Yerel UI", "perry": "Yerel platform API'leri ile 25+ widget", "competitor": "Hayır" },
-          { "feature": "İzin modeli", "perry": "Standart işletim sistemi süreç izinleri", "competitor": "Granüler çalıştırma zamanı izinleri (--allow-net, --allow-read, vb.)" },
-          { "feature": "Kararlılık", "perry": "1.0 öncesi", "competitor": "Kararlı (1.x / 2.x)" },
-          { "feature": "Yazıldığı dil", "perry": "Rust", "competitor": "Rust (V8 üzerinde)" }
+          {
+            "feature": "Çıktı",
+            "perry": "Yerel makine kodu (LLVM)",
+            "competitor": "Kodunuz + Deno çalışma zamanı (V8) paketlenmiş"
+          },
+          {
+            "feature": "İkili dosyada JavaScript motoru",
+            "perry": "Varsayılan olarak yok; isteğe bağlı V8",
+            "competitor": "Her zaman V8"
+          },
+          {
+            "feature": "Hello-world ikili dosya boyutu",
+            "perry": "~330 KB",
+            "competitor": "~80–100 MB (V8 dahil)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "Hayır (AOT derlenmiş)",
+            "competitor": "Evet (V8 TurboFan)"
+          },
+          {
+            "feature": "Mobil hedefler",
+            "perry": "iOS, iPadOS, Android",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "Watch / TV / WASM / Web",
+            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "Yerel UI",
+            "perry": "Yerel platform API'leri ile 25+ widget",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "İzin modeli",
+            "perry": "Standart işletim sistemi süreç izinleri",
+            "competitor": "Granüler çalıştırma zamanı izinleri (--allow-net, --allow-read, vb.)"
+          },
+          {
+            "feature": "Kararlılık",
+            "perry": "1.0 öncesi",
+            "competitor": "Kararlı (1.x / 2.x)"
+          },
+          {
+            "feature": "Yazıldığı dil",
+            "perry": "Rust",
+            "competitor": "Rust (V8 üzerinde)"
+          }
         ],
         "perryWins": [
           "Çarpıcı şekilde daha küçük ikili dosyalar. Bir Perry hello world ~330 KB. `deno compile` çıktıları V8'i içerir ve 80–100 MB aralığına çıkar.",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes, Meta'nın React Native için inşa ettiği JavaScript motorudur — bytecode tabanlı, AOT-ön derlenmiş, mobil başlatma süresi için optimize edilmiştir. Static Hermes, Hermes'i tipli bir JavaScript alt kümesinin ahead-of-time yerel derlemesiyle genişletme araştırma çabasıdır ve React Native'e gerçek yerel koda giden bir yol sağlamayı amaçlar. Esas olarak bir derleyici Ar-Ge projesidir; Perry'nin benchmark notlarına göre macOS arm64 üzerinde rutin kurulum için henüz paketlenmemiştir (`shermes`, polyglot benchmark'tan 'macOS arm64 üzerinde temiz bir şekilde kurulan bir biçimde Homebrew veya npm üzerinde mevcut değildir' notuyla atlanmıştır — perry/benchmarks/README.md'ye bakın).",
         "perryWhat": "Perry; Rust ile yazılmış, ayrıştırma için SWC ve kod üretimi için LLVM kullanan yerel bir TypeScript derleyicisidir. Çalışan bir CLI (`perry compile`, `perry run`, `perry publish`), 25+ yerel UI widget'ı, 10 derleme hedefi, kendi kendini barındıran bir çalışma zamanı ve şeffaf koşullar altında ölçülen bir benchmark suite'i (M1 Max, RUNS=11) gönderir. Perry 1.0 öncesidir ama üretim hattıdır: insanlar onunla inşa edilmiş uygulamaları gönderiyor (Bloom Engine, Mango, Hone, Pry, dB Meter — perryts.com'a bakın).",
         "table": [
-          { "feature": "Durum", "perry": "1.0 öncesi (alfa) — üretim hattı", "competitor": "Araştırma / deneysel" },
-          { "feature": "Kurulum yolu (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "Yazıldığı sırada temiz kurulum için paketlenmemiş (perry/benchmarks'a göre)" },
-          { "feature": "Backend", "perry": "LLVM", "competitor": "Özel (Hermes tabanlı kod üretimi)" },
-          { "feature": "Girdi", "perry": "TypeScript (tam)", "competitor": "Tipli JS/TS alt kümesi" },
-          { "feature": "Derleme hedefleri", "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "Esas olarak mobil (React Native bağlamı)" },
-          { "feature": "Yerel UI", "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+ widget", "competitor": "React Native köprüsü aracılığıyla (entegre edildiğinde)" },
-          { "feature": "Bağımsız CLI uygulama akışı", "perry": "Evet — `perry compile main.ts` bir ikili dosya üretir", "competitor": "React Native bağlamına bağlı" },
-          { "feature": "Genel benchmark suite'i", "perry": "Evet — Node, Bun, Rust, C++, Go, Swift, Java'ya karşı RUNS=11", "competitor": "Dahili / araştırma makaleleri" }
+          {
+            "feature": "Durum",
+            "perry": "1.0 öncesi (alfa) — üretim hattı",
+            "competitor": "Araştırma / deneysel"
+          },
+          {
+            "feature": "Kurulum yolu (macOS arm64)",
+            "perry": "Homebrew, APT, npm (@perryts/perry)",
+            "competitor": "Yazıldığı sırada temiz kurulum için paketlenmemiş (perry/benchmarks'a göre)"
+          },
+          {
+            "feature": "Backend",
+            "perry": "LLVM",
+            "competitor": "Özel (Hermes tabanlı kod üretimi)"
+          },
+          {
+            "feature": "Girdi",
+            "perry": "TypeScript (tam)",
+            "competitor": "Tipli JS/TS alt kümesi"
+          },
+          {
+            "feature": "Derleme hedefleri",
+            "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
+            "competitor": "Esas olarak mobil (React Native bağlamı)"
+          },
+          {
+            "feature": "Yerel UI",
+            "perry": "AppKit, UIKit, GTK4, Win32, JNI ile 25+ widget",
+            "competitor": "React Native köprüsü aracılığıyla (entegre edildiğinde)"
+          },
+          {
+            "feature": "Bağımsız CLI uygulama akışı",
+            "perry": "Evet — `perry compile main.ts` bir ikili dosya üretir",
+            "competitor": "React Native bağlamına bağlı"
+          },
+          {
+            "feature": "Genel benchmark suite'i",
+            "perry": "Evet — Node, Bun, Rust, C++, Go, Swift, Java'ya karşı RUNS=11",
+            "competitor": "Dahili / araştırma makaleleri"
+          }
         ],
         "perryWins": [
           "Kullanılabilir bir araç olarak mevcuttur. Perry bugün Homebrew, APT veya `npm install @perryts/perry` ile kurulabilir ve `perry compile main.ts` ilk denemede bir ikili dosya üretir.",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron; render için Chromium'u ve sistem erişimi için Node.js'i kullanarak çapraz platform masaüstü uygulamaları inşa etmek için açık kaynak bir framework'tür. Her Electron uygulaması kendi Chromium ve Node kopyasıyla gönderilir; bu nedenle Electron uygulamasının yükleyicileri tipik olarak hello world için bile 80–150 MB civarındadır. Electron; VS Code, Slack, Discord ve Figma'nın masaüstü istemcisi dahil yaygın olarak kullanılan uygulamaları çalıştırmıştır. Linux, macOS ve Windows masaüstlerini hedefler; birinci taraf bir mobil, watch veya TV hikâyesi yoktur.",
         "perryWhat": "Perry, TypeScript'i tarayıcı motoru, Chromium ve Node çalışma zamanı olmaksızın doğrudan yerel makine koduna derler. UI katmanı (perry/ui), macOS'ta AppKit, iOS/iPadOS/tvOS'ta UIKit, Linux'ta GTK4, Windows'ta Win32 ve Android'de JNI aracılığıyla yerel platform widget'larına eşlenen SwiftUI tarzı bildirimsel bir sistemdir. Hello-world ikili dosyaları ~330 KB; stdlib ile (Fastify, mysql2, vb.) tam uygulamalar yaklaşık 48 MB'dir.",
         "table": [
-          { "feature": "Render", "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Paketlenmiş Chromium (HTML/CSS/JS)" },
-          { "feature": "Paketlenmiş motorlar", "perry": "Yok (sadece --enable-js-runtime ile isteğe bağlı V8)", "competitor": "Chromium + Node.js" },
-          { "feature": "Hello-world yükleyici boyutu", "perry": "~330 KB", "competitor": "~80–150 MB" },
-          { "feature": "Tam uygulama yükleyicisi (stdlib + framework'ler)", "perry": "~48 MB", "competitor": "Tipik olarak 100–200+ MB" },
-          { "feature": "RAM kullanımı", "perry": "Yerel (tipik: onlarca MB)", "competitor": "Birden fazla Chromium süreci (tipik: yüzlerce MB)" },
-          { "feature": "Mobil / watch / TV", "perry": "Evet — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "Hayır (yalnızca masaüstü)" },
-          { "feature": "UI dili", "perry": "Bildirimsel SwiftUI tarzı API ile TypeScript", "competitor": "HTML/CSS/JS (web yığını)" },
-          { "feature": "Otomatik güncelleme / paketleme", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (olgun ekosistem)" },
-          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı, üretimde 10+ yıl" }
+          {
+            "feature": "Render",
+            "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Paketlenmiş Chromium (HTML/CSS/JS)"
+          },
+          {
+            "feature": "Paketlenmiş motorlar",
+            "perry": "Yok (sadece --enable-js-runtime ile isteğe bağlı V8)",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "Hello-world yükleyici boyutu",
+            "perry": "~330 KB",
+            "competitor": "~80–150 MB"
+          },
+          {
+            "feature": "Tam uygulama yükleyicisi (stdlib + framework'ler)",
+            "perry": "~48 MB",
+            "competitor": "Tipik olarak 100–200+ MB"
+          },
+          {
+            "feature": "RAM kullanımı",
+            "perry": "Yerel (tipik: onlarca MB)",
+            "competitor": "Birden fazla Chromium süreci (tipik: yüzlerce MB)"
+          },
+          {
+            "feature": "Mobil / watch / TV",
+            "perry": "Evet — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
+            "competitor": "Hayır (yalnızca masaüstü)"
+          },
+          {
+            "feature": "UI dili",
+            "perry": "Bildirimsel SwiftUI tarzı API ile TypeScript",
+            "competitor": "HTML/CSS/JS (web yığını)"
+          },
+          {
+            "feature": "Otomatik güncelleme / paketleme",
+            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
+            "competitor": "electron-builder, electron-updater (olgun ekosistem)"
+          },
+          {
+            "feature": "Olgunluk",
+            "perry": "1.0 öncesi",
+            "competitor": "Kararlı, üretimde 10+ yıl"
+          }
         ],
         "perryWins": [
           "İkili dosya boyutu. Bir Perry hello world ~330 KB; bir Electron hello world ise her uygulama kendi Chromium'unu gönderdiği için tipik olarak 80–150 MB'dir.",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri, web frontend (herhangi bir framework — React, Vue, Svelte, vb.) ve Rust backend ile çapraz platform uygulamalar inşa etmenize izin veren, Rust ile yazılmış açık kaynak bir framework'tür. Chromium paketlemek yerine Tauri sistemin yerleşik webview'ini kullanır; bu da Linux/Windows/macOS'ta uygulama yükleyicilerini tek haneli MB aralığında tutar. Tauri 2 mobil (iOS ve Android) desteği ekledi. Frontend, sistem webview'i tarafından HTML/CSS/JS olarak render edilir; Rust backend ile iletişim bir IPC köprüsü üzerinden olur.",
         "perryWhat": "Perry, TypeScript'i LLVM aracılığıyla doğrudan yerel makine koduna derler. UI katmanı (perry/ui), webview tarafından render edilen HTML değil, yerel platform widget'larına eşlenen bildirimsel SwiftUI tarzı bir API'dir. Perry ile yazılmış uygulamalar bir JavaScript motoru taşımaz, WebKit/WebView2 içinde çalışmaz ve UI ile mantık arasında bir IPC köprüsü gerektirmez. Perry; mobil, watch ve TV dahil 10 platformu hedefler.",
         "table": [
-          { "feature": "UI render", "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Sistem webview'i (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
-          { "feature": "Frontend dili", "perry": "TypeScript (bildirimsel widget API'si)", "competitor": "Herhangi bir web framework'ü ile HTML/CSS/JS (React, Vue, vb.)" },
-          { "feature": "Backend dili", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "UI ve mantık arasında IPC", "perry": "Yok — tek süreç, doğrudan çağrılar", "competitor": "Gerekli (UI webview'de, mantık Rust sürecinde)" },
-          { "feature": "Hello-world yükleyici", "perry": "~330 KB", "competitor": "~3–10 MB (webview OS tarafından sağlanır)" },
-          { "feature": "Mobil (iOS, Android)", "perry": "Evet — yerel UI", "competitor": "Evet — webview tabanlı (Tauri 2)" },
-          { "feature": "Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Hayır" },
-          { "feature": "WebAssembly hedefi", "perry": "Evet (DOM köprüsü ile perry/ui)", "competitor": "Yok (Tauri'nin kendisi yerel olarak webview kullanır)" },
-          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı (1.x / 2.x)" }
+          {
+            "feature": "UI render",
+            "perry": "Yerel platform widget'ları (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Sistem webview'i (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
+          },
+          {
+            "feature": "Frontend dili",
+            "perry": "TypeScript (bildirimsel widget API'si)",
+            "competitor": "Herhangi bir web framework'ü ile HTML/CSS/JS (React, Vue, vb.)"
+          },
+          {
+            "feature": "Backend dili",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "UI ve mantık arasında IPC",
+            "perry": "Yok — tek süreç, doğrudan çağrılar",
+            "competitor": "Gerekli (UI webview'de, mantık Rust sürecinde)"
+          },
+          {
+            "feature": "Hello-world yükleyici",
+            "perry": "~330 KB",
+            "competitor": "~3–10 MB (webview OS tarafından sağlanır)"
+          },
+          {
+            "feature": "Mobil (iOS, Android)",
+            "perry": "Evet — yerel UI",
+            "competitor": "Evet — webview tabanlı (Tauri 2)"
+          },
+          {
+            "feature": "Watch / TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "Hayır"
+          },
+          {
+            "feature": "WebAssembly hedefi",
+            "perry": "Evet (DOM köprüsü ile perry/ui)",
+            "competitor": "Yok (Tauri'nin kendisi yerel olarak webview kullanır)"
+          },
+          {
+            "feature": "Olgunluk",
+            "perry": "1.0 öncesi",
+            "competitor": "Kararlı (1.x / 2.x)"
+          }
         ],
         "perryWins": [
           "Gerçekten yerel UI — Perry HTML render etmez; gerçek platform widget'larını sürer, böylece uygulamalar yerel kaydırma fiziğini, focus, erişilebilirlik, IME ve OS temalandırmasını ücretsiz olarak miras alır.",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native, Meta'nın React kullanarak mobil uygulamalar inşa etmek için framework'üdür. JavaScript gömülü bir motorda çalışır — varsayılan olarak Hermes veya JavaScriptCore — ve yerel iOS/Android widget'larıyla bir köprü (eski) veya JSI/Fabric (Yeni Mimari) aracılığıyla etkileşime girer. Framework mobil önceliklidir (iOS ve Android); Microsoft, Windows ve macOS için topluluk fork'larını korur. React Native; Meta, Microsoft, Shopify, Discord ve daha birçok yerde uygulamaları çalıştırmıştır.",
         "perryWhat": "Perry, TypeScript'i doğrudan yerel makine koduna derler. perry/ui modülü, derleme zamanında yerel platform widget'larına derlenen SwiftUI tarzı bildirimsel bir UI sistemidir — ikili dosyada JS çalıştırma zamanı yok, köprü yok ve JSI yok. Aynı TypeScript kod tabanı; macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly ve Web'e derlenir.",
         "table": [
-          { "feature": "Yürütme modeli", "perry": "AOT-derlenmiş yerel makine kodu", "competitor": "JS motoru (Hermes/JSC) + yerel köprü (veya JSI/Fabric)" },
-          { "feature": "Uygulamada JS motoru", "perry": "Yok", "competitor": "Hermes (varsayılan) veya JavaScriptCore" },
-          { "feature": "UI", "perry": "Yerel widget'lar — SwiftUI tarzı bildirimsel API", "competitor": "React + köprü / Fabric ile yerel widget'lar" },
-          { "feature": "Birincil hedefler", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web", "competitor": "iOS, Android (Windows/macOS topluluk fork'ları aracılığıyla)" },
-          { "feature": "Sunucu / CLI / masaüstü ikili dosyaları", "perry": "Evet (CLI araçları, sunucular, masaüstü uygulamaları)", "competitor": "Hayır (mobil UI framework'ü)" },
-          { "feature": "JS ve yerel arasında köprü", "perry": "Köprü yok — yerel kod programın kendisidir", "competitor": "Evet (eski köprü veya JSI/Fabric)" },
-          { "feature": "Geliştirme sırasında hot reload", "perry": "perry dev (watch-mode otomatik yeniden derleme)", "competitor": "Fast Refresh (çok hızlı)" },
-          { "feature": "Olgunluk", "perry": "1.0 öncesi", "competitor": "Kararlı, üretimde geniş çapta dağıtılmış" },
-          { "feature": "Bileşen kütüphanesi", "perry": "perry/ui temel widget'lar + perry-react React-uyum katmanı", "competitor": "Devasa — React Native + topluluk paketleri" }
+          {
+            "feature": "Yürütme modeli",
+            "perry": "AOT-derlenmiş yerel makine kodu",
+            "competitor": "JS motoru (Hermes/JSC) + yerel köprü (veya JSI/Fabric)"
+          },
+          {
+            "feature": "Uygulamada JS motoru",
+            "perry": "Yok",
+            "competitor": "Hermes (varsayılan) veya JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "Yerel widget'lar — SwiftUI tarzı bildirimsel API",
+            "competitor": "React + köprü / Fabric ile yerel widget'lar"
+          },
+          {
+            "feature": "Birincil hedefler",
+            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web",
+            "competitor": "iOS, Android (Windows/macOS topluluk fork'ları aracılığıyla)"
+          },
+          {
+            "feature": "Sunucu / CLI / masaüstü ikili dosyaları",
+            "perry": "Evet (CLI araçları, sunucular, masaüstü uygulamaları)",
+            "competitor": "Hayır (mobil UI framework'ü)"
+          },
+          {
+            "feature": "JS ve yerel arasında köprü",
+            "perry": "Köprü yok — yerel kod programın kendisidir",
+            "competitor": "Evet (eski köprü veya JSI/Fabric)"
+          },
+          {
+            "feature": "Geliştirme sırasında hot reload",
+            "perry": "perry dev (watch-mode otomatik yeniden derleme)",
+            "competitor": "Fast Refresh (çok hızlı)"
+          },
+          {
+            "feature": "Olgunluk",
+            "perry": "1.0 öncesi",
+            "competitor": "Kararlı, üretimde geniş çapta dağıtılmış"
+          },
+          {
+            "feature": "Bileşen kütüphanesi",
+            "perry": "perry/ui temel widget'lar + perry-react React-uyum katmanı",
+            "competitor": "Devasa — React Native + topluluk paketleri"
+          }
         ],
         "perryWins": [
           "Gönderilen uygulamada JS motoru yok. Perry ile derlenmiş ikili dosyalar Hermes veya JSC taşımaz; TypeScript çalıştırılabilir dosyanın kendisidir.",

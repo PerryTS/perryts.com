@@ -210,7 +210,8 @@
     "issues": "Issues",
     "discussions": "ディスカッション",
     "contributing": "コントリビューション",
-    "tagline": "Rust、SWC、LLVMで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています"
+    "tagline": "Rust、SWC、LLVMで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "はい。Perryコンパイラ、ビルドサーバー（perry-hub）、検証サービス、ビルドワーカーはすべてオープンソースです。リポジトリをクローンし、自分のMac MiniやLinuxマシンでhubを実行し、PERRY_HUB_SELF_HOSTED=trueを設定してレート制限を無効化してください。無制限のビルドがコストゼロで利用できます。hub.perryts.comのホスティングサービスは利便性のためにあります——インフラ管理不要、署名証明書の管理不要、ビルドキューの監視不要。",
       "q4": "「公開」には何が含まれますか？",
       "a4": "perry publish '<'platform'>'の1回の実行です。各プラットフォームは個別の公開としてカウントされます。公開にはビルド、コード署名、ライト検証（アプリが正常に起動すること）、ストアへの提出またはアーティファクト生成が含まれます。"
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun は Zig で書かれた高速なオールインワンの JavaScript / TypeScript ツールキットです。`.ts` ソースを直接実行し（事前コンパイル不要）、JS エンジンには JavaScriptCore を採用、バンドラ・パッケージマネージャ・テストランナーも内蔵しています。`bun build --compile` は Bun ランタイムをアプリケーションと一緒に単一の実行ファイルへバンドルします。Bun は x64 と arm64 上の Linux、macOS、Windows をターゲットにしています。",
         "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラです。TypeScript を LLVM 経由で直接ネイティブマシンコードへコンパイルします――JavaScript エンジンも、ランタイムも、JIT もありません。出力は単一のバイナリで、hello world で約 330 KB、Fastify サーバのような stdlib をフル活用したアプリでも ~48 MB 程度です。Perry は macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web を含む 10 のプラットフォームをターゲットにしています。",
         "table": [
-          { "feature": "出力", "perry": "ネイティブマシンコード（LLVM）", "competitor": "あなたのコード + Bun ランタイムを 1 つのバイナリにバンドル" },
-          { "feature": "バイナリ内の JavaScript エンジン", "perry": "デフォルトではなし。--enable-js-runtime でオプションの V8（+ ~15 MB）", "competitor": "JavaScriptCore（常時）" },
-          { "feature": "hello-world バイナリサイズ", "perry": "~330 KB", "competitor": "~50–100 MB（Bun ランタイムを含む）" },
-          { "feature": "JIT", "perry": "なし（AOT コンパイル）", "competitor": "あり（JavaScriptCore JIT）" },
-          { "feature": "モバイルターゲット（iOS、Android）", "perry": "あり――UIKit / JNI 経由のネイティブ UI", "competitor": "なし" },
-          { "feature": "ウォッチ / TV ターゲット", "perry": "watchOS、tvOS、Wear OS", "competitor": "なし" },
-          { "feature": "ネイティブ UI ウィジェット", "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+", "competitor": "なし（サーバ / CLI 中心）" },
-          { "feature": "npm エコシステム", "perry": "純粋な TS / JS パッケージはネイティブにコンパイル可能。それ以外はオプションの V8 経由", "competitor": "Node 互換の npm をフルサポート" },
-          { "feature": "安定性", "perry": "1.0 未満（アルファ）", "competitor": "安定版（1.x）" },
-          { "feature": "実装言語", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "出力",
+            "perry": "ネイティブマシンコード（LLVM）",
+            "competitor": "あなたのコード + Bun ランタイムを 1 つのバイナリにバンドル"
+          },
+          {
+            "feature": "バイナリ内の JavaScript エンジン",
+            "perry": "デフォルトではなし。--enable-js-runtime でオプションの V8（+ ~15 MB）",
+            "competitor": "JavaScriptCore（常時）"
+          },
+          {
+            "feature": "hello-world バイナリサイズ",
+            "perry": "~330 KB",
+            "competitor": "~50–100 MB（Bun ランタイムを含む）"
+          },
+          {
+            "feature": "JIT",
+            "perry": "なし（AOT コンパイル）",
+            "competitor": "あり（JavaScriptCore JIT）"
+          },
+          {
+            "feature": "モバイルターゲット（iOS、Android）",
+            "perry": "あり――UIKit / JNI 経由のネイティブ UI",
+            "competitor": "なし"
+          },
+          {
+            "feature": "ウォッチ / TV ターゲット",
+            "perry": "watchOS、tvOS、Wear OS",
+            "competitor": "なし"
+          },
+          {
+            "feature": "ネイティブ UI ウィジェット",
+            "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+",
+            "competitor": "なし（サーバ / CLI 中心）"
+          },
+          {
+            "feature": "npm エコシステム",
+            "perry": "純粋な TS / JS パッケージはネイティブにコンパイル可能。それ以外はオプションの V8 経由",
+            "competitor": "Node 互換の npm をフルサポート"
+          },
+          {
+            "feature": "安定性",
+            "perry": "1.0 未満（アルファ）",
+            "competitor": "安定版（1.x）"
+          },
+          {
+            "feature": "実装言語",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "バイナリが小さい――Perry の hello world は ~330 KB ですが、Bun の --compile による hello world は Bun ランタイムを含み数十 MB になります。",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno は Rust で書かれ、V8 と Tokio の上に構築された TypeScript / JavaScript ランタイムです。`.ts` ソースを直接実行し、フォーマッタ・リンタ・テストランナー・言語サーバなどのツールを内蔵し、ネットワーク・ファイル・環境変数アクセスに明示的な許可を求めるパーミッションモデルを採用しています。`deno compile` は Deno ランタイム（V8 を含む）をコードと一緒にバンドルし、自己完結型の実行ファイルを生成します。Deno は x64 と arm64 上の Linux、macOS、Windows をターゲットにしています。",
         "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラです。TypeScript を LLVM 経由で直接ネイティブマシンコードへコンパイルします――V8 も、JIT も、ランタイムもありません。出力は単一のバイナリで、ネイティブコードであれば通常数百 KB から数 MB 程度、JS エンジンを必要とする npm パッケージのために組み込み V8 ランタイムをオプトインすればより大きくなります。",
         "table": [
-          { "feature": "出力", "perry": "ネイティブマシンコード（LLVM）", "competitor": "あなたのコード + Deno ランタイム（V8）をバンドル" },
-          { "feature": "バイナリ内の JavaScript エンジン", "perry": "デフォルトではなし。オプションの V8", "competitor": "V8（常時）" },
-          { "feature": "hello-world バイナリサイズ", "perry": "~330 KB", "competitor": "~80–100 MB（V8 を含む）" },
-          { "feature": "JIT", "perry": "なし（AOT コンパイル）", "competitor": "あり（V8 TurboFan）" },
-          { "feature": "モバイルターゲット", "perry": "iOS、iPadOS、Android", "competitor": "なし" },
-          { "feature": "ウォッチ / TV / WASM / Web", "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS", "competitor": "なし" },
-          { "feature": "ネイティブ UI", "perry": "ネイティブプラットフォーム API 経由で 25+ ウィジェット", "competitor": "なし" },
-          { "feature": "パーミッションモデル", "perry": "標準的な OS プロセスのパーミッション", "competitor": "粒度の細かいランタイムパーミッション（--allow-net、--allow-read など）" },
-          { "feature": "安定性", "perry": "1.0 未満", "competitor": "安定版（1.x / 2.x）" },
-          { "feature": "実装言語", "perry": "Rust", "competitor": "Rust（V8 上）" }
+          {
+            "feature": "出力",
+            "perry": "ネイティブマシンコード（LLVM）",
+            "competitor": "あなたのコード + Deno ランタイム（V8）をバンドル"
+          },
+          {
+            "feature": "バイナリ内の JavaScript エンジン",
+            "perry": "デフォルトではなし。オプションの V8",
+            "competitor": "V8（常時）"
+          },
+          {
+            "feature": "hello-world バイナリサイズ",
+            "perry": "~330 KB",
+            "competitor": "~80–100 MB（V8 を含む）"
+          },
+          {
+            "feature": "JIT",
+            "perry": "なし（AOT コンパイル）",
+            "competitor": "あり（V8 TurboFan）"
+          },
+          {
+            "feature": "モバイルターゲット",
+            "perry": "iOS、iPadOS、Android",
+            "competitor": "なし"
+          },
+          {
+            "feature": "ウォッチ / TV / WASM / Web",
+            "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS",
+            "competitor": "なし"
+          },
+          {
+            "feature": "ネイティブ UI",
+            "perry": "ネイティブプラットフォーム API 経由で 25+ ウィジェット",
+            "competitor": "なし"
+          },
+          {
+            "feature": "パーミッションモデル",
+            "perry": "標準的な OS プロセスのパーミッション",
+            "competitor": "粒度の細かいランタイムパーミッション（--allow-net、--allow-read など）"
+          },
+          {
+            "feature": "安定性",
+            "perry": "1.0 未満",
+            "competitor": "安定版（1.x / 2.x）"
+          },
+          {
+            "feature": "実装言語",
+            "perry": "Rust",
+            "competitor": "Rust（V8 上）"
+          }
         ],
         "perryWins": [
           "バイナリが圧倒的に小さい。Perry の hello world は ~330 KB。`deno compile` の出力は V8 を含み 80–100 MB の範囲になります。",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes は Meta が React Native のために構築した JavaScript エンジンで――バイトコードベース、AOT 事前コンパイル、モバイルの起動時間に最適化されています。Static Hermes は Hermes に型付き JavaScript サブセットの事前ネイティブコンパイルを拡張するリサーチ的な取り組みで、React Native に真のネイティブコードへの道筋を与えることを意図しています。主にコンパイラの研究開発プロジェクトです。Perry のベンチマークノートによれば、現時点では macOS arm64 上で日常的にインストールできるパッケージにはなっていません（`shermes` は polyglot ベンチからスキップされ、「Homebrew や npm 経由で macOS arm64 にクリーンにインストールできる形では提供されていない」と注記されています――perry/benchmarks/README.md を参照）。",
         "perryWhat": "Perry は Rust で書かれたネイティブ TypeScript コンパイラで、パースに SWC、コード生成に LLVM を使用します。動作する CLI（`perry compile`、`perry run`、`perry publish`）、25+ のネイティブ UI ウィジェット、10 のコンパイレーションターゲット、セルフホストランタイム、そして透明な条件で計測されたベンチマークスイート（M1 Max、RUNS=11）を出荷しています。Perry は 1.0 未満ですがプロダクション志向で、すでに Perry で構築されたアプリが出荷されています（Bloom Engine、Mango、Hone、Pry、dB Meter――perryts.com 参照）。",
         "table": [
-          { "feature": "ステータス", "perry": "1.0 未満（アルファ）――プロダクション志向", "competitor": "リサーチ / 実験的" },
-          { "feature": "インストール経路（macOS arm64）", "perry": "Homebrew、APT、npm（@perryts/perry）", "competitor": "執筆時点でクリーンインストール用にパッケージ化されていない（perry/benchmarks による）" },
-          { "feature": "バックエンド", "perry": "LLVM", "competitor": "独自（Hermes ベースの codegen）" },
-          { "feature": "入力", "perry": "TypeScript（フル）", "competitor": "型付き JS / TS のサブセット" },
-          { "feature": "コンパイレーションターゲット", "perry": "10：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS", "competitor": "主にモバイル（React Native コンテキスト）" },
-          { "feature": "ネイティブ UI", "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+ ウィジェット", "competitor": "React Native ブリッジ経由（統合時）" },
-          { "feature": "スタンドアロン CLI アプリのワークフロー", "perry": "あり――`perry compile main.ts` がバイナリを生成", "competitor": "React Native コンテキストに紐付く" },
-          { "feature": "公開ベンチマークスイート", "perry": "あり――Node、Bun、Rust、C++、Go、Swift、Java に対して RUNS=11", "competitor": "内部 / リサーチ論文" }
+          {
+            "feature": "ステータス",
+            "perry": "1.0 未満（アルファ）――プロダクション志向",
+            "competitor": "リサーチ / 実験的"
+          },
+          {
+            "feature": "インストール経路（macOS arm64）",
+            "perry": "Homebrew、APT、npm（@perryts/perry）",
+            "competitor": "執筆時点でクリーンインストール用にパッケージ化されていない（perry/benchmarks による）"
+          },
+          {
+            "feature": "バックエンド",
+            "perry": "LLVM",
+            "competitor": "独自（Hermes ベースの codegen）"
+          },
+          {
+            "feature": "入力",
+            "perry": "TypeScript（フル）",
+            "competitor": "型付き JS / TS のサブセット"
+          },
+          {
+            "feature": "コンパイレーションターゲット",
+            "perry": "10：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS",
+            "competitor": "主にモバイル（React Native コンテキスト）"
+          },
+          {
+            "feature": "ネイティブ UI",
+            "perry": "AppKit、UIKit、GTK4、Win32、JNI 経由で 25+ ウィジェット",
+            "competitor": "React Native ブリッジ経由（統合時）"
+          },
+          {
+            "feature": "スタンドアロン CLI アプリのワークフロー",
+            "perry": "あり――`perry compile main.ts` がバイナリを生成",
+            "competitor": "React Native コンテキストに紐付く"
+          },
+          {
+            "feature": "公開ベンチマークスイート",
+            "perry": "あり――Node、Bun、Rust、C++、Go、Swift、Java に対して RUNS=11",
+            "competitor": "内部 / リサーチ論文"
+          }
         ],
         "perryWins": [
           "実用ツールとして存在しています。Perry は今日 Homebrew、APT、または `npm install @perryts/perry` でインストールでき、`perry compile main.ts` は最初の試行でバイナリを生成します。",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron はレンダリングに Chromium、システムアクセスに Node.js を使用してクロスプラットフォームデスクトップアプリケーションを構築するためのオープンソースフレームワークです。各 Electron アプリは Chromium と Node の独自コピーを出荷するため、hello world でも Electron アプリのインストーラは通常 80–150 MB になります。Electron は VS Code、Slack、Discord、Figma のデスクトップクライアントなど、広く使用されているアプリを支えてきました。Linux、macOS、Windows のデスクトップをターゲットにしています。モバイル、ウォッチ、TV のファーストパーティの選択肢はありません。",
         "perryWhat": "Perry はブラウザエンジンも、Chromium も、Node ランタイムもなしに TypeScript を直接ネイティブマシンコードへコンパイルします。UI レイヤ（perry/ui）は SwiftUI スタイルの宣言的システムで、macOS の AppKit、iOS / iPadOS / tvOS の UIKit、Linux の GTK4、Windows の Win32、Android の JNI 経由でネイティブプラットフォームウィジェットにマップされます。hello-world バイナリは ~330 KB、stdlib（Fastify、mysql2 など）を伴うフルアプリでも約 48 MB です。",
         "table": [
-          { "feature": "レンダリング", "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "バンドルされた Chromium（HTML / CSS / JS）" },
-          { "feature": "バンドルされるエンジン", "perry": "なし（--enable-js-runtime のときのみオプションの V8）", "competitor": "Chromium + Node.js" },
-          { "feature": "hello-world インストーラサイズ", "perry": "~330 KB", "competitor": "~80–150 MB" },
-          { "feature": "フルアプリのインストーラ（stdlib + フレームワーク）", "perry": "~48 MB", "competitor": "通常 100–200+ MB" },
-          { "feature": "RAM 使用量", "perry": "ネイティブ（典型値：数十 MB）", "competitor": "複数の Chromium プロセス（典型値：数百 MB）" },
-          { "feature": "モバイル / ウォッチ / TV", "perry": "あり――iOS、iPadOS、Android、watchOS、tvOS、Wear OS", "competitor": "なし（デスクトップ専用）" },
-          { "feature": "UI 言語", "perry": "宣言的 SwiftUI スタイル API を伴う TypeScript", "competitor": "HTML / CSS / JS（Web スタック）" },
-          { "feature": "自動更新 / パッケージング", "perry": "perry publish（Homebrew、APT、App Store、Play Store）", "competitor": "electron-builder、electron-updater（成熟したエコシステム）" },
-          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版、10 年以上のプロダクション実績" }
+          {
+            "feature": "レンダリング",
+            "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）",
+            "competitor": "バンドルされた Chromium（HTML / CSS / JS）"
+          },
+          {
+            "feature": "バンドルされるエンジン",
+            "perry": "なし（--enable-js-runtime のときのみオプションの V8）",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "hello-world インストーラサイズ",
+            "perry": "~330 KB",
+            "competitor": "~80–150 MB"
+          },
+          {
+            "feature": "フルアプリのインストーラ（stdlib + フレームワーク）",
+            "perry": "~48 MB",
+            "competitor": "通常 100–200+ MB"
+          },
+          {
+            "feature": "RAM 使用量",
+            "perry": "ネイティブ（典型値：数十 MB）",
+            "competitor": "複数の Chromium プロセス（典型値：数百 MB）"
+          },
+          {
+            "feature": "モバイル / ウォッチ / TV",
+            "perry": "あり――iOS、iPadOS、Android、watchOS、tvOS、Wear OS",
+            "competitor": "なし（デスクトップ専用）"
+          },
+          {
+            "feature": "UI 言語",
+            "perry": "宣言的 SwiftUI スタイル API を伴う TypeScript",
+            "competitor": "HTML / CSS / JS（Web スタック）"
+          },
+          {
+            "feature": "自動更新 / パッケージング",
+            "perry": "perry publish（Homebrew、APT、App Store、Play Store）",
+            "competitor": "electron-builder、electron-updater（成熟したエコシステム）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "1.0 未満",
+            "competitor": "安定版、10 年以上のプロダクション実績"
+          }
         ],
         "perryWins": [
           "バイナリサイズ。Perry の hello world は ~330 KB ですが、Electron の hello world は通常 80–150 MB――各アプリが独自の Chromium を出荷するためです。",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri は Rust で書かれたオープンソースフレームワークで、Web フロントエンド（React、Vue、Svelte などのフレームワーク）と Rust バックエンドでクロスプラットフォームアプリケーションを構築できます。Chromium をバンドルする代わりに、Tauri は OS 組込みの webview を使用するため、Linux / Windows / macOS でアプリインストーラは 1 桁 MB の範囲に収まります。Tauri 2 ではモバイル（iOS と Android）対応が追加されました。フロントエンドはシステムの webview によって HTML / CSS / JS としてレンダリングされ、Rust バックエンドとの通信は IPC ブリッジ経由で行われます。",
         "perryWhat": "Perry は LLVM 経由で TypeScript を直接ネイティブマシンコードへコンパイルします。UI レイヤ（perry/ui）は宣言的 SwiftUI スタイルの API で、webview がレンダリングする HTML ではなく、ネイティブプラットフォームウィジェットにマップされます。Perry で書かれたアプリは JavaScript エンジンを持ち運ばず、WebKit / WebView2 の中で動作せず、UI とロジックの間に IPC ブリッジを必要としません。Perry はモバイル、ウォッチ、TV を含む 10 のプラットフォームをターゲットにしています。",
         "table": [
-          { "feature": "UI レンダリング", "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "システム webview（WKWebView、WebView2、WebKitGTK）――HTML / CSS / JS" },
-          { "feature": "フロントエンド言語", "perry": "TypeScript（宣言的ウィジェット API）", "competitor": "任意の Web フレームワーク（React、Vue など）経由の HTML / CSS / JS" },
-          { "feature": "バックエンド言語", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "UI とロジックの間の IPC", "perry": "なし――単一プロセス、直接呼出し", "competitor": "必要（UI は webview、ロジックは Rust プロセス）" },
-          { "feature": "hello-world インストーラ", "perry": "~330 KB", "competitor": "~3–10 MB（webview は OS 提供）" },
-          { "feature": "モバイル（iOS、Android）", "perry": "あり――ネイティブ UI", "competitor": "あり――webview ベース（Tauri 2）" },
-          { "feature": "ウォッチ / TV", "perry": "watchOS、tvOS、Wear OS", "competitor": "なし" },
-          { "feature": "WebAssembly ターゲット", "perry": "あり（DOM ブリッジ経由の perry/ui）", "competitor": "該当なし（Tauri 自体がネイティブに webview を使用）" },
-          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版（1.x / 2.x）" }
+          {
+            "feature": "UI レンダリング",
+            "perry": "ネイティブプラットフォームウィジェット（AppKit、UIKit、GTK4、Win32、JNI）",
+            "competitor": "システム webview（WKWebView、WebView2、WebKitGTK）――HTML / CSS / JS"
+          },
+          {
+            "feature": "フロントエンド言語",
+            "perry": "TypeScript（宣言的ウィジェット API）",
+            "competitor": "任意の Web フレームワーク（React、Vue など）経由の HTML / CSS / JS"
+          },
+          {
+            "feature": "バックエンド言語",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "UI とロジックの間の IPC",
+            "perry": "なし――単一プロセス、直接呼出し",
+            "competitor": "必要（UI は webview、ロジックは Rust プロセス）"
+          },
+          {
+            "feature": "hello-world インストーラ",
+            "perry": "~330 KB",
+            "competitor": "~3–10 MB（webview は OS 提供）"
+          },
+          {
+            "feature": "モバイル（iOS、Android）",
+            "perry": "あり――ネイティブ UI",
+            "competitor": "あり――webview ベース（Tauri 2）"
+          },
+          {
+            "feature": "ウォッチ / TV",
+            "perry": "watchOS、tvOS、Wear OS",
+            "competitor": "なし"
+          },
+          {
+            "feature": "WebAssembly ターゲット",
+            "perry": "あり（DOM ブリッジ経由の perry/ui）",
+            "competitor": "該当なし（Tauri 自体がネイティブに webview を使用）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "1.0 未満",
+            "competitor": "安定版（1.x / 2.x）"
+          }
         ],
         "perryWins": [
           "本当にネイティブな UI――Perry は HTML をレンダリングしません。実プラットフォームウィジェットを駆動するため、アプリはネイティブのスクロール物理、フォーカス、アクセシビリティ、IME、OS テーマを自動で継承します。",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native は React を使ってモバイルアプリを構築するための Meta のフレームワークです。JavaScript は組込みエンジン――デフォルトで Hermes、または JavaScriptCore――で実行され、ブリッジ（レガシー）または JSI / Fabric（New Architecture）経由でネイティブの iOS / Android ウィジェットと相互作用します。フレームワークはモバイルファースト（iOS と Android）です。Microsoft が Windows と macOS のコミュニティフォークを保守しています。React Native は Meta、Microsoft、Shopify、Discord などのアプリを支えてきました。",
         "perryWhat": "Perry は TypeScript を直接ネイティブマシンコードへコンパイルします。perry/ui モジュールは SwiftUI スタイルの宣言的 UI システムで、ビルド時にネイティブプラットフォームウィジェットへコンパイルされます――バイナリ内に JS ランタイムはなく、ブリッジもなく、JSI もありません。同じ TypeScript コードベースが macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、Wear OS、WebAssembly、Web へコンパイルされます。",
         "table": [
-          { "feature": "実行モデル", "perry": "AOT コンパイル済みネイティブマシンコード", "competitor": "JS エンジン（Hermes / JSC）+ ネイティブブリッジ（または JSI / Fabric）" },
-          { "feature": "アプリ内の JS エンジン", "perry": "なし", "competitor": "Hermes（デフォルト）または JavaScriptCore" },
-          { "feature": "UI", "perry": "ネイティブウィジェット――SwiftUI スタイルの宣言的 API", "competitor": "React + ブリッジ / Fabric 経由のネイティブウィジェット" },
-          { "feature": "主要ターゲット", "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web", "competitor": "iOS、Android（Windows / macOS はコミュニティフォーク経由）" },
-          { "feature": "サーバ / CLI / デスクトップバイナリ", "perry": "あり（CLI ツール、サーバ、デスクトップアプリ）", "competitor": "なし（モバイル UI フレームワーク）" },
-          { "feature": "JS とネイティブの間のブリッジ", "perry": "ブリッジなし――ネイティブコードがプログラム本体", "competitor": "あり（レガシーブリッジまたは JSI / Fabric）" },
-          { "feature": "開発時のホットリロード", "perry": "perry dev（ウォッチモードの自動再コンパイル）", "competitor": "Fast Refresh（非常に高速）" },
-          { "feature": "成熟度", "perry": "1.0 未満", "competitor": "安定版、プロダクションで広く展開済み" },
-          { "feature": "コンポーネントライブラリ", "perry": "perry/ui コアウィジェット + perry-react React 互換レイヤ", "competitor": "膨大――React Native + コミュニティパッケージ" }
+          {
+            "feature": "実行モデル",
+            "perry": "AOT コンパイル済みネイティブマシンコード",
+            "competitor": "JS エンジン（Hermes / JSC）+ ネイティブブリッジ（または JSI / Fabric）"
+          },
+          {
+            "feature": "アプリ内の JS エンジン",
+            "perry": "なし",
+            "competitor": "Hermes（デフォルト）または JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "ネイティブウィジェット――SwiftUI スタイルの宣言的 API",
+            "competitor": "React + ブリッジ / Fabric 経由のネイティブウィジェット"
+          },
+          {
+            "feature": "主要ターゲット",
+            "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web",
+            "competitor": "iOS、Android（Windows / macOS はコミュニティフォーク経由）"
+          },
+          {
+            "feature": "サーバ / CLI / デスクトップバイナリ",
+            "perry": "あり（CLI ツール、サーバ、デスクトップアプリ）",
+            "competitor": "なし（モバイル UI フレームワーク）"
+          },
+          {
+            "feature": "JS とネイティブの間のブリッジ",
+            "perry": "ブリッジなし――ネイティブコードがプログラム本体",
+            "competitor": "あり（レガシーブリッジまたは JSI / Fabric）"
+          },
+          {
+            "feature": "開発時のホットリロード",
+            "perry": "perry dev（ウォッチモードの自動再コンパイル）",
+            "competitor": "Fast Refresh（非常に高速）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "1.0 未満",
+            "competitor": "安定版、プロダクションで広く展開済み"
+          },
+          {
+            "feature": "コンポーネントライブラリ",
+            "perry": "perry/ui コアウィジェット + perry-react React 互換レイヤ",
+            "competitor": "膨大――React Native + コミュニティパッケージ"
+          }
         ],
         "perryWins": [
           "出荷アプリに JS エンジンがありません。Perry でコンパイルされたバイナリは Hermes も JSC も持ち運ばず、TypeScript そのものが実行ファイルです。",

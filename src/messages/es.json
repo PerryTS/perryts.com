@@ -210,7 +210,8 @@
     "issues": "Issues",
     "discussions": "Discusiones",
     "contributing": "Contribuir",
-    "tagline": "Construido con Rust, SWC y LLVM — y sí, este sitio web es servido por un binario compilado con Perry"
+    "tagline": "Construido con Rust, SWC y LLVM — y sí, este sitio web es servido por un binario compilado con Perry",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "Sí. El compilador Perry, el servidor de builds (perry-hub), el servicio de verificación y los workers son todos de código abierto. Clona el repositorio, ejecuta el hub en tu propio Mac Mini o servidor Linux, y configura PERRY_HUB_SELF_HOSTED=true para deshabilitar el límite de tasa. Obtienes builds ilimitados sin costo. El servicio alojado en hub.perryts.com existe por conveniencia — sin infraestructura que gestionar, sin certificados de firma que manejar, sin cola de builds que monitorear.",
       "q4": "¿Qué incluye una \"publicación\"?",
       "a4": "Una invocación de perry publish '<'platform'>'. Cada plataforma es una publicación separada. Una publicación incluye compilación, firma de código, verificación ligera (la app se lanza exitosamente) y envío a la tienda o generación de artefactos."
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun es un kit todo en uno rápido para JavaScript y TypeScript construido en Zig. Ejecuta directamente código `.ts` (sin paso de precompilación), usa JavaScriptCore como motor JS e incluye un bundler, un gestor de paquetes y un test runner. `bun build --compile` empaqueta el runtime de Bun junto con tu aplicación en un único ejecutable. Bun apunta a Linux, macOS y Windows en x64 y arm64.",
         "perryWhat": "Perry es un compilador nativo de TypeScript escrito en Rust. Compila TypeScript directamente a código máquina nativo a través de LLVM — sin motor JavaScript, sin runtime, sin JIT. La salida es un único binario (alrededor de 330 KB para un hello world; ~48 MB para una app completa con stdlib como un servidor Fastify). Perry apunta a 10 plataformas, incluyendo macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly y la Web.",
         "table": [
-          { "feature": "Salida", "perry": "Código máquina nativo (LLVM)", "competitor": "Tu código + el runtime de Bun empaquetados en un binario" },
-          { "feature": "Motor JavaScript en el binario", "perry": "Ninguno por defecto; V8 opcional con --enable-js-runtime (+~15 MB)", "competitor": "JavaScriptCore, siempre" },
-          { "feature": "Tamaño del binario hello world", "perry": "~330 KB", "competitor": "~50–100 MB (incluye el runtime de Bun)" },
-          { "feature": "JIT", "perry": "No (compilado AOT)", "competitor": "Sí (JIT de JavaScriptCore)" },
-          { "feature": "Plataformas móviles (iOS, Android)", "perry": "Sí — UI nativa vía UIKit/JNI", "competitor": "No" },
-          { "feature": "Plataformas Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "No" },
-          { "feature": "Widgets de UI nativa", "perry": "25+ vía AppKit, UIKit, GTK4, Win32, JNI", "competitor": "No (enfoque servidor/CLI)" },
-          { "feature": "Ecosistema npm", "perry": "Los paquetes TS/JS puros pueden compilarse a nativo; el resto vía V8 opcional", "competitor": "npm completo compatible con Node" },
-          { "feature": "Estabilidad", "perry": "Pre-1.0 (alpha)", "competitor": "Estable (1.x)" },
-          { "feature": "Construido en", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "Salida",
+            "perry": "Código máquina nativo (LLVM)",
+            "competitor": "Tu código + el runtime de Bun empaquetados en un binario"
+          },
+          {
+            "feature": "Motor JavaScript en el binario",
+            "perry": "Ninguno por defecto; V8 opcional con --enable-js-runtime (+~15 MB)",
+            "competitor": "JavaScriptCore, siempre"
+          },
+          {
+            "feature": "Tamaño del binario hello world",
+            "perry": "~330 KB",
+            "competitor": "~50–100 MB (incluye el runtime de Bun)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "No (compilado AOT)",
+            "competitor": "Sí (JIT de JavaScriptCore)"
+          },
+          {
+            "feature": "Plataformas móviles (iOS, Android)",
+            "perry": "Sí — UI nativa vía UIKit/JNI",
+            "competitor": "No"
+          },
+          {
+            "feature": "Plataformas Watch / TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "No"
+          },
+          {
+            "feature": "Widgets de UI nativa",
+            "perry": "25+ vía AppKit, UIKit, GTK4, Win32, JNI",
+            "competitor": "No (enfoque servidor/CLI)"
+          },
+          {
+            "feature": "Ecosistema npm",
+            "perry": "Los paquetes TS/JS puros pueden compilarse a nativo; el resto vía V8 opcional",
+            "competitor": "npm completo compatible con Node"
+          },
+          {
+            "feature": "Estabilidad",
+            "perry": "Pre-1.0 (alpha)",
+            "competitor": "Estable (1.x)"
+          },
+          {
+            "feature": "Construido en",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "Binarios más pequeños — un hello world de Perry es ~330 KB; un hello world de Bun --compile incluye el runtime de Bun y se sitúa en decenas de megabytes.",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno es un runtime de TypeScript y JavaScript construido en Rust sobre V8 y Tokio. Ejecuta directamente código `.ts`, lleva tooling integrado (formateador, linter, test runner, language server) y usa un modelo de permisos que requiere concesiones explícitas para acceder a red, archivos y entorno. `deno compile` produce un ejecutable autocontenido empaquetando el runtime de Deno (que incluye V8) con tu código. Deno apunta a Linux, macOS y Windows en x64 y arm64.",
         "perryWhat": "Perry es un compilador nativo de TypeScript escrito en Rust. Compila TypeScript directamente a código máquina nativo a través de LLVM — sin V8, sin JIT, sin runtime. La salida es un único binario, normalmente de unos pocos cientos de KB a unos pocos MB para código nativo, opcionalmente mayor si optas por el runtime V8 embebido para paquetes npm que necesiten un motor JS.",
         "table": [
-          { "feature": "Salida", "perry": "Código máquina nativo (LLVM)", "competitor": "Tu código + el runtime de Deno (V8) empaquetados" },
-          { "feature": "Motor JavaScript en el binario", "perry": "Ninguno por defecto; V8 opcional", "competitor": "V8, siempre" },
-          { "feature": "Tamaño del binario hello world", "perry": "~330 KB", "competitor": "~80–100 MB (incluye V8)" },
-          { "feature": "JIT", "perry": "No (compilado AOT)", "competitor": "Sí (TurboFan de V8)" },
-          { "feature": "Plataformas móviles", "perry": "iOS, iPadOS, Android", "competitor": "No" },
-          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "No" },
-          { "feature": "UI nativa", "perry": "25+ widgets vía APIs nativas de cada plataforma", "competitor": "No" },
-          { "feature": "Modelo de permisos", "perry": "Permisos estándar de proceso del sistema operativo", "competitor": "Permisos granulares en runtime (--allow-net, --allow-read, etc.)" },
-          { "feature": "Estabilidad", "perry": "Pre-1.0", "competitor": "Estable (1.x / 2.x)" },
-          { "feature": "Construido en", "perry": "Rust", "competitor": "Rust (sobre V8)" }
+          {
+            "feature": "Salida",
+            "perry": "Código máquina nativo (LLVM)",
+            "competitor": "Tu código + el runtime de Deno (V8) empaquetados"
+          },
+          {
+            "feature": "Motor JavaScript en el binario",
+            "perry": "Ninguno por defecto; V8 opcional",
+            "competitor": "V8, siempre"
+          },
+          {
+            "feature": "Tamaño del binario hello world",
+            "perry": "~330 KB",
+            "competitor": "~80–100 MB (incluye V8)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "No (compilado AOT)",
+            "competitor": "Sí (TurboFan de V8)"
+          },
+          {
+            "feature": "Plataformas móviles",
+            "perry": "iOS, iPadOS, Android",
+            "competitor": "No"
+          },
+          {
+            "feature": "Watch / TV / WASM / Web",
+            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
+            "competitor": "No"
+          },
+          {
+            "feature": "UI nativa",
+            "perry": "25+ widgets vía APIs nativas de cada plataforma",
+            "competitor": "No"
+          },
+          {
+            "feature": "Modelo de permisos",
+            "perry": "Permisos estándar de proceso del sistema operativo",
+            "competitor": "Permisos granulares en runtime (--allow-net, --allow-read, etc.)"
+          },
+          {
+            "feature": "Estabilidad",
+            "perry": "Pre-1.0",
+            "competitor": "Estable (1.x / 2.x)"
+          },
+          {
+            "feature": "Construido en",
+            "perry": "Rust",
+            "competitor": "Rust (sobre V8)"
+          }
         ],
         "perryWins": [
           "Binarios drásticamente más pequeños. Un hello world de Perry es ~330 KB. Las salidas de `deno compile` incluyen V8 y se sitúan en el rango de 80–100 MB.",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes es el motor JavaScript que Meta construyó para React Native — basado en bytecode, precompilado AOT, optimizado para tiempo de arranque en móvil. Static Hermes es el esfuerzo de investigación para extender Hermes con compilación nativa anticipada de un subconjunto tipado de JavaScript, con la intención de dar a React Native un camino hacia código verdaderamente nativo. Es principalmente un proyecto de I+D de compiladores; según las notas de los benchmarks de Perry, aún no está empaquetado para una instalación rutinaria en macOS arm64 (`shermes` se omitió del benchmark políglota con la nota de que «no está disponible en Homebrew o npm de una forma que se instale limpiamente en macOS arm64» — ver perry/benchmarks/README.md).",
         "perryWhat": "Perry es un compilador nativo de TypeScript escrito en Rust, que usa SWC para el parseo y LLVM para la generación de código. Distribuye un CLI funcional (`perry compile`, `perry run`, `perry publish`), más de 25 widgets de UI nativa, 10 plataformas de compilación, un runtime auto-hospedado y una suite de benchmarks medida en condiciones transparentes (M1 Max, RUNS=11). Perry está en pre-1.0 pero en vía de producción: hay gente publicando apps construidas con él (Bloom Engine, Mango, Hone, Pry, dB Meter — ver perryts.com).",
         "table": [
-          { "feature": "Estado", "perry": "Pre-1.0 (alpha) — en vía de producción", "competitor": "Investigación / experimental" },
-          { "feature": "Vía de instalación (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "Sin paquete para instalación limpia al momento de escribir esto (según perry/benchmarks)" },
-          { "feature": "Backend", "perry": "LLVM", "competitor": "Personalizado (codegen basado en Hermes)" },
-          { "feature": "Entrada", "perry": "TypeScript (completo)", "competitor": "Subconjunto tipado de JS/TS" },
-          { "feature": "Plataformas de compilación", "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "Principalmente móvil (contexto de React Native)" },
-          { "feature": "UI nativa", "perry": "25+ widgets vía AppKit, UIKit, GTK4, Win32, JNI", "competitor": "Vía el puente de React Native (cuando se integra)" },
-          { "feature": "Flujo de app CLI autónoma", "perry": "Sí — `perry compile main.ts` produce un binario", "competitor": "Atado al contexto de React Native" },
-          { "feature": "Suite de benchmarks pública", "perry": "Sí — RUNS=11 frente a Node, Bun, Rust, C++, Go, Swift, Java", "competitor": "Interna / papers de investigación" }
+          {
+            "feature": "Estado",
+            "perry": "Pre-1.0 (alpha) — en vía de producción",
+            "competitor": "Investigación / experimental"
+          },
+          {
+            "feature": "Vía de instalación (macOS arm64)",
+            "perry": "Homebrew, APT, npm (@perryts/perry)",
+            "competitor": "Sin paquete para instalación limpia al momento de escribir esto (según perry/benchmarks)"
+          },
+          {
+            "feature": "Backend",
+            "perry": "LLVM",
+            "competitor": "Personalizado (codegen basado en Hermes)"
+          },
+          {
+            "feature": "Entrada",
+            "perry": "TypeScript (completo)",
+            "competitor": "Subconjunto tipado de JS/TS"
+          },
+          {
+            "feature": "Plataformas de compilación",
+            "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
+            "competitor": "Principalmente móvil (contexto de React Native)"
+          },
+          {
+            "feature": "UI nativa",
+            "perry": "25+ widgets vía AppKit, UIKit, GTK4, Win32, JNI",
+            "competitor": "Vía el puente de React Native (cuando se integra)"
+          },
+          {
+            "feature": "Flujo de app CLI autónoma",
+            "perry": "Sí — `perry compile main.ts` produce un binario",
+            "competitor": "Atado al contexto de React Native"
+          },
+          {
+            "feature": "Suite de benchmarks pública",
+            "perry": "Sí — RUNS=11 frente a Node, Bun, Rust, C++, Go, Swift, Java",
+            "competitor": "Interna / papers de investigación"
+          }
         ],
         "perryWins": [
           "Existe como herramienta usable. Perry puede instalarse hoy vía Homebrew, APT o `npm install @perryts/perry`, y `perry compile main.ts` produce un binario al primer intento.",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron es un framework de código abierto para construir aplicaciones de escritorio multiplataforma usando Chromium para renderizar y Node.js para acceso al sistema. Cada app de Electron se distribuye con su propia copia de Chromium y Node, motivo por el que los instaladores de apps Electron suelen pesar 80–150 MB incluso para un hello world. Electron ha potenciado apps ampliamente usadas como VS Code, Slack, Discord y el cliente de escritorio de Figma. Apunta a Linux, macOS y Windows en escritorio; no hay una historia oficial para móvil, watch o TV.",
         "perryWhat": "Perry compila TypeScript directamente a código máquina nativo sin motor de navegador, sin Chromium y sin runtime de Node. La capa de UI (perry/ui) es un sistema declarativo al estilo SwiftUI que mapea a widgets nativos vía AppKit en macOS, UIKit en iOS/iPadOS/tvOS, GTK4 en Linux, Win32 en Windows y JNI en Android. Los binarios hello world son de ~330 KB; las apps completas con stdlib (Fastify, mysql2, etc.) rondan los 48 MB.",
         "table": [
-          { "feature": "Renderizado", "perry": "Widgets nativos de la plataforma (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Chromium empaquetado (HTML/CSS/JS)" },
-          { "feature": "Motores empaquetados", "perry": "Ninguno (V8 opcional solo con --enable-js-runtime)", "competitor": "Chromium + Node.js" },
-          { "feature": "Tamaño del instalador hello world", "perry": "~330 KB", "competitor": "~80–150 MB" },
-          { "feature": "Instalador de app completa (stdlib + frameworks)", "perry": "~48 MB", "competitor": "100–200+ MB típico" },
-          { "feature": "Uso de RAM", "perry": "Nativo (típico: decenas de MB)", "competitor": "Múltiples procesos de Chromium (típico: cientos de MB)" },
-          { "feature": "Móvil / watch / TV", "perry": "Sí — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "No (solo escritorio)" },
-          { "feature": "Lenguaje de UI", "perry": "TypeScript con API declarativa al estilo SwiftUI", "competitor": "HTML/CSS/JS (stack web)" },
-          { "feature": "Auto-actualización / empaquetado", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (ecosistema maduro)" },
-          { "feature": "Madurez", "perry": "Pre-1.0", "competitor": "Estable, más de una década en producción" }
+          {
+            "feature": "Renderizado",
+            "perry": "Widgets nativos de la plataforma (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Chromium empaquetado (HTML/CSS/JS)"
+          },
+          {
+            "feature": "Motores empaquetados",
+            "perry": "Ninguno (V8 opcional solo con --enable-js-runtime)",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "Tamaño del instalador hello world",
+            "perry": "~330 KB",
+            "competitor": "~80–150 MB"
+          },
+          {
+            "feature": "Instalador de app completa (stdlib + frameworks)",
+            "perry": "~48 MB",
+            "competitor": "100–200+ MB típico"
+          },
+          {
+            "feature": "Uso de RAM",
+            "perry": "Nativo (típico: decenas de MB)",
+            "competitor": "Múltiples procesos de Chromium (típico: cientos de MB)"
+          },
+          {
+            "feature": "Móvil / watch / TV",
+            "perry": "Sí — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
+            "competitor": "No (solo escritorio)"
+          },
+          {
+            "feature": "Lenguaje de UI",
+            "perry": "TypeScript con API declarativa al estilo SwiftUI",
+            "competitor": "HTML/CSS/JS (stack web)"
+          },
+          {
+            "feature": "Auto-actualización / empaquetado",
+            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
+            "competitor": "electron-builder, electron-updater (ecosistema maduro)"
+          },
+          {
+            "feature": "Madurez",
+            "perry": "Pre-1.0",
+            "competitor": "Estable, más de una década en producción"
+          }
         ],
         "perryWins": [
           "Tamaño de binario. Un hello world de Perry es ~330 KB; uno de Electron suele pesar 80–150 MB porque cada app distribuye su propio Chromium.",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri es un framework de código abierto escrito en Rust que te permite construir aplicaciones multiplataforma con un frontend web (cualquier framework — React, Vue, Svelte, etc.) y un backend en Rust. En lugar de empaquetar Chromium, Tauri usa el webview integrado del sistema, lo que mantiene los instaladores de apps en el rango de un dígito de MB en Linux/Windows/macOS. Tauri 2 añadió soporte móvil (iOS y Android). El frontend se renderiza como HTML/CSS/JS por el webview del sistema; la comunicación con el backend Rust va por un puente IPC.",
         "perryWhat": "Perry compila TypeScript directamente a código máquina nativo a través de LLVM. La capa de UI (perry/ui) es una API declarativa al estilo SwiftUI que mapea a widgets nativos de cada plataforma — no a HTML renderizado por un webview. Las apps escritas en Perry no llevan motor JavaScript, no corren dentro de WebKit/WebView2 y no necesitan un puente IPC entre UI y lógica. Perry apunta a 10 plataformas, incluyendo móvil, watch y TV.",
         "table": [
-          { "feature": "Renderizado de UI", "perry": "Widgets nativos de la plataforma (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Webview del sistema (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
-          { "feature": "Lenguaje de frontend", "perry": "TypeScript (API declarativa de widgets)", "competitor": "HTML/CSS/JS vía cualquier framework web (React, Vue, etc.)" },
-          { "feature": "Lenguaje de backend", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "IPC entre UI y lógica", "perry": "Ninguno — un solo proceso, llamadas directas", "competitor": "Requerido (UI en webview, lógica en proceso Rust)" },
-          { "feature": "Instalador hello world", "perry": "~330 KB", "competitor": "~3–10 MB (el webview lo provee el SO)" },
-          { "feature": "Móvil (iOS, Android)", "perry": "Sí — UI nativa", "competitor": "Sí — basado en webview (Tauri 2)" },
-          { "feature": "Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "No" },
-          { "feature": "Plataforma WebAssembly", "perry": "Sí (perry/ui vía puente DOM)", "competitor": "N/A (Tauri en sí usa webview de forma nativa)" },
-          { "feature": "Madurez", "perry": "Pre-1.0", "competitor": "Estable (1.x / 2.x)" }
+          {
+            "feature": "Renderizado de UI",
+            "perry": "Widgets nativos de la plataforma (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Webview del sistema (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
+          },
+          {
+            "feature": "Lenguaje de frontend",
+            "perry": "TypeScript (API declarativa de widgets)",
+            "competitor": "HTML/CSS/JS vía cualquier framework web (React, Vue, etc.)"
+          },
+          {
+            "feature": "Lenguaje de backend",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "IPC entre UI y lógica",
+            "perry": "Ninguno — un solo proceso, llamadas directas",
+            "competitor": "Requerido (UI en webview, lógica en proceso Rust)"
+          },
+          {
+            "feature": "Instalador hello world",
+            "perry": "~330 KB",
+            "competitor": "~3–10 MB (el webview lo provee el SO)"
+          },
+          {
+            "feature": "Móvil (iOS, Android)",
+            "perry": "Sí — UI nativa",
+            "competitor": "Sí — basado en webview (Tauri 2)"
+          },
+          {
+            "feature": "Watch / TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "No"
+          },
+          {
+            "feature": "Plataforma WebAssembly",
+            "perry": "Sí (perry/ui vía puente DOM)",
+            "competitor": "N/A (Tauri en sí usa webview de forma nativa)"
+          },
+          {
+            "feature": "Madurez",
+            "perry": "Pre-1.0",
+            "competitor": "Estable (1.x / 2.x)"
+          }
         ],
         "perryWins": [
           "UI verdaderamente nativa — Perry no renderiza HTML; controla widgets reales de cada plataforma, así que las apps heredan gratis la física de scroll nativa, el foco, la accesibilidad, el IME y el theming del SO.",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native es el framework de Meta para construir apps móviles usando React. JavaScript se ejecuta en un motor embebido — Hermes por defecto, o JavaScriptCore — e interactúa con widgets nativos de iOS/Android a través de un puente (legacy) o JSI/Fabric (New Architecture). El framework es móvil primero (iOS y Android); Microsoft mantiene forks de la comunidad para Windows y macOS. React Native ha potenciado apps en Meta, Microsoft, Shopify, Discord y muchos otros.",
         "perryWhat": "Perry compila TypeScript directamente a código máquina nativo. Su módulo perry/ui es un sistema de UI declarativo al estilo SwiftUI que compila a widgets nativos de cada plataforma en tiempo de build — no hay runtime JS en el binario, no hay puente y no hay JSI. El mismo código TypeScript compila a macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly y la Web.",
         "table": [
-          { "feature": "Modelo de ejecución", "perry": "Código máquina nativo compilado AOT", "competitor": "Motor JS (Hermes/JSC) + puente nativo (o JSI/Fabric)" },
-          { "feature": "Motor JS en la app", "perry": "Ninguno", "competitor": "Hermes (por defecto) o JavaScriptCore" },
-          { "feature": "UI", "perry": "Widgets nativos — API declarativa al estilo SwiftUI", "competitor": "Widgets nativos vía React + puente / Fabric" },
-          { "feature": "Plataformas principales", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web", "competitor": "iOS, Android (Windows/macOS vía forks de la comunidad)" },
-          { "feature": "Binarios servidor / CLI / escritorio", "perry": "Sí (herramientas CLI, servidores, apps de escritorio)", "competitor": "No (framework de UI móvil)" },
-          { "feature": "Puente entre JS y nativo", "perry": "Sin puente — el código nativo es el programa", "competitor": "Sí (puente legacy o JSI/Fabric)" },
-          { "feature": "Hot reload durante el desarrollo", "perry": "perry dev (recompilación automática en modo watch)", "competitor": "Fast Refresh (muy rápido)" },
-          { "feature": "Madurez", "perry": "Pre-1.0", "competitor": "Estable, ampliamente desplegado en producción" },
-          { "feature": "Librería de componentes", "perry": "Widgets core de perry/ui + capa perry-react de compatibilidad con React", "competitor": "Vasta — React Native + paquetes de la comunidad" }
+          {
+            "feature": "Modelo de ejecución",
+            "perry": "Código máquina nativo compilado AOT",
+            "competitor": "Motor JS (Hermes/JSC) + puente nativo (o JSI/Fabric)"
+          },
+          {
+            "feature": "Motor JS en la app",
+            "perry": "Ninguno",
+            "competitor": "Hermes (por defecto) o JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "Widgets nativos — API declarativa al estilo SwiftUI",
+            "competitor": "Widgets nativos vía React + puente / Fabric"
+          },
+          {
+            "feature": "Plataformas principales",
+            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web",
+            "competitor": "iOS, Android (Windows/macOS vía forks de la comunidad)"
+          },
+          {
+            "feature": "Binarios servidor / CLI / escritorio",
+            "perry": "Sí (herramientas CLI, servidores, apps de escritorio)",
+            "competitor": "No (framework de UI móvil)"
+          },
+          {
+            "feature": "Puente entre JS y nativo",
+            "perry": "Sin puente — el código nativo es el programa",
+            "competitor": "Sí (puente legacy o JSI/Fabric)"
+          },
+          {
+            "feature": "Hot reload durante el desarrollo",
+            "perry": "perry dev (recompilación automática en modo watch)",
+            "competitor": "Fast Refresh (muy rápido)"
+          },
+          {
+            "feature": "Madurez",
+            "perry": "Pre-1.0",
+            "competitor": "Estable, ampliamente desplegado en producción"
+          },
+          {
+            "feature": "Librería de componentes",
+            "perry": "Widgets core de perry/ui + capa perry-react de compatibilidad con React",
+            "competitor": "Vasta — React Native + paquetes de la comunidad"
+          }
         ],
         "perryWins": [
           "Sin motor JS en la app distribuida. Los binarios compilados con Perry no llevan Hermes ni JSC; el TypeScript es el ejecutable.",

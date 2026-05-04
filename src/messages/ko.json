@@ -210,7 +210,8 @@
     "issues": "Issues",
     "discussions": "토론",
     "contributing": "기여하기",
-    "tagline": "Rust, SWC, LLVM으로 구축 — 그리고 이 웹사이트도 Perry로 컴파일된 바이너리가 서빙합니다"
+    "tagline": "Rust, SWC, LLVM으로 구축 — 그리고 이 웹사이트도 Perry로 컴파일된 바이너리가 서빙합니다",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "네. Perry 컴파일러, 빌드 서버 (perry-hub), 검증 서비스, 빌드 워커는 모두 오픈소스입니다. 리포지토리를 클론하고, Mac Mini나 Linux 서버에서 hub를 실행하고, PERRY_HUB_SELF_HOSTED=true를 설정하여 속도 제한을 비활성화하세요. 비용 없이 무제한 빌드를 할 수 있습니다. hub.perryts.com의 호스팅 서비스는 편의를 위해 존재합니다 — 인프라 관리 불필요, 서명 인증서 관리 불필요, 빌드 큐 모니터링 불필요.",
       "q4": "\"배포\"에는 무엇이 포함되나요?",
       "a4": "perry publish '<'platform'>'의 한 번 실행입니다. 각 플랫폼은 별도의 배포로 카운트됩니다. 배포에는 빌드, 코드 서명, 라이트 검증 (앱이 성공적으로 시작되는지 확인), 스토어 제출 또는 아티팩트 생성이 포함됩니다."
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun은 Zig로 작성된 빠른 올인원 JavaScript·TypeScript 툴킷입니다. `.ts` 소스를 사전 컴파일 단계 없이 바로 실행하며, JS 엔진으로 JavaScriptCore를 사용하고 번들러, 패키지 매니저, 테스트 러너를 내장하고 있습니다. `bun build --compile`은 Bun 런타임을 애플리케이션과 함께 단일 실행 파일로 번들링합니다. Bun은 x64 및 arm64 환경의 Linux, macOS, Windows를 타겟으로 합니다.",
         "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러입니다. LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다 — JavaScript 엔진도, 런타임도, JIT도 없습니다. 출력은 단일 바이너리로, hello world의 경우 약 330 KB이며 Fastify 서버처럼 표준 라이브러리를 모두 포함하는 앱은 약 48 MB 정도입니다. Perry는 macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 웹을 포함한 10개 플랫폼을 타겟으로 합니다.",
         "table": [
-          { "feature": "출력 형태", "perry": "네이티브 머신 코드 (LLVM)", "competitor": "사용자 코드 + Bun 런타임이 하나의 바이너리에 번들링됨" },
-          { "feature": "바이너리 내 JavaScript 엔진", "perry": "기본값 없음. --enable-js-runtime 옵션으로 V8 추가 가능 (+~15 MB)", "competitor": "JavaScriptCore, 항상 포함" },
-          { "feature": "Hello-world 바이너리 크기", "perry": "약 330 KB", "competitor": "약 50–100 MB (Bun 런타임 포함)" },
-          { "feature": "JIT", "perry": "없음 (AOT 컴파일)", "competitor": "있음 (JavaScriptCore JIT)" },
-          { "feature": "모바일 타겟 (iOS, Android)", "perry": "지원 — UIKit/JNI를 통한 네이티브 UI", "competitor": "지원하지 않음" },
-          { "feature": "워치·TV 타겟", "perry": "watchOS, tvOS, Wear OS", "competitor": "지원하지 않음" },
-          { "feature": "네이티브 UI 위젯", "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상", "competitor": "없음 (서버·CLI 중심)" },
-          { "feature": "npm 생태계", "perry": "순수 TS/JS 패키지는 네이티브 컴파일 가능, 그 외에는 선택적 V8을 통해 지원", "competitor": "Node 호환 npm 전체 지원" },
-          { "feature": "안정성", "perry": "1.0 이전 (알파)", "competitor": "안정 (1.x)" },
-          { "feature": "구현 언어", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "출력 형태",
+            "perry": "네이티브 머신 코드 (LLVM)",
+            "competitor": "사용자 코드 + Bun 런타임이 하나의 바이너리에 번들링됨"
+          },
+          {
+            "feature": "바이너리 내 JavaScript 엔진",
+            "perry": "기본값 없음. --enable-js-runtime 옵션으로 V8 추가 가능 (+~15 MB)",
+            "competitor": "JavaScriptCore, 항상 포함"
+          },
+          {
+            "feature": "Hello-world 바이너리 크기",
+            "perry": "약 330 KB",
+            "competitor": "약 50–100 MB (Bun 런타임 포함)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "없음 (AOT 컴파일)",
+            "competitor": "있음 (JavaScriptCore JIT)"
+          },
+          {
+            "feature": "모바일 타겟 (iOS, Android)",
+            "perry": "지원 — UIKit/JNI를 통한 네이티브 UI",
+            "competitor": "지원하지 않음"
+          },
+          {
+            "feature": "워치·TV 타겟",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "지원하지 않음"
+          },
+          {
+            "feature": "네이티브 UI 위젯",
+            "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상",
+            "competitor": "없음 (서버·CLI 중심)"
+          },
+          {
+            "feature": "npm 생태계",
+            "perry": "순수 TS/JS 패키지는 네이티브 컴파일 가능, 그 외에는 선택적 V8을 통해 지원",
+            "competitor": "Node 호환 npm 전체 지원"
+          },
+          {
+            "feature": "안정성",
+            "perry": "1.0 이전 (알파)",
+            "competitor": "안정 (1.x)"
+          },
+          {
+            "feature": "구현 언어",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "더 작은 바이너리 — Perry의 hello world는 약 330 KB이며, Bun --compile로 만든 hello world는 Bun 런타임을 포함해 수십 MB에 이릅니다.",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno는 Rust로 작성되었으며 V8과 Tokio를 기반으로 하는 TypeScript·JavaScript 런타임입니다. `.ts` 소스를 직접 실행하고, 포매터·린터·테스트 러너·언어 서버 같은 도구를 내장하고 있으며, 네트워크·파일·환경 변수 접근에 명시적인 권한 부여를 요구하는 권한 모델을 사용합니다. `deno compile`은 V8을 포함한 Deno 런타임을 사용자의 코드와 함께 묶어 자체 실행 파일을 생성합니다. Deno는 x64 및 arm64 환경의 Linux, macOS, Windows를 타겟으로 합니다.",
         "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러입니다. LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다 — V8도, JIT도, 런타임도 없습니다. 출력은 단일 바이너리로, 네이티브 코드는 보통 수백 KB에서 수 MB이며, JS 엔진이 필요한 npm 패키지를 위해 임베디드 V8 런타임을 선택적으로 포함시키면 더 커질 수 있습니다.",
         "table": [
-          { "feature": "출력 형태", "perry": "네이티브 머신 코드 (LLVM)", "competitor": "사용자 코드 + Deno 런타임 (V8) 번들링" },
-          { "feature": "바이너리 내 JavaScript 엔진", "perry": "기본값 없음, 선택적 V8", "competitor": "V8, 항상 포함" },
-          { "feature": "Hello-world 바이너리 크기", "perry": "약 330 KB", "competitor": "약 80–100 MB (V8 포함)" },
-          { "feature": "JIT", "perry": "없음 (AOT 컴파일)", "competitor": "있음 (V8 TurboFan)" },
-          { "feature": "모바일 타겟", "perry": "iOS, iPadOS, Android", "competitor": "지원하지 않음" },
-          { "feature": "워치·TV·WASM·웹", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "지원하지 않음" },
-          { "feature": "네이티브 UI", "perry": "네이티브 플랫폼 API 기반 25개 이상의 위젯", "competitor": "없음" },
-          { "feature": "권한 모델", "perry": "표준 OS 프로세스 권한", "competitor": "런타임 단위의 세분화된 권한 (--allow-net, --allow-read 등)" },
-          { "feature": "안정성", "perry": "1.0 이전", "competitor": "안정 (1.x / 2.x)" },
-          { "feature": "구현 언어", "perry": "Rust", "competitor": "Rust (V8 위에서 동작)" }
+          {
+            "feature": "출력 형태",
+            "perry": "네이티브 머신 코드 (LLVM)",
+            "competitor": "사용자 코드 + Deno 런타임 (V8) 번들링"
+          },
+          {
+            "feature": "바이너리 내 JavaScript 엔진",
+            "perry": "기본값 없음, 선택적 V8",
+            "competitor": "V8, 항상 포함"
+          },
+          {
+            "feature": "Hello-world 바이너리 크기",
+            "perry": "약 330 KB",
+            "competitor": "약 80–100 MB (V8 포함)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "없음 (AOT 컴파일)",
+            "competitor": "있음 (V8 TurboFan)"
+          },
+          {
+            "feature": "모바일 타겟",
+            "perry": "iOS, iPadOS, Android",
+            "competitor": "지원하지 않음"
+          },
+          {
+            "feature": "워치·TV·WASM·웹",
+            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
+            "competitor": "지원하지 않음"
+          },
+          {
+            "feature": "네이티브 UI",
+            "perry": "네이티브 플랫폼 API 기반 25개 이상의 위젯",
+            "competitor": "없음"
+          },
+          {
+            "feature": "권한 모델",
+            "perry": "표준 OS 프로세스 권한",
+            "competitor": "런타임 단위의 세분화된 권한 (--allow-net, --allow-read 등)"
+          },
+          {
+            "feature": "안정성",
+            "perry": "1.0 이전",
+            "competitor": "안정 (1.x / 2.x)"
+          },
+          {
+            "feature": "구현 언어",
+            "perry": "Rust",
+            "competitor": "Rust (V8 위에서 동작)"
+          }
         ],
         "perryWins": [
           "현저히 작은 바이너리. Perry의 hello world는 약 330 KB입니다. `deno compile` 결과물은 V8을 포함해 80–100 MB 수준입니다.",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes는 Meta가 React Native를 위해 만든 JavaScript 엔진으로, 바이트코드 기반이고 사전 컴파일되며 모바일 시작 시간에 최적화되어 있습니다. Static Hermes는 타입화된 JavaScript 부분 집합의 사전 네이티브 컴파일을 통해 React Native에 진정한 네이티브 코드 경로를 제공하려는 Hermes의 확장 연구입니다. 주로 컴파일러 R&D 프로젝트이며, Perry의 벤치마크 노트에 따르면 macOS arm64에서 일상적인 설치를 위해 패키징되어 있지 않습니다 (`shermes`는 폴리글랏 벤치에서 'macOS arm64에 깔끔하게 설치되는 형태로 Homebrew나 npm에 제공되지 않는다'는 메모와 함께 제외됨 — perry/benchmarks/README.md 참고).",
         "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러로, 파싱에 SWC를 사용하고 코드 생성에 LLVM을 사용합니다. 동작하는 CLI (`perry compile`, `perry run`, `perry publish`), 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟, 셀프 호스팅 런타임, 그리고 투명한 조건 (M1 Max, RUNS=11)으로 측정한 벤치마크 슈트를 제공합니다. Perry는 1.0 이전이지만 프로덕션 트랙입니다 — Bloom Engine, Mango, Hone, Pry, dB Meter 같은 앱이 Perry로 만들어져 출시되고 있습니다 (perryts.com 참고).",
         "table": [
-          { "feature": "상태", "perry": "1.0 이전 (알파) — 프로덕션 트랙", "competitor": "연구·실험 단계" },
-          { "feature": "설치 경로 (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "현재 깔끔한 설치를 위한 패키지 없음 (perry/benchmarks 기준)" },
-          { "feature": "백엔드", "perry": "LLVM", "competitor": "자체 (Hermes 기반 코드 생성)" },
-          { "feature": "입력", "perry": "TypeScript (전체)", "competitor": "타입화된 JS/TS 부분 집합" },
-          { "feature": "컴파일 타겟", "perry": "10개: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "주로 모바일 (React Native 맥락)" },
-          { "feature": "네이티브 UI", "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상의 위젯", "competitor": "React Native 브리지를 통해 (통합되었을 때)" },
-          { "feature": "독립형 CLI 앱 워크플로", "perry": "지원 — `perry compile main.ts`로 바이너리 생성", "competitor": "React Native 맥락에 종속됨" },
-          { "feature": "공개 벤치마크 슈트", "perry": "있음 — Node, Bun, Rust, C++, Go, Swift, Java를 상대로 한 RUNS=11", "competitor": "내부 자료·연구 논문" }
+          {
+            "feature": "상태",
+            "perry": "1.0 이전 (알파) — 프로덕션 트랙",
+            "competitor": "연구·실험 단계"
+          },
+          {
+            "feature": "설치 경로 (macOS arm64)",
+            "perry": "Homebrew, APT, npm (@perryts/perry)",
+            "competitor": "현재 깔끔한 설치를 위한 패키지 없음 (perry/benchmarks 기준)"
+          },
+          {
+            "feature": "백엔드",
+            "perry": "LLVM",
+            "competitor": "자체 (Hermes 기반 코드 생성)"
+          },
+          {
+            "feature": "입력",
+            "perry": "TypeScript (전체)",
+            "competitor": "타입화된 JS/TS 부분 집합"
+          },
+          {
+            "feature": "컴파일 타겟",
+            "perry": "10개: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
+            "competitor": "주로 모바일 (React Native 맥락)"
+          },
+          {
+            "feature": "네이티브 UI",
+            "perry": "AppKit, UIKit, GTK4, Win32, JNI 기반 25개 이상의 위젯",
+            "competitor": "React Native 브리지를 통해 (통합되었을 때)"
+          },
+          {
+            "feature": "독립형 CLI 앱 워크플로",
+            "perry": "지원 — `perry compile main.ts`로 바이너리 생성",
+            "competitor": "React Native 맥락에 종속됨"
+          },
+          {
+            "feature": "공개 벤치마크 슈트",
+            "perry": "있음 — Node, Bun, Rust, C++, Go, Swift, Java를 상대로 한 RUNS=11",
+            "competitor": "내부 자료·연구 논문"
+          }
         ],
         "perryWins": [
           "사용 가능한 도구로 존재합니다. Perry는 오늘 바로 Homebrew, APT, 또는 `npm install @perryts/perry`로 설치할 수 있고, `perry compile main.ts`로 첫 시도에 바이너리를 만들 수 있습니다.",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron은 렌더링에 Chromium, 시스템 접근에 Node.js를 사용해 크로스 플랫폼 데스크톱 애플리케이션을 만드는 오픈소스 프레임워크입니다. 모든 Electron 앱은 자체 Chromium과 Node 사본을 함께 배포하기 때문에 hello world 수준이라도 설치 파일이 보통 80–150 MB에 달합니다. Electron은 VS Code, Slack, Discord, Figma 데스크톱 클라이언트 등 널리 쓰이는 앱을 구동해 왔습니다. 타겟은 Linux, macOS, Windows 데스크톱이며, 공식적인 모바일·워치·TV 지원은 없습니다.",
         "perryWhat": "Perry는 브라우저 엔진도, Chromium도, Node 런타임도 없이 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. UI 레이어 (perry/ui)는 SwiftUI 스타일의 선언적 시스템으로, macOS의 AppKit, iOS/iPadOS/tvOS의 UIKit, Linux의 GTK4, Windows의 Win32, Android의 JNI를 통해 네이티브 플랫폼 위젯에 매핑됩니다. hello world 바이너리는 약 330 KB이며, 표준 라이브러리를 모두 포함한 풀 앱 (Fastify, mysql2 등)도 약 48 MB 수준입니다.",
         "table": [
-          { "feature": "렌더링", "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "번들된 Chromium (HTML/CSS/JS)" },
-          { "feature": "번들된 엔진", "perry": "없음 (--enable-js-runtime 시에만 V8)", "competitor": "Chromium + Node.js" },
-          { "feature": "Hello-world 설치 파일 크기", "perry": "약 330 KB", "competitor": "약 80–150 MB" },
-          { "feature": "풀 앱 설치 파일 (표준 라이브러리 + 프레임워크)", "perry": "약 48 MB", "competitor": "보통 100–200 MB 이상" },
-          { "feature": "RAM 사용량", "perry": "네이티브 (보통 수십 MB)", "competitor": "여러 Chromium 프로세스 (보통 수백 MB)" },
-          { "feature": "모바일·워치·TV", "perry": "지원 — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "지원하지 않음 (데스크톱 전용)" },
-          { "feature": "UI 언어", "perry": "선언적 SwiftUI 스타일 API의 TypeScript", "competitor": "HTML/CSS/JS (웹 스택)" },
-          { "feature": "자동 업데이트·패키징", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (성숙한 생태계)" },
-          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정, 10년 이상 프로덕션 운영" }
+          {
+            "feature": "렌더링",
+            "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "번들된 Chromium (HTML/CSS/JS)"
+          },
+          {
+            "feature": "번들된 엔진",
+            "perry": "없음 (--enable-js-runtime 시에만 V8)",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "Hello-world 설치 파일 크기",
+            "perry": "약 330 KB",
+            "competitor": "약 80–150 MB"
+          },
+          {
+            "feature": "풀 앱 설치 파일 (표준 라이브러리 + 프레임워크)",
+            "perry": "약 48 MB",
+            "competitor": "보통 100–200 MB 이상"
+          },
+          {
+            "feature": "RAM 사용량",
+            "perry": "네이티브 (보통 수십 MB)",
+            "competitor": "여러 Chromium 프로세스 (보통 수백 MB)"
+          },
+          {
+            "feature": "모바일·워치·TV",
+            "perry": "지원 — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
+            "competitor": "지원하지 않음 (데스크톱 전용)"
+          },
+          {
+            "feature": "UI 언어",
+            "perry": "선언적 SwiftUI 스타일 API의 TypeScript",
+            "competitor": "HTML/CSS/JS (웹 스택)"
+          },
+          {
+            "feature": "자동 업데이트·패키징",
+            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
+            "competitor": "electron-builder, electron-updater (성숙한 생태계)"
+          },
+          {
+            "feature": "성숙도",
+            "perry": "1.0 이전",
+            "competitor": "안정, 10년 이상 프로덕션 운영"
+          }
         ],
         "perryWins": [
           "바이너리 크기. Perry hello world는 약 330 KB이고, Electron hello world는 모든 앱이 자체 Chromium을 함께 배포하기 때문에 보통 80–150 MB입니다.",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri는 Rust로 작성된 오픈소스 프레임워크로, 웹 프런트엔드 (React, Vue, Svelte 등 어떤 프레임워크든)와 Rust 백엔드로 크로스 플랫폼 애플리케이션을 만들 수 있게 해줍니다. Chromium을 번들링하는 대신 시스템에 내장된 웹뷰를 사용하기 때문에, Linux/Windows/macOS에서 앱 설치 파일이 한 자릿수 MB 수준에 머무릅니다. Tauri 2부터 모바일 (iOS와 Android) 지원이 추가되었습니다. 프런트엔드는 시스템 웹뷰가 HTML/CSS/JS로 그리며, Rust 백엔드와의 통신은 IPC 브리지를 통해 이루어집니다.",
         "perryWhat": "Perry는 LLVM을 통해 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. UI 레이어 (perry/ui)는 웹뷰가 그리는 HTML이 아니라 네이티브 플랫폼 위젯에 매핑되는 SwiftUI 스타일의 선언적 API입니다. Perry로 작성된 앱은 JavaScript 엔진을 동반하지 않고, WebKit/WebView2 안에서 돌지 않으며, UI와 로직 사이에 IPC 브리지도 필요 없습니다. Perry는 모바일, 워치, TV를 포함해 10개 플랫폼을 타겟합니다.",
         "table": [
-          { "feature": "UI 렌더링", "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "시스템 웹뷰 (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
-          { "feature": "프런트엔드 언어", "perry": "TypeScript (선언적 위젯 API)", "competitor": "어떤 웹 프레임워크든 (React, Vue 등) HTML/CSS/JS" },
-          { "feature": "백엔드 언어", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "UI와 로직 간 IPC", "perry": "없음 — 단일 프로세스, 직접 호출", "competitor": "필요 (UI는 웹뷰, 로직은 Rust 프로세스)" },
-          { "feature": "Hello-world 설치 파일", "perry": "약 330 KB", "competitor": "약 3–10 MB (웹뷰는 OS에서 제공)" },
-          { "feature": "모바일 (iOS, Android)", "perry": "지원 — 네이티브 UI", "competitor": "지원 — 웹뷰 기반 (Tauri 2)" },
-          { "feature": "워치·TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "지원하지 않음" },
-          { "feature": "WebAssembly 타겟", "perry": "지원 (DOM 브리지를 통한 perry/ui)", "competitor": "해당 없음 (Tauri 자체가 웹뷰를 네이티브로 사용)" },
-          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정 (1.x / 2.x)" }
+          {
+            "feature": "UI 렌더링",
+            "perry": "네이티브 플랫폼 위젯 (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "시스템 웹뷰 (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
+          },
+          {
+            "feature": "프런트엔드 언어",
+            "perry": "TypeScript (선언적 위젯 API)",
+            "competitor": "어떤 웹 프레임워크든 (React, Vue 등) HTML/CSS/JS"
+          },
+          {
+            "feature": "백엔드 언어",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "UI와 로직 간 IPC",
+            "perry": "없음 — 단일 프로세스, 직접 호출",
+            "competitor": "필요 (UI는 웹뷰, 로직은 Rust 프로세스)"
+          },
+          {
+            "feature": "Hello-world 설치 파일",
+            "perry": "약 330 KB",
+            "competitor": "약 3–10 MB (웹뷰는 OS에서 제공)"
+          },
+          {
+            "feature": "모바일 (iOS, Android)",
+            "perry": "지원 — 네이티브 UI",
+            "competitor": "지원 — 웹뷰 기반 (Tauri 2)"
+          },
+          {
+            "feature": "워치·TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "지원하지 않음"
+          },
+          {
+            "feature": "WebAssembly 타겟",
+            "perry": "지원 (DOM 브리지를 통한 perry/ui)",
+            "competitor": "해당 없음 (Tauri 자체가 웹뷰를 네이티브로 사용)"
+          },
+          {
+            "feature": "성숙도",
+            "perry": "1.0 이전",
+            "competitor": "안정 (1.x / 2.x)"
+          }
         ],
         "perryWins": [
           "진정한 네이티브 UI — Perry는 HTML을 그리지 않고 실제 플랫폼 위젯을 구동하므로, 앱이 네이티브 스크롤 물리, 포커스, 접근성, IME, OS 테마를 무료로 물려받습니다.",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native는 React로 모바일 앱을 만들기 위한 Meta의 프레임워크입니다. JavaScript는 임베디드 엔진 — 기본값은 Hermes, 또는 JavaScriptCore — 에서 실행되고, 브리지 (레거시) 또는 JSI/Fabric (New Architecture)을 통해 네이티브 iOS/Android 위젯과 상호작용합니다. 프레임워크는 모바일 우선 (iOS와 Android)이며, Microsoft가 Windows와 macOS용 커뮤니티 포크를 유지하고 있습니다. React Native는 Meta, Microsoft, Shopify, Discord 등 여러 회사의 앱을 구동해 왔습니다.",
         "perryWhat": "Perry는 TypeScript를 곧바로 네이티브 머신 코드로 컴파일합니다. perry/ui 모듈은 SwiftUI 스타일의 선언적 UI 시스템으로, 빌드 타임에 네이티브 플랫폼 위젯으로 컴파일됩니다 — 바이너리 안에 JS 런타임도, 브리지도, JSI도 없습니다. 같은 TypeScript 코드베이스가 macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly, 웹으로 컴파일됩니다.",
         "table": [
-          { "feature": "실행 모델", "perry": "AOT 컴파일된 네이티브 머신 코드", "competitor": "JS 엔진 (Hermes/JSC) + 네이티브 브리지 (또는 JSI/Fabric)" },
-          { "feature": "앱 내 JS 엔진", "perry": "없음", "competitor": "Hermes (기본) 또는 JavaScriptCore" },
-          { "feature": "UI", "perry": "네이티브 위젯 — SwiftUI 스타일 선언적 API", "competitor": "React + 브리지·Fabric을 통한 네이티브 위젯" },
-          { "feature": "주요 타겟", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, 웹", "competitor": "iOS, Android (Windows/macOS는 커뮤니티 포크)" },
-          { "feature": "서버·CLI·데스크톱 바이너리", "perry": "지원 (CLI 도구, 서버, 데스크톱 앱)", "competitor": "지원하지 않음 (모바일 UI 프레임워크)" },
-          { "feature": "JS와 네이티브 사이의 브리지", "perry": "브리지 없음 — 네이티브 코드 자체가 프로그램", "competitor": "있음 (레거시 브리지 또는 JSI/Fabric)" },
-          { "feature": "개발 중 핫 리로드", "perry": "perry dev (워치 모드 자동 재컴파일)", "competitor": "Fast Refresh (매우 빠름)" },
-          { "feature": "성숙도", "perry": "1.0 이전", "competitor": "안정, 프로덕션에 폭넓게 배포됨" },
-          { "feature": "컴포넌트 라이브러리", "perry": "perry/ui 코어 위젯 + perry-react React 호환 레이어", "competitor": "방대함 — React Native + 커뮤니티 패키지" }
+          {
+            "feature": "실행 모델",
+            "perry": "AOT 컴파일된 네이티브 머신 코드",
+            "competitor": "JS 엔진 (Hermes/JSC) + 네이티브 브리지 (또는 JSI/Fabric)"
+          },
+          {
+            "feature": "앱 내 JS 엔진",
+            "perry": "없음",
+            "competitor": "Hermes (기본) 또는 JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "네이티브 위젯 — SwiftUI 스타일 선언적 API",
+            "competitor": "React + 브리지·Fabric을 통한 네이티브 위젯"
+          },
+          {
+            "feature": "주요 타겟",
+            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, 웹",
+            "competitor": "iOS, Android (Windows/macOS는 커뮤니티 포크)"
+          },
+          {
+            "feature": "서버·CLI·데스크톱 바이너리",
+            "perry": "지원 (CLI 도구, 서버, 데스크톱 앱)",
+            "competitor": "지원하지 않음 (모바일 UI 프레임워크)"
+          },
+          {
+            "feature": "JS와 네이티브 사이의 브리지",
+            "perry": "브리지 없음 — 네이티브 코드 자체가 프로그램",
+            "competitor": "있음 (레거시 브리지 또는 JSI/Fabric)"
+          },
+          {
+            "feature": "개발 중 핫 리로드",
+            "perry": "perry dev (워치 모드 자동 재컴파일)",
+            "competitor": "Fast Refresh (매우 빠름)"
+          },
+          {
+            "feature": "성숙도",
+            "perry": "1.0 이전",
+            "competitor": "안정, 프로덕션에 폭넓게 배포됨"
+          },
+          {
+            "feature": "컴포넌트 라이브러리",
+            "perry": "perry/ui 코어 위젯 + perry-react React 호환 레이어",
+            "competitor": "방대함 — React Native + 커뮤니티 패키지"
+          }
         ],
         "perryWins": [
           "배포되는 앱에 JS 엔진이 없습니다. Perry로 컴파일된 바이너리는 Hermes나 JSC를 동반하지 않습니다 — TypeScript가 곧 실행 파일입니다.",

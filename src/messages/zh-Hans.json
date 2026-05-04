@@ -210,7 +210,8 @@
     "issues": "Issues",
     "discussions": "讨论",
     "contributing": "贡献",
-    "tagline": "使用 Rust、SWC 和 LLVM 构建——没错，这个网站由 Perry 编译的二进制文件提供服务"
+    "tagline": "使用 Rust、SWC 和 LLVM 构建——没错，这个网站由 Perry 编译的二进制文件提供服务",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "可以。Perry 编译器、构建服务器（perry-hub）、验证服务和构建工作节点都是开源的。克隆仓库，在您自己的 Mac Mini 或 Linux 服务器上运行 hub，设置 PERRY_HUB_SELF_HOSTED=true 禁用速率限制。您可以零成本获得无限构建。hub.perryts.com 上的托管服务是为方便而存在的——无需管理基础设施，无需处理签名证书，无需监控构建队列。",
       "q4": "\"发布\"包括什么？",
       "a4": "一次 perry publish '<'platform'>' 的调用。每个平台算一次单独的发布。发布包括构建、代码签名、轻量验证（应用成功启动）以及商店提交或构件生成。"
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun 是一个用 Zig 编写的快速、一体化的 JavaScript 与 TypeScript 工具链。它直接运行 `.ts` 源码（无需预编译），使用 JavaScriptCore 作为 JS 引擎，并自带打包器、包管理器和测试运行器。`bun build --compile` 会把 Bun 运行时连同你的应用一起打包为单个可执行文件。Bun 面向 Linux、macOS 和 Windows 上的 x64 与 arm64。",
         "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器。它通过 LLVM 把 TypeScript 直接编译为原生机器码——没有 JavaScript 引擎、没有运行时、没有 JIT。产物是单个二进制文件（hello world 大约 330 KB；带完整标准库的应用，例如 Fastify 服务器，约 48 MB）。Perry 面向 10 个平台，包括 macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web。",
         "table": [
-          { "feature": "产物", "perry": "原生机器码（LLVM）", "competitor": "你的代码 + Bun 运行时打包在一个二进制中" },
-          { "feature": "二进制中的 JavaScript 引擎", "perry": "默认无；可选 V8，通过 --enable-js-runtime 启用（+约 15 MB）", "competitor": "始终内置 JavaScriptCore" },
-          { "feature": "hello world 二进制大小", "perry": "约 330 KB", "competitor": "约 50–100 MB（包含 Bun 运行时）" },
-          { "feature": "JIT", "perry": "无（AOT 编译）", "competitor": "有（JavaScriptCore JIT）" },
-          { "feature": "移动平台目标（iOS、Android）", "perry": "支持——通过 UIKit/JNI 提供原生 UI", "competitor": "不支持" },
-          { "feature": "Watch / TV 目标", "perry": "watchOS、tvOS、Wear OS", "competitor": "不支持" },
-          { "feature": "原生 UI 组件", "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个", "competitor": "无（聚焦服务端/CLI）" },
-          { "feature": "npm 生态", "perry": "纯 TS/JS 包可原生编译；其他通过可选 V8", "competitor": "完整的 Node 兼容 npm" },
-          { "feature": "稳定性", "perry": "Pre-1.0（alpha）", "competitor": "稳定（1.x）" },
-          { "feature": "实现语言", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "产物",
+            "perry": "原生机器码（LLVM）",
+            "competitor": "你的代码 + Bun 运行时打包在一个二进制中"
+          },
+          {
+            "feature": "二进制中的 JavaScript 引擎",
+            "perry": "默认无；可选 V8，通过 --enable-js-runtime 启用（+约 15 MB）",
+            "competitor": "始终内置 JavaScriptCore"
+          },
+          {
+            "feature": "hello world 二进制大小",
+            "perry": "约 330 KB",
+            "competitor": "约 50–100 MB（包含 Bun 运行时）"
+          },
+          {
+            "feature": "JIT",
+            "perry": "无（AOT 编译）",
+            "competitor": "有（JavaScriptCore JIT）"
+          },
+          {
+            "feature": "移动平台目标（iOS、Android）",
+            "perry": "支持——通过 UIKit/JNI 提供原生 UI",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "Watch / TV 目标",
+            "perry": "watchOS、tvOS、Wear OS",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "原生 UI 组件",
+            "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个",
+            "competitor": "无（聚焦服务端/CLI）"
+          },
+          {
+            "feature": "npm 生态",
+            "perry": "纯 TS/JS 包可原生编译；其他通过可选 V8",
+            "competitor": "完整的 Node 兼容 npm"
+          },
+          {
+            "feature": "稳定性",
+            "perry": "Pre-1.0（alpha）",
+            "competitor": "稳定（1.x）"
+          },
+          {
+            "feature": "实现语言",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "更小的二进制——Perry 的 hello world 约 330 KB；Bun --compile 的 hello world 包含 Bun 运行时，落在数十 MB 量级。",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno 是一个用 Rust 编写、构建于 V8 与 Tokio 之上的 TypeScript/JavaScript 运行时。它直接执行 `.ts` 源码，内置工具（格式化器、linter、测试运行器、语言服务器），并采用权限模型——网络、文件和环境访问都需要显式授权。`deno compile` 通过把 Deno 运行时（其中包含 V8）与你的代码一起打包，生成自包含的可执行文件。Deno 面向 Linux、macOS 和 Windows 上的 x64 与 arm64。",
         "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器。它通过 LLVM 把 TypeScript 直接编译为原生机器码——没有 V8、没有 JIT、没有运行时。产物是单个二进制，原生代码通常为几百 KB 到几 MB；如果选择启用嵌入式 V8 运行时以兼容需要 JS 引擎的 npm 包，体积会更大。",
         "table": [
-          { "feature": "产物", "perry": "原生机器码（LLVM）", "competitor": "你的代码 + Deno 运行时（V8）打包在一起" },
-          { "feature": "二进制中的 JavaScript 引擎", "perry": "默认无；可选 V8", "competitor": "始终内置 V8" },
-          { "feature": "hello world 二进制大小", "perry": "约 330 KB", "competitor": "约 80–100 MB（包含 V8）" },
-          { "feature": "JIT", "perry": "无（AOT 编译）", "competitor": "有（V8 TurboFan）" },
-          { "feature": "移动平台目标", "perry": "iOS、iPadOS、Android", "competitor": "不支持" },
-          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS", "competitor": "不支持" },
-          { "feature": "原生 UI", "perry": "通过原生平台 API 提供 25+ 个组件", "competitor": "不支持" },
-          { "feature": "权限模型", "perry": "标准操作系统进程权限", "competitor": "细粒度运行时权限（--allow-net、--allow-read 等）" },
-          { "feature": "稳定性", "perry": "Pre-1.0", "competitor": "稳定（1.x / 2.x）" },
-          { "feature": "实现语言", "perry": "Rust", "competitor": "Rust（基于 V8）" }
+          {
+            "feature": "产物",
+            "perry": "原生机器码（LLVM）",
+            "competitor": "你的代码 + Deno 运行时（V8）打包在一起"
+          },
+          {
+            "feature": "二进制中的 JavaScript 引擎",
+            "perry": "默认无；可选 V8",
+            "competitor": "始终内置 V8"
+          },
+          {
+            "feature": "hello world 二进制大小",
+            "perry": "约 330 KB",
+            "competitor": "约 80–100 MB（包含 V8）"
+          },
+          {
+            "feature": "JIT",
+            "perry": "无（AOT 编译）",
+            "competitor": "有（V8 TurboFan）"
+          },
+          {
+            "feature": "移动平台目标",
+            "perry": "iOS、iPadOS、Android",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "Watch / TV / WASM / Web",
+            "perry": "watchOS、tvOS、Wear OS、WASM、Web/JS",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "原生 UI",
+            "perry": "通过原生平台 API 提供 25+ 个组件",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "权限模型",
+            "perry": "标准操作系统进程权限",
+            "competitor": "细粒度运行时权限（--allow-net、--allow-read 等）"
+          },
+          {
+            "feature": "稳定性",
+            "perry": "Pre-1.0",
+            "competitor": "稳定（1.x / 2.x）"
+          },
+          {
+            "feature": "实现语言",
+            "perry": "Rust",
+            "competitor": "Rust（基于 V8）"
+          }
         ],
         "perryWins": [
           "二进制显著更小。Perry 的 hello world 约 330 KB。`deno compile` 的产物包含 V8，落在 80–100 MB 区间。",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes 是 Meta 为 React Native 打造的 JavaScript 引擎——基于字节码、AOT 预编译、为移动端启动时间做了优化。Static Hermes 是把 Hermes 扩展为对类型化 JavaScript 子集进行提前原生编译的研究项目，目的是给 React Native 一条通往真正原生代码的路径。它本质上是一个编译器研发项目；按 Perry 的基准说明所述，它目前还没有被打包为可在 macOS arm64 上常规安装的形态（`shermes` 在多语言基准对照中被跳过，并附注“在 Homebrew 或 npm 上没有以可在 macOS arm64 上干净安装的方式提供”——见 perry/benchmarks/README.md）。",
         "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器，使用 SWC 解析、LLVM 生成代码。它已交付可用的 CLI（`perry compile`、`perry run`、`perry publish`）、25+ 原生 UI 组件、10 个编译目标、自托管的运行时，以及一个在透明条件下测得的基准套件（M1 Max，RUNS=11）。Perry 仍处于 Pre-1.0，但走的是生产路线：已经有人在用它构建并交付应用（Bloom Engine、Mango、Hone、Pry、dB Meter——见 perryts.com）。",
         "table": [
-          { "feature": "状态", "perry": "Pre-1.0（alpha）——走生产路线", "competitor": "研究 / 实验性" },
-          { "feature": "安装路径（macOS arm64）", "perry": "Homebrew、APT、npm（@perryts/perry）", "competitor": "撰写本文时尚未打包为可干净安装的形式（依据 perry/benchmarks）" },
-          { "feature": "后端", "perry": "LLVM", "competitor": "自定义（基于 Hermes 的代码生成）" },
-          { "feature": "输入", "perry": "完整 TypeScript", "competitor": "类型化的 JS/TS 子集" },
-          { "feature": "编译目标", "perry": "10 个：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS", "competitor": "主要面向移动端（React Native 场景）" },
-          { "feature": "原生 UI", "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个组件", "competitor": "通过 React Native 桥接（在被集成时）" },
-          { "feature": "独立 CLI 应用工作流", "perry": "支持——`perry compile main.ts` 直接生成二进制", "competitor": "绑定 React Native 上下文" },
-          { "feature": "公开基准套件", "perry": "有——RUNS=11，对比 Node、Bun、Rust、C++、Go、Swift、Java", "competitor": "内部 / 研究论文" }
+          {
+            "feature": "状态",
+            "perry": "Pre-1.0（alpha）——走生产路线",
+            "competitor": "研究 / 实验性"
+          },
+          {
+            "feature": "安装路径（macOS arm64）",
+            "perry": "Homebrew、APT、npm（@perryts/perry）",
+            "competitor": "撰写本文时尚未打包为可干净安装的形式（依据 perry/benchmarks）"
+          },
+          {
+            "feature": "后端",
+            "perry": "LLVM",
+            "competitor": "自定义（基于 Hermes 的代码生成）"
+          },
+          {
+            "feature": "输入",
+            "perry": "完整 TypeScript",
+            "competitor": "类型化的 JS/TS 子集"
+          },
+          {
+            "feature": "编译目标",
+            "perry": "10 个：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web/JS",
+            "competitor": "主要面向移动端（React Native 场景）"
+          },
+          {
+            "feature": "原生 UI",
+            "perry": "通过 AppKit、UIKit、GTK4、Win32、JNI 提供 25+ 个组件",
+            "competitor": "通过 React Native 桥接（在被集成时）"
+          },
+          {
+            "feature": "独立 CLI 应用工作流",
+            "perry": "支持——`perry compile main.ts` 直接生成二进制",
+            "competitor": "绑定 React Native 上下文"
+          },
+          {
+            "feature": "公开基准套件",
+            "perry": "有——RUNS=11，对比 Node、Bun、Rust、C++、Go、Swift、Java",
+            "competitor": "内部 / 研究论文"
+          }
         ],
         "perryWins": [
           "它作为一个可用工具是真实存在的。今天就可以通过 Homebrew、APT 或 `npm install @perryts/perry` 安装 Perry，而 `perry compile main.ts` 第一次就能生成二进制。",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron 是一个开源的跨平台桌面应用框架，使用 Chromium 进行渲染、Node.js 进行系统访问。每个 Electron 应用都自带一份 Chromium 和 Node，因此即便是 hello world，Electron 应用安装包通常也有 80–150 MB。Electron 支撑了大量被广泛使用的应用，包括 VS Code、Slack、Discord 和 Figma 桌面客户端。它面向 Linux、macOS 和 Windows 桌面；没有官方的移动、手表或 TV 方案。",
         "perryWhat": "Perry 把 TypeScript 直接编译为原生机器码，没有浏览器引擎、没有 Chromium，也没有 Node 运行时。UI 层（perry/ui）是一套 SwiftUI 风格的声明式系统，通过 macOS 上的 AppKit、iOS/iPadOS/tvOS 上的 UIKit、Linux 上的 GTK4、Windows 上的 Win32 以及 Android 上的 JNI 映射到原生平台组件。hello world 二进制约 330 KB；带完整标准库（Fastify、mysql2 等）的应用约 48 MB。",
         "table": [
-          { "feature": "渲染", "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "内置 Chromium（HTML/CSS/JS）" },
-          { "feature": "内置引擎", "perry": "无（仅在 --enable-js-runtime 时可选 V8）", "competitor": "Chromium + Node.js" },
-          { "feature": "hello world 安装包大小", "perry": "约 330 KB", "competitor": "约 80–150 MB" },
-          { "feature": "完整应用安装包（标准库 + 框架）", "perry": "约 48 MB", "competitor": "通常 100–200+ MB" },
-          { "feature": "内存占用", "perry": "原生（典型为数十 MB）", "competitor": "多个 Chromium 进程（典型为数百 MB）" },
-          { "feature": "移动 / 手表 / TV", "perry": "支持——iOS、iPadOS、Android、watchOS、tvOS、Wear OS", "competitor": "不支持（仅限桌面）" },
-          { "feature": "UI 语言", "perry": "TypeScript，SwiftUI 风格的声明式 API", "competitor": "HTML/CSS/JS（Web 技术栈）" },
-          { "feature": "自动更新 / 打包", "perry": "perry publish（Homebrew、APT、App Store、Play Store）", "competitor": "electron-builder、electron-updater（生态成熟）" },
-          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定，已有十余年生产经验" }
+          {
+            "feature": "渲染",
+            "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）",
+            "competitor": "内置 Chromium（HTML/CSS/JS）"
+          },
+          {
+            "feature": "内置引擎",
+            "perry": "无（仅在 --enable-js-runtime 时可选 V8）",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "hello world 安装包大小",
+            "perry": "约 330 KB",
+            "competitor": "约 80–150 MB"
+          },
+          {
+            "feature": "完整应用安装包（标准库 + 框架）",
+            "perry": "约 48 MB",
+            "competitor": "通常 100–200+ MB"
+          },
+          {
+            "feature": "内存占用",
+            "perry": "原生（典型为数十 MB）",
+            "competitor": "多个 Chromium 进程（典型为数百 MB）"
+          },
+          {
+            "feature": "移动 / 手表 / TV",
+            "perry": "支持——iOS、iPadOS、Android、watchOS、tvOS、Wear OS",
+            "competitor": "不支持（仅限桌面）"
+          },
+          {
+            "feature": "UI 语言",
+            "perry": "TypeScript，SwiftUI 风格的声明式 API",
+            "competitor": "HTML/CSS/JS（Web 技术栈）"
+          },
+          {
+            "feature": "自动更新 / 打包",
+            "perry": "perry publish（Homebrew、APT、App Store、Play Store）",
+            "competitor": "electron-builder、electron-updater（生态成熟）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "Pre-1.0",
+            "competitor": "稳定，已有十余年生产经验"
+          }
         ],
         "perryWins": [
           "二进制大小。Perry 的 hello world 约 330 KB；Electron 的 hello world 因为每个应用都自带一份 Chromium，通常在 80–150 MB。",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri 是一个用 Rust 编写的开源框架，让你用 Web 前端（任意框架——React、Vue、Svelte 等）和 Rust 后端构建跨平台应用。它不打包 Chromium，而是使用系统内置的 webview，因此在 Linux/Windows/macOS 上的应用安装包通常在个位数 MB 量级。Tauri 2 增加了对移动端（iOS 与 Android）的支持。前端由系统 webview 以 HTML/CSS/JS 渲染；与 Rust 后端的通信通过一个 IPC 桥进行。",
         "perryWhat": "Perry 通过 LLVM 把 TypeScript 直接编译为原生机器码。UI 层（perry/ui）是一套 SwiftUI 风格的声明式 API，映射到原生平台组件——而不是由 webview 渲染的 HTML。Perry 写的应用既不携带 JavaScript 引擎，也不跑在 WebKit/WebView2 里，更不需要 UI 与逻辑之间的 IPC 桥。Perry 面向 10 个平台，包括移动、手表和 TV。",
         "table": [
-          { "feature": "UI 渲染", "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）", "competitor": "系统 webview（WKWebView、WebView2、WebKitGTK）——HTML/CSS/JS" },
-          { "feature": "前端语言", "perry": "TypeScript（声明式组件 API）", "competitor": "通过任意 Web 框架（React、Vue 等）使用 HTML/CSS/JS" },
-          { "feature": "后端语言", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "UI 与逻辑之间的 IPC", "perry": "无——单进程，直接调用", "competitor": "必需（UI 在 webview，逻辑在 Rust 进程中）" },
-          { "feature": "hello world 安装包", "perry": "约 330 KB", "competitor": "约 3–10 MB（webview 由 OS 提供）" },
-          { "feature": "移动（iOS、Android）", "perry": "支持——原生 UI", "competitor": "支持——基于 webview（Tauri 2）" },
-          { "feature": "Watch / TV", "perry": "watchOS、tvOS、Wear OS", "competitor": "不支持" },
-          { "feature": "WebAssembly 目标", "perry": "支持（perry/ui 通过 DOM 桥）", "competitor": "不适用（Tauri 自身原生使用 webview）" },
-          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定（1.x / 2.x）" }
+          {
+            "feature": "UI 渲染",
+            "perry": "原生平台组件（AppKit、UIKit、GTK4、Win32、JNI）",
+            "competitor": "系统 webview（WKWebView、WebView2、WebKitGTK）——HTML/CSS/JS"
+          },
+          {
+            "feature": "前端语言",
+            "perry": "TypeScript（声明式组件 API）",
+            "competitor": "通过任意 Web 框架（React、Vue 等）使用 HTML/CSS/JS"
+          },
+          {
+            "feature": "后端语言",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "UI 与逻辑之间的 IPC",
+            "perry": "无——单进程，直接调用",
+            "competitor": "必需（UI 在 webview，逻辑在 Rust 进程中）"
+          },
+          {
+            "feature": "hello world 安装包",
+            "perry": "约 330 KB",
+            "competitor": "约 3–10 MB（webview 由 OS 提供）"
+          },
+          {
+            "feature": "移动（iOS、Android）",
+            "perry": "支持——原生 UI",
+            "competitor": "支持——基于 webview（Tauri 2）"
+          },
+          {
+            "feature": "Watch / TV",
+            "perry": "watchOS、tvOS、Wear OS",
+            "competitor": "不支持"
+          },
+          {
+            "feature": "WebAssembly 目标",
+            "perry": "支持（perry/ui 通过 DOM 桥）",
+            "competitor": "不适用（Tauri 自身原生使用 webview）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "Pre-1.0",
+            "competitor": "稳定（1.x / 2.x）"
+          }
         ],
         "perryWins": [
           "真正的原生 UI——Perry 不渲染 HTML，而是直接驱动真正的平台组件，因此应用会自动获得原生滚动手感、焦点、可访问性、IME 与系统主题。",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native 是 Meta 用 React 构建移动应用的框架。JavaScript 跑在嵌入式引擎里——默认 Hermes，或 JavaScriptCore——并通过桥（旧版）或 JSI/Fabric（新架构）与 iOS/Android 原生组件交互。该框架以移动优先（iOS 与 Android）；Microsoft 维护着 Windows 与 macOS 的社区分支。React Native 已经支撑了 Meta、Microsoft、Shopify、Discord 等众多公司的应用。",
         "perryWhat": "Perry 把 TypeScript 直接编译为原生机器码。它的 perry/ui 模块是一套 SwiftUI 风格的声明式 UI 系统，会在构建时编译为原生平台组件——二进制中没有 JS 运行时、没有桥、也没有 JSI。同一份 TypeScript 代码可以同时编译到 macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、Wear OS、WebAssembly 和 Web。",
         "table": [
-          { "feature": "执行模型", "perry": "AOT 编译的原生机器码", "competitor": "JS 引擎（Hermes/JSC）+ 原生桥（或 JSI/Fabric）" },
-          { "feature": "应用中的 JS 引擎", "perry": "无", "competitor": "Hermes（默认）或 JavaScriptCore" },
-          { "feature": "UI", "perry": "原生组件——SwiftUI 风格的声明式 API", "competitor": "通过 React + 桥 / Fabric 的原生组件" },
-          { "feature": "主要目标", "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web", "competitor": "iOS、Android（Windows/macOS 通过社区分支）" },
-          { "feature": "服务器 / CLI / 桌面二进制", "perry": "支持（CLI 工具、服务器、桌面应用）", "competitor": "不支持（移动 UI 框架）" },
-          { "feature": "JS 与原生之间的桥", "perry": "无桥——原生代码就是程序本身", "competitor": "有（旧版桥或 JSI/Fabric）" },
-          { "feature": "开发期热重载", "perry": "perry dev（watch 模式自动重编译）", "competitor": "Fast Refresh（非常快）" },
-          { "feature": "成熟度", "perry": "Pre-1.0", "competitor": "稳定，在生产中被广泛部署" },
-          { "feature": "组件库", "perry": "perry/ui 核心组件 + perry-react React 兼容层", "competitor": "庞大——React Native + 社区包" }
+          {
+            "feature": "执行模型",
+            "perry": "AOT 编译的原生机器码",
+            "competitor": "JS 引擎（Hermes/JSC）+ 原生桥（或 JSI/Fabric）"
+          },
+          {
+            "feature": "应用中的 JS 引擎",
+            "perry": "无",
+            "competitor": "Hermes（默认）或 JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "原生组件——SwiftUI 风格的声明式 API",
+            "competitor": "通过 React + 桥 / Fabric 的原生组件"
+          },
+          {
+            "feature": "主要目标",
+            "perry": "macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WASM、Web",
+            "competitor": "iOS、Android（Windows/macOS 通过社区分支）"
+          },
+          {
+            "feature": "服务器 / CLI / 桌面二进制",
+            "perry": "支持（CLI 工具、服务器、桌面应用）",
+            "competitor": "不支持（移动 UI 框架）"
+          },
+          {
+            "feature": "JS 与原生之间的桥",
+            "perry": "无桥——原生代码就是程序本身",
+            "competitor": "有（旧版桥或 JSI/Fabric）"
+          },
+          {
+            "feature": "开发期热重载",
+            "perry": "perry dev（watch 模式自动重编译）",
+            "competitor": "Fast Refresh（非常快）"
+          },
+          {
+            "feature": "成熟度",
+            "perry": "Pre-1.0",
+            "competitor": "稳定，在生产中被广泛部署"
+          },
+          {
+            "feature": "组件库",
+            "perry": "perry/ui 核心组件 + perry-react React 兼容层",
+            "competitor": "庞大——React Native + 社区包"
+          }
         ],
         "perryWins": [
           "交付的应用里没有 JS 引擎。Perry 编译出的二进制不携带 Hermes 或 JSC；TypeScript 就是可执行文件本身。",

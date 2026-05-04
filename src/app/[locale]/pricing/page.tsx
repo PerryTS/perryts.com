@@ -48,6 +48,15 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
       <Header />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto mb-10">
+            <Link
+              href="/enterprise"
+              className="block rounded-xl border border-amber-500/25 bg-gradient-to-r from-amber-500/8 to-orange-500/8 hover:border-amber-500/50 hover:from-amber-500/12 hover:to-orange-500/12 transition-all duration-200 px-4 py-3 text-sm text-center"
+            >
+              <span className="text-slate-300">{t("enterpriseBanner.text")}</span>{" "}
+              <span className="text-amber-400 font-semibold">{t("enterpriseBanner.link")}</span>
+            </Link>
+          </div>
           <div className="text-center mb-16">
             <p className="text-sm text-slate-500 mb-3">
               <Link href="/publish" className="hover:text-slate-300 transition-colors">{t("breadcrumbPublish")}</Link>

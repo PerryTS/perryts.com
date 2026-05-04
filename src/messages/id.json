@@ -210,7 +210,8 @@
     "issues": "Issues",
     "discussions": "Diskusi",
     "contributing": "Kontribusi",
-    "tagline": "Dibangun dengan Rust, SWC, dan LLVM — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry"
+    "tagline": "Dibangun dengan Rust, SWC, dan LLVM — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry",
+    "enterprise": "Enterprise"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -272,6 +273,90 @@
       "a3": "Ya. Kompiler Perry, server build (perry-hub), layanan verifikasi, dan build worker semuanya open source. Clone repo, jalankan hub di Mac Mini atau mesin Linux Anda sendiri, dan atur PERRY_HUB_SELF_HOSTED=true untuk menonaktifkan pembatasan rate. Anda mendapat build tak terbatas tanpa biaya. Layanan yang dihost di hub.perryts.com ada untuk kemudahan — tanpa infrastruktur untuk dikelola, tanpa sertifikat penandatanganan untuk diurus, tanpa antrean build untuk dipantau.",
       "q4": "Apa yang termasuk dalam \"publikasi\"?",
       "a4": "Satu pemanggilan perry publish '<'platform'>'. Setiap platform adalah publikasi terpisah. Publikasi mencakup build, penandatanganan kode, verifikasi ringan (aplikasi berhasil diluncurkan), dan pengiriman ke toko atau pembuatan artifact."
+    },
+    "enterpriseBanner": {
+      "text": "Need LTS, SSO, or a support SLA?",
+      "link": "See Perry for Teams →"
+    }
+  },
+  "enterprise": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "hero": {
+      "title": "Perry for teams shipping in production",
+      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "primaryCta": "Email ralph@perryts.com"
+    },
+    "audience": {
+      "title": "Who this is for",
+      "item1": "You're shipping a production app built with Perry",
+      "item2": "You need predictable, supported releases instead of riding main",
+      "item3": "You need to influence what ships in upcoming versions",
+      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
+    },
+    "included": {
+      "title": "What's included",
+      "item1": "LTS compiler releases with security backports for 18 months",
+      "item2": "Direct Slack or shared channel with the maintainers",
+      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
+      "item4": "Quarterly roadmap call where your priorities get heard",
+      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
+      "item6": "Migration and architecture support — paired sessions for onboarding teams",
+      "item7": "Logo placement on perryts.com (opt-in)",
+      "item8": "Security questionnaires and compliance documentation"
+    },
+    "tiers": {
+      "title": "Plans",
+      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
+      "perMonth": "/month",
+      "recommended": "Recommended",
+      "team": {
+        "name": "Team",
+        "price": "$499",
+        "tagline": "For startups and small teams shipping with Perry",
+        "feature1": "LTS compiler releases",
+        "feature2": "Shared Slack channel (one channel)",
+        "feature3": "P1 response within 1 business day",
+        "feature4": "Quarterly roadmap call",
+        "feature5": "Self-hosted Perry Publish setup help",
+        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
+        "cta": "Subscribe"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "tagline": "For organizations betting their product on Perry",
+        "everythingIn": "Everything in Team, plus:",
+        "feature1": "SSO and audit logs on Perry Publish",
+        "feature2": "Dedicated build infrastructure",
+        "feature3": "Named technical contact",
+        "feature4": "P0 response within 4 business hours",
+        "feature5": "Custom contract and procurement support",
+        "feature6": "Training and onboarding sessions",
+        "cta": "Talk to us"
+      }
+    },
+    "faq": {
+      "title": "Questions",
+      "q1": "Isn't Perry fully open source? Why pay?",
+      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
+      "q2": "What if Perry as a project is abandoned?",
+      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
+      "q3": "How does roadmap input work?",
+      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
+      "q4": "Can we self-host everything?",
+      "a4": "Yes — and Enterprise includes setup help and architecture review.",
+      "q5": "What's the SLA, exactly?",
+      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
+      "q6": "Do you offer training or onboarding?",
+      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
+      "q7": "Can we evaluate before committing?",
+      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
+    },
+    "closing": {
+      "title": "Talk to the team",
+      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "emailCta": "Email ralph@perryts.com"
     }
   },
   "roadmap": {
@@ -468,16 +553,56 @@
         "competitorWhat": "Bun adalah toolkit JavaScript dan TypeScript serba ada yang cepat, dibangun dengan Zig. Ia menjalankan source `.ts` secara langsung (tanpa langkah prakompilasi), menggunakan JavaScriptCore sebagai engine JS-nya, dan menyertakan bundler, manajer paket, dan test runner. `bun build --compile` membundel runtime Bun bersama aplikasi Anda menjadi satu executable. Bun menargetkan Linux, macOS, dan Windows pada x64 dan arm64.",
         "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust. Ia mengompilasi TypeScript langsung ke kode mesin native melalui LLVM — tanpa engine JavaScript, tanpa runtime, tanpa JIT. Outputnya adalah satu binary (sekitar 330 KB untuk hello world; ~48 MB untuk aplikasi stdlib lengkap seperti server Fastify). Perry menargetkan 10 platform termasuk macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.",
         "table": [
-          { "feature": "Output", "perry": "Kode mesin native (LLVM)", "competitor": "Kode Anda + runtime Bun dibundel dalam satu binary" },
-          { "feature": "Engine JavaScript di binary", "perry": "Tidak ada secara default; V8 opsional dengan --enable-js-runtime (+~15 MB)", "competitor": "JavaScriptCore, selalu" },
-          { "feature": "Ukuran binary hello-world", "perry": "~330 KB", "competitor": "~50–100 MB (termasuk runtime Bun)" },
-          { "feature": "JIT", "perry": "Tidak (dikompilasi AOT)", "competitor": "Ya (JIT JavaScriptCore)" },
-          { "feature": "Target mobile (iOS, Android)", "perry": "Ya — UI native via UIKit/JNI", "competitor": "Tidak" },
-          { "feature": "Target watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Tidak" },
-          { "feature": "Widget UI native", "perry": "25+ via AppKit, UIKit, GTK4, Win32, JNI", "competitor": "Tidak (fokus server/CLI)" },
-          { "feature": "Ekosistem npm", "perry": "Paket TS/JS murni dapat dikompilasi secara native; lainnya via V8 opsional", "competitor": "npm kompatibel Node sepenuhnya" },
-          { "feature": "Stabilitas", "perry": "Pra-1.0 (alfa)", "competitor": "Stabil (1.x)" },
-          { "feature": "Dibangun dengan", "perry": "Rust", "competitor": "Zig" }
+          {
+            "feature": "Output",
+            "perry": "Kode mesin native (LLVM)",
+            "competitor": "Kode Anda + runtime Bun dibundel dalam satu binary"
+          },
+          {
+            "feature": "Engine JavaScript di binary",
+            "perry": "Tidak ada secara default; V8 opsional dengan --enable-js-runtime (+~15 MB)",
+            "competitor": "JavaScriptCore, selalu"
+          },
+          {
+            "feature": "Ukuran binary hello-world",
+            "perry": "~330 KB",
+            "competitor": "~50–100 MB (termasuk runtime Bun)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "Tidak (dikompilasi AOT)",
+            "competitor": "Ya (JIT JavaScriptCore)"
+          },
+          {
+            "feature": "Target mobile (iOS, Android)",
+            "perry": "Ya — UI native via UIKit/JNI",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "Target watch / TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "Widget UI native",
+            "perry": "25+ via AppKit, UIKit, GTK4, Win32, JNI",
+            "competitor": "Tidak (fokus server/CLI)"
+          },
+          {
+            "feature": "Ekosistem npm",
+            "perry": "Paket TS/JS murni dapat dikompilasi secara native; lainnya via V8 opsional",
+            "competitor": "npm kompatibel Node sepenuhnya"
+          },
+          {
+            "feature": "Stabilitas",
+            "perry": "Pra-1.0 (alfa)",
+            "competitor": "Stabil (1.x)"
+          },
+          {
+            "feature": "Dibangun dengan",
+            "perry": "Rust",
+            "competitor": "Zig"
+          }
         ],
         "perryWins": [
           "Binary lebih kecil — hello world Perry ~330 KB; hello world Bun --compile menyertakan runtime Bun dan mencapai puluhan megabyte.",
@@ -507,16 +632,56 @@
         "competitorWhat": "Deno adalah runtime TypeScript dan JavaScript yang dibangun dalam Rust di atas V8 dan Tokio. Ia mengeksekusi source `.ts` secara langsung, memiliki tooling bawaan (formatter, linter, test runner, language server), dan menggunakan model izin yang membutuhkan pemberian izin eksplisit untuk akses jaringan, file, dan environment. `deno compile` menghasilkan executable mandiri dengan membundel runtime Deno (yang menyertakan V8) bersama kode Anda. Deno menargetkan Linux, macOS, dan Windows pada x64 dan arm64.",
         "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust. Ia mengompilasi TypeScript langsung ke kode mesin native melalui LLVM — tanpa V8, tanpa JIT, tanpa runtime. Outputnya adalah satu binary, biasanya beberapa ratus KB hingga beberapa MB untuk kode native, opsional lebih besar jika Anda memilih runtime V8 tertanam untuk paket npm yang membutuhkan engine JS.",
         "table": [
-          { "feature": "Output", "perry": "Kode mesin native (LLVM)", "competitor": "Kode Anda + runtime Deno (V8) dibundel" },
-          { "feature": "Engine JavaScript di binary", "perry": "Tidak ada secara default; V8 opsional", "competitor": "V8, selalu" },
-          { "feature": "Ukuran binary hello-world", "perry": "~330 KB", "competitor": "~80–100 MB (termasuk V8)" },
-          { "feature": "JIT", "perry": "Tidak (dikompilasi AOT)", "competitor": "Ya (TurboFan V8)" },
-          { "feature": "Target mobile", "perry": "iOS, iPadOS, Android", "competitor": "Tidak" },
-          { "feature": "Watch / TV / WASM / Web", "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS", "competitor": "Tidak" },
-          { "feature": "UI native", "perry": "25+ widget via API platform native", "competitor": "Tidak" },
-          { "feature": "Model izin", "perry": "Izin proses OS standar", "competitor": "Izin runtime granular (--allow-net, --allow-read, dll.)" },
-          { "feature": "Stabilitas", "perry": "Pra-1.0", "competitor": "Stabil (1.x / 2.x)" },
-          { "feature": "Dibangun dengan", "perry": "Rust", "competitor": "Rust (di atas V8)" }
+          {
+            "feature": "Output",
+            "perry": "Kode mesin native (LLVM)",
+            "competitor": "Kode Anda + runtime Deno (V8) dibundel"
+          },
+          {
+            "feature": "Engine JavaScript di binary",
+            "perry": "Tidak ada secara default; V8 opsional",
+            "competitor": "V8, selalu"
+          },
+          {
+            "feature": "Ukuran binary hello-world",
+            "perry": "~330 KB",
+            "competitor": "~80–100 MB (termasuk V8)"
+          },
+          {
+            "feature": "JIT",
+            "perry": "Tidak (dikompilasi AOT)",
+            "competitor": "Ya (TurboFan V8)"
+          },
+          {
+            "feature": "Target mobile",
+            "perry": "iOS, iPadOS, Android",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "Watch / TV / WASM / Web",
+            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "UI native",
+            "perry": "25+ widget via API platform native",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "Model izin",
+            "perry": "Izin proses OS standar",
+            "competitor": "Izin runtime granular (--allow-net, --allow-read, dll.)"
+          },
+          {
+            "feature": "Stabilitas",
+            "perry": "Pra-1.0",
+            "competitor": "Stabil (1.x / 2.x)"
+          },
+          {
+            "feature": "Dibangun dengan",
+            "perry": "Rust",
+            "competitor": "Rust (di atas V8)"
+          }
         ],
         "perryWins": [
           "Binary jauh lebih kecil. Hello world Perry ~330 KB. Output `deno compile` menyertakan V8 dan mencapai kisaran 80–100 MB.",
@@ -546,14 +711,46 @@
         "competitorWhat": "Hermes adalah engine JavaScript yang dibangun Meta untuk React Native — berbasis bytecode, AOT-precompiled, dioptimalkan untuk waktu startup mobile. Static Hermes adalah upaya riset untuk memperluas Hermes dengan kompilasi native ahead-of-time dari subset JavaScript bertipe, dimaksudkan untuk memberi React Native jalur ke kode native sejati. Ini terutama proyek R&D kompiler; menurut catatan benchmark Perry, ia belum dipaketkan untuk instalasi rutin di macOS arm64 (`shermes` dilewati dari benchmark polyglot dengan catatan bahwa ia 'tidak tersedia di Homebrew atau npm dengan cara yang dapat diinstal dengan bersih di macOS arm64' — lihat perry/benchmarks/README.md).",
         "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust, menggunakan SWC untuk parsing dan LLVM untuk pembuatan kode. Ia mengirim CLI yang berfungsi (`perry compile`, `perry run`, `perry publish`), 25+ widget UI native, 10 target kompilasi, runtime self-hosted, dan suite benchmark yang diukur dalam kondisi transparan (M1 Max, RUNS=11). Perry masih pra-1.0 tetapi jalur produksi: orang-orang sudah mengirim aplikasi yang dibangun dengannya (Bloom Engine, Mango, Hone, Pry, dB Meter — lihat perryts.com).",
         "table": [
-          { "feature": "Status", "perry": "Pra-1.0 (alfa) — jalur produksi", "competitor": "Riset / eksperimental" },
-          { "feature": "Jalur instalasi (macOS arm64)", "perry": "Homebrew, APT, npm (@perryts/perry)", "competitor": "Belum dipaketkan untuk instalasi bersih saat penulisan (per perry/benchmarks)" },
-          { "feature": "Backend", "perry": "LLVM", "competitor": "Kustom (codegen berbasis Hermes)" },
-          { "feature": "Input", "perry": "TypeScript (penuh)", "competitor": "Subset JS/TS bertipe" },
-          { "feature": "Target kompilasi", "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS", "competitor": "Terutama mobile (konteks React Native)" },
-          { "feature": "UI native", "perry": "25+ widget via AppKit, UIKit, GTK4, Win32, JNI", "competitor": "Via bridge React Native (saat terintegrasi)" },
-          { "feature": "Alur kerja aplikasi CLI standalone", "perry": "Ya — `perry compile main.ts` menghasilkan binary", "competitor": "Terikat pada konteks React Native" },
-          { "feature": "Suite benchmark publik", "perry": "Ya — RUNS=11 melawan Node, Bun, Rust, C++, Go, Swift, Java", "competitor": "Internal / makalah riset" }
+          {
+            "feature": "Status",
+            "perry": "Pra-1.0 (alfa) — jalur produksi",
+            "competitor": "Riset / eksperimental"
+          },
+          {
+            "feature": "Jalur instalasi (macOS arm64)",
+            "perry": "Homebrew, APT, npm (@perryts/perry)",
+            "competitor": "Belum dipaketkan untuk instalasi bersih saat penulisan (per perry/benchmarks)"
+          },
+          {
+            "feature": "Backend",
+            "perry": "LLVM",
+            "competitor": "Kustom (codegen berbasis Hermes)"
+          },
+          {
+            "feature": "Input",
+            "perry": "TypeScript (penuh)",
+            "competitor": "Subset JS/TS bertipe"
+          },
+          {
+            "feature": "Target kompilasi",
+            "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
+            "competitor": "Terutama mobile (konteks React Native)"
+          },
+          {
+            "feature": "UI native",
+            "perry": "25+ widget via AppKit, UIKit, GTK4, Win32, JNI",
+            "competitor": "Via bridge React Native (saat terintegrasi)"
+          },
+          {
+            "feature": "Alur kerja aplikasi CLI standalone",
+            "perry": "Ya — `perry compile main.ts` menghasilkan binary",
+            "competitor": "Terikat pada konteks React Native"
+          },
+          {
+            "feature": "Suite benchmark publik",
+            "perry": "Ya — RUNS=11 melawan Node, Bun, Rust, C++, Go, Swift, Java",
+            "competitor": "Internal / makalah riset"
+          }
         ],
         "perryWins": [
           "Ia ada sebagai tool yang dapat digunakan. Perry dapat diinstal hari ini via Homebrew, APT, atau `npm install @perryts/perry`, dan `perry compile main.ts` menghasilkan binary pada percobaan pertama.",
@@ -580,15 +777,51 @@
         "competitorWhat": "Electron adalah framework open source untuk membangun aplikasi desktop lintas platform menggunakan Chromium untuk rendering dan Node.js untuk akses sistem. Setiap aplikasi Electron mengirim salinan Chromium dan Node-nya sendiri, itulah sebabnya installer aplikasi Electron biasanya 80–150 MB bahkan untuk hello world. Electron telah memberdayakan aplikasi yang banyak digunakan termasuk VS Code, Slack, Discord, dan klien desktop Figma. Ia menargetkan desktop Linux, macOS, dan Windows; tidak ada cerita resmi mobile, watch, atau TV.",
         "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native tanpa engine browser, tanpa Chromium, dan tanpa runtime Node. Lapisan UI (perry/ui) adalah sistem deklaratif gaya SwiftUI yang dipetakan ke widget platform native via AppKit di macOS, UIKit di iOS/iPadOS/tvOS, GTK4 di Linux, Win32 di Windows, dan JNI di Android. Binary hello world ~330 KB; aplikasi penuh dengan stdlib (Fastify, mysql2, dll.) sekitar 48 MB.",
         "table": [
-          { "feature": "Rendering", "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Chromium yang dibundel (HTML/CSS/JS)" },
-          { "feature": "Engine yang dibundel", "perry": "Tidak ada (V8 opsional hanya saat --enable-js-runtime)", "competitor": "Chromium + Node.js" },
-          { "feature": "Ukuran installer hello-world", "perry": "~330 KB", "competitor": "~80–150 MB" },
-          { "feature": "Installer aplikasi penuh (stdlib + framework)", "perry": "~48 MB", "competitor": "100–200+ MB tipikal" },
-          { "feature": "Penggunaan RAM", "perry": "Native (tipikal: puluhan MB)", "competitor": "Beberapa proses Chromium (tipikal: ratusan MB)" },
-          { "feature": "Mobile / watch / TV", "perry": "Ya — iOS, iPadOS, Android, watchOS, tvOS, Wear OS", "competitor": "Tidak (hanya desktop)" },
-          { "feature": "Bahasa UI", "perry": "TypeScript dengan API deklaratif gaya SwiftUI", "competitor": "HTML/CSS/JS (stack web)" },
-          { "feature": "Auto-update / pengemasan", "perry": "perry publish (Homebrew, APT, App Store, Play Store)", "competitor": "electron-builder, electron-updater (ekosistem matang)" },
-          { "feature": "Kematangan", "perry": "Pra-1.0", "competitor": "Stabil, satu dekade+ di produksi" }
+          {
+            "feature": "Rendering",
+            "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Chromium yang dibundel (HTML/CSS/JS)"
+          },
+          {
+            "feature": "Engine yang dibundel",
+            "perry": "Tidak ada (V8 opsional hanya saat --enable-js-runtime)",
+            "competitor": "Chromium + Node.js"
+          },
+          {
+            "feature": "Ukuran installer hello-world",
+            "perry": "~330 KB",
+            "competitor": "~80–150 MB"
+          },
+          {
+            "feature": "Installer aplikasi penuh (stdlib + framework)",
+            "perry": "~48 MB",
+            "competitor": "100–200+ MB tipikal"
+          },
+          {
+            "feature": "Penggunaan RAM",
+            "perry": "Native (tipikal: puluhan MB)",
+            "competitor": "Beberapa proses Chromium (tipikal: ratusan MB)"
+          },
+          {
+            "feature": "Mobile / watch / TV",
+            "perry": "Ya — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
+            "competitor": "Tidak (hanya desktop)"
+          },
+          {
+            "feature": "Bahasa UI",
+            "perry": "TypeScript dengan API deklaratif gaya SwiftUI",
+            "competitor": "HTML/CSS/JS (stack web)"
+          },
+          {
+            "feature": "Auto-update / pengemasan",
+            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
+            "competitor": "electron-builder, electron-updater (ekosistem matang)"
+          },
+          {
+            "feature": "Kematangan",
+            "perry": "Pra-1.0",
+            "competitor": "Stabil, satu dekade+ di produksi"
+          }
         ],
         "perryWins": [
           "Ukuran binary. Hello world Perry ~330 KB; hello world Electron biasanya 80–150 MB karena setiap aplikasi mengirim Chromium-nya sendiri.",
@@ -618,15 +851,51 @@
         "competitorWhat": "Tauri adalah framework open source yang ditulis dalam Rust yang memungkinkan Anda membangun aplikasi lintas platform dengan frontend web (framework apa saja — React, Vue, Svelte, dll.) dan backend Rust. Alih-alih membundel Chromium, Tauri menggunakan webview bawaan sistem, yang menjaga installer aplikasi dalam kisaran MB satu digit di Linux/Windows/macOS. Tauri 2 menambahkan dukungan mobile (iOS dan Android). Frontend dirender sebagai HTML/CSS/JS oleh webview sistem; komunikasi dengan backend Rust melalui bridge IPC.",
         "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native melalui LLVM. Lapisan UI (perry/ui) adalah API deklaratif gaya SwiftUI yang dipetakan ke widget platform native — bukan HTML yang dirender oleh webview. Aplikasi yang ditulis dalam Perry tidak membawa engine JavaScript, tidak berjalan di dalam WebKit/WebView2, dan tidak butuh bridge IPC antara UI dan logika. Perry menargetkan 10 platform termasuk mobile, watch, dan TV.",
         "table": [
-          { "feature": "Rendering UI", "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)", "competitor": "Webview sistem (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS" },
-          { "feature": "Bahasa frontend", "perry": "TypeScript (API widget deklaratif)", "competitor": "HTML/CSS/JS via framework web apa saja (React, Vue, dll.)" },
-          { "feature": "Bahasa backend", "perry": "TypeScript", "competitor": "Rust" },
-          { "feature": "IPC antara UI dan logika", "perry": "Tidak ada — proses tunggal, panggilan langsung", "competitor": "Diperlukan (UI di webview, logika di proses Rust)" },
-          { "feature": "Installer hello-world", "perry": "~330 KB", "competitor": "~3–10 MB (webview disediakan OS)" },
-          { "feature": "Mobile (iOS, Android)", "perry": "Ya — UI native", "competitor": "Ya — berbasis webview (Tauri 2)" },
-          { "feature": "Watch / TV", "perry": "watchOS, tvOS, Wear OS", "competitor": "Tidak" },
-          { "feature": "Target WebAssembly", "perry": "Ya (perry/ui via DOM bridge)", "competitor": "T/A (Tauri sendiri menggunakan webview secara native)" },
-          { "feature": "Kematangan", "perry": "Pra-1.0", "competitor": "Stabil (1.x / 2.x)" }
+          {
+            "feature": "Rendering UI",
+            "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)",
+            "competitor": "Webview sistem (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
+          },
+          {
+            "feature": "Bahasa frontend",
+            "perry": "TypeScript (API widget deklaratif)",
+            "competitor": "HTML/CSS/JS via framework web apa saja (React, Vue, dll.)"
+          },
+          {
+            "feature": "Bahasa backend",
+            "perry": "TypeScript",
+            "competitor": "Rust"
+          },
+          {
+            "feature": "IPC antara UI dan logika",
+            "perry": "Tidak ada — proses tunggal, panggilan langsung",
+            "competitor": "Diperlukan (UI di webview, logika di proses Rust)"
+          },
+          {
+            "feature": "Installer hello-world",
+            "perry": "~330 KB",
+            "competitor": "~3–10 MB (webview disediakan OS)"
+          },
+          {
+            "feature": "Mobile (iOS, Android)",
+            "perry": "Ya — UI native",
+            "competitor": "Ya — berbasis webview (Tauri 2)"
+          },
+          {
+            "feature": "Watch / TV",
+            "perry": "watchOS, tvOS, Wear OS",
+            "competitor": "Tidak"
+          },
+          {
+            "feature": "Target WebAssembly",
+            "perry": "Ya (perry/ui via DOM bridge)",
+            "competitor": "T/A (Tauri sendiri menggunakan webview secara native)"
+          },
+          {
+            "feature": "Kematangan",
+            "perry": "Pra-1.0",
+            "competitor": "Stabil (1.x / 2.x)"
+          }
         ],
         "perryWins": [
           "UI yang benar-benar native — Perry tidak merender HTML; ia menggerakkan widget platform asli, jadi aplikasi mewarisi fisika scroll native, fokus, aksesibilitas, IME, dan tema OS secara gratis.",
@@ -656,15 +925,51 @@
         "competitorWhat": "React Native adalah framework Meta untuk membangun aplikasi mobile menggunakan React. JavaScript berjalan di engine tertanam — Hermes secara default, atau JavaScriptCore — dan berinteraksi dengan widget native iOS/Android melalui bridge (legacy) atau JSI/Fabric (New Architecture). Framework ini berfokus pada mobile (iOS dan Android); Microsoft memelihara fork komunitas untuk Windows dan macOS. React Native telah memberdayakan aplikasi di Meta, Microsoft, Shopify, Discord, dan banyak lainnya.",
         "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native. Modul perry/ui-nya adalah sistem UI deklaratif gaya SwiftUI yang dikompilasi ke widget platform native pada waktu build — tidak ada runtime JS di binary, tidak ada bridge, dan tidak ada JSI. Kode sumber TypeScript yang sama dikompilasi ke macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly, dan Web.",
         "table": [
-          { "feature": "Model eksekusi", "perry": "Kode mesin native AOT-compiled", "competitor": "Engine JS (Hermes/JSC) + bridge native (atau JSI/Fabric)" },
-          { "feature": "Engine JS dalam aplikasi", "perry": "Tidak ada", "competitor": "Hermes (default) atau JavaScriptCore" },
-          { "feature": "UI", "perry": "Widget native — API deklaratif gaya SwiftUI", "competitor": "Widget native via React + bridge / Fabric" },
-          { "feature": "Target utama", "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web", "competitor": "iOS, Android (Windows/macOS via fork komunitas)" },
-          { "feature": "Binary server / CLI / desktop", "perry": "Ya (tool CLI, server, aplikasi desktop)", "competitor": "Tidak (framework UI mobile)" },
-          { "feature": "Bridge antara JS dan native", "perry": "Tanpa bridge — kode native adalah programnya", "competitor": "Ya (bridge legacy atau JSI/Fabric)" },
-          { "feature": "Hot reload saat development", "perry": "perry dev (auto-recompile mode watch)", "competitor": "Fast Refresh (sangat cepat)" },
-          { "feature": "Kematangan", "perry": "Pra-1.0", "competitor": "Stabil, banyak digunakan di produksi" },
-          { "feature": "Library komponen", "perry": "Widget inti perry/ui + lapisan kompat React perry-react", "competitor": "Sangat luas — React Native + paket komunitas" }
+          {
+            "feature": "Model eksekusi",
+            "perry": "Kode mesin native AOT-compiled",
+            "competitor": "Engine JS (Hermes/JSC) + bridge native (atau JSI/Fabric)"
+          },
+          {
+            "feature": "Engine JS dalam aplikasi",
+            "perry": "Tidak ada",
+            "competitor": "Hermes (default) atau JavaScriptCore"
+          },
+          {
+            "feature": "UI",
+            "perry": "Widget native — API deklaratif gaya SwiftUI",
+            "competitor": "Widget native via React + bridge / Fabric"
+          },
+          {
+            "feature": "Target utama",
+            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web",
+            "competitor": "iOS, Android (Windows/macOS via fork komunitas)"
+          },
+          {
+            "feature": "Binary server / CLI / desktop",
+            "perry": "Ya (tool CLI, server, aplikasi desktop)",
+            "competitor": "Tidak (framework UI mobile)"
+          },
+          {
+            "feature": "Bridge antara JS dan native",
+            "perry": "Tanpa bridge — kode native adalah programnya",
+            "competitor": "Ya (bridge legacy atau JSI/Fabric)"
+          },
+          {
+            "feature": "Hot reload saat development",
+            "perry": "perry dev (auto-recompile mode watch)",
+            "competitor": "Fast Refresh (sangat cepat)"
+          },
+          {
+            "feature": "Kematangan",
+            "perry": "Pra-1.0",
+            "competitor": "Stabil, banyak digunakan di produksi"
+          },
+          {
+            "feature": "Library komponen",
+            "perry": "Widget inti perry/ui + lapisan kompat React perry-react",
+            "competitor": "Sangat luas — React Native + paket komunitas"
+          }
         ],
         "perryWins": [
           "Tanpa engine JS di aplikasi yang dikirim. Binary yang dikompilasi Perry tidak membawa Hermes atau JSC; TypeScript adalah executable-nya.",
