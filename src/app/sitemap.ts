@@ -18,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/publish",
     "/pricing",
     "/internals",
+    "/imprint",
+    "/privacy",
   ];
 
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>

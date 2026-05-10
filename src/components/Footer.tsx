@@ -103,6 +103,12 @@ export async function Footer() {
             {t("tagline")}
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
+            <Link href="/imprint" className="hover:text-white transition-colors">
+              Impressum
+            </Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Datenschutz
+            </Link>
             <a
               href="https://github.com/PerryTS/perry"
               target="_blank"

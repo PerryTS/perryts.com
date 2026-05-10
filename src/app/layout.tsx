@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Rubik, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -56,6 +57,16 @@ export default function RootLayout({
 }>) {
   return (
     <html className={`${rubik.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <head>
+        <Script
+          defer
+          src="https://plausible.io/js/pa-gC_Q02qX-0sNU3AxUlF1r.js"
+          strategy="afterInteractive"
+        />
+        <Script id="plausible-init" strategy="afterInteractive">
+          {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`}
+        </Script>
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );
