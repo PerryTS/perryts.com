@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+  <g>
+    <rect x="272.0" y="128.0" width="28.0" height="28.0" rx="4.8" fill="#fbbf24" opacity="1.0"/>
+    <rect x="300.0" y="128.0" width="28.0" height="28.0" rx="4.8" fill="#f59e0b" opacity="1.0"/>
+    <rect x="272.0" y="156.0" width="28.0" height="28.0" rx="4.8" fill="#f97316" opacity="1.0"/>
+    <rect x="300.0" y="156.0" width="28.0" height="28.0" rx="4.8" fill="#fb923c" opacity="1.0"/>
+    <rect x="304.0" y="132.0" width="16.0" height="16.0" rx="4.0" fill="#ffffff" opacity="1.0"/>
+    <rect x="328.0" y="144.0" width="28.0" height="20.0" rx="4.8" fill="#fde68a" opacity="1.0"/>
+    <rect x="356.0" y="152.0" width="20.0" height="12.0" rx="4.0" fill="#fef3c7" opacity="1.0"/>
+    <rect x="216.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#f97316" opacity="1.0"/>
+    <rect x="244.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#ef4444" opacity="1.0"/>
+    <rect x="272.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#e879f9" opacity="1.0"/>
+    <rect x="300.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#8b5cf6" opacity="1.0"/>
+    <rect x="216.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#a855f7" opacity="1.0"/>
+    <rect x="244.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#7c3aed" opacity="1.0"/>
+    <rect x="272.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#6366f1" opacity="1.0"/>
+    <rect x="300.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#818cf8" opacity="1.0"/>
+    <rect x="244.0" y="240.0" width="28.0" height="28.0" rx="4.8" fill="#3b82f6" opacity="1.0"/>
+    <rect x="272.0" y="240.0" width="28.0" height="28.0" rx="4.8" fill="#60a5fa" opacity="1.0"/>
+    <rect x="160.0" y="156.0" width="28.0" height="28.0" rx="4.8" fill="#fbbf24" opacity="0.7"/>
+    <rect x="188.0" y="156.0" width="28.0" height="28.0" rx="4.8" fill="#f59e0b" opacity="0.8"/>
+    <rect x="132.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#fcd34d" opacity="0.5"/>
+    <rect x="160.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#fbbf24" opacity="0.7"/>
+    <rect x="188.0" y="184.0" width="28.0" height="28.0" rx="4.8" fill="#f97316" opacity="0.8"/>
+    <rect x="104.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#fcd34d" opacity="0.3"/>
+    <rect x="132.0" y="212.0" width="28.0" height="28.0" rx="4.8" fill="#fbbf24" opacity="0.5"/>
+    <rect x="188.0" y="268.0" width="28.0" height="28.0" rx="4.8" fill="#60a5fa" opacity="0.5"/>
+    <rect x="160.0" y="296.0" width="28.0" height="28.0" rx="4.8" fill="#93c5fd" opacity="0.4"/>
+    <rect x="132.0" y="324.0" width="28.0" height="28.0" rx="4.8" fill="#bfdbfe" opacity="0.3"/>
+    <rect x="216.0" y="268.0" width="28.0" height="28.0" rx="4.8" fill="#3b82f6" opacity="0.6"/>
+    <rect x="188.0" y="296.0" width="28.0" height="28.0" rx="4.8" fill="#60a5fa" opacity="0.4"/>
+  </g>
+  <text x="520" y="340" font-family="'Rubik', 'Segoe UI', 'Arial', sans-serif" font-weight="800" font-size="96" fill="#fef3c7" letter-spacing="-0.02em">Perry</text>
+  <text x="525" y="400" font-family="'Rubik', 'Segoe UI', 'Arial', sans-serif" font-weight="500" font-size="28" fill="#60a5fa" letter-spacing="0.04em">TypeScript → Native</text>
+</svg>

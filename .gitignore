@@ -1,0 +1,24 @@
+node_modules
+dist
+*.tsbuildinfo
+
+# Perry compile artifacts
+.perry-cache
+*.o
+__perry_js_bundle.js
+*_bundle.js
+*_tsx.o
+*_ts.o
+
+# Build outputs (regenerated; see scripts.build:css)
+public/styles.css
+
+# Editor / OS
+.DS_Store
+.idea
+.vscode
+*.swp
+
+# Logs
+*.log
+/tmp

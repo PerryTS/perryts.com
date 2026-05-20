@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  /* Perry amber scale — primary warm accent */
+  --color-perry-50: #fffbeb;
+  --color-perry-100: #fef3c7;
+  --color-perry-200: #fde68a;
+  --color-perry-300: #fcd34d;
+  --color-perry-400: #fbbf24;
+  --color-perry-500: #f59e0b;
+  --color-perry-600: #d97706;
+  --color-perry-700: #b45309;
+  --color-perry-800: #92400e;
+  --color-perry-900: #78350f;
+  --color-perry-950: #0a0a0f;
+
+  /* Perry brand backgrounds */
+  --color-perry-bg: #0a0a0f;
+  --color-perry-surface: #1a1a1e;
+
+  /* Font family */
+  --font-sans: 'Rubik', 'Segoe UI', '-apple-system', 'Arial', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0a0a0f;
+    color: #e0e7ff;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: rgba(251, 191, 36, 0.25);
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #fbbf24, #a855f7, #3b82f6);
+  }
+
+  .glow {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.25);
+  }
+
+  .code-block {
+    @apply bg-[#1a1a1e] border border-white/10 rounded-xl p-6 font-mono text-sm overflow-x-auto;
+  }
+
+  .feature-card {
+    background: rgba(26, 26, 30, 0.6);
+    backdrop-filter: blur(12px);
+    @apply border border-white/10 rounded-2xl p-6 transition-all duration-300;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(251, 191, 36, 0.35);
+    background: rgba(26, 26, 30, 0.85);
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+    box-shadow: 0 4px 24px rgba(245, 158, 11, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 4px 32px rgba(245, 158, 11, 0.45);
+  }
+
+  .btn-secondary {
+    @apply border border-white/15 hover:border-amber-500/40 text-slate-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 bg-white/5 hover:bg-white/10;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

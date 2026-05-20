@@ -1,0 +1,33 @@
+{
+  "name": "perry-landing-skelpo",
+  "version": "0.0.1",
+  "description": "perry.land served by a Perry-native customer site fetching from Skelpo CMS",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "npm run build:css && tsx watch src/server.tsx",
+    "start": "npm run build:css && node --import tsx src/server.tsx",
+    "start:bun": "bun src/server.ts",
+    "start:perry": "./dist/perry-landing",
+    "build:perry": "perry build src/server.tsx -o dist/perry-landing",
+    "build:css": "tailwindcss -i src/globals.css -o public/styles.css --minify",
+    "watch:css": "tailwindcss -i src/globals.css -o public/styles.css --watch"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "@skelpo/cms-client": "file:../skelpo-cms/packages/cms-client",
+    "@skelpo/site-kit": "file:../skelpo-cms/packages/site-kit",
+    "@tailwindcss/cli": "^4.3.0",
+    "@tailwindcss/postcss": "^4.3.0",
+    "hono": "^4.10.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.0"
+  },
+  "perry": {
+    "allowJsRuntime": true
+  }
+}

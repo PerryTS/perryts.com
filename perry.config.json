@@ -1,0 +1,10 @@
+{
+  "entry": "src/server.tsx",
+  "output": "dist/perry-landing",
+  "target": "native",
+  "compilePackages": [
+    "@skelpo/cms-client",
+    "@skelpo/site-kit",
+    "hono"
+  ]
+}
