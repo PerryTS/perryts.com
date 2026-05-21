@@ -59,6 +59,24 @@ browser by default. This branch proves it.
 The CMS is its own product ([@skelpo/cms](https://github.com/skelpo/cms),
 MIT) — this site is its first sample case.
 
+## Performance — Node vs Perry
+
+Direct head-to-head on a synthetic twin (identical Fastify source, two
+runtimes, same machine). Full writeup:
+[skelpo/cms docs/benchmarks-perry-vs-node.md](https://github.com/skelpo/cms/blob/main/docs/benchmarks-perry-vs-node.md).
+
+| | Node + tsx | Perry native |
+|---|---:|---:|
+| Cold start (spawn → 200) | 730 ms | **44 ms** (~17×) |
+| RPS (50 conns, /loop CPU) | 49,947 | **67,197** (+35%) |
+| RPS (50 conns, avg)        | 54,770 | **65,476** (+20%) |
+| Idle RSS                   | 86 MB  | **11 MB** (~8×)  |
+| Distributable              | ~105 MB (node + node_modules) | **3.5 MB** binary (~30×) |
+
+Throughput edge is modest at this concurrency (+20% on average); the
+asymmetric wins are cold start, idle memory, and deployable size — the
+axes that matter for autoscale-from-zero, FaaS, and edge.
+
 ## License
 
 MIT (matches the rest of the Perry org).
