@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.0",
-    "@skelpo/cms-client": "file:../skelpo-cms/packages/cms-client",
-    "@skelpo/site-kit": "file:../skelpo-cms/packages/site-kit",
+    "@skelpo/cms-client": "^0.1.3",
+    "@skelpo/site-kit": "^0.1.2",
     "@tailwindcss/cli": "^4.3.0",
     "@tailwindcss/postcss": "^4.3.0",
     "hono": "^4.10.0",
