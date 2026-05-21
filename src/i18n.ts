@@ -34,8 +34,9 @@ export async function loadMessages(locale: string): Promise<MessageBag> {
   }
 }
 
-/** Drill a dot-path through nested message groups. */
-function drill(bag: MessageBag, key: string): string | null {
+/** Drill a dot-path through nested message groups. Returns the raw
+ *  value (string, array, object, …) at the path, or null if missing. */
+function drillRaw(bag: MessageBag, key: string): unknown {
   const parts = key.split('.');
   let cur: unknown = bag;
   for (const p of parts) {
@@ -43,11 +44,19 @@ function drill(bag: MessageBag, key: string): string | null {
       cur = (cur as Record<string, unknown>)[p];
     } else return null;
   }
-  return typeof cur === 'string' ? cur : null;
+  return cur ?? null;
+}
+
+function drill(bag: MessageBag, key: string): string | null {
+  const v = drillRaw(bag, key);
+  return typeof v === 'string' ? v : null;
 }
 
 export interface Translator {
   (key: string, fallback?: string): string;
+  /** Returns a nested raw value (array, object, …) at the dot-path,
+   *  with en fallback. Use for structured data like compare-item tables. */
+  raw: <T = unknown>(key: string) => T | null;
   locale: string;
 }
 
@@ -57,6 +66,12 @@ export async function makeT(locale: string): Promise<Translator> {
   const t = ((key: string, fallback?: string): string => {
     return drill(local, key) ?? drill(en, key) ?? fallback ?? key;
   }) as Translator;
+  t.raw = <T = unknown>(key: string): T | null => {
+    const v = drillRaw(local, key);
+    if (v !== null) return v as T;
+    const fb = drillRaw(en, key);
+    return fb === null ? null : (fb as T);
+  };
   t.locale = locale;
   return t;
 }

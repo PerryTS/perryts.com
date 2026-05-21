@@ -6,9 +6,37 @@
 import type { FC, PropsWithChildren } from 'hono/jsx';
 import { metaTagsToHtml, jsonLdToHtml, buildMetaTags, buildJsonLd } from '@skelpo/site-kit';
 import type { MetaTag, SkContent, SkSite } from '@skelpo/site-kit';
+import type { MenuItemTree } from '@skelpo/cms-client';
 import { raw } from 'hono/html';
 import type { Translator } from './i18n.js';
 import { localize } from './i18n.js';
+import { cms } from './cms.js';
+
+// CMS-driven menu cache (5s TTL — invalidated on next request after any
+// menu edit, since cms-client honors the CMS's ETag + dep-graph).
+interface MenuCacheEntry { items: MenuItemTree[]; t: number }
+const MENU_CACHE = new Map<string, MenuCacheEntry>();
+async function getMenu(slug: string, locale: string): Promise<MenuItemTree[]> {
+  const key = `${slug}:${locale}`;
+  const hit = MENU_CACHE.get(key);
+  if (hit && Date.now() - hit.t < 5000) return hit.items;
+  try {
+    const { data } = await cms.menus.bySlug(slug, { locale });
+    const items = (data?.items ?? []) as MenuItemTree[];
+    MENU_CACHE.set(key, { items, t: Date.now() });
+    return items;
+  } catch { return []; }
+}
+// Resolve a menu item's localized label (cms-client returns the locale
+// already, but fall through gracefully for legacy shapes).
+function label(item: MenuItemTree): string {
+  if (typeof item.label === 'string') return item.label;
+  if (item.label && typeof item.label === 'object') {
+    const obj = item.label as Record<string, string>;
+    return obj.en ?? Object.values(obj)[0] ?? '';
+  }
+  return '';
+}
 
 export interface LayoutProps {
   title: string;
@@ -19,11 +47,18 @@ export interface LayoutProps {
   locales: string[];
   pathForSwitcher: string;
   jsonLdImageUrl?: string;
+  /** Path (relative to site.url) of the OG image. Defaults to /og/home.svg
+   *  when no `content` row drives the meta tags. */
+  ogImagePath?: string;
 }
 
-export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
-  title, description, content, site, t, locales, pathForSwitcher, jsonLdImageUrl, children,
+export const Layout: FC<PropsWithChildren<LayoutProps>> = async ({
+  title, description, content, site, t, locales, pathForSwitcher, jsonLdImageUrl, ogImagePath, children,
 }) => {
+  const [mainMenu, footerMenu] = await Promise.all([
+    getMenu('main', t.locale),
+    getMenu('footer', t.locale),
+  ]);
   let metaHtml = '';
   let ldHtml = '';
   if (content) {
@@ -34,6 +69,7 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
     metaHtml = `<title>${title}</title>` +
       (description ? `<meta name="description" content="${description.replace(/"/g, '&quot;')}">` : '');
   }
+  const ogImage = ogImagePath ?? (content ? null : '/og/home.svg');
   return (
     <html lang={t.locale} class="scroll-smooth">
       <head>
@@ -49,7 +85,10 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
         <link rel="alternate icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/perry-icon.svg" />
         <meta name="theme-color" content="#0a0a0f" />
-        {!content ? <meta property="og:image" content={`${site.url}/perry-social-banner.svg`} /> : null}
+        {ogImage ? <meta property="og:image" content={`${site.url}${ogImage}`} /> : null}
+        {ogImage ? <meta property="og:image:width" content="1200" /> : null}
+        {ogImage ? <meta property="og:image:height" content="630" /> : null}
+        {ogImage ? <meta name="twitter:card" content="summary_large_image" /> : null}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
         <link
           rel="stylesheet"
@@ -58,15 +97,22 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
         <link rel="stylesheet" href="/styles.css" />
       </head>
       <body class="bg-[#0a0a0f] text-slate-200 min-h-screen antialiased">
-        <Header t={t} locales={locales} pathForSwitcher={pathForSwitcher} />
+        <Header t={t} locales={locales} pathForSwitcher={pathForSwitcher} mainMenu={mainMenu} />
         <main class="min-h-[60vh]">{children}</main>
-        <SiteFooter t={t} />
+        <SiteFooter t={t} footerMenu={footerMenu} />
       </body>
     </html>
   );
 };
 
-const Header: FC<{ t: Translator; locales: string[]; pathForSwitcher: string }> = ({ t, locales, pathForSwitcher }) => (
+// Localize internal URLs (those starting with "/"). External URLs pass through.
+function menuHref(url: string | undefined | null, locale: string): string {
+  if (!url) return '#';
+  if (url.startsWith('/') && !url.startsWith('//')) return localize(url, locale);
+  return url;
+}
+
+const Header: FC<{ t: Translator; locales: string[]; pathForSwitcher: string; mainMenu: MenuItemTree[] }> = ({ t, locales, pathForSwitcher, mainMenu }) => (
   <header class="sticky top-0 z-30 backdrop-blur-md bg-[#0a0a0f]/75 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       <a class="flex items-center gap-2 font-bold text-lg tracking-tight text-white" href={localize('/', t.locale)}>
@@ -74,13 +120,15 @@ const Header: FC<{ t: Translator; locales: string[]; pathForSwitcher: string }> 
         Perry
       </a>
       <nav class="hidden md:flex items-center gap-6 text-sm text-slate-400">
-        <a class="hover:text-white transition-colors" href={localize('/showcase', t.locale)}>{t('nav.showcase', 'Showcase')}</a>
-        <a class="hover:text-white transition-colors" href={localize('/blog', t.locale)}>{t('nav.blog', 'Blog')}</a>
-        <a class="hover:text-white transition-colors" href={localize('/compare', t.locale)}>{t('nav.compare', 'Compare')}</a>
-        <a class="hover:text-white transition-colors" href={localize('/roadmap', t.locale)}>{t('nav.roadmap', 'Roadmap')}</a>
-        <a class="hover:text-white transition-colors" href={localize('/publish', t.locale)}>{t('nav.publish', 'Publish')}</a>
-        <a class="hover:text-white transition-colors" href={localize('/pricing', t.locale)}>{t('nav.pricing', 'Pricing')}</a>
-        <a class="hover:text-white transition-colors" href="https://github.com/PerryTS/perry">{t('nav.github', 'GitHub')}</a>
+        {mainMenu.map((item) => (
+          <a
+            class="hover:text-white transition-colors"
+            href={menuHref(item.url, t.locale)}
+            {...(item.target === '_blank' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {label(item)}
+          </a>
+        ))}
       </nav>
       <details class="relative">
         <summary class="cursor-pointer list-none flex items-center gap-1.5 text-xs uppercase tracking-wider text-slate-400 hover:text-white border border-white/10 hover:border-amber-500/30 px-2.5 py-1.5 rounded-md transition-colors">
@@ -98,7 +146,7 @@ const Header: FC<{ t: Translator; locales: string[]; pathForSwitcher: string }> 
   </header>
 );
 
-const SiteFooter: FC<{ t: Translator }> = ({ t }) => (
+const SiteFooter: FC<{ t: Translator; footerMenu: MenuItemTree[] }> = ({ t, footerMenu }) => (
   <footer class="mt-32 border-t border-white/5 bg-[#0d0d12]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
       <div class="col-span-2 md:col-span-1">
@@ -107,33 +155,24 @@ const SiteFooter: FC<{ t: Translator }> = ({ t }) => (
         </a>
         <p class="text-slate-500 leading-relaxed">{t('footer.tagline', 'Native TypeScript. Standalone executables.')}</p>
       </div>
-      <div>
-        <h4 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">{t('footer.resources', 'Resources')}</h4>
-        <ul class="space-y-2 text-slate-400">
-          <li><a class="hover:text-amber-300" href={localize('/blog', t.locale)}>{t('nav.blog', 'Blog')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/showcase', t.locale)}>{t('nav.showcase', 'Showcase')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/compare', t.locale)}>{t('nav.compare', 'Compare')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/internals', t.locale)}>{t('footer.documentation', 'Documentation')}</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">{t('footer.community', 'Community')}</h4>
-        <ul class="space-y-2 text-slate-400">
-          <li><a class="hover:text-amber-300" href="https://github.com/PerryTS/perry">GitHub</a></li>
-          <li><a class="hover:text-amber-300" href="https://github.com/PerryTS/perry/issues">{t('footer.issues', 'Issues')}</a></li>
-          <li><a class="hover:text-amber-300" href="https://github.com/PerryTS/perry/discussions">{t('footer.discussions', 'Discussions')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/newsletter', t.locale)}>Newsletter</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">{t('footer.enterprise', 'Enterprise')}</h4>
-        <ul class="space-y-2 text-slate-400">
-          <li><a class="hover:text-amber-300" href={localize('/pricing', t.locale)}>{t('nav.pricing', 'Pricing')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/enterprise', t.locale)}>{t('footer.enterprise', 'Enterprise')}</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/privacy', t.locale)}>Privacy</a></li>
-          <li><a class="hover:text-amber-300" href={localize('/imprint', t.locale)}>Imprint</a></li>
-        </ul>
-      </div>
+      {footerMenu.map((section) => (
+        <div>
+          <h4 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">{label(section)}</h4>
+          <ul class="space-y-2 text-slate-400">
+            {(section.children ?? []).map((it) => (
+              <li>
+                <a
+                  class="hover:text-amber-300"
+                  href={menuHref(it.url, t.locale)}
+                  {...(it.target === '_blank' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {label(it)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
     <div class="border-t border-white/5">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">

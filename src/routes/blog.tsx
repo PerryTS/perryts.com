@@ -3,7 +3,13 @@ import type { FC } from 'hono/jsx';
 import { raw } from 'hono/html';
 import { Layout } from '../layout.js';
 import { site } from '../cms.js';
-import { renderTipTap } from '@skelpo/site-kit';
+import { renderTipTap, renderMarkdown } from '@skelpo/site-kit';
+
+function renderBody(body: unknown): string {
+  if (!body) return '';
+  if (typeof body === 'string') return renderMarkdown(body);
+  return renderTipTap(body as never);
+}
 import { localize, type Translator } from '../i18n.js';
 import type { ContentPublic } from '@skelpo/cms-client';
 
@@ -67,7 +73,7 @@ export const BlogPost: FC<{
         </div>
       </header>
       <div class="prose-content text-slate-300 leading-relaxed [&_p]:my-5 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3 [&_a]:text-amber-300 [&_a:hover]:text-amber-200 [&_a]:underline [&_a]:underline-offset-2 [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-1 [&_code]:bg-amber-500/10 [&_code]:text-amber-300 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre]:bg-[#15161c] [&_pre]:border [&_pre]:border-white/10 [&_pre]:rounded-xl [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:my-6 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-slate-200 [&_blockquote]:border-l-4 [&_blockquote]:border-amber-500/40 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-slate-400">
-        {raw(renderTipTap(post.fields.body))}
+        {raw(renderBody(post.fields.body))}
       </div>
       <div class="mt-16 pt-8 border-t border-white/5 text-center">
         <a class="btn-secondary inline-block" href={localize('/blog', t.locale)}>← {t('nav.blog', 'Blog')}</a>

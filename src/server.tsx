@@ -11,8 +11,18 @@ import { BlogIndex, BlogPost, NotFound } from './routes/blog.js';
 import { ShowcaseIndex, ShowcaseDetail, ShowcaseFeatureDetail } from './routes/showcase.js';
 import {
   RoadmapPage, PricingPage, EnterprisePage, InternalsPage, PublishPage,
-  NewsletterPage, PrivacyPage, ImprintPage, CompareIndex, CompareItemPage,
+  NewsletterPage, RichtextPage, CompareIndex, CompareItemPage,
 } from './routes/pages.js';
+import { renderTipTap, renderMarkdown } from '@skelpo/site-kit';
+
+// Body field is now markdown after the bulk conversion. Old TipTap-JSON
+// rows (objects with type: 'doc') still render via renderTipTap, so the
+// site stays correct even if some rows haven't migrated yet.
+function renderBody(body: unknown): string {
+  if (!body) return '';
+  if (typeof body === 'string') return renderMarkdown(body);
+  return renderTipTap(body as never);
+}
 import { makeT, getConfiguredLocales, localize } from './i18n.js';
 import {
   sitemapXml,
@@ -43,6 +53,7 @@ const SAFE_SEG = /^[a-zA-Z0-9._-]+$/;
 const TOP_LEVEL_OK = new Set(['styles.css', 'favicon.ico', 'manifest.webmanifest']);
 const PERRY_BRAND = new Set([
   'perry-icon.svg', 'perry-favicon.svg', 'perry-logo-horizontal-dark.svg', 'perry-social-banner.svg',
+  'ralph-kuepper.jpg',
 ]);
 const SHOWCASE_FILES = new Set([
   'mango-logo.svg', 'hone-icon.svg', 'dbmeter-icon.png',
@@ -121,6 +132,31 @@ app.get('/og/blog/:filename', async (c) => {
   });
 });
 
+// ── /og/home.svg — homepage OG banner ───────────────────────────────────
+app.get('/og/home.svg', (c) =>
+  c.body(ogBannerSvg('Native TypeScript. Standalone executables. No runtime.'), 200, {
+    'Content-Type': 'image/svg+xml',
+    'Cache-Control': 'public, max-age=86400',
+  }),
+);
+
+// ── /og/compare/<slug>.svg — per-competitor OG banner ───────────────────
+app.get('/og/compare/:filename', async (c) => {
+  const filename = c.req.param('filename') ?? '';
+  if (!filename.endsWith('.svg')) return c.notFound();
+  const slug = filename.slice(0, -4);
+  if (!/^[a-z0-9-]+$/.test(slug)) return c.notFound();
+  let competitor = slug;
+  try {
+    const items = await cms.settings.get<{ slug: string; competitor: string }[]>('compare.items');
+    competitor = items?.find((i) => i.slug === slug)?.competitor ?? slug;
+  } catch { /* fall through */ }
+  return c.body(ogBannerSvg(`Perry vs ${competitor}`), 200, {
+    'Content-Type': 'image/svg+xml',
+    'Cache-Control': 'public, max-age=3600',
+  });
+});
+
 function ogBannerSvg(title: string): string {
   // Wrap title at ~26 chars per line, max 4 lines, ellipsize the rest.
   const lines: string[] = [];
@@ -172,6 +208,127 @@ app.use('*', async (c, next) => {
   c.header('X-Powered-By', 'Perry + Skelpo CMS');
   c.header('Content-Language', c.get('locale') ?? 'en');
 });
+
+// ── Maintenance gate ────────────────────────────────────────────────────
+// When CMS settings flip `site.maintenance` on, all routes except the
+// preview-cookie holders + health + static assets get a 503 with a
+// "we'll be right back" page. Admins land here via a one-time link
+// (?preview=<token>) which sets a session cookie + redirects.
+
+import { getCookie, setCookie } from 'hono/cookie';
+
+const PREVIEW_COOKIE = 'skelpoPreview';
+// Maintenance state has to bypass the cms-client's auto-cache (which
+// only invalidates on webhooks or local writes — toggling from the admin
+// UI won't reach the customer site). We hit the CMS directly with a
+// short 5 s TTL so toggle latency is bounded.
+const CMS_URL = process.env.CMS_URL ?? 'http://127.0.0.1:3137';
+let maintCache: { on: boolean; previewToken: string; until: number } = { on: false, previewToken: '', until: 0 };
+async function maintenanceState(): Promise<{ on: boolean; previewToken: string }> {
+  const now = Date.now();
+  if (now < maintCache.until) return maintCache;
+  try {
+    const [mRes, tRes] = await Promise.all([
+      fetch(`${CMS_URL}/api/v1/settings/site.maintenance`),
+      fetch(`${CMS_URL}/api/v1/settings/site.previewToken`),
+    ]);
+    const m = await mRes.json() as { data?: Record<string, unknown> };
+    const t = await tRes.json() as { data?: Record<string, unknown> };
+    maintCache = {
+      on: m.data?.['site.maintenance'] === true,
+      previewToken: typeof t.data?.['site.previewToken'] === 'string' ? t.data['site.previewToken'] as string : '',
+      until: now + 5000,
+    };
+  } catch {
+    maintCache = { ...maintCache, until: now + 5000 };
+  }
+  return maintCache;
+}
+
+const MAINT_BYPASS_PREFIXES = ['/healthz', '/styles.css', '/favicon.ico', '/perry-', '/manifest.webmanifest', '/og/', '/showcase/'];
+app.use('*', async (c, next) => {
+  const url = new URL(c.req.url);
+  const path = url.pathname;
+
+  // 1. Preview token in query → set cookie, drop the param, redirect back.
+  const previewParam = url.searchParams.get('preview');
+  if (previewParam) {
+    const { previewToken } = await maintenanceState();
+    if (previewToken && previewParam === previewToken) {
+      setCookie(c, PREVIEW_COOKIE, previewToken, {
+        httpOnly: true,
+        sameSite: 'Lax',
+        secure: c.req.url.startsWith('https://'),
+        path: '/',
+        maxAge: 60 * 60 * 24,    // 24 h
+      });
+      url.searchParams.delete('preview');
+      return c.redirect(url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : ''), 302);
+    }
+    // Wrong token → fall through (still get the maintenance page if on).
+  }
+
+  // 2. Static-ish paths always serve (the maintenance page needs them).
+  if (MAINT_BYPASS_PREFIXES.some((p) => path.startsWith(p))) return next();
+
+  // 3. Check state. Cookie holders bypass.
+  const { on, previewToken } = await maintenanceState();
+  if (!on) return next();
+  const cookie = getCookie(c, PREVIEW_COOKIE);
+  if (cookie && previewToken && cookie === previewToken) return next();
+
+  // 4. Serve maintenance page (503 + Retry-After hint).
+  return c.html(await renderMaintenancePage(c), 503, {
+    'Retry-After': '600',
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+  });
+});
+
+async function renderMaintenancePage(c: Context): Promise<string> {
+  const [title, message] = await Promise.all([
+    cms.settings.get<string>('site.maintenanceTitle').catch(() => "We'll be right back"),
+    cms.settings.get<string>('site.maintenanceMessage').catch(() => "We're making some quick updates. Thanks for your patience."),
+  ]);
+  const safeTitle = (title || "We'll be right back").replace(/</g, '&lt;');
+  const safeMsg = (message || '').replace(/</g, '&lt;').replace(/\n/g, '<br>');
+  return `<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>${safeTitle} · Perry</title>
+<link rel="icon" type="image/svg+xml" href="/perry-favicon.svg">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  :root { color-scheme: dark; }
+  body { background:#0a0a0f; color:#e5e7eb; margin:0; min-height:100vh;
+         font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;
+         display:flex;align-items:center;justify-content:center;padding:24px }
+  .wrap { max-width:560px; text-align:center }
+  .pulse { width:10px; height:10px; border-radius:999px; background:#f59e0b; display:inline-block;
+           margin-right:8px; box-shadow:0 0 0 0 rgba(245,158,11,.4); animation:pulse 1.8s infinite; vertical-align:middle }
+  @keyframes pulse { 70% { box-shadow:0 0 0 14px rgba(245,158,11,0) } 100% { box-shadow:0 0 0 0 rgba(245,158,11,0) } }
+  .eyebrow { font-size:12px; text-transform:uppercase; letter-spacing:0.18em; color:#fbbf24; margin-bottom:18px }
+  h1 { font-size:36px; line-height:1.1; margin:0 0 16px; font-weight:700;
+       background:linear-gradient(90deg,#fbbf24,#f59e0b); -webkit-background-clip:text;
+       background-clip:text; color:transparent }
+  p { color:#9ca3af; margin:0 0 28px; font-size:18px }
+  .logo { display:inline-flex; align-items:center; gap:10px; font-weight:700; color:#fff;
+          font-size:18px; margin-bottom:48px; text-decoration:none }
+  .logo img { width:28px; height:28px }
+  footer { color:#52525b; font-size:12px; margin-top:48px }
+</style>
+</head><body>
+<div class="wrap">
+  <a class="logo" href="/"><img src="/perry-icon.svg" alt=""> Perry</a>
+  <div class="eyebrow"><span class="pulse"></span>Maintenance</div>
+  <h1>${safeTitle}</h1>
+  <p>${safeMsg}</p>
+  <footer>If this page persists, contact <a style="color:#fbbf24" href="mailto:support@skelpo.com">support@skelpo.com</a>.</footer>
+</div>
+</body></html>`;
+}
+
 
 // Locale resolver: strip /<locale>/ prefix → c.locale. Default 'en'.
 app.use('*', async (c, next) => {
@@ -278,6 +435,44 @@ const compareItem = async (c: Context) => {
 app.get('/compare/:slug', compareItem);
 app.get('/:locale{[a-z]{2}(?:-[A-Za-z0-9]+)?}/compare/:slug', compareItem);
 
+// ── Roadmap (CMS-driven: singleton row with milestones repeater) ─────────
+interface RoadmapMilestone { title: string; description: string; status: 'shipped'|'inProgress'|'planned'|'vision'; sortOrder?: number }
+const roadmapPage = async (c: Context) => {
+  const { t, locales } = await uiCtx(c);
+  const data = await loadLocalizedContent('roadmap', 'roadmap', t.locale);
+  const fields = (data?.fields ?? {}) as { subtitle?: string; milestones?: RoadmapMilestone[] };
+  const subtitle = fields.subtitle ?? t('roadmap.subtitle', '');
+  const milestones = fields.milestones ?? [];
+  return c.html(<RoadmapPage t={t} locales={locales} subtitle={subtitle} milestones={milestones} />);
+};
+app.get('/roadmap', roadmapPage);
+app.get('/:locale{[a-z]{2}(?:-[A-Za-z0-9]+)?}/roadmap', roadmapPage);
+
+// ── Pricing (CMS-driven: singleton row with tiers/compareRows/faqs) ─────
+const pricingPage = async (c: Context) => {
+  const { t, locales } = await uiCtx(c);
+  const data = await loadLocalizedContent('pricing', 'pricing', t.locale);
+  const fields = (data?.fields ?? {}) as import('./routes/pages.js').PricingData;
+  return c.html(<PricingPage t={t} locales={locales} data={fields} />);
+};
+app.get('/pricing', pricingPage);
+app.get('/:locale{[a-z]{2}(?:-[A-Za-z0-9]+)?}/pricing', pricingPage);
+
+// ── Privacy + Imprint (CMS richtext page rows) ──────────────────────────
+function richtextPageHandler(slug: 'privacy' | 'imprint', fallbackTitle: string) {
+  return async (c: Context) => {
+    const { t, locales } = await uiCtx(c);
+    const data = await loadLocalizedContent('page', slug, t.locale);
+    const body = (data?.fields as { body?: unknown } | undefined)?.body;
+    const bodyHtml = body ? renderBody(body) : `<p>Page not yet available.</p>`;
+    return c.html(<RichtextPage title={data?.title ?? fallbackTitle} bodyHtml={bodyHtml} t={t} locales={locales} path={`/${slug}`} />);
+  };
+}
+app.get('/privacy', richtextPageHandler('privacy', 'Datenschutzerklärung'));
+app.get('/:locale{[a-z]{2}(?:-[A-Za-z0-9]+)?}/privacy', richtextPageHandler('privacy', 'Datenschutzerklärung'));
+app.get('/imprint', richtextPageHandler('imprint', 'Impressum'));
+app.get('/:locale{[a-z]{2}(?:-[A-Za-z0-9]+)?}/imprint', richtextPageHandler('imprint', 'Impressum'));
+
 // ── Static pages (message-driven) ────────────────────────────────────────
 function pageHandler(Component: (p: { t: Awaited<ReturnType<typeof makeT>>; locales: string[] }) => unknown) {
   return async (c: Context) => {
@@ -286,14 +481,10 @@ function pageHandler(Component: (p: { t: Awaited<ReturnType<typeof makeT>>; loca
   };
 }
 const pages: [string, Parameters<typeof pageHandler>[0]][] = [
-  ['/roadmap',    RoadmapPage    as Parameters<typeof pageHandler>[0]],
-  ['/pricing',    PricingPage    as Parameters<typeof pageHandler>[0]],
   ['/enterprise', EnterprisePage as Parameters<typeof pageHandler>[0]],
   ['/internals',  InternalsPage  as Parameters<typeof pageHandler>[0]],
   ['/publish',    PublishPage    as Parameters<typeof pageHandler>[0]],
   ['/newsletter', NewsletterPage as Parameters<typeof pageHandler>[0]],
-  ['/privacy',    PrivacyPage    as Parameters<typeof pageHandler>[0]],
-  ['/imprint',    ImprintPage    as Parameters<typeof pageHandler>[0]],
 ];
 for (const [path, comp] of pages) {
   app.get(path, pageHandler(comp));
