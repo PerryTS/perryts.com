@@ -59,8 +59,8 @@ export default function RootLayout({
     <html className={`${rubik.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <Script
-          defer
-          src="https://plausible.io/js/pa-gC_Q02qX-0sNU3AxUlF1r.js"
+          async
+          src="https://pa.skelpo.com/js/pa-RM9JdedWZTuKvQnKJaGmY.js"
           strategy="afterInteractive"
         />
         <Script id="plausible-init" strategy="afterInteractive">
