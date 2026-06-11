@@ -61,6 +61,13 @@ app.get("/*", async (req: any, reply: any) => {
     return;
   }
 
+  // Redirect locale-less paths to the default locale (/showcase -> /en/showcase)
+  const trimmed = relative.endsWith("/") ? relative.slice(0, -1) : relative;
+  if (trimmed && fs.existsSync(outDir + "/en/" + trimmed + "/index.html")) {
+    reply.status(301).header("location", "/en/" + trimmed).send("");
+    return;
+  }
+
   // 404
   const page404 = outDir + "/404.html";
   if (fs.existsSync(page404)) {
