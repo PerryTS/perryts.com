@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — 세대별 GC + 지연 JSON 테이프 기본값, 대부분 벤치마크에서 Node·Bun보다 빠름",
+    "badge": "v0.5.1146 — 실제 npm 패키지가 이제 컴파일됩니다: axios, zod, express, fastify, hono",
     "headline1": "하나의 코드베이스. 모든 플랫폼.",
     "headline2": "네이티브 성능.",
     "subheadline": "Perry는 TypeScript를 <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 그리고 웹</platforms>에서 네이티브 GUI 및 CLI 앱으로 컴파일합니다. 런타임 없음. Electron 없음. 네이티브 바이너리만.",
@@ -60,12 +60,12 @@
       "description": "fs, path, crypto, os, Buffer, child_process 등의 네이티브 구현이 내장되어 있습니다. 익숙한 Node.js API를 사용하세요."
     },
     "v8Runtime": {
-      "title": "선택적 V8 런타임",
-      "description": "순수 JavaScript npm 패키지를 사용해야 하나요? V8 런타임 플래그를 활성화하여 전체 npm 생태계 호환성을 확보하세요."
+      "title": "실제 npm 패키지",
+      "description": "axios, zod, express, fastify, hono가 네이티브 바이너리로 컴파일됩니다. 순수 JavaScript 패키지는 선택적 임베디드 런타임에서 실행됩니다 — 자기 완결적이며, 런타임에 node_modules가 없습니다."
     },
     "widgets": {
-      "title": "25개 이상의 네이티브 UI 위젯",
-      "description": "버튼, 텍스트 필드, 텍스트 영역, 테이블, Canvas, 스크롤 뷰, QR 코드, 보안 필드, 스플래시 화면 등 — 모두 AppKit, GTK4, Win32, UIKit, JNI를 통해 실제 플랫폼 위젯으로 컴파일됩니다."
+      "title": "35개 이상의 네이티브 UI 위젯",
+      "description": "버튼, 테이블, 날짜 선택기, 드래그 & 드롭, 차트, 지도, 명령 팔레트, QR 코드, 리치 텍스트 등 — 모두 AppKit, UIKit, GTK4, Win32(Fluent/Mica), JNI를 통해 실제 플랫폼 위젯으로 컴파일됩니다."
     },
     "plugins": {
       "title": "컴파일 타임 플러그인 시스템",
@@ -201,6 +201,7 @@
     "compilerInternals": "컴파일러 내부 구조"
   },
   "footer": {
+    "newsletter": "뉴스레터",
     "brand": "TypeScript → 네이티브. TypeScript를 macOS, iOS, Android, Linux, Windows에서 독립형 실행 파일로 직접 컴파일. 런타임 없음, Electron 없음.",
     "resources": "리소스",
     "gettingStarted": "시작하기",
@@ -212,6 +213,27 @@
     "contributing": "기여하기",
     "tagline": "Rust, SWC, LLVM으로 구축 — 그리고 이 웹사이트도 Perry로 컴파일된 바이너리가 서빙합니다",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "최신 소식 받기",
+    "footerHint": "릴리스 노트와 엔지니어링 글. 스팸 없음.",
+    "placeholder": "you@example.com",
+    "subscribe": "구독하기",
+    "success": "감사합니다 — 구독이 완료되었습니다.",
+    "errorInvalid": "올바른 이메일을 입력해 주세요.",
+    "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "blockTitle": "이 글이 마음에 드셨나요? 다음 글도 받아보세요.",
+    "blockSubtitle": "Perry 릴리스와 다음에 만들고 있는 것에 대한 짧은 소식.",
+    "privacy": "한 달에 몇 통의 메일. 언제든지 구독 해지 가능.",
+    "pageTitle": "Perry 뉴스레터",
+    "pageDescription": "새로운 Perry 릴리스, 플랫폼 지원, 엔지니어링 글에 대한 업데이트. 스팸 없음.",
+    "pageSubtitle": "Perry에서 출시되는 내용에 대한 짧은 소식 — 릴리스, 플랫폼, 엔지니어링 심층 분석.",
+    "bullet1Title": "릴리스 노트",
+    "bullet1Body": "Perry의 모든 주요 릴리스, 무엇이 어떻게 바뀌었는지.",
+    "bullet2Title": "엔지니어링 글",
+    "bullet2Body": "컴파일러 내부, 벤치마크, 그리고 우리가 배우고 있는 것들.",
+    "bullet3Title": "스팸 없음",
+    "bullet3Body": "한 달에 몇 통의 메일. 한 번의 클릭으로 구독 해지."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "자동 업데이트, 라이브 인스펙터, 그리고 스스로 반으로 줄인 컴파일러",
       "excerpt": "Perry v0.5.306 → v0.5.359 4일 만에 — 53번의 패치 릴리스, 약 30개 이슈 종결, 그리고 큰 세 가지가 도착: 데스크톱 자동 업데이트를 위한 perry/updater, localhost:7676의 라이브 인스펙터, 그리고 가장 큰 네 개 파일을 33–91% 줄인 컴파일러 리팩터링."
+    },
+    "closing-the-gc-gap": {
+      "title": "aya_koto의 벤치마크가 Perry의 GC에 대해 가르쳐 준 것",
+      "excerpt": "한 독자가 AtCoder ABC451D에서 Perry를 벤치마크했고 Bun보다 3.85× 느린 것으로 측정했다. 그 사이 조용한 회귀가 격차를 6.59×까지 벌려놓고 있었다. 수정은 우리가 예상한 곳에 있지 않았고, 그것이 드러낸 의도된 GC 트레이드오프는 실재했으며, Perry v0.5.875는 이제 같은 벤치에서 Bun과 동률을 이룬다: 425 ms 대 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "이제 실제 npm 패키지가 컴파일됩니다: axios, zod, express — 그리고 적합성 스윕",
+      "excerpt": "v0.5.875에서 v0.5.1146까지의 ~270개 릴리스는 하나의 벤치마크에 관한 것이 아니라 — 실제 npm 패키지가 컴파일되고 실행되게 만드는 것에 관한 것이었다. axios, zod v4, express, fastify, hono가 이제 동작한다; test262 동등성이 뛰어올랐고(String 60→79%, Array 61→72%); Windows는 Mica와 함께 Fluent로 갔으며; DatePicker와 드래그 & 드롭이 모든 플랫폼에 도착했다."
     }
   },
   "compare": {

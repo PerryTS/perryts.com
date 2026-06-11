@@ -154,6 +154,24 @@ export const blogPosts: BlogPost[] = [
     tags: ["updater", "devtools", "refactor", "community", "milestone"],
     content: () => null,
   },
+  {
+    slug: "closing-the-gc-gap",
+    title: "What aya_koto's Benchmark Taught Us About Perry's GC",
+    date: "2026-05-12",
+    excerpt:
+      "A reader benchmarked Perry on AtCoder ABC451D and measured it 3.85× slower than Bun. A silent regression had widened the gap to 6.59× since. The fix wasn't where we expected, the deliberate GC trade-off it exposed was real, and Perry v0.5.875 now ties Bun on the same bench: 425 ms vs 431 ms.",
+    tags: ["GC", "performance", "benchmarks", "community"],
+    content: () => null,
+  },
+  {
+    slug: "real-npm-packages-and-a-conformance-sweep",
+    title: "Real npm Packages Now Compile: axios, zod, express — and a Conformance Sweep",
+    date: "2026-06-09",
+    excerpt:
+      "The ~270 releases from v0.5.875 to v0.5.1146 weren't about one benchmark — they were about making real npm packages compile and run. axios, zod v4, express, fastify, and hono now work; test262 parity jumped (String 60→79%, Array 61→72%); Windows went Fluent with Mica; and DatePicker + drag & drop landed on every platform.",
+    tags: ["npm", "test262", "Windows", "widgets", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

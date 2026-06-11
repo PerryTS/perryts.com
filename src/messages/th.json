@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — generational GC + lazy JSON tape เป็นค่าเริ่มต้น เร็วกว่า Node และ Bun ในเบนช์มาร์กส่วนใหญ่",
+    "badge": "v0.5.1146 — แพ็กเกจ npm จริงคอมไพล์ได้แล้ว: axios, zod, express, fastify, hono",
     "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
     "headline2": "ประสิทธิภาพระดับเนทีฟ",
     "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
@@ -60,12 +60,12 @@
       "description": "มีการ implement เนทีฟในตัวของ fs, path, crypto, os, Buffer, child_process และอื่น ๆ ใช้ API ของ Node.js ที่คุ้นเคย"
     },
     "v8Runtime": {
-      "title": "V8 Runtime เสริม",
-      "description": "ต้องใช้แพ็กเกจ npm ที่เป็น JavaScript ล้วน? เปิดใช้งาน flag V8 runtime เพื่อความเข้ากันได้กับระบบ npm อย่างเต็มรูปแบบ"
+      "title": "npm Package จริง",
+      "description": "axios, zod, express, fastify และ hono คอมไพล์เป็น native binary แพ็กเกจที่เป็น JavaScript ล้วนรันบน runtime ฝังตัวแบบเสริม — self-contained ในตัวเอง โดยไม่มี node_modules ตอน runtime"
     },
     "widgets": {
-      "title": "วิดเจ็ต UI เนทีฟ 25+ ตัว",
-      "description": "ปุ่ม, ช่องข้อความ, พื้นที่ข้อความ, ตาราง, canvas, scroll view, QR code, ช่องป้อนข้อมูลที่ปลอดภัย, หน้าจอเปิดแอป และอื่น ๆ — ทั้งหมดคอมไพล์เป็นวิดเจ็ตแพลตฟอร์มจริงผ่าน AppKit, GTK4, Win32, UIKit และ JNI"
+      "title": "วิดเจ็ต UI เนทีฟ 35+ ตัว",
+      "description": "ปุ่ม, ตาราง, date picker, drag & drop, แผนภูมิ, แผนที่, command palette, QR code, rich text และอื่น ๆ — ทั้งหมดคอมไพล์เป็นวิดเจ็ตแพลตฟอร์มจริงผ่าน AppKit, UIKit, GTK4, Win32 (Fluent/Mica) และ JNI"
     },
     "plugins": {
       "title": "ระบบปลั๊กอินแบบ Compile-Time",
@@ -201,6 +201,7 @@
     "compilerInternals": "โครงสร้างภายในคอมไพเลอร์"
   },
   "footer": {
+    "newsletter": "จดหมายข่าว",
     "brand": "TypeScript → เนทีฟ คอมไพล์ TypeScript โดยตรงเป็นไฟล์ปฏิบัติการ standalone บน macOS, iOS, Android, Linux และ Windows ไม่ต้องมี runtime ไม่ต้องมี Electron",
     "resources": "แหล่งข้อมูล",
     "gettingStarted": "เริ่มต้น",
@@ -212,6 +213,27 @@
     "contributing": "การมีส่วนร่วม",
     "tagline": "สร้างด้วย Rust, SWC และ LLVM — และใช่ เว็บไซต์นี้ให้บริการโดยไบนารีที่คอมไพล์ด้วย Perry",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "ติดตามข่าวสาร",
+    "footerHint": "บันทึกการอัปเดตและบทความวิศวกรรม ไม่มีสแปม",
+    "placeholder": "you@example.com",
+    "subscribe": "สมัครรับ",
+    "success": "ขอบคุณ — คุณอยู่ในรายชื่อแล้ว",
+    "errorInvalid": "กรุณากรอกอีเมลที่ถูกต้อง",
+    "errorGeneric": "เกิดข้อผิดพลาด กรุณาลองอีกครั้ง",
+    "blockTitle": "ชอบโพสต์นี้ใช่ไหม? รับโพสต์ถัดไป",
+    "blockSubtitle": "บันทึกสั้น ๆ เกี่ยวกับการอัปเดตของ Perry และสิ่งที่เรากำลังสร้างต่อไป",
+    "privacy": "อีเมลไม่กี่ฉบับต่อเดือน ยกเลิกได้ทุกเมื่อ",
+    "pageTitle": "จดหมายข่าว Perry",
+    "pageDescription": "อัปเดตเกี่ยวกับ Perry รุ่นใหม่ การรองรับแพลตฟอร์ม และบทความวิศวกรรม ไม่มีสแปม",
+    "pageSubtitle": "บันทึกสั้น ๆ เกี่ยวกับสิ่งที่กำลังเปิดตัวใน Perry — การอัปเดต แพลตฟอร์ม และการเจาะลึกเชิงวิศวกรรม",
+    "bullet1Title": "บันทึกการอัปเดต",
+    "bullet1Body": "ทุกการอัปเดตสำคัญของ Perry พร้อมรายละเอียดว่าอะไรเปลี่ยนและทำไม",
+    "bullet2Title": "บทความวิศวกรรม",
+    "bullet2Body": "เบื้องหลังคอมไพเลอร์ เบนช์มาร์ก และสิ่งที่เรากำลังเรียนรู้",
+    "bullet3Title": "ไม่มีสแปม",
+    "bullet3Body": "อีเมลไม่กี่ฉบับต่อเดือน ยกเลิกได้ด้วยคลิกเดียว"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "อัปเดตอัตโนมัติ, inspector แบบ live และคอมไพเลอร์ที่ลดตัวเองลงครึ่งหนึ่ง",
       "excerpt": "Perry v0.5.306 → v0.5.359 ใน 4 วัน — 53 patch release ปิด issue ราว 30 รายการ และของใหญ่ 3 อย่างลงจอด: perry/updater สำหรับ auto-update บน desktop, inspector แบบ live ที่ localhost:7676 และการ refactor คอมไพเลอร์ที่ลดไฟล์ใหญ่ที่สุด 4 ไฟล์ลง 33–91%"
+    },
+    "closing-the-gc-gap": {
+      "title": "สิ่งที่ benchmark ของ aya_koto สอนเราเกี่ยวกับ GC ของ Perry",
+      "excerpt": "ผู้อ่านคนหนึ่ง benchmark Perry บน AtCoder ABC451D และวัดได้ว่าช้ากว่า Bun 3.85× ในระหว่างนั้น regression แบบเงียบได้ขยายช่องว่างขึ้นเป็น 6.59× การแก้ไม่ได้อยู่ในจุดที่เราคาด trade-off ของ GC ที่จงใจไว้ซึ่งมันเปิดเผยออกมานั้นเป็นเรื่องจริง และ Perry v0.5.875 ตอนนี้เสมอกับ Bun บน bench เดียวกัน: 425 ms vs 431 ms"
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "npm package จริงคอมไพล์ได้แล้ว: axios, zod, express — กับการกวาด conformance",
+      "excerpt": "ราว 270 release จาก v0.5.875 ถึง v0.5.1146 ไม่ได้เกี่ยวกับ benchmark ตัวเดียว — แต่เกี่ยวกับการทำให้ npm package จริงคอมไพล์และรันได้ axios, zod v4, express, fastify และ hono ทำงานได้แล้ว ความเทียบเท่า test262 กระโดดขึ้น (String 60→79%, Array 61→72%) Windows กลายเป็น Fluent ด้วย Mica และ DatePicker + drag & drop ลงจอดบนทุกแพลตฟอร์ม"
     }
   },
   "compare": {

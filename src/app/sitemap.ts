@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/showcase/pry",
     "/publish",
     "/pricing",
+    "/newsletter",
     "/internals",
     "/imprint",
     "/privacy",

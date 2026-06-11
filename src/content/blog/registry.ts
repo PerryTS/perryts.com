@@ -20,6 +20,8 @@ const slugs = [
   "npm-perry-dev-and-beating-bun",
   "gen-gc-lazy-json-and-defensible-benchmarks",
   "updater-live-inspector-and-compiler-refactor",
+  "closing-the-gc-gap",
+  "real-npm-packages-and-a-conformance-sweep",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -264,6 +266,36 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./updater-live-inspector-and-compiler-refactor/vi"),
     id: () => import("./updater-live-inspector-and-compiler-refactor/id"),
     "zh-Hans": () => import("./updater-live-inspector-and-compiler-refactor/zh-Hans"),
+  },
+  "closing-the-gc-gap": {
+    en: () => import("./closing-the-gc-gap/en"),
+    de: () => import("./closing-the-gc-gap/de"),
+    es: () => import("./closing-the-gc-gap/es"),
+    fr: () => import("./closing-the-gc-gap/fr"),
+    it: () => import("./closing-the-gc-gap/it"),
+    ja: () => import("./closing-the-gc-gap/ja"),
+    ko: () => import("./closing-the-gc-gap/ko"),
+    pt: () => import("./closing-the-gc-gap/pt"),
+    th: () => import("./closing-the-gc-gap/th"),
+    tr: () => import("./closing-the-gc-gap/tr"),
+    vi: () => import("./closing-the-gc-gap/vi"),
+    id: () => import("./closing-the-gc-gap/id"),
+    "zh-Hans": () => import("./closing-the-gc-gap/zh-Hans"),
+  },
+  "real-npm-packages-and-a-conformance-sweep": {
+    en: () => import("./real-npm-packages-and-a-conformance-sweep/en"),
+    de: () => import("./real-npm-packages-and-a-conformance-sweep/de"),
+    es: () => import("./real-npm-packages-and-a-conformance-sweep/es"),
+    fr: () => import("./real-npm-packages-and-a-conformance-sweep/fr"),
+    it: () => import("./real-npm-packages-and-a-conformance-sweep/it"),
+    ja: () => import("./real-npm-packages-and-a-conformance-sweep/ja"),
+    ko: () => import("./real-npm-packages-and-a-conformance-sweep/ko"),
+    pt: () => import("./real-npm-packages-and-a-conformance-sweep/pt"),
+    th: () => import("./real-npm-packages-and-a-conformance-sweep/th"),
+    tr: () => import("./real-npm-packages-and-a-conformance-sweep/tr"),
+    vi: () => import("./real-npm-packages-and-a-conformance-sweep/vi"),
+    id: () => import("./real-npm-packages-and-a-conformance-sweep/id"),
+    "zh-Hans": () => import("./real-npm-packages-and-a-conformance-sweep/zh-Hans"),
   },
 };
 

@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — GC generacional + cinta JSON perezosa por defecto, más rápido que Node y Bun en la mayoría de benchmarks",
+    "badge": "v0.5.1146 — los paquetes npm reales ya compilan: axios, zod, express, fastify, hono",
     "headline1": "Un código fuente. Todas las plataformas.",
     "headline2": "Rendimiento nativo.",
     "subheadline": "Perry compila TypeScript a aplicaciones nativas GUI y CLI en <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly y la Web.</platforms> Sin runtime. Sin Electron. Solo binarios nativos.",
@@ -60,12 +60,12 @@
       "description": "Implementaciones nativas integradas de fs, path, crypto, os, Buffer, child_process y más. Usa las APIs familiares de Node.js."
     },
     "v8Runtime": {
-      "title": "Runtime V8 opcional",
-      "description": "¿Necesitas usar un paquete npm de JavaScript puro? Activa la flag de runtime V8 para compatibilidad total con el ecosistema npm."
+      "title": "Paquetes npm reales",
+      "description": "axios, zod, express, fastify y hono compilan a binarios nativos. Los paquetes de JavaScript puro corren sobre un runtime embebido opcional — autocontenidos, sin node_modules en runtime."
     },
     "widgets": {
-      "title": "Más de 25 widgets UI nativos",
-      "description": "Botones, campos de texto, áreas de texto, tablas, canvas, scroll views, códigos QR, campos seguros, pantallas de inicio y más — todo compilado a widgets reales de la plataforma vía AppKit, GTK4, Win32, UIKit y JNI."
+      "title": "Más de 35 widgets UI nativos",
+      "description": "Botones, tablas, selectores de fecha, arrastrar y soltar, gráficos, mapas, paletas de comandos, códigos QR, texto enriquecido y más — todo compilando a widgets reales de la plataforma vía AppKit, UIKit, GTK4, Win32 (Fluent/Mica) y JNI."
     },
     "plugins": {
       "title": "Sistema de plugins en tiempo de compilación",
@@ -201,6 +201,7 @@
     "compilerInternals": "Internos del compilador"
   },
   "footer": {
+    "newsletter": "Boletín",
     "brand": "TypeScript → Nativo. Compila TypeScript directamente a ejecutables independientes en macOS, iOS, Android, Linux y Windows. Sin runtime, sin Electron.",
     "resources": "Recursos",
     "gettingStarted": "Primeros pasos",
@@ -212,6 +213,27 @@
     "contributing": "Contribuir",
     "tagline": "Construido con Rust, SWC y LLVM — y sí, este sitio web es servido por un binario compilado con Perry",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "Mantente al día",
+    "footerHint": "Notas de versión y artículos de ingeniería. Sin spam.",
+    "placeholder": "you@example.com",
+    "subscribe": "Suscribirse",
+    "success": "Gracias — estás en la lista.",
+    "errorInvalid": "Por favor, introduce un correo válido.",
+    "errorGeneric": "Algo salió mal. Inténtalo de nuevo.",
+    "blockTitle": "¿Te gustó este post? Recibe el siguiente.",
+    "blockSubtitle": "Notas breves sobre los releases de Perry y lo que viene.",
+    "privacy": "Unos pocos correos al mes. Cancela cuando quieras.",
+    "pageTitle": "Newsletter de Perry",
+    "pageDescription": "Novedades sobre nuevos releases de Perry, soporte de plataformas y artículos de ingeniería. Sin spam.",
+    "pageSubtitle": "Notas breves sobre lo que sale en Perry — releases, plataformas y artículos técnicos en profundidad.",
+    "bullet1Title": "Notas de versión",
+    "bullet1Body": "Cada release importante de Perry, con qué cambió y por qué.",
+    "bullet2Title": "Artículos de ingeniería",
+    "bullet2Body": "Interioridades del compilador, benchmarks y lo que estamos aprendiendo.",
+    "bullet3Title": "Sin spam",
+    "bullet3Body": "Unos pocos correos al mes. Cancela con un clic."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "Auto-actualización, un inspector en vivo y el compilador que se redujo a la mitad",
       "excerpt": "Perry v0.5.306 → v0.5.359 en cuatro días — 53 patch releases, ~30 issues cerradas y aterrizaron tres cosas grandes: perry/updater para auto-actualización en desktop, un inspector en vivo en localhost:7676 y un refactor del compilador que recortó los cuatro archivos más grandes entre un 33 y un 91 %."
+    },
+    "closing-the-gc-gap": {
+      "title": "Lo que el benchmark de aya_koto nos enseñó sobre el GC de Perry",
+      "excerpt": "Un lector benchmarkeó Perry en AtCoder ABC451D y lo midió 3,85× más lento que Bun. Una regresión silenciosa había ampliado el gap a 6,59× desde entonces. El fix no estaba donde lo esperábamos, el trade-off deliberado del GC que reveló era real, y Perry v0.5.875 ahora empata con Bun en el mismo bench: 425 ms vs 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "Paquetes npm reales ya compilan: axios, zod, express — y un barrido de conformidad",
+      "excerpt": "Las ~270 releases de v0.5.875 a v0.5.1146 no fueron sobre un benchmark — fueron sobre hacer que paquetes npm reales compilen y corran. axios, zod v4, express, fastify y hono ahora funcionan; la paridad de test262 saltó (String 60→79%, Array 61→72%); Windows se volvió Fluent con Mica; y DatePicker + arrastrar y soltar aterrizaron en cada plataforma."
     }
   },
   "compare": {

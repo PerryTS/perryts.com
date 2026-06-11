@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — 分代 GC + 惰性 JSON 磁带为默认，在大多数基准上比 Node 与 Bun 更快",
+    "badge": "v0.5.1146 — 真实 npm 包现已可编译：axios、zod、express、fastify、hono",
     "headline1": "一套代码。所有平台。",
     "headline2": "原生性能。",
     "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
@@ -60,12 +60,12 @@
       "description": "内置 fs、path、crypto、os、Buffer、child_process 等原生实现。使用您熟悉的 Node.js API。"
     },
     "v8Runtime": {
-      "title": "可选 V8 运行时",
-      "description": "需要使用纯 JavaScript npm 包？启用 V8 运行时标志即可获得完整的 npm 生态系统兼容性。"
+      "title": "真实的 npm 包",
+      "description": "axios、zod、express、fastify 和 hono 编译为原生二进制。纯 JavaScript 包运行在一个可选的内嵌运行时上——自包含，运行时没有 node_modules。"
     },
     "widgets": {
-      "title": "25+ 原生 UI 组件",
-      "description": "按钮、文本框、文本区域、表格、Canvas、滚动视图、二维码、安全输入框、启动画面等——全部编译为通过 AppKit、GTK4、Win32、UIKit 和 JNI 实现的真正平台组件。"
+      "title": "35+ 原生 UI 组件",
+      "description": "按钮、表格、日期选择器、拖放、图表、地图、命令面板、二维码、富文本等等——全部编译为通过 AppKit、UIKit、GTK4、Win32（Fluent/Mica）和 JNI 实现的真正平台组件。"
     },
     "plugins": {
       "title": "编译时插件系统",
@@ -201,6 +201,7 @@
     "compilerInternals": "编译器内部原理"
   },
   "footer": {
+    "newsletter": "新闻通讯",
     "brand": "TypeScript → 原生。将 TypeScript 直接编译为 macOS、iOS、Android、Linux 和 Windows 上的独立可执行文件。无需运行时，无需 Electron。",
     "resources": "资源",
     "gettingStarted": "快速入门",
@@ -212,6 +213,27 @@
     "contributing": "贡献",
     "tagline": "使用 Rust、SWC 和 LLVM 构建——没错，这个网站由 Perry 编译的二进制文件提供服务",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "保持关注",
+    "footerHint": "发布说明和工程文章。无垃圾邮件。",
+    "placeholder": "you@example.com",
+    "subscribe": "订阅",
+    "success": "感谢 — 你已加入名单。",
+    "errorInvalid": "请输入有效的电子邮件。",
+    "errorGeneric": "出错了。请重试。",
+    "blockTitle": "喜欢这篇文章？获取下一篇。",
+    "blockSubtitle": "关于 Perry 发布和我们下一步开发内容的简短笔记。",
+    "privacy": "每月几封邮件。随时取消订阅。",
+    "pageTitle": "Perry 新闻通讯",
+    "pageDescription": "关于 Perry 新发布、平台支持和工程文章的更新。无垃圾邮件。",
+    "pageSubtitle": "关于 Perry 中正在发布的内容的简短笔记 —— 发布、平台和工程深度解析。",
+    "bullet1Title": "发布说明",
+    "bullet1Body": "每个重要的 Perry 发布，附带变更内容和原因。",
+    "bullet2Title": "工程文章",
+    "bullet2Body": "编译器内部、基准测试，以及我们正在学习的内容。",
+    "bullet3Title": "无垃圾邮件",
+    "bullet3Body": "每月几封邮件。一键取消订阅。"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "自动更新、实时 Inspector，以及把自己砍掉一半的编译器",
       "excerpt": "Perry v0.5.306 → v0.5.359 用了四天 — 53 个补丁版本、约 30 个 issue 关闭，以及三件大事落地：面向桌面的 perry/updater 自动更新、localhost:7676 上的实时 inspector，以及把四个最大文件削减 33–91% 的编译器重构。"
+    },
+    "closing-the-gc-gap": {
+      "title": "aya_koto 的基准测试教给我们关于 Perry GC 的什么",
+      "excerpt": "一位读者在 AtCoder ABC451D 上对 Perry 做了基准测试，测得它比 Bun 慢 3.85 倍。此后一个无声的 regression 已经把差距拉大到了 6.59 倍。修复不在我们预期的位置，它暴露的那个有意为之的 GC 取舍是真实的，而 Perry v0.5.875 现在在同一个 bench 上与 Bun 打成平手：425 ms 对 431 ms。"
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "真实的 npm 包现在能编译了：axios、zod、express —— 以及一次一致性扫尾",
+      "excerpt": "从 v0.5.875 到 v0.5.1146 的约 270 个版本不是关于某一个基准 —— 它们是关于让真实的 npm 包能编译并运行。axios、zod v4、express、fastify 和 hono 现在都能用了；test262 等同性跃升（String 60→79%，Array 61→72%）；Windows 借助 Mica 走向 Fluent；DatePicker 与拖放在每个平台落地。"
     }
   },
   "compare": {

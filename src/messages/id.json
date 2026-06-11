@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — GC generasional + lazy JSON tape default, lebih cepat dari Node dan Bun di sebagian besar benchmark",
+    "badge": "v0.5.1146 — paket npm asli kini bisa dikompilasi: axios, zod, express, fastify, hono",
     "headline1": "Satu Kode Sumber. Semua Platform.",
     "headline2": "Performa Native.",
     "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
@@ -60,12 +60,12 @@
       "description": "Implementasi native bawaan untuk fs, path, crypto, os, Buffer, child_process, dan lainnya. Gunakan API Node.js yang familiar."
     },
     "v8Runtime": {
-      "title": "Runtime V8 Opsional",
-      "description": "Perlu menggunakan paket npm JavaScript murni? Aktifkan flag runtime V8 untuk kompatibilitas penuh dengan ekosistem npm."
+      "title": "Paket npm Nyata",
+      "description": "axios, zod, express, fastify, dan hono dikompilasi menjadi binary native. Paket JavaScript murni berjalan di runtime ter-embed opsional — self-contained, tanpa node_modules saat runtime."
     },
     "widgets": {
-      "title": "25+ Widget UI Native",
-      "description": "Tombol, field teks, area teks, tabel, canvas, scroll view, kode QR, field aman, layar pembuka, dan lainnya — semuanya dikompilasi menjadi widget platform asli melalui AppKit, GTK4, Win32, UIKit, dan JNI."
+      "title": "35+ Widget UI Native",
+      "description": "Tombol, tabel, date picker, drag & drop, chart, peta, command palette, kode QR, rich text, dan lainnya — semuanya dikompilasi menjadi widget platform nyata melalui AppKit, UIKit, GTK4, Win32 (Fluent/Mica), dan JNI."
     },
     "plugins": {
       "title": "Sistem Plugin Waktu Kompilasi",
@@ -201,6 +201,7 @@
     "compilerInternals": "Struktur internal kompiler"
   },
   "footer": {
+    "newsletter": "Buletin",
     "brand": "TypeScript → Native. Kompilasi TypeScript langsung ke executable standalone di macOS, iOS, Android, Linux, dan Windows. Tanpa runtime, tanpa Electron.",
     "resources": "Sumber Daya",
     "gettingStarted": "Memulai",
@@ -212,6 +213,27 @@
     "contributing": "Kontribusi",
     "tagline": "Dibangun dengan Rust, SWC, dan LLVM — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "Tetap terhubung",
+    "footerHint": "Catatan rilis dan artikel teknis. Tanpa spam.",
+    "placeholder": "you@example.com",
+    "subscribe": "Berlangganan",
+    "success": "Terima kasih — kamu sudah ada di daftar.",
+    "errorInvalid": "Mohon masukkan email yang valid.",
+    "errorGeneric": "Ada yang salah. Silakan coba lagi.",
+    "blockTitle": "Suka postingan ini? Dapatkan yang berikutnya.",
+    "blockSubtitle": "Catatan singkat tentang rilis Perry dan apa yang sedang kami bangun selanjutnya.",
+    "privacy": "Beberapa email per bulan. Berhenti berlangganan kapan saja.",
+    "pageTitle": "Newsletter Perry",
+    "pageDescription": "Update tentang rilis Perry baru, dukungan platform, dan artikel teknis. Tanpa spam.",
+    "pageSubtitle": "Catatan singkat tentang apa yang sedang dirilis di Perry — rilis, platform, dan pembahasan teknis mendalam.",
+    "bullet1Title": "Catatan rilis",
+    "bullet1Body": "Setiap rilis Perry yang penting, dengan apa yang berubah dan kenapa.",
+    "bullet2Title": "Artikel teknis",
+    "bullet2Body": "Internal kompiler, benchmark, dan apa yang sedang kami pelajari.",
+    "bullet3Title": "Tanpa spam",
+    "bullet3Body": "Beberapa email per bulan. Berhenti berlangganan dengan satu klik."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "Auto-Update, Inspector Live, dan Compiler yang Memotong Dirinya Sendiri",
       "excerpt": "Perry v0.5.306 → v0.5.359 dalam empat hari — 53 patch release, ~30 issue ditutup, dan tiga hal besar mendarat: perry/updater untuk auto-update desktop, inspector live di localhost:7676, dan refactor compiler yang menyusutkan empat file terbesar sebesar 33–91%."
+    },
+    "closing-the-gc-gap": {
+      "title": "Apa yang Benchmark aya_koto Ajarkan kepada Kami tentang GC Perry",
+      "excerpt": "Seorang pembaca melakukan benchmark Perry pada AtCoder ABC451D dan mengukurnya 3,85× lebih lambat dari Bun. Sebuah regresi diam-diam telah memperlebar gap menjadi 6,59× sejak itu. Fix-nya tidak di tempat yang kami duga, trade-off GC disengaja yang terungkapnya nyata, dan Perry v0.5.875 sekarang seri dengan Bun di bench yang sama: 425 ms vs 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "Paket npm Nyata Kini Ter-compile: axios, zod, express — dan Sapuan Konformansi",
+      "excerpt": "Sekitar 270 release dari v0.5.875 ke v0.5.1146 bukan tentang satu benchmark — melainkan tentang membuat paket npm nyata ter-compile dan berjalan. axios, zod v4, express, fastify, dan hono kini berfungsi; paritas test262 melonjak (String 60→79%, Array 61→72%); Windows menjadi Fluent dengan Mica; dan DatePicker + drag & drop mendarat di setiap platform."
     }
   },
   "compare": {

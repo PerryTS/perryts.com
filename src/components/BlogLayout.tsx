@@ -1,6 +1,7 @@
 import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { BlogPost } from "@/lib/blog";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export async function BlogLayout({
   post,
@@ -46,6 +47,8 @@ export async function BlogLayout({
         <div className="prose prose-invert prose-slate max-w-none [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-12 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-8 [&>h3]:mb-3 [&>p]:text-slate-300 [&>p]:leading-relaxed [&>p]:mb-6 [&>ul]:text-slate-300 [&>ul]:mb-6 [&>ul]:space-y-2 [&>ul>li]:pl-2 [&>ol]:text-slate-300 [&>ol]:mb-6 [&>ol]:space-y-2">
           {children}
         </div>
+
+        <NewsletterForm variant="block" source={`blog:${post.slug}`} />
       </div>
     </article>
   );

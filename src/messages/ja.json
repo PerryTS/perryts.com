@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — 世代別GC + 遅延JSONテープがデフォルト、ほとんどのベンチマークでNodeとBunより高速",
+    "badge": "v0.5.1146 — 実際の npm パッケージがコンパイル可能に：axios、zod、express、fastify、hono",
     "headline1": "ひとつのコードベース。すべてのプラットフォーム。",
     "headline2": "ネイティブパフォーマンス。",
     "subheadline": "PerryはTypeScriptを<platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly、Web</platforms>向けのネイティブGUI・CLIアプリにコンパイルします。ランタイム不要。Electron不要。ネイティブバイナリのみ。",
@@ -60,12 +60,12 @@
       "description": "fs、path、crypto、os、Buffer、child_processなどのネイティブ実装を内蔵。おなじみのNode.js APIが使えます。"
     },
     "v8Runtime": {
-      "title": "オプションV8ランタイム",
-      "description": "純粋なJavaScript npmパッケージを使う必要がありますか？ V8ランタイムフラグを有効にして、npmエコシステムとの完全な互換性を確保できます。"
+      "title": "本物の npm パッケージ",
+      "description": "axios、zod、express、fastify、hono がネイティブバイナリにコンパイルされます。純粋な JavaScript のパッケージは、オプションの埋め込みランタイム上で動きます — 自己完結型で、ランタイムに node_modules は不要です。"
     },
     "widgets": {
-      "title": "25以上のネイティブUIウィジェット",
-      "description": "ボタン、テキストフィールド、テキストエリア、テーブル、Canvas、スクロールビュー、QRコード、セキュアフィールド、スプラッシュスクリーンなど——すべてAppKit、GTK4、Win32、UIKit、JNIを通じた実際のプラットフォームウィジェットにコンパイルされます。"
+      "title": "35以上のネイティブUIウィジェット",
+      "description": "ボタン、テーブル、日付ピッカー、ドラッグ & ドロップ、チャート、マップ、コマンドパレット、QRコード、リッチテキストなど——すべて AppKit、UIKit、GTK4、Win32（Fluent/Mica）、JNI を通じて実際のプラットフォームウィジェットにコンパイルされます。"
     },
     "plugins": {
       "title": "コンパイル時プラグインシステム",
@@ -201,6 +201,7 @@
     "compilerInternals": "コンパイラ内部構造"
   },
   "footer": {
+    "newsletter": "ニュースレター",
     "brand": "TypeScript → ネイティブ。TypeScriptをmacOS、iOS、Android、Linux、Windowsのスタンドアロン実行ファイルに直接コンパイル。ランタイムなし、Electronなし。",
     "resources": "リソース",
     "gettingStarted": "はじめに",
@@ -212,6 +213,27 @@
     "contributing": "コントリビューション",
     "tagline": "Rust、SWC、LLVMで構築——そして、このウェブサイトもPerryでコンパイルされたバイナリが配信しています",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "最新情報をチェック",
+    "footerHint": "リリースノートと開発記事をお届け。スパムなし。",
+    "placeholder": "you@example.com",
+    "subscribe": "登録する",
+    "success": "ありがとうございます — 登録が完了しました。",
+    "errorInvalid": "有効なメールアドレスを入力してください。",
+    "errorGeneric": "問題が発生しました。もう一度お試しください。",
+    "blockTitle": "この記事が気に入ったら、次の記事も受け取りませんか？",
+    "blockSubtitle": "Perryのリリースと次の開発内容を短くお届け。",
+    "privacy": "月に数通のメール。いつでも配信停止できます。",
+    "pageTitle": "Perry ニュースレター",
+    "pageDescription": "Perry の新しいリリース、プラットフォーム対応、開発記事の最新情報。スパムなし。",
+    "pageSubtitle": "Perry の最新リリース、対応プラットフォーム、開発の深掘り記事を短くお届けします。",
+    "bullet1Title": "リリースノート",
+    "bullet1Body": "Perry の主要なリリースごとに、変更点と理由を解説。",
+    "bullet2Title": "開発記事",
+    "bullet2Body": "コンパイラの内部、ベンチマーク、学んでいることを共有。",
+    "bullet3Title": "スパムなし",
+    "bullet3Body": "月に数通のメール。ワンクリックで配信停止。"
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "自動アップデート、ライブインスペクター、そして自らを半分にしたコンパイラ",
       "excerpt": "Perry v0.5.306 → v0.5.359 を 4 日で — 53 のパッチリリース、約 30 件の Issue クローズ、そして 3 つの大きなものが着地：デスクトップ自動アップデート用の perry/updater、localhost:7676 のライブインスペクター、そして最大の 4 ファイルを 33〜91% 縮めたコンパイラのリファクタリング。"
+    },
+    "closing-the-gc-gap": {
+      "title": "aya_koto のベンチマークが Perry の GC について教えてくれたこと",
+      "excerpt": "ある読者が AtCoder ABC451D で Perry をベンチマークし、Bun より 3.85× 遅いと計測した。それ以降、静かなリグレッションがギャップを 6.59× にまで広げていた。修正は私たちが予想していた場所にはなく、それが露わにした意図的な GC のトレードオフは本物で、Perry v0.5.875 は今や同じベンチで Bun と並ぶ：425 ms 対 431 ms。"
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "本物の npm パッケージが今コンパイルできる：axios、zod、express — そして適合性の一掃",
+      "excerpt": "v0.5.875 から v0.5.1146 までの約 270 リリースは、1 つのベンチマークについてではなかった — 本物の npm パッケージをコンパイルして動かすことについてだった。axios、zod v4、express、fastify、hono が今や動く。test262 パリティが跳躍した（String 60→79%、Array 61→72%）。Windows は Mica で Fluent になった。そして DatePicker とドラッグ & ドロップがすべてのプラットフォームに着地した。"
     }
   },
   "compare": {

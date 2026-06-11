@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — kuşaksal GC + lazy JSON tape varsayılan, çoğu benchmark'ta Node ve Bun'dan hızlı",
+    "badge": "v0.5.1146 — gerçek npm paketleri artık derleniyor: axios, zod, express, fastify, hono",
     "headline1": "Tek Kod Tabanı. Her Platform.",
     "headline2": "Yerel Performans.",
     "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
@@ -60,12 +60,12 @@
       "description": "fs, path, crypto, os, Buffer, child_process ve daha fazlasının yerleşik yerel implementasyonları. Tanıdık Node.js API'lerini kullanın."
     },
     "v8Runtime": {
-      "title": "İsteğe Bağlı V8 Runtime",
-      "description": "Saf JavaScript npm paketi mi kullanmanız gerekiyor? Tam npm ekosistemi uyumluluğu için V8 runtime bayrağını etkinleştirin."
+      "title": "Gerçek npm Paketleri",
+      "description": "axios, zod, express, fastify ve hono native ikiliklere derlenir. Saf JavaScript paketleri isteğe bağlı bir gömülü runtime üzerinde çalışır — kendi kendine yeterli, runtime'da node_modules olmadan."
     },
     "widgets": {
-      "title": "25+ Yerel UI Widget'ı",
-      "description": "Düğmeler, metin alanları, metin bölgeleri, tablolar, canvas, scroll view'lar, QR kodlar, güvenli alanlar, açılış ekranları ve daha fazlası — tümü AppKit, GTK4, Win32, UIKit ve JNI aracılığıyla gerçek platform widget'larına derlenir."
+      "title": "35+ Yerel UI Widget'ı",
+      "description": "Düğmeler, tablolar, tarih seçiciler, drag & drop, grafikler, haritalar, komut paletleri, QR kodlar, zengin metin ve daha fazlası — tümü AppKit, UIKit, GTK4, Win32 (Fluent/Mica) ve JNI aracılığıyla gerçek platform widget'larına derlenir."
     },
     "plugins": {
       "title": "Derleme Zamanı Eklenti Sistemi",
@@ -201,6 +201,7 @@
     "compilerInternals": "Derleyici iç yapısı"
   },
   "footer": {
+    "newsletter": "Bülten",
     "brand": "TypeScript → Yerel. TypeScript'i doğrudan macOS, iOS, Android, Linux ve Windows'ta bağımsız çalıştırılabilir dosyalara derleyin. Runtime yok, Electron yok.",
     "resources": "Kaynaklar",
     "gettingStarted": "Başlarken",
@@ -212,6 +213,27 @@
     "contributing": "Katkıda Bulunma",
     "tagline": "Rust, SWC ve LLVM ile inşa edildi — ve evet, bu web sitesi Perry ile derlenmiş bir ikili dosya tarafından sunulmaktadır",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "Haberdar ol",
+    "footerHint": "Sürüm notları ve mühendislik yazıları. Spam yok.",
+    "placeholder": "you@example.com",
+    "subscribe": "Abone ol",
+    "success": "Teşekkürler — listedesiniz.",
+    "errorInvalid": "Lütfen geçerli bir e-posta girin.",
+    "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "blockTitle": "Bu yazıyı beğendin mi? Bir sonrakini de al.",
+    "blockSubtitle": "Perry sürümleri ve sıradaki çalışmalarımıza dair kısa notlar.",
+    "privacy": "Ayda birkaç e-posta. İstediğiniz zaman aboneliği iptal edin.",
+    "pageTitle": "Perry Bülteni",
+    "pageDescription": "Yeni Perry sürümleri, platform desteği ve mühendislik yazıları hakkında güncellemeler. Spam yok.",
+    "pageSubtitle": "Perry'de neler çıkıyor — sürümler, platformlar ve mühendislik derinlemesine yazıları hakkında kısa notlar.",
+    "bullet1Title": "Sürüm notları",
+    "bullet1Body": "Her önemli Perry sürümü, neyin değiştiği ve nedeniyle birlikte.",
+    "bullet2Title": "Mühendislik yazıları",
+    "bullet2Body": "Derleyici iç yapısı, benchmark'lar ve öğrendiklerimiz.",
+    "bullet3Title": "Spam yok",
+    "bullet3Body": "Ayda birkaç e-posta. Tek tıkla aboneliği iptal edin."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "Otomatik Güncelleme, Canlı Inspector ve Kendini İkiye Bölen Derleyici",
       "excerpt": "Perry v0.5.306 → v0.5.359 dört günde — 53 patch sürüm, ~30 issue kapandı ve üç büyük şey indi: masaüstü otomatik güncelleme için perry/updater, localhost:7676'da canlı bir inspector ve en büyük dört dosyayı %33–91 küçülten bir derleyici refactor'u."
+    },
+    "closing-the-gc-gap": {
+      "title": "aya_koto'nun Benchmark'ı Bize Perry'nin GC'si Hakkında Ne Öğretti",
+      "excerpt": "Bir okur, AtCoder ABC451D üzerinde Perry'yi benchmark etti ve Bun'dan 3,85× daha yavaş ölçtü. Sessiz bir regresyon o arada farkı 6,59×'a kadar açmıştı. Düzeltme beklediğimiz yerde değildi, açığa çıkardığı kasıtlı GC ödünleşimi gerçekti ve Perry v0.5.875 artık aynı benchmark'ta Bun ile berabere: 425 ms vs 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "Gerçek npm Paketleri Artık Derleniyor: axios, zod, express — ve Bir Uygunluk Süpürmesi",
+      "excerpt": "v0.5.875'ten v0.5.1146'ya ~270 sürüm tek bir benchmark'la ilgili değildi — gerçek npm paketlerini derletip çalıştırmakla ilgiliydi. axios, zod v4, express, fastify ve hono artık çalışıyor; test262 paritesi sıçradı (String 60→79%, Array 61→72%); Windows Mica ile Fluent oldu; ve DatePicker + drag & drop her platforma indi."
     }
   },
   "compare": {

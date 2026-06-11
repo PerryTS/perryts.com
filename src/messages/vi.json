@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — GC theo thế hệ + lazy JSON tape mặc định, nhanh hơn Node và Bun ở hầu hết benchmark",
+    "badge": "v0.5.1146 — các gói npm thật giờ đã biên dịch được: axios, zod, express, fastify, hono",
     "headline1": "Một mã nguồn. Mọi nền tảng.",
     "headline2": "Hiệu năng gốc.",
     "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
@@ -60,12 +60,12 @@
       "description": "Triển khai gốc tích hợp sẵn của fs, path, crypto, os, Buffer, child_process và nhiều hơn nữa. Sử dụng các API Node.js quen thuộc."
     },
     "v8Runtime": {
-      "title": "V8 Runtime tùy chọn",
-      "description": "Cần sử dụng gói npm JavaScript thuần? Bật cờ V8 runtime để tương thích đầy đủ với hệ sinh thái npm."
+      "title": "Các package npm thực tế",
+      "description": "axios, zod, express, fastify, và hono compile thành binary native. Các package JavaScript thuần chạy trên một runtime nhúng tùy chọn — tự chứa, không có node_modules lúc runtime."
     },
     "widgets": {
-      "title": "Hơn 25 Widget UI gốc",
-      "description": "Nút bấm, trường văn bản, vùng văn bản, bảng, canvas, scroll view, mã QR, trường bảo mật, màn hình khởi động và nhiều hơn — tất cả biên dịch thành widget nền tảng thực sự qua AppKit, GTK4, Win32, UIKit và JNI."
+      "title": "Hơn 35 Widget UI gốc",
+      "description": "Nút bấm, bảng, bộ chọn ngày, drag & drop, biểu đồ, bản đồ, command palette, mã QR, văn bản định dạng phong phú, và nhiều hơn — tất cả biên dịch thành widget nền tảng thực sự qua AppKit, UIKit, GTK4, Win32 (Fluent/Mica), và JNI."
     },
     "plugins": {
       "title": "Hệ thống plugin thời điểm biên dịch",
@@ -201,6 +201,7 @@
     "compilerInternals": "Cấu trúc bên trong trình biên dịch"
   },
   "footer": {
+    "newsletter": "Bản tin",
     "brand": "TypeScript → Gốc. Biên dịch TypeScript trực tiếp thành tệp thực thi độc lập trên macOS, iOS, Android, Linux và Windows. Không runtime, không Electron.",
     "resources": "Tài nguyên",
     "gettingStarted": "Bắt đầu",
@@ -212,6 +213,27 @@
     "contributing": "Đóng góp",
     "tagline": "Được xây dựng với Rust, SWC và LLVM — và đúng vậy, trang web này được phục vụ bởi binary được biên dịch bằng Perry",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "Cập nhật tin mới",
+    "footerHint": "Ghi chú phát hành và bài viết kỹ thuật. Không spam.",
+    "placeholder": "you@example.com",
+    "subscribe": "Đăng ký",
+    "success": "Cảm ơn — bạn đã có trong danh sách.",
+    "errorInvalid": "Vui lòng nhập email hợp lệ.",
+    "errorGeneric": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+    "blockTitle": "Thích bài này? Nhận bài tiếp theo.",
+    "blockSubtitle": "Ghi chú ngắn về các bản phát hành Perry và những gì chúng tôi đang xây dựng tiếp theo.",
+    "privacy": "Vài email mỗi tháng. Hủy đăng ký bất cứ lúc nào.",
+    "pageTitle": "Bản tin Perry",
+    "pageDescription": "Cập nhật về các bản phát hành Perry mới, hỗ trợ nền tảng và bài viết kỹ thuật. Không spam.",
+    "pageSubtitle": "Ghi chú ngắn về những gì đang ra mắt trong Perry — bản phát hành, nền tảng và phân tích kỹ thuật chuyên sâu.",
+    "bullet1Title": "Ghi chú phát hành",
+    "bullet1Body": "Mỗi bản phát hành Perry quan trọng, kèm theo những gì đã thay đổi và lý do.",
+    "bullet2Title": "Bài viết kỹ thuật",
+    "bullet2Body": "Nội bộ trình biên dịch, các benchmark và những gì chúng tôi đang học.",
+    "bullet3Title": "Không spam",
+    "bullet3Body": "Vài email mỗi tháng. Hủy đăng ký chỉ với một cú nhấp."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -519,6 +541,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "Auto-Update, một Inspector trực tiếp và Compiler tự cắt mình một nửa",
       "excerpt": "Perry v0.5.306 → v0.5.359 trong bốn ngày — 53 patch release, ~30 issue được đóng, và ba thứ lớn hạ cánh: perry/updater cho auto-update desktop, inspector trực tiếp tại localhost:7676, và một cuộc refactor compiler khiến bốn file lớn nhất nhỏ đi 33–91%."
+    },
+    "closing-the-gc-gap": {
+      "title": "Benchmark của aya_koto đã dạy chúng tôi điều gì về GC của Perry",
+      "excerpt": "Một độc giả đã benchmark Perry trên AtCoder ABC451D và đo được chậm hơn Bun 3,85×. Một regression âm thầm đã mở rộng khoảng cách lên 6,59× trong khoảng thời gian đó. Bản fix không nằm ở nơi chúng tôi mong đợi, trade-off có chủ ý của GC mà nó phơi bày là thật, và Perry v0.5.875 giờ đây hòa với Bun trên cùng bench: 425 ms vs 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "Các package npm thực tế giờ compile được: axios, zod, express — và một lượt quét conformance",
+      "excerpt": "Khoảng 270 release từ v0.5.875 đến v0.5.1146 không phải về một benchmark — chúng là về việc làm cho các package npm thực tế compile và chạy. axios, zod v4, express, fastify, và hono giờ hoạt động; parity test262 nhảy vọt (String 60→79%, Array 61→72%); Windows chuyển sang Fluent với Mica; và DatePicker + drag & drop đáp xuống mọi nền tảng."
     }
   },
   "compare": {

@@ -22,7 +22,7 @@
     "github": "GitHub"
   },
   "hero": {
-    "badge": "v0.5.306 — generational GC + lazy JSON tape default, faster than Node and Bun on most benchmarks",
+    "badge": "v0.5.1146 — real npm packages now compile: axios, zod, express, fastify, hono",
     "headline1": "One Codebase. Every Platform.",
     "headline2": "Native Performance.",
     "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
@@ -60,12 +60,12 @@
       "description": "Built-in native implementations of fs, path, crypto, os, Buffer, child_process, and more. Use familiar Node.js APIs."
     },
     "v8Runtime": {
-      "title": "Optional V8 Runtime",
-      "description": "Need to use a pure JavaScript npm package? Enable the V8 runtime flag for full npm ecosystem compatibility."
+      "title": "Real npm Packages",
+      "description": "axios, zod, express, fastify, and hono compile to native binaries. Pure-JavaScript packages run on an optional embedded runtime — self-contained, with no node_modules at runtime."
     },
     "widgets": {
-      "title": "25+ Native UI Widgets",
-      "description": "Buttons, text fields, text areas, tables, canvas, scroll views, QR codes, secure fields, splash screens, and more — all compiling to real platform widgets via AppKit, GTK4, Win32, UIKit, and JNI."
+      "title": "35+ Native UI Widgets",
+      "description": "Buttons, tables, date pickers, drag & drop, charts, maps, command palettes, QR codes, rich text, and more — all compiling to real platform widgets via AppKit, UIKit, GTK4, Win32 (Fluent/Mica), and JNI."
     },
     "plugins": {
       "title": "Compile-Time Plugin System",
@@ -201,6 +201,7 @@
     "compilerInternals": "Compiler internals"
   },
   "footer": {
+    "newsletter": "Newsletter",
     "brand": "TypeScript → Native. Compile TypeScript directly to standalone executables on macOS, iOS, Android, Linux, and Windows. No runtime, no Electron.",
     "resources": "Resources",
     "gettingStarted": "Getting Started",
@@ -212,6 +213,27 @@
     "contributing": "Contributing",
     "tagline": "Built with Rust, SWC, and LLVM — and yes, this website is served by a Perry-compiled binary",
     "enterprise": "Enterprise"
+  },
+  "newsletter": {
+    "footerLabel": "Stay in the loop",
+    "footerHint": "Release notes and engineering posts. No spam.",
+    "placeholder": "you@example.com",
+    "subscribe": "Subscribe",
+    "success": "Thanks — you're on the list.",
+    "errorInvalid": "Please enter a valid email.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "blockTitle": "Like this post? Get the next one.",
+    "blockSubtitle": "Short notes on Perry releases and what we're building next.",
+    "privacy": "A few emails a month. Unsubscribe anytime.",
+    "pageTitle": "Perry Newsletter",
+    "pageDescription": "Updates on new Perry releases, platform support, and engineering posts. No spam.",
+    "pageSubtitle": "Short notes on what's shipping in Perry — releases, platforms, and engineering deep-dives.",
+    "bullet1Title": "Release notes",
+    "bullet1Body": "Every meaningful Perry release, with what changed and why.",
+    "bullet2Title": "Engineering posts",
+    "bullet2Body": "Compiler internals, benchmarks, and what we're learning.",
+    "bullet3Title": "No spam",
+    "bullet3Body": "A few emails a month. Unsubscribe with one click."
   },
   "pricing": {
     "breadcrumbPublish": "Perry Publish",
@@ -516,6 +538,14 @@
     "updater-live-inspector-and-compiler-refactor": {
       "title": "Auto-Update, a Live Inspector, and the Compiler That Halved Itself",
       "excerpt": "Perry v0.5.306 → v0.5.359 in four days — 53 patch releases, ~30 issues closed, and three big things landed: perry/updater for desktop auto-update, a live inspector at localhost:7676, and a compiler refactor that shrank the four biggest files by 33–91%."
+    },
+    "closing-the-gc-gap": {
+      "title": "What aya_koto's Benchmark Taught Us About Perry's GC",
+      "excerpt": "A reader benchmarked Perry on AtCoder ABC451D and measured it 3.85× slower than Bun. A silent regression had widened the gap to 6.59× since. The fix wasn't where we expected, the deliberate GC trade-off it exposed was real, and Perry v0.5.875 now ties Bun on the same bench: 425 ms vs 431 ms."
+    },
+    "real-npm-packages-and-a-conformance-sweep": {
+      "title": "Real npm Packages Now Compile: axios, zod, express — and a Conformance Sweep",
+      "excerpt": "The ~270 releases from v0.5.875 to v0.5.1146 weren't about one benchmark — they were about making real npm packages compile and run. axios, zod v4, express, fastify, and hono now work; test262 parity jumped (String 60→79%, Array 61→72%); Windows went Fluent with Mica; and DatePicker + drag & drop landed on every platform."
     }
   },
   "languageSwitcher": {

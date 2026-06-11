@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export async function Footer() {
   const t = await getTranslations("footer");
@@ -15,9 +16,12 @@ export async function Footer() {
               <img src="/perry-icon.svg" alt="Perry" className="w-8 h-8" />
               <span className="text-xl font-bold gradient-text">Perry</span>
             </Link>
-            <p className="text-slate-400 text-sm max-w-md">
+            <p className="text-slate-400 text-sm max-w-md mb-6">
               {t("brand")}
             </p>
+            <div className="max-w-md">
+              <NewsletterForm variant="footer" source="footer" />
+            </div>
           </div>
 
           <div>
@@ -36,6 +40,11 @@ export async function Footer() {
               <li>
                 <Link href="/blog" className="text-slate-400 hover:text-white transition-colors">
                   {nav("blog")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/newsletter" className="text-slate-400 hover:text-white transition-colors">
+                  {t("newsletter")}
                 </Link>
               </li>
               <li>
