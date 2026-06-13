@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { locales, localeNames, type Locale } from "@/i18n/routing";
 
+const DISCORD_URL = "https://discord.gg/chEmpGdTtZ";
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("nav");
@@ -22,7 +24,7 @@ export function Header() {
             <span className="text-xl font-bold gradient-text">Perry</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-5 lg:gap-8">
             <Link
               href="/showcase"
               className="text-slate-400 hover:text-white transition-colors"
@@ -54,6 +56,21 @@ export function Header() {
               className="text-slate-400 hover:text-white transition-colors"
             >
               {t("docs")}
+            </a>
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                aria-hidden="true"
+                alt=""
+                className="w-5 h-5"
+                src="/discord.svg"
+              />
+              {t("discord")}
             </a>
             <a
               href="https://github.com/PerryTS/perry"
@@ -169,6 +186,14 @@ export function Header() {
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 {t("docs")}
+              </a>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                {t("discord")}
               </a>
               <a
                 href="https://github.com/PerryTS/perry"
