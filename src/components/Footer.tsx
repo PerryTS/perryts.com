@@ -2,6 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NewsletterForm } from "@/components/NewsletterForm";
 
+const DISCORD_URL = "https://discord.gg/chEmpGdTtZ";
+
 export async function Footer() {
   const t = await getTranslations("footer");
   const nav = await getTranslations("nav");
@@ -88,6 +90,11 @@ export async function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-slate-300">{t("community")}</h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+                  {nav("discord")}
+                </a>
+              </li>
               <li>
                 <a href="https://github.com/PerryTS/perry/issues" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                   {t("issues")}
