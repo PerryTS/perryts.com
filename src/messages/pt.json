@@ -19,7 +19,8 @@
     "overview": "Visão geral",
     "pricing": "Preços",
     "docs": "Documentação",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — pacotes npm reais agora compilam: axios, zod, express, fastify, hono",

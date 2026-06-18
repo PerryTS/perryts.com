@@ -19,7 +19,8 @@
     "overview": "Tổng quan",
     "pricing": "Bảng giá",
     "docs": "Tài liệu",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — các gói npm thật giờ đã biên dịch được: axios, zod, express, fastify, hono",

@@ -19,7 +19,8 @@
     "overview": "ภาพรวม",
     "pricing": "ราคา",
     "docs": "เอกสาร",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — แพ็กเกจ npm จริงคอมไพล์ได้แล้ว: axios, zod, express, fastify, hono",

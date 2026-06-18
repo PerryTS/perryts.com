@@ -19,7 +19,8 @@
     "overview": "Genel Bakış",
     "pricing": "Fiyatlandırma",
     "docs": "Dokümantasyon",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — gerçek npm paketleri artık derleniyor: axios, zod, express, fastify, hono",

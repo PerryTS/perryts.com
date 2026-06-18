@@ -12,6 +12,17 @@ export interface ShowcaseProject {
 
 export const showcaseProjects: ShowcaseProject[] = [
   {
+    slug: "bloom-jump",
+    name: "Bloom Jump",
+    tagline: "Native arcade jumper that runs everywhere — even on your TV and watch",
+    description:
+      "A fast-paced arcade jumping game compiled from TypeScript to native binaries. Runs at full framerate across phones, tablets, desktops, and even tvOS and watchOS — one codebase, every screen.",
+    platforms: ["iOS", "iPadOS", "macOS", "Android", "tvOS", "watchOS"],
+    githubUrl: "https://bloomengine.dev/showcase",
+    tags: ["game", "arcade", "native-ui"],
+    hasFeaturePage: false,
+  },
+  {
     slug: "mango",
     name: "Mango",
     tagline: "Native MongoDB GUI that starts instantly",

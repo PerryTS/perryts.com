@@ -19,7 +19,8 @@
     "overview": "概要",
     "pricing": "料金",
     "docs": "ドキュメント",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — 実際の npm パッケージがコンパイル可能に：axios、zod、express、fastify、hono",

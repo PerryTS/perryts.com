@@ -19,7 +19,8 @@
     "overview": "Gambaran Umum",
     "pricing": "Harga",
     "docs": "Dokumentasi",
-    "github": "GitHub"
+    "github": "GitHub",
+    "discord": "Discord"
   },
   "hero": {
     "badge": "v0.5.1146 — paket npm asli kini bisa dikompilasi: axios, zod, express, fastify, hono",
