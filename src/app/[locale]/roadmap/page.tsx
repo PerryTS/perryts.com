@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Roadmap - Perry",
+  title: "Roadmap",
   description:
     "Perry development roadmap — what's shipped, what's in progress, and what's planned for the native TypeScript compiler.",
 };
@@ -200,8 +200,8 @@ const sections: RoadmapSection[] = [
         description: "perry/push (APNs permission, token retrieval, badge count) and perry/storekit (StoreKit 2 purchases, subscriptions, receipt validation) as first-party native packages.",
       },
       {
-        title: "Cranelift 0.121 + parallel compilation",
-        description: "Upgraded from Cranelift 0.113 to 0.121. Module codegen, transform passes, and symbol scanning parallelized via rayon across all CPU cores.",
+        title: "Parallel compiler pipeline",
+        description: "Module codegen, transform passes, and symbol scanning parallelized via rayon across all CPU cores.",
       },
       {
         title: "tvOS (Apple TV) target (v0.4.5)",
@@ -239,6 +239,58 @@ const sections: RoadmapSection[] = [
         title: "iOS App Store readiness (v0.4.24)",
         description: "Full Info.plist with all Apple-required keys, CFBundleIcons, version/build from perry.toml, UILaunchScreen, provisioning profiles for TestFlight.",
       },
+      {
+        title: "LLVM backend migration (v0.5.0–v0.5.12)",
+        description: "Cranelift replaced by LLVM as the sole codegen backend — loop vectorization, GVN, aggressive inlining. After the migration settled, Perry beat Node.js on every benchmark in its suite (1.7x–24.6x, two ties).",
+      },
+      {
+        title: "Generational GC, small-string optimization, lazy JSON (v0.5.306)",
+        description: "Generational garbage collector and SSO ship as defaults. Lazy JSON tape lands at 75 ms median on validate-and-roundtrip — best in the dynamic-typing pack.",
+      },
+      {
+        title: "npm, winget, and Scoop distribution",
+        description: "npm install @perryts/perry on all seven binary platforms, winget install PerryTS.Perry, and Scoop — alongside the existing Homebrew and APT channels.",
+      },
+      {
+        title: "perry dev, live inspector, perry/updater (v0.5.359)",
+        description: "Watch-mode auto-recompile on an in-memory AST cache, live inspector at localhost:7676, and a desktop auto-update package.",
+      },
+      {
+        title: "Real npm packages compile natively (v0.5.1146)",
+        description: "axios, zod v4, express, fastify, and hono compile and run through perry.compilePackages — with the V8 fallback covering the long tail.",
+      },
+      {
+        title: "Direct JavaScript compilation (.js / .cjs / .mjs / .jsx)",
+        description: "Plain JavaScript feeds the same native AOT pipeline as TypeScript — require() / module.exports are rewritten to ESM automatically. No type annotations required.",
+      },
+      {
+        title: "node:stream + node:stream/web",
+        description: "Readable, Writable, Transform, Duplex, and the WHATWG web streams — real implementations, not stubs.",
+      },
+      {
+        title: "~97% parity against Node's own test suite",
+        description: "2792/2863 cases across 53 node:* modules (Node v26.3.0): fs, http/https/http2, net/tls, dns/dgram, crypto, child_process, cluster, worker_threads, zlib, async_hooks/AsyncLocalStorage, WebCrypto, and more.",
+      },
+      {
+        title: "95%+ on the c262 conformance suite",
+        description: "Perry's test262-derived ECMAScript conformance suite passes at 95%+. The remaining gap is a known tail: lookbehind regex, console formatting edge cases, lone surrogate handling.",
+      },
+      {
+        title: "DatePicker + drag & drop on all platforms (v0.5.1146)",
+        description: "Cross-platform DatePicker widget and drag & drop across AppKit, UIKit, GTK4, Win32, and Android.",
+      },
+      {
+        title: "Windows Fluent design + windows-winui target",
+        description: "Mica materials and Fluent styling for Windows apps, plus a new windows-winui render backend target.",
+      },
+      {
+        title: "Game-engine embedding (BloomView)",
+        description: "Live Bloom Engine rendering inside perry/ui on every backend — native surface handles on macOS, iOS, tvOS, GTK4, Android, and Windows.",
+      },
+      {
+        title: "Hub public beta — live",
+        description: "Distributed builds are open to everyone: perry login (GitHub OAuth), free tier with 15 publishes/month, Pro plan, dashboard at app.perryts.com. Push TypeScript, get signed binaries and store submissions.",
+      },
     ],
   },
   {
@@ -249,24 +301,24 @@ const sections: RoadmapSection[] = [
     dotColor: "bg-blue-500",
     milestones: [
       {
-        title: "perry/ui expansion",
-        description: "Drag and drop, accessibility labels, custom context menus, DatePicker, and more layout primitives across all platforms.",
+        title: "Next.js standalone server, compiled natively",
+        description: "Wall-by-wall bring-up of the real Next.js 16 app-router standalone build \u2014 dozens of codegen and runtime walls already down, with the render pipeline advancing deeper every release.",
       },
       {
-        title: "Full regex support",
-        description: "Complete ECMAScript-compatible regular expression engine compiled to native code.",
+        title: "Server frameworks out of the box",
+        description: "Express, Fastify, and Hono compile and serve today \u2014 Fastify HTTP throughput is now part of the benchmark suite. NestJS bring-up is underway.",
+      },
+      {
+        title: "Closing the conformance tail",
+        description: "From 95%+ on c262 and ~97% on Node's own tests toward the last few exceptions: lookbehind regex, console.dir/group formatting, lone surrogate handling, and the long tail of edge-case options.",
+      },
+      {
+        title: "perry/ui expansion",
+        description: "Accessibility labels, custom context menus, and more layout primitives across all platforms \u2014 plus new surfaces like WebView and perry/ads.",
       },
       {
         title: "Further performance optimization",
-        description: "Continuing to improve object creation, memory management, and code generation for even faster binaries. v0.4.14 shipped native fcmp (30% faster mandelbrot), 125x string append, short-circuit AND/OR, and negative literal folding.",
-      },
-      {
-        title: "Framework compatibility layers",
-        description: "Improving React, Angular, and Ionic bridges as on-ramps \u2014 all mapping to perry/ui underneath.",
-      },
-      {
-        title: "perrysdad: self-hosting LLVM compiler",
-        description: "Alternative LLVM IR backend for Perry written in TypeScript, compiled by Perry itself. 68/68 deterministic tests passing (100% parity). Phase 6: async/await, generators, interface dispatch.",
+        description: "Perry already wins most benchmarks against Node.js and Bun. Ongoing work on JSON, GC block reclaim, typed-array fast paths, and inlining boundaries.",
       },
     ],
   },
@@ -278,24 +330,12 @@ const sections: RoadmapSection[] = [
     dotColor: "bg-purple-500",
     milestones: [
       {
-        title: "Hub public beta",
-        description: "Opening distributed builds to external users \u2014 push TypeScript, get signed native binaries for all platforms.",
-      },
-      {
-        title: "Stream module",
-        description: "Node.js-compatible Readable, Writable, Transform, and Duplex stream implementations.",
+        title: "Compile 98% of all Node.js programs",
+        description: "The next big milestone: real-world Node.js software compiles and runs with no code changes \u2014 desktop and CLI apps (opencode, Claude Code, and friends) as well as server-side stacks (Next.js, NestJS, and beyond).",
       },
       {
         title: "Source maps & debug info",
         description: "DWARF debug info and source maps for native debugging with lldb/gdb and IDE integration.",
-      },
-      {
-        title: "VS Code extension",
-        description: "Language server, build integration, and debugging support directly in VS Code.",
-      },
-      {
-        title: "Perry package registry",
-        description: "A registry for Perry-optimized packages with pre-compiled native implementations.",
       },
     ],
   },
