@@ -18,12 +18,12 @@ export async function generateMetadata({
     title: ui("indexMetaTitle"),
     description: ui("indexMetaDescription"),
     alternates: {
-      canonical: "/compare",
+      canonical: `/${locale}/compare/`,
     },
     openGraph: {
       title: ui("indexMetaTitle"),
       description: ui("indexMetaDescription"),
-      url: "/compare",
+      url: `/${locale}/compare/`,
       type: "website",
     },
   };

@@ -31,12 +31,12 @@ export async function generateMetadata({
     title: data.metaTitle,
     description: data.metaDescription,
     alternates: {
-      canonical: `/compare/${slug}`,
+      canonical: `/${locale}/compare/${slug}/`,
     },
     openGraph: {
       title: data.metaTitle,
       description: data.metaDescription,
-      url: `/compare/${slug}`,
+      url: `/${locale}/compare/${slug}/`,
       type: "article",
       publishedTime: item.updated,
     },

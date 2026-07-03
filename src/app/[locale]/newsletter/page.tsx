@@ -14,11 +14,11 @@ export async function generateMetadata({
   return {
     title: t("pageTitle"),
     description: t("pageDescription"),
-    alternates: { canonical: "/newsletter" },
+    alternates: { canonical: `/${locale}/newsletter/` },
     openGraph: {
       title: t("pageTitle"),
       description: t("pageDescription"),
-      url: "/newsletter",
+      url: `/${locale}/newsletter/`,
     },
     twitter: {
       card: "summary_large_image",

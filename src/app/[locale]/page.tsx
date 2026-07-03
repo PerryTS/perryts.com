@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -37,6 +38,33 @@ const softwareApplicationJsonLd = {
     "https://docs.perryts.com",
   ],
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: {
+      canonical: `/${locale}/`,
+    },
+    openGraph: {
+      title: "Perry — Compile TypeScript to Native Executables",
+      description:
+        "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
+      url: `/${locale}/`,
+      siteName: "Perry",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Perry — Compile TypeScript to Native Executables",
+      description:
+        "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
+    },
+  };
+}
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

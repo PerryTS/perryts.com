@@ -20,19 +20,19 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return {};
   return {
     title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: `/${locale}/blog/${slug}/`,
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/blog/${slug}`,
+      url: `/${locale}/blog/${slug}/`,
       type: "article",
       publishedTime: post.date,
       tags: post.tags,

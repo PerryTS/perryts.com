@@ -8,6 +8,8 @@ export const dynamic = "force-static";
 const BASE = "https://perryts.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Trailing slashes everywhere: the site serves trailing-slash URLs
+  // (trailingSlash: true) and canonicals resolve to that form.
   const staticPaths = [
     "",
     "/blog",
@@ -17,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/showcase/pry",
     "/publish",
     "/pricing",
+    "/enterprise",
     "/newsletter",
     "/internals",
     "/imprint",
@@ -25,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     staticPaths.map((path) => ({
-      url: `${BASE}/${locale}${path}`,
+      url: `${BASE}/${locale}${path}/`,
       lastModified: new Date(),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "" ? 1 : 0.7,
@@ -34,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const postPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     blogPosts.map((post) => ({
-      url: `${BASE}/${locale}/blog/${post.slug}`,
+      url: `${BASE}/${locale}/blog/${post.slug}/`,
       lastModified: new Date(post.date),
       changeFrequency: "yearly" as const,
       priority: 0.6,
@@ -43,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const comparePages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     compareItems.map((item) => ({
-      url: `${BASE}/${locale}/compare/${item.slug}`,
+      url: `${BASE}/${locale}/compare/${item.slug}/`,
       lastModified: new Date(item.updated),
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -61,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const enOnlyPages: MetadataRoute.Sitemap = enOnlyPaths.map((path) => ({
-    url: `${BASE}/en${path}`,
+    url: `${BASE}/en${path}/`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,

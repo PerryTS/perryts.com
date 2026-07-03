@@ -35,19 +35,14 @@ export const metadata: Metadata = {
     "native UI",
   ],
   authors: [{ name: "Perry" }],
+  // No og/twitter title/description here: pages must inherit their own
+  // resolved <title>/description as social meta, not the homepage's.
   openGraph: {
-    title: "Perry — Compile TypeScript to Native Executables",
-    description:
-      "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
-    url: "https://perryts.com",
     siteName: "Perry",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Perry — Compile TypeScript to Native Executables",
-    description:
-      "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
   },
 };
 
