@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CompareCard } from "@/components/CompareCard";
 import { compareItems } from "@/lib/compare";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({
   params,
@@ -35,6 +36,7 @@ export default async function CompareIndex({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("compare");
   const ui = await getTranslations("compare.ui");
 
   return (
@@ -55,6 +57,22 @@ export default async function CompareIndex({
             {compareItems.map((item) => (
               <CompareCard key={item.slug} item={item} />
             ))}
+            <Link
+              href="/compare/perry-vs-electron-alternatives"
+              className="feature-card block group"
+            >
+              <div className="flex flex-wrap gap-2 mb-3">
+                <span className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                  {ui("category.ui-framework")}
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                {t("electronAlternatives.title")}
+              </h3>
+              <p className="text-slate-400 text-sm line-clamp-3">
+                {t("electronAlternatives.tldr")}
+              </p>
+            </Link>
           </div>
         </div>
       </section>

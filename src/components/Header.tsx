@@ -36,6 +36,12 @@ export function Header() {
               {t("blog")}
             </Link>
             <Link
+              href="/compare"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              {t("compare")}
+            </Link>
+            <Link
               href="/roadmap"
               className="text-slate-400 hover:text-white transition-colors"
             >
@@ -164,6 +170,12 @@ export function Header() {
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 {t("blog")}
+              </Link>
+              <Link
+                href="/compare"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                {t("compare")}
               </Link>
               <Link
                 href="/roadmap"

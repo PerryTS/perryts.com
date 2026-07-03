@@ -1022,6 +1022,10 @@
         "whenCompetitor": "如果你正在构建移动应用，并希望使用最成熟的跨平台原生 UI 框架；你已有现成的 React 团队；你依赖 React Native 的库生态；或者你需要当下行业标准的移动跨平台技术栈，就选 React Native。",
         "verdict": "React Native 是一个移动优先、带 JS 运行时和（如今已显著改进的）桥的框架。Perry 是一个从 TypeScript 生成原生二进制的编译器，原生 UI 是编译输出的一部分。如果你想要在移动端使用 React 并拥有最深厚的生态，今天的答案是 React Native；如果你想要一份 TypeScript 代码同时编译到移动 + 桌面 + 手表 + TV 且应用中不带 JS 运行时，那答案是 Perry。"
       }
+    },
+    "electronAlternatives": {
+      "title": "Electron Alternatives for TypeScript",
+      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
     }
   }
 }

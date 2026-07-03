@@ -50,5 +50,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...postPages, ...comparePages];
+  // English-only content pages (served under all locale prefixes, but
+  // canonicalized to /en — only the canonical URL belongs in the sitemap).
+  const enOnlyPaths = [
+    "/getting-started",
+    "/compile-typescript-to-binary",
+    "/typescript-native-compiler",
+    "/typescript-llvm",
+    "/compare/perry-vs-electron-alternatives",
+  ];
+
+  const enOnlyPages: MetadataRoute.Sitemap = enOnlyPaths.map((path) => ({
+    url: `${BASE}/en${path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...postPages, ...comparePages, ...enOnlyPages];
 }

@@ -24,8 +24,8 @@
   },
   "hero": {
     "badge": "v0.5.1146 — real npm packages now compile: axios, zod, express, fastify, hono",
-    "headline1": "One Codebase. Every Platform.",
-    "headline2": "Native Performance.",
+    "headline1": "Compile TypeScript to Native.",
+    "headline2": "One Codebase, Every Platform.",
     "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
     "getStarted": "Get Started",
     "viewOnGithub": "View on GitHub",
@@ -738,8 +738,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): production-ready vs research compiler",
         "metaDescription": "Static Hermes is Meta's experimental ahead-of-time TypeScript-to-native compiler. Perry is a production-track TS-to-native compiler shipping today. Compare maturity, scope, output, and platform reach.",
-        "tldr": "Static Hermes (`shermes`) is Meta's research-stage effort to ahead-of-time compile a strongly-typed subset of JavaScript/TypeScript through the Hermes engine, primarily aimed at React Native. Perry is a different bet on the same general idea — TypeScript compiled to native — but built independently in Rust on LLVM, with a working compiler, 25+ native UI widgets, and 10 compilation targets shipping today. As of April 2026, Perry's own benchmark suite reports that Static Hermes was tried as a peer and was not installable cleanly via the standard package managers it tested.",
-        "competitorWhat": "Hermes is the JavaScript engine Meta built for React Native — bytecode-based, AOT-precompiled, optimized for mobile startup time. Static Hermes is the research effort to extend Hermes with ahead-of-time native compilation of a typed JavaScript subset, intended to give React Native a path to true native code. It's primarily a compiler R&D project; per Perry's benchmark notes, it isn't packaged for routine installation on macOS arm64 yet (`shermes` was skipped from the polyglot bench with a note that it 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — see perry/benchmarks/README.md).",
+        "tldr": "Static Hermes (`shermes`) is Meta's research-stage effort to ahead-of-time compile a strongly-typed subset of JavaScript/TypeScript through the Hermes engine, primarily aimed at React Native. Perry is a different bet on the same general idea — TypeScript compiled to native — but built independently in Rust on LLVM, with a working compiler, 25+ native UI widgets, and 10 compilation targets shipping today. As of mid-2026, `shermes` still has to be built from source — Perry's benchmark suite tried it as a peer and found no clean install path via standard package managers — and the Hermes V1 engine that became React Native's default in early 2026 explicitly does not include the static compilation features.",
+        "competitorWhat": "Hermes is the JavaScript engine Meta built for React Native — bytecode-based, AOT-precompiled, optimized for mobile startup time. Static Hermes is the research effort to extend Hermes with ahead-of-time native compilation of a typed JavaScript subset, intended to give React Native a path to true native code. The `static_h` branch is now the repo's default branch and under active development, but what actually shipped to React Native users is Hermes V1 — a new bytecode compiler and VM that became the default engine in React Native 0.84 (February 2026) — which does not compile JS to native binaries or use type information. Static Hermes itself remains a compiler R&D project; per Perry's benchmark notes, it isn't packaged for routine installation on macOS arm64 yet (`shermes` was skipped from the polyglot bench with a note that it 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — see perry/benchmarks/README.md).",
         "perryWhat": "Perry is a native TypeScript compiler written in Rust, using SWC for parsing and LLVM for code generation. It ships a working CLI (`perry compile`, `perry run`, `perry publish`), 25+ native UI widgets, 10 compilation targets, a self-hosted runtime, and a benchmark suite measured under transparent conditions (M1 Max, RUNS=11). Perry is pre-1.0 but production-track: people are shipping apps built with it (Bloom Engine, Mango, Hone, Pry, dB Meter — see perryts.com).",
         "table": [
           {
@@ -1022,6 +1022,10 @@
         "whenCompetitor": "Choose React Native if you're building mobile apps and want the most mature cross-platform native-UI framework, you have an existing React team, you depend on the React Native ecosystem of libraries, or you need today's industry-standard mobile cross-platform stack.",
         "verdict": "React Native is a mobile-first framework with a JS runtime and a (now-improved) bridge. Perry is a compiler that produces native binaries from TypeScript, with native UI as part of the compile output. If you want React on mobile with the deepest ecosystem, React Native is the answer today. If you want one TypeScript codebase that compiles to mobile + desktop + watch + TV with no JS runtime in the app, Perry is the answer."
       }
+    },
+    "electronAlternatives": {
+      "title": "Electron Alternatives for TypeScript",
+      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
     }
   }
 }

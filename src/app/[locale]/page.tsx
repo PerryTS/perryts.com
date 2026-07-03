@@ -13,13 +13,37 @@ import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
 import { ShippingInProduction } from "@/components/ShippingInProduction";
 import { AppShowcase } from "@/components/AppShowcase";
+import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
 import { Footer } from "@/components/Footer";
+
+const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Perry",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem:
+    "macOS, Windows, Linux, iOS, iPadOS, Android, watchOS, tvOS",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  description:
+    "Perry is a TypeScript to native compiler: standalone binaries with no Node.js runtime. 2–5 MB executables for macOS, Linux, Windows, iOS, and Android.",
+  url: "https://perryts.com/en/",
+  sameAs: [
+    "https://github.com/PerryTS/perry",
+    "https://docs.perryts.com",
+  ],
+};
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
     <main className="min-h-screen">
+      <JsonLd data={softwareApplicationJsonLd} />
       <Header />
       <Hero />
       <ShippingInProduction />
@@ -34,6 +58,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <FeatureTable />
       <NativeLibraries />
       <Architecture />
+      {locale === "en" && <Faq />}
       <Footer />
     </main>
   );

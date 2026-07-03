@@ -4,7 +4,9 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CompareLayout } from "@/components/CompareLayout";
+import { JsonLd } from "@/components/JsonLd";
 import { getCompareItem, getAllCompareSlugs } from "@/lib/compare";
+import { breadcrumbJsonLd } from "@/lib/breadcrumbs";
 import { locales } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -59,6 +61,16 @@ export default async function ComparePage({
 
   return (
     <main className="min-h-screen">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: `/${locale}/` },
+          { name: "Compare", path: `/${locale}/compare/` },
+          {
+            name: `Perry vs ${item.competitor}`,
+            path: `/${locale}/compare/${slug}/`,
+          },
+        ])}
+      />
       <Header />
       <CompareLayout item={item} />
       <Footer />

@@ -1022,6 +1022,10 @@
         "whenCompetitor": "Choisissez React Native si vous construisez des applications mobiles et voulez le framework UI native multiplateforme le plus mature, si vous avez une équipe React existante, si vous dépendez de l'écosystème de bibliothèques de React Native, ou si vous avez besoin de la stack mobile multiplateforme standard de l'industrie aujourd'hui.",
         "verdict": "React Native est un framework mobile-first avec un runtime JS et un pont (désormais amélioré). Perry est un compilateur qui produit des binaires natifs depuis TypeScript, avec une UI native faisant partie de la sortie de compilation. Si vous voulez React sur mobile avec l'écosystème le plus profond, React Native est la réponse aujourd'hui. Si vous voulez un seul codebase TypeScript qui compile vers mobile + desktop + montre + TV sans runtime JS dans l'application, Perry est la réponse."
       }
+    },
+    "electronAlternatives": {
+      "title": "Electron Alternatives for TypeScript",
+      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
     }
   }
 }

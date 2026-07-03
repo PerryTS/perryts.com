@@ -28,9 +28,9 @@ export async function Footer() {
             <h4 className="font-semibold mb-4 text-slate-300">{t("resources")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#installation" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/getting-started" className="text-slate-400 hover:text-white transition-colors">
                   {t("gettingStarted")}
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/showcase" className="text-slate-400 hover:text-white transition-colors">

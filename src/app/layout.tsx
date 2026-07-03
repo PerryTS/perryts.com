@@ -17,11 +17,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://perryts.com"),
   title: {
-    default: "Perry — TypeScript → Native",
+    default:
+      "Perry — Compile TypeScript to Native Executables | TypeScript Native Compiler",
     template: "%s — Perry",
   },
   description:
-    "Perry compiles TypeScript directly to native executables. No Node.js, no Electron, no runtime. Native GUI and CLI apps on macOS, iOS, Android, Linux, and Windows.",
+    "Perry is a TypeScript to native compiler: standalone binaries with no Node.js runtime. 2–5 MB executables for macOS, Linux, Windows, iOS, and Android.",
   keywords: [
     "TypeScript",
     "compiler",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Perry" }],
   openGraph: {
-    title: "Perry — TypeScript → Native",
+    title: "Perry — Compile TypeScript to Native Executables",
     description:
       "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
     url: "https://perryts.com",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Perry — TypeScript → Native",
+    title: "Perry — Compile TypeScript to Native Executables",
     description:
       "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
   },

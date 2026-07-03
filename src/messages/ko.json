@@ -1022,6 +1022,10 @@
         "whenCompetitor": "모바일 앱을 만들고 가장 성숙한 크로스 플랫폼 네이티브 UI 프레임워크를 원할 때, 이미 React 팀이 있을 때, React Native 라이브러리 생태계에 의존할 때, 또는 오늘날 업계 표준의 모바일 크로스 플랫폼 스택이 필요할 때 React Native를 선택하세요.",
         "verdict": "React Native는 JS 런타임과 (지금은 개선된) 브리지를 가진 모바일 우선 프레임워크입니다. Perry는 TypeScript에서 네이티브 바이너리를 만드는 컴파일러로, 네이티브 UI는 컴파일 출력의 일부입니다. 가장 깊은 생태계를 가진 모바일 React를 원한다면 오늘날 React Native가 답입니다. 모바일 + 데스크톱 + 워치 + TV로 컴파일되는 하나의 TypeScript 코드베이스를 앱 안에 JS 런타임 없이 원한다면 Perry가 답입니다."
       }
+    },
+    "electronAlternatives": {
+      "title": "Electron Alternatives for TypeScript",
+      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
     }
   }
 }

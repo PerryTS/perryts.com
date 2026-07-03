@@ -22,7 +22,7 @@ export const compareItems: CompareItem[] = [
     slug: "static-hermes",
     competitor: "Static Hermes",
     category: "compiler",
-    updated: "2026-04-26",
+    updated: "2026-07-03",
   },
   {
     slug: "electron",
