@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
@@ -45,23 +45,24 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
   return {
+    title: { absolute: t("title") },
+    description: t("description"),
     alternates: {
       canonical: `/${locale}/`,
     },
     openGraph: {
-      title: "Perry — Compile TypeScript to Native Executables",
-      description:
-        "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
+      title: t("ogTitle"),
+      description: t("ogDescription"),
       url: `/${locale}/`,
       siteName: "Perry",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Perry — Compile TypeScript to Native Executables",
-      description:
-        "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup.",
+      title: t("ogTitle"),
+      description: t("ogDescription"),
     },
   };
 }
@@ -86,7 +87,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <FeatureTable />
       <NativeLibraries />
       <Architecture />
-      {locale === "en" && <Faq />}
+      <Faq />
       <Footer />
     </main>
   );

@@ -26,7 +26,7 @@
     "badge": "v0.5.1146 — real npm packages now compile: axios, zod, express, fastify, hono",
     "headline1": "Compile TypeScript to Native.",
     "headline2": "One Codebase, Every Platform.",
-    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
+    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps on <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly, and the Web.</platforms> No runtime. No Electron. Just native binaries.",
     "getStarted": "Get Started",
     "viewOnGithub": "View on GitHub",
     "compiling": "Compiling main.ts...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "Compile-Time i18n",
       "description": "Automatic string extraction, CLDR plural rules for 30+ locales, compile-time validation. Translations baked into the binary with near-zero runtime lookup."
-    }
+    },
+    "goDeeper": "Go deeper: how Perry <binaryLink>compiles TypeScript to a binary</binaryLink>, what makes it a <compilerLink>TypeScript native compiler</compilerLink>, and how it stacks up against <electronAltLink>Electron alternatives</electronAltLink>."
   },
   "platforms": {
     "title": "Native on <gradient>Every Platform</gradient>",
@@ -199,7 +200,8 @@
     "binarySize": "2-5 MB binary",
     "tsFiles": ".ts files",
     "compilerInternalsPrompt": "Want to know how the compiler works under the hood?",
-    "compilerInternals": "Compiler internals"
+    "compilerInternals": "Compiler internals",
+    "deepDive": "Deep dive: <llvmLink>TypeScript on LLVM</llvmLink> — monomorphization, NaN-boxing, and why Perry left Cranelift."
   },
   "footer": {
     "newsletter": "Newsletter",
@@ -1027,5 +1029,50 @@
       "title": "Electron Alternatives for TypeScript",
       "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
     }
+  },
+  "meta": {
+    "title": "Perry — Compile TypeScript to Native Executables | TypeScript Native Compiler",
+    "description": "Perry is a TypeScript to native compiler: standalone binaries with no Node.js runtime. 2–5 MB executables for macOS, Linux, Windows, iOS, and Android.",
+    "ogTitle": "Perry — Compile TypeScript to Native Executables",
+    "ogDescription": "Compile TypeScript to native executables. 10 platforms, 25+ UI widgets, 0 ms startup."
+  },
+  "faq": {
+    "title": "Frequently Asked <gradient>Questions</gradient>",
+    "subtitle": "Everything people ask before compiling their first binary",
+    "more": "More questions? Read the <guideLink>getting-started guide</guideLink> or ask on <discussionsLink>GitHub Discussions</discussionsLink>.",
+    "items": [
+      {
+        "question": "Does Perry need Node.js or a runtime?",
+        "answer": "No. Perry compiles TypeScript ahead of time to a standalone native executable. The binary runs without Node.js, Bun, Deno, or any JavaScript runtime installed on the machine. For npm packages that can't compile natively yet, an optional embedded V8 fallback is available via --enable-js-runtime."
+      },
+      {
+        "question": "How big are the compiled binaries?",
+        "answer": "A hello-world binary is around 330 KB. Typical CLI tools land at 2–5 MB. Full applications that pull in large frameworks (Fastify, mysql2, etc.) are around 48 MB — still far below the ~80–150 MB an Electron app or runtime-embedded binary starts at."
+      },
+      {
+        "question": "Can I use npm packages?",
+        "answer": "Yes. Pure TypeScript/JavaScript packages compile natively via perry.compilePackages — axios, zod v4, express, fastify, and hono compile and run today. Packages that need full JS engine semantics can run through the optional V8 fallback with --enable-js-runtime."
+      },
+      {
+        "question": "Which platforms does Perry support?",
+        "answer": "Ten compilation targets: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and Web/JS. GUI apps use native platform widgets — AppKit, UIKit, GTK4, Win32, and Android via JNI."
+      },
+      {
+        "question": "Is Perry free and open source?",
+        "answer": "Yes. The compiler is free and open source. Compiling and running locally costs nothing and requires no account. Perry Publish — the hosted build, signing, and store-submission pipeline — has a free tier (15 publishes per month) and a Pro plan."
+      },
+      {
+        "question": "How is Perry different from Bun or Deno compile?",
+        "answer": "Bun and Deno bundle your JavaScript together with their runtime into one file — a hello world is roughly 60–100 MB depending on platform, and the code is still JIT-executed. Perry compiles TypeScript ahead of time to machine code via LLVM: no embedded engine, ~330 KB hello world, ~1 ms startup. See the full <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> comparisons."
+      },
+      {
+        "question": "How is Perry different from Electron or Tauri?",
+        "answer": "Electron ships Chromium and Node.js with every app, so installers start at roughly 80–150 MB. Tauri is much smaller but still renders a web frontend in the system webview, with app logic in Rust. Perry uses no webview at all: TypeScript compiles to machine code that drives real platform widgets — AppKit, UIKit, GTK4, Win32 — in a single process. See the full <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons."
+      },
+      {
+        "question": "How mature is Perry?",
+        "answer": "Perry is pre-1.0 and moving fast, but real apps built with it are shipping today — Bloom Engine, Mango, Hone, Pry, and dB Meter among them. See the <showcaseLink>showcase</showcaseLink> for details."
+      }
+    ]
   }
 }

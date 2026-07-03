@@ -1,9 +1,8 @@
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
 export async function Features() {
   const t = await getTranslations("features");
-  const locale = await getLocale();
 
   const featureKeys = [
     "noRuntime", "fastCompilation", "smallBinaries", "deterministicBuilds", "stdLib",
@@ -49,32 +48,34 @@ export async function Features() {
           ))}
         </div>
 
-        {locale === "en" && (
-          <p className="mt-12 text-center text-slate-400">
-            Go deeper: how Perry{" "}
-            <Link
-              href="/compile-typescript-to-binary"
-              className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              compiles TypeScript to a binary
-            </Link>
-            , what makes it a{" "}
-            <Link
-              href="/typescript-native-compiler"
-              className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              TypeScript native compiler
-            </Link>
-            , and how it stacks up against{" "}
-            <Link
-              href="/compare/perry-vs-electron-alternatives"
-              className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              Electron alternatives
-            </Link>
-            .
-          </p>
-        )}
+        <p className="mt-12 text-center text-slate-400">
+          {t.rich("goDeeper", {
+            binaryLink: (chunks) => (
+              <Link
+                href="/compile-typescript-to-binary"
+                className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
+              >
+                {chunks}
+              </Link>
+            ),
+            compilerLink: (chunks) => (
+              <Link
+                href="/typescript-native-compiler"
+                className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
+              >
+                {chunks}
+              </Link>
+            ),
+            electronAltLink: (chunks) => (
+              <Link
+                href="/compare/perry-vs-electron-alternatives"
+                className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
 export async function Architecture() {
   const t = await getTranslations("architecture");
-  const locale = await getLocale();
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
@@ -63,18 +62,18 @@ export async function Architecture() {
               {t("compilerInternals")}
             </Link>
           </p>
-          {locale === "en" && (
-            <p className="mt-4 text-center text-slate-400">
-              Deep dive:{" "}
-              <Link
-                href="/typescript-llvm"
-                className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-              >
-                TypeScript on LLVM
-              </Link>{" "}
-              — monomorphization, NaN-boxing, and why Perry left Cranelift.
-            </p>
-          )}
+          <p className="mt-4 text-center text-slate-400">
+            {t.rich("deepDive", {
+              llvmLink: (chunks) => (
+                <Link
+                  href="/typescript-llvm"
+                  className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
         </div>
       </div>
     </section>

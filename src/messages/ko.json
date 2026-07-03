@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — 실제 npm 패키지가 이제 컴파일됩니다: axios, zod, express, fastify, hono",
-    "headline1": "하나의 코드베이스. 모든 플랫폼.",
-    "headline2": "네이티브 성능.",
-    "subheadline": "Perry는 TypeScript를 <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, 그리고 웹</platforms>에서 네이티브 GUI 및 CLI 앱으로 컴파일합니다. 런타임 없음. Electron 없음. 네이티브 바이너리만.",
+    "headline1": "TypeScript를 네이티브로 컴파일하세요.",
+    "headline2": "하나의 코드베이스, 모든 플랫폼.",
+    "subheadline": "Perry는 TypeScript를 <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly, 그리고 웹</platforms>에서 네이티브 GUI 및 CLI 앱으로 컴파일합니다. 런타임 없음. Electron 없음. 네이티브 바이너리만.",
     "getStarted": "시작하기",
     "viewOnGithub": "GitHub에서 보기",
     "compiling": "main.ts 컴파일 중...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "컴파일 타임 i18n",
       "description": "자동 문자열 추출, 30개 이상 로케일에 대한 CLDR 복수형 규칙, 컴파일 타임 유효성 검사. 번역이 바이너리에 내장되어 런타임 조회가 거의 없습니다."
-    }
+    },
+    "goDeeper": "더 알아보기: Perry가 <binaryLink>TypeScript를 바이너리로 컴파일하는</binaryLink> 방법, Perry를 <compilerLink>네이티브 TypeScript 컴파일러</compilerLink>로 만드는 요소, 그리고 <electronAltLink>Electron 대안</electronAltLink>과 비교했을 때의 위치."
   },
   "platforms": {
     "title": "<gradient>모든 플랫폼</gradient>에서 네이티브",
@@ -199,7 +200,8 @@
     "binarySize": "2-5 MB 바이너리",
     "tsFiles": ".ts 파일",
     "compilerInternalsPrompt": "컴파일러 내부 작동 방식이 궁금하신가요?",
-    "compilerInternals": "컴파일러 내부 구조"
+    "compilerInternals": "컴파일러 내부 구조",
+    "deepDive": "심층 분석: <llvmLink>LLVM 위의 TypeScript</llvmLink> — 모노모픽화, NaN 박싱, 그리고 Perry가 Cranelift를 떠난 이유."
   },
   "footer": {
     "newsletter": "뉴스레터",
@@ -738,8 +740,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): 프로덕션 가능 vs 연구 단계 컴파일러",
         "metaDescription": "Static Hermes는 Meta의 실험적인 사전 컴파일 TypeScript-네이티브 컴파일러입니다. Perry는 오늘 바로 출시되어 있는 프로덕션 트랙의 TS-네이티브 컴파일러입니다. 성숙도, 적용 범위, 출력, 플랫폼 지원을 비교하세요.",
-        "tldr": "Static Hermes (`shermes`)는 Hermes 엔진을 통해 강타입화된 JavaScript/TypeScript 부분 집합을 사전 컴파일하려는 Meta의 연구 단계 시도로, 주로 React Native를 겨냥합니다. Perry는 같은 일반 아이디어 — TypeScript를 네이티브로 컴파일하기 — 를 다른 방식으로 풀고 있습니다. Rust로 독립적으로 만들어졌고 LLVM을 백엔드로 사용하며, 현재 동작하는 컴파일러, 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟이 출시되어 있습니다. 2026년 4월 기준, Perry의 자체 벤치마크 슈트는 Static Hermes를 동급 비교 대상으로 시도했지만 표준 패키지 매니저로는 깔끔하게 설치되지 않았다고 보고합니다.",
-        "competitorWhat": "Hermes는 Meta가 React Native를 위해 만든 JavaScript 엔진으로, 바이트코드 기반이고 사전 컴파일되며 모바일 시작 시간에 최적화되어 있습니다. Static Hermes는 타입화된 JavaScript 부분 집합의 사전 네이티브 컴파일을 통해 React Native에 진정한 네이티브 코드 경로를 제공하려는 Hermes의 확장 연구입니다. 주로 컴파일러 R&D 프로젝트이며, Perry의 벤치마크 노트에 따르면 macOS arm64에서 일상적인 설치를 위해 패키징되어 있지 않습니다 (`shermes`는 폴리글랏 벤치에서 'macOS arm64에 깔끔하게 설치되는 형태로 Homebrew나 npm에 제공되지 않는다'는 메모와 함께 제외됨 — perry/benchmarks/README.md 참고).",
+        "tldr": "Static Hermes (`shermes`)는 Hermes 엔진을 통해 강타입화된 JavaScript/TypeScript 부분 집합을 사전 컴파일하려는 Meta의 연구 단계 시도로, 주로 React Native를 겨냥합니다. Perry는 같은 일반 아이디어 — TypeScript를 네이티브로 컴파일하기 — 를 다른 방식으로 풀고 있습니다. Rust로 독립적으로 만들어졌고 LLVM을 백엔드로 사용하며, 현재 동작하는 컴파일러, 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟이 출시되어 있습니다. 2026년 중반 기준, `shermes`는 여전히 소스에서 직접 빌드해야 합니다 — Perry의 벤치마크 슈트는 이를 동급 비교 대상으로 시도했지만 표준 패키지 매니저를 통한 깔끔한 설치 경로를 찾지 못했습니다 — 그리고 2026년 초 React Native의 기본 엔진이 된 Hermes V1 엔진은 정적 컴파일 기능을 명시적으로 포함하지 않습니다.",
+        "competitorWhat": "Hermes는 Meta가 React Native를 위해 만든 JavaScript 엔진으로, 바이트코드 기반이고 사전 컴파일되며 모바일 시작 시간에 최적화되어 있습니다. Static Hermes는 타입화된 JavaScript 부분 집합의 사전 네이티브 컴파일을 통해 React Native에 진정한 네이티브 코드 경로를 제공하려는 Hermes의 확장 연구입니다. `static_h` 브랜치는 이제 저장소의 기본 브랜치가 되어 활발히 개발되고 있지만, 실제로 React Native 사용자에게 배포된 것은 Hermes V1입니다 — React Native 0.84 (2026년 2월)에서 기본 엔진이 된 새로운 바이트코드 컴파일러 겸 VM으로, JS를 네이티브 바이너리로 컴파일하지도, 타입 정보를 사용하지도 않습니다. Static Hermes 자체는 여전히 컴파일러 R&D 프로젝트로 남아 있으며, Perry의 벤치마크 노트에 따르면 macOS arm64에서 일상적인 설치를 위해 아직 패키징되어 있지 않습니다 (`shermes`는 폴리글랏 벤치에서 'macOS arm64에 깔끔하게 설치되는 형태로 Homebrew나 npm에 제공되지 않는다'는 메모와 함께 제외됨 — perry/benchmarks/README.md 참고).",
         "perryWhat": "Perry는 Rust로 작성된 네이티브 TypeScript 컴파일러로, 파싱에 SWC를 사용하고 코드 생성에 LLVM을 사용합니다. 동작하는 CLI (`perry compile`, `perry run`, `perry publish`), 25개 이상의 네이티브 UI 위젯, 10개의 컴파일 타겟, 셀프 호스팅 런타임, 그리고 투명한 조건 (M1 Max, RUNS=11)으로 측정한 벤치마크 슈트를 제공합니다. Perry는 1.0 이전이지만 프로덕션 트랙입니다 — Bloom Engine, Mango, Hone, Pry, dB Meter 같은 앱이 Perry로 만들어져 출시되고 있습니다 (perryts.com 참고).",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "TypeScript를 위한 Electron 대안",
+      "tldr": "2026년 TypeScript 데스크톱 앱을 위한 네 가지 현실적인 선택지: Electron, Tauri, Bun 단일 파일 바이너리, 그리고 Perry의 네이티브 위젯. 바이너리 크기, 메모리, UI 스택, 언어를 솔직하게 비교합니다."
     }
+  },
+  "meta": {
+    "title": "Perry — TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 TypeScript 컴파일러",
+    "description": "Perry는 TypeScript를 네이티브로 컴파일하는 컴파일러입니다: Node.js 런타임이 필요 없는 독립형 바이너리. macOS, Linux, Windows, iOS, Android용 2–5 MB 실행 파일.",
+    "ogTitle": "Perry — TypeScript를 네이티브 실행 파일로 컴파일",
+    "ogDescription": "TypeScript를 네이티브 실행 파일로 컴파일합니다. 10개 플랫폼, 25개 이상의 UI 위젯, 0 ms 시작 시간."
+  },
+  "faq": {
+    "title": "자주 묻는 <gradient>질문</gradient>",
+    "subtitle": "사람들이 첫 바이너리를 컴파일하기 전에 묻는 모든 것",
+    "more": "더 궁금한 점이 있나요? <guideLink>시작하기 가이드</guideLink>를 읽어보거나 <discussionsLink>GitHub Discussions</discussionsLink>에 질문해보세요.",
+    "items": [
+      {
+        "question": "Perry는 Node.js나 런타임이 필요한가요?",
+        "answer": "아니요. Perry는 TypeScript를 사전에 독립형 네이티브 실행 파일로 컴파일합니다. 이 바이너리는 머신에 Node.js, Bun, Deno, 그 어떤 JavaScript 런타임도 설치되어 있지 않아도 실행됩니다. 아직 네이티브로 컴파일할 수 없는 npm 패키지의 경우, --enable-js-runtime을 통해 선택적 임베디드 V8 폴백을 사용할 수 있습니다."
+      },
+      {
+        "question": "컴파일된 바이너리는 크기가 얼마나 되나요?",
+        "answer": "hello-world 바이너리는 약 330 KB입니다. 일반적인 CLI 도구는 2–5 MB 수준입니다. 대형 프레임워크(Fastify, mysql2 등)를 포함하는 완전한 애플리케이션도 약 48 MB 정도입니다 — Electron 앱이나 런타임이 내장된 바이너리가 시작하는 약 80–150 MB에 비하면 여전히 훨씬 작습니다."
+      },
+      {
+        "question": "npm 패키지를 사용할 수 있나요?",
+        "answer": "네. 순수 TypeScript/JavaScript 패키지는 perry.compilePackages를 통해 네이티브로 컴파일됩니다 — axios, zod v4, express, fastify, hono는 오늘 바로 컴파일되어 실행됩니다. 완전한 JS 엔진 의미론이 필요한 패키지는 --enable-js-runtime의 선택적 V8 폴백을 통해 실행할 수 있습니다."
+      },
+      {
+        "question": "Perry는 어떤 플랫폼을 지원하나요?",
+        "answer": "10개의 컴파일 타겟: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, Web/JS. GUI 앱은 네이티브 플랫폼 위젯을 사용합니다 — AppKit, UIKit, GTK4, Win32, 그리고 JNI를 통한 Android."
+      },
+      {
+        "question": "Perry는 무료이고 오픈 소스인가요?",
+        "answer": "네. 컴파일러는 무료이며 오픈 소스입니다. 로컬에서 컴파일하고 실행하는 데는 비용이 들지 않으며 계정도 필요하지 않습니다. 호스팅형 빌드·서명·스토어 제출 파이프라인인 Perry Publish는 무료 티어(월 15회 게시)와 Pro 플랜을 제공합니다."
+      },
+      {
+        "question": "Perry는 Bun이나 Deno compile과 어떻게 다른가요?",
+        "answer": "Bun과 Deno는 여러분의 JavaScript를 자체 런타임과 함께 하나의 파일로 번들링합니다 — hello world는 플랫폼에 따라 약 60–100 MB이며, 코드는 여전히 JIT로 실행됩니다. Perry는 TypeScript를 LLVM을 통해 사전에 머신 코드로 컴파일합니다: 임베디드 엔진 없음, 약 330 KB의 hello world, 약 1 ms의 시작 시간. 전체 비교는 <bunLink>Perry vs Bun</bunLink>과 <denoLink>Perry vs Deno</denoLink>를 참고하세요."
+      },
+      {
+        "question": "Perry는 Electron이나 Tauri와 어떻게 다른가요?",
+        "answer": "Electron은 모든 앱에 Chromium과 Node.js를 함께 담아 배포하므로, 설치 파일이 약 80–150 MB에서 시작합니다. Tauri는 훨씬 작지만 여전히 시스템 웹뷰에서 웹 프런트엔드를 렌더링하며, 앱 로직은 Rust로 작성됩니다. Perry는 웹뷰를 전혀 사용하지 않습니다: TypeScript가 머신 코드로 컴파일되어 실제 플랫폼 위젯 — AppKit, UIKit, GTK4, Win32 — 을 단일 프로세스에서 직접 구동합니다. 전체 비교는 <electronLink>Perry vs Electron</electronLink>과 <tauriLink>Perry vs Tauri</tauriLink>를 참고하세요."
+      },
+      {
+        "question": "Perry는 얼마나 성숙한 상태인가요?",
+        "answer": "Perry는 아직 1.0 이전이며 빠르게 발전하고 있지만, 이를 사용해 만든 실제 앱들이 이미 출시되어 있습니다 — Bloom Engine, Mango, Hone, Pry, dB Meter 등이 그 예입니다. 자세한 내용은 <showcaseLink>쇼케이스</showcaseLink>를 확인하세요."
+      }
+    ]
   }
 }

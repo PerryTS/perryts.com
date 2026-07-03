@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — แพ็กเกจ npm จริงคอมไพล์ได้แล้ว: axios, zod, express, fastify, hono",
-    "headline1": "โค้ดเดียว ทุกแพลตฟอร์ม",
-    "headline2": "ประสิทธิภาพระดับเนทีฟ",
-    "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
+    "headline1": "คอมไพล์ TypeScript เป็นเนทีฟ",
+    "headline2": "โค้ดเดียว ทุกแพลตฟอร์ม",
+    "subheadline": "Perry คอมไพล์ TypeScript เป็นแอป GUI และ CLI เนทีฟบน <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly และเว็บ</platforms> ไม่ต้องมี runtime ไม่ต้องมี Electron เป็นไบนารีเนทีฟล้วน ๆ",
     "getStarted": "เริ่มต้น",
     "viewOnGithub": "ดูบน GitHub",
     "compiling": "กำลังคอมไพล์ main.ts...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "i18n แบบ Compile-Time",
       "description": "แยกสตริงอัตโนมัติ, กฎพหูพจน์ CLDR สำหรับ 30+ locale, การตรวจสอบแบบ compile-time การแปลถูกฝังในไบนารีโดยแทบไม่ต้อง lookup ที่รันไทม์"
-    }
+    },
+    "goDeeper": "เจาะลึกยิ่งขึ้น: Perry <binaryLink>คอมไพล์ TypeScript เป็นไบนารี</binaryLink>อย่างไร อะไรที่ทำให้มันเป็น<compilerLink>คอมไพเลอร์ TypeScript เนทีฟ</compilerLink> และเทียบกับ<electronAltLink>ทางเลือกแทน Electron</electronAltLink>ได้อย่างไร"
   },
   "platforms": {
     "title": "เนทีฟบน<gradient>ทุกแพลตฟอร์ม</gradient>",
@@ -199,7 +200,8 @@
     "binarySize": "ไบนารี 2-5 MB",
     "tsFiles": "ไฟล์ .ts",
     "compilerInternalsPrompt": "อยากรู้ว่าคอมไพเลอร์ทำงานภายในอย่างไร?",
-    "compilerInternals": "โครงสร้างภายในคอมไพเลอร์"
+    "compilerInternals": "โครงสร้างภายในคอมไพเลอร์",
+    "deepDive": "เจาะลึก: <llvmLink>TypeScript บน LLVM</llvmLink> — monomorphization, NaN-boxing และเหตุผลที่ Perry ทิ้ง Cranelift"
   },
   "footer": {
     "newsletter": "จดหมายข่าว",
@@ -738,8 +740,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): พร้อมใช้ในโปรดักชัน vs คอมไพเลอร์งานวิจัย",
         "metaDescription": "Static Hermes เป็นคอมไพเลอร์ AOT TypeScript-to-native ระดับทดลองของ Meta Perry เป็นคอมไพเลอร์ TS-to-native สายโปรดักชันที่ส่งมอบในวันนี้ เปรียบเทียบความสมบูรณ์ ขอบเขต เอาต์พุต และการเข้าถึงแพลตฟอร์ม",
-        "tldr": "Static Hermes (`shermes`) เป็นความพยายามระดับงานวิจัยของ Meta ในการคอมไพล์ JavaScript/TypeScript subset ที่มี type แข็งแกร่งแบบ ahead-of-time ผ่าน Hermes engine โดยมุ่งเป้าหลักไปที่ React Native Perry เป็นเดิมพันที่แตกต่างกันบนแนวคิดทั่วไปเดียวกัน — TypeScript คอมไพล์เป็นเนทีฟ — แต่สร้างขึ้นอย่างอิสระด้วย Rust บน LLVM พร้อมคอมไพเลอร์ที่ใช้งานได้ วิดเจ็ต UI เนทีฟ 25+ ตัว และ 10 เป้าหมายการคอมไพล์ที่ส่งมอบในวันนี้ ณ เดือนเมษายน 2026 ชุดเบนช์มาร์กของ Perry รายงานว่า Static Hermes ถูกทดสอบเป็นเพียร์แต่ไม่สามารถติดตั้งได้อย่างสะอาดผ่าน package manager มาตรฐานที่ใช้ทดสอบ",
-        "competitorWhat": "Hermes คือ JavaScript engine ที่ Meta สร้างขึ้นสำหรับ React Native — อิงกับ bytecode, คอมไพล์ AOT ล่วงหน้า, ปรับแต่งสำหรับเวลาเริ่มต้นบนมือถือ Static Hermes คือความพยายามวิจัยในการขยาย Hermes ด้วยการคอมไพล์เนทีฟ ahead-of-time ของ JavaScript subset ที่มี type มีจุดประสงค์เพื่อให้ React Native มีเส้นทางสู่โค้ดเนทีฟอย่างแท้จริง เป็นโครงการ R&D ของคอมไพเลอร์เป็นหลัก; ตามบันทึกของ perry/benchmarks ยังไม่ได้ถูกแพ็กเกจสำหรับการติดตั้งทั่วไปบน macOS arm64 (`shermes` ถูกข้ามจากการเบนช์มาร์กแบบ polyglot ด้วยหมายเหตุว่า 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — ดู perry/benchmarks/README.md)",
+        "tldr": "Static Hermes (`shermes`) เป็นความพยายามระดับงานวิจัยของ Meta ในการคอมไพล์ JavaScript/TypeScript subset ที่มี type แข็งแกร่งแบบ ahead-of-time ผ่าน Hermes engine โดยมุ่งเป้าหลักไปที่ React Native Perry เป็นเดิมพันที่แตกต่างกันบนแนวคิดทั่วไปเดียวกัน — TypeScript คอมไพล์เป็นเนทีฟ — แต่สร้างขึ้นอย่างอิสระด้วย Rust บน LLVM พร้อมคอมไพเลอร์ที่ใช้งานได้ วิดเจ็ต UI เนทีฟ 25+ ตัว และ 10 เป้าหมายการคอมไพล์ที่ส่งมอบในวันนี้ ณ กลางปี 2026 `shermes` ยังคงต้อง build จาก source เอง — ชุดเบนช์มาร์กของ Perry ทดสอบมันในฐานะเพียร์แต่ไม่พบเส้นทางติดตั้งที่สะอาดผ่าน package manager มาตรฐาน — และ Hermes V1 engine ที่กลายเป็นค่าเริ่มต้นของ React Native ในช่วงต้นปี 2026 ก็ไม่มีฟีเจอร์การคอมไพล์แบบ static รวมอยู่ด้วยอย่างชัดเจน",
+        "competitorWhat": "Hermes คือ JavaScript engine ที่ Meta สร้างขึ้นสำหรับ React Native — อิงกับ bytecode, คอมไพล์ AOT ล่วงหน้า, ปรับแต่งสำหรับเวลาเริ่มต้นบนมือถือ Static Hermes คือความพยายามวิจัยในการขยาย Hermes ด้วยการคอมไพล์เนทีฟ ahead-of-time ของ JavaScript subset ที่มี type มีจุดประสงค์เพื่อให้ React Native มีเส้นทางสู่โค้ดเนทีฟอย่างแท้จริง ตอนนี้ branch `static_h` กลายเป็น default branch ของ repo แล้วและอยู่ระหว่างการพัฒนาอย่างต่อเนื่อง แต่สิ่งที่ส่งมอบจริงให้ผู้ใช้ React Native คือ Hermes V1 — bytecode compiler และ VM ตัวใหม่ที่กลายเป็น engine เริ่มต้นใน React Native 0.84 (กุมภาพันธ์ 2026) — ซึ่งไม่ได้คอมไพล์ JS เป็นไบนารีเนทีฟหรือใช้ข้อมูล type แต่อย่างใด Static Hermes เองยังคงเป็นโครงการ R&D ของคอมไพเลอร์เป็นหลัก; ตามบันทึกของ perry/benchmarks ยังไม่ได้ถูกแพ็กเกจสำหรับการติดตั้งทั่วไปบน macOS arm64 (`shermes` ถูกข้ามจากการเบนช์มาร์กแบบ polyglot ด้วยหมายเหตุว่า 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — ดู perry/benchmarks/README.md)",
         "perryWhat": "Perry เป็นคอมไพเลอร์ TypeScript เนทีฟที่เขียนด้วย Rust ใช้ SWC สำหรับการ parse และ LLVM สำหรับการสร้างโค้ด มาพร้อม CLI ที่ใช้งานได้ (`perry compile`, `perry run`, `perry publish`) วิดเจ็ต UI เนทีฟ 25+ ตัว 10 เป้าหมายการคอมไพล์ รันไทม์ self-hosted และชุดเบนช์มาร์กที่วัดผลภายใต้เงื่อนไขที่โปร่งใส (M1 Max, RUNS=11) Perry เป็น pre-1.0 แต่อยู่ในสายโปรดักชัน: มีคนกำลังส่งมอบแอปที่สร้างด้วย Perry (Bloom Engine, Mango, Hone, Pry, dB Meter — ดู perryts.com)",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "ทางเลือกแทน Electron สำหรับ TypeScript",
+      "tldr": "สี่เส้นทางที่ใช้งานได้จริงสำหรับแอปเดสก์ท็อป TypeScript ในปี 2026: Electron, Tauri, ไบนารีไฟล์เดียวของ Bun และวิดเจ็ตเนทีฟของ Perry เปรียบเทียบขนาดไบนารี หน่วยความจำ UI stack และภาษาอย่างตรงไปตรงมา"
     }
+  },
+  "meta": {
+    "title": "Perry — คอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ | คอมไพเลอร์ TypeScript เนทีฟ",
+    "description": "Perry เป็นคอมไพเลอร์ TypeScript เป็นเนทีฟ: ไบนารีแบบ standalone ที่ไม่ต้องมี Node.js runtime ไฟล์ปฏิบัติการขนาด 2–5 MB สำหรับ macOS, Linux, Windows, iOS และ Android",
+    "ogTitle": "Perry — คอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ",
+    "ogDescription": "คอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ 10 แพลตฟอร์ม วิดเจ็ต UI เนทีฟ 25+ ตัว เริ่มทำงานใน 0 ms"
+  },
+  "faq": {
+    "title": "<gradient>คำถาม</gradient>ที่พบบ่อย",
+    "subtitle": "ทุกอย่างที่คนถามก่อนคอมไพล์ไบนารีตัวแรกของพวกเขา",
+    "more": "มีคำถามเพิ่มเติมไหม? อ่าน<guideLink>คู่มือเริ่มต้นใช้งาน</guideLink> หรือถามได้ที่ <discussionsLink>GitHub Discussions</discussionsLink>",
+    "items": [
+      {
+        "question": "Perry ต้องมี Node.js หรือรันไทม์หรือไม่?",
+        "answer": "ไม่ต้อง Perry คอมไพล์ TypeScript ล่วงหน้าเป็นไฟล์ปฏิบัติการเนทีฟแบบ standalone ไบนารีนี้รันได้โดยไม่ต้องมี Node.js, Bun, Deno หรือ JavaScript runtime ใด ๆ ติดตั้งอยู่บนเครื่อง สำหรับแพ็กเกจ npm ที่ยังคอมไพล์แบบเนทีฟไม่ได้ มี V8 fallback แบบฝังตัวเป็นตัวเลือกเสริมผ่าน --enable-js-runtime"
+      },
+      {
+        "question": "ไบนารีที่คอมไพล์แล้วมีขนาดใหญ่แค่ไหน?",
+        "answer": "ไบนารี hello-world มีขนาดประมาณ 330 KB เครื่องมือ CLI ทั่วไปอยู่ที่ 2–5 MB แอปพลิเคชันเต็มรูปแบบที่ดึงเฟรมเวิร์กขนาดใหญ่เข้ามา (Fastify, mysql2 และอื่น ๆ) มีขนาดประมาณ 48 MB — ยังคงต่ำกว่า ~80–150 MB ที่แอป Electron หรือไบนารีแบบฝังรันไทม์เริ่มต้นไว้มาก"
+      },
+      {
+        "question": "ใช้แพ็กเกจ npm ได้หรือไม่?",
+        "answer": "ได้ แพ็กเกจ TypeScript/JavaScript ล้วนคอมไพล์แบบเนทีฟได้ผ่าน perry.compilePackages — axios, zod v4, express, fastify และ hono คอมไพล์และรันได้แล้วในวันนี้ แพ็กเกจที่ต้องการ semantics ของ JS engine เต็มรูปแบบสามารถรันผ่าน V8 fallback แบบเสริมด้วย --enable-js-runtime"
+      },
+      {
+        "question": "Perry รองรับแพลตฟอร์มใดบ้าง?",
+        "answer": "10 เป้าหมายการคอมไพล์: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly และ Web/JS แอป GUI ใช้วิดเจ็ตแพลตฟอร์มเนทีฟ — AppKit, UIKit, GTK4, Win32 และ Android ผ่าน JNI"
+      },
+      {
+        "question": "Perry ฟรีและเป็นโอเพนซอร์สหรือไม่?",
+        "answer": "ใช่ คอมไพเลอร์นี้ฟรีและเป็นโอเพนซอร์ส การคอมไพล์และรันในเครื่องไม่มีค่าใช้จ่ายและไม่ต้องมีบัญชี Perry Publish — ไปป์ไลน์สำหรับ build, ลงนาม และส่งขึ้นสโตร์แบบโฮสต์ — มีแพลนฟรี (เผยแพร่ได้ 15 ครั้งต่อเดือน) และแพลน Pro"
+      },
+      {
+        "question": "Perry ต่างจาก Bun หรือ Deno compile อย่างไร?",
+        "answer": "Bun และ Deno รวม JavaScript ของคุณเข้ากับรันไทม์ของตัวเองไว้ในไฟล์เดียว — hello world มีขนาดประมาณ 60–100 MB ขึ้นอยู่กับแพลตฟอร์ม และโค้ดยังคงถูกรันแบบ JIT อยู่ Perry คอมไพล์ TypeScript ล่วงหน้าเป็นโค้ดเครื่องผ่าน LLVM: ไม่มี engine ฝังตัว, hello world ขนาด ~330 KB, เริ่มทำงานใน ~1 ms ดูการเปรียบเทียบแบบเต็มที่ <bunLink>Perry vs Bun</bunLink> และ <denoLink>Perry vs Deno</denoLink>"
+      },
+      {
+        "question": "Perry ต่างจาก Electron หรือ Tauri อย่างไร?",
+        "answer": "Electron ส่งมอบ Chromium และ Node.js ไปกับทุกแอป ทำให้ตัวติดตั้งเริ่มต้นที่ประมาณ 80–150 MB Tauri มีขนาดเล็กกว่ามากแต่ยังคงเรนเดอร์ web frontend ใน webview ของระบบ โดยมี app logic เป็น Rust Perry ไม่ใช้ webview เลย: TypeScript คอมไพล์เป็นโค้ดเครื่องที่ขับวิดเจ็ตแพลตฟอร์มจริง — AppKit, UIKit, GTK4, Win32 — ในโพรเซสเดียว ดูการเปรียบเทียบแบบเต็มที่ <electronLink>Perry vs Electron</electronLink> และ <tauriLink>Perry vs Tauri</tauriLink>"
+      },
+      {
+        "question": "Perry มีความสมบูรณ์แค่ไหน?",
+        "answer": "Perry อยู่ในขั้น pre-1.0 และพัฒนาอย่างรวดเร็ว แต่แอปจริงที่สร้างด้วยมันก็กำลังส่งมอบอยู่แล้วในวันนี้ — รวมถึง Bloom Engine, Mango, Hone, Pry และ dB Meter ดูรายละเอียดที่ <showcaseLink>showcase</showcaseLink>"
+      }
+    ]
   }
 }

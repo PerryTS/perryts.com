@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — 真实 npm 包现已可编译：axios、zod、express、fastify、hono",
-    "headline1": "一套代码。所有平台。",
-    "headline2": "原生性能。",
-    "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
+    "headline1": "将 TypeScript 编译为原生。",
+    "headline2": "一套代码。所有平台。",
+    "subheadline": "Perry 将 TypeScript 编译为 <platforms>macOS、iPadOS、iOS、Android、Linux、Windows、watchOS、tvOS、HarmonyOS、WebAssembly 和 Web</platforms> 上的原生 GUI 和 CLI 应用。无需运行时。无需 Electron。只有原生二进制文件。",
     "getStarted": "开始使用",
     "viewOnGithub": "在 GitHub 上查看",
     "compiling": "正在编译 main.ts...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "编译时 i18n",
       "description": "自动字符串提取、30+ 语言环境的 CLDR 复数规则、编译时验证。翻译被嵌入二进制文件中，运行时查找几乎为零。"
-    }
+    },
+    "goDeeper": "深入了解：Perry 如何<binaryLink>将 TypeScript 编译为二进制文件</binaryLink>、是什么让它成为<compilerLink>TypeScript 原生编译器</compilerLink>，以及它与<electronAltLink>Electron 替代方案</electronAltLink>相比表现如何。"
   },
   "platforms": {
     "title": "在<gradient>每个平台</gradient>上原生运行",
@@ -199,7 +200,8 @@
     "binarySize": "2-5 MB 二进制文件",
     "tsFiles": ".ts 文件",
     "compilerInternalsPrompt": "想了解编译器内部是如何工作的吗？",
-    "compilerInternals": "编译器内部原理"
+    "compilerInternals": "编译器内部原理",
+    "deepDive": "深入了解：<llvmLink>TypeScript 与 LLVM</llvmLink>——单态化、NaN 装箱，以及 Perry 为何放弃 Cranelift。"
   },
   "footer": {
     "newsletter": "新闻通讯",
@@ -738,8 +740,8 @@
         "title": "Perry 对比 Static Hermes",
         "metaTitle": "Perry 对比 Static Hermes（shermes）：可投入生产 vs 研究型编译器",
         "metaDescription": "Static Hermes 是 Meta 实验性的 TypeScript 转原生提前编译器。Perry 则是今天就在交付的、走生产路线的 TS 转原生编译器。比较成熟度、覆盖范围、产物形态与平台覆盖。",
-        "tldr": "Static Hermes（`shermes`）是 Meta 处于研究阶段的尝试，目标是通过 Hermes 引擎对一类强类型化的 JavaScript/TypeScript 子集进行提前编译，主要面向 React Native。Perry 在同一类思路下押的是另一注——把 TypeScript 编译为原生——但它独立用 Rust 在 LLVM 之上构建，并已交付一个可工作的编译器、25+ 原生 UI 组件以及 10 个编译目标。截至 2026 年 4 月，Perry 自己的基准套件汇报：他们曾尝试把 Static Hermes 当作对照纳入，但发现它无法通过它所测试的标准包管理器干净地安装。",
-        "competitorWhat": "Hermes 是 Meta 为 React Native 打造的 JavaScript 引擎——基于字节码、AOT 预编译、为移动端启动时间做了优化。Static Hermes 是把 Hermes 扩展为对类型化 JavaScript 子集进行提前原生编译的研究项目，目的是给 React Native 一条通往真正原生代码的路径。它本质上是一个编译器研发项目；按 Perry 的基准说明所述，它目前还没有被打包为可在 macOS arm64 上常规安装的形态（`shermes` 在多语言基准对照中被跳过，并附注“在 Homebrew 或 npm 上没有以可在 macOS arm64 上干净安装的方式提供”——见 perry/benchmarks/README.md）。",
+        "tldr": "Static Hermes（`shermes`）是 Meta 的一个研究阶段项目，旨在通过 Hermes 引擎对 JavaScript/TypeScript 的一个强类型子集进行提前编译，主要面向 React Native。Perry 押注的是同一个大方向——把 TypeScript 编译为原生代码——但完全独立地用 Rust 在 LLVM 之上构建，如今已拥有一个可用的编译器、25+ 个原生 UI 组件和 10 个正式发布的编译目标。截至 2026 年年中，`shermes` 仍需从源码构建——Perry 的基准测试套件曾尝试将其作为对照对象，却发现没有可通过标准包管理器完成的干净安装路径——而在 2026 年初成为 React Native 默认引擎的 Hermes V1 明确不包含静态编译特性。",
+        "competitorWhat": "Hermes 是 Meta 为 React Native 打造的 JavaScript 引擎——基于字节码、AOT 预编译，为移动端启动时间做了优化。Static Hermes 是将 Hermes 扩展为对类型化 JavaScript 子集进行提前原生编译的研究项目，目的是为 React Native 提供一条通往真正原生代码的路径。`static_h` 分支目前已是该仓库的默认分支，并处于积极开发中，但真正交付给 React Native 用户的是 Hermes V1——一个新的字节码编译器和虚拟机，已于 2026 年 2 月成为 React Native 0.84 的默认引擎——它并不会将 JS 编译为原生二进制文件，也不使用类型信息。Static Hermes 本身仍然是一个编译器研发项目；根据 Perry 的基准测试说明，它目前尚未被打包为可在 macOS arm64 上常规安装的形态（`shermes` 在多语言基准对照中被跳过，并附注说明它“在 Homebrew 或 npm 上没有以可在 macOS arm64 上干净安装的方式提供”——见 perry/benchmarks/README.md）。",
         "perryWhat": "Perry 是一个用 Rust 编写的原生 TypeScript 编译器，使用 SWC 解析、LLVM 生成代码。它已交付可用的 CLI（`perry compile`、`perry run`、`perry publish`）、25+ 原生 UI 组件、10 个编译目标、自托管的运行时，以及一个在透明条件下测得的基准套件（M1 Max，RUNS=11）。Perry 仍处于 Pre-1.0，但走的是生产路线：已经有人在用它构建并交付应用（Bloom Engine、Mango、Hone、Pry、dB Meter——见 perryts.com）。",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "TypeScript 的 Electron 替代方案",
+      "tldr": "2026 年 TypeScript 桌面应用的四条现实路径：Electron、Tauri、Bun 单文件二进制，以及 Perry 的原生组件。从二进制大小、内存占用、UI 技术栈和语言等方面进行如实比较。"
     }
+  },
+  "meta": {
+    "title": "Perry — 将 TypeScript 编译为原生可执行文件 | TypeScript 原生编译器",
+    "description": "Perry 是一个将 TypeScript 编译为原生代码的编译器：无需 Node.js 运行时的独立二进制文件。为 macOS、Linux、Windows、iOS 和 Android 生成 2–5 MB 的可执行文件。",
+    "ogTitle": "Perry — 将 TypeScript 编译为原生可执行文件",
+    "ogDescription": "将 TypeScript 编译为原生可执行文件。10 个平台，25+ 原生 UI 组件，0 毫秒启动。"
+  },
+  "faq": {
+    "title": "常见<gradient>问题</gradient>",
+    "subtitle": "编译第一个二进制文件之前，人们想问的一切",
+    "more": "还有其他问题？阅读<guideLink>快速入门指南</guideLink>，或在<discussionsLink>GitHub Discussions</discussionsLink>上提问。",
+    "items": [
+      {
+        "question": "Perry 需要 Node.js 或运行时吗？",
+        "answer": "不需要。Perry 会提前将 TypeScript 编译为独立的原生可执行文件。该二进制文件运行时无需在机器上安装 Node.js、Bun、Deno 或任何 JavaScript 运行时。对于尚无法原生编译的 npm 包，可通过 --enable-js-runtime 启用可选的内嵌 V8 回退方案。"
+      },
+      {
+        "question": "编译出的二进制文件有多大？",
+        "answer": "hello-world 二进制文件约为 330 KB。典型的 CLI 工具在 2–5 MB 之间。引入大型框架（Fastify、mysql2 等）的完整应用约为 48 MB——仍远低于 Electron 应用或内嵌运行时二进制文件起步的约 80–150 MB。"
+      },
+      {
+        "question": "可以使用 npm 包吗？",
+        "answer": "可以。纯 TypeScript/JavaScript 包可通过 perry.compilePackages 原生编译——axios、zod v4、express、fastify 和 hono 如今已能编译并运行。需要完整 JS 引擎语义的包，可通过 --enable-js-runtime 启用的可选 V8 回退方案运行。"
+      },
+      {
+        "question": "Perry 支持哪些平台？",
+        "answer": "十个编译目标：macOS、iOS、iPadOS、Android、Linux、Windows、watchOS、tvOS、WebAssembly 和 Web/JS。GUI 应用使用原生平台组件——AppKit、UIKit、GTK4、Win32，以及通过 JNI 实现的 Android。"
+      },
+      {
+        "question": "Perry 是免费且开源的吗？",
+        "answer": "是的。编译器是免费且开源的。本地编译和运行不收取任何费用，也无需注册账户。Perry Publish——托管的构建、签名和应用商店提交流水线——提供免费套餐（每月 15 次发布）和 Pro 方案。"
+      },
+      {
+        "question": "Perry 与 Bun 或 Deno compile 有什么不同？",
+        "answer": "Bun 和 Deno 会把你的 JavaScript 与各自的运行时打包进同一个文件——hello world 根据平台不同约为 60–100 MB，且代码仍以 JIT 方式执行。Perry 通过 LLVM 提前将 TypeScript 编译为机器码：不内嵌引擎，hello world 约 330 KB，启动时间约 1 毫秒。完整对比见<bunLink>Perry 对比 Bun</bunLink>和<denoLink>Perry 对比 Deno</denoLink>。"
+      },
+      {
+        "question": "Perry 与 Electron 或 Tauri 有什么不同？",
+        "answer": "Electron 会在每个应用中都附带 Chromium 和 Node.js，因此安装包起步约为 80–150 MB。Tauri 体积小得多，但仍在系统 webview 中渲染 Web 前端，应用逻辑用 Rust 编写。Perry 则完全不使用 webview：TypeScript 编译为机器码，在单一进程中驱动真正的平台组件——AppKit、UIKit、GTK4、Win32。完整对比见<electronLink>Perry 对比 Electron</electronLink>和<tauriLink>Perry 对比 Tauri</tauriLink>。"
+      },
+      {
+        "question": "Perry 成熟度如何？",
+        "answer": "Perry 目前处于 Pre-1.0 阶段，迭代很快，但用它构建的真实应用如今已经上线——包括 Bloom Engine、Mango、Hone、Pry 和 dB Meter。详情见<showcaseLink>展示页面</showcaseLink>。"
+      }
+    ]
   }
 }

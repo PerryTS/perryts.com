@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — echte npm-Pakete kompilieren jetzt: axios, zod, express, fastify, hono",
-    "headline1": "Eine Codebasis. Jede Plattform.",
-    "headline2": "Native Performance.",
-    "subheadline": "Perry kompiliert TypeScript zu nativen GUI- und CLI-Apps auf <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly und dem Web.</platforms> Keine Laufzeitumgebung. Kein Electron. Einfach native Binaries.",
+    "headline1": "TypeScript zu Nativ kompilieren.",
+    "headline2": "Eine Codebasis, jede Plattform.",
+    "subheadline": "Perry kompiliert TypeScript zu nativen GUI- und CLI-Apps auf <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly und dem Web.</platforms> Keine Laufzeitumgebung. Kein Electron. Einfach native Binaries.",
     "getStarted": "Loslegen",
     "viewOnGithub": "Auf GitHub ansehen",
     "compiling": "Kompiliere main.ts...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "Compile-Time-i18n",
       "description": "Automatische String-Extraktion, CLDR-Pluralregeln für 30+ Sprachen, Compile-Time-Validierung. Übersetzungen werden ins Binary eingebacken mit nahezu null Laufzeit-Lookup."
-    }
+    },
+    "goDeeper": "Mehr erfahren: wie Perry <binaryLink>TypeScript zu einer Binary kompiliert</binaryLink>, was einen <compilerLink>nativen TypeScript-Compiler</compilerLink> ausmacht, und wie Perry im Vergleich zu <electronAltLink>Electron-Alternativen</electronAltLink> abschneidet."
   },
   "platforms": {
     "title": "Nativ auf <gradient>jeder Plattform</gradient>",
@@ -199,7 +200,8 @@
     "binarySize": "2–5 MB Binary",
     "tsFiles": ".ts-Dateien",
     "compilerInternalsPrompt": "Willst du wissen, wie der Compiler unter der Haube funktioniert?",
-    "compilerInternals": "Compiler-Interna"
+    "compilerInternals": "Compiler-Interna",
+    "deepDive": "Tiefer eintauchen: <llvmLink>TypeScript auf LLVM</llvmLink> — Monomorphisierung, NaN-Boxing und warum Perry Cranelift verlassen hat."
   },
   "footer": {
     "newsletter": "Newsletter",
@@ -738,8 +740,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): produktionsreif vs Forschungs-Compiler",
         "metaDescription": "Static Hermes ist Metas experimenteller Ahead-of-Time-TypeScript-zu-Nativ-Compiler. Perry ist ein heute ausgelieferter, produktionsreifer TS-zu-Nativ-Compiler. Vergleiche Reife, Umfang, Output und Plattformreichweite.",
-        "tldr": "Static Hermes (`shermes`) ist Metas Forschungsprojekt, einen stark typisierten Subset von JavaScript/TypeScript ahead-of-time durch die Hermes-Engine zu kompilieren, primär ausgerichtet auf React Native. Perry ist eine andere Wette auf dieselbe grundsätzliche Idee — TypeScript zu Nativ kompiliert — aber unabhängig in Rust auf LLVM gebaut, mit einem funktionierenden Compiler, 25+ nativen UI-Widgets und 10 Kompilierungszielen, die heute ausgeliefert werden. Stand April 2026 berichtet Perrys eigene Benchmark-Suite, dass Static Hermes als Peer ausprobiert wurde und sich nicht sauber über die getesteten Standard-Paketmanager installieren ließ.",
-        "competitorWhat": "Hermes ist die JavaScript-Engine, die Meta für React Native gebaut hat — bytecode-basiert, AOT-vorkompiliert, optimiert für mobile Startzeit. Static Hermes ist das Forschungsprojekt, Hermes um Ahead-of-Time-Native-Kompilierung eines typisierten JavaScript-Subsets zu erweitern, um React Native einen Pfad zu echtem nativem Code zu geben. Es ist primär ein Compiler-F&E-Projekt; laut Perrys Benchmark-Notizen ist es noch nicht für eine routinemäßige Installation auf macOS arm64 paketiert (`shermes` wurde aus dem Polyglot-Bench mit dem Hinweis ausgeschlossen, es 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — siehe perry/benchmarks/README.md).",
+        "tldr": "Static Hermes (`shermes`) ist Metas Projekt im Forschungsstadium, einen stark typisierten Subset von JavaScript/TypeScript ahead-of-time durch die Hermes-Engine zu kompilieren, primär ausgerichtet auf React Native. Perry ist eine andere Wette auf dieselbe grundsätzliche Idee — TypeScript zu Nativ kompiliert — aber unabhängig in Rust auf LLVM gebaut, mit einem funktionierenden Compiler, 25+ nativen UI-Widgets und 10 Kompilierungszielen, die heute ausgeliefert werden. Stand Mitte 2026 muss `shermes` noch immer aus dem Quellcode gebaut werden — Perrys Benchmark-Suite hat es als Peer ausprobiert und fand keinen sauberen Installationsweg über gängige Paketmanager —, und die Hermes-V1-Engine, die Anfang 2026 zum Standard in React Native wurde, enthält die statischen Kompilierungsfeatures ausdrücklich nicht.",
+        "competitorWhat": "Hermes ist die JavaScript-Engine, die Meta für React Native gebaut hat — bytecode-basiert, AOT-vorkompiliert, optimiert für mobile Startzeit. Static Hermes ist das Forschungsprojekt, um Hermes um Ahead-of-Time-Native-Kompilierung eines typisierten JavaScript-Subsets zu erweitern, mit dem Ziel, React Native einen Pfad zu echtem nativem Code zu geben. Der `static_h`-Branch ist inzwischen der Default-Branch des Repos und wird aktiv weiterentwickelt, aber was tatsächlich bei React-Native-Nutzern ankam, ist Hermes V1 — ein neuer Bytecode-Compiler und eine neue VM, die mit React Native 0.84 (Februar 2026) zur Standard-Engine wurde — und der kompiliert JS weder zu nativen Binaries noch nutzt er Typinformationen. Static Hermes selbst bleibt ein Compiler-F&E-Projekt; laut Perrys Benchmark-Notizen ist es noch nicht für eine routinemäßige Installation auf macOS arm64 paketiert (`shermes` wurde aus dem Polyglot-Bench mit dem Hinweis ausgeschlossen, es 'is not available on Homebrew or npm in a way that installs cleanly on macOS arm64' — siehe perry/benchmarks/README.md).",
         "perryWhat": "Perry ist ein nativer TypeScript-Compiler, geschrieben in Rust, der SWC zum Parsen und LLVM zur Codegenerierung nutzt. Er liefert eine funktionierende CLI (`perry compile`, `perry run`, `perry publish`), 25+ native UI-Widgets, 10 Kompilierungsziele, eine selbstgehostete Runtime und eine unter transparenten Bedingungen gemessene Benchmark-Suite (M1 Max, RUNS=11). Perry ist Pre-1.0, aber produktionsreif: Leute liefern damit gebaute Apps aus (Bloom Engine, Mango, Hone, Pry, dB Meter — siehe perryts.com).",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "Electron-Alternativen für TypeScript",
+      "tldr": "Vier realistische Wege für TypeScript-Desktop-Apps im Jahr 2026: Electron, Tauri, Bun-Single-File-Binaries und Perrys native Widgets. Binary-Größe, Speicherverbrauch, UI-Stack und Sprache ehrlich verglichen."
     }
+  },
+  "meta": {
+    "title": "Perry — TypeScript zu nativen Executables kompilieren | Nativer TypeScript-Compiler",
+    "description": "Perry ist ein TypeScript-zu-Nativ-Compiler: eigenständige Binaries ohne Node.js. 2–5 MB große Executables für macOS, Linux, Windows, iOS und Android.",
+    "ogTitle": "Perry — TypeScript zu nativen Executables kompilieren",
+    "ogDescription": "TypeScript zu nativen Executables kompilieren. 10 Plattformen, 25+ UI-Widgets, 0 ms Startzeit."
+  },
+  "faq": {
+    "title": "Häufig gestellte <gradient>Fragen</gradient>",
+    "subtitle": "Alles, was Leute fragen, bevor sie ihre erste Binary kompilieren",
+    "more": "Weitere Fragen? Lies den <guideLink>Getting-Started-Guide</guideLink> oder frag in den <discussionsLink>GitHub Discussions</discussionsLink>.",
+    "items": [
+      {
+        "question": "Braucht Perry Node.js oder eine Laufzeitumgebung?",
+        "answer": "Nein. Perry kompiliert TypeScript ahead-of-time zu einem eigenständigen nativen Executable. Das Binary läuft ohne installiertes Node.js, Bun, Deno oder eine andere JavaScript-Laufzeitumgebung auf der Maschine. Für npm-Pakete, die noch nicht nativ kompilieren können, steht optional ein eingebetteter V8-Fallback über --enable-js-runtime zur Verfügung."
+      },
+      {
+        "question": "Wie groß sind die kompilierten Binaries?",
+        "answer": "Ein Hello-World-Binary ist rund 330 KB groß. Typische CLI-Tools landen bei 2–5 MB. Vollständige Anwendungen, die große Frameworks einbinden (Fastify, mysql2 usw.), liegen bei rund 48 MB — immer noch weit unter den ~80–150 MB, mit denen eine Electron-App oder ein Runtime-eingebettetes Binary startet."
+      },
+      {
+        "question": "Kann ich npm-Pakete verwenden?",
+        "answer": "Ja. Reine TypeScript-/JavaScript-Pakete kompilieren nativ über perry.compilePackages — axios, zod v4, express, fastify und hono kompilieren und laufen bereits heute. Pakete, die volle JS-Engine-Semantik benötigen, können über den optionalen V8-Fallback mit --enable-js-runtime laufen."
+      },
+      {
+        "question": "Welche Plattformen unterstützt Perry?",
+        "answer": "Zehn Kompilierungsziele: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly und Web/JS. GUI-Apps nutzen native Plattform-Widgets — AppKit, UIKit, GTK4, Win32 und Android über JNI."
+      },
+      {
+        "question": "Ist Perry kostenlos und Open Source?",
+        "answer": "Ja. Der Compiler ist kostenlos und quelloffen. Lokales Kompilieren und Ausführen kostet nichts und erfordert kein Konto. Perry Publish — die gehostete Pipeline für Build, Signierung und Store-Einreichung — hat eine kostenlose Stufe (15 Veröffentlichungen pro Monat) und einen Pro-Plan."
+      },
+      {
+        "question": "Wie unterscheidet sich Perry von Bun oder Deno compile?",
+        "answer": "Bun und Deno bündeln dein JavaScript zusammen mit ihrer Laufzeitumgebung in eine Datei — ein Hello World ist je nach Plattform rund 60–100 MB groß, und der Code wird weiterhin JIT-ausgeführt. Perry kompiliert TypeScript ahead-of-time über LLVM zu Maschinencode: keine eingebettete Engine, ~330 KB Hello World, ~1 ms Startzeit. Siehe die vollständigen Vergleiche <bunLink>Perry vs Bun</bunLink> und <denoLink>Perry vs Deno</denoLink>."
+      },
+      {
+        "question": "Wie unterscheidet sich Perry von Electron oder Tauri?",
+        "answer": "Electron liefert Chromium und Node.js mit jeder App aus, daher starten Installer bei rund 80–150 MB. Tauri ist deutlich kleiner, rendert aber weiterhin ein Web-Frontend in der System-Webview, mit App-Logik in Rust. Perry nutzt überhaupt keine Webview: TypeScript kompiliert zu Maschinencode, der echte Plattform-Widgets ansteuert — AppKit, UIKit, GTK4, Win32 — in einem einzigen Prozess. Siehe die vollständigen Vergleiche <electronLink>Perry vs Electron</electronLink> und <tauriLink>Perry vs Tauri</tauriLink>."
+      },
+      {
+        "question": "Wie ausgereift ist Perry?",
+        "answer": "Perry ist Pre-1.0 und entwickelt sich schnell weiter, aber echte damit gebaute Apps werden bereits heute ausgeliefert — darunter Bloom Engine, Mango, Hone, Pry und dB Meter. Details im <showcaseLink>Showcase</showcaseLink>."
+      }
+    ]
   }
 }

@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — paket npm asli kini bisa dikompilasi: axios, zod, express, fastify, hono",
-    "headline1": "Satu Kode Sumber. Semua Platform.",
-    "headline2": "Performa Native.",
-    "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
+    "headline1": "Kompilasi TypeScript ke Native.",
+    "headline2": "Satu Kode Sumber, Semua Platform.",
+    "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
     "getStarted": "Mulai",
     "viewOnGithub": "Lihat di GitHub",
     "compiling": "Mengompilasi main.ts...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "i18n Waktu Kompilasi",
       "description": "Ekstraksi string otomatis, aturan jamak CLDR untuk 30+ bahasa, validasi waktu kompilasi. Terjemahan ditanam ke binary dengan pencarian runtime hampir nol."
-    }
+    },
+    "goDeeper": "Pelajari lebih dalam: bagaimana Perry <binaryLink>mengompilasi TypeScript menjadi binary</binaryLink>, apa yang membuatnya menjadi <compilerLink>kompiler TypeScript native</compilerLink>, dan bagaimana perbandingannya dengan <electronAltLink>alternatif Electron</electronAltLink>."
   },
   "platforms": {
     "title": "Native di <gradient>Semua Platform</gradient>",
@@ -199,7 +200,8 @@
     "binarySize": "Binary 2-5 MB",
     "tsFiles": "File .ts",
     "compilerInternalsPrompt": "Ingin tahu bagaimana kompiler bekerja di balik layar?",
-    "compilerInternals": "Struktur internal kompiler"
+    "compilerInternals": "Struktur internal kompiler",
+    "deepDive": "Pendalaman: <llvmLink>TypeScript di atas LLVM</llvmLink> — monomorphization, NaN-boxing, dan mengapa Perry meninggalkan Cranelift."
   },
   "footer": {
     "newsletter": "Buletin",
@@ -738,8 +740,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): siap-produksi vs kompiler riset",
         "metaDescription": "Static Hermes adalah kompiler eksperimental TypeScript-ke-native ahead-of-time dari Meta. Perry adalah kompiler TS-ke-native jalur produksi yang sudah dikirim hari ini. Bandingkan kematangan, cakupan, output, dan jangkauan platform.",
-        "tldr": "Static Hermes (`shermes`) adalah upaya tahap riset Meta untuk mengompilasi subset JavaScript/TypeScript yang bertipe kuat secara ahead-of-time melalui engine Hermes, terutama ditujukan untuk React Native. Perry adalah taruhan berbeda pada ide umum yang sama — TypeScript dikompilasi ke native — tetapi dibangun secara independen dalam Rust di atas LLVM, dengan kompiler yang berfungsi, 25+ widget UI native, dan 10 target kompilasi yang dikirim hari ini. Per April 2026, suite benchmark Perry sendiri melaporkan bahwa Static Hermes telah dicoba sebagai peer dan tidak dapat diinstal dengan bersih melalui manajer paket standar yang diuji.",
-        "competitorWhat": "Hermes adalah engine JavaScript yang dibangun Meta untuk React Native — berbasis bytecode, AOT-precompiled, dioptimalkan untuk waktu startup mobile. Static Hermes adalah upaya riset untuk memperluas Hermes dengan kompilasi native ahead-of-time dari subset JavaScript bertipe, dimaksudkan untuk memberi React Native jalur ke kode native sejati. Ini terutama proyek R&D kompiler; menurut catatan benchmark Perry, ia belum dipaketkan untuk instalasi rutin di macOS arm64 (`shermes` dilewati dari benchmark polyglot dengan catatan bahwa ia 'tidak tersedia di Homebrew atau npm dengan cara yang dapat diinstal dengan bersih di macOS arm64' — lihat perry/benchmarks/README.md).",
+        "tldr": "Static Hermes (`shermes`) adalah upaya tahap riset Meta untuk mengompilasi subset JavaScript/TypeScript yang bertipe kuat secara ahead-of-time melalui engine Hermes, terutama ditujukan untuk React Native. Perry adalah taruhan berbeda pada ide umum yang sama — TypeScript dikompilasi ke native — tetapi dibangun secara independen dalam Rust di atas LLVM, dengan kompiler yang berfungsi, 25+ widget UI native, dan 10 target kompilasi yang dikirim hari ini. Per pertengahan 2026, `shermes` masih harus dibangun dari source — suite benchmark Perry mencobanya sebagai peer dan tidak menemukan jalur instalasi yang bersih melalui manajer paket standar — dan engine Hermes V1 yang menjadi default React Native di awal 2026 secara eksplisit tidak menyertakan fitur kompilasi statis tersebut.",
+        "competitorWhat": "Hermes adalah engine JavaScript yang dibangun Meta untuk React Native — berbasis bytecode, AOT-precompiled, dioptimalkan untuk waktu startup mobile. Static Hermes adalah upaya riset untuk memperluas Hermes dengan kompilasi native ahead-of-time dari subset JavaScript bertipe, dimaksudkan untuk memberi React Native jalur ke kode native sejati. Branch `static_h` kini menjadi branch default repo dan sedang dikembangkan secara aktif, tetapi yang benar-benar dikirim ke pengguna React Native adalah Hermes V1 — kompiler bytecode dan VM baru yang menjadi engine default di React Native 0.84 (Februari 2026) — yang tidak mengompilasi JS ke binary native atau menggunakan informasi tipe. Static Hermes sendiri tetap menjadi proyek R&D kompiler; menurut catatan benchmark Perry, ia belum dipaketkan untuk instalasi rutin di macOS arm64 (`shermes` dilewati dari benchmark polyglot dengan catatan bahwa ia 'tidak tersedia di Homebrew atau npm dengan cara yang dapat diinstal dengan bersih di macOS arm64' — lihat perry/benchmarks/README.md).",
         "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust, menggunakan SWC untuk parsing dan LLVM untuk pembuatan kode. Ia mengirim CLI yang berfungsi (`perry compile`, `perry run`, `perry publish`), 25+ widget UI native, 10 target kompilasi, runtime self-hosted, dan suite benchmark yang diukur dalam kondisi transparan (M1 Max, RUNS=11). Perry masih pra-1.0 tetapi jalur produksi: orang-orang sudah mengirim aplikasi yang dibangun dengannya (Bloom Engine, Mango, Hone, Pry, dB Meter — lihat perryts.com).",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "Alternatif Electron untuk TypeScript",
+      "tldr": "Empat jalur realistis untuk aplikasi desktop TypeScript di 2026: Electron, Tauri, binary file tunggal Bun, dan widget native Perry. Ukuran binary, memori, stack UI, dan bahasa dibandingkan secara jujur."
     }
+  },
+  "meta": {
+    "title": "Perry — Kompilasi TypeScript ke Executable Native | Kompiler TypeScript Native",
+    "description": "Perry adalah kompiler TypeScript ke native: binary standalone tanpa runtime Node.js. Executable 2–5 MB untuk macOS, Linux, Windows, iOS, dan Android.",
+    "ogTitle": "Perry — Kompilasi TypeScript ke Executable Native",
+    "ogDescription": "Kompilasi TypeScript menjadi executable native. 10 platform, 25+ widget UI, startup 0 ms."
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering <gradient>Diajukan</gradient>",
+    "subtitle": "Semua yang ditanyakan orang-orang sebelum mengompilasi binary pertama mereka",
+    "more": "Ada pertanyaan lain? Baca <guideLink>panduan memulai</guideLink> atau tanyakan di <discussionsLink>GitHub Discussions</discussionsLink>.",
+    "items": [
+      {
+        "question": "Apakah Perry membutuhkan Node.js atau runtime?",
+        "answer": "Tidak. Perry mengompilasi TypeScript secara ahead-of-time menjadi executable native standalone. Binary berjalan tanpa Node.js, Bun, Deno, atau runtime JavaScript apa pun yang terinstal di mesin. Untuk paket npm yang belum bisa dikompilasi secara native, fallback V8 tertanam opsional tersedia melalui --enable-js-runtime."
+      },
+      {
+        "question": "Seberapa besar binary yang dikompilasi?",
+        "answer": "Binary hello-world berukuran sekitar 330 KB. Tool CLI tipikal berada di kisaran 2–5 MB. Aplikasi lengkap yang menyertakan framework besar (Fastify, mysql2, dll.) berukuran sekitar 48 MB — masih jauh di bawah ~80–150 MB yang menjadi titik awal ukuran aplikasi Electron atau binary dengan runtime tertanam."
+      },
+      {
+        "question": "Bisakah saya menggunakan paket npm?",
+        "answer": "Ya. Paket TypeScript/JavaScript murni dikompilasi secara native melalui perry.compilePackages — axios, zod v4, express, fastify, dan hono sudah bisa dikompilasi dan berjalan hari ini. Paket yang membutuhkan semantik engine JS penuh dapat berjalan melalui fallback V8 opsional dengan --enable-js-runtime."
+      },
+      {
+        "question": "Platform apa saja yang didukung Perry?",
+        "answer": "Sepuluh target kompilasi: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web/JS. Aplikasi GUI menggunakan widget platform native — AppKit, UIKit, GTK4, Win32, dan Android melalui JNI."
+      },
+      {
+        "question": "Apakah Perry gratis dan open source?",
+        "answer": "Ya. Kompiler ini gratis dan open source. Mengompilasi dan menjalankan secara lokal tidak memerlukan biaya maupun akun. Perry Publish — pipeline build, penandatanganan, dan pengiriman ke toko yang di-hosting — memiliki tingkat gratis (15 publikasi per bulan) dan paket Pro."
+      },
+      {
+        "question": "Apa bedanya Perry dengan Bun atau Deno compile?",
+        "answer": "Bun dan Deno membundel JavaScript Anda bersama runtime-nya menjadi satu file — hello world berukuran sekitar 60–100 MB tergantung platform, dan kodenya tetap dieksekusi secara JIT. Perry mengompilasi TypeScript secara ahead-of-time menjadi kode mesin melalui LLVM: tanpa engine tertanam, hello world ~330 KB, startup ~1 ms. Lihat perbandingan lengkap <bunLink>Perry vs Bun</bunLink> dan <denoLink>Perry vs Deno</denoLink>."
+      },
+      {
+        "question": "Apa bedanya Perry dengan Electron atau Tauri?",
+        "answer": "Electron mengirim Chromium dan Node.js dengan setiap aplikasi, sehingga installer berukuran sekitar 80–150 MB. Tauri jauh lebih kecil tetapi tetap merender frontend web di webview sistem, dengan logika aplikasi di Rust. Perry sama sekali tidak menggunakan webview: TypeScript dikompilasi menjadi kode mesin yang menggerakkan widget platform asli — AppKit, UIKit, GTK4, Win32 — dalam satu proses tunggal. Lihat perbandingan lengkap <electronLink>Perry vs Electron</electronLink> dan <tauriLink>Perry vs Tauri</tauriLink>."
+      },
+      {
+        "question": "Seberapa matang Perry?",
+        "answer": "Perry masih pra-1.0 dan bergerak cepat, tetapi aplikasi nyata yang dibangun dengannya sudah dikirim hari ini — di antaranya Bloom Engine, Mango, Hone, Pry, dan dB Meter. Lihat <showcaseLink>showcase</showcaseLink> untuk detailnya."
+      }
+    ]
   }
 }

@@ -24,9 +24,9 @@
   },
   "hero": {
     "badge": "v0.5.1146 — gerçek npm paketleri artık derleniyor: axios, zod, express, fastify, hono",
-    "headline1": "Tek Kod Tabanı. Her Platform.",
-    "headline2": "Yerel Performans.",
-    "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
+    "headline1": "TypeScript'i Yerel Koda Derleyin.",
+    "headline2": "Tek Kod Tabanı. Her Platform.",
+    "subheadline": "Perry, TypeScript'i <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly ve Web</platforms> üzerinde yerel GUI ve CLI uygulamalarına derler. Runtime yok. Electron yok. Sadece yerel ikili dosyalar.",
     "getStarted": "Başlayın",
     "viewOnGithub": "GitHub'da Görüntüle",
     "compiling": "main.ts derleniyor...",
@@ -79,7 +79,8 @@
     "i18n": {
       "title": "Derleme Zamanı i18n",
       "description": "Otomatik dize çıkarımı, 30+ dil için CLDR çoğul kuralları, derleme zamanı doğrulama. Çeviriler neredeyse sıfır runtime arama ile ikili dosyaya gömülür."
-    }
+    },
+    "goDeeper": "Daha derine inin: Perry'nin <binaryLink>TypeScript'i bir ikili dosyaya nasıl derlediği</binaryLink>, onu bir <compilerLink>TypeScript yerel derleyicisi</compilerLink> yapan şey ve <electronAltLink>Electron alternatifleri</electronAltLink> karşısında nasıl bir yerde durduğu."
   },
   "platforms": {
     "title": "<gradient>Her Platformda</gradient> Yerel",
@@ -199,7 +200,8 @@
     "binarySize": "2-5 MB ikili dosya",
     "tsFiles": ".ts dosyaları",
     "compilerInternalsPrompt": "Derleyicinin kaputun altında nasıl çalıştığını öğrenmek ister misiniz?",
-    "compilerInternals": "Derleyici iç yapısı"
+    "compilerInternals": "Derleyici iç yapısı",
+    "deepDive": "Derinlemesine inceleme: <llvmLink>LLVM üzerinde TypeScript</llvmLink> — monomorphization, NaN-boxing ve Perry'nin Cranelift'ten neden ayrıldığı."
   },
   "footer": {
     "newsletter": "Bülten",
@@ -738,8 +740,8 @@
         "title": "Perry vs Static Hermes",
         "metaTitle": "Perry vs Static Hermes (shermes): üretime hazır vs araştırma derleyicisi",
         "metaDescription": "Static Hermes, Meta'nın deneysel ahead-of-time TypeScript-yerel derleyicisidir. Perry ise bugün gönderilen üretim hattı bir TS-yerel derleyicisidir. Olgunluğu, kapsamı, çıktıyı ve platform erişimini karşılaştırın.",
-        "tldr": "Static Hermes (`shermes`), Meta'nın güçlü tipli bir JavaScript/TypeScript alt kümesini Hermes motoru üzerinden ahead-of-time derlemeyi amaçlayan, esas olarak React Native'i hedefleyen araştırma aşamasındaki çabasıdır. Perry, aynı genel fikre — TypeScript yerel koda derleniyor — yapılan farklı bir bahistir, ancak bağımsız olarak Rust üzerine LLVM ile inşa edilmiştir; bugün çalışan bir derleyici, 25+ yerel UI widget'ı ve 10 derleme hedefi göndermektedir. Nisan 2026 itibarıyla, Perry'nin kendi benchmark suite'i Static Hermes'in eş olarak denendiğini ve test ettiği standart paket yöneticileri aracılığıyla temiz bir şekilde kurulamadığını rapor etmektedir.",
-        "competitorWhat": "Hermes, Meta'nın React Native için inşa ettiği JavaScript motorudur — bytecode tabanlı, AOT-ön derlenmiş, mobil başlatma süresi için optimize edilmiştir. Static Hermes, Hermes'i tipli bir JavaScript alt kümesinin ahead-of-time yerel derlemesiyle genişletme araştırma çabasıdır ve React Native'e gerçek yerel koda giden bir yol sağlamayı amaçlar. Esas olarak bir derleyici Ar-Ge projesidir; Perry'nin benchmark notlarına göre macOS arm64 üzerinde rutin kurulum için henüz paketlenmemiştir (`shermes`, polyglot benchmark'tan 'macOS arm64 üzerinde temiz bir şekilde kurulan bir biçimde Homebrew veya npm üzerinde mevcut değildir' notuyla atlanmıştır — perry/benchmarks/README.md'ye bakın).",
+        "tldr": "Static Hermes (`shermes`), Meta'nın; JavaScript/TypeScript'in güçlü tipli bir alt kümesini Hermes motoru üzerinden ahead-of-time derlemeyi hedefleyen, esas olarak React Native'e yönelik araştırma aşamasındaki çabasıdır. Perry, aynı genel fikre — TypeScript'in yerele derlenmesi — yapılan farklı bir bahistir, ancak bağımsız olarak Rust üzerinde LLVM ile inşa edilmiştir; bugün çalışan bir derleyici, 25+ yerel UI widget'ı ve 10 derleme hedefi göndermektedir. 2026 ortası itibarıyla `shermes` hâlâ kaynaktan derlenmek zorundadır — Perry'nin benchmark suite'i onu bir eş olarak denemiş ve standart paket yöneticileri aracılığıyla temiz bir kurulum yolu bulamamıştır — ve 2026 başında React Native'in varsayılanı hâline gelen Hermes V1 motoru, statik derleme özelliklerini açıkça içermemektedir.",
+        "competitorWhat": "Hermes, Meta'nın React Native için inşa ettiği JavaScript motorudur — bytecode tabanlı, AOT-ön derlenmiş, mobil başlatma süresi için optimize edilmiştir. Static Hermes, Hermes'i tipli bir JavaScript alt kümesinin ahead-of-time yerel derlemesiyle genişletme araştırma çabasıdır ve React Native'e gerçek yerel koda giden bir yol vermeyi amaçlar. `static_h` dalı artık deponun varsayılan dalıdır ve aktif olarak geliştirilmektedir, ancak React Native kullanıcılarına asıl gönderilen şey Hermes V1'dir — React Native 0.84'te (Şubat 2026) varsayılan motor hâline gelen yeni bir bytecode derleyicisi ve VM — ve bu motor JS'i yerel ikili dosyalara derlemez veya tip bilgisini kullanmaz. Static Hermes'in kendisi bir derleyici Ar-Ge projesi olarak kalmaya devam ediyor; Perry'nin benchmark notlarına göre, macOS arm64 üzerinde rutin kurulum için henüz paketlenmemiştir (`shermes`, polyglot benchmark'tan 'macOS arm64 üzerinde temiz bir şekilde kurulan bir biçimde Homebrew veya npm üzerinde mevcut değildir' notuyla atlanmıştır — bkz. perry/benchmarks/README.md).",
         "perryWhat": "Perry; Rust ile yazılmış, ayrıştırma için SWC ve kod üretimi için LLVM kullanan yerel bir TypeScript derleyicisidir. Çalışan bir CLI (`perry compile`, `perry run`, `perry publish`), 25+ yerel UI widget'ı, 10 derleme hedefi, kendi kendini barındıran bir çalışma zamanı ve şeffaf koşullar altında ölçülen bir benchmark suite'i (M1 Max, RUNS=11) gönderir. Perry 1.0 öncesidir ama üretim hattıdır: insanlar onunla inşa edilmiş uygulamaları gönderiyor (Bloom Engine, Mango, Hone, Pry, dB Meter — perryts.com'a bakın).",
         "table": [
           {
@@ -1024,8 +1026,53 @@
       }
     },
     "electronAlternatives": {
-      "title": "Electron Alternatives for TypeScript",
-      "tldr": "Four realistic paths for TypeScript desktop apps in 2026: Electron, Tauri, Bun single-file binaries, and Perry's native widgets. Binary size, memory, UI stack, and language compared honestly."
+      "title": "TypeScript İçin Electron Alternatifleri",
+      "tldr": "2026'da TypeScript masaüstü uygulamaları için dört gerçekçi yol: Electron, Tauri, Bun tek dosyalı ikili dosyalar ve Perry'nin yerel widget'ları. İkili dosya boyutu, bellek, UI yığını ve dil dürüstçe karşılaştırılıyor."
     }
+  },
+  "meta": {
+    "title": "Perry — TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin | TypeScript Yerel Derleyicisi",
+    "description": "Perry: Node.js'siz bağımsız ikili dosyalar üreten bir TypeScript-yerel derleyici. macOS, Linux, Windows, iOS ve Android için 2–5 MB çalıştırılabilir dosyalar.",
+    "ogTitle": "Perry — TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin",
+    "ogDescription": "TypeScript'i yerel çalıştırılabilir dosyalara derleyin. 10 platform, 25+ UI widget'ı, 0 ms başlatma süresi."
+  },
+  "faq": {
+    "title": "Sıkça Sorulan <gradient>Sorular</gradient>",
+    "subtitle": "İnsanların ilk ikili dosyalarını derlemeden önce sorduğu her şey",
+    "more": "Başka sorularınız mı var? <guideLink>Başlarken kılavuzunu</guideLink> okuyun veya <discussionsLink>GitHub Discussions</discussionsLink>'da sorun.",
+    "items": [
+      {
+        "question": "Perry'nin Node.js'e veya bir runtime'a ihtiyacı var mı?",
+        "answer": "Hayır. Perry, TypeScript'i ahead-of-time olarak bağımsız bir yerel çalıştırılabilir dosyaya derler. İkili dosya; makinede Node.js, Bun, Deno veya herhangi bir JavaScript runtime'ı kurulu olmadan çalışır. Henüz yerel olarak derlenemeyen npm paketleri için --enable-js-runtime ile isteğe bağlı, gömülü bir V8 fallback kullanılabilir."
+      },
+      {
+        "question": "Derlenen ikili dosyalar ne kadar büyük?",
+        "answer": "Bir hello world ikili dosyası yaklaşık 330 KB'dir. Tipik CLI araçları 2–5 MB civarındadır. Büyük framework'ler içeren (Fastify, mysql2, vb.) tam kapsamlı uygulamalar yaklaşık 48 MB'dir — bu, bir Electron uygulamasının veya runtime gömülü bir ikili dosyanın başladığı ~80–150 MB'nin hâlâ çok altındadır."
+      },
+      {
+        "question": "npm paketlerini kullanabilir miyim?",
+        "answer": "Evet. Saf TypeScript/JavaScript paketleri perry.compilePackages aracılığıyla yerel olarak derlenir — axios, zod v4, express, fastify ve hono bugün derlenip çalışıyor. Tam JS motoru semantiğine ihtiyaç duyan paketler, --enable-js-runtime ile isteğe bağlı V8 fallback'i üzerinden çalıştırılabilir."
+      },
+      {
+        "question": "Perry hangi platformları destekliyor?",
+        "answer": "On derleme hedefi: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly ve Web/JS. GUI uygulamaları yerel platform widget'larını kullanır — AppKit, UIKit, GTK4, Win32 ve JNI aracılığıyla Android."
+      },
+      {
+        "question": "Perry ücretsiz ve açık kaynaklı mı?",
+        "answer": "Evet. Derleyici ücretsiz ve açık kaynaklıdır. Yerelde derlemek ve çalıştırmak hiçbir ücrete tabi değildir ve hesap gerektirmez. Perry Publish — barındırılan derleme, imzalama ve mağaza gönderim hattı — ücretsiz bir plan (ayda 15 yayın) ve bir Pro plan sunar."
+      },
+      {
+        "question": "Perry, Bun veya Deno compile'dan nasıl farklı?",
+        "answer": "Bun ve Deno, JavaScript'inizi kendi runtime'larıyla birlikte tek bir dosyada paketler — bir hello world, platforma bağlı olarak yaklaşık 60–100 MB'dir ve kod hâlâ JIT ile çalıştırılır. Perry ise TypeScript'i LLVM aracılığıyla ahead-of-time olarak makine koduna derler: gömülü motor yok, ~330 KB hello world, ~1 ms başlatma süresi. Tam karşılaştırmalar için <bunLink>Perry vs Bun</bunLink> ve <denoLink>Perry vs Deno</denoLink> sayfalarına bakın."
+      },
+      {
+        "question": "Perry, Electron veya Tauri'den nasıl farklı?",
+        "answer": "Electron, her uygulamayla birlikte Chromium ve Node.js'i gönderir, bu yüzden kurulum dosyaları yaklaşık 80–150 MB'den başlar. Tauri çok daha küçüktür ama yine de sistem webview'inde bir web ön yüzü render eder ve uygulama mantığı Rust'tadır. Perry ise hiç webview kullanmaz: TypeScript, tek bir süreçte gerçek platform widget'larını — AppKit, UIKit, GTK4, Win32 — süren makine koduna derlenir. Tam karşılaştırmalar için <electronLink>Perry vs Electron</electronLink> ve <tauriLink>Perry vs Tauri</tauriLink> sayfalarına bakın."
+      },
+      {
+        "question": "Perry ne kadar olgun?",
+        "answer": "Perry 1.0 öncesi ve hızla ilerliyor, ancak onunla inşa edilmiş gerçek uygulamalar bugün gönderiliyor — bunlar arasında Bloom Engine, Mango, Hone, Pry ve dB Meter var. Detaylar için <showcaseLink>showcase</showcaseLink>'e bakın."
+      }
+    ]
   }
 }
