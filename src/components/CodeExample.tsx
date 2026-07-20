@@ -144,7 +144,7 @@ export function CodeExample() {
               <div className="flex-1 font-mono text-sm">
                 <span className="text-slate-500">$</span>{" "}
                 <span className="text-cyan-400">perry</span>{" "}
-                <span className="text-white">build</span>{" "}
+                <span className="text-white">compile</span>{" "}
                 <span className="text-yellow-400">{examples[activeTab].filename}</span>
               </div>
               <div className="text-green-400 text-sm flex items-center gap-2">
