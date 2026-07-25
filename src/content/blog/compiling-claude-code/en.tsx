@@ -20,7 +20,7 @@ export default function Content() {
           className="w-full rounded-lg border border-slate-800"
         />
         <figcaption className="text-sm text-slate-400 mt-3">
-          No <code>node</code> in that command line. <code>/tmp/verify/cc_fptest_dbg25</code> is a single native executable produced by <code>perry compile</code> from the shipped <code>cli.js</code> — logging in, streaming a real answer, and exiting cleanly on Ctrl-C.
+          No <code>node</code> in that command line. <code>/tmp/verify/cc_fptest_dbg25</code> is a single native executable produced by <code>perry compile</code> from the shipped <code>cli.js</code> — logging in, streaming a real answer, and exiting cleanly on Ctrl-C. Since the filename invites the question: <code>dbg25</code> is the 25th build of a diagnostic series from the GC investigation still running as this was written — debug symbols, plus write-barrier elision switched off so that <em>every</em> array store emits a barrier. It carries more overhead than an ordinary build, not less. The performance table further down was measured on different, uninstrumented binaries.
         </figcaption>
       </figure>
 
@@ -237,7 +237,7 @@ while (true) {
         Two things are still open, and they may well be one thing. Input stops registering after roughly a minute of sustained interactive use — no crash, no error, it just stops. And <code>ESC</code> does not interrupt an in-flight response, though <code>Ctrl-C</code> does now quit cleanly, which it did not do a week ago (that&apos;s the exit you see at the end of the recording). A quit path that works while an interrupt path doesn&apos;t points at the same suspect as the input death: keypress events that stop reaching the app, rather than anything wrong with the app&apos;s own handlers.
       </p>
       <p>
-        The performance picture, measured against Node running the identical bundle, before and after the first round of the speed campaign that started the day correctness landed:
+        The performance picture, measured against Node running the identical bundle, before and after the first round of the speed campaign that started the day correctness landed. These came off <code>cc_final</code> and <code>cc_perf2</code> on 17 July — ordinary builds with no diagnostics compiled in, not the instrumented binary in the screenshot above:
       </p>
       <div className="overflow-x-auto my-6">
         <table className="w-full text-sm">
@@ -280,6 +280,12 @@ while (true) {
       </p>
       <p>
         Those bugs were all sitting in Perry while CI was green, while test262 numbers climbed, while the Node parity matrix said 97%. It took thirteen megabytes of somebody else&apos;s minified JavaScript, doing real work against a real API in a real terminal, to shake them loose.
+      </p>
+      <p>
+        There is one more thing, and it is the part we find funniest. Perry is not written by hand alone — a great deal of it, including a great deal of <em>this</em> campaign, was written with Claude Code. The mock servers, the PTY harness, the differential runner, the long nights of bisecting a GC bug at four in the morning: agent sessions, reviewed and merged by a human. Not all of Perry, and not without a lot of argument. But enough that the sentence is true both ways round.
+      </p>
+      <p>
+        The compiler that ate Claude Code was, in substantial part, built by Claude Code.
       </p>
       <p>
         We&apos;ll keep doing it. The next targets are already queued.
