@@ -304,6 +304,9 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
   },
   "compiling-claude-code": {
     en: () => import("./compiling-claude-code/en"),
+    ja: () => import("./compiling-claude-code/ja"),
+    ko: () => import("./compiling-claude-code/ko"),
+    "zh-Hans": () => import("./compiling-claude-code/zh-Hans"),
   },
 };
 

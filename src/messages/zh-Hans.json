@@ -558,8 +558,8 @@
       "excerpt": "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter."
     },
     "compiling-claude-code": {
-      "title": "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
-      "excerpt": "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers."
+      "title": "编译 Claude Code：一个压缩包，160 个编译器修复",
+      "excerpt": "我们把 Perry 对准了 npm 为 Claude Code 发布的那份 13 MB 压缩过的 cli.js，试着把它变成一个原生二进制文件。一个月后，它能启动、登录、流式接收真实的 API 响应，并把你键入的内容绘制出来——期间有 160 个 pull request 落地进了 Perry，从一个空操作的 MessageChannel，到 RegExp 头部缺失的 GC 写屏障。"
     }
   },
   "compare": {
