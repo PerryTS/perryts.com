@@ -1,0 +1,67 @@
+COMPILING CLAUDE CODE — Twitter / X copy
+Blog: https://perryts.com/blog/compiling-claude-code
+
+============================================================
+OPTION A — Single post
+============================================================
+
+We took the 13 MB minified cli.js that npm ships for Claude Code and compiled it to a native binary with Perry.
+
+It launches, logs in, streams a real API response, and paints what you type.
+
+It also took 160 compiler fixes to get there 👇
+perryts.com/blog/compiling-claude-code
+
+============================================================
+OPTION B — Thread
+============================================================
+
+1/
+June 16: "find the claude code folder, get the minified javascript, let's see if we can compile it :D"
+
+A month later: a Perry-compiled Claude Code CLI launches, runs /login, streams a real API response, and accepts input.
+
+160 merged PRs later.
+
+2/
+The target is the artifact npm ships: 13 MB of minified self-executing JS. No source, no sourcemap.
+
+Perry turns it into 207 MB of IR across 16,023 functions and a ~180 MB binary. Ahead of time. No JIT, no eval, no bail-out to an interpreter.
+
+3/
+Bug: every real subcommand hung at startup.
+
+Perry's MessageChannel installed postMessage as a no-op. Harmless — until you meet React's scheduler, which uses a message channel as its macrotask queue. Message dropped → callback never ran → event loop idled forever.
+
+4/
+Bug: one accessor on Object.prototype flipped a process-global flag that disabled the fast path for EVERY dynamic write.
+
+20,000-property build:
+• clean process — 16 ms
+• after one Object.prototype accessor — 42,394 ms
+
+5/
+Bug: worked perfectly against our mock API. Hung forever against the real one.
+
+The real API sends `event: ping`. Our mock didn't. And ping is the one event the SDK skips with `continue` — which Perry's for-await lowering placed BEFORE the iterator advance. Infinite spin.
+
+A mock that passes is evidence about the mock.
+
+6/
+Bug: the TUI SIGBUS'd within seconds, 12/12 runs.
+
+js_regexp_new stored its pattern/flags string pointers with no GC write barrier. A terminal UI runs regexes every frame, so the collector swept those strings out from under a live RegExp constantly.
+
+7/
+Honest status: it works, and it's slow.
+
+--version now BEATS node (227ms vs 328ms). But first paint is 8.4s vs 0.76s, keystroke p50 ~120ms vs 2.2ms, and idle footprint 420MB vs node's flat 290MB.
+
+Correctness first. Speed is the current campaign.
+
+8/
+None of the 160 fixes are about Claude Code. A missing regex write barrier corrupts memory in any program. for-await + continue spins in any stream consumer.
+
+All of it was sitting in Perry while CI was green.
+
+perryts.com/blog/compiling-claude-code

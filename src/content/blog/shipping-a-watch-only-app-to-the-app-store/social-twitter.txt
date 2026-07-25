@@ -1,0 +1,42 @@
+SHIPPING A WATCH-ONLY APP TO THE APP STORE — Twitter / X copy
+Blog: https://perryts.com/blog/shipping-a-watch-only-app-to-the-app-store
+
+============================================================
+OPTION A — Single post
+============================================================
+
+You can't upload a standalone Apple Watch app to the App Store.
+
+Not with altool. Not with Transporter. Not with Xcode 26 — its Organizer doesn't even show an App Store option for watchOS.
+
+I found the undocumented fix. It ships, and it keeps 32-bit support for older watches 👇
+perryts.com/blog/shipping-a-watch-only-app-to-the-app-store
+
+============================================================
+OPTION B — Thread
+============================================================
+
+1/
+I shipped dB Meter — a sound-level meter for Apple Watch. Standalone, no iPhone app, compiled from one TypeScript file with Perry.
+
+Building it was easy. Getting it into the App Store took a full day, because Apple's tools quietly refuse a watch-only app.
+
+2/
+Every upload path fails on a standalone watch .ipa:
+• altool → "Cannot determine the platform"
+• iTMSTransporter → "Unknown platform alias: watchOS"
+• xcodebuild export → no app-store method
+• Xcode 26 Organizer → Ad Hoc / Enterprise / Development only
+
+3/
+The obvious fix — wrap it in an iOS companion app — has a trap: an iOS binary can't contain arm64_32, so you'd drop every Series 4–8 and SE watch. And the store then demands iPhone screenshots for an app that does nothing on iPhone.
+
+4/
+The real trick: an iOS *container stub* flagged ITSWatchOnlyContainer + LSApplicationLaunchProhibited, with the watch app (WKWatchOnly, arm64_32 + arm64) nested in Watch/. Upload with iTMSTransporter → the store treats it as watch-only. No iPhone screenshots, 32-bit kept.
+
+5/
+Three landmines: a swiftc stub gets rejected as a "beta SDK" (used Perry's own iOS output instead), the watch app needs the full CFBundleIcons dict — not just the key — and the stub needs UIRequiredDeviceCapabilities=[arm64].
+
+6/
+Exact plist keys, every error, and the working command:
+perryts.com/blog/shipping-a-watch-only-app-to-the-app-store

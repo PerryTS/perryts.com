@@ -552,6 +552,14 @@
     "real-npm-packages-and-a-conformance-sweep": {
       "title": "Pacotes npm reais agora compilam: axios, zod, express — e uma varredura de conformidade",
       "excerpt": "As ~270 releases de v0.5.875 a v0.5.1146 não eram sobre um benchmark — eram sobre fazer pacotes npm reais compilarem e rodarem. axios, zod v4, express, fastify e hono agora funcionam; a paridade test262 saltou (String 60→79%, Array 61→72%); o Windows ficou Fluent com Mica; e DatePicker + drag & drop chegaram em toda plataforma."
+    },
+    "shipping-a-watch-only-app-to-the-app-store": {
+      "title": "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
+      "excerpt": "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter."
+    },
+    "compiling-claude-code": {
+      "title": "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
+      "excerpt": "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers."
     }
   },
   "compare": {

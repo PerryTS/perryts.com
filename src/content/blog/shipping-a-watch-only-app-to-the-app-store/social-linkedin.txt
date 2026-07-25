@@ -1,0 +1,26 @@
+SHIPPING A WATCH-ONLY APP TO THE APP STORE — LinkedIn copy
+Blog: https://perryts.com/blog/shipping-a-watch-only-app-to-the-app-store
+
+============================================================
+
+How do you ship a standalone Apple Watch app to the App Store? Turns out: not with any of Apple's own tools.
+
+I just shipped dB Meter — a sound-level meter for Apple Watch, compiled from a single TypeScript file with Perry and running natively with no iPhone companion.
+
+Getting it to build and run on the watch was the easy part. Getting it into the App Store took a full day of dead ends, because a "standalone watchOS app" is something Apple's delivery tooling quietly doesn't support:
+
+• altool has no watchOS product type
+• iTMSTransporter rejects the watchOS platform alias
+• xcodebuild's export step offers no App Store method for a watch archive
+• Xcode 26's Organizer shows only Ad Hoc, Enterprise, and Development
+
+The usual escape hatch — embedding the watch app inside a real iOS app — would have forced me to strip arm64_32, the 32-bit slice every Apple Watch Series 4 through 8 and the SE needs. It also makes the App Store demand iPhone screenshots for an app that does nothing on iPhone.
+
+The fix almost nobody documents: wrap the watch app in a tiny iOS "container stub" flagged ITSWatchOnlyContainer, keep the watch app WKWatchOnly with its arm64_32 slice intact, and upload with iTMSTransporter. App Store Connect then treats the whole bundle as watch-only — no iPhone screenshots, full support for older watches.
+
+I wrote up the whole thing — the exact Info.plist keys, the three validation landmines, and the error each one throws:
+https://perryts.com/blog/shipping-a-watch-only-app-to-the-app-store
+
+If you're building for Apple Watch and Xcode is telling you it can't be done — it can.
+
+#watchOS #iOSDev #AppStore #TypeScript #Perry

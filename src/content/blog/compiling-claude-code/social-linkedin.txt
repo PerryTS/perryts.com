@@ -1,0 +1,30 @@
+COMPILING CLAUDE CODE — LinkedIn copy
+Blog: https://perryts.com/blog/compiling-claude-code
+
+============================================================
+
+The best test suite we have ever written for Perry is somebody else's minified JavaScript.
+
+In June we pointed Perry — our ahead-of-time TypeScript-to-native compiler — at the 13 MB minified cli.js that npm ships for Anthropic's Claude Code CLI. Not a fork, not a port: the published artifact, unmodified, compiled to a native executable.
+
+A month later it launches, runs the OAuth login flow, streams a real API response, and paints the characters you type. Getting there took 160 pull requests merged into Perry.
+
+A few of the bugs it found:
+
+• Perry's MessageChannel installed postMessage as a no-op. Harmless in isolation — until you meet the React-scheduler pattern that uses a message channel as its macrotask queue. Every real subcommand hung at startup, with no error and no CPU usage.
+
+• A single accessor installed on Object.prototype flipped a process-global flag that disabled the fast path for every dynamic property write in the program. A 20,000-property build went from 16 ms to 42 seconds.
+
+• The compiled binary did a complete API round-trip against our mock server, and hung forever against the real API. The reason: the real API sends `event: ping` frames, and ping is the one event the SDK skips with a bare `continue` — which Perry's for-await lowering had placed before the iterator advance. A mock that passes is only evidence about the mock.
+
+• The terminal UI crashed within seconds because RegExp headers stored their pattern and flags strings without a GC write barrier. A terminal UI runs regexes on every frame, so the collector kept sweeping those strings out from under a live object. Our minimal reproduction never triggered it. The real app triggered it every time.
+
+Honest status: it works, and it is slow. `--version` now beats Node (227 ms vs 328 ms), but first paint is 8.4 s against Node's 0.76 s, and idle memory sits at 420 MB against Node's flat 290 MB. Correctness came first; performance is the campaign we are on now.
+
+The point isn't the app. A missing write barrier on regex headers corrupts memory in any program that builds regexes under load. A for-await loop that skips its advance on `continue` spins in any stream consumer. All of it was sitting in Perry while CI was green, test262 numbers climbed, and the Node parity matrix read 97%.
+
+Nothing replaces real-world software for finding the limits of your own.
+
+Full write-up: https://perryts.com/blog/compiling-claude-code
+
+#TypeScript #Compilers #Rust #LLVM #SoftwareEngineering #Perry

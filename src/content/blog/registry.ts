@@ -22,6 +22,8 @@ const slugs = [
   "updater-live-inspector-and-compiler-refactor",
   "closing-the-gc-gap",
   "real-npm-packages-and-a-conformance-sweep",
+  "shipping-a-watch-only-app-to-the-app-store",
+  "compiling-claude-code",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -296,6 +298,12 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     vi: () => import("./real-npm-packages-and-a-conformance-sweep/vi"),
     id: () => import("./real-npm-packages-and-a-conformance-sweep/id"),
     "zh-Hans": () => import("./real-npm-packages-and-a-conformance-sweep/zh-Hans"),
+  },
+  "shipping-a-watch-only-app-to-the-app-store": {
+    en: () => import("./shipping-a-watch-only-app-to-the-app-store/en"),
+  },
+  "compiling-claude-code": {
+    en: () => import("./compiling-claude-code/en"),
   },
 };
 

@@ -552,6 +552,14 @@
     "real-npm-packages-and-a-conformance-sweep": {
       "title": "本物の npm パッケージが今コンパイルできる：axios、zod、express — そして適合性の一掃",
       "excerpt": "v0.5.875 から v0.5.1146 までの約 270 リリースは、1 つのベンチマークについてではなかった — 本物の npm パッケージをコンパイルして動かすことについてだった。axios、zod v4、express、fastify、hono が今や動く。test262 パリティが跳躍した（String 60→79%、Array 61→72%）。Windows は Mica で Fluent になった。そして DatePicker とドラッグ & ドロップがすべてのプラットフォームに着地した。"
+    },
+    "shipping-a-watch-only-app-to-the-app-store": {
+      "title": "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
+      "excerpt": "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter."
+    },
+    "compiling-claude-code": {
+      "title": "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
+      "excerpt": "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers."
     }
   },
   "compare": {

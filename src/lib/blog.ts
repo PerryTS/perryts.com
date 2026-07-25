@@ -172,6 +172,24 @@ export const blogPosts: BlogPost[] = [
     tags: ["npm", "test262", "Windows", "widgets", "milestone"],
     content: () => null,
   },
+  {
+    slug: "shipping-a-watch-only-app-to-the-app-store",
+    title: "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
+    date: "2026-07-07",
+    excerpt:
+      "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter.",
+    tags: ["watchOS", "App Store", "iOS", "how-to"],
+    content: () => null,
+  },
+  {
+    slug: "compiling-claude-code",
+    title: "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
+    date: "2026-07-25",
+    excerpt:
+      "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers.",
+    tags: ["compiler", "GC", "debugging", "Node.js parity", "milestone"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
