@@ -24,6 +24,7 @@ const slugs = [
   "real-npm-packages-and-a-conformance-sweep",
   "shipping-a-watch-only-app-to-the-app-store",
   "compiling-claude-code",
+  "gc-decisions-surprises",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -307,6 +308,21 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     ja: () => import("./compiling-claude-code/ja"),
     ko: () => import("./compiling-claude-code/ko"),
     "zh-Hans": () => import("./compiling-claude-code/zh-Hans"),
+  },
+  "gc-decisions-surprises": {
+    en: () => import("./gc-decisions-surprises/en"),
+    de: () => import("./gc-decisions-surprises/de"),
+    es: () => import("./gc-decisions-surprises/es"),
+    fr: () => import("./gc-decisions-surprises/fr"),
+    it: () => import("./gc-decisions-surprises/it"),
+    ja: () => import("./gc-decisions-surprises/ja"),
+    ko: () => import("./gc-decisions-surprises/ko"),
+    pt: () => import("./gc-decisions-surprises/pt"),
+    th: () => import("./gc-decisions-surprises/th"),
+    tr: () => import("./gc-decisions-surprises/tr"),
+    vi: () => import("./gc-decisions-surprises/vi"),
+    id: () => import("./gc-decisions-surprises/id"),
+    "zh-Hans": () => import("./gc-decisions-surprises/zh-Hans"),
   },
 };
 

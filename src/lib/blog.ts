@@ -190,6 +190,15 @@ export const blogPosts: BlogPost[] = [
     tags: ["compiler", "GC", "debugging", "Node.js parity", "milestone"],
     content: () => null,
   },
+  {
+    slug: "gc-decisions-surprises",
+    title: "Building a GC for a Native TypeScript Compiler: Decisions, Surprises, and How It's Going",
+    date: "2026-08-12",
+    excerpt:
+      "Perry compiles TypeScript to native code with LLVM — which means it needs a real garbage collector. The decisions we made, the bugs that left no evidence, the CI gates that couldn't fail, and where the numbers stand against Node and a refcounting AOT competitor.",
+    tags: ["GC", "performance", "LLVM", "debugging", "architecture"],
+    content: () => null,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

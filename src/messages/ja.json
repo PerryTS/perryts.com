@@ -560,6 +560,10 @@
     "compiling-claude-code": {
       "title": "Claude Code をコンパイルする — 1つの minify 済みバンドル、160件のコンパイラ修正",
       "excerpt": "私たちは、npm が Claude Code 向けに出荷する13 MBの minify 済みの cli.js に Perry を向け、それをネイティブバイナリに変えようとしました。1か月後、それは起動し、ログインし、本物の API レスポンスをストリームし、入力した文字を描画するようになりました — そして160件のプルリクエストが Perry にマージされました。no-op だった MessageChannel から、RegExp ヘッダーに欠けていた GC の write barrier まで。"
+    },
+    "gc-decisions-surprises": {
+      "title": "ネイティブ TypeScript コンパイラの GC を作る：判断、意外な発見、そして現在地",
+      "excerpt": "Perry は LLVM で TypeScript をネイティブコードへコンパイルします。つまり、本物のガベージコレクタが必要です。私たちが下した判断、証拠を残さないバグ、構造上失敗できなかった CI ゲート、そして Node や参照カウント方式の AOT 競合との現在の数値を紹介します。"
     }
   },
   "compare": {

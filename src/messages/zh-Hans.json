@@ -560,6 +560,10 @@
     "compiling-claude-code": {
       "title": "编译 Claude Code：一个压缩包，160 个编译器修复",
       "excerpt": "我们把 Perry 对准了 npm 为 Claude Code 发布的那份 13 MB 压缩过的 cli.js，试着把它变成一个原生二进制文件。一个月后，它能启动、登录、流式接收真实的 API 响应，并把你键入的内容绘制出来——期间有 160 个 pull request 落地进了 Perry，从一个空操作的 MessageChannel，到 RegExp 头部缺失的 GC 写屏障。"
+    },
+    "gc-decisions-surprises": {
+      "title": "为原生 TypeScript 编译器构建 GC：决策、意外与当前进展",
+      "excerpt": "Perry 使用 LLVM 将 TypeScript 编译为原生代码，因此它需要真正的垃圾回收器。本文介绍我们做出的决策、不留下任何证据的错误、在结构上根本不可能失败的 CI 门禁，以及与 Node 和采用引用计数的 AOT 竞争者相比的最新数据。"
     }
   },
   "compare": {

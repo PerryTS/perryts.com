@@ -560,6 +560,10 @@
     "compiling-claude-code": {
       "title": "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
       "excerpt": "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers."
+    },
+    "gc-decisions-surprises": {
+      "title": "Construindo um GC para um compilador TypeScript nativo: decisões, surpresas e o estado atual",
+      "excerpt": "Perry compila TypeScript para código nativo com LLVM — portanto, precisa de um coletor de lixo de verdade. As decisões que tomamos, os bugs que não deixavam evidências, os gates de CI que não podiam falhar e a situação dos números diante do Node e de um concorrente AOT com contagem de referências."
     }
   },
   "compare": {
