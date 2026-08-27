@@ -12,12 +12,12 @@ export interface ShowcaseProject {
 
 export const showcaseProjects: ShowcaseProject[] = [
   {
-    slug: "bloom-jump",
-    name: "Bloom Jump",
-    tagline: "Native arcade jumper that runs everywhere — even on your TV and watch",
+    slug: "bloom-engine",
+    name: "Bloom Engine",
+    tagline: "Native TypeScript game engine across desktop, mobile, and TV",
     description:
-      "A fast-paced arcade jumping game compiled from TypeScript to native binaries. Runs at full framerate across phones, tablets, desktops, and even tvOS and watchOS — one codebase, every screen.",
-    platforms: ["iOS", "iPadOS", "macOS", "Android", "tvOS", "watchOS"],
+      "A native TypeScript game engine with Metal, DirectX 12, Vulkan, and OpenGL backends. The published platform list covers macOS, Windows, Linux, iOS, tvOS, and Android.",
+    platforms: ["macOS", "Windows", "Linux", "iOS", "tvOS", "Android"],
     githubUrl: "https://bloomengine.dev/showcase",
     tags: ["game", "arcade", "native-ui"],
     hasFeaturePage: false,
@@ -27,7 +27,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     name: "Mango",
     tagline: "Native MongoDB GUI that starts instantly",
     description:
-      "A fast, native MongoDB database management tool with connection management, query builder, inline document editing, and index viewer. ~7 MB binary, <100 MB RAM, <1s cold start.",
+      "A native MongoDB database management tool with connection management, a query builder, inline document editing, and an index viewer. Its public project listing reports a ~7 MB app and sub-second cold start.",
     platforms: ["macOS", "Windows", "Linux", "iOS", "Android"],
     githubUrl: "https://github.com/MangoQuery/app",
     tags: ["database", "native-ui", "MongoDB"],
@@ -39,7 +39,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     name: "Hone",
     tagline: "Native, AI-powered code editor",
     description:
-      "A native code editor with AI-first architecture, built-in terminal, Git integration, LSP support, and cross-device sync. Sub-second startup, <100 MB RAM, <50 MB binary.",
+      "A native code editor with AI-first architecture, a built-in terminal, Git integration, LSP support, and cross-device sync.",
     platforms: ["macOS", "Windows", "Linux", "iOS", "Android", "Web"],
     githubUrl: "https://hone.codes",
     tags: ["developer-tools", "AI", "code-editor"],
@@ -51,7 +51,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     name: "dB Meter",
     tagline: "Simple sound level measurement app",
     description:
-      "Real-time decibel measurement with 60fps updates, color-coded feedback, live waveform display, and per-device calibration. One-time purchase, no subscriptions.",
+      "Real-time decibel measurement with 60 fps updates, color-coded feedback, a live waveform display, and per-device calibration.",
     platforms: ["iOS", "macOS", "Android"],
     githubUrl: "https://dbmeter.app",
     tags: ["audio", "utility", "native-ui"],
@@ -74,7 +74,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     name: "Perry Demo",
     tagline: "Live benchmark comparing Perry vs Node.js vs Bun",
     description:
-      "An interactive demo that benchmarks Perry-compiled executables against Node.js and Bun, showing startup time, memory usage, and binary size differences in real time.",
+      "An interactive demo for exploring Perry, Node.js, and Bun benchmark runs. Results depend on the selected workload, tool versions, and host machine.",
     platforms: ["Web"],
     githubUrl: "https://demo.perryts.com",
     tags: ["benchmark", "demo"],

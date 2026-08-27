@@ -11,8 +11,8 @@ const examples = [
 const greeting = "Hello, World!";
 console.log(greeting);
 
-// Compiles to ~2MB native executable
-// No runtime needed!`,
+// Output size varies with target and linked features
+// No external JavaScript runtime installation needed!`,
   },
   {
     name: "File System",
@@ -30,7 +30,7 @@ console.log(\`Loaded config: \${config.name}\`);`,
     filename: "fetch.ts",
     code: `import axios from 'axios';
 
-// Native Rust implementation - no npm install needed
+// Validate package support with: perry check
 const response = await axios.get('https://api.example.com/data');
 
 console.log(\`Status: \${response.status}\`);
@@ -144,7 +144,7 @@ export function CodeExample() {
               <div className="flex-1 font-mono text-sm">
                 <span className="text-slate-500">$</span>{" "}
                 <span className="text-cyan-400">perry</span>{" "}
-                <span className="text-white">build</span>{" "}
+                <span className="text-white">compile</span>{" "}
                 <span className="text-yellow-400">{examples[activeTab].filename}</span>
               </div>
               <div className="text-green-400 text-sm flex items-center gap-2">

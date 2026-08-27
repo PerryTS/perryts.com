@@ -1,14 +1,14 @@
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import type { CompareItem } from "@/lib/compare";
+import { getComparisonContent } from "@/lib/compare-content";
 
 export async function CompareCard({ item }: { item: CompareItem }) {
-  const t = await getTranslations("compare");
   const ui = await getTranslations("compare.ui");
-
-  const title = t(`items.${item.slug}.title`);
-  const tldr = t(`items.${item.slug}.tldr`);
+  const data = getComparisonContent(item.slug);
   const categoryLabel = ui(`category.${item.category}`);
+
+  if (!data) return null;
 
   return (
     <Link href={`/compare/${item.slug}`} className="feature-card block group">
@@ -18,9 +18,9 @@ export async function CompareCard({ item }: { item: CompareItem }) {
         </span>
       </div>
       <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors">
-        {title}
+        {data.title}
       </h3>
-      <p className="text-slate-400 text-sm line-clamp-3">{tldr}</p>
+      <p className="text-slate-400 text-sm line-clamp-3">{data.tldr}</p>
     </Link>
   );
 }

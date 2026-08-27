@@ -5,10 +5,20 @@ import { Footer } from "@/components/Footer";
 import { BlogCard } from "@/components/BlogCard";
 import { blogPosts } from "@/lib/blog";
 
-export const metadata: Metadata = {
-  title: "Blog - Perry",
-  description: "News, tutorials, and deep dives into Perry — the native TypeScript compiler.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("blog");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: `/${locale}/blog/` },
+  };
+}
 
 export default async function BlogIndex({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -1,7 +1,9 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { PRODUCT_FACTS } from "@/lib/product-facts";
 
 export async function Hero() {
   const t = await getTranslations("hero");
+  const locale = await getLocale();
 
   return (
     <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -18,6 +20,12 @@ export async function Hero() {
             {t("badge")}
           </span>
         </div>
+
+        {locale !== "en" && (
+          <p className="max-w-2xl mx-auto -mt-4 mb-8 text-xs text-slate-500">
+            {t("factsLanguageNotice")}
+          </p>
+        )}
 
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
           {t("headline1")}
@@ -74,15 +82,21 @@ export async function Hero() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">10</div>
+            <div className="text-3xl font-bold gradient-text">
+              {PRODUCT_FACTS.documentedTargetCount} + preview
+            </div>
             <div className="text-slate-500 text-sm mt-1">{t("targetsLabel")}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">25+</div>
+            <div className="text-3xl font-bold gradient-text">
+              {PRODUCT_FACTS.nativeWidgetCount}
+            </div>
             <div className="text-slate-500 text-sm mt-1">{t("widgetsLabel")}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text">0 ms</div>
+            <div className="text-3xl font-bold gradient-text">
+              {PRODUCT_FACTS.measuredMacStartup}
+            </div>
             <div className="text-slate-500 text-sm mt-1">{t("startupLabel")}</div>
           </div>
           <div className="text-center">

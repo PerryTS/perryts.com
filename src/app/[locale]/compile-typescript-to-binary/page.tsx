@@ -14,17 +14,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const { meta } = await getLandingContent(SLUG, locale);
+  const { meta, resolvedLocale } = await getLandingContent(SLUG, locale);
+  const canonicalLocale = resolvedLocale ?? locale;
   return {
     title: meta.title,
     description: meta.description,
     alternates: {
-      canonical: `/${locale}/compile-typescript-to-binary/`,
+      canonical: `/${canonicalLocale}/compile-typescript-to-binary/`,
     },
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `/${locale}/compile-typescript-to-binary/`,
+      url: `/${canonicalLocale}/compile-typescript-to-binary/`,
       type: "article",
     },
   };

@@ -1,145 +1,108 @@
 import { getTranslations } from "next-intl/server";
+import { PRODUCT_FACTS } from "@/lib/product-facts";
+
+type FeatureStatus = "tested" | "partial";
+
+const categories: ReadonlyArray<{
+  nameKey: "coreLanguage" | "functions" | "classes" | "typeSystem" | "standardLibrary";
+  features: ReadonlyArray<{ name: string; status: FeatureStatus }>;
+}> = [
+  {
+    nameKey: "coreLanguage",
+    features: [
+      { name: "Numbers (f64 + selected unboxed representations)", status: "tested" },
+      { name: "Strings (UTF-8)", status: "tested" },
+      { name: "Booleans", status: "tested" },
+      { name: "Arrays", status: "tested" },
+      { name: "Objects", status: "tested" },
+      { name: "BigInt (fixed 1024-bit)", status: "tested" },
+      { name: "Proxy", status: "partial" },
+      { name: "eval / runtime-generated code", status: "partial" },
+    ],
+  },
+  {
+    nameKey: "functions",
+    features: [
+      { name: "Function declarations", status: "tested" },
+      { name: "Arrow functions", status: "tested" },
+      { name: "Default parameters", status: "tested" },
+      { name: "Rest parameters", status: "tested" },
+      { name: "Closures", status: "tested" },
+      { name: "Higher-order functions", status: "tested" },
+      { name: "Async / await", status: "tested" },
+      { name: "Runtime-computed dynamic import", status: "partial" },
+    ],
+  },
+  {
+    nameKey: "classes",
+    features: [
+      { name: "Classes and constructors", status: "tested" },
+      { name: "Private fields (#)", status: "tested" },
+      { name: "Static methods / fields", status: "tested" },
+      { name: "Getters / setters", status: "tested" },
+      { name: "Inheritance and super", status: "tested" },
+      { name: "Decorators and reflection", status: "partial" },
+      { name: "Dynamic prototype manipulation", status: "partial" },
+      { name: "Weak references / finalizers", status: "partial" },
+    ],
+  },
+  {
+    nameKey: "typeSystem",
+    features: [
+      { name: "Type annotations", status: "tested" },
+      { name: "Local type inference", status: "tested" },
+      { name: "Generics / specialization", status: "tested" },
+      { name: "Interfaces", status: "tested" },
+      { name: "Union types and guards", status: "tested" },
+      { name: "Runtime type validation", status: "partial" },
+    ],
+  },
+  {
+    nameKey: "standardLibrary",
+    features: [
+      { name: "fs / path / os", status: "partial" },
+      { name: "crypto", status: "partial" },
+      { name: "Buffer and streams", status: "partial" },
+      { name: "http / http2 / net / tls", status: "partial" },
+      { name: "child_process / worker_threads", status: "partial" },
+      { name: "WebAssembly global", status: "partial" },
+      { name: `${PRODUCT_FACTS.nodeParity} Node suite · ${PRODUCT_FACTS.nodeModuleCount} modules`, status: "partial" },
+    ],
+  },
+];
+
+function StatusIcon({ status }: { status: FeatureStatus }) {
+  return status === "tested" ? (
+    <span className="mt-0.5 w-4 h-4 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] flex items-center justify-center">✓</span>
+  ) : (
+    <span className="mt-0.5 w-4 h-4 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] flex items-center justify-center">–</span>
+  );
+}
 
 export async function FeatureTable() {
   const t = await getTranslations("featureTable");
-  const categories = [
-    {
-      name: "Core Language",
-      features: [
-        { name: "Numbers", status: "full", note: "64-bit floating point (f64)" },
-        { name: "Strings", status: "full", note: "UTF-8, all common methods" },
-        { name: "Booleans", status: "full", note: "true/false, logical operators" },
-        { name: "Arrays", status: "full", note: "Typed and mixed-type arrays" },
-        { name: "Objects", status: "full", note: "Object literals and field access" },
-        { name: "BigInt", status: "full", note: "256-bit integer support" },
-        { name: "Enums", status: "full", note: "Numeric and string enums" },
-      ],
-    },
-    {
-      name: "Functions",
-      features: [
-        { name: "Function Declaration", status: "full", note: "Named functions" },
-        { name: "Arrow Functions", status: "full", note: "() => {} syntax" },
-        { name: "Default Parameters", status: "full", note: "Parameters with defaults" },
-        { name: "Rest Parameters", status: "full", note: "...args syntax" },
-        { name: "Closures", status: "full", note: "Including mutable captures" },
-        { name: "Higher-Order Functions", status: "full", note: "Functions as arguments/returns" },
-        { name: "Async/Await", status: "full", note: "Async function support" },
-      ],
-    },
-    {
-      name: "Classes",
-      features: [
-        { name: "Class Declaration", status: "full", note: "Basic class syntax" },
-        { name: "Constructors", status: "full", note: "With parameters" },
-        { name: "Private Fields (#)", status: "full", note: "ES2022 #privateField syntax" },
-        { name: "Static Methods/Fields", status: "full", note: "Class-level members" },
-        { name: "Getters/Setters", status: "full", note: "get/set accessors" },
-        { name: "Inheritance", status: "full", note: "extends keyword" },
-        { name: "Super Calls", status: "full", note: "super() constructor calls" },
-      ],
-    },
-    {
-      name: "Type System",
-      features: [
-        { name: "Type Annotations", status: "full", note: "Explicit type declarations" },
-        { name: "Type Inference", status: "full", note: "Automatic type detection" },
-        { name: "Generics", status: "full", note: "Monomorphization (like Rust)" },
-        { name: "Interfaces", status: "full", note: "Interface declarations" },
-        { name: "Union Types", status: "full", note: "string | number support" },
-        { name: "Type Guards", status: "full", note: "typeof operator" },
-        { name: "Type Aliases", status: "full", note: "type X = ... declarations" },
-      ],
-    },
-    {
-      name: "Standard Library",
-      features: [
-        { name: "fs", status: "full", note: "readFileSync, writeFileSync, existsSync, etc." },
-        { name: "path", status: "full", note: "join, dirname, basename, extname, resolve" },
-        { name: "crypto", status: "full", note: "randomBytes, randomUUID, sha256, md5" },
-        { name: "os", status: "full", note: "platform, arch, hostname, memory info" },
-        { name: "Buffer", status: "full", note: "from, alloc, toString, slice, copy" },
-        { name: "child_process", status: "full", note: "execSync, spawnSync" },
-        { name: "JSON/Math/Date", status: "full", note: "Full implementations" },
-      ],
-    },
-  ];
 
   return (
     <section id="docs" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t.rich("title", { gradient: (chunks) => <span className="gradient-text">{chunks}</span> })}
+            {t.rich("title", {
+              gradient: (chunks) => <span className="gradient-text">{chunks}</span>,
+            })}
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            {t("subtitle")}
-          </p>
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">{t("subtitle")}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="feature-card">
-              <h3 className="text-lg font-semibold mb-4 text-perry-400">
-                {category.name}
-              </h3>
+          {categories.map((category) => (
+            <div key={category.nameKey} className="feature-card">
+              <h3 className="text-lg font-semibold mb-4 text-perry-400">{t(category.nameKey)}</h3>
               <ul className="space-y-2">
-                {category.features.map((feature, featureIndex) => (
-                  <li
-                    key={featureIndex}
-                    className="flex items-start gap-2 text-sm"
-                  >
-                    <span className="mt-0.5">
-                      {feature.status === "full" ? (
-                        <svg
-                          className="w-4 h-4 text-green-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      ) : feature.status === "partial" ? (
-                        <svg
-                          className="w-4 h-4 text-yellow-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          className="w-4 h-4 text-slate-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      )}
-                    </span>
-                    <div>
-                      <span className="text-slate-300">{feature.name}</span>
-                      <span className="text-slate-500 text-xs block">
-                        {feature.note}
-                      </span>
-                    </div>
+                {category.features.map((feature) => (
+                  <li key={feature.name} className="flex items-start gap-2 text-sm">
+                    <StatusIcon status={feature.status} />
+                    <span className="text-slate-300">{feature.name}</span>
                   </li>
                 ))}
               </ul>
@@ -147,40 +110,17 @@ export async function FeatureTable() {
           ))}
         </div>
 
-        {/* Legend */}
-        <div className="flex items-center justify-center gap-8 mt-8 text-sm text-slate-400">
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-green-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            {t("fullSupport")}
+        <div className="mt-8 text-center text-sm text-slate-400">
+          <div className="flex flex-wrap items-center justify-center gap-6 mb-3">
+            <span className="flex items-center gap-2"><StatusIcon status="tested" />{t("tested")}</span>
+            <span className="flex items-center gap-2"><StatusIcon status="partial" />{t("partial")}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-yellow-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            {t("partial")}
-          </div>
+          <p className="text-slate-500">
+            {t("limitationsNote")}{" "}
+            <a href={PRODUCT_FACTS.limitationsUrl} target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-white underline underline-offset-4">
+              {t("limitationsLink")}
+            </a>
+          </p>
         </div>
       </div>
     </section>

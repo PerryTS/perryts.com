@@ -1,8 +1,9 @@
 import Fastify from "fastify";
 import fs from "fs";
+import path from "path";
 
 const app = Fastify();
-const outDir = "./out";
+const outDir = path.resolve("./out");
 
 function mimeType(filePath: string): string {
   if (filePath.endsWith(".html")) return "text/html; charset=utf-8";
@@ -28,19 +29,41 @@ function mimeTypeFromName(filePath: string): string {
   return "application/octet-stream";
 }
 
-function sendFile(filePath: string, mime: string, reply: any) {
-  reply.header("content-type", mime).send(fs.readFileSync(filePath, "utf-8"));
-}
-
 app.get("/*", async (req: any, reply: any) => {
   const urlPath = (req.url as string).split("?")[0];
-  const relative = urlPath.startsWith("/") ? urlPath.slice(1) : urlPath;
-  const base = outDir + "/" + relative;
+  reply
+    .header("x-content-type-options", "nosniff")
+    .header("x-frame-options", "DENY")
+    .header("referrer-policy", "strict-origin-when-cross-origin")
+    .header("permissions-policy", "camera=(), microphone=(), geolocation=()");
+  if (urlPath === "/") {
+    reply.status(308).header("location", "/en/").send("");
+    return;
+  }
+  let relative: string;
+  try {
+    relative = decodeURIComponent(urlPath).replace(/^\/+/, "");
+  } catch {
+    reply.status(400).send("Bad Request");
+    return;
+  }
+  if (relative.includes("\0")) {
+    reply.status(400).send("Bad Request");
+    return;
+  }
+
+  const base = path.resolve(outDir, relative);
+  if (base !== outDir && !base.startsWith(outDir + path.sep)) {
+    reply.status(404).send("Not Found");
+    return;
+  }
 
   // Try directory index
-  const indexPath = base + "/index.html";
+  const indexPath = path.join(base, "index.html");
   if (fs.existsSync(indexPath)) {
-    sendFile(indexPath, "text/html; charset=utf-8", reply);
+    reply
+      .header("content-type", "text/html; charset=utf-8")
+      .send(fs.readFileSync(indexPath));
     return;
   }
 
@@ -50,26 +73,35 @@ app.get("/*", async (req: any, reply: any) => {
     if (mime === "application/octet-stream") {
       mime = mimeTypeFromName(base);
     }
-    sendFile(base, mime, reply);
+    reply
+      .header("content-type", mime)
+      .send(fs.readFileSync(base));
     return;
   }
 
   // Try adding .html
-  const htmlPath = base + ".html";
+  const htmlPath = `${base}.html`;
   if (fs.existsSync(htmlPath)) {
-    sendFile(htmlPath, "text/html; charset=utf-8", reply);
+    reply
+      .header("content-type", "text/html; charset=utf-8")
+      .send(fs.readFileSync(htmlPath));
     return;
   }
 
   // Redirect locale-less paths to the default locale (/showcase -> /en/showcase)
   const trimmed = relative.endsWith("/") ? relative.slice(0, -1) : relative;
-  if (trimmed && fs.existsSync(outDir + "/en/" + trimmed + "/index.html")) {
-    reply.status(301).header("location", "/en/" + trimmed).send("");
+  const englishIndex = path.resolve(outDir, "en", trimmed, "index.html");
+  if (
+    trimmed &&
+    englishIndex.startsWith(outDir + path.sep) &&
+    fs.existsSync(englishIndex)
+  ) {
+    reply.status(301).header("location", `/en/${trimmed}/`).send("");
     return;
   }
 
   // 404
-  const page404 = outDir + "/404.html";
+  const page404 = path.join(outDir, "404.html");
   if (fs.existsSync(page404)) {
     const body = fs.readFileSync(page404, "utf-8");
     reply.status(404).header("content-type", "text/html; charset=utf-8").send(body);

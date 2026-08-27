@@ -14,17 +14,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const { meta } = await getLandingContent(SLUG, locale);
+  const { meta, resolvedLocale } = await getLandingContent(SLUG, locale);
+  const canonicalLocale = resolvedLocale ?? locale;
   return {
     title: meta.title,
     description: meta.description,
     alternates: {
-      canonical: `/${locale}/compare/perry-vs-electron-alternatives/`,
+      canonical: `/${canonicalLocale}/compare/perry-vs-electron-alternatives/`,
     },
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `/${locale}/compare/perry-vs-electron-alternatives/`,
+      url: `/${canonicalLocale}/compare/perry-vs-electron-alternatives/`,
       type: "article",
     },
   };

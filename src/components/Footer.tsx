@@ -113,10 +113,10 @@ export async function Footer() {
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <Link href="/imprint" className="hover:text-white transition-colors">
-              Impressum
+              {t("imprint")}
             </Link>
             <Link href="/privacy" className="hover:text-white transition-colors">
-              Datenschutz
+              {t("privacy")}
             </Link>
             <a
               href="https://github.com/PerryTS/perry"

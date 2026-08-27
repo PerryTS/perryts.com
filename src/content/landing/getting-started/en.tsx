@@ -1,12 +1,13 @@
 import { Link } from "@/i18n/navigation";
 import { Installation } from "@/components/Installation";
+import { TechnicalFactsNotice } from "@/components/TechnicalFactsNotice";
 import type { LandingMeta } from "../registry";
 
 export const meta: LandingMeta = {
   title:
     "Get Started with Perry — Install & Compile TypeScript to Native",
   description:
-    "Install Perry with Homebrew, APT, or winget and compile your first TypeScript file into a native executable in under a minute. No Node.js required.",
+    "Install Perry and compile a TypeScript file into a native executable. Native output needs no external Node.js installation or JavaScript engine.",
   breadcrumb: "Get Started",
   absoluteTitle: true,
 };
@@ -16,12 +17,14 @@ export default function Content() {
     <>
             <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
+          <TechnicalFactsNotice />
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">
             Get Started with <span className="gradient-text">Perry</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            From zero to a running native executable in three steps. No Node.js,
-            no bundler, no runtime to install on the target machine.
+            From zero to a running native executable in three steps. Native
+            output does not need Node.js or an external JavaScript engine on
+            the target machine; Perry&apos;s runtime and GC are linked into it.
           </p>
         </div>
       </section>
@@ -77,8 +80,9 @@ console.log(\`Hello, \${name}!\`);`}</code>
           </div>
 
           <p className="text-slate-400 leading-relaxed mb-12">
-            That binary starts in about a millisecond and runs on any machine
-            with the same OS and architecture — nothing to install first. Read
+            The published runtime-only hello-world measurement is about 3.2 ms
+            on the documented Apple M-series test host. Real startup depends on
+            the target, linked features, I/O, and hardware. Read
             more about{" "}
             <Link
               href="/compile-typescript-to-binary"
@@ -108,8 +112,8 @@ console.log(\`Hello, \${name}!\`);`}</code>
                 Documentation
               </h3>
               <p className="text-slate-400 text-sm">
-                Guides for the CLI, perry/ui widgets, threading, i18n, and every
-                compilation target — at docs.perryts.com.
+                Guides for the CLI, Perry UI widgets, threading, i18n, platform
+                prerequisites, and known limitations.
               </p>
             </a>
             <Link href="/showcase" className="feature-card block group">
@@ -117,8 +121,8 @@ console.log(\`Hello, \${name}!\`);`}</code>
                 Showcase
               </h3>
               <p className="text-slate-400 text-sm">
-                Real apps compiled with Perry, shipping on the App Store and
-                beyond.
+                Public applications and examples built with Perry, with
+                measurements labeled where evidence is available.
               </p>
             </Link>
             <Link href="/compare" className="feature-card block group">

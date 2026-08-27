@@ -24,14 +24,14 @@ const softwareApplicationJsonLd = {
   name: "Perry",
   applicationCategory: "DeveloperApplication",
   operatingSystem:
-    "macOS, Windows, Linux, iOS, iPadOS, Android, watchOS, tvOS",
+    "macOS, Windows, Linux, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Web/WebAssembly",
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
   },
   description:
-    "Perry is a TypeScript to native compiler: standalone binaries with no Node.js runtime. 2–5 MB executables for macOS, Linux, Windows, iOS, and Android.",
+    "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
   url: "https://perryts.com/en/",
   sameAs: [
     "https://github.com/PerryTS/perry",

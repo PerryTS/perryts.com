@@ -4,11 +4,20 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
 
-export const metadata: Metadata = {
-  title: "Pry — Native JSON Viewer - Perry Showcase",
-  description:
-    "Pry is a native JSON viewer built with Perry. Tree navigation, search, keyboard shortcuts — compiled from TypeScript to native macOS, iOS, and Android apps.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("pry");
+  return {
+    title: "Pry — Perry showcase",
+    description: t("subtitle"),
+    alternates: { canonical: `/${locale}/showcase/pry/` },
+  };
+}
 
 export default async function PryShowcase({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -168,26 +177,14 @@ export default async function PryShowcase({ params }: { params: Promise<{ locale
           </div>
 
           <div className="code-block">
-            <div className="flex items-center gap-2 mb-4 text-slate-500">
-              <div className="w-3 h-3 rounded-full bg-red-500/50" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-              <div className="w-3 h-3 rounded-full bg-green-500/50" />
-              <span className="ml-2 text-xs">pry.ts (simplified)</span>
-            </div>
-            <div className="space-y-1 text-sm">
-              <p><span className="text-purple-400">import</span> {"{"} <span className="text-cyan-400">App</span>, <span className="text-cyan-400">TreeView</span>, <span className="text-cyan-400">SearchBar</span> {"}"} <span className="text-purple-400">from</span> <span className="text-green-400">&quot;perry/ui&quot;</span>;</p>
-              <p><span className="text-purple-400">import</span> {"{"} <span className="text-cyan-400">readFile</span> {"}"} <span className="text-purple-400">from</span> <span className="text-green-400">&quot;perry/fs&quot;</span>;</p>
-              <p className="mt-3"><span className="text-purple-400">const</span> <span className="text-cyan-400">data</span> = JSON.<span className="text-yellow-400">parse</span>(<span className="text-yellow-400">readFile</span>(process.argv[2]));</p>
-              <p><span className="text-purple-400">const</span> <span className="text-cyan-400">app</span> = <span className="text-purple-400">new</span> <span className="text-yellow-400">App</span>(<span className="text-green-400">&quot;Pry&quot;</span>, {"{"} width: <span className="text-orange-400">800</span>, height: <span className="text-orange-400">600</span> {"}"});</p>
-              <p className="mt-3"><span className="text-cyan-400">app</span>.<span className="text-yellow-400">addSearchBar</span>({"{"} placeholder: <span className="text-green-400">&quot;Search JSON...&quot;</span> {"}"});</p>
-              <p><span className="text-cyan-400">app</span>.<span className="text-yellow-400">addTreeView</span>(<span className="text-cyan-400">data</span>, {"{"}</p>
-              <p>  collapsible: <span className="text-orange-400">true</span>,</p>
-              <p>  syntaxHighlight: <span className="text-orange-400">true</span>,</p>
-              <p>  copyOnClick: <span className="text-orange-400">true</span>,</p>
-              <p>{"}"});</p>
-              <p><span className="text-cyan-400">app</span>.<span className="text-yellow-400">addStatusBar</span>();</p>
-              <p><span className="text-cyan-400">app</span>.<span className="text-yellow-400">run</span>();</p>
-            </div>
+            <p className="text-sm text-slate-300">
+              <span className="text-slate-500">$</span>{" "}
+              <span className="text-cyan-400">perry</span> compile src/main.ts -o pry
+            </p>
+            <p className="mt-3 text-sm text-slate-500">
+              The complete, platform-specific source is linked below; this page
+              does not substitute a fictional simplified API for the real code.
+            </p>
           </div>
         </div>
       </section>

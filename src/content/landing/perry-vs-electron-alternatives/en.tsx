@@ -1,276 +1,112 @@
 import { Link } from "@/i18n/navigation";
+import { TechnicalFactsNotice } from "@/components/TechnicalFactsNotice";
+import { PRODUCT_FACTS } from "@/lib/product-facts";
 import type { LandingMeta } from "../registry";
 
 export const meta: LandingMeta = {
-  title:
-    "Electron Alternatives for TypeScript: Perry vs Tauri vs Bun",
+  title: "Electron Alternatives for TypeScript: Architecture and Tradeoffs",
   description:
-    "Looking for an Electron alternative in TypeScript? Compare Electron, Tauri, Bun-based approaches, and Perry on binary size, memory, UI stack, and language.",
+    "A sourced guide to Electron, Tauri, Bun standalone executables, and Perry, focused on runtime and UI architecture instead of universal size or speed claims.",
   breadcrumb: "Electron Alternatives for TypeScript",
 };
 
+const approaches = [
+  {
+    name: "Electron",
+    summary:
+      "Electron embeds Chromium and Node.js. Web content runs in Chromium renderer processes, while the main process runs in a Node.js environment. It offers the most direct reuse of an existing web application and a mature desktop ecosystem.",
+    bestFor: "Desktop products that prioritize web compatibility, team familiarity, and ecosystem maturity.",
+    source: "https://www.electronjs.org/docs/latest/",
+    compare: "/compare/electron" as const,
+  },
+  {
+    name: "Tauri",
+    summary:
+      "Tauri combines a compiled Rust core with HTML, CSS, and JavaScript rendered in the operating system webview. It avoids bundling a browser engine, but remains a webview architecture and can vary with the platform webview.",
+    bestFor: "Teams that want a web frontend with a Rust-native core and system-webview distribution.",
+    source: "https://v2.tauri.app/concept/architecture/",
+    compare: "/compare/tauri" as const,
+  },
+  {
+    name: "Bun standalone executables",
+    summary:
+      "Bun’s --compile workflow packages the application with a copy of the Bun runtime. It is useful for single-file CLIs and servers, but Bun does not provide a built-in cross-platform native-widget layer.",
+    bestFor: "CLIs and servers that value Bun’s runtime compatibility and integrated toolchain more than a native GUI layer.",
+    source: "https://bun.sh/docs/bundler/executables",
+    compare: "/compare/bun" as const,
+  },
+  {
+    name: "Perry",
+    summary:
+      "Perry compiles supported TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine by default, and remains a pre-1.0 compatibility surface.",
+    bestFor: "Validated applications where native widgets or Perry’s mobile, wearable, TV, and Web/WASM targets solve a specific product need.",
+    source: "https://github.com/PerryTS/perry#readme",
+    compare: "/typescript-native-compiler" as const,
+  },
+];
+
 export default function Content() {
   return (
-    <>
-            <article className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <Link
-            href="/compare"
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-8"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-            </svg>
-            Back to comparisons
-          </Link>
+    <article className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <TechnicalFactsNotice />
+        <Link href="/compare" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-8">
+          ← Back to comparisons
+        </Link>
 
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-            <span className="gradient-text">
-              Electron Alternatives for TypeScript Developers
-            </span>
-          </h1>
+        <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+          <span className="gradient-text">Electron Alternatives for TypeScript</span>
+        </h1>
+        <p className="text-lg text-slate-300 leading-relaxed mb-12">
+          “Electron alternative” can mean a smaller webview application, a
+          single-file runtime, or a real native-widget application. These are
+          different architectural choices, so this guide avoids invented
+          universal installer, memory, and startup numbers.
+        </p>
 
-          <p className="text-lg text-slate-300 leading-relaxed mb-12">
-            Electron made desktop apps accessible to web developers, and its
-            size and memory costs made &ldquo;Electron alternative&rdquo; a
-            permanent search query. If TypeScript is your language, there are
-            four realistic paths in 2026: stay with Electron, move to Tauri,
-            build runtime-embedded binaries with Bun, or compile to native with
-            Perry. They make very different trade-offs.
-          </p>
-
-          <h2 className="text-2xl font-bold mb-6">The four approaches</h2>
-
-          <div className="space-y-6 mb-16">
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Electron — the baseline
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Bundles Chromium and Node.js with every app. The upside is a
-                decade of production maturity and a UI stack (HTML/CSS/JS) your
-                team already knows — VS Code, Slack, and Discord ship on it.
-                The downside is the baseline cost: hello-world installers of
-                roughly 80–150 MB, multiple Chromium processes, and hundreds of
-                MB of RAM at idle. Desktop only.{" "}
-                <Link
-                  href="/compare/electron"
-                  className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-                >
-                  Full Perry vs Electron comparison
-                </Link>
-                .
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Tauri — web UI in the system webview, Rust backend
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Tauri keeps the web frontend but drops bundled Chromium: the UI
-                renders in the OS webview (WKWebView, WebView2, WebKitGTK), so
-                installers land in the single-digit MB range. It&apos;s stable,
-                well-documented, and Tauri 2 added iOS/Android. The trade-offs:
-                the backend is Rust, not TypeScript — app logic beyond the UI
-                means writing Rust and crossing an IPC bridge — and rendering
-                varies slightly per platform because each OS ships a different
-                webview.{" "}
-                <Link
-                  href="/compare/tauri"
-                  className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-                >
-                  Full Perry vs Tauri comparison
-                </Link>
-                .
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Bun — single-file binaries, no GUI layer
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                People searching &ldquo;bun electron&rdquo; usually want
-                Electron&apos;s convenience without its weight.{" "}
-                <code className="text-slate-300">bun build --compile</code>{" "}
-                produces a single executable by embedding the Bun runtime with
-                your bundled TypeScript — excellent for CLIs and servers, with
-                full npm compatibility since it literally is the runtime. But
-                the binary is roughly 60 MB (macOS arm64) to 100+ MB
-                (Linux/Windows), the code is still JIT-executed, and Bun has no
-                UI framework — a desktop app still needs Electron, Tauri, or a
-                webview library on top.{" "}
-                <Link
-                  href="/compare/bun"
-                  className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-                >
-                  Full Perry vs Bun comparison
-                </Link>
-                .
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Perry — TypeScript compiled to native widgets
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Perry compiles TypeScript ahead of time to machine code and
-                renders UI through real platform widgets — AppKit, UIKit, GTK4,
-                Win32, Android via JNI — with no webview and no IPC bridge. One
-                language for UI and logic, ~330 KB hello world, 2–5 MB typical
-                binaries, ~1 ms startup, and ten targets including mobile,
-                watch, and TV. The honest caveat: Perry is pre-1.0, its UI API
-                is its own (declarative, SwiftUI-style — not HTML/CSS), and the
-                ecosystem is young next to Electron&apos;s.
-              </p>
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-bold mb-6">Side by side</h2>
-          <div className="overflow-x-auto mb-16 border border-white/10 rounded-xl">
-            <table className="w-full text-sm">
-              <thead className="bg-white/5">
-                <tr>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-300"></th>
-                  <th className="text-left px-4 py-3 font-semibold text-amber-300">Perry</th>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-300">Electron</th>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-300">Tauri</th>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-300">Bun (--compile)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Language</td>
-                  <td className="px-4 py-3 text-slate-400">TypeScript everywhere</td>
-                  <td className="px-4 py-3 text-slate-400">JS/TS + HTML/CSS</td>
-                  <td className="px-4 py-3 text-slate-400">JS/TS frontend, Rust backend</td>
-                  <td className="px-4 py-3 text-slate-400">TypeScript</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">UI approach</td>
-                  <td className="px-4 py-3 text-slate-400">Native platform widgets</td>
-                  <td className="px-4 py-3 text-slate-400">Bundled Chromium</td>
-                  <td className="px-4 py-3 text-slate-400">System webview</td>
-                  <td className="px-4 py-3 text-slate-400">None (CLI/server)</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Hello-world size</td>
-                  <td className="px-4 py-3 text-slate-400">~330 KB</td>
-                  <td className="px-4 py-3 text-slate-400">~80–150 MB</td>
-                  <td className="px-4 py-3 text-slate-400">~3–10 MB</td>
-                  <td className="px-4 py-3 text-slate-400">~60–116 MB by platform</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Execution</td>
-                  <td className="px-4 py-3 text-slate-400">AOT machine code</td>
-                  <td className="px-4 py-3 text-slate-400">JIT (V8)</td>
-                  <td className="px-4 py-3 text-slate-400">JIT (webview JS engine) + native Rust</td>
-                  <td className="px-4 py-3 text-slate-400">JIT (JavaScriptCore)</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Memory at idle</td>
-                  <td className="px-4 py-3 text-slate-400">Tens of MB (single native process)</td>
-                  <td className="px-4 py-3 text-slate-400">Hundreds of MB (multi-process Chromium)</td>
-                  <td className="px-4 py-3 text-slate-400">Lower than Electron (OS webview)</td>
-                  <td className="px-4 py-3 text-slate-400">Runtime-typical</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Mobile / watch / TV</td>
-                  <td className="px-4 py-3 text-slate-400">iOS, iPadOS, Android, watchOS, tvOS</td>
-                  <td className="px-4 py-3 text-slate-400">No</td>
-                  <td className="px-4 py-3 text-slate-400">iOS, Android (Tauri 2)</td>
-                  <td className="px-4 py-3 text-slate-400">No</td>
-                </tr>
-                <tr className="border-t border-white/5">
-                  <td className="px-4 py-3 text-slate-300 font-medium">Maturity</td>
-                  <td className="px-4 py-3 text-slate-400">Pre-1.0</td>
-                  <td className="px-4 py-3 text-slate-400">Decade+ in production</td>
-                  <td className="px-4 py-3 text-slate-400">Stable (1.x/2.x)</td>
-                  <td className="px-4 py-3 text-slate-400">Stable</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h2 className="text-2xl font-bold mb-6">
-            What about React Native or Flutter?
-          </h2>
-          <p className="text-slate-400 leading-relaxed mb-16">
-            They come up in every Electron thread, but they answer a different
-            question. React Native is mobile-first: your JavaScript runs in the
-            Hermes engine and drives native views over a bridge, and desktop
-            support exists only through separate community/Microsoft forks —
-            it&apos;s not a drop-in Electron replacement (
-            <Link
-              href="/compare/react-native"
-              className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              Perry vs React Native
-            </Link>
-            ). Flutter covers desktop and mobile but means leaving TypeScript
-            for Dart, and it paints its own widgets rather than using the
-            platform&apos;s. If staying in TypeScript is the constraint, the
-            realistic desktop shortlist remains the four options above.
-          </p>
-
-          <h2 className="text-2xl font-bold mb-6">Which one should you pick?</h2>
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Stay with the web stack
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                If your UI is already built in React/Vue/Svelte and you need
-                battle-tested desktop distribution today, Electron remains the
-                lowest-risk choice — you pay in size and memory. If that cost
-                bothers you and you&apos;re comfortable writing the backend in
-                Rust, Tauri gives you most of the web-stack experience at a
-                fraction of the footprint.
-              </p>
-            </div>
-            <div className="feature-card">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                Leave the webview behind
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                If what you actually want is TypeScript in, native app out —
-                one language, real platform widgets, small binaries, and mobile
-                /watch/TV from the same codebase — that is precisely the gap
-                Perry exists to fill, with pre-1.0 maturity as the price of
-                admission. And if you only need a CLI or server as a single
-                file with zero compatibility risk, Bun&apos;s{" "}
-                <code className="text-slate-300">--compile</code> is the
-                pragmatic pick.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="feature-card text-center">
-            <h2 className="text-2xl font-bold mb-3 gradient-text">
-              See it for yourself
-            </h2>
-            <p className="text-slate-400 mb-6">
-              Install Perry and ship a native app from TypeScript.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/getting-started" className="btn-primary">
-                Get Started
-              </Link>
-              <a
-                href="https://github.com/PerryTS/perry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                View on GitHub
-              </a>
-            </div>
-          </div>
+        <div className="space-y-6 mb-16">
+          {approaches.map((approach) => (
+            <section key={approach.name} className="feature-card">
+              <h2 className="text-xl font-semibold text-white mb-3">{approach.name}</h2>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">{approach.summary}</p>
+              <p className="text-slate-300 text-sm mb-4"><strong>Best fit:</strong> {approach.bestFor}</p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <a href={approach.source} target="_blank" rel="noopener noreferrer" className="text-perry-400 hover:text-white underline underline-offset-4">Primary source</a>
+                <Link href={approach.compare} className="text-perry-400 hover:text-white underline underline-offset-4">Perry comparison</Link>
+              </div>
+            </section>
+          ))}
         </div>
-      </article>
-    </>
+
+        <h2 className="text-2xl font-bold mb-6">What Perry can substantiate</h2>
+        <ul className="space-y-3 text-slate-400 leading-relaxed mb-12 list-disc pl-6 marker:text-amber-400">
+          <li>A hello-world example around {PRODUCT_FACTS.helloWorldSize} and a public Mango application around {PRODUCT_FACTS.mangoSize}; neither establishes a universal application-size range.</li>
+          <li>{PRODUCT_FACTS.documentedTargetCount} documented targets plus a separate HarmonyOS preview, with narrower core support on some targets.</li>
+          <li>{PRODUCT_FACTS.nativeWidgetCount} UI widgets, with platform-specific availability and behavior.</li>
+          <li>A current public benchmark suite containing Perry wins, mixed rows, and losses—not a claim that Perry is always fastest.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold mb-6">How to choose</h2>
+        <p className="text-slate-400 leading-relaxed mb-6">
+          Start with the UI model and compatibility you need. Choose Electron
+          when Chromium consistency and mature desktop tooling dominate. Choose
+          Tauri when a system webview and Rust core fit. Choose Bun for a
+          runtime-centric single-file CLI or server. Evaluate Perry when its
+          native widgets or broader target model justify testing against its
+          current pre-1.0 limitations.
+        </p>
+        <p className="text-slate-400 leading-relaxed mb-12">
+          Then measure the real application: installer and update size, idle and
+          working memory, cold and warm startup, accessibility, package support,
+          platform prerequisites, signing, and maintenance cost.
+        </p>
+
+        <div className="feature-card text-center">
+          <h2 className="text-2xl font-bold mb-3 gradient-text">Compare the architectures</h2>
+          <p className="text-slate-400 mb-6">Read the sourced side-by-side pages, then test the exact workload you plan to ship.</p>
+          <Link href="/compare" className="btn-primary inline-block">View comparisons</Link>
+        </div>
+      </div>
+    </article>
   );
 }

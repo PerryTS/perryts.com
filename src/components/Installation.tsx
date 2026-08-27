@@ -13,9 +13,14 @@ export function Installation() {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const [installMethod, setInstallMethod] = useState<"homebrew" | "apt" | "windows" | "source">("homebrew");
+  const [installMethod, setInstallMethod] = useState<"npm" | "homebrew" | "apt" | "windows" | "source">("npm");
 
   const installMethods = {
+    npm: {
+      label: "npm / npx",
+      commands: ["npm install -g @perryts/perry"],
+      note: t("npmNote"),
+    },
     homebrew: {
       label: t("homebrew"),
       commands: ["brew tap PerryTS/perry", "brew install perry"],
@@ -43,6 +48,7 @@ export function Installation() {
   };
 
   const usageExamples = [
+    { id: "doctor", label: t("doctor"), command: "perry doctor", description: t("doctorDesc") },
     { id: "build", label: t("compileFile"), command: "perry compile main.ts", description: t("compileFileDesc") },
     { id: "output", label: t("customOutput"), command: "perry compile main.ts -o myapp", description: t("customOutputDesc") },
     { id: "jsruntime", label: t("withV8"), command: "perry compile main.ts --enable-js-runtime", description: t("withV8Desc") },
@@ -70,7 +76,7 @@ export function Installation() {
               </span>
               {t("step1")}
             </h3>
-            <div className="flex gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               {(Object.keys(installMethods) as Array<keyof typeof installMethods>).map((key) => (
                 <button
                   key={key}

@@ -23,74 +23,81 @@
     "discord": "Discord"
   },
   "hero": {
-    "badge": "v0.5.1146 — các gói npm thật giờ đã biên dịch được: axios, zod, express, fastify, hono",
+    "badge": "AOT TypeScript via SWC + LLVM — native builds with no external JavaScript engine",
     "headline1": "Biên dịch ahead-of-time TypeScript sang gốc.",
-    "headline2": "Một mã nguồn. Mọi nền tảng.",
-    "subheadline": "Perry biên dịch TypeScript thành ứng dụng GUI và CLI gốc trên <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly và Web.</platforms> Không cần runtime. Không cần Electron. Chỉ là binary gốc.",
+    "headline2": "One Codebase, Many Targets.",
+    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps for <platforms>macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WebAssembly</platforms>, with a separate HarmonyOS preview. Native binaries statically link the Perry runtime and GC; they do not require Node.js or an external JavaScript engine.",
     "getStarted": "Bắt đầu",
     "viewOnGithub": "Xem trên GitHub",
     "compiling": "Đang biên dịch main.ts...",
-    "compiled": "✓ Tệp thực thi đã biên dịch: main (2,3 MB)",
-    "targetsLabel": "Mục tiêu",
+    "compiled": "✓ Example executable written: main (size varies by linked features)",
+    "targetsLabel": "Documented targets + preview",
     "widgetsLabel": "Widget UI gốc",
-    "startupLabel": "Thời gian khởi động",
-    "appStore": "App Store",
-    "readyLabel": "Sẵn sàng"
+    "startupLabel": "Measured runtime-only macOS hello",
+    "appStore": "Store workflows",
+    "readyLabel": "perry publish",
+    "factsLanguageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
   },
   "features": {
     "title": "Tại sao chọn <brand>Perry</brand>?",
-    "subtitle": "Mọi thứ bạn cần để biên dịch TypeScript thành ứng dụng gốc",
+    "subtitle": "The current compiler, runtime, UI, and tooling surfaces — with limitations called out",
     "noRuntime": {
-      "title": "Không cần Runtime",
-      "description": "Tạo ra tệp thực thi gốc độc lập. Không Node.js, không V8, không phụ thuộc runtime. Chỉ một binary duy nhất chạy được ở mọi nơi."
+      "title": "No External JS Engine",
+      "description": "Native builds run without Node.js, Bun, Deno, or an external JavaScript engine installed. The Perry runtime and garbage collector are statically linked into each target-specific binary."
     },
     "fastCompilation": {
       "title": "Biên dịch nhanh",
       "description": "Biên dịch trực tiếp TypeScript sang mã gốc sử dụng SWC để phân tích cú pháp và LLVM để sinh mã tối ưu. Không có JavaScript trung gian."
     },
     "smallBinaries": {
-      "title": "Binary nhỏ gọn",
-      "description": "Binary đầu ra thường chỉ 2-5 MB. Với V8 runtime tùy chọn cho các gói npm JS, 15-20 MB. Gửi ít hơn, triển khai nhanh hơn."
+      "title": "Size Scales With Features",
+      "description": "Hello world can be about 330 KB and Mango is published at about 7 MB. Applications that link the full standard library or optional V8 fallback can be much larger; size depends on target, imports, and build profile."
     },
     "deterministicBuilds": {
-      "title": "Build có tính tất định",
-      "description": "Cùng đầu vào, cùng binary. Tái tạo được trên mọi máy, mọi lần chạy CI và mọi đội. Không có lần build lại bí ẩn."
+      "title": "Cacheable Builds",
+      "description": "Perry caches module objects and can pin a CPU baseline for portable output. Default host builds tune for the local CPU, and final binaries may contain platform UUIDs, timestamps, or signatures, so byte-for-byte cross-machine reproducibility is not promised."
     },
     "stdLib": {
-      "title": "Thư viện chuẩn toàn diện",
-      "description": "Triển khai gốc tích hợp sẵn của fs, path, crypto, os, Buffer, child_process và nhiều hơn nữa. Sử dụng các API Node.js quen thuộc."
+      "title": "Tracked Node.js APIs",
+      "description": "Native implementations cover many familiar Node.js APIs across 53 tracked modules. Coverage is broad but not complete; use perry check and the published limitations for your project."
     },
     "v8Runtime": {
       "title": "Các package npm thực tế",
-      "description": "axios, zod, express, fastify, và hono compile thành binary native. Các package JavaScript thuần chạy trên một runtime nhúng tùy chọn — tự chứa, không có node_modules lúc runtime."
+      "description": "Many pure TypeScript and JavaScript packages compile natively. Packages that depend on unsupported dynamic or engine-specific semantics may need the optional embedded V8 fallback or may not work."
     },
     "widgets": {
-      "title": "Hơn 35 Widget UI gốc",
-      "description": "Nút bấm, bảng, bộ chọn ngày, drag & drop, biểu đồ, bản đồ, command palette, mã QR, văn bản định dạng phong phú, và nhiều hơn — tất cả biên dịch thành widget nền tảng thực sự qua AppKit, UIKit, GTK4, Win32 (Fluent/Mica), và JNI."
+      "title": "35+ Native UI Widgets",
+      "description": "35+ native UI widgets map to platform toolkits including AppKit, UIKit, GTK4, Win32, Android SDK APIs, SwiftUI on watches, and a DOM/CSS bridge on Web/WASM. Availability varies by target."
     },
     "plugins": {
-      "title": "Hệ thống plugin thời điểm biên dịch",
-      "description": "Các module được kết hợp tại thời điểm build — không có chi phí plugin khi runtime, không có ranh giới IPC. Các phụ thuộc của bạn trở thành lệnh gọi hàm gốc trực tiếp trong binary cuối cùng."
+      "title": "Compile-Time Plugin System",
+      "description": "Modules can compose at build time and statically linked dependencies can become direct native calls. Dynamic dispatch and runtime support remain where JavaScript semantics require them."
     },
     "threading": {
-      "title": "Đa luồng thực sự",
-      "description": "Thread OS thực sự với parallelMap, parallelFilter và spawn. An toàn tại thời điểm biên dịch từ chối các capture có thể thay đổi — không SharedArrayBuffer, không worker, chỉ có thread."
+      "title": "True Multi-Threading",
+      "description": "Real OS threads with parallelMap, parallelFilter, and spawn. Mutable captures are rejected by default; SharedArrayBuffer and Atomics provide explicit shared-memory coordination, with documented typed-view caveats."
     },
     "i18n": {
-      "title": "i18n thời điểm biên dịch",
-      "description": "Trích xuất chuỗi tự động, quy tắc số nhiều CLDR cho hơn 30 ngôn ngữ, xác thực thời điểm biên dịch. Bản dịch được nhúng vào binary với tra cứu gần như bằng không tại runtime."
+      "title": "Compile-Time i18n",
+      "description": "Automatic string extraction, CLDR plural rules for 30+ locales, and compile-time validation. Translations are baked into the binary; lookup cost depends on the generated catalog and call site."
     },
     "goDeeper": "Tìm hiểu sâu hơn: cách Perry <binaryLink>biên dịch TypeScript thành binary</binaryLink>, điều gì khiến nó trở thành một <compilerLink>trình biên dịch TypeScript gốc</compilerLink>, và nó so sánh thế nào với các <electronAltLink>giải pháp thay thế Electron</electronAltLink>."
   },
   "platforms": {
-    "title": "Gốc trên <gradient>mọi nền tảng</gradient>",
-    "subtitle": "Perry biên dịch TypeScript của bạn thành framework UI gốc, WebAssembly và JavaScript — không phải web view, không phải Electron. Widget gốc thực sự trên mọi nền tảng, cộng thêm web.",
-    "stable": "Ổn định"
+    "title": "Native across <gradient>documented targets</gradient>",
+    "subtitle": "Eleven documented targets share Perry’s compiler and UI model. Web and WASM are aliases; visionOS, watchOS, and Wear OS have narrower core support, and HarmonyOS is a separate preview.",
+    "core": "Core support",
+    "preview": "Preview",
+    "countNote": "{count} documented targets; HarmonyOS is listed separately as a preview.",
+    "platformGuide": "See the platform status guide",
+    "webAliasNote": "--target web and --target wasm are aliases",
+    "harmonyPreviewNote": "Separate preview; not included in the 11 documented targets",
+    "broad": "Broad support"
   },
   "comparison": {
     "badge": "So sánh framework",
-    "title": "Framework duy nhất đáp ứng <gradient>mọi tiêu chí</gradient>",
-    "subtitle": "TypeScript biên dịch sang mã gốc. Widget nền tảng thực sự. Không có chi phí runtime.",
+    "title": "Perry’s native compilation <gradient>model</gradient>",
+    "subtitle": "Ahead-of-time machine code and real platform widgets, with an explicitly linked runtime and documented compatibility tradeoffs.",
     "framework": "Framework",
     "language": "Ngôn ngữ",
     "nativeCode": "Mã gốc",
@@ -98,18 +105,25 @@
     "runtimeOverhead": "Chi phí runtime",
     "partial": "Một phần",
     "noSharedUI": "Không có UI dùng chung",
-    "nativeCompiled": "Biên dịch gốc",
-    "realPlatformWidgets": "Widget nền tảng thực sự",
-    "zeroRuntimeOverhead": "Không có chi phí runtime"
+    "nativeCompiled": "Ahead-of-time machine code through LLVM",
+    "realPlatformWidgets": "Real platform widgets where each target supports them",
+    "noExternalEngine": "No external Node.js installation or JavaScript engine by default",
+    "linkedRuntime": "The Perry runtime and GC are statically linked; overhead is not “none”",
+    "compatibilityTradeoff": "Perry implements a practical TypeScript and Node.js subset; some packages need the optional V8 fallback",
+    "platformMaturityTradeoff": "Platform capabilities and maturity differ across desktop, mobile, wearable, TV, and Web/WASM targets",
+    "designedFor": "Designed for",
+    "tradeoffs": "Tradeoffs to evaluate",
+    "compareNote": "Competitor-specific pages are dated and link to upstream documentation.",
+    "viewComparisons": "View sourced comparisons"
   },
   "codeExample": {
     "title": "Viết <gradient>TypeScript</gradient>, xuất bản gốc",
-    "subtitle": "Sử dụng cú pháp và API TypeScript quen thuộc. Perry lo phần còn lại.",
+    "subtitle": "Use familiar TypeScript syntax and validate each API or package against Perry’s current compatibility surface.",
     "nativeBinary": "Binary gốc"
   },
   "performance": {
-    "title": "So sánh <gradient>hiệu năng</gradient>",
-    "subtitle": "Biên dịch gốc mang lại hiệu quả vượt trội",
+    "title": "Published <gradient>measurements</gradient>",
+    "subtitle": "Current public results include wins, mixed results, and losses. Treat microbenchmarks as workload-specific measurements, not a universal speed claim.",
     "metric": "Chỉ số",
     "binarySize": "Kích thước binary",
     "startupTime": "Thời gian khởi động",
@@ -117,9 +131,24 @@
     "memoryOverhead": "Chi phí bộ nhớ",
     "none": "Không có",
     "minimal": "Tối thiểu",
-    "benchmarkTitle": "Kết quả benchmark: <gradient>Nhanh hơn tới 18 lần</gradient>",
-    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — trung vị RUNS=11, Apple M1 Max (thấp hơn là tốt hơn)",
-    "lowerIsBetter": "Thấp hơn là tốt hơn"
+    "benchmarkTitle": "Full public suite: <gradient>wins and losses</gradient>",
+    "benchmarkSubtitle": "Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.",
+    "lowerIsBetter": "Thấp hơn là tốt hơn",
+    "nodeDistribution": "Application plus an installed Node.js runtime",
+    "bunDistribution": "Standalone executable embeds the Bun runtime",
+    "engineStartup": "Engine boot and warmup; workload-dependent",
+    "linkedRuntime": "Statically linked Perry runtime + GC",
+    "externalRuntime": "External Node.js runtime",
+    "embeddedRuntime": "Embedded Bun / JavaScriptCore runtime",
+    "workloadDependent": "Workload-dependent",
+    "startupFootnote": "Measured runtime-only macOS hello world on an Apple M-series host (5.0 → 3.2 ms after removing unused dynamic-library links). Application startup varies.",
+    "benchmark": "Benchmark",
+    "result": "Result",
+    "result_win": "Win vs both",
+    "result_mixed": "Mixed",
+    "result_loss": "Loss vs both",
+    "benchmarkSource": "Raw benchmark artifact",
+    "methodology": "Methodology and caveats"
   },
   "installation": {
     "title": "<gradient>Bắt đầu</gradient>",
@@ -130,10 +159,10 @@
     "apt": "APT (Debian/Ubuntu)",
     "windows": "Windows (winget)",
     "source": "Từ mã nguồn",
-    "homebrewNote": "Yêu cầu Homebrew. Hỗ trợ macOS arm64 và x86_64.",
-    "aptNote": "Hỗ trợ Linux x86_64 và arm64.",
-    "windowsNote": "Yêu cầu Windows Package Manager. Hỗ trợ Windows x86_64 và arm64.",
-    "sourceNote": "Yêu cầu Rust toolchain. Binary sẽ ở target/release/perry.",
+    "homebrewNote": "Supports macOS arm64 and x86_64. Xcode Command Line Tools are required for native linking.",
+    "aptNote": "Supports x86_64 and arm64 Linux. Install GCC or Clang; some targets require Clang 15 or newer.",
+    "windowsNote": "Supports Windows x86_64 and arm64. Native and cross-target builds may require LLVM plus MSVC or xwin tooling.",
+    "sourceNote": "Requires Rust, LLVM/Clang, and the SDK/toolchain for the target platform. The binary is written to target/release/perry.",
     "compileFile": "Biên dịch tệp",
     "compileFileDesc": "Biên dịch main.ts thành tệp thực thi gốc",
     "customOutput": "Đầu ra tùy chỉnh",
@@ -141,63 +170,68 @@
     "withV8": "Với V8 runtime",
     "withV8Desc": "Bật V8 để tương thích với các gói npm JavaScript",
     "checkCompat": "Kiểm tra tương thích",
-    "checkCompatDesc": "Xác thực mã TypeScript cho biên dịch gốc"
+    "checkCompatDesc": "Xác thực mã TypeScript cho biên dịch gốc",
+    "npmNote": "Recommended cross-platform install. Native targets still require the relevant platform SDK and linker; run perry doctor after installation.",
+    "doctor": "Verify the toolchain",
+    "doctorDesc": "Checks the compiler, linker, SDK, and target setup"
   },
   "featureTable": {
     "title": "<gradient>Hỗ trợ</gradient> tính năng",
-    "subtitle": "Bao phủ toàn diện API TypeScript và Node.js",
+    "subtitle": "Tested surfaces and known partial areas — not a blanket claim of complete TypeScript or Node.js compatibility",
     "coreLanguage": "Ngôn ngữ cốt lõi",
     "functions": "Hàm",
     "classes": "Lớp",
     "typeSystem": "Hệ thống kiểu",
     "standardLibrary": "Thư viện chuẩn",
-    "fullSupport": "Hỗ trợ đầy đủ",
-    "partial": "Một phần"
+    "partial": "Partial",
+    "tested": "Tested in the current implementation",
+    "limitationsNote": "“Partial” means the API or syntax exists with documented gaps. Exact behavior changes as parity work lands.",
+    "limitationsLink": "Read the current limitations"
   },
   "nativeLibs": {
-    "title": "<gradient>Hơn 30</gradient> gói npm gốc",
-    "subtitle": "Các gói npm phổ biến được triển khai lại bằng Rust gốc. Không npm install, không node_modules, chỉ có mã gốc nhanh.",
+    "title": "<gradient>~50</gradient> Native Packages and Node APIs",
+    "subtitle": "Many popular packages and Node APIs have native implementations. Coverage is package- and feature-specific; perry check and the compatibility documentation are the source of truth.",
     "database": "Cơ sở dữ liệu",
     "security": "Bảo mật",
     "http": "HTTP",
     "dataProcessing": "Xử lý dữ liệu",
     "dateTime": "Ngày và giờ",
     "utilities": "Tiện ích",
-    "info": "Chỉ cần import và sử dụng — Perry tự động dùng triển khai gốc"
+    "info": "Import the package normally. Perry selects a native implementation when one is available, otherwise compilation may use another supported path or report a limitation."
   },
   "shipIt": {
     "title": "Từ mã nguồn đến <gradient>App Store</gradient>",
-    "subtitle": "Perry không chỉ biên dịch ứng dụng — mà còn đưa nó đến tay người dùng.",
+    "subtitle": "The perry publish command supports build, signing, packaging, verification, and submission workflows. Availability and prerequisites vary by platform and hosted-service configuration.",
     "compileSign": "Biên dịch và ký",
     "packageSubmit": "Đóng gói và gửi",
     "storesDownloads": "Cửa hàng và tải về",
     "storesList": "App Store, Play Store, trực tiếp",
-    "testEveryPlatform": "Kiểm thử mọi nền tảng",
+    "testEveryPlatform": "Verify supported targets",
     "buildSign": {
-      "title": "Build và Ký",
-      "description": "Build đa nền tảng chỉ với một lệnh. Ký mã cho macOS, iOS, Android và Windows được xử lý cho bạn. Không cần vật lộn với provisioning profile của Xcode hay keystore của Android."
+      "title": "Build & Sign",
+      "description": "Create platform artifacts and use configured signing credentials. Apple, Android, and Windows workflows require their platform SDKs, accounts, and certificates."
     },
     "distribute": {
-      "title": "Phân phối",
-      "description": "Đẩy lên App Store, Play Store hoặc cung cấp tải trực tiếp. Perry Publish xử lý đóng gói, công chứng và gửi."
+      "title": "Distribute",
+      "description": "Prepare store submissions or direct-download artifacts for supported targets. Store acceptance and processing remain controlled by each store."
     },
     "verify": {
-      "title": "Xác minh",
-      "description": "Được hỗ trợ bởi Geisterhand. Kiểm thử UI tự động trên cả 6 nền tảng. Biết rằng ứng dụng của bạn hoạt động ở mọi nơi trước khi người dùng nói cho bạn biết nó không."
+      "title": "Verify",
+      "description": "Run available launch and UI checks through Perry and Geisterhand. Test depth and target coverage depend on the selected environment."
     },
-    "freeForOpenSource": "Miễn phí cho dự án mã nguồn mở.",
-    "plansForTeams": "Gói cho nhóm"
+    "freeForOpenSource": "Local compilation is free and MIT licensed.",
+    "plansForTeams": "Check hosted-service availability"
   },
   "architecture": {
     "title": "Cách <gradient>hoạt động</gradient>",
-    "subtitle": "Từ mã nguồn TypeScript đến tệp thực thi gốc chỉ trong vài giây",
+    "subtitle": "From TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime",
     "parser": "Bộ phân tích",
     "fastParsing": "Phân tích nhanh",
     "transform": "Chuyển đổi",
     "codegen": "Sinh mã",
     "machineCode": "Mã máy",
     "executable": "Tệp thực thi",
-    "binarySize": "Binary 2-5 MB",
+    "binarySize": "From ~330 KB; varies by features",
     "tsFiles": "Tệp .ts",
     "compilerInternalsPrompt": "Muốn biết trình biên dịch hoạt động bên trong như thế nào?",
     "compilerInternals": "Cấu trúc bên trong trình biên dịch",
@@ -205,7 +239,7 @@
   },
   "footer": {
     "newsletter": "Bản tin",
-    "brand": "TypeScript → Gốc. Biên dịch TypeScript trực tiếp thành tệp thực thi độc lập trên macOS, iOS, Android, Linux và Windows. Không runtime, không Electron.",
+    "brand": "TypeScript → Native. Compile ahead of time for desktop, mobile, wearable, TV, and Web/WASM targets. No external Node.js installation or JavaScript engine is required for native builds; the Perry runtime and GC are statically linked.",
     "resources": "Tài nguyên",
     "gettingStarted": "Bắt đầu",
     "documentation": "Tài liệu",
@@ -214,8 +248,10 @@
     "issues": "Issues",
     "discussions": "Thảo luận",
     "contributing": "Đóng góp",
-    "tagline": "Được xây dựng với Rust, SWC và LLVM — và đúng vậy, trang web này được phục vụ bởi binary được biên dịch bằng Perry",
-    "enterprise": "Enterprise"
+    "tagline": "Built with Rust, SWC, and LLVM. The static site is served by a Perry-compiled binary; newsletter subscriptions use a separate Node helper.",
+    "enterprise": "Enterprise",
+    "imprint": "Thông tin pháp lý",
+    "privacy": "Quyền riêng tư"
   },
   "newsletter": {
     "footerLabel": "Cập nhật tin mới",
@@ -227,7 +263,7 @@
     "errorGeneric": "Đã có lỗi xảy ra. Vui lòng thử lại.",
     "blockTitle": "Thích bài này? Nhận bài tiếp theo.",
     "blockSubtitle": "Ghi chú ngắn về các bản phát hành Perry và những gì chúng tôi đang xây dựng tiếp theo.",
-    "privacy": "Vài email mỗi tháng. Hủy đăng ký bất cứ lúc nào.",
+    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
     "pageTitle": "Bản tin Perry",
     "pageDescription": "Cập nhật về các bản phát hành Perry mới, hỗ trợ nền tảng và bài viết kỹ thuật. Không spam.",
     "pageSubtitle": "Ghi chú ngắn về những gì đang ra mắt trong Perry — bản phát hành, nền tảng và phân tích kỹ thuật chuyên sâu.",
@@ -235,196 +271,148 @@
     "bullet1Body": "Mỗi bản phát hành Perry quan trọng, kèm theo những gì đã thay đổi và lý do.",
     "bullet2Title": "Bài viết kỹ thuật",
     "bullet2Body": "Nội bộ trình biên dịch, các benchmark và những gì chúng tôi đang học.",
-    "bullet3Title": "Không spam",
-    "bullet3Body": "Vài email mỗi tháng. Hủy đăng ký chỉ với một cú nhấp."
+    "bullet3Title": "Privacy controls",
+    "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled.",
+    "privacyLink": "Privacy notice"
   },
   "pricing": {
-    "breadcrumbPublish": "Perry Publish",
     "breadcrumbPricing": "Bảng giá",
-    "title": "Bảng giá đơn giản",
-    "subtitle": "Một lệnh để build, ký và gửi. Miễn phí cho hầu hết nhà phát triển. Không cần tài khoản để bắt đầu.",
-    "free": "Miễn phí",
-    "noAccountRequired": "Không cần tài khoản",
-    "perMonth": "/tháng",
-    "pro": "Pro",
-    "mostPopular": "Phổ biến nhất",
-    "forDevs": "Cho nhà phát triển gửi nhanh",
-    "subscribeToPro": "Đăng ký Pro",
-    "feature_publishes15": "15 lần xuất bản mỗi tháng",
-    "feature_deepVerify2": "2 lần chạy deep verify mỗi tháng",
-    "feature_lightVerify": "Light verify mỗi lần xuất bản",
-    "feature_allPlatforms": "Tất cả nền tảng (macOS, iOS, Android, Windows, Linux)",
-    "feature_codeSigning": "Ký mã và công chứng",
-    "feature_storeSubmission": "Gửi App Store và Play Store",
-    "feature_unlimitedProjects": "Không giới hạn dự án (với tài khoản miễn phí)",
-    "feature_publishes50": "50 lần xuất bản mỗi tháng",
-    "feature_deepVerify20": "20 lần chạy deep verify mỗi tháng",
-    "feature_unlimitedProjectsPro": "Không giới hạn dự án",
-    "feature_priorityQueue": "Hàng đợi build ưu tiên",
-    "feature_overage": "$0.49/lần xuất bản vượt mức (vs $0.99 miễn phí)",
-    "comparePlans": "So sánh gói",
-    "col_free": "Miễn phí",
-    "col_pro": "Pro",
-    "row_monthlyPublishes": "Lần xuất bản hàng tháng",
-    "row_deepVerifyRuns": "Lần chạy deep verify",
-    "row_lightVerify": "Light verify",
-    "row_everyPublish": "Mỗi lần xuất bản",
-    "row_overagePublish": "Phí vượt mức mỗi lần xuất bản",
-    "row_overageVerify": "Phí vượt mức mỗi deep verify",
-    "row_buildQueue": "Ưu tiên hàng đợi build",
-    "row_standard": "Tiêu chuẩn",
-    "row_priority": "Ưu tiên",
-    "row_projects": "Dự án",
-    "row_unlimitedStar": "Không giới hạn*",
-    "row_unlimited": "Không giới hạn",
-    "row_accountRequired": "Yêu cầu tài khoản",
-    "row_accountFreeDesc": "Không (1 dự án) / GitHub (nhiều dự án)",
-    "row_accountProDesc": "Có (GitHub)",
-    "row_failedBuilds": "Build thất bại có tính không?",
-    "row_noStar": "Không*",
-    "failedBuildsNote": "* Các build thất bại trước khi biên dịch (cấu hình không hợp lệ, thiếu phụ thuộc) không tính vào hạn mức hàng tháng.",
+    "title": "Perry pricing and availability",
+    "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
+    "localTitle": "Compiler and local builds",
+    "localDescription": "Use Perry locally without an account or usage fee.",
+    "localFeature1": "MIT-licensed compiler and runtime",
+    "localFeature2": "Local compile, run, check, doctor, and verify workflows",
+    "localFeature3": "No hosted-service quota for work performed on your own machine",
+    "viewSource": "View source and license",
+    "hostedAvailability": "Availability varies",
+    "hostedTitle": "Hosted Perry Publish",
+    "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
+    "hostedFeature1": "Build and packaging workflows for supported targets",
+    "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
+    "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
+    "publishDetails": "Read how publish works",
     "selfHost": {
-      "title": "Hoặc tự lưu trữ mọi thứ",
-      "description": "Perry là mã nguồn mở 100% — trình biên dịch, runtime, máy chủ build, dịch vụ xác minh và trang web này. Bạn có thể chạy toàn bộ pipeline xuất bản trên phần cứng của riêng mình miễn phí. Không bị khóa nhà cung cấp, mãi mãi.",
-      "selfHostingGuide": "Hướng dẫn tự lưu trữ"
+      "title": "What is open source and self-hostable today?",
+      "description": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
+      "selfHostingGuide": "Deployment documentation"
     },
+    "currentFaq": {
+      "q1": "Does local compilation require an account?",
+      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
+      "q2": "What are the hosted quotas and prices?",
+      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
+      "q3": "Can I self-host the complete publish service?",
+      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+    },
+    "needTermsTitle": "Need hosted builds or a support agreement?",
+    "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
+    "contact": "Contact the team",
+    "languageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch.",
     "faq": {
-      "title": "Câu hỏi",
-      "q1": "Tôi có cần tài khoản để xuất bản không?",
-      "a1": "Không. Lần perry publish đầu tiên của bạn hoạt động ngay — không cần đăng ký, không cần thanh toán. Bạn được 15 lần xuất bản mỗi tháng. Để xuất bản nhiều dự án, chạy perry login để tạo tài khoản miễn phí liên kết GitHub. Không cần thanh toán.",
-      "q2": "Chuyện gì xảy ra khi tôi đạt giới hạn?",
-      "a2": "Các build của bạn bị tạm dừng cho đến tháng sau. Nâng cấp lên Pro để có thêm lần xuất bản, hoặc thêm phương thức thanh toán cho phần vượt mức theo nhu cầu.",
-      "q3": "Tôi có thể tự lưu trữ máy chủ build không?",
-      "a3": "Có. Trình biên dịch Perry, máy chủ build (perry-hub), dịch vụ xác minh và build worker đều là mã nguồn mở. Clone repo, chạy hub trên Mac Mini hoặc máy Linux của riêng bạn, và đặt PERRY_HUB_SELF_HOSTED=true để tắt giới hạn tốc độ. Bạn nhận được build không giới hạn với chi phí bằng không. Dịch vụ lưu trữ tại hub.perryts.com tồn tại vì sự tiện lợi — không cần quản lý hạ tầng, không cần xử lý chứng chỉ ký, không cần giám sát hàng đợi build.",
-      "q4": "Một \"lần xuất bản\" bao gồm những gì?",
-      "a4": "Một lần gọi perry publish '<'platform'>'. Mỗi nền tảng là một lần xuất bản riêng. Một lần xuất bản bao gồm build, ký mã, xác minh nhẹ (ứng dụng khởi chạy thành công) và gửi lên cửa hàng hoặc tạo artifact."
-    },
-    "enterpriseBanner": {
-      "text": "Need LTS, SSO, or a support SLA?",
-      "link": "See Perry for Teams →"
+      "title": "Câu hỏi"
     }
   },
   "enterprise": {
     "metaTitle": "Perry for Teams",
-    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
     "hero": {
-      "title": "Perry for teams shipping in production",
-      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "title": "Production support scoped to your team",
+      "subtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
       "primaryCta": "Email ralph@perryts.com"
     },
-    "audience": {
-      "title": "Who this is for",
-      "item1": "You're shipping a production app built with Perry",
-      "item2": "You need predictable, supported releases instead of riding main",
-      "item3": "You need to influence what ships in upcoming versions",
-      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
-    },
-    "included": {
-      "title": "What's included",
-      "item1": "LTS compiler releases with security backports for 18 months",
-      "item2": "Direct Slack or shared channel with the maintainers",
-      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
-      "item4": "Quarterly roadmap call where your priorities get heard",
-      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
-      "item6": "Migration and architecture support — paired sessions for onboarding teams",
-      "item7": "Logo placement on perryts.com (opt-in)",
-      "item8": "Security questionnaires and compliance documentation"
-    },
-    "tiers": {
-      "title": "Plans",
-      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
-      "perMonth": "/month",
-      "recommended": "Recommended",
-      "team": {
-        "name": "Team",
-        "price": "$499",
-        "tagline": "For startups and small teams shipping with Perry",
-        "feature1": "LTS compiler releases",
-        "feature2": "Shared Slack channel (one channel)",
-        "feature3": "P1 response within 1 business day",
-        "feature4": "Quarterly roadmap call",
-        "feature5": "Self-hosted Perry Publish setup help",
-        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
-        "cta": "Subscribe"
-      },
-      "enterprise": {
-        "name": "Enterprise",
-        "price": "Custom",
-        "tagline": "For organizations betting their product on Perry",
-        "everythingIn": "Everything in Team, plus:",
-        "feature1": "SSO and audit logs on Perry Publish",
-        "feature2": "Dedicated build infrastructure",
-        "feature3": "Named technical contact",
-        "feature4": "P0 response within 4 business hours",
-        "feature5": "Custom contract and procurement support",
-        "feature6": "Training and onboarding sessions",
-        "cta": "Talk to us"
-      }
-    },
-    "faq": {
-      "title": "Questions",
-      "q1": "Isn't Perry fully open source? Why pay?",
-      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
-      "q2": "What if Perry as a project is abandoned?",
-      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
-      "q3": "How does roadmap input work?",
-      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
-      "q4": "Can we self-host everything?",
-      "a4": "Yes — and Enterprise includes setup help and architecture review.",
-      "q5": "What's the SLA, exactly?",
-      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
-      "q6": "Do you offer training or onboarding?",
-      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
-      "q7": "Can we evaluate before committing?",
-      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
-    },
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
     "closing": {
-      "title": "Talk to the team",
-      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "title": "Talk to the maintainers",
+      "body": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
       "emailCta": "Email ralph@perryts.com"
-    }
+    },
+    "languageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
   },
   "roadmap": {
     "title": "Lộ trình",
-    "subtitle": "Perry đang ở đâu hôm nay và đang đi đến đâu. Từ biên dịch gốc đến hệ sinh thái phát triển đa nền tảng hoàn chỉnh.",
+    "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
     "shipped": "Đã phát hành",
     "inProgress": "Đang tiến hành",
     "planned": "Kế hoạch",
-    "vision": "Tầm nhìn"
+    "vision": "Tầm nhìn",
+    "currentTitle": "Verified today",
+    "activeTitle": "Active development areas",
+    "policyTitle": "How to read Perry claims",
+    "currentItems": [
+      "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
+      "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
+      "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
+      "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
+      "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+    ],
+    "activeItems": [
+      "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
+      "Improving platform parity, especially core and preview targets.",
+      "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
+      "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+    ],
+    "policyItems": [
+      "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
+      "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
+      "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+      "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+    ],
+    "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
+    "platformStatus": "Platform status",
+    "knownLimitations": "Known limitations",
+    "benchmarkArtifact": "Benchmark artifact",
+    "changelog": "Changelog",
+    "languageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
   },
   "publish": {
     "title": "Perry Publish",
-    "subtitle": "Một lệnh để build, ký và gửi ứng dụng đến mọi cửa hàng. Perry Publish xử lý ký mã, công chứng, đóng gói và gửi — để bạn tập trung vào mã của mình.",
+    "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
     "buildingForIos": "Đang build cho iOS...",
     "signingCert": "Đang ký với chứng chỉ của bạn...",
-    "verifyingLaunch": "Đang xác minh — ứng dụng khởi chạy thành công",
-    "publishedToAppStore": "Đã xuất bản lên App Store Connect.",
+    "verifyingLaunch": "Running the configured verification steps...",
+    "publishedToAppStore": "Submission requested; final store status is reported by the store.",
     "buildSign": "Build và Ký",
-    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "buildSignPlatforms": "Target, host, SDK, and credential dependent",
     "distribute": "Phân phối",
-    "distributePlatforms": "App Store, Play Store, tải trực tiếp",
+    "distributePlatforms": "Available stores and channels depend on the target",
     "verify": "Xác minh",
-    "verifyDesc": "Kiểm thử đa nền tảng hỗ trợ bởi AI"
+    "verifyDesc": "Configured launch and UI checks; coverage varies by target",
+    "metaTitle": "Perry Publish workflows",
+    "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats."
   },
   "internals": {
-    "title": "Cấu trúc <gradient>bên trong</gradient> trình biên dịch",
-    "subtitle": "Các quyết định thiết kế chính giúp Perry nhanh",
+    "title": "Compiler <gradient>Internals</gradient>",
+    "subtitle": "The key design decisions that make Perry fast",
     "nanBoxing": {
-      "p1": "Giá trị được lưu dưới dạng float 64-bit với các mẫu bit đặc biệt cho con trỏ, cho phép kiểu union hoạt động mà không có chi phí runtime. Điều này giúp (string | number)[] hoạt động hiệu quả.",
-      "p2": "Bằng cách mã hóa thông tin kiểu trực tiếp trong các bit payload NaN của IEEE 754, Perry tránh được nhu cầu về tagged union hoặc boxed value. Một từ 64-bit duy nhất có thể biểu diễn bất kỳ kiểu giá trị JavaScript nào — số sử dụng biểu diễn tự nhiên, trong khi chuỗi, đối tượng và các giá trị cấp phát heap khác sử dụng mẫu bit con trỏ nằm trong phạm vi NaN."
+      "p1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
+      "p2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries."
     },
     "monomorphization": {
-      "p1": "Generic được chuyên biệt hóa tại thời điểm biên dịch, giống như Rust. Mỗi lần khởi tạo kiểu tạo ra mã được tối ưu hóa, loại bỏ chi phí kiểm tra kiểu tại runtime.",
-      "p2": "Khi bạn viết Array'<'number'>' và Array'<'string'>', Perry tạo ra hai triển khai riêng biệt, được tối ưu hóa hoàn toàn. Điều này có nghĩa là các phép toán mảng trên số sử dụng phép tính máy trực tiếp — không type guard, không dynamic dispatch, không boxing."
+      "p1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
+      "p2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves."
     },
     "staticDispatch": {
-      "p1": "Không có bảng ảo. Các lệnh gọi phương thức được giải quyết tại thời điểm biên dịch, cho phép gọi hàm trực tiếp và tối ưu hóa inline.",
-      "p2": "Runtime OOP truyền thống sử dụng vtable để giải quyết phương thức, thêm một lớp gián tiếp vào mỗi lần gọi. Perry giải quyết tất cả các lệnh gọi phương thức một cách tĩnh trong quá trình biên dịch, biến các lệnh gọi phương thức interface thành nhảy trực tiếp. Điều này cũng mở khóa inline mạnh mẽ — các phương thức nhỏ thường được gấp trực tiếp vào nơi gọi."
+      "p1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
+      "p2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time."
     },
     "zeroCost": {
-      "p1": "Các lớp, interface và generic của TypeScript biên dịch thành mã gốc hiệu quả mà không có chi phí biểu diễn tại runtime.",
-      "p2": "Hệ thống kiểu của TypeScript chỉ tồn tại tại thời điểm biên dịch — và Perry thực hiện điều này đúng nghĩa đen. Interface không tạo mã runtime. Phân cấp lớp được làm phẳng. Ràng buộc generic được giải quyết thành kiểu cụ thể. Binary đã biên dịch chỉ chứa logic thực tế, không có bộ máy trừu tượng mà các trình thông dịch thường mang theo."
-    }
+      "p1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
+      "p2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally."
+    },
+    "metaTitle": "Perry compiler internals",
+    "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior."
   },
   "shipping": {
     "eyebrow": "Đang chạy trong sản xuất",
@@ -432,14 +420,16 @@
   },
   "appShowcase": {
     "title": "Xem mọi người <gradient>xây dựng</gradient> gì",
-    "subtitle": "Ứng dụng native thực sự, biên dịch từ TypeScript. Không Electron, không web view — chỉ UI native trên mọi nền tảng.",
+    "subtitle": "Public native applications compiled from TypeScript, with platforms and capabilities taken from their current project pages.",
     "mangoTagline": "GUI MongoDB native — xây dựng hoàn toàn bằng TypeScript",
     "honeTagline": "Trình soạn thảo code native hỗ trợ AI — TypeScript sang binary native",
     "viewAll": "Xem tất cả dự án"
   },
   "showcase": {
     "title": "Showcase",
-    "subtitle": "Các dự án thực được xây dựng với Perry. Từ ứng dụng GUI gốc đến công cụ CLI, xem những gì có thể với biên dịch TypeScript gốc."
+    "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
+    "metaTitle": "Perry showcase",
+    "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
   },
   "pry": {
     "subtitle": "Trình xem JSON nhanh, gốc được xây dựng với Perry. Điều hướng cây, tìm kiếm, phím tắt — biên dịch từ TypeScript sang binary gốc.",
@@ -457,13 +447,13 @@
     "syntaxColoring": "Tô màu cú pháp",
     "syntaxColoringDesc": "Giá trị được tô màu theo kiểu — chuỗi, số, boolean, null.",
     "howItsBuilt": "Cách xây dựng",
-    "howItsBuiltDesc": "Pry được viết bằng TypeScript và biên dịch với Perry thành binary gốc. Không Electron, không web view, không JavaScript runtime.",
+    "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
     "typeScriptSource": "Mã nguồn TypeScript",
     "typeScriptSourceDesc": "TypeScript tiêu chuẩn với API UI gốc của Perry",
     "perryCompile": "Perry Compile",
     "perryCompileDesc": "Phân tích SWC → giải quyết kiểu → sinh mã LLVM",
     "nativeBinary": "Binary gốc",
-    "nativeBinaryDesc": "Tệp thực thi độc lập không phụ thuộc runtime",
+    "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
     "platformSupport": "Hỗ trợ nền tảng",
     "nativeWidgets": "Widget {framework} gốc",
     "available": "Có sẵn",
@@ -475,7 +465,10 @@
   "blog": {
     "title": "Blog",
     "subtitle": "Tin tức, hướng dẫn và phân tích chuyên sâu về xây dựng ứng dụng gốc với Perry.",
-    "englishOnly": "Bài viết này chỉ có bằng tiếng Anh."
+    "englishOnly": "Bài viết này chỉ có bằng tiếng Anh.",
+    "metaTitle": "Perry blog",
+    "metaDescription": "Dated Perry release notes, tutorials, and technical articles. Historical measurements remain tied to their original versions.",
+    "historicalNotice": "This dated article records the Perry version and measurements available when it was published. Use the current limitations, platform guide, and benchmark artifact for decisions today."
   },
   "languageSwitcher": {
     "label": "Ngôn ngữ"
@@ -483,15 +476,15 @@
   "blogPosts": {
     "introducing-perry": {
       "title": "Giới thiệu Perry",
-      "excerpt": "Perry là trình biên dịch TypeScript gốc được viết bằng Rust, biên dịch TypeScript của bạn trực tiếp thành tệp thực thi độc lập. Không cần runtime, không cần Electron, không thỏa hiệp."
+      "excerpt": "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
     },
     "cross-platform-native-ui": {
       "title": "UI gốc đa nền tảng từ TypeScript",
-      "excerpt": "Cách Perry ánh xạ một mã nguồn TypeScript sang AppKit, UIKit, Android Views, GTK4 và Win32 — mang đến UI gốc thực sự trên mọi nền tảng."
+      "excerpt": "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
     },
     "building-pry": {
       "title": "Xây dựng Pry: Trình xem JSON gốc bằng TypeScript",
-      "excerpt": "Hướng dẫn từng bước xây dựng Pry — trình xem JSON gốc biên dịch từ TypeScript sang binary ARM64 gốc. Không cần runtime, không cần web view."
+      "excerpt": "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
     },
     "plugin-systems-are-a-performance-tax": {
       "title": "Hệ thống plugin là một loại thuế hiệu năng",
@@ -587,455 +580,9 @@
         "runtime": "Runtime TypeScript",
         "compiler": "Trình biên dịch TS-to-native",
         "ui-framework": "UI đa nền tảng"
-      }
-    },
-    "items": {
-      "bun": {
-        "title": "Perry vs Bun",
-        "metaTitle": "Perry vs Bun: TypeScript-to-native vs runtime tất-cả-trong-một",
-        "metaDescription": "Bun đóng gói TypeScript của bạn cùng runtime Bun thành một tệp thực thi duy nhất. Perry biên dịch TypeScript trực tiếp thành mã máy gốc. So sánh kiến trúc, kích thước đầu ra, hiệu năng và hỗ trợ nền tảng.",
-        "tldr": "Bun là một runtime JavaScript/TypeScript tất-cả-trong-một, kèm bundler, trình quản lý gói và test runner; nó cũng có thể tạo tệp thực thi đơn lẻ bằng cách đóng gói runtime của mình cùng mã của bạn. Perry đi theo một con đường khác: biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có engine JavaScript trong binary, không có runtime, chỉ là một tệp thực thi gốc nhỏ gọn. Bun và Perry chồng lấn ở đầu ra TS-to-binary nhưng bất đồng về việc có nên có engine JavaScript trong binary đó hay không.",
-        "competitorWhat": "Bun là một bộ công cụ JavaScript và TypeScript tất-cả-trong-một, nhanh, được xây dựng bằng Zig. Nó chạy trực tiếp mã nguồn `.ts` (không cần bước tiền biên dịch), sử dụng JavaScriptCore làm engine JS, và bao gồm bundler, trình quản lý gói và test runner. `bun build --compile` đóng gói runtime Bun cùng ứng dụng của bạn thành một tệp thực thi duy nhất. Bun nhắm đến Linux, macOS và Windows trên x64 và arm64.",
-        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust. Nó biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có engine JavaScript, không có runtime, không có JIT. Đầu ra là một binary đơn lẻ (khoảng 330 KB cho hello world; ~48 MB cho một ứng dụng đầy đủ stdlib như máy chủ Fastify). Perry nhắm đến 10 nền tảng bao gồm macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web.",
-        "table": [
-          {
-            "feature": "Đầu ra",
-            "perry": "Mã máy gốc (LLVM)",
-            "competitor": "Mã của bạn + runtime Bun đóng gói trong một binary"
-          },
-          {
-            "feature": "Engine JavaScript trong binary",
-            "perry": "Không có mặc định; tùy chọn V8 với --enable-js-runtime (+~15 MB)",
-            "competitor": "JavaScriptCore, luôn luôn"
-          },
-          {
-            "feature": "Kích thước binary hello-world",
-            "perry": "~330 KB",
-            "competitor": "~50–100 MB (bao gồm runtime Bun)"
-          },
-          {
-            "feature": "JIT",
-            "perry": "Không (biên dịch AOT)",
-            "competitor": "Có (JIT của JavaScriptCore)"
-          },
-          {
-            "feature": "Mục tiêu di động (iOS, Android)",
-            "perry": "Có — UI gốc qua UIKit/JNI",
-            "competitor": "Không"
-          },
-          {
-            "feature": "Mục tiêu Watch / TV",
-            "perry": "watchOS, tvOS, Wear OS",
-            "competitor": "Không"
-          },
-          {
-            "feature": "Widget UI gốc",
-            "perry": "25+ qua AppKit, UIKit, GTK4, Win32, JNI",
-            "competitor": "Không (tập trung server/CLI)"
-          },
-          {
-            "feature": "Hệ sinh thái npm",
-            "perry": "Các gói TS/JS thuần có thể biên dịch gốc; gói khác qua V8 tùy chọn",
-            "competitor": "npm tương thích Node đầy đủ"
-          },
-          {
-            "feature": "Độ ổn định",
-            "perry": "Trước 1.0 (alpha)",
-            "competitor": "Ổn định (1.x)"
-          },
-          {
-            "feature": "Được xây dựng bằng",
-            "perry": "Rust",
-            "competitor": "Zig"
-          }
-        ],
-        "perryWins": [
-          "Binary nhỏ hơn — hello world của Perry chỉ ~330 KB; hello world Bun --compile bao gồm runtime Bun và lên tới hàng chục megabyte.",
-          "Không có chi phí engine JavaScript. Binary Perry biên dịch không mang theo trình thông dịch hay JIT — TypeScript của bạn chính là tệp thực thi.",
-          "Di động, watch và TV. Perry biên dịch sang iOS, iPadOS, Android, watchOS, tvOS và WebAssembly. Bun chỉ dành cho server/desktop.",
-          "UI gốc. Module perry/ui của Perry biên dịch thành widget nền tảng thực sự (AppKit trên macOS, UIKit trên iOS, GTK4 trên Linux, Win32 trên Windows, JNI trên Android). Bun không có giải pháp UI.",
-          "Nhanh hơn ở hầu hết microbench tính toán đo trong điều kiện tương đương trên M1 Max (RUNS=11, v0.5.279, 2026-04-25): fibonacci 318 ms vs Bun 589 ms; object_create 1 ms vs 6 ms; nested_loops 18 ms vs 21 ms. Xem perry/benchmarks để có bảng đầy đủ.",
-          "Nhanh hơn ở JSON validate-and-roundtrip trong nhóm runtime kiểu động: lazy JSON tape của Perry đáp ở 75 ms trung vị so với 259 ms của Bun trên cùng workload 10k bản ghi."
-        ],
-        "competitorWins": [
-          "Runtime trưởng thành, ổn định với các bản phát hành 1.x. Perry còn ở giai đoạn trước 1.0.",
-          "Nhanh hơn ở JSON parse-and-iterate (nơi mọi giá trị đều được duyệt qua): Bun 254 ms vs Perry 466 ms trung vị trên cùng workload — lazy tape của Perry không thể đi tắt khi việc lặp được bắt buộc.",
-          "Hệ sinh thái npm tương thích Node đầy đủ ngay từ đầu. Perry chạy gốc một tập con và quay lại V8 nhúng tùy chọn cho phần còn lại.",
-          "Tích hợp sẵn test runner, bundler và trình quản lý gói. Perry là một trình biên dịch — công cụ kề cận thì tách biệt.",
-          "Hiệu năng JIT đã làm nóng có thể vượt qua AOT trên mã thiên về lặp với vòng lặp bên trong nóng; Perry không có JIT.",
-          "Ngang bằng với Perry trong khoảng nhiễu giữa các lần chạy trên `loop_data_dependent` (232 ms vs 235 ms) — kernel f64 thực sự không thể fold mà cả hai bên trình biên dịch đều không thể đảo thứ tự. Nguồn: perry/benchmarks RUNS=11."
-        ],
-        "whenPerry": "Chọn Perry khi kích thước binary quan trọng (phân phối di động, ngữ cảnh nhúng, khởi động nguội nhanh), khi bạn muốn xuất bản đến mobile/watch/TV từ một mã nguồn TypeScript duy nhất, khi bạn muốn widget UI gốc, hoặc khi bạn không muốn có engine JavaScript trong artifact đã xuất bản.",
-        "whenCompetitor": "Chọn Bun khi bạn cần một runtime ổn định, trưởng thành ngay hôm nay, khi tương thích npm đầy đủ là không thể thương lượng, khi bạn muốn một công cụ duy nhất cho runtime + bundler + trình quản lý gói + test runner, hoặc khi hiệu năng JIT đã làm nóng trên workload chạy lâu quan trọng với bạn hơn kích thước khởi động nguội.",
-        "verdict": "Bun và Perry đều cho phép xuất bản chương trình TypeScript dưới dạng một binary đơn lẻ, nhưng chúng trả lời những câu hỏi khác nhau. Binary của Bun chứa runtime Bun và được tối ưu cho workload backend/CLI nơi JIT và tương thích Node đầy đủ chiến thắng. Binary của Perry không chứa engine JS và được tối ưu cho kích thước, khởi động nguội, di động và UI gốc. Nếu bạn xuất bản máy chủ, Bun đã được chứng minh hơn hiện tại. Nếu bạn xuất bản ứng dụng gốc hoặc quan tâm đến kích thước binary, Perry được xây dựng cho trường hợp đó."
       },
-      "deno": {
-        "title": "Perry vs Deno",
-        "metaTitle": "Perry vs Deno: binary gốc biên dịch AOT vs Deno compile",
-        "metaDescription": "`deno compile` của Deno đóng gói V8 và TypeScript của bạn thành một tệp thực thi duy nhất. Perry biên dịch TypeScript trực tiếp thành mã gốc qua LLVM. So sánh đầu ra, mô hình runtime, bảo mật và hỗ trợ nền tảng.",
-        "tldr": "Deno là một runtime JavaScript và TypeScript hiện đại được xây dựng trên V8, với hỗ trợ TypeScript hạng nhất, mô hình bảo mật dựa trên quyền và lệnh `deno compile` tạo ra một tệp thực thi duy nhất bằng cách đóng gói V8 với ứng dụng của bạn. Perry biên dịch TypeScript trực tiếp thành mã máy gốc — không có V8 trong đầu ra, không có lớp runtime, chỉ là một binary gốc nhỏ.",
-        "competitorWhat": "Deno là một runtime TypeScript và JavaScript được xây dựng bằng Rust trên V8 và Tokio. Nó thực thi trực tiếp mã nguồn `.ts`, có công cụ tích hợp (formatter, linter, test runner, language server) và sử dụng mô hình quyền yêu cầu cấp quyền tường minh cho truy cập mạng, tệp và môi trường. `deno compile` tạo một tệp thực thi tự chứa bằng cách đóng gói runtime Deno (bao gồm V8) cùng mã của bạn. Deno nhắm đến Linux, macOS và Windows trên x64 và arm64.",
-        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust. Nó biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM — không có V8, không có JIT, không có runtime. Đầu ra là một binary đơn lẻ, thường là vài trăm KB đến vài MB cho mã gốc, có thể lớn hơn nếu bạn chọn dùng V8 runtime nhúng cho các gói npm cần engine JS.",
-        "table": [
-          {
-            "feature": "Đầu ra",
-            "perry": "Mã máy gốc (LLVM)",
-            "competitor": "Mã của bạn + runtime Deno (V8) đóng gói"
-          },
-          {
-            "feature": "Engine JavaScript trong binary",
-            "perry": "Không có mặc định; tùy chọn V8",
-            "competitor": "V8, luôn luôn"
-          },
-          {
-            "feature": "Kích thước binary hello-world",
-            "perry": "~330 KB",
-            "competitor": "~80–100 MB (bao gồm V8)"
-          },
-          {
-            "feature": "JIT",
-            "perry": "Không (biên dịch AOT)",
-            "competitor": "Có (V8 TurboFan)"
-          },
-          {
-            "feature": "Mục tiêu di động",
-            "perry": "iOS, iPadOS, Android",
-            "competitor": "Không"
-          },
-          {
-            "feature": "Watch / TV / WASM / Web",
-            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
-            "competitor": "Không"
-          },
-          {
-            "feature": "UI gốc",
-            "perry": "25+ widget qua API nền tảng gốc",
-            "competitor": "Không"
-          },
-          {
-            "feature": "Mô hình quyền",
-            "perry": "Quyền tiến trình OS tiêu chuẩn",
-            "competitor": "Quyền runtime chi tiết (--allow-net, --allow-read, v.v.)"
-          },
-          {
-            "feature": "Độ ổn định",
-            "perry": "Trước 1.0",
-            "competitor": "Ổn định (1.x / 2.x)"
-          },
-          {
-            "feature": "Được xây dựng bằng",
-            "perry": "Rust",
-            "competitor": "Rust (trên V8)"
-          }
-        ],
-        "perryWins": [
-          "Binary nhỏ hơn đáng kể. Hello world của Perry chỉ ~330 KB. Đầu ra `deno compile` bao gồm V8 và đạt mức 80–100 MB.",
-          "Không có engine JavaScript trong binary. TypeScript của bạn được biên dịch thành mã máy gốc, không bị V8 thông dịch tại runtime.",
-          "Mục tiêu di động, watch, TV, WASM và Web. Deno chỉ dành cho server/desktop.",
-          "Widget UI gốc ánh xạ sang AppKit, UIKit, GTK4, Win32 và JNI — không có tương đương trong Deno.",
-          "Khởi động nguội nhanh hơn. Binary gốc biên dịch AOT không trả chi phí khởi động V8.",
-          "Dẫn đầu microbench tính toán trong điều kiện tương đương trên M1 Max nơi mặc định fast-math `reassoc contract` của Perry cho phép LLVM tự động vector hóa và fold các bộ tích lũy có thể fold đơn giản (ví dụ loop_overhead 12 ms, math_intensive 14 ms; xem perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Runtime trưởng thành, ổn định với lịch sử lâu dài và dòng 2.x đang hoạt động.",
-          "Mô hình quyền chi tiết. Deno yêu cầu `--allow-net`, `--allow-read` tường minh, v.v. — hữu ích cho script trong sandbox và mã không đáng tin.",
-          "Công cụ tích hợp: formatter, linter, test runner, doc generator, LSP, tất cả trong runtime.",
-          "Hệ sinh thái V8 đầy đủ tại runtime — bất cứ thứ gì chạy trên V8 đều chạy trên Deno, bao gồm tối ưu JIT trên các đường nóng chạy lâu.",
-          "TypeScript hạng nhất không cần bước biên dịch riêng trong quá trình phát triển, với pipeline kiểm tra kiểu được quản lý đầy đủ.",
-          "API nền tảng web tiêu chuẩn (fetch, Web Streams, Web Crypto) được triển khai gốc trong runtime."
-        ],
-        "whenPerry": "Chọn Perry nếu bạn muốn một binary gốc nhỏ, khởi động nhanh, bạn xuất bản đến di động hoặc các mục tiêu phi-server khác, bạn muốn UI gốc, hoặc bạn muốn biên dịch TypeScript thành một binary không chứa engine JS.",
-        "whenCompetitor": "Chọn Deno nếu bạn muốn một runtime TypeScript ổn định, đầy đủ pin, bạn coi trọng sandbox quyền, bạn xây dựng workload phía server hoặc kịch bản, hoặc bạn cần tương thích đầy đủ hệ sinh thái V8 tại runtime.",
-        "verdict": "Cả hai đều cho phép xuất bản chương trình TypeScript dưới dạng một binary đơn lẻ; sự khác biệt là những gì bên trong binary đó. Deno cho bạn V8 + runtime được tuyển chọn + sandbox quyền. Perry cho bạn mã máy gốc không có engine. Deno là lựa chọn tốt hơn cho công việc phía server và kịch bản nơi hệ sinh thái và mô hình quyền quan trọng. Perry là lựa chọn tốt hơn khi bạn cần binary nhỏ, khởi động nhanh, mục tiêu di động hoặc UI gốc."
-      },
-      "static-hermes": {
-        "title": "Perry vs Static Hermes",
-        "metaTitle": "Perry vs Static Hermes (shermes): sẵn sàng sản xuất vs trình biên dịch nghiên cứu",
-        "metaDescription": "Static Hermes là trình biên dịch TypeScript-to-native ahead-of-time thử nghiệm của Meta. Perry là trình biên dịch TS-to-native theo hướng sản xuất đang phát hành ngay hôm nay. So sánh độ trưởng thành, phạm vi, đầu ra và độ phủ nền tảng.",
-        "tldr": "Static Hermes (`shermes`) là nỗ lực ở giai đoạn nghiên cứu của Meta nhằm biên dịch ahead-of-time một tập con JavaScript/TypeScript có kiểu mạnh thông qua engine Hermes, chủ yếu nhắm đến React Native. Perry là một canh bạc khác trên cùng ý tưởng chung — TypeScript biên dịch sang gốc — nhưng được xây dựng độc lập bằng Rust trên LLVM, với một trình biên dịch hoạt động được, hơn 25 widget UI gốc và 10 mục tiêu biên dịch đang phát hành ngay hôm nay. Tính đến giữa năm 2026, `shermes` vẫn phải được build từ mã nguồn — bộ benchmark của Perry đã thử nó như một peer và không tìm thấy cách cài đặt sạch sẽ qua các trình quản lý gói tiêu chuẩn — và engine Hermes V1, vốn trở thành mặc định của React Native từ đầu năm 2026, hoàn toàn không bao gồm các tính năng biên dịch tĩnh.",
-        "competitorWhat": "Hermes là engine JavaScript mà Meta xây dựng cho React Native — dựa trên bytecode, biên dịch AOT trước, tối ưu cho thời gian khởi động trên di động. Static Hermes là nỗ lực nghiên cứu để mở rộng Hermes với biên dịch gốc ahead-of-time của một tập con JavaScript có kiểu, nhằm cho React Native một con đường đến mã gốc thực sự. Nhánh `static_h` hiện là nhánh mặc định của repo và đang được phát triển tích cực, nhưng thứ thực sự được đưa đến người dùng React Native là Hermes V1 — một trình biên dịch bytecode và VM mới trở thành engine mặc định trong React Native 0.84 (tháng 2/2026) — vốn không biên dịch JS thành binary gốc và cũng không sử dụng thông tin kiểu. Bản thân Static Hermes vẫn là một dự án R&D về trình biên dịch; theo ghi chú benchmark của Perry, nó chưa được đóng gói để cài đặt thường quy trên macOS arm64 (`shermes` đã bị bỏ qua khỏi benchmark đa ngôn ngữ với ghi chú rằng nó 'không có sẵn trên Homebrew hoặc npm theo cách cài đặt sạch sẽ trên macOS arm64' — xem perry/benchmarks/README.md).",
-        "perryWhat": "Perry là một trình biên dịch TypeScript gốc được viết bằng Rust, sử dụng SWC để phân tích cú pháp và LLVM để sinh mã. Nó cung cấp một CLI hoạt động (`perry compile`, `perry run`, `perry publish`), hơn 25 widget UI gốc, 10 mục tiêu biên dịch, runtime tự lưu trữ và một bộ benchmark được đo trong điều kiện minh bạch (M1 Max, RUNS=11). Perry còn ở giai đoạn trước 1.0 nhưng đang theo hướng sản xuất: mọi người đang xuất bản ứng dụng được xây dựng với nó (Bloom Engine, Mango, Hone, Pry, dB Meter — xem perryts.com).",
-        "table": [
-          {
-            "feature": "Trạng thái",
-            "perry": "Trước 1.0 (alpha) — theo hướng sản xuất",
-            "competitor": "Nghiên cứu / thử nghiệm"
-          },
-          {
-            "feature": "Đường cài đặt (macOS arm64)",
-            "perry": "Homebrew, APT, npm (@perryts/perry)",
-            "competitor": "Chưa được đóng gói để cài đặt sạch tại thời điểm viết (theo perry/benchmarks)"
-          },
-          {
-            "feature": "Backend",
-            "perry": "LLVM",
-            "competitor": "Tùy chỉnh (sinh mã dựa trên Hermes)"
-          },
-          {
-            "feature": "Đầu vào",
-            "perry": "TypeScript (đầy đủ)",
-            "competitor": "Tập con JS/TS có kiểu"
-          },
-          {
-            "feature": "Mục tiêu biên dịch",
-            "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
-            "competitor": "Chủ yếu là di động (ngữ cảnh React Native)"
-          },
-          {
-            "feature": "UI gốc",
-            "perry": "25+ widget qua AppKit, UIKit, GTK4, Win32, JNI",
-            "competitor": "Qua bridge React Native (khi tích hợp)"
-          },
-          {
-            "feature": "Quy trình ứng dụng CLI độc lập",
-            "perry": "Có — `perry compile main.ts` tạo ra một binary",
-            "competitor": "Gắn với ngữ cảnh React Native"
-          },
-          {
-            "feature": "Bộ benchmark công khai",
-            "perry": "Có — RUNS=11 vs Node, Bun, Rust, C++, Go, Swift, Java",
-            "competitor": "Nội bộ / bài báo nghiên cứu"
-          }
-        ],
-        "perryWins": [
-          "Nó tồn tại như một công cụ có thể dùng được. Perry có thể được cài đặt ngay hôm nay qua Homebrew, APT hoặc `npm install @perryts/perry`, và `perry compile main.ts` tạo ra một binary ngay lần thử đầu tiên.",
-          "Phạm vi rộng hơn. Perry biên dịch ứng dụng CLI độc lập, ứng dụng desktop gốc, ứng dụng di động, ứng dụng watch, ứng dụng TV, WASM và web từ một mã nguồn TypeScript. Static Hermes tập trung vào con đường mã gốc của React Native.",
-          "UI gốc tích hợp sẵn. Module perry/ui của Perry là một lớp UI khai báo phong cách SwiftUI hoạt động được, biên dịch thành widget AppKit/UIKit/GTK4/Win32/JNI. Static Hermes để UI cho host của nó (React Native).",
-          "Bộ benchmark công khai, có thể tái lập với phương pháp được tài liệu hóa — perry/benchmarks hiển thị trung vị + p95 + σ qua RUNS=11 so với các trình biên dịch và runtime được nêu tên.",
-          "Backend LLVM nghĩa là Perry kế thừa hàng thập kỷ tối ưu hóa trưởng thành (autovectorization, IndVarSimplify, scalar replacement) và hỗ trợ mọi nền tảng mà LLVM nhắm đến."
-        ],
-        "competitorWins": [
-          "Được hậu thuẫn bởi Meta — nguồn lực kỹ thuật đáng kể và một điểm tựa chiến lược rõ ràng ở React Native.",
-          "Hermes đã được phát hành trong các ứng dụng React Native sản xuất với tư cách engine bytecode; Static Hermes kế thừa hệ sinh thái và công cụ đó.",
-          "Công việc nghiên cứu cấp cao về quy tắc kiểu AOT và ngữ nghĩa tập con JS thực sự mới mẻ.",
-          "Nếu bạn đã ở trên React Native, Static Hermes (khi có sẵn) là con đường gia tăng dần hơn so với việc viết lại với một trình biên dịch khác."
-        ],
-        "whenPerry": "Chọn Perry nếu bạn cần một trình biên dịch TS-to-native hoạt động ngay hôm nay, bạn muốn một mã nguồn TypeScript duy nhất nhắm đến desktop, di động, watch, TV, WASM và web, hoặc bạn muốn widget UI gốc mà không cần bridge của React Native.",
-        "whenCompetitor": "Chọn Static Hermes (khi có sẵn) nếu bạn cam kết với React Native và muốn một con đường từ JavaScript/TypeScript đến mã gốc biên dịch ahead-of-time trên di động, và bạn thoải mái làm việc ở rìa công cụ nghiên cứu.",
-        "verdict": "Static Hermes là nghiên cứu thú vị từ một đội đáng tin cậy. Perry là một sản phẩm hoạt động được trên cùng ý tưởng chung, có phạm vi rộng hơn nhiều so với chỉ di động và đang phát hành ngay hôm nay. Nếu bạn cần một trình biên dịch TS-to-native trong tay ngay bây giờ, Perry là lựa chọn. Nếu bạn ở trên React Native và sẵn sàng theo dõi một dự án nghiên cứu, hãy theo dõi Static Hermes."
-      },
-      "electron": {
-        "title": "Perry vs Electron",
-        "metaTitle": "Perry vs Electron: ứng dụng TypeScript gốc vs Chromium đóng gói",
-        "metaDescription": "Electron đóng gói Chromium và Node.js cùng mỗi ứng dụng. Perry biên dịch TypeScript trực tiếp thành binary gốc nhỏ với widget UI gốc. So sánh kích thước binary, hiệu năng, độ trung thực UI và độ phủ nền tảng.",
-        "tldr": "Electron cho phép bạn xây dựng ứng dụng desktop đa nền tảng bằng công nghệ web (HTML/CSS/JS) bằng cách đóng gói Chromium và Node.js cùng ứng dụng. Perry biên dịch TypeScript trực tiếp thành mã máy gốc và render UI qua widget nền tảng thực sự — AppKit, UIKit, GTK4, Win32, JNI. Lập trường của Electron là tái sử dụng công nghệ web; lập trường của Perry là binary gốc nhỏ với UI gốc từ TypeScript.",
-        "competitorWhat": "Electron là một framework mã nguồn mở để xây dựng ứng dụng desktop đa nền tảng, sử dụng Chromium để render và Node.js để truy cập hệ thống. Mỗi ứng dụng Electron đi kèm bản sao Chromium và Node của riêng nó, đó là lý do trình cài đặt Electron thường có kích thước 80–150 MB ngay cả với hello world. Electron đã hỗ trợ các ứng dụng được sử dụng rộng rãi bao gồm VS Code, Slack, Discord và client desktop của Figma. Nó nhắm đến desktop Linux, macOS và Windows; không có giải pháp di động, watch hay TV chính thức.",
-        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc, không có engine trình duyệt, không có Chromium và không có runtime Node. Lớp UI (perry/ui) là một hệ thống khai báo kiểu SwiftUI ánh xạ đến widget nền tảng gốc qua AppKit trên macOS, UIKit trên iOS/iPadOS/tvOS, GTK4 trên Linux, Win32 trên Windows và JNI trên Android. Binary hello-world chỉ ~330 KB; ứng dụng đầy đủ với stdlib (Fastify, mysql2, v.v.) khoảng 48 MB.",
-        "table": [
-          {
-            "feature": "Render",
-            "perry": "Widget nền tảng gốc (AppKit, UIKit, GTK4, Win32, JNI)",
-            "competitor": "Chromium đóng gói (HTML/CSS/JS)"
-          },
-          {
-            "feature": "Engine đóng gói",
-            "perry": "Không có (chỉ V8 tùy chọn khi --enable-js-runtime)",
-            "competitor": "Chromium + Node.js"
-          },
-          {
-            "feature": "Kích thước trình cài đặt hello-world",
-            "perry": "~330 KB",
-            "competitor": "~80–150 MB"
-          },
-          {
-            "feature": "Trình cài đặt ứng dụng đầy đủ (stdlib + framework)",
-            "perry": "~48 MB",
-            "competitor": "Thông thường 100–200+ MB"
-          },
-          {
-            "feature": "Sử dụng RAM",
-            "perry": "Gốc (thông thường: hàng chục MB)",
-            "competitor": "Nhiều tiến trình Chromium (thông thường: hàng trăm MB)"
-          },
-          {
-            "feature": "Di động / watch / TV",
-            "perry": "Có — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
-            "competitor": "Không (chỉ desktop)"
-          },
-          {
-            "feature": "Ngôn ngữ UI",
-            "perry": "TypeScript với API khai báo kiểu SwiftUI",
-            "competitor": "HTML/CSS/JS (web stack)"
-          },
-          {
-            "feature": "Tự động cập nhật / đóng gói",
-            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
-            "competitor": "electron-builder, electron-updater (hệ sinh thái trưởng thành)"
-          },
-          {
-            "feature": "Độ trưởng thành",
-            "perry": "Trước 1.0",
-            "competitor": "Ổn định, hơn một thập kỷ trong sản xuất"
-          }
-        ],
-        "perryWins": [
-          "Kích thước binary. Hello world của Perry ~330 KB; hello world Electron thường 80–150 MB vì mỗi ứng dụng đi kèm Chromium riêng.",
-          "Dấu chân bộ nhớ. Ứng dụng Perry chạy như một tiến trình gốc duy nhất; ứng dụng Electron chạy nhiều tiến trình Chromium (renderer, GPU, utility, v.v.) và tiêu thụ hàng trăm MB RAM khi nhàn rỗi.",
-          "Diện mạo và cảm giác gốc. Perry render qua widget nền tảng thực sự, vì vậy ứng dụng kế thừa các quy ước OS (focus ring, accessibility, IME, vật lý cuộn) tự động.",
-          "Di động, watch, TV. Một mã nguồn Perry biên dịch sang iOS/iPadOS/Android/watchOS/tvOS/Wear OS. Electron chỉ desktop.",
-          "Khởi động nguội. Binary gốc không trả chi phí khởi động Chromium và Node.",
-          "Hiệu năng CPU thực sự trên mã chặt chẽ. Perry dẫn đầu microbench tính toán so với Node (mà Electron sử dụng) gấp nhiều lần trên hầu hết kernel (xem perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Độ trưởng thành. Electron đã ở sản xuất hơn một thập kỷ và hỗ trợ VS Code, Slack, Discord và nhiều ứng dụng khác với công cụ đã được thử thách.",
-          "Tái sử dụng web stack. Nếu nhóm của bạn đã xây dựng UI web, Electron cho phép bạn xuất bản chúng dưới dạng ứng dụng desktop mà không cần viết lại.",
-          "Tính nhất quán UI giữa các nền tảng dễ dàng — Chromium render giống nhau trên mọi OS, đó chính xác là điều một số sản phẩm muốn.",
-          "Hệ sinh thái rộng lớn các thư viện npm hoạt động tại runtime; Perry chạy gốc một tập con và V8 tùy chọn bao phủ phần còn lại.",
-          "Công cụ đóng gói trưởng thành (electron-builder, electron-updater, trình hỗ trợ ký mã) với hỗ trợ cộng đồng rộng.",
-          "Các tính năng web-native như devtools, hot reload và tốc độ lặp CSS/HTML mượt mà không gì sánh được."
-        ],
-        "whenPerry": "Chọn Perry nếu bạn muốn binary gốc nhỏ, sử dụng bộ nhớ thấp, diện mạo và cảm giác gốc theo từng nền tảng, hoặc một mã nguồn TypeScript duy nhất xuất bản đến di động/watch/TV ngoài desktop.",
-        "whenCompetitor": "Chọn Electron nếu bạn có UI web hiện có và muốn xuất bản nó dưới dạng ứng dụng desktop với việc viết lại tối thiểu, nếu bạn cần tính nhất quán UI đa nền tảng tối đa trên desktop, hoặc nếu bạn phụ thuộc vào nhiều thư viện JS thuần tại runtime.",
-        "verdict": "Electron và Perry nằm ở hai đầu đối lập của phổ đa nền tảng. Electron đánh đổi kích thước binary và bộ nhớ lấy tái sử dụng công nghệ web; Perry đánh đổi web stack lấy binary gốc và UI gốc. Nếu bạn đã thấy trình cài đặt Electron của mình phình lên hơn 150 MB hoặc RAM nhàn rỗi của nó vượt nửa gigabyte, Perry là câu trả lời cho vấn đề cụ thể đó — với cái giá là một mô hình UI khác, kiểu gốc."
-      },
-      "tauri": {
-        "title": "Perry vs Tauri",
-        "metaTitle": "Perry vs Tauri: widget gốc vs webview hệ thống",
-        "metaDescription": "Tauri sử dụng webview của hệ thống để render UI web trong vỏ Rust. Perry biên dịch TypeScript trực tiếp thành widget gốc — không có webview, không render HTML. So sánh kiến trúc, kích thước đầu ra và hỗ trợ nền tảng.",
-        "tldr": "Tauri là một framework để xây dựng ứng dụng desktop đa nền tảng (và ngày càng nhiều cho di động) với backend Rust và frontend chạy bên trong webview tích hợp của hệ điều hành — WebView2 trên Windows, WKWebView trên macOS, WebKitGTK trên Linux. Ứng dụng Tauri nhỏ hơn đáng kể so với Electron vì webview của OS không được đóng gói. Perry đi theo một con đường khác: hoàn toàn không có webview, không render HTML, chỉ là TypeScript được biên dịch thành mã máy gốc điều khiển widget nền tảng thực sự.",
-        "competitorWhat": "Tauri là một framework mã nguồn mở được viết bằng Rust cho phép bạn xây dựng ứng dụng đa nền tảng với frontend web (bất kỳ framework nào — React, Vue, Svelte, v.v.) và backend Rust. Thay vì đóng gói Chromium, Tauri sử dụng webview tích hợp của hệ thống, giúp giữ trình cài đặt ứng dụng ở mức một chữ số MB trên Linux/Windows/macOS. Tauri 2 đã thêm hỗ trợ di động (iOS và Android). Frontend được render dưới dạng HTML/CSS/JS bởi webview hệ thống; giao tiếp với backend Rust đi qua một bridge IPC.",
-        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc qua LLVM. Lớp UI (perry/ui) là một API khai báo kiểu SwiftUI ánh xạ đến widget nền tảng gốc — không phải HTML được render bởi webview. Ứng dụng viết bằng Perry không mang theo engine JavaScript, không chạy bên trong WebKit/WebView2 và không cần bridge IPC giữa UI và logic. Perry nhắm đến 10 nền tảng bao gồm di động, watch và TV.",
-        "table": [
-          {
-            "feature": "Render UI",
-            "perry": "Widget nền tảng gốc (AppKit, UIKit, GTK4, Win32, JNI)",
-            "competitor": "Webview hệ thống (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
-          },
-          {
-            "feature": "Ngôn ngữ frontend",
-            "perry": "TypeScript (API widget khai báo)",
-            "competitor": "HTML/CSS/JS qua bất kỳ framework web nào (React, Vue, v.v.)"
-          },
-          {
-            "feature": "Ngôn ngữ backend",
-            "perry": "TypeScript",
-            "competitor": "Rust"
-          },
-          {
-            "feature": "IPC giữa UI và logic",
-            "perry": "Không — một tiến trình, gọi trực tiếp",
-            "competitor": "Bắt buộc (UI trong webview, logic trong tiến trình Rust)"
-          },
-          {
-            "feature": "Trình cài đặt hello-world",
-            "perry": "~330 KB",
-            "competitor": "~3–10 MB (webview do OS cung cấp)"
-          },
-          {
-            "feature": "Di động (iOS, Android)",
-            "perry": "Có — UI gốc",
-            "competitor": "Có — dựa trên webview (Tauri 2)"
-          },
-          {
-            "feature": "Watch / TV",
-            "perry": "watchOS, tvOS, Wear OS",
-            "competitor": "Không"
-          },
-          {
-            "feature": "Mục tiêu WebAssembly",
-            "perry": "Có (perry/ui qua bridge DOM)",
-            "competitor": "N/A (Tauri tự sử dụng webview gốc)"
-          },
-          {
-            "feature": "Độ trưởng thành",
-            "perry": "Trước 1.0",
-            "competitor": "Ổn định (1.x / 2.x)"
-          }
-        ],
-        "perryWins": [
-          "UI thực sự gốc — Perry không render HTML; nó điều khiển widget nền tảng thực sự, vì vậy ứng dụng kế thừa vật lý cuộn gốc, focus, accessibility, IME và theming OS miễn phí.",
-          "Hello-world nhỏ hơn (~330 KB so với mức một chữ số MB của Tauri), và không phụ thuộc webview hệ thống tại runtime.",
-          "Một ngôn ngữ, một tiến trình. Toàn bộ ứng dụng — UI và logic — là TypeScript, không có bridge IPC để thiết kế hay debug.",
-          "watchOS, tvOS, Wear OS và một mục tiêu Web/JS đầy đủ với pipeline biên dịch gốc thực sự, không phải webview đóng gói.",
-          "Không có sự khác biệt hành vi webview giữa các nền tảng. Tauri kế thừa các đặc thù của WKWebView vs WebView2 vs WebKitGTK; Perry chọn con đường widget gốc trên mỗi OS.",
-          "Hiệu năng tính toán là AOT-gốc, không phải JIT của webview. Perry dẫn đầu microbench tính toán trong điều kiện tương đương trên M1 Max (perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Framework trưởng thành, ổn định với dòng 2.x đang hoạt động và cộng đồng lớn.",
-          "Linh hoạt frontend — sử dụng bất kỳ framework web nào (React, Vue, Svelte, Solid, v.v.) bạn đã biết.",
-          "Trình cài đặt nhỏ hơn Electron vì Tauri dựa vào webview do OS cung cấp thay vì đóng gói Chromium.",
-          "Backend Rust lý tưởng nếu bạn có công việc cấp hệ thống cần làm (filesystem, API gốc) và muốn đảm bảo tại thời điểm biên dịch ở đó.",
-          "Render webview nghĩa là tốc độ lặp CSS/HTML và devtools hoạt động như bạn mong đợi từ phát triển web.",
-          "Pipeline đóng gói, ký mã và cập nhật đã được thiết lập."
-        ],
-        "whenPerry": "Chọn Perry nếu bạn muốn UI thực sự gốc (không phải HTML render trong webview), binary gốc nhỏ không phụ thuộc webview, một mã nguồn TypeScript duy nhất qua desktop + di động + watch + TV, hoặc mã widget đa nền tảng được xác thực tại thời điểm biên dịch.",
-        "whenCompetitor": "Chọn Tauri nếu bạn có frontend web hiện tại hoặc dự kiến, muốn ứng dụng desktop được hỗ trợ bởi Rust với trình cài đặt nhỏ, hài lòng với HTML/CSS cho UI, hoặc muốn hệ sinh thái rộng lớn của các framework và công cụ web.",
-        "verdict": "Tauri là một Electron tốt hơn rất nhiều — cùng cách tiếp cận công nghệ web, trình cài đặt nhỏ hơn đáng kể vì webview của OS không được đóng gói. Nhưng nó vẫn là một kiến trúc dựa trên webview, có nghĩa là render HTML/CSS/JS và một bridge IPC. Perry có một lập trường khác: hoàn toàn không có webview, widget nền tảng gốc, một tiến trình duy nhất. Nếu bạn muốn giữ web stack với binary nhỏ hơn Electron, Tauri là câu trả lời đúng. Nếu bạn muốn rời web stack để có widget gốc trong TypeScript, Perry là câu trả lời."
-      },
-      "react-native": {
-        "title": "Perry vs React Native",
-        "metaTitle": "Perry vs React Native: TypeScript biên dịch AOT vs bridge JS đến UI gốc",
-        "metaDescription": "React Native cung cấp một bundle JavaScript cộng với một engine JS làm cầu nối đến widget gốc. Perry biên dịch TypeScript trực tiếp thành mã máy gốc với UI gốc tích hợp. So sánh kiến trúc, hiệu năng và hỗ trợ nền tảng.",
-        "tldr": "React Native cho phép bạn viết JavaScript/TypeScript điều khiển UI gốc trên iOS và Android — các thành phần UI ánh xạ đến widget nền tảng qua một bridge JS-to-native (hoặc, trong New Architecture, một lớp JSI / Fabric với cùng hình dạng khái niệm). Perry đi theo một cách tiếp cận khác: TypeScript được biên dịch ahead-of-time thành mã máy gốc, và UI gốc là một phần của binary đã biên dịch, không phải bridge tại runtime.",
-        "competitorWhat": "React Native là framework của Meta để xây dựng ứng dụng di động bằng React. JavaScript chạy trong một engine nhúng — Hermes mặc định, hoặc JavaScriptCore — và tương tác với widget iOS/Android gốc qua một bridge (legacy) hoặc JSI/Fabric (New Architecture). Framework này ưu tiên di động (iOS và Android); Microsoft duy trì các fork cộng đồng cho Windows và macOS. React Native đã hỗ trợ ứng dụng tại Meta, Microsoft, Shopify, Discord và nhiều nơi khác.",
-        "perryWhat": "Perry biên dịch TypeScript trực tiếp thành mã máy gốc. Module perry/ui của nó là một hệ thống UI khai báo kiểu SwiftUI biên dịch thành widget nền tảng gốc tại thời điểm build — không có runtime JS trong binary, không có bridge và không có JSI. Cùng một mã nguồn TypeScript biên dịch đến macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly và Web.",
-        "table": [
-          {
-            "feature": "Mô hình thực thi",
-            "perry": "Mã máy gốc biên dịch AOT",
-            "competitor": "Engine JS (Hermes/JSC) + bridge gốc (hoặc JSI/Fabric)"
-          },
-          {
-            "feature": "Engine JS trong ứng dụng",
-            "perry": "Không có",
-            "competitor": "Hermes (mặc định) hoặc JavaScriptCore"
-          },
-          {
-            "feature": "UI",
-            "perry": "Widget gốc — API khai báo kiểu SwiftUI",
-            "competitor": "Widget gốc qua React + bridge / Fabric"
-          },
-          {
-            "feature": "Mục tiêu chính",
-            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web",
-            "competitor": "iOS, Android (Windows/macOS qua fork cộng đồng)"
-          },
-          {
-            "feature": "Binary server / CLI / desktop",
-            "perry": "Có (công cụ CLI, máy chủ, ứng dụng desktop)",
-            "competitor": "Không (framework UI di động)"
-          },
-          {
-            "feature": "Bridge giữa JS và gốc",
-            "perry": "Không có bridge — mã gốc chính là chương trình",
-            "competitor": "Có (bridge legacy hoặc JSI/Fabric)"
-          },
-          {
-            "feature": "Hot reload trong phát triển",
-            "perry": "perry dev (tự động biên dịch lại watch-mode)",
-            "competitor": "Fast Refresh (rất nhanh)"
-          },
-          {
-            "feature": "Độ trưởng thành",
-            "perry": "Trước 1.0",
-            "competitor": "Ổn định, được triển khai rộng rãi trong sản xuất"
-          },
-          {
-            "feature": "Thư viện thành phần",
-            "perry": "widget cốt lõi perry/ui + lớp tương thích React perry-react",
-            "competitor": "Rất rộng — React Native + các gói cộng đồng"
-          }
-        ],
-        "perryWins": [
-          "Không có engine JS trong ứng dụng được phát hành. Binary Perry biên dịch không mang theo Hermes hay JSC; TypeScript chính là tệp thực thi.",
-          "Không có chi phí bridge / JSI. Các lệnh gọi UI gốc là lệnh gọi hàm biên dịch trực tiếp, không phải marshaling JS-to-native.",
-          "Độ phủ nền tảng rộng hơn. Một mã nguồn Perry biên dịch sang desktop (macOS/Linux/Windows), di động (iOS/iPadOS/Android), thiết bị đeo (watchOS/Wear OS), TV (tvOS), WASM và Web. React Native ưu tiên di động.",
-          "Binary phía server và CLI từ cùng một trình biên dịch — Perry cũng là một runtime máy chủ, không chỉ là framework UI.",
-          "Hiệu năng tính toán biên dịch AOT — không có warmup, không có JIT, không có round trip qua bridge.",
-          "perry-react cho bạn React/JSX biên dịch thành widget gốc, vì vậy mô hình tư duy React có sẵn mà không cần engine JS trong binary."
-        ],
-        "competitorWins": [
-          "Hệ sinh thái trưởng thành, được thử thách trong trận chiến với cộng đồng, thư viện và công cụ hỗ trợ khổng lồ.",
-          "Fast Refresh trong phát triển là tốt nhất trong lớp — thay đổi mã xuất hiện trong mili giây mà không cần build lại.",
-          "Nguồn nhân lực khổng lồ. Tuyển dụng nhà phát triển React Native dễ dàng; Perry còn mới.",
-          "Pipeline CI/CD, xuất bản App Store / Play Store và cập nhật OTA kiểu codepush đã được thiết lập.",
-          "JSI/Fabric và New Architecture đã thu hẹp phần lớn khoảng cách hiệu năng lịch sử với gốc, đồng thời bảo toàn mô hình lập trình React.",
-          "Hỗ trợ trực tiếp từ Meta và các đơn vị áp dụng lớn (Microsoft, Shopify, Amazon) giữ cho framework tiếp tục tiến lên."
-        ],
-        "whenPerry": "Chọn Perry nếu bạn muốn một mã nguồn TypeScript duy nhất qua di động, desktop, watch, TV, WASM và web; nếu bạn không muốn có runtime JS trong ứng dụng được phát hành; nếu bạn muốn UI gốc không có bridge; hoặc nếu bạn đã đầu tư vào TypeScript và muốn biên dịch gốc thay vì một engine JS.",
-        "whenCompetitor": "Chọn React Native nếu bạn xây dựng ứng dụng di động và muốn framework UI gốc đa nền tảng trưởng thành nhất, bạn có một đội React hiện có, bạn phụ thuộc vào hệ sinh thái thư viện React Native, hoặc bạn cần stack đa nền tảng di động tiêu chuẩn ngành ngày nay.",
-        "verdict": "React Native là một framework ưu tiên di động với runtime JS và một bridge (hiện đã được cải thiện). Perry là một trình biên dịch tạo ra binary gốc từ TypeScript, với UI gốc là một phần của đầu ra biên dịch. Nếu bạn muốn React trên di động với hệ sinh thái sâu nhất, React Native là câu trả lời ngày nay. Nếu bạn muốn một mã nguồn TypeScript duy nhất biên dịch đến di động + desktop + watch + TV mà không có runtime JS trong ứng dụng, Perry là câu trả lời."
-      }
+      "sources": "Nguồn",
+      "factsLanguageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
     },
     "electronAlternatives": {
       "title": "Giải pháp thay thế Electron cho TypeScript",
@@ -1044,9 +591,9 @@
   },
   "meta": {
     "title": "Perry — Biên dịch TypeScript thành tệp thực thi gốc | Trình biên dịch TypeScript gốc",
-    "description": "Perry là trình biên dịch TypeScript sang gốc: binary độc lập không cần runtime Node.js. Tệp thực thi 2–5 MB cho macOS, Linux, Windows, iOS và Android.",
+    "description": "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; the Perry runtime and GC are statically linked.",
     "ogTitle": "Perry — Biên dịch TypeScript thành tệp thực thi gốc",
-    "ogDescription": "Biên dịch TypeScript thành tệp thực thi gốc. 10 nền tảng, hơn 25 widget UI, khởi động 0 ms."
+    "ogDescription": "AOT TypeScript via SWC and LLVM. 11 documented targets plus a HarmonyOS preview, 35+ native UI widgets, and transparent benchmark results."
   },
   "faq": {
     "title": "Các câu hỏi <gradient>thường gặp</gradient>",
@@ -1055,36 +602,71 @@
     "items": [
       {
         "question": "Perry có cần Node.js hay runtime không?",
-        "answer": "Không. Perry biên dịch ahead-of-time TypeScript thành một tệp thực thi gốc độc lập. Binary chạy được mà không cần cài Node.js, Bun, Deno hay bất kỳ runtime JavaScript nào trên máy. Với các gói npm chưa thể biên dịch gốc, có một tùy chọn V8 nhúng dự phòng qua --enable-js-runtime."
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
       },
       {
         "question": "Các binary đã biên dịch lớn cỡ nào?",
-        "answer": "Một binary hello-world có kích thước khoảng 330 KB. Các công cụ CLI điển hình rơi vào khoảng 2–5 MB. Ứng dụng đầy đủ có tích hợp framework lớn (Fastify, mysql2, v.v.) khoảng 48 MB — vẫn thấp hơn nhiều so với mức khởi điểm ~80–150 MB của một ứng dụng Electron hay binary nhúng runtime."
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
       },
       {
         "question": "Tôi có thể dùng gói npm không?",
-        "answer": "Có. Các gói TypeScript/JavaScript thuần biên dịch gốc qua perry.compilePackages — axios, zod v4, express, fastify và hono đã có thể biên dịch và chạy ngay hôm nay. Các gói cần đầy đủ ngữ nghĩa engine JS có thể chạy qua tùy chọn V8 dự phòng với --enable-js-runtime."
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
       },
       {
         "question": "Perry hỗ trợ những nền tảng nào?",
-        "answer": "Mười mục tiêu biên dịch: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly và Web/JS. Ứng dụng GUI sử dụng widget nền tảng gốc — AppKit, UIKit, GTK4, Win32 và Android qua JNI."
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
       },
       {
         "question": "Perry có miễn phí và mã nguồn mở không?",
-        "answer": "Có. Trình biên dịch này miễn phí và mã nguồn mở. Biên dịch và chạy cục bộ hoàn toàn miễn phí và không cần tài khoản. Perry Publish — dịch vụ đám mây lo việc build, ký và gửi lên store — có gói miễn phí (15 lượt xuất bản mỗi tháng) và gói Pro."
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
       },
       {
         "question": "Perry khác gì so với Bun hay Deno compile?",
-        "answer": "Bun và Deno đóng gói JavaScript của bạn cùng runtime của chúng thành một tệp — một hello world nặng khoảng 60–100 MB tùy nền tảng, và mã vẫn được thực thi bằng JIT. Perry biên dịch ahead-of-time TypeScript thành mã máy qua LLVM: không có engine nhúng, hello world ~330 KB, khởi động ~1 ms. Xem so sánh đầy đủ <bunLink>Perry vs Bun</bunLink> và <denoLink>Perry vs Deno</denoLink>."
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
       },
       {
         "question": "Perry khác gì so với Electron hay Tauri?",
-        "answer": "Electron đóng gói Chromium và Node.js cùng mọi ứng dụng, nên trình cài đặt khởi điểm ở khoảng 80–150 MB. Tauri nhỏ hơn nhiều nhưng vẫn render giao diện web trong webview hệ thống, với logic ứng dụng viết bằng Rust. Perry không dùng webview: TypeScript biên dịch thành mã máy điều khiển các widget nền tảng thực sự — AppKit, UIKit, GTK4, Win32 — trong một tiến trình duy nhất. Xem so sánh đầy đủ <electronLink>Perry vs Electron</electronLink> và <tauriLink>Perry vs Tauri</tauriLink>."
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
       },
       {
         "question": "Perry đã trưởng thành đến mức nào?",
-        "answer": "Perry vẫn ở giai đoạn trước 1.0 và đang phát triển nhanh, nhưng các ứng dụng thực tế xây dựng bằng Perry đã ra mắt ngay hôm nay — trong đó có Bloom Engine, Mango, Hone, Pry và dB Meter. Xem <showcaseLink>showcase</showcaseLink> để biết chi tiết."
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
       }
     ]
+  },
+  "privacy": {
+    "metaTitle": "Privacy notice",
+    "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
+    "title": "Privacy notice",
+    "updated": "Last updated: August 27, 2026",
+    "controllerTitle": "1. Controller",
+    "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
+    "dataTitle": "2. Data processed",
+    "dataItems": [
+      "Page-view and technical request data produced when you visit the site.",
+      "Your email address and the source form when you choose to subscribe to the newsletter."
+    ],
+    "analyticsTitle": "3. Analytics",
+    "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
+    "newsletterTitle": "4. Newsletter and Resend",
+    "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
+    "purposesTitle": "5. Purposes and legal bases",
+    "purposesItems": [
+      "Operate, secure, and diagnose the website and its supporting services.",
+      "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
+      "Send the newsletter after your request or consent."
+    ],
+    "retentionTitle": "6. Retention and recipients",
+    "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
+    "rightsTitle": "7. Your rights",
+    "rightsItems": [
+      "Request access, correction, deletion, restriction, or portability where applicable.",
+      "Object to processing based on legitimate interests.",
+      "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
+      "Complain to a competent data-protection supervisory authority."
+    ],
+    "contactTitle": "8. Contact",
+    "contactBody": "For privacy questions or requests, contact",
+    "languageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
   }
 }

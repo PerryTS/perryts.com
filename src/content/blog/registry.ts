@@ -329,23 +329,30 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
 export async function getBlogContent(
   slug: string,
   locale: string
-): Promise<ComponentType | null> {
+): Promise<{ Component: ComponentType; resolvedLocale: string } | null> {
   const slugLoaders = loaders[slug];
   if (!slugLoaders) return null;
 
-  const loader = slugLoaders[locale] ?? slugLoaders["en"];
+  const resolvedLocale = slugLoaders[locale] ? locale : "en";
+  const loader = slugLoaders[resolvedLocale];
   if (!loader) return null;
 
   try {
     const mod = await loader();
-    return mod.default;
+    return { Component: mod.default, resolvedLocale };
   } catch {
     // Fallback to English if locale file doesn't exist
     try {
       const mod = await slugLoaders["en"]();
-      return mod.default;
+      return { Component: mod.default, resolvedLocale: "en" };
     } catch {
       return null;
     }
   }
+}
+
+export function getBlogContentLocale(slug: string, locale: string): string | null {
+  const slugLoaders = loaders[slug];
+  if (!slugLoaders) return null;
+  return slugLoaders[locale] ? locale : slugLoaders.en ? "en" : null;
 }
