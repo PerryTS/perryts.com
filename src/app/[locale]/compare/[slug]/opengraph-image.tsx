@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { getTranslations } from "next-intl/server";
 import { getCompareItem, getAllCompareSlugs } from "@/lib/compare";
+import { getComparisonContent } from "@/lib/compare-content";
 import { locales } from "@/i18n/routing";
 
 export const dynamic = "force-static";
@@ -18,17 +18,10 @@ export default async function Image({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const item = getCompareItem(slug);
   const competitor = item?.competitor ?? "Alternatives";
-
-  let tldr = "";
-  try {
-    const t = await getTranslations({ locale, namespace: "compare" });
-    tldr = (t.raw(`items.${slug}`) as { tldr?: string })?.tldr ?? "";
-  } catch {
-    // ignore
-  }
+  const tldr = getComparisonContent(slug)?.tldr ?? "";
 
   return new ImageResponse(
     (

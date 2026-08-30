@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import { TechnicalFactsNotice } from "@/components/TechnicalFactsNotice";
 import type { LandingMeta } from "../registry";
 
 export const meta: LandingMeta = {
@@ -16,6 +17,7 @@ export default function Content() {
       <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-[#0a0a0f] to-[#0a0a0f]" />
         <div className="relative max-w-4xl mx-auto text-center">
+          <TechnicalFactsNotice />
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
             TypeScript on <span className="gradient-text">LLVM</span>
           </h1>
@@ -70,24 +72,24 @@ export default function Content() {
           <ul className="space-y-4 text-slate-400 leading-relaxed mb-12 list-disc pl-6 marker:text-amber-400">
             <li>
               <strong className="text-slate-300">Monomorphization.</strong>{" "}
-              Generic functions and classes are specialized per concrete
-              instantiation, the same strategy Rust and C++ use.{" "}
+              Known function and generic call shapes can be specialized for a
+              bounded set of representations.{" "}
               <code className="text-slate-300">{`Stack<number>`}</code> and{" "}
               <code className="text-slate-300">{`Stack<string>`}</code> become
-              two independent, fully-typed functions — so the optimizer works
-              with concrete types instead of a generic dispatch blob, and
-              generics cost nothing at run time.
+              can therefore give the optimizer more specific inputs, while
+              unproved or highly polymorphic calls retain dynamic fallbacks.
             </li>
             <li>
               <strong className="text-slate-300">Static dispatch.</strong>{" "}
               Where the receiver type is known at compile time, method calls
-              compile to direct calls that LLVM can inline, not hash-table
-              lookups.
+              can compile to direct calls that LLVM can inline. Unknown
+              receivers retain runtime method and prototype dispatch.
             </li>
             <li>
               <strong className="text-slate-300">Direct field access.</strong>{" "}
-              Object fields resolve to compile-time indices, so a property read
-              is a fixed-offset load — not a dictionary lookup.
+              Shape-proved object fields can resolve to fixed offsets. Dynamic
+              property access keeps the runtime lookup path required for
+              JavaScript behavior.
             </li>
           </ul>
 
@@ -95,12 +97,14 @@ export default function Content() {
             NaN-boxing and inline lowerings
           </h2>
           <p className="text-slate-400 leading-relaxed mb-6">
-            Where values are dynamic, Perry uses NaN-boxing: every value is a
-            64-bit word. Doubles are stored directly; objects, strings,
+            Perry&apos;s canonical dynamic value is a 64-bit NaN-boxed word,
+            while representation selection can keep proved values in native
+            forms. Doubles are stored directly; objects, strings,
             booleans, <code className="text-slate-300">null</code>, and{" "}
-            <code className="text-slate-300">undefined</code> are encoded into
-            the unused bit patterns of an IEEE 754 quiet NaN. Numbers are
-            zero-cost — no boxing, no allocation for arithmetic.
+            <code className="text-slate-300">undefined</code> can be encoded in
+            the unused bit patterns of an IEEE 754 quiet NaN. This can avoid
+            heap boxing for numeric arithmetic, but conversions and dynamic
+            operations can still have runtime cost.
           </p>
           <p className="text-slate-400 leading-relaxed mb-6">
             The catch is that operations on non-number values need
@@ -159,10 +163,10 @@ br i1 %fits, label %fast, label %slow`}</code>
             some benchmarks by up to 70x because hot operations initially went
             through opaque runtime helper calls. Recovering — inline lowerings,
             the bump allocator above, better inlining boundaries — took the
-            backend past Cranelift&apos;s numbers, and by the time it settled
-            Perry beat Node.js on every benchmark in its suite, by 1.7x to
-            24.6x with two ties (April 2026). The full post-mortem is worth
-            reading:{" "}
+            backend past its earlier baseline. That April 2026 result is
+            historical, not a current universal speed claim. The current
+            public suite includes Perry wins, mixed rows, and losses against
+            Node.js and Bun. The migration post-mortem is worth reading:{" "}
             <Link
               href="/blog/cranelift-to-llvm"
               className="text-perry-400 hover:text-white transition-colors underline underline-offset-2"
@@ -218,7 +222,8 @@ br i1 %fits, label %fast, label %slow`}</code>
             </h2>
             <p className="text-slate-400 mb-6">
               <code className="text-slate-300">perry compile main.ts</code> —
-              native machine code, no engine attached.
+              native machine code with the Perry runtime and GC statically
+              linked, and no external JavaScript engine by default.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/getting-started" className="btn-primary">

@@ -68,6 +68,11 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/coop" className="text-slate-400 hover:text-white transition-colors">
+                  Coop
+                </Link>
+              </li>
+              <li>
                 <a href="https://docs.perryts.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                   {t("documentation")}
                 </a>
@@ -113,10 +118,10 @@ export async function Footer() {
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <Link href="/imprint" className="hover:text-white transition-colors">
-              Impressum
+              {t("imprint")}
             </Link>
             <Link href="/privacy" className="hover:text-white transition-colors">
-              Datenschutz
+              {t("privacy")}
             </Link>
             <a
               href="https://github.com/PerryTS/perry"

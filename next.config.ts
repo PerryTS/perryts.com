@@ -6,6 +6,9 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     unoptimized: true,
   },

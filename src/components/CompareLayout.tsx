@@ -1,33 +1,15 @@
 import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { CompareItem } from "@/lib/compare";
-
-interface TableRow {
-  feature: string;
-  perry: string;
-  competitor: string;
-}
-
-interface CompareTranslations {
-  title: string;
-  tldr: string;
-  competitorWhat: string;
-  perryWhat: string;
-  table: TableRow[];
-  perryWins: string[];
-  competitorWins: string[];
-  whenPerry: string;
-  whenCompetitor: string;
-  verdict: string;
-}
+import { getComparisonContent } from "@/lib/compare-content";
 
 export async function CompareLayout({ item }: { item: CompareItem }) {
   const common = await getTranslations("common");
   const ui = await getTranslations("compare.ui");
-  const t = await getTranslations("compare");
   const locale = await getLocale();
+  const data = getComparisonContent(item.slug);
 
-  const data = t.raw(`items.${item.slug}`) as CompareTranslations;
+  if (!data) return null;
 
   return (
     <article className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
@@ -53,6 +35,12 @@ export async function CompareLayout({ item }: { item: CompareItem }) {
         </h1>
 
         <p className="text-lg text-slate-300 leading-relaxed mb-12">{data.tldr}</p>
+
+        {locale !== "en" && (
+          <p className="mb-8 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">
+            {ui("factsLanguageNotice")}
+          </p>
+        )}
 
         <time className="text-sm text-slate-500 block mb-12">
           {ui("lastUpdated")}{" "}
@@ -154,7 +142,23 @@ export async function CompareLayout({ item }: { item: CompareItem }) {
 
         {/* Verdict */}
         <h2 className="text-2xl font-bold mb-4">{ui("verdict")}</h2>
-        <p className="text-slate-300 leading-relaxed mb-12">{data.verdict}</p>
+        <p className="text-slate-300 leading-relaxed mb-10">{data.verdict}</p>
+
+        <h2 className="text-2xl font-bold mb-4">{ui("sources")}</h2>
+        <ul className="space-y-2 mb-12 text-sm">
+          {data.sources.map((source) => (
+            <li key={source.url}>
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-perry-400 hover:text-white underline underline-offset-4"
+              >
+                {source.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
         {/* CTA */}
         <div className="feature-card text-center">

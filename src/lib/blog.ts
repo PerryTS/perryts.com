@@ -15,7 +15,7 @@ export const blogPosts: BlogPost[] = [
     title: "Introducing Perry",
     date: "2025-01-15",
     excerpt:
-      "Perry is a native TypeScript compiler written in Rust that compiles your TypeScript directly to standalone executables. No runtime, no Electron, no compromises.",
+      "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine.",
     tags: ["announcement", "compiler", "TypeScript"],
     content: () => null, // Content rendered inline in the post page
   },
@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     title: "Cross-Platform Native UI from TypeScript",
     date: "2025-02-01",
     excerpt:
-      "How Perry maps one TypeScript codebase to AppKit, UIKit, Android Views, GTK4, and Win32 — delivering truly native UI on every platform.",
+      "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites.",
     tags: ["architecture", "UI", "cross-platform"],
     content: () => null,
   },
@@ -33,7 +33,7 @@ export const blogPosts: BlogPost[] = [
     title: "Building Pry: A Native JSON Viewer in TypeScript",
     date: "2025-02-20",
     excerpt:
-      "A walkthrough of building Pry — a native JSON viewer that compiles from TypeScript to a native ARM64 binary. No runtime, no web views.",
+      "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview.",
     tags: ["tutorial", "showcase", "Pry"],
     content: () => null,
   },
@@ -170,6 +170,33 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "The ~270 releases from v0.5.875 to v0.5.1146 weren't about one benchmark — they were about making real npm packages compile and run. axios, zod v4, express, fastify, and hono now work; test262 parity jumped (String 60→79%, Array 61→72%); Windows went Fluent with Mica; and DatePicker + drag & drop landed on every platform.",
     tags: ["npm", "test262", "Windows", "widgets", "milestone"],
+    content: () => null,
+  },
+  {
+    slug: "shipping-a-watch-only-app-to-the-app-store",
+    title: "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
+    date: "2026-07-07",
+    excerpt:
+      "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter.",
+    tags: ["watchOS", "App Store", "iOS", "how-to"],
+    content: () => null,
+  },
+  {
+    slug: "compiling-claude-code",
+    title: "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
+    date: "2026-07-25",
+    excerpt:
+      "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers.",
+    tags: ["compiler", "GC", "debugging", "Node.js parity", "milestone"],
+    content: () => null,
+  },
+  {
+    slug: "gc-decisions-surprises",
+    title: "Building a GC for a Native TypeScript Compiler: Decisions, Surprises, and How It's Going",
+    date: "2026-08-12",
+    excerpt:
+      "Perry compiles TypeScript to native code with LLVM — which means it needs a real garbage collector. The decisions we made, the bugs that left no evidence, the CI gates that couldn't fail, and where the numbers stand against Node and a refcounting AOT competitor.",
+    tags: ["GC", "performance", "LLVM", "debugging", "architecture"],
     content: () => null,
   },
 ];

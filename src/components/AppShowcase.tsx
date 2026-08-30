@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 
 export async function AppShowcase() {
   const t = await getTranslations("appShowcase");
@@ -108,7 +109,7 @@ export async function AppShowcase() {
         </div>
 
         <div className="text-center mt-12">
-          <a
+          <Link
             href="/showcase"
             className="btn-secondary inline-flex items-center gap-2"
           >
@@ -126,7 +127,7 @@ export async function AppShowcase() {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

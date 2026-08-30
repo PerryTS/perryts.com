@@ -23,74 +23,81 @@
     "discord": "Discord"
   },
   "hero": {
-    "badge": "v0.5.1146 — paket npm asli kini bisa dikompilasi: axios, zod, express, fastify, hono",
+    "badge": "AOT TypeScript via SWC + LLVM — native builds with no external JavaScript engine",
     "headline1": "Kompilasi TypeScript ke Native.",
-    "headline2": "Satu Kode Sumber, Semua Platform.",
-    "subheadline": "Perry mengompilasi TypeScript menjadi aplikasi GUI dan CLI native di <platforms>macOS, iPadOS, iOS, Android, Linux, Windows, watchOS, tvOS, HarmonyOS, WebAssembly, dan Web.</platforms> Tanpa runtime. Tanpa Electron. Hanya binary native.",
+    "headline2": "One Codebase, Many Targets.",
+    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps for <platforms>macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WebAssembly</platforms>, with a separate HarmonyOS preview. Native binaries statically link the Perry runtime and GC; they do not require Node.js or an external JavaScript engine.",
     "getStarted": "Mulai",
     "viewOnGithub": "Lihat di GitHub",
     "compiling": "Mengompilasi main.ts...",
-    "compiled": "✓ Executable terkompilasi: main (2,3 MB)",
-    "targetsLabel": "Target",
+    "compiled": "✓ Example executable written: main (size varies by linked features)",
+    "targetsLabel": "Documented targets + preview",
     "widgetsLabel": "Widget UI native",
-    "startupLabel": "Waktu mulai",
-    "appStore": "App Store",
-    "readyLabel": "Siap"
+    "startupLabel": "Measured runtime-only macOS hello",
+    "appStore": "Store workflows",
+    "readyLabel": "perry publish",
+    "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
   },
   "features": {
     "title": "Mengapa <brand>Perry</brand>?",
-    "subtitle": "Semua yang Anda butuhkan untuk mengompilasi TypeScript menjadi aplikasi native",
+    "subtitle": "The current compiler, runtime, UI, and tooling surfaces — with limitations called out",
     "noRuntime": {
-      "title": "Tanpa Runtime",
-      "description": "Menghasilkan executable native yang berdiri sendiri. Tanpa Node.js, tanpa V8, tanpa dependensi runtime. Hanya satu binary yang berjalan di mana saja."
+      "title": "No External JS Engine",
+      "description": "Native builds run without Node.js, Bun, Deno, or an external JavaScript engine installed. The Perry runtime and garbage collector are statically linked into each target-specific binary."
     },
     "fastCompilation": {
       "title": "Kompilasi Cepat",
       "description": "Kompilasi langsung dari TypeScript ke kode native menggunakan SWC untuk parsing dan LLVM untuk pembuatan kode yang dioptimalkan. Tanpa JavaScript perantara."
     },
     "smallBinaries": {
-      "title": "Binary Kecil",
-      "description": "Binary output biasanya berukuran 2-5 MB. Dengan runtime V8 opsional untuk paket npm JS, 15-20 MB. Kirim lebih sedikit, deploy lebih cepat."
+      "title": "Size Scales With Features",
+      "description": "Hello world can be about 330 KB and Mango is published at about 7 MB. Applications that link the full standard library or optional V8 fallback can be much larger; size depends on target, imports, and build profile."
     },
     "deterministicBuilds": {
-      "title": "Build deterministik",
-      "description": "Input sama, biner sama. Dapat direproduksi di mesin mana pun, di setiap proses CI, di tim mana pun. Tidak ada rebuild misterius."
+      "title": "Cacheable Builds",
+      "description": "Perry caches module objects and can pin a CPU baseline for portable output. Default host builds tune for the local CPU, and final binaries may contain platform UUIDs, timestamps, or signatures, so byte-for-byte cross-machine reproducibility is not promised."
     },
     "stdLib": {
-      "title": "Standard Library Lengkap",
-      "description": "Implementasi native bawaan untuk fs, path, crypto, os, Buffer, child_process, dan lainnya. Gunakan API Node.js yang familiar."
+      "title": "Tracked Node.js APIs",
+      "description": "Native implementations cover many familiar Node.js APIs across 53 tracked modules. Coverage is broad but not complete; use perry check and the published limitations for your project."
     },
     "v8Runtime": {
       "title": "Paket npm Nyata",
-      "description": "axios, zod, express, fastify, dan hono dikompilasi menjadi binary native. Paket JavaScript murni berjalan di runtime ter-embed opsional — self-contained, tanpa node_modules saat runtime."
+      "description": "Many pure TypeScript and JavaScript packages compile natively. Packages that depend on unsupported dynamic or engine-specific semantics may need the optional embedded V8 fallback or may not work."
     },
     "widgets": {
-      "title": "35+ Widget UI Native",
-      "description": "Tombol, tabel, date picker, drag & drop, chart, peta, command palette, kode QR, rich text, dan lainnya — semuanya dikompilasi menjadi widget platform nyata melalui AppKit, UIKit, GTK4, Win32 (Fluent/Mica), dan JNI."
+      "title": "35+ Native UI Widgets",
+      "description": "35+ native UI widgets map to platform toolkits including AppKit, UIKit, GTK4, Win32, Android SDK APIs, SwiftUI on watches, and a DOM/CSS bridge on Web/WASM. Availability varies by target."
     },
     "plugins": {
-      "title": "Sistem Plugin Waktu Kompilasi",
-      "description": "Modul dikomposisi saat build — tanpa overhead plugin saat runtime, tanpa batasan IPC. Dependensi Anda menjadi pemanggilan fungsi native langsung di binary akhir."
+      "title": "Compile-Time Plugin System",
+      "description": "Modules can compose at build time and statically linked dependencies can become direct native calls. Dynamic dispatch and runtime support remain where JavaScript semantics require them."
     },
     "threading": {
-      "title": "Multi-Threading Sejati",
-      "description": "Thread OS nyata dengan parallelMap, parallelFilter, dan spawn. Keamanan waktu kompilasi menolak capture yang bisa berubah — tanpa SharedArrayBuffer, tanpa worker, hanya thread."
+      "title": "True Multi-Threading",
+      "description": "Real OS threads with parallelMap, parallelFilter, and spawn. Mutable captures are rejected by default; SharedArrayBuffer and Atomics provide explicit shared-memory coordination, with documented typed-view caveats."
     },
     "i18n": {
-      "title": "i18n Waktu Kompilasi",
-      "description": "Ekstraksi string otomatis, aturan jamak CLDR untuk 30+ bahasa, validasi waktu kompilasi. Terjemahan ditanam ke binary dengan pencarian runtime hampir nol."
+      "title": "Compile-Time i18n",
+      "description": "Automatic string extraction, CLDR plural rules for 30+ locales, and compile-time validation. Translations are baked into the binary; lookup cost depends on the generated catalog and call site."
     },
     "goDeeper": "Pelajari lebih dalam: bagaimana Perry <binaryLink>mengompilasi TypeScript menjadi binary</binaryLink>, apa yang membuatnya menjadi <compilerLink>kompiler TypeScript native</compilerLink>, dan bagaimana perbandingannya dengan <electronAltLink>alternatif Electron</electronAltLink>."
   },
   "platforms": {
-    "title": "Native di <gradient>Semua Platform</gradient>",
-    "subtitle": "Perry mengompilasi TypeScript Anda ke framework UI native, WebAssembly, dan JavaScript — bukan web view, bukan Electron. Widget native asli di setiap platform, plus web.",
-    "stable": "Stabil"
+    "title": "Native across <gradient>documented targets</gradient>",
+    "subtitle": "Eleven documented targets share Perry’s compiler and UI model. Web and WASM are aliases; visionOS, watchOS, and Wear OS have narrower core support, and HarmonyOS is a separate preview.",
+    "core": "Core support",
+    "preview": "Preview",
+    "countNote": "{count} documented targets; HarmonyOS is listed separately as a preview.",
+    "platformGuide": "See the platform status guide",
+    "webAliasNote": "--target web and --target wasm are aliases",
+    "harmonyPreviewNote": "Separate preview; not included in the 11 documented targets",
+    "broad": "Broad support"
   },
   "comparison": {
     "badge": "Perbandingan Framework",
-    "title": "Satu-satunya framework yang memenuhi <gradient>semua kriteria</gradient>",
-    "subtitle": "TypeScript dikompilasi ke kode native. Widget platform asli. Nol overhead runtime.",
+    "title": "Perry’s native compilation <gradient>model</gradient>",
+    "subtitle": "Ahead-of-time machine code and real platform widgets, with an explicitly linked runtime and documented compatibility tradeoffs.",
     "framework": "Framework",
     "language": "Bahasa",
     "nativeCode": "Kode Native",
@@ -98,18 +105,25 @@
     "runtimeOverhead": "Overhead Runtime",
     "partial": "Sebagian",
     "noSharedUI": "Tanpa UI bersama",
-    "nativeCompiled": "Dikompilasi native",
-    "realPlatformWidgets": "Widget platform asli",
-    "zeroRuntimeOverhead": "Nol overhead runtime"
+    "nativeCompiled": "Ahead-of-time machine code through LLVM",
+    "realPlatformWidgets": "Real platform widgets where each target supports them",
+    "noExternalEngine": "No external Node.js installation or JavaScript engine by default",
+    "linkedRuntime": "The Perry runtime and GC are statically linked; overhead is not “none”",
+    "compatibilityTradeoff": "Perry implements a practical TypeScript and Node.js subset; some packages need the optional V8 fallback",
+    "platformMaturityTradeoff": "Platform capabilities and maturity differ across desktop, mobile, wearable, TV, and Web/WASM targets",
+    "designedFor": "Designed for",
+    "tradeoffs": "Tradeoffs to evaluate",
+    "compareNote": "Competitor-specific pages are dated and link to upstream documentation.",
+    "viewComparisons": "View sourced comparisons"
   },
   "codeExample": {
     "title": "Tulis <gradient>TypeScript</gradient>, Kirim Native",
-    "subtitle": "Gunakan sintaks dan API TypeScript yang familiar. Perry menangani sisanya.",
+    "subtitle": "Use familiar TypeScript syntax and validate each API or package against Perry’s current compatibility surface.",
     "nativeBinary": "Binary native"
   },
   "performance": {
-    "title": "Perbandingan <gradient>Performa</gradient>",
-    "subtitle": "Kompilasi native memberikan efisiensi tak tertandingi",
+    "title": "Published <gradient>measurements</gradient>",
+    "subtitle": "Current public results include wins, mixed results, and losses. Treat microbenchmarks as workload-specific measurements, not a universal speed claim.",
     "metric": "Metrik",
     "binarySize": "Ukuran Binary",
     "startupTime": "Waktu Mulai",
@@ -117,9 +131,24 @@
     "memoryOverhead": "Overhead Memori",
     "none": "Tidak ada",
     "minimal": "Minimal",
-    "benchmarkTitle": "Hasil Benchmark: <gradient>Hingga 18x Lebih Cepat</gradient>",
-    "benchmarkSubtitle": "Perry v0.5.279 vs Node.js v25 — median RUNS=11, Apple M1 Max (lebih rendah lebih baik)",
-    "lowerIsBetter": "Lebih rendah lebih baik"
+    "benchmarkTitle": "Full public suite: <gradient>wins and losses</gradient>",
+    "benchmarkSubtitle": "Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.",
+    "lowerIsBetter": "Lebih rendah lebih baik",
+    "nodeDistribution": "Application plus an installed Node.js runtime",
+    "bunDistribution": "Standalone executable embeds the Bun runtime",
+    "engineStartup": "Engine boot and warmup; workload-dependent",
+    "linkedRuntime": "Statically linked Perry runtime + GC",
+    "externalRuntime": "External Node.js runtime",
+    "embeddedRuntime": "Embedded Bun / JavaScriptCore runtime",
+    "workloadDependent": "Workload-dependent",
+    "startupFootnote": "Measured runtime-only macOS hello world on an Apple M-series host (5.0 → 3.2 ms after removing unused dynamic-library links). Application startup varies.",
+    "benchmark": "Benchmark",
+    "result": "Result",
+    "result_win": "Win vs both",
+    "result_mixed": "Mixed",
+    "result_loss": "Loss vs both",
+    "benchmarkSource": "Raw benchmark artifact",
+    "methodology": "Methodology and caveats"
   },
   "installation": {
     "title": "<gradient>Mulai</gradient>",
@@ -130,10 +159,10 @@
     "apt": "APT (Debian/Ubuntu)",
     "windows": "Windows (winget)",
     "source": "Dari Kode Sumber",
-    "homebrewNote": "Memerlukan Homebrew. Mendukung macOS arm64 dan x86_64.",
-    "aptNote": "Mendukung Linux x86_64 dan arm64.",
-    "windowsNote": "Memerlukan Windows Package Manager. Mendukung Windows x86_64 dan arm64.",
-    "sourceNote": "Memerlukan Rust toolchain. Binary akan berada di target/release/perry.",
+    "homebrewNote": "Supports macOS arm64 and x86_64. Xcode Command Line Tools are required for native linking.",
+    "aptNote": "Supports x86_64 and arm64 Linux. Install GCC or Clang; some targets require Clang 15 or newer.",
+    "windowsNote": "Supports Windows x86_64 and arm64. Native and cross-target builds may require LLVM plus MSVC or xwin tooling.",
+    "sourceNote": "Requires Rust, LLVM/Clang, and the SDK/toolchain for the target platform. The binary is written to target/release/perry.",
     "compileFile": "Kompilasi file",
     "compileFileDesc": "Mengompilasi main.ts menjadi executable native",
     "customOutput": "Output kustom",
@@ -141,63 +170,68 @@
     "withV8": "Dengan runtime V8",
     "withV8Desc": "Aktifkan V8 untuk kompatibilitas paket npm JavaScript",
     "checkCompat": "Periksa kompatibilitas",
-    "checkCompatDesc": "Validasi kode TypeScript untuk kompilasi native"
+    "checkCompatDesc": "Validasi kode TypeScript untuk kompilasi native",
+    "npmNote": "Recommended cross-platform install. Native targets still require the relevant platform SDK and linker; run perry doctor after installation.",
+    "doctor": "Verify the toolchain",
+    "doctorDesc": "Checks the compiler, linker, SDK, and target setup"
   },
   "featureTable": {
     "title": "<gradient>Dukungan</gradient> Fitur",
-    "subtitle": "Cakupan API TypeScript dan Node.js yang komprehensif",
+    "subtitle": "Tested surfaces and known partial areas — not a blanket claim of complete TypeScript or Node.js compatibility",
     "coreLanguage": "Bahasa Inti",
     "functions": "Fungsi",
     "classes": "Kelas",
     "typeSystem": "Sistem Tipe",
     "standardLibrary": "Standard Library",
-    "fullSupport": "Dukungan Penuh",
-    "partial": "Sebagian"
+    "partial": "Partial",
+    "tested": "Tested in the current implementation",
+    "limitationsNote": "“Partial” means the API or syntax exists with documented gaps. Exact behavior changes as parity work lands.",
+    "limitationsLink": "Read the current limitations"
   },
   "nativeLibs": {
-    "title": "<gradient>30+</gradient> Paket npm Native",
-    "subtitle": "Paket npm populer diimplementasi ulang dalam Rust native. Tanpa npm install, tanpa node_modules, hanya kode native yang cepat.",
+    "title": "<gradient>~50</gradient> Native Packages and Node APIs",
+    "subtitle": "Many popular packages and Node APIs have native implementations. Coverage is package- and feature-specific; perry check and the compatibility documentation are the source of truth.",
     "database": "Database",
     "security": "Keamanan",
     "http": "HTTP",
     "dataProcessing": "Pemrosesan Data",
     "dateTime": "Tanggal & Waktu",
     "utilities": "Utilitas",
-    "info": "Cukup import dan gunakan — Perry secara otomatis menggunakan implementasi native"
+    "info": "Import the package normally. Perry selects a native implementation when one is available, otherwise compilation may use another supported path or report a limitation."
   },
   "shipIt": {
     "title": "Dari Kode ke <gradient>App Store</gradient>",
-    "subtitle": "Perry tidak hanya mengompilasi aplikasi Anda — tetapi juga mengantarkannya ke tangan pengguna.",
+    "subtitle": "The perry publish command supports build, signing, packaging, verification, and submission workflows. Availability and prerequisites vary by platform and hosted-service configuration.",
     "compileSign": "Kompilasi & tanda tangani",
     "packageSubmit": "Kemas & kirim",
     "storesDownloads": "Toko & Unduhan",
     "storesList": "App Store, Play Store, langsung",
-    "testEveryPlatform": "Uji setiap platform",
+    "testEveryPlatform": "Verify supported targets",
     "buildSign": {
-      "title": "Build & Tanda Tangani",
-      "description": "Build lintas platform dengan satu perintah. Penandatanganan kode untuk macOS, iOS, Android, dan Windows ditangani untuk Anda. Tidak perlu bergulat dengan provisioning profile Xcode atau keystore Android."
+      "title": "Build & Sign",
+      "description": "Create platform artifacts and use configured signing credentials. Apple, Android, and Windows workflows require their platform SDKs, accounts, and certificates."
     },
     "distribute": {
-      "title": "Distribusi",
-      "description": "Push ke App Store, Play Store, atau kirim unduhan langsung. Perry Publish menangani pengemasan, notarisasi, dan pengiriman."
+      "title": "Distribute",
+      "description": "Prepare store submissions or direct-download artifacts for supported targets. Store acceptance and processing remain controlled by each store."
     },
     "verify": {
-      "title": "Verifikasi",
-      "description": "Didukung oleh Geisterhand. Pengujian UI otomatis di semua 6 platform. Ketahui bahwa aplikasi Anda bekerja di mana saja sebelum pengguna memberi tahu Anda bahwa tidak."
+      "title": "Verify",
+      "description": "Run available launch and UI checks through Perry and Geisterhand. Test depth and target coverage depend on the selected environment."
     },
-    "freeForOpenSource": "Gratis untuk proyek open source.",
-    "plansForTeams": "Paket untuk tim"
+    "freeForOpenSource": "Local compilation is free and MIT licensed.",
+    "plansForTeams": "Check hosted-service availability"
   },
   "architecture": {
     "title": "Cara <gradient>Kerjanya</gradient>",
-    "subtitle": "Dari kode sumber TypeScript ke executable native dalam hitungan detik",
+    "subtitle": "From TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime",
     "parser": "Parser",
     "fastParsing": "Parsing cepat",
     "transform": "Transformasi",
     "codegen": "Codegen",
     "machineCode": "Kode mesin",
     "executable": "Executable",
-    "binarySize": "Binary 2-5 MB",
+    "binarySize": "From ~330 KB; varies by features",
     "tsFiles": "File .ts",
     "compilerInternalsPrompt": "Ingin tahu bagaimana kompiler bekerja di balik layar?",
     "compilerInternals": "Struktur internal kompiler",
@@ -205,7 +239,7 @@
   },
   "footer": {
     "newsletter": "Buletin",
-    "brand": "TypeScript → Native. Kompilasi TypeScript langsung ke executable standalone di macOS, iOS, Android, Linux, dan Windows. Tanpa runtime, tanpa Electron.",
+    "brand": "TypeScript → Native. Compile ahead of time for desktop, mobile, wearable, TV, and Web/WASM targets. No external Node.js installation or JavaScript engine is required for native builds; the Perry runtime and GC are statically linked.",
     "resources": "Sumber Daya",
     "gettingStarted": "Memulai",
     "documentation": "Dokumentasi",
@@ -214,8 +248,10 @@
     "issues": "Issues",
     "discussions": "Diskusi",
     "contributing": "Kontribusi",
-    "tagline": "Dibangun dengan Rust, SWC, dan LLVM — dan ya, website ini dilayani oleh binary yang dikompilasi dengan Perry",
-    "enterprise": "Enterprise"
+    "tagline": "Built with Rust, SWC, and LLVM. The static site is served by a Perry-compiled binary; newsletter subscriptions use a separate Node helper.",
+    "enterprise": "Enterprise",
+    "imprint": "Pemberitahuan hukum",
+    "privacy": "Privasi"
   },
   "newsletter": {
     "footerLabel": "Tetap terhubung",
@@ -227,7 +263,7 @@
     "errorGeneric": "Ada yang salah. Silakan coba lagi.",
     "blockTitle": "Suka postingan ini? Dapatkan yang berikutnya.",
     "blockSubtitle": "Catatan singkat tentang rilis Perry dan apa yang sedang kami bangun selanjutnya.",
-    "privacy": "Beberapa email per bulan. Berhenti berlangganan kapan saja.",
+    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
     "pageTitle": "Newsletter Perry",
     "pageDescription": "Update tentang rilis Perry baru, dukungan platform, dan artikel teknis. Tanpa spam.",
     "pageSubtitle": "Catatan singkat tentang apa yang sedang dirilis di Perry — rilis, platform, dan pembahasan teknis mendalam.",
@@ -235,196 +271,148 @@
     "bullet1Body": "Setiap rilis Perry yang penting, dengan apa yang berubah dan kenapa.",
     "bullet2Title": "Artikel teknis",
     "bullet2Body": "Internal kompiler, benchmark, dan apa yang sedang kami pelajari.",
-    "bullet3Title": "Tanpa spam",
-    "bullet3Body": "Beberapa email per bulan. Berhenti berlangganan dengan satu klik."
+    "bullet3Title": "Privacy controls",
+    "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled.",
+    "privacyLink": "Privacy notice"
   },
   "pricing": {
-    "breadcrumbPublish": "Perry Publish",
     "breadcrumbPricing": "Harga",
-    "title": "Harga sederhana",
-    "subtitle": "Satu perintah untuk build, tanda tangani, dan kirim. Gratis untuk sebagian besar developer. Tidak perlu akun untuk memulai.",
-    "free": "Gratis",
-    "noAccountRequired": "Tidak perlu akun",
-    "perMonth": "/bulan",
-    "pro": "Pro",
-    "mostPopular": "Paling populer",
-    "forDevs": "Untuk developer yang mengirim cepat",
-    "subscribeToPro": "Berlangganan Pro",
-    "feature_publishes15": "15 publikasi per bulan",
-    "feature_deepVerify2": "2 kali deep verify per bulan",
-    "feature_lightVerify": "Light verify setiap publikasi",
-    "feature_allPlatforms": "Semua platform (macOS, iOS, Android, Windows, Linux)",
-    "feature_codeSigning": "Penandatanganan kode & notarisasi",
-    "feature_storeSubmission": "Pengiriman App Store & Play Store",
-    "feature_unlimitedProjects": "Proyek tak terbatas (dengan akun gratis)",
-    "feature_publishes50": "50 publikasi per bulan",
-    "feature_deepVerify20": "20 kali deep verify per bulan",
-    "feature_unlimitedProjectsPro": "Proyek tak terbatas",
-    "feature_priorityQueue": "Antrean build prioritas",
-    "feature_overage": "$0.49/publikasi kelebihan (vs $0.99 gratis)",
-    "comparePlans": "Bandingkan paket",
-    "col_free": "Gratis",
-    "col_pro": "Pro",
-    "row_monthlyPublishes": "Publikasi bulanan",
-    "row_deepVerifyRuns": "Kali deep verify",
-    "row_lightVerify": "Light verify",
-    "row_everyPublish": "Setiap publikasi",
-    "row_overagePublish": "Kelebihan per publikasi",
-    "row_overageVerify": "Kelebihan per deep verify",
-    "row_buildQueue": "Prioritas antrean build",
-    "row_standard": "Standar",
-    "row_priority": "Prioritas",
-    "row_projects": "Proyek",
-    "row_unlimitedStar": "Tak terbatas*",
-    "row_unlimited": "Tak terbatas",
-    "row_accountRequired": "Akun diperlukan",
-    "row_accountFreeDesc": "Tidak (1 proyek) / GitHub (banyak)",
-    "row_accountProDesc": "Ya (GitHub)",
-    "row_failedBuilds": "Build gagal dihitung?",
-    "row_noStar": "Tidak*",
-    "failedBuildsNote": "* Build yang gagal sebelum kompilasi (konfigurasi tidak valid, dependensi hilang) tidak dihitung dalam jatah bulanan Anda.",
+    "title": "Perry pricing and availability",
+    "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
+    "localTitle": "Compiler and local builds",
+    "localDescription": "Use Perry locally without an account or usage fee.",
+    "localFeature1": "MIT-licensed compiler and runtime",
+    "localFeature2": "Local compile, run, check, doctor, and verify workflows",
+    "localFeature3": "No hosted-service quota for work performed on your own machine",
+    "viewSource": "View source and license",
+    "hostedAvailability": "Availability varies",
+    "hostedTitle": "Hosted Perry Publish",
+    "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
+    "hostedFeature1": "Build and packaging workflows for supported targets",
+    "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
+    "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
+    "publishDetails": "Read how publish works",
     "selfHost": {
-      "title": "Atau host sendiri semuanya",
-      "description": "Perry 100% open source — kompiler, runtime, server build, layanan verifikasi, dan website ini. Anda dapat menjalankan seluruh pipeline publikasi di hardware Anda sendiri secara gratis. Tanpa vendor lock-in, selamanya.",
-      "selfHostingGuide": "Panduan self-hosting"
+      "title": "What is open source and self-hostable today?",
+      "description": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
+      "selfHostingGuide": "Deployment documentation"
     },
+    "currentFaq": {
+      "q1": "Does local compilation require an account?",
+      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
+      "q2": "What are the hosted quotas and prices?",
+      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
+      "q3": "Can I self-host the complete publish service?",
+      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+    },
+    "needTermsTitle": "Need hosted builds or a support agreement?",
+    "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
+    "contact": "Contact the team",
+    "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
     "faq": {
-      "title": "Pertanyaan",
-      "q1": "Apakah saya perlu akun untuk mempublikasi?",
-      "a1": "Tidak. perry publish pertama Anda langsung berjalan — tanpa pendaftaran, tanpa pembayaran. Anda mendapat 15 publikasi per bulan. Untuk mempublikasi banyak proyek, jalankan perry login untuk membuat akun gratis yang terhubung dengan GitHub. Tidak perlu pembayaran.",
-      "q2": "Apa yang terjadi ketika saya mencapai batas?",
-      "a2": "Build Anda dijeda hingga bulan berikutnya. Upgrade ke Pro untuk lebih banyak publikasi, atau tambahkan metode pembayaran untuk kelebihan bayar sesuai penggunaan.",
-      "q3": "Bisakah saya menghost sendiri server build?",
-      "a3": "Ya. Kompiler Perry, server build (perry-hub), layanan verifikasi, dan build worker semuanya open source. Clone repo, jalankan hub di Mac Mini atau mesin Linux Anda sendiri, dan atur PERRY_HUB_SELF_HOSTED=true untuk menonaktifkan pembatasan rate. Anda mendapat build tak terbatas tanpa biaya. Layanan yang dihost di hub.perryts.com ada untuk kemudahan — tanpa infrastruktur untuk dikelola, tanpa sertifikat penandatanganan untuk diurus, tanpa antrean build untuk dipantau.",
-      "q4": "Apa yang termasuk dalam \"publikasi\"?",
-      "a4": "Satu pemanggilan perry publish '<'platform'>'. Setiap platform adalah publikasi terpisah. Publikasi mencakup build, penandatanganan kode, verifikasi ringan (aplikasi berhasil diluncurkan), dan pengiriman ke toko atau pembuatan artifact."
-    },
-    "enterpriseBanner": {
-      "text": "Need LTS, SSO, or a support SLA?",
-      "link": "See Perry for Teams →"
+      "title": "Pertanyaan"
     }
   },
   "enterprise": {
     "metaTitle": "Perry for Teams",
-    "metaDescription": "LTS releases, response SLAs, direct support, and roadmap input for companies shipping production apps with Perry.",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
     "hero": {
-      "title": "Perry for teams shipping in production",
-      "subtitle": "For companies whose products depend on Perry. Get LTS releases, direct support, roadmap input, and a human who picks up when builds break.",
+      "title": "Production support scoped to your team",
+      "subtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
       "primaryCta": "Email ralph@perryts.com"
     },
-    "audience": {
-      "title": "Who this is for",
-      "item1": "You're shipping a production app built with Perry",
-      "item2": "You need predictable, supported releases instead of riding main",
-      "item3": "You need to influence what ships in upcoming versions",
-      "item4": "You need self-hosted Perry Publish with SSO and audit logs"
-    },
-    "included": {
-      "title": "What's included",
-      "item1": "LTS compiler releases with security backports for 18 months",
-      "item2": "Direct Slack or shared channel with the maintainers",
-      "item3": "Response SLA — P0 within 4 business hours, P1 within 1 business day",
-      "item4": "Quarterly roadmap call where your priorities get heard",
-      "item5": "Self-hosted Perry Publish with SSO, audit logs, dedicated build workers, and higher verify limits",
-      "item6": "Migration and architecture support — paired sessions for onboarding teams",
-      "item7": "Logo placement on perryts.com (opt-in)",
-      "item8": "Security questionnaires and compliance documentation"
-    },
-    "tiers": {
-      "title": "Plans",
-      "subtitle": "Pick the level of partnership that fits your stage. Both tiers come with the same humans answering when something breaks.",
-      "perMonth": "/month",
-      "recommended": "Recommended",
-      "team": {
-        "name": "Team",
-        "price": "$499",
-        "tagline": "For startups and small teams shipping with Perry",
-        "feature1": "LTS compiler releases",
-        "feature2": "Shared Slack channel (one channel)",
-        "feature3": "P1 response within 1 business day",
-        "feature4": "Quarterly roadmap call",
-        "feature5": "Self-hosted Perry Publish setup help",
-        "feature6": "Up to 200 publishes/month, 100 deep verify runs/month",
-        "cta": "Subscribe"
-      },
-      "enterprise": {
-        "name": "Enterprise",
-        "price": "Custom",
-        "tagline": "For organizations betting their product on Perry",
-        "everythingIn": "Everything in Team, plus:",
-        "feature1": "SSO and audit logs on Perry Publish",
-        "feature2": "Dedicated build infrastructure",
-        "feature3": "Named technical contact",
-        "feature4": "P0 response within 4 business hours",
-        "feature5": "Custom contract and procurement support",
-        "feature6": "Training and onboarding sessions",
-        "cta": "Talk to us"
-      }
-    },
-    "faq": {
-      "title": "Questions",
-      "q1": "Isn't Perry fully open source? Why pay?",
-      "a1": "Yes, completely. You're paying for a partner who guarantees response times, ships LTS releases, and prioritizes your bugs. The code stays free and MIT/Apache licensed.",
-      "q2": "What if Perry as a project is abandoned?",
-      "a2": "Everything is open source and fully self-hostable, including the build hub. Worst case you fork — you're never locked in.",
-      "q3": "How does roadmap input work?",
-      "a3": "Quarterly call where you bring your priorities and we discuss what's feasible. No guarantees on specific features, but Enterprise customers materially shape what ships.",
-      "q4": "Can we self-host everything?",
-      "a4": "Yes — and Enterprise includes setup help and architecture review.",
-      "q5": "What's the SLA, exactly?",
-      "a5": "P0 (production down): 4 business hours response. P1 (significant impact): 1 business day. P2 (minor): 3 business days. Team tier covers P1 and P2; Enterprise covers all severities.",
-      "q6": "Do you offer training or onboarding?",
-      "a6": "Yes — included with Enterprise. Available as add-on for Team.",
-      "q7": "Can we evaluate before committing?",
-      "a7": "Yes. Book a call and we'll talk through your use case before any contract."
-    },
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
     "closing": {
-      "title": "Talk to the team",
-      "body": "Perry is built by a small group of compiler and systems engineers. When you reach out, you talk to us directly — not a sales funnel.",
+      "title": "Talk to the maintainers",
+      "body": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
       "emailCta": "Email ralph@perryts.com"
-    }
+    },
+    "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
   },
   "roadmap": {
     "title": "Peta Jalan",
-    "subtitle": "Di mana Perry hari ini dan ke mana tujuannya. Dari kompilasi native ke ekosistem pengembangan lintas platform yang lengkap.",
+    "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
     "shipped": "Dirilis",
     "inProgress": "Sedang Berlangsung",
     "planned": "Direncanakan",
-    "vision": "Visi"
+    "vision": "Visi",
+    "currentTitle": "Verified today",
+    "activeTitle": "Active development areas",
+    "policyTitle": "How to read Perry claims",
+    "currentItems": [
+      "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
+      "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
+      "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
+      "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
+      "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+    ],
+    "activeItems": [
+      "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
+      "Improving platform parity, especially core and preview targets.",
+      "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
+      "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+    ],
+    "policyItems": [
+      "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
+      "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
+      "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+      "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+    ],
+    "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
+    "platformStatus": "Platform status",
+    "knownLimitations": "Known limitations",
+    "benchmarkArtifact": "Benchmark artifact",
+    "changelog": "Changelog",
+    "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
   },
   "publish": {
     "title": "Perry Publish",
-    "subtitle": "Satu perintah untuk build, tanda tangani, dan kirim aplikasi Anda ke setiap toko. Perry Publish menangani penandatanganan kode, notarisasi, pengemasan, dan pengiriman — sehingga Anda bisa fokus pada kode Anda.",
+    "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
     "buildingForIos": "Building untuk iOS...",
     "signingCert": "Menandatangani dengan sertifikat Anda...",
-    "verifyingLaunch": "Memverifikasi — aplikasi berhasil diluncurkan",
-    "publishedToAppStore": "Dipublikasikan ke App Store Connect.",
+    "verifyingLaunch": "Running the configured verification steps...",
+    "publishedToAppStore": "Submission requested; final store status is reported by the store.",
     "buildSign": "Build & Tanda Tangani",
-    "buildSignPlatforms": "macOS, iOS, Android, Windows, Linux",
+    "buildSignPlatforms": "Target, host, SDK, and credential dependent",
     "distribute": "Distribusi",
-    "distributePlatforms": "App Store, Play Store, unduhan langsung",
+    "distributePlatforms": "Available stores and channels depend on the target",
     "verify": "Verifikasi",
-    "verifyDesc": "Pengujian lintas platform bertenaga AI"
+    "verifyDesc": "Configured launch and UI checks; coverage varies by target",
+    "metaTitle": "Perry Publish workflows",
+    "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats."
   },
   "internals": {
-    "title": "Struktur <gradient>Internal</gradient> Kompiler",
-    "subtitle": "Keputusan desain utama yang membuat Perry cepat",
+    "title": "Compiler <gradient>Internals</gradient>",
+    "subtitle": "The key design decisions that make Perry fast",
     "nanBoxing": {
-      "p1": "Nilai disimpan sebagai float 64-bit dengan pola bit khusus untuk pointer, memungkinkan tipe union tanpa overhead runtime. Ini memungkinkan (string | number)[] bekerja secara efisien.",
-      "p2": "Dengan mengkodekan informasi tipe langsung dalam bit payload NaN IEEE 754, Perry menghindari kebutuhan akan tagged union atau boxed value. Satu kata 64-bit dapat merepresentasikan tipe nilai JavaScript apa pun — angka menggunakan representasi naturalnya, sementara string, objek, dan nilai heap-allocated lainnya menggunakan pola bit pointer yang berada dalam rentang NaN."
+      "p1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
+      "p2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries."
     },
     "monomorphization": {
-      "p1": "Generic dikhususkan pada waktu kompilasi, seperti Rust. Setiap instansiasi tipe menghasilkan kode yang dioptimalkan, menghilangkan overhead pemeriksaan tipe saat runtime.",
-      "p2": "Ketika Anda menulis Array'<'number'>' dan Array'<'string'>', Perry menghasilkan dua implementasi terpisah yang sepenuhnya dioptimalkan. Ini berarti operasi array pada angka menggunakan aritmatika mesin langsung — tanpa type guard, tanpa dynamic dispatch, tanpa boxing."
+      "p1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
+      "p2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves."
     },
     "staticDispatch": {
-      "p1": "Tanpa tabel virtual. Pemanggilan metode diselesaikan pada waktu kompilasi, memungkinkan pemanggilan fungsi langsung dan optimasi inlining.",
-      "p2": "Runtime OOP tradisional menggunakan vtable untuk resolusi metode, menambahkan lapisan indireksi pada setiap pemanggilan. Perry menyelesaikan semua pemanggilan metode secara statis selama kompilasi, mengubah pemanggilan metode interface menjadi lompatan langsung. Ini juga membuka inlining agresif — metode kecil sering dilipat langsung ke situs pemanggilan mereka."
+      "p1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
+      "p2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time."
     },
     "zeroCost": {
-      "p1": "Kelas, interface, dan generic TypeScript dikompilasi menjadi kode native yang efisien tanpa overhead representasi runtime.",
-      "p2": "Sistem tipe TypeScript hanya ada pada waktu kompilasi — dan Perry mengambil ini secara literal. Interface tidak menghasilkan kode runtime. Hierarki kelas diratakan. Constraint generic diselesaikan menjadi tipe konkret. Binary yang dikompilasi hanya berisi logika aktual, tanpa mesin abstraksi yang biasanya dibawa oleh interpreter."
-    }
+      "p1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
+      "p2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally."
+    },
+    "metaTitle": "Perry compiler internals",
+    "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior."
   },
   "shipping": {
     "eyebrow": "Berjalan di produksi",
@@ -432,14 +420,16 @@
   },
   "appShowcase": {
     "title": "Lihat Apa yang Orang <gradient>Bangun</gradient>",
-    "subtitle": "Aplikasi native nyata, dikompilasi dari TypeScript. Tanpa Electron, tanpa web view — hanya UI native di setiap platform.",
+    "subtitle": "Public native applications compiled from TypeScript, with platforms and capabilities taken from their current project pages.",
     "mangoTagline": "GUI MongoDB native — dibangun sepenuhnya dengan TypeScript",
     "honeTagline": "Editor kode native bertenaga AI — TypeScript ke binary native",
     "viewAll": "Lihat semua proyek showcase"
   },
   "showcase": {
     "title": "Showcase",
-    "subtitle": "Proyek nyata yang dibangun dengan Perry. Dari aplikasi GUI native hingga tool CLI, lihat apa yang mungkin dengan kompilasi TypeScript native."
+    "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
+    "metaTitle": "Perry showcase",
+    "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
   },
   "pry": {
     "subtitle": "Penampil JSON yang cepat dan native dibangun dengan Perry. Navigasi pohon, pencarian, pintasan keyboard — dikompilasi dari TypeScript ke binary native.",
@@ -457,13 +447,13 @@
     "syntaxColoring": "Pewarnaan Sintaks",
     "syntaxColoringDesc": "Nilai diberi kode warna berdasarkan tipe — string, angka, boolean, null.",
     "howItsBuilt": "Cara Pembuatannya",
-    "howItsBuiltDesc": "Pry ditulis dalam TypeScript dan dikompilasi dengan Perry menjadi binary native. Tanpa Electron, tanpa web view, tanpa JavaScript runtime.",
+    "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
     "typeScriptSource": "Kode Sumber TypeScript",
     "typeScriptSourceDesc": "TypeScript standar dengan API UI native Perry",
     "perryCompile": "Perry Compile",
     "perryCompileDesc": "Parsing SWC → resolusi tipe → codegen LLVM",
     "nativeBinary": "Binary Native",
-    "nativeBinaryDesc": "Executable standalone tanpa dependensi runtime",
+    "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
     "platformSupport": "Dukungan Platform",
     "nativeWidgets": "Widget {framework} native",
     "available": "Tersedia",
@@ -475,7 +465,10 @@
   "blog": {
     "title": "Blog",
     "subtitle": "Berita, tutorial, dan analisis mendalam tentang membangun aplikasi native dengan Perry.",
-    "englishOnly": "Artikel ini hanya tersedia dalam bahasa Inggris."
+    "englishOnly": "Artikel ini hanya tersedia dalam bahasa Inggris.",
+    "metaTitle": "Perry blog",
+    "metaDescription": "Dated Perry release notes, tutorials, and technical articles. Historical measurements remain tied to their original versions.",
+    "historicalNotice": "This dated article records the Perry version and measurements available when it was published. Use the current limitations, platform guide, and benchmark artifact for decisions today."
   },
   "languageSwitcher": {
     "label": "Bahasa"
@@ -483,15 +476,15 @@
   "blogPosts": {
     "introducing-perry": {
       "title": "Memperkenalkan Perry",
-      "excerpt": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust yang mengompilasi TypeScript Anda langsung menjadi executable standalone. Tanpa runtime, tanpa Electron, tanpa kompromi."
+      "excerpt": "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
     },
     "cross-platform-native-ui": {
       "title": "UI Native Lintas Platform dari TypeScript",
-      "excerpt": "Bagaimana Perry memetakan satu kode sumber TypeScript ke AppKit, UIKit, Android Views, GTK4, dan Win32 — menghadirkan UI yang benar-benar native di setiap platform."
+      "excerpt": "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
     },
     "building-pry": {
       "title": "Membangun Pry: Penampil JSON Native dalam TypeScript",
-      "excerpt": "Panduan langkah demi langkah membangun Pry — penampil JSON native yang dikompilasi dari TypeScript ke binary ARM64 native. Tanpa runtime, tanpa web view."
+      "excerpt": "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
     },
     "plugin-systems-are-a-performance-tax": {
       "title": "Sistem Plugin Adalah Pajak Performa",
@@ -552,6 +545,18 @@
     "real-npm-packages-and-a-conformance-sweep": {
       "title": "Paket npm Nyata Kini Ter-compile: axios, zod, express — dan Sapuan Konformansi",
       "excerpt": "Sekitar 270 release dari v0.5.875 ke v0.5.1146 bukan tentang satu benchmark — melainkan tentang membuat paket npm nyata ter-compile dan berjalan. axios, zod v4, express, fastify, dan hono kini berfungsi; paritas test262 melonjak (String 60→79%, Array 61→72%); Windows menjadi Fluent dengan Mica; dan DatePicker + drag & drop mendarat di setiap platform."
+    },
+    "shipping-a-watch-only-app-to-the-app-store": {
+      "title": "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
+      "excerpt": "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter."
+    },
+    "compiling-claude-code": {
+      "title": "Compiling Claude Code: One Minified Bundle, 160 Compiler Fixes",
+      "excerpt": "We pointed Perry at the 13 MB minified cli.js that npm ships for Claude Code and tried to turn it into a native binary. A month later it launches, logs in, streams a real API response, and paints what you type — and 160 pull requests had landed in Perry, from a no-op MessageChannel to a missing GC write barrier on RegExp headers."
+    },
+    "gc-decisions-surprises": {
+      "title": "Membangun GC untuk compiler TypeScript native: keputusan, kejutan, dan perkembangannya",
+      "excerpt": "Perry mengompilasi TypeScript menjadi kode native dengan LLVM — artinya Perry memerlukan garbage collector sungguhan. Tulisan ini membahas keputusan kami, bug yang tidak meninggalkan bukti, gerbang CI yang secara struktur tidak mungkin gagal, serta posisi angkanya terhadap Node dan pesaing AOT berbasis reference counting."
     }
   },
   "compare": {
@@ -575,455 +580,9 @@
         "runtime": "Runtime TypeScript",
         "compiler": "Kompiler TS-ke-native",
         "ui-framework": "UI lintas platform"
-      }
-    },
-    "items": {
-      "bun": {
-        "title": "Perry vs Bun",
-        "metaTitle": "Perry vs Bun: TypeScript-ke-native vs runtime serba ada",
-        "metaDescription": "Bun membundel TypeScript Anda dengan runtime Bun menjadi satu executable. Perry mengompilasi TypeScript langsung ke kode mesin native. Bandingkan arsitektur, ukuran output, performa, dan dukungan platform.",
-        "tldr": "Bun adalah runtime JavaScript/TypeScript serba ada, bundler, manajer paket, dan test runner yang juga dapat menghasilkan executable file tunggal dengan membundel runtime-nya bersama kode Anda. Perry mengambil jalur berbeda: ia mengompilasi TypeScript langsung ke kode mesin native melalui LLVM — tanpa engine JavaScript di binary, tanpa runtime, hanya executable native yang kecil. Bun dan Perry tumpang tindih pada output TS-ke-binary tetapi tidak sepakat tentang apakah engine JavaScript harus ada di binary tersebut.",
-        "competitorWhat": "Bun adalah toolkit JavaScript dan TypeScript serba ada yang cepat, dibangun dengan Zig. Ia menjalankan source `.ts` secara langsung (tanpa langkah prakompilasi), menggunakan JavaScriptCore sebagai engine JS-nya, dan menyertakan bundler, manajer paket, dan test runner. `bun build --compile` membundel runtime Bun bersama aplikasi Anda menjadi satu executable. Bun menargetkan Linux, macOS, dan Windows pada x64 dan arm64.",
-        "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust. Ia mengompilasi TypeScript langsung ke kode mesin native melalui LLVM — tanpa engine JavaScript, tanpa runtime, tanpa JIT. Outputnya adalah satu binary (sekitar 330 KB untuk hello world; ~48 MB untuk aplikasi stdlib lengkap seperti server Fastify). Perry menargetkan 10 platform termasuk macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web.",
-        "table": [
-          {
-            "feature": "Output",
-            "perry": "Kode mesin native (LLVM)",
-            "competitor": "Kode Anda + runtime Bun dibundel dalam satu binary"
-          },
-          {
-            "feature": "Engine JavaScript di binary",
-            "perry": "Tidak ada secara default; V8 opsional dengan --enable-js-runtime (+~15 MB)",
-            "competitor": "JavaScriptCore, selalu"
-          },
-          {
-            "feature": "Ukuran binary hello-world",
-            "perry": "~330 KB",
-            "competitor": "~50–100 MB (termasuk runtime Bun)"
-          },
-          {
-            "feature": "JIT",
-            "perry": "Tidak (dikompilasi AOT)",
-            "competitor": "Ya (JIT JavaScriptCore)"
-          },
-          {
-            "feature": "Target mobile (iOS, Android)",
-            "perry": "Ya — UI native via UIKit/JNI",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "Target watch / TV",
-            "perry": "watchOS, tvOS, Wear OS",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "Widget UI native",
-            "perry": "25+ via AppKit, UIKit, GTK4, Win32, JNI",
-            "competitor": "Tidak (fokus server/CLI)"
-          },
-          {
-            "feature": "Ekosistem npm",
-            "perry": "Paket TS/JS murni dapat dikompilasi secara native; lainnya via V8 opsional",
-            "competitor": "npm kompatibel Node sepenuhnya"
-          },
-          {
-            "feature": "Stabilitas",
-            "perry": "Pra-1.0 (alfa)",
-            "competitor": "Stabil (1.x)"
-          },
-          {
-            "feature": "Dibangun dengan",
-            "perry": "Rust",
-            "competitor": "Zig"
-          }
-        ],
-        "perryWins": [
-          "Binary lebih kecil — hello world Perry ~330 KB; hello world Bun --compile menyertakan runtime Bun dan mencapai puluhan megabyte.",
-          "Tanpa biaya engine JavaScript. Binary yang dikompilasi Perry tidak membawa interpreter atau JIT — TypeScript Anda adalah executable-nya.",
-          "Mobile, watch, dan TV. Perry mengompilasi ke iOS, iPadOS, Android, watchOS, tvOS, dan WebAssembly. Bun hanya untuk server/desktop.",
-          "UI native. Modul perry/ui dari Perry mengompilasi ke widget platform asli (AppKit di macOS, UIKit di iOS, GTK4 di Linux, Win32 di Windows, JNI di Android). Bun tidak punya cerita UI.",
-          "Lebih cepat pada sebagian besar microbench komputasi yang diukur dalam kondisi setara di M1 Max (RUNS=11, v0.5.279, 2026-04-25): fibonacci 318 ms vs Bun 589 ms; object_create 1 ms vs 6 ms; nested_loops 18 ms vs 21 ms. Lihat perry/benchmarks untuk tabel lengkap.",
-          "Lebih cepat pada JSON validate-and-roundtrip dalam kelompok dynamic typing: lazy JSON tape Perry mendarat di median 75 ms vs 259 ms Bun pada workload 10k record yang sama."
-        ],
-        "competitorWins": [
-          "Runtime yang matang dan stabil dengan rilis 1.x. Perry masih pra-1.0.",
-          "Lebih cepat pada JSON parse-and-iterate (di mana setiap nilai disentuh): Bun 254 ms vs Perry 466 ms median pada workload yang sama — lazy tape Perry tidak dapat memotong jalur ketika iterasi dipaksakan.",
-          "Ekosistem npm kompatibel Node sepenuhnya secara langsung. Perry menjalankan subset secara native dan beralih ke V8 opsional yang tertanam untuk sisanya.",
-          "Test runner, bundler, dan manajer paket bawaan. Perry adalah kompiler — tooling pendamping terpisah.",
-          "Performa JIT-warm dapat melampaui AOT pada kode yang berat iterasi dengan inner loop panas; Perry tidak punya JIT.",
-          "Seimbang dengan Perry dalam batas noise antar-jalan pada `loop_data_dependent` (232 ms vs 235 ms) — kernel f64 yang benar-benar tidak dapat dilipat di mana kompiler kedua belah pihak tidak dapat menyusun ulang. Sumber: perry/benchmarks RUNS=11."
-        ],
-        "whenPerry": "Pilih Perry ketika ukuran binary penting (distribusi mobile, konteks embedded, cold start cepat), ketika Anda ingin mengirim ke mobile/watch/TV dari satu kode sumber TypeScript, ketika Anda ingin widget UI native, atau ketika Anda tidak ingin engine JavaScript dalam artefak yang dikirim sama sekali.",
-        "whenCompetitor": "Pilih Bun ketika Anda butuh runtime yang stabil dan matang hari ini, ketika kompatibilitas npm penuh tidak bisa ditawar, ketika Anda ingin satu tool untuk runtime + bundler + manajer paket + test runner, atau ketika performa JIT-warm pada workload yang berjalan lama lebih penting bagi Anda daripada ukuran cold-start.",
-        "verdict": "Bun dan Perry sama-sama memungkinkan Anda mengirim program TypeScript sebagai satu binary, tetapi keduanya menjawab pertanyaan berbeda. Binary Bun berisi runtime Bun dan dioptimalkan untuk workload backend/CLI di mana JIT dan kompatibilitas Node penuh menang. Binary Perry tidak berisi engine JS dan dioptimalkan untuk ukuran, cold start, mobile, dan UI native. Jika Anda mengirim server, Bun lebih terbukti hari ini. Jika Anda mengirim aplikasi native atau peduli ukuran binary, Perry dibangun untuk kasus itu."
       },
-      "deno": {
-        "title": "Perry vs Deno",
-        "metaTitle": "Perry vs Deno: binary native AOT-compiled vs Deno compile",
-        "metaDescription": "`deno compile` membundel V8 dan TypeScript Anda menjadi satu executable. Perry mengompilasi TypeScript langsung ke kode native via LLVM. Bandingkan output, model runtime, keamanan, dan dukungan platform.",
-        "tldr": "Deno adalah runtime JavaScript dan TypeScript modern yang dibangun di atas V8, dengan dukungan TypeScript kelas satu, model keamanan berbasis izin, dan perintah `deno compile` yang menghasilkan satu executable dengan membundel V8 bersama aplikasi Anda. Perry mengompilasi TypeScript langsung ke kode mesin native — tanpa V8 di output, tanpa lapisan runtime, hanya binary native kecil.",
-        "competitorWhat": "Deno adalah runtime TypeScript dan JavaScript yang dibangun dalam Rust di atas V8 dan Tokio. Ia mengeksekusi source `.ts` secara langsung, memiliki tooling bawaan (formatter, linter, test runner, language server), dan menggunakan model izin yang membutuhkan pemberian izin eksplisit untuk akses jaringan, file, dan environment. `deno compile` menghasilkan executable mandiri dengan membundel runtime Deno (yang menyertakan V8) bersama kode Anda. Deno menargetkan Linux, macOS, dan Windows pada x64 dan arm64.",
-        "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust. Ia mengompilasi TypeScript langsung ke kode mesin native melalui LLVM — tanpa V8, tanpa JIT, tanpa runtime. Outputnya adalah satu binary, biasanya beberapa ratus KB hingga beberapa MB untuk kode native, opsional lebih besar jika Anda memilih runtime V8 tertanam untuk paket npm yang membutuhkan engine JS.",
-        "table": [
-          {
-            "feature": "Output",
-            "perry": "Kode mesin native (LLVM)",
-            "competitor": "Kode Anda + runtime Deno (V8) dibundel"
-          },
-          {
-            "feature": "Engine JavaScript di binary",
-            "perry": "Tidak ada secara default; V8 opsional",
-            "competitor": "V8, selalu"
-          },
-          {
-            "feature": "Ukuran binary hello-world",
-            "perry": "~330 KB",
-            "competitor": "~80–100 MB (termasuk V8)"
-          },
-          {
-            "feature": "JIT",
-            "perry": "Tidak (dikompilasi AOT)",
-            "competitor": "Ya (TurboFan V8)"
-          },
-          {
-            "feature": "Target mobile",
-            "perry": "iOS, iPadOS, Android",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "Watch / TV / WASM / Web",
-            "perry": "watchOS, tvOS, Wear OS, WASM, Web/JS",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "UI native",
-            "perry": "25+ widget via API platform native",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "Model izin",
-            "perry": "Izin proses OS standar",
-            "competitor": "Izin runtime granular (--allow-net, --allow-read, dll.)"
-          },
-          {
-            "feature": "Stabilitas",
-            "perry": "Pra-1.0",
-            "competitor": "Stabil (1.x / 2.x)"
-          },
-          {
-            "feature": "Dibangun dengan",
-            "perry": "Rust",
-            "competitor": "Rust (di atas V8)"
-          }
-        ],
-        "perryWins": [
-          "Binary jauh lebih kecil. Hello world Perry ~330 KB. Output `deno compile` menyertakan V8 dan mencapai kisaran 80–100 MB.",
-          "Tanpa engine JavaScript di binary. TypeScript Anda dikompilasi ke kode mesin native, bukan diinterpretasikan oleh V8 saat runtime.",
-          "Target mobile, watch, TV, WASM, dan Web. Deno hanya untuk server/desktop.",
-          "Widget UI native yang dipetakan ke AppKit, UIKit, GTK4, Win32, dan JNI — tidak ada padanannya di Deno.",
-          "Cold start lebih cepat. Binary native AOT-compiled tidak membayar biaya startup V8.",
-          "Kepemimpinan microbench komputasi dalam kondisi setara di M1 Max di mana default fast-math `reassoc contract` dari Perry memungkinkan LLVM melakukan autovectorize dan melipat akumulator yang sepele dilipat (mis., loop_overhead 12 ms, math_intensive 14 ms; lihat perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Runtime yang matang dan stabil dengan rekam jejak panjang dan jalur 2.x yang aktif.",
-          "Model izin granular. Deno memerlukan `--allow-net`, `--allow-read`, dll. secara eksplisit — berguna untuk skrip yang di-sandbox dan kode tidak terpercaya.",
-          "Tooling bawaan: formatter, linter, test runner, generator dokumentasi, LSP, semuanya di runtime.",
-          "Ekosistem V8 penuh saat runtime — apa pun yang berjalan di V8 berjalan di Deno, termasuk optimasi JIT pada hot path yang berjalan lama.",
-          "TypeScript kelas satu tanpa langkah kompiler terpisah saat development, dengan pipeline pemeriksaan tipe yang sepenuhnya dikelola.",
-          "API web-platform standar (fetch, Web Streams, Web Crypto) diimplementasikan secara native dalam runtime."
-        ],
-        "whenPerry": "Pilih Perry jika Anda ingin binary native yang kecil dan cepat startup, Anda mengirim ke mobile atau target non-server lainnya, Anda ingin UI native, atau Anda ingin mengompilasi TypeScript ke binary yang tidak berisi engine JS.",
-        "whenCompetitor": "Pilih Deno jika Anda ingin runtime TypeScript yang stabil dan lengkap, Anda menghargai sandbox izin, Anda membangun workload server-side atau scripting, atau Anda butuh kompatibilitas ekosistem V8 penuh saat runtime.",
-        "verdict": "Keduanya memungkinkan Anda mengirim program TypeScript sebagai satu binary; perbedaannya adalah apa yang ada di dalam binary itu. Deno memberi Anda V8 + runtime terkurasi + sandbox izin. Perry memberi Anda kode mesin native tanpa engine. Deno adalah pilihan yang lebih baik untuk pekerjaan server-side dan scripting di mana ekosistem dan model izin penting. Perry adalah pilihan yang lebih baik ketika Anda butuh binary yang kecil dan cepat startup, target mobile, atau UI native."
-      },
-      "static-hermes": {
-        "title": "Perry vs Static Hermes",
-        "metaTitle": "Perry vs Static Hermes (shermes): siap-produksi vs kompiler riset",
-        "metaDescription": "Static Hermes adalah kompiler eksperimental TypeScript-ke-native ahead-of-time dari Meta. Perry adalah kompiler TS-ke-native jalur produksi yang sudah dikirim hari ini. Bandingkan kematangan, cakupan, output, dan jangkauan platform.",
-        "tldr": "Static Hermes (`shermes`) adalah upaya tahap riset Meta untuk mengompilasi subset JavaScript/TypeScript yang bertipe kuat secara ahead-of-time melalui engine Hermes, terutama ditujukan untuk React Native. Perry adalah taruhan berbeda pada ide umum yang sama — TypeScript dikompilasi ke native — tetapi dibangun secara independen dalam Rust di atas LLVM, dengan kompiler yang berfungsi, 25+ widget UI native, dan 10 target kompilasi yang dikirim hari ini. Per pertengahan 2026, `shermes` masih harus dibangun dari source — suite benchmark Perry mencobanya sebagai peer dan tidak menemukan jalur instalasi yang bersih melalui manajer paket standar — dan engine Hermes V1 yang menjadi default React Native di awal 2026 secara eksplisit tidak menyertakan fitur kompilasi statis tersebut.",
-        "competitorWhat": "Hermes adalah engine JavaScript yang dibangun Meta untuk React Native — berbasis bytecode, AOT-precompiled, dioptimalkan untuk waktu startup mobile. Static Hermes adalah upaya riset untuk memperluas Hermes dengan kompilasi native ahead-of-time dari subset JavaScript bertipe, dimaksudkan untuk memberi React Native jalur ke kode native sejati. Branch `static_h` kini menjadi branch default repo dan sedang dikembangkan secara aktif, tetapi yang benar-benar dikirim ke pengguna React Native adalah Hermes V1 — kompiler bytecode dan VM baru yang menjadi engine default di React Native 0.84 (Februari 2026) — yang tidak mengompilasi JS ke binary native atau menggunakan informasi tipe. Static Hermes sendiri tetap menjadi proyek R&D kompiler; menurut catatan benchmark Perry, ia belum dipaketkan untuk instalasi rutin di macOS arm64 (`shermes` dilewati dari benchmark polyglot dengan catatan bahwa ia 'tidak tersedia di Homebrew atau npm dengan cara yang dapat diinstal dengan bersih di macOS arm64' — lihat perry/benchmarks/README.md).",
-        "perryWhat": "Perry adalah kompiler TypeScript native yang ditulis dalam Rust, menggunakan SWC untuk parsing dan LLVM untuk pembuatan kode. Ia mengirim CLI yang berfungsi (`perry compile`, `perry run`, `perry publish`), 25+ widget UI native, 10 target kompilasi, runtime self-hosted, dan suite benchmark yang diukur dalam kondisi transparan (M1 Max, RUNS=11). Perry masih pra-1.0 tetapi jalur produksi: orang-orang sudah mengirim aplikasi yang dibangun dengannya (Bloom Engine, Mango, Hone, Pry, dB Meter — lihat perryts.com).",
-        "table": [
-          {
-            "feature": "Status",
-            "perry": "Pra-1.0 (alfa) — jalur produksi",
-            "competitor": "Riset / eksperimental"
-          },
-          {
-            "feature": "Jalur instalasi (macOS arm64)",
-            "perry": "Homebrew, APT, npm (@perryts/perry)",
-            "competitor": "Belum dipaketkan untuk instalasi bersih saat penulisan (per perry/benchmarks)"
-          },
-          {
-            "feature": "Backend",
-            "perry": "LLVM",
-            "competitor": "Kustom (codegen berbasis Hermes)"
-          },
-          {
-            "feature": "Input",
-            "perry": "TypeScript (penuh)",
-            "competitor": "Subset JS/TS bertipe"
-          },
-          {
-            "feature": "Target kompilasi",
-            "perry": "10: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web/JS",
-            "competitor": "Terutama mobile (konteks React Native)"
-          },
-          {
-            "feature": "UI native",
-            "perry": "25+ widget via AppKit, UIKit, GTK4, Win32, JNI",
-            "competitor": "Via bridge React Native (saat terintegrasi)"
-          },
-          {
-            "feature": "Alur kerja aplikasi CLI standalone",
-            "perry": "Ya — `perry compile main.ts` menghasilkan binary",
-            "competitor": "Terikat pada konteks React Native"
-          },
-          {
-            "feature": "Suite benchmark publik",
-            "perry": "Ya — RUNS=11 melawan Node, Bun, Rust, C++, Go, Swift, Java",
-            "competitor": "Internal / makalah riset"
-          }
-        ],
-        "perryWins": [
-          "Ia ada sebagai tool yang dapat digunakan. Perry dapat diinstal hari ini via Homebrew, APT, atau `npm install @perryts/perry`, dan `perry compile main.ts` menghasilkan binary pada percobaan pertama.",
-          "Cakupan lebih luas. Perry mengompilasi aplikasi CLI standalone, aplikasi desktop native, aplikasi mobile, aplikasi watch, aplikasi TV, WASM, dan web dari satu kode sumber TypeScript. Static Hermes berfokus pada jalur kode native React Native.",
-          "UI native bawaan. Modul perry/ui dari Perry adalah lapisan UI deklaratif gaya SwiftUI yang berfungsi, yang dikompilasi ke widget AppKit/UIKit/GTK4/Win32/JNI. Static Hermes menyerahkan UI ke host-nya (React Native).",
-          "Suite benchmark publik yang dapat direproduksi dengan metodologi terdokumentasi — perry/benchmarks menampilkan median + p95 + σ pada RUNS=11 melawan kompiler dan runtime yang disebutkan.",
-          "Backend LLVM berarti Perry mewarisi puluhan tahun pass optimasi yang matang (autovectorization, IndVarSimplify, scalar replacement) dan mendukung setiap platform yang ditargetkan LLVM."
-        ],
-        "competitorWins": [
-          "Didukung oleh Meta — sumber daya rekayasa yang signifikan dan jangkar strategis yang jelas di React Native.",
-          "Hermes sudah dikirim dalam aplikasi React Native produksi sebagai engine bytecode; Static Hermes mewarisi ekosistem dan tooling itu.",
-          "Pekerjaan tingkat riset pada aturan typing AOT dan semantik subset JS yang benar-benar baru.",
-          "Jika Anda sudah di React Native, Static Hermes (saat tersedia) adalah jalur yang lebih bertahap daripada menulis ulang melawan kompiler yang berbeda."
-        ],
-        "whenPerry": "Pilih Perry jika Anda butuh kompiler TS-ke-native yang berfungsi hari ini, Anda ingin satu kode sumber TypeScript untuk menargetkan desktop, mobile, watch, TV, WASM, dan web, atau Anda ingin widget UI native tanpa bridge React Native.",
-        "whenCompetitor": "Pilih Static Hermes (saat tersedia) jika Anda berkomitmen pada React Native dan ingin jalur dari JavaScript/TypeScript ke kode native yang dikompilasi ahead-of-time di mobile, dan Anda nyaman bekerja di tepi tooling riset.",
-        "verdict": "Static Hermes adalah riset menarik dari tim yang kredibel. Perry adalah produk yang berfungsi pada ide umum yang sama, dengan cakupan yang jauh lebih luas daripada mobile dan dikirim hari ini. Jika Anda butuh kompiler TS-ke-native di tangan Anda sekarang, Perry adalah pilihannya. Jika Anda di React Native dan bersedia melacak proyek riset, perhatikan Static Hermes."
-      },
-      "electron": {
-        "title": "Perry vs Electron",
-        "metaTitle": "Perry vs Electron: aplikasi TypeScript native vs Chromium yang dibundel",
-        "metaDescription": "Electron mengirim Chromium dan Node.js dengan setiap aplikasi. Perry mengompilasi TypeScript langsung ke binary native kecil dengan widget UI native. Bandingkan ukuran binary, performa, kesetiaan UI, dan jangkauan platform.",
-        "tldr": "Electron memungkinkan Anda membangun aplikasi desktop lintas platform menggunakan teknologi web (HTML/CSS/JS) dengan membundel Chromium dan Node.js bersama aplikasi Anda. Perry mengompilasi TypeScript langsung ke kode mesin native dan merender UI melalui widget platform asli — AppKit, UIKit, GTK4, Win32, JNI. Electron menjual penggunaan ulang teknologi web; Perry menjual binary native kecil dengan UI native dari TypeScript.",
-        "competitorWhat": "Electron adalah framework open source untuk membangun aplikasi desktop lintas platform menggunakan Chromium untuk rendering dan Node.js untuk akses sistem. Setiap aplikasi Electron mengirim salinan Chromium dan Node-nya sendiri, itulah sebabnya installer aplikasi Electron biasanya 80–150 MB bahkan untuk hello world. Electron telah memberdayakan aplikasi yang banyak digunakan termasuk VS Code, Slack, Discord, dan klien desktop Figma. Ia menargetkan desktop Linux, macOS, dan Windows; tidak ada cerita resmi mobile, watch, atau TV.",
-        "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native tanpa engine browser, tanpa Chromium, dan tanpa runtime Node. Lapisan UI (perry/ui) adalah sistem deklaratif gaya SwiftUI yang dipetakan ke widget platform native via AppKit di macOS, UIKit di iOS/iPadOS/tvOS, GTK4 di Linux, Win32 di Windows, dan JNI di Android. Binary hello world ~330 KB; aplikasi penuh dengan stdlib (Fastify, mysql2, dll.) sekitar 48 MB.",
-        "table": [
-          {
-            "feature": "Rendering",
-            "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)",
-            "competitor": "Chromium yang dibundel (HTML/CSS/JS)"
-          },
-          {
-            "feature": "Engine yang dibundel",
-            "perry": "Tidak ada (V8 opsional hanya saat --enable-js-runtime)",
-            "competitor": "Chromium + Node.js"
-          },
-          {
-            "feature": "Ukuran installer hello-world",
-            "perry": "~330 KB",
-            "competitor": "~80–150 MB"
-          },
-          {
-            "feature": "Installer aplikasi penuh (stdlib + framework)",
-            "perry": "~48 MB",
-            "competitor": "100–200+ MB tipikal"
-          },
-          {
-            "feature": "Penggunaan RAM",
-            "perry": "Native (tipikal: puluhan MB)",
-            "competitor": "Beberapa proses Chromium (tipikal: ratusan MB)"
-          },
-          {
-            "feature": "Mobile / watch / TV",
-            "perry": "Ya — iOS, iPadOS, Android, watchOS, tvOS, Wear OS",
-            "competitor": "Tidak (hanya desktop)"
-          },
-          {
-            "feature": "Bahasa UI",
-            "perry": "TypeScript dengan API deklaratif gaya SwiftUI",
-            "competitor": "HTML/CSS/JS (stack web)"
-          },
-          {
-            "feature": "Auto-update / pengemasan",
-            "perry": "perry publish (Homebrew, APT, App Store, Play Store)",
-            "competitor": "electron-builder, electron-updater (ekosistem matang)"
-          },
-          {
-            "feature": "Kematangan",
-            "perry": "Pra-1.0",
-            "competitor": "Stabil, satu dekade+ di produksi"
-          }
-        ],
-        "perryWins": [
-          "Ukuran binary. Hello world Perry ~330 KB; hello world Electron biasanya 80–150 MB karena setiap aplikasi mengirim Chromium-nya sendiri.",
-          "Footprint memori. Aplikasi Perry berjalan sebagai satu proses native; aplikasi Electron menjalankan beberapa proses Chromium (renderer, GPU, utility, dll.) dan mengonsumsi ratusan MB RAM saat idle.",
-          "Tampilan dan nuansa native. Perry merender melalui widget platform asli, jadi aplikasi mewarisi konvensi OS (focus ring, aksesibilitas, IME, fisika scroll) secara otomatis.",
-          "Mobile, watch, TV. Satu kode sumber Perry mengompilasi ke iOS/iPadOS/Android/watchOS/tvOS/Wear OS. Electron hanya desktop.",
-          "Cold start. Binary native tidak membayar biaya startup Chromium dan Node.",
-          "Performa CPU nyata pada kode ketat. Perry memimpin microbench komputasi melawan Node (yang digunakan Electron) dengan kelipatan pada sebagian besar kernel (lihat perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Kematangan. Electron sudah di produksi selama lebih dari satu dekade dan memberdayakan VS Code, Slack, Discord, dan banyak aplikasi lain dengan tooling yang teruji pertempuran.",
-          "Penggunaan ulang stack web. Jika tim Anda sudah membangun UI web, Electron memungkinkan Anda mengirimnya sebagai aplikasi desktop tanpa penulisan ulang.",
-          "Konsistensi UI lintas platform mudah — Chromium merender sama di setiap OS, yang persis seperti yang diinginkan beberapa produk.",
-          "Ekosistem perpustakaan npm yang luas berfungsi saat runtime; Perry menjalankan subset secara native dan V8 opt-in mencakup sisanya.",
-          "Tooling pengemasan matang (electron-builder, electron-updater, helper penandatanganan kode) dengan dukungan komunitas yang luas.",
-          "Fitur web-native seperti devtools, hot reload, dan kecepatan iterasi CSS/HTML yang lancar tak tertandingi."
-        ],
-        "whenPerry": "Pilih Perry jika Anda ingin binary native kecil, penggunaan memori rendah, tampilan-dan-nuansa native per platform, atau satu kode sumber TypeScript yang mengirim ke mobile/watch/TV selain desktop.",
-        "whenCompetitor": "Pilih Electron jika Anda memiliki UI web yang sudah ada dan ingin mengirimnya sebagai aplikasi desktop dengan penulisan ulang minimal, jika Anda butuh konsistensi UI lintas platform maksimum di desktop, atau jika Anda bergantung pada berbagai perpustakaan JS murni saat runtime.",
-        "verdict": "Electron dan Perry duduk di ujung berlawanan dari spektrum lintas platform. Electron menukar ukuran binary dan memori demi penggunaan ulang teknologi web; Perry menukar stack web demi binary native dan UI native. Jika Anda telah melihat installer aplikasi Electron Anda membengkak melewati 150 MB atau RAM idle-nya melewati setengah gigabyte, Perry adalah jawaban untuk masalah spesifik itu — dengan biaya model UI bergaya native yang berbeda."
-      },
-      "tauri": {
-        "title": "Perry vs Tauri",
-        "metaTitle": "Perry vs Tauri: widget native vs webview sistem",
-        "metaDescription": "Tauri menggunakan webview sistem untuk merender UI web dalam shell Rust. Perry mengompilasi TypeScript langsung ke widget native — tanpa webview, tanpa rendering HTML. Bandingkan arsitektur, ukuran output, dan dukungan platform.",
-        "tldr": "Tauri adalah framework untuk membangun aplikasi desktop (dan semakin mobile) lintas platform dengan backend Rust dan frontend yang berjalan di dalam webview bawaan sistem operasi — WebView2 di Windows, WKWebView di macOS, WebKitGTK di Linux. Aplikasi Tauri jauh lebih kecil daripada Electron karena webview OS tidak dibundel. Perry mengambil jalur berbeda: tanpa webview sama sekali, tanpa rendering HTML, hanya TypeScript yang dikompilasi ke kode mesin native yang menggerakkan widget platform asli.",
-        "competitorWhat": "Tauri adalah framework open source yang ditulis dalam Rust yang memungkinkan Anda membangun aplikasi lintas platform dengan frontend web (framework apa saja — React, Vue, Svelte, dll.) dan backend Rust. Alih-alih membundel Chromium, Tauri menggunakan webview bawaan sistem, yang menjaga installer aplikasi dalam kisaran MB satu digit di Linux/Windows/macOS. Tauri 2 menambahkan dukungan mobile (iOS dan Android). Frontend dirender sebagai HTML/CSS/JS oleh webview sistem; komunikasi dengan backend Rust melalui bridge IPC.",
-        "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native melalui LLVM. Lapisan UI (perry/ui) adalah API deklaratif gaya SwiftUI yang dipetakan ke widget platform native — bukan HTML yang dirender oleh webview. Aplikasi yang ditulis dalam Perry tidak membawa engine JavaScript, tidak berjalan di dalam WebKit/WebView2, dan tidak butuh bridge IPC antara UI dan logika. Perry menargetkan 10 platform termasuk mobile, watch, dan TV.",
-        "table": [
-          {
-            "feature": "Rendering UI",
-            "perry": "Widget platform native (AppKit, UIKit, GTK4, Win32, JNI)",
-            "competitor": "Webview sistem (WKWebView, WebView2, WebKitGTK) — HTML/CSS/JS"
-          },
-          {
-            "feature": "Bahasa frontend",
-            "perry": "TypeScript (API widget deklaratif)",
-            "competitor": "HTML/CSS/JS via framework web apa saja (React, Vue, dll.)"
-          },
-          {
-            "feature": "Bahasa backend",
-            "perry": "TypeScript",
-            "competitor": "Rust"
-          },
-          {
-            "feature": "IPC antara UI dan logika",
-            "perry": "Tidak ada — proses tunggal, panggilan langsung",
-            "competitor": "Diperlukan (UI di webview, logika di proses Rust)"
-          },
-          {
-            "feature": "Installer hello-world",
-            "perry": "~330 KB",
-            "competitor": "~3–10 MB (webview disediakan OS)"
-          },
-          {
-            "feature": "Mobile (iOS, Android)",
-            "perry": "Ya — UI native",
-            "competitor": "Ya — berbasis webview (Tauri 2)"
-          },
-          {
-            "feature": "Watch / TV",
-            "perry": "watchOS, tvOS, Wear OS",
-            "competitor": "Tidak"
-          },
-          {
-            "feature": "Target WebAssembly",
-            "perry": "Ya (perry/ui via DOM bridge)",
-            "competitor": "T/A (Tauri sendiri menggunakan webview secara native)"
-          },
-          {
-            "feature": "Kematangan",
-            "perry": "Pra-1.0",
-            "competitor": "Stabil (1.x / 2.x)"
-          }
-        ],
-        "perryWins": [
-          "UI yang benar-benar native — Perry tidak merender HTML; ia menggerakkan widget platform asli, jadi aplikasi mewarisi fisika scroll native, fokus, aksesibilitas, IME, dan tema OS secara gratis.",
-          "Hello-world lebih kecil (~330 KB vs MB satu digit Tauri), dan tanpa dependensi webview sistem saat runtime.",
-          "Satu bahasa, satu proses. Seluruh aplikasi — UI dan logika — adalah TypeScript, tanpa bridge IPC untuk dirancang atau di-debug.",
-          "watchOS, tvOS, Wear OS, dan target Web/JS lengkap dengan pipeline kompilasi native yang nyata, bukan webview yang dibundel.",
-          "Tanpa perbedaan perilaku webview antar platform. Tauri mewarisi keanehan WKWebView vs WebView2 vs WebKitGTK; Perry memilih jalur widget native di setiap OS.",
-          "Performa komputasi adalah AOT-native, bukan webview-JIT. Perry memimpin microbench komputasi dalam kondisi setara di M1 Max (perry/benchmarks)."
-        ],
-        "competitorWins": [
-          "Framework yang matang dan stabil dengan jalur 2.x aktif dan komunitas besar.",
-          "Fleksibilitas frontend — gunakan framework web apa pun (React, Vue, Svelte, Solid, dll.) yang sudah Anda kenal.",
-          "Installer lebih kecil dari Electron karena Tauri bersandar pada webview yang disediakan OS daripada membundel Chromium.",
-          "Backend Rust ideal jika Anda memiliki pekerjaan tingkat sistem (filesystem, API native) dan menginginkan jaminan waktu kompilasi di sana.",
-          "Rendering webview berarti kecepatan iterasi CSS/HTML dan devtools bekerja seperti yang Anda harapkan dari pengembangan web.",
-          "Pipeline pengemasan, penandatanganan kode, dan updater yang mapan."
-        ],
-        "whenPerry": "Pilih Perry jika Anda ingin UI yang benar-benar native (bukan HTML yang dirender di webview), binary native kecil tanpa dependensi webview, satu kode sumber TypeScript di desktop + mobile + watch + TV, atau kode widget lintas platform yang divalidasi waktu kompilasi.",
-        "whenCompetitor": "Pilih Tauri jika Anda memiliki frontend web yang sudah ada atau direncanakan, ingin aplikasi desktop installer kecil yang didukung Rust, senang dengan HTML/CSS untuk UI, atau menginginkan ekosistem luas framework dan tool web.",
-        "verdict": "Tauri adalah Electron yang jauh lebih baik — pendekatan teknologi web yang sama, installer yang jauh lebih kecil karena webview OS tidak dibundel. Tetapi tetap arsitektur berbasis webview, yang berarti rendering HTML/CSS/JS dan bridge IPC. Perry mengambil posisi berbeda: tanpa webview sama sekali, widget platform native, proses tunggal. Jika Anda ingin mempertahankan stack web dengan binary lebih kecil dari Electron, Tauri adalah jawaban yang tepat. Jika Anda ingin meninggalkan stack web demi widget native dalam TypeScript, Perry-lah jawabannya."
-      },
-      "react-native": {
-        "title": "Perry vs React Native",
-        "metaTitle": "Perry vs React Native: TypeScript AOT-compiled vs bridge JS ke UI native",
-        "metaDescription": "React Native mengirim bundle JavaScript plus engine JS yang menjembatani ke widget native. Perry mengompilasi TypeScript langsung ke kode mesin native dengan UI native bawaan. Bandingkan arsitektur, performa, dan dukungan platform.",
-        "tldr": "React Native memungkinkan Anda menulis JavaScript/TypeScript yang menggerakkan UI native di iOS dan Android — komponen UI dipetakan ke widget platform melalui bridge JS-ke-native (atau, dalam New Architecture, lapisan JSI / Fabric dengan bentuk konseptual yang sama). Perry mengambil pendekatan berbeda: TypeScript dikompilasi ahead-of-time menjadi kode mesin native, dan UI native adalah bagian dari binary yang dikompilasi, bukan bridge runtime.",
-        "competitorWhat": "React Native adalah framework Meta untuk membangun aplikasi mobile menggunakan React. JavaScript berjalan di engine tertanam — Hermes secara default, atau JavaScriptCore — dan berinteraksi dengan widget native iOS/Android melalui bridge (legacy) atau JSI/Fabric (New Architecture). Framework ini berfokus pada mobile (iOS dan Android); Microsoft memelihara fork komunitas untuk Windows dan macOS. React Native telah memberdayakan aplikasi di Meta, Microsoft, Shopify, Discord, dan banyak lainnya.",
-        "perryWhat": "Perry mengompilasi TypeScript langsung ke kode mesin native. Modul perry/ui-nya adalah sistem UI deklaratif gaya SwiftUI yang dikompilasi ke widget platform native pada waktu build — tidak ada runtime JS di binary, tidak ada bridge, dan tidak ada JSI. Kode sumber TypeScript yang sama dikompilasi ke macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, Wear OS, WebAssembly, dan Web.",
-        "table": [
-          {
-            "feature": "Model eksekusi",
-            "perry": "Kode mesin native AOT-compiled",
-            "competitor": "Engine JS (Hermes/JSC) + bridge native (atau JSI/Fabric)"
-          },
-          {
-            "feature": "Engine JS dalam aplikasi",
-            "perry": "Tidak ada",
-            "competitor": "Hermes (default) atau JavaScriptCore"
-          },
-          {
-            "feature": "UI",
-            "perry": "Widget native — API deklaratif gaya SwiftUI",
-            "competitor": "Widget native via React + bridge / Fabric"
-          },
-          {
-            "feature": "Target utama",
-            "perry": "macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WASM, Web",
-            "competitor": "iOS, Android (Windows/macOS via fork komunitas)"
-          },
-          {
-            "feature": "Binary server / CLI / desktop",
-            "perry": "Ya (tool CLI, server, aplikasi desktop)",
-            "competitor": "Tidak (framework UI mobile)"
-          },
-          {
-            "feature": "Bridge antara JS dan native",
-            "perry": "Tanpa bridge — kode native adalah programnya",
-            "competitor": "Ya (bridge legacy atau JSI/Fabric)"
-          },
-          {
-            "feature": "Hot reload saat development",
-            "perry": "perry dev (auto-recompile mode watch)",
-            "competitor": "Fast Refresh (sangat cepat)"
-          },
-          {
-            "feature": "Kematangan",
-            "perry": "Pra-1.0",
-            "competitor": "Stabil, banyak digunakan di produksi"
-          },
-          {
-            "feature": "Library komponen",
-            "perry": "Widget inti perry/ui + lapisan kompat React perry-react",
-            "competitor": "Sangat luas — React Native + paket komunitas"
-          }
-        ],
-        "perryWins": [
-          "Tanpa engine JS di aplikasi yang dikirim. Binary yang dikompilasi Perry tidak membawa Hermes atau JSC; TypeScript adalah executable-nya.",
-          "Tanpa biaya bridge / JSI. Panggilan UI native adalah panggilan fungsi terkompilasi langsung, bukan marshaling JS-ke-native.",
-          "Jangkauan platform lebih luas. Satu kode sumber Perry mengompilasi ke desktop (macOS/Linux/Windows), mobile (iOS/iPadOS/Android), wearable (watchOS/Wear OS), TV (tvOS), WASM, dan Web. React Native berfokus pada mobile.",
-          "Binary server-side dan CLI dari kompiler yang sama — Perry juga merupakan runtime server, bukan hanya framework UI.",
-          "Performa komputasi AOT-compiled — tanpa warmup, tanpa JIT, tanpa round trip bridge.",
-          "perry-react memberi Anda React/JSX yang dikompilasi ke widget native, sehingga model mental React tersedia tanpa engine JS di binary."
-        ],
-        "competitorWins": [
-          "Ekosistem yang matang dan teruji pertempuran dengan dukungan komunitas, perpustakaan, dan tooling yang sangat besar.",
-          "Fast Refresh saat development adalah yang terbaik di kelasnya — perubahan kode muncul dalam milidetik tanpa rebuild.",
-          "Kumpulan talenta yang besar. Mempekerjakan developer React Native mudah; Perry baru.",
-          "Pipeline CI/CD yang mapan, publikasi App Store / Play Store, dan update OTA gaya codepush.",
-          "JSI/Fabric dan New Architecture telah menutup banyak gap performa historis dengan native, sambil mempertahankan model pemrograman React.",
-          "Dukungan langsung dari Meta dan adopter besar (Microsoft, Shopify, Amazon) menjaga framework tetap berkembang."
-        ],
-        "whenPerry": "Pilih Perry jika Anda ingin satu kode sumber TypeScript di mobile, desktop, watch, TV, WASM, dan web; jika Anda ingin tanpa runtime JS di aplikasi yang dikirim; jika Anda ingin UI native tanpa bridge; atau jika Anda sudah berinvestasi di TypeScript dan menginginkan kompilasi native daripada engine JS.",
-        "whenCompetitor": "Pilih React Native jika Anda membangun aplikasi mobile dan menginginkan framework UI native lintas platform yang paling matang, Anda memiliki tim React yang sudah ada, Anda bergantung pada ekosistem perpustakaan React Native, atau Anda butuh stack lintas platform mobile standar industri saat ini.",
-        "verdict": "React Native adalah framework yang berfokus pada mobile dengan runtime JS dan bridge (yang sekarang ditingkatkan). Perry adalah kompiler yang menghasilkan binary native dari TypeScript, dengan UI native sebagai bagian dari output kompilasi. Jika Anda menginginkan React di mobile dengan ekosistem terdalam, React Native adalah jawabannya hari ini. Jika Anda ingin satu kode sumber TypeScript yang mengompilasi ke mobile + desktop + watch + TV tanpa runtime JS di aplikasi, Perry-lah jawabannya."
-      }
+      "sources": "Sumber",
+      "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
     },
     "electronAlternatives": {
       "title": "Alternatif Electron untuk TypeScript",
@@ -1032,9 +591,9 @@
   },
   "meta": {
     "title": "Perry — Kompilasi TypeScript ke Executable Native | Kompiler TypeScript Native",
-    "description": "Perry adalah kompiler TypeScript ke native: binary standalone tanpa runtime Node.js. Executable 2–5 MB untuk macOS, Linux, Windows, iOS, dan Android.",
+    "description": "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; the Perry runtime and GC are statically linked.",
     "ogTitle": "Perry — Kompilasi TypeScript ke Executable Native",
-    "ogDescription": "Kompilasi TypeScript menjadi executable native. 10 platform, 25+ widget UI, startup 0 ms."
+    "ogDescription": "AOT TypeScript via SWC and LLVM. 11 documented targets plus a HarmonyOS preview, 35+ native UI widgets, and transparent benchmark results."
   },
   "faq": {
     "title": "Pertanyaan yang Sering <gradient>Diajukan</gradient>",
@@ -1043,36 +602,71 @@
     "items": [
       {
         "question": "Apakah Perry membutuhkan Node.js atau runtime?",
-        "answer": "Tidak. Perry mengompilasi TypeScript secara ahead-of-time menjadi executable native standalone. Binary berjalan tanpa Node.js, Bun, Deno, atau runtime JavaScript apa pun yang terinstal di mesin. Untuk paket npm yang belum bisa dikompilasi secara native, fallback V8 tertanam opsional tersedia melalui --enable-js-runtime."
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
       },
       {
         "question": "Seberapa besar binary yang dikompilasi?",
-        "answer": "Binary hello-world berukuran sekitar 330 KB. Tool CLI tipikal berada di kisaran 2–5 MB. Aplikasi lengkap yang menyertakan framework besar (Fastify, mysql2, dll.) berukuran sekitar 48 MB — masih jauh di bawah ~80–150 MB yang menjadi titik awal ukuran aplikasi Electron atau binary dengan runtime tertanam."
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
       },
       {
         "question": "Bisakah saya menggunakan paket npm?",
-        "answer": "Ya. Paket TypeScript/JavaScript murni dikompilasi secara native melalui perry.compilePackages — axios, zod v4, express, fastify, dan hono sudah bisa dikompilasi dan berjalan hari ini. Paket yang membutuhkan semantik engine JS penuh dapat berjalan melalui fallback V8 opsional dengan --enable-js-runtime."
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
       },
       {
         "question": "Platform apa saja yang didukung Perry?",
-        "answer": "Sepuluh target kompilasi: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web/JS. Aplikasi GUI menggunakan widget platform native — AppKit, UIKit, GTK4, Win32, dan Android melalui JNI."
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
       },
       {
         "question": "Apakah Perry gratis dan open source?",
-        "answer": "Ya. Kompiler ini gratis dan open source. Mengompilasi dan menjalankan secara lokal tidak memerlukan biaya maupun akun. Perry Publish — pipeline build, penandatanganan, dan pengiriman ke toko yang di-hosting — memiliki tingkat gratis (15 publikasi per bulan) dan paket Pro."
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
       },
       {
         "question": "Apa bedanya Perry dengan Bun atau Deno compile?",
-        "answer": "Bun dan Deno membundel JavaScript Anda bersama runtime-nya menjadi satu file — hello world berukuran sekitar 60–100 MB tergantung platform, dan kodenya tetap dieksekusi secara JIT. Perry mengompilasi TypeScript secara ahead-of-time menjadi kode mesin melalui LLVM: tanpa engine tertanam, hello world ~330 KB, startup ~1 ms. Lihat perbandingan lengkap <bunLink>Perry vs Bun</bunLink> dan <denoLink>Perry vs Deno</denoLink>."
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
       },
       {
         "question": "Apa bedanya Perry dengan Electron atau Tauri?",
-        "answer": "Electron mengirim Chromium dan Node.js dengan setiap aplikasi, sehingga installer berukuran sekitar 80–150 MB. Tauri jauh lebih kecil tetapi tetap merender frontend web di webview sistem, dengan logika aplikasi di Rust. Perry sama sekali tidak menggunakan webview: TypeScript dikompilasi menjadi kode mesin yang menggerakkan widget platform asli — AppKit, UIKit, GTK4, Win32 — dalam satu proses tunggal. Lihat perbandingan lengkap <electronLink>Perry vs Electron</electronLink> dan <tauriLink>Perry vs Tauri</tauriLink>."
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
       },
       {
         "question": "Seberapa matang Perry?",
-        "answer": "Perry masih pra-1.0 dan bergerak cepat, tetapi aplikasi nyata yang dibangun dengannya sudah dikirim hari ini — di antaranya Bloom Engine, Mango, Hone, Pry, dan dB Meter. Lihat <showcaseLink>showcase</showcaseLink> untuk detailnya."
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
       }
     ]
+  },
+  "privacy": {
+    "metaTitle": "Privacy notice",
+    "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
+    "title": "Privacy notice",
+    "updated": "Last updated: August 27, 2026",
+    "controllerTitle": "1. Controller",
+    "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
+    "dataTitle": "2. Data processed",
+    "dataItems": [
+      "Page-view and technical request data produced when you visit the site.",
+      "Your email address and the source form when you choose to subscribe to the newsletter."
+    ],
+    "analyticsTitle": "3. Analytics",
+    "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
+    "newsletterTitle": "4. Newsletter and Resend",
+    "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
+    "purposesTitle": "5. Purposes and legal bases",
+    "purposesItems": [
+      "Operate, secure, and diagnose the website and its supporting services.",
+      "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
+      "Send the newsletter after your request or consent."
+    ],
+    "retentionTitle": "6. Retention and recipients",
+    "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
+    "rightsTitle": "7. Your rights",
+    "rightsItems": [
+      "Request access, correction, deletion, restriction, or portability where applicable.",
+      "Object to processing based on legitimate interests.",
+      "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
+      "Complain to a competent data-protection supervisory authority."
+    ],
+    "contactTitle": "8. Contact",
+    "contactBody": "For privacy questions or requests, contact",
+    "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
   }
 }

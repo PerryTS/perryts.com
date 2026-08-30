@@ -3,12 +3,23 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShowcaseCard } from "@/components/ShowcaseCard";
+import { TechnicalFactsNotice } from "@/components/TechnicalFactsNotice";
 import { showcaseProjects } from "@/lib/showcase";
 
-export const metadata: Metadata = {
-  title: "Showcase - Perry",
-  description: "Projects built with Perry — the native TypeScript compiler.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("showcase");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: `/${locale}/showcase/` },
+  };
+}
 
 export default async function ShowcaseIndex({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -28,6 +39,8 @@ export default async function ShowcaseIndex({ params }: { params: Promise<{ loca
               {t("subtitle")}
             </p>
           </div>
+
+          <TechnicalFactsNotice />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {showcaseProjects.map((project) => (

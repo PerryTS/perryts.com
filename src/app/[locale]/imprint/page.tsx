@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Impressum",
   description: "Rechtliche Informationen — Skelpo GmbH",
+  alternates: { canonical: "/de/imprint/" },
 };
 
 export default async function ImprintPage({
@@ -27,10 +28,16 @@ export default async function ImprintPage({
           </h1>
           <p className="text-slate-400 mb-12">Rechtliche Informationen</p>
 
+          {locale !== "de" && (
+            <p className="mb-8 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">
+              This mandatory legal information is published in German.
+            </p>
+          )}
+
           <div className="space-y-10 text-slate-300 leading-relaxed">
             <section>
               <h2 className="text-2xl font-bold mb-4 text-white">
-                Angaben gemäß § 5 TMG
+                Angaben gemäß § 5 DDG
               </h2>
               <p>
                 <strong className="text-white">Skelpo GmbH</strong>
@@ -95,13 +102,9 @@ export default async function ImprintPage({
               <p>
                 Die Inhalte dieser Website werden mit größter Sorgfalt erstellt.
                 Wir übernehmen jedoch keine Gewähr für die Richtigkeit,
-                Vollständigkeit und Aktualität der bereitgestellten Inhalte. Als
-                Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte
-                auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
-                Nach §§ 8 bis 10 TMG sind Diensteanbieter jedoch nicht
-                verpflichtet, übermittelte oder gespeicherte fremde
-                Informationen zu überwachen oder nach Umständen zu forschen, die
-                auf eine rechtswidrige Tätigkeit hinweisen.
+                Vollständigkeit und Aktualität der bereitgestellten Inhalte.
+                Für eigene Inhalte auf diesen Seiten gelten die allgemeinen
+                Gesetze.
               </p>
 
               <h3 className="text-xl font-semibold mb-3 mt-6 text-white">

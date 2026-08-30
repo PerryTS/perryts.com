@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CompareCard } from "@/components/CompareCard";
+import { TechnicalFactsNotice } from "@/components/TechnicalFactsNotice";
 import { compareItems } from "@/lib/compare";
 import { Link } from "@/i18n/navigation";
 
@@ -52,6 +53,8 @@ export default async function CompareIndex({
               {ui("indexSubtitle")}
             </p>
           </div>
+
+          <TechnicalFactsNotice />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {compareItems.map((item) => (

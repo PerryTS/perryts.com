@@ -10,6 +10,7 @@ import { Performance } from "@/components/Performance";
 import { Installation } from "@/components/Installation";
 import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
+import { CoopTeaser } from "@/components/CoopTeaser";
 import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
 import { ShippingInProduction } from "@/components/ShippingInProduction";
@@ -35,6 +36,7 @@ export default async function Home() {
         <FeatureTable />
         <NativeLibraries />
         <Architecture />
+        <CoopTeaser />
         <Footer />
       </main>
     </NextIntlClientProvider>

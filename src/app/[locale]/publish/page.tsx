@@ -4,11 +4,20 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
 
-export const metadata: Metadata = {
-  title: "Perry Publish",
-  description:
-    "Build, sign, and distribute your Perry apps to the App Store, Play Store, and beyond.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("publish");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/en/publish/" },
+  };
+}
 
 export default async function PublishPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -21,6 +30,11 @@ export default async function PublishPage({ params }: { params: Promise<{ locale
       <Header />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
+          {locale !== "en" && (
+            <p className="mb-8 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">
+              {(await getTranslations("hero"))("factsLanguageNotice")}
+            </p>
+          )}
           <h1 className="text-4xl sm:text-5xl font-bold mb-6">
             <span className="gradient-text">{t("title")}</span>
           </h1>

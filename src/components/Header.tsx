@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { locales, localeNames, type Locale } from "@/i18n/routing";
 
@@ -10,7 +10,9 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("nav");
   const params = useParams();
+  const pathname = usePathname();
   const currentLocale = (params?.locale as string) || "en";
+  const pathWithoutLocale = pathname.replace(/^\/[^/]+(?=\/|$)/, "") || "/";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/85 backdrop-blur-lg border-b border-white/8">
@@ -98,21 +100,22 @@ export function Header() {
 
             {/* Language Switcher */}
             <div className="relative group">
-              <button className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm uppercase">
+              <button
+                type="button"
+                aria-label="Choose language"
+                className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm uppercase"
+              >
                 {currentLocale === "zh-Hans" ? "ZH" : currentLocale.toUpperCase()}
                 <svg className="w-3.5 h-3.5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+              <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-150">
                 <div className="bg-[#1a1a1e] border border-white/10 rounded-xl py-2 px-1 min-w-[140px] shadow-xl max-h-80 overflow-y-auto">
                   {locales.map((locale) => (
                     <a
                       key={locale}
-                      href={`/${locale}${typeof window !== "undefined" ? window.location.pathname.replace(/^\/[^/]+/, "") : "/"}`}
-                      onClick={() => {
-                        try { localStorage.setItem("perry-locale", locale); } catch {}
-                      }}
+                      href={`/${locale}${pathWithoutLocale}`}
                       className={`block px-3 py-1.5 text-sm rounded-lg transition-colors ${
                         locale === currentLocale
                           ? "text-perry-400 bg-perry-500/10"
@@ -128,6 +131,9 @@ export function Header() {
           </div>
 
           <button
+            type="button"
+            aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={mobileMenuOpen}
             className="md:hidden p-2 text-slate-400 hover:text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -199,6 +205,8 @@ export function Header() {
               </a>
               <a
                 href="https://github.com/PerryTS/perry"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 {t("github")}
@@ -217,10 +225,7 @@ export function Header() {
                   {locales.map((locale) => (
                     <a
                       key={locale}
-                      href={`/${locale}/`}
-                      onClick={() => {
-                        try { localStorage.setItem("perry-locale", locale); } catch {}
-                      }}
+                      href={`/${locale}${pathWithoutLocale}`}
                       className={`text-xs px-2 py-1 rounded-lg transition-colors ${
                         locale === currentLocale
                           ? "text-perry-400 bg-perry-500/10 border border-perry-500/30"

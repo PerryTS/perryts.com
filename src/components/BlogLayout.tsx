@@ -6,11 +6,14 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 export async function BlogLayout({
   post,
   children,
+  isEnglishFallback = false,
 }: {
   post: BlogPost;
   children: React.ReactNode;
+  isEnglishFallback?: boolean;
 }) {
   const t = await getTranslations("common");
+  const blog = await getTranslations("blog");
   const locale = await getLocale();
 
   return (
@@ -43,6 +46,16 @@ export async function BlogLayout({
             day: "numeric",
           })}
         </time>
+
+        {isEnglishFallback && (
+          <p className="mb-8 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">
+            {blog("englishOnly")}
+          </p>
+        )}
+
+        <p className="mb-8 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-400">
+          {blog("historicalNotice")}
+        </p>
 
         <div className="prose prose-invert prose-slate max-w-none [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-12 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-8 [&>h3]:mb-3 [&>p]:text-slate-300 [&>p]:leading-relaxed [&>p]:mb-6 [&>ul]:text-slate-300 [&>ul]:mb-6 [&>ul]:space-y-2 [&>ul>li]:pl-2 [&>ol]:text-slate-300 [&>ol]:mb-6 [&>ol]:space-y-2">
           {children}

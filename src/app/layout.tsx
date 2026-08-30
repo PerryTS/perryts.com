@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s — Perry",
   },
   description:
-    "Perry is a TypeScript to native compiler: standalone binaries with no Node.js runtime. 2–5 MB executables for macOS, Linux, Windows, iOS, and Android.",
+    "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
   keywords: [
     "TypeScript",
     "compiler",
@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${rubik.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${rubik.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <Script
           async

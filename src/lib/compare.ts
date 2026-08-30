@@ -10,37 +10,37 @@ export const compareItems: CompareItem[] = [
     slug: "bun",
     competitor: "Bun",
     category: "runtime",
-    updated: "2026-04-26",
+    updated: "2026-08-27",
   },
   {
     slug: "deno",
     competitor: "Deno",
     category: "runtime",
-    updated: "2026-04-26",
+    updated: "2026-08-27",
   },
   {
     slug: "static-hermes",
     competitor: "Static Hermes",
     category: "compiler",
-    updated: "2026-07-03",
+    updated: "2026-08-27",
   },
   {
     slug: "electron",
     competitor: "Electron",
     category: "ui-framework",
-    updated: "2026-04-26",
+    updated: "2026-08-27",
   },
   {
     slug: "tauri",
     competitor: "Tauri",
     category: "ui-framework",
-    updated: "2026-04-26",
+    updated: "2026-08-27",
   },
   {
     slug: "react-native",
     competitor: "React Native",
     category: "ui-framework",
-    updated: "2026-04-26",
+    updated: "2026-08-27",
   },
 ];
 

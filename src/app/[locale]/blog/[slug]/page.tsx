@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { BlogLayout } from "@/components/BlogLayout";
 import { getBlogPost, getAllSlugs } from "@/lib/blog";
 import { locales } from "@/i18n/routing";
-import { getBlogContent } from "@/content/blog/registry";
+import { getBlogContent, getBlogContentLocale } from "@/content/blog/registry";
 
 export function generateStaticParams() {
   const slugs = getAllSlugs();
@@ -21,26 +21,32 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getBlogPost(slug);
   if (!post) return {};
+  const resolvedLocale = getBlogContentLocale(slug, locale);
+  const canonicalLocale = resolvedLocale ?? locale;
+  const t = await getTranslations("blogPosts");
+  const title = resolvedLocale === "en" ? post.title : t(`${slug}.title`);
+  const description = resolvedLocale === "en" ? post.excerpt : t(`${slug}.excerpt`);
   return {
-    title: post.title,
-    description: post.excerpt,
+    title,
+    description,
     alternates: {
-      canonical: `/${locale}/blog/${slug}/`,
+      canonical: `/${canonicalLocale}/blog/${slug}/`,
     },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      url: `/${locale}/blog/${slug}/`,
+      title,
+      description,
+      url: `/${canonicalLocale}/blog/${slug}/`,
       type: "article",
       publishedTime: post.date,
       tags: post.tags,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
     },
   };
 }
@@ -56,21 +62,22 @@ export default async function BlogPostPage({
   const post = getBlogPost(slug);
   if (!post) notFound();
 
-  const ContentComponent = await getBlogContent(slug, locale);
-  if (!ContentComponent) notFound();
+  const content = await getBlogContent(slug, locale);
+  if (!content) notFound();
+  const { Component: ContentComponent, resolvedLocale } = content;
 
   const t = await getTranslations("blogPosts");
 
   const localizedPost = {
     ...post,
-    title: t(`${slug}.title`),
-    excerpt: t(`${slug}.excerpt`),
+    title: resolvedLocale === "en" ? post.title : t(`${slug}.title`),
+    excerpt: resolvedLocale === "en" ? post.excerpt : t(`${slug}.excerpt`),
   };
 
   return (
     <main className="min-h-screen">
       <Header />
-      <BlogLayout post={localizedPost}>
+      <BlogLayout post={localizedPost} isEnglishFallback={locale !== "en" && resolvedLocale === "en"}>
         <ContentComponent />
       </BlogLayout>
       <Footer />

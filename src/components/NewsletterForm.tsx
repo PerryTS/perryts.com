@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 type Variant = "footer" | "block" | "hero";
 
@@ -62,6 +63,12 @@ export function NewsletterForm({ variant = "footer", source }: { variant?: Varia
           </button>
         </div>
         <StatusLine status={status} errorKey={errorKey} t={t} />
+        <p className="text-[11px] text-slate-600">
+          {t("privacy")}{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-white">
+            {t("privacyLink")}
+          </Link>
+        </p>
       </form>
     );
   }
@@ -101,7 +108,12 @@ export function NewsletterForm({ variant = "footer", source }: { variant?: Varia
       <div className="mt-3">
         <StatusLine status={status} errorKey={errorKey} t={t} />
       </div>
-      <p className="text-xs text-slate-500 mt-4">{t("privacy")}</p>
+      <p className="text-xs text-slate-500 mt-4">
+        {t("privacy")}{" "}
+        <Link href="/privacy" className="underline underline-offset-2 hover:text-white">
+          {t("privacyLink")}
+        </Link>
+      </p>
     </div>
   );
 }

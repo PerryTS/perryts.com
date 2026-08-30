@@ -1,6 +1,6 @@
 # perryts.com
 
-Landing site for [Perry](https://github.com/nicholasgasior/perry) — a TypeScript-to-native compiler built on Rust, SWC, and Cranelift.
+Landing site for [Perry](https://github.com/PerryTS/perry) — a TypeScript-to-native compiler built with Rust, SWC, and LLVM.
 
 ## Stack
 
@@ -14,7 +14,7 @@ This site used to deploy on Vercel, but we kept hitting routing issues — sub-r
 
 So we dogfooded Perry instead.
 
-`server.ts` is a ~90-line static file server written in TypeScript using Perry's native HTTP server API (FFI bindings to a Rust/hyper HTTP server). It handles:
+`server.ts` is a small static file server written in TypeScript and compiled with Perry. It uses the Fastify-compatible native HTTP implementation and handles:
 
 - Static file serving from the `out/` directory
 - Clean URL resolution (`/blog` → `out/blog/index.html`)
@@ -22,17 +22,17 @@ So we dogfooded Perry instead.
 - 404 fallback page
 - URL percent-decoding for Next.js data file paths
 
-The server compiles to a **2 MB native binary** in under a second:
+The server compiles to a native binary. Exact size and compile time vary with the Perry version, host, and linked feature set:
 
 ```
-$ perry compile server.ts -o server
+$ npm run build:server
 ```
 
-In production, nginx handles TLS termination and serves the static files directly (Perry can't cross-compile to Linux yet, so the binary runs on macOS for local dev). The full build pipeline:
+In production, the deployment script uploads the static export and TypeScript server, compiles `native-entry/server.ts` with Perry on the Linux host, and restarts the Perry service. A separate Node helper forwards newsletter subscriptions to Resend. It requires `RESEND_API_KEY` and `RESEND_AUDIENCE_ID`; `ALLOWED_ORIGINS` and `PORT` are optional. TLS and proxy configuration live outside this repository. The local build pipeline is:
 
 ```
 npm run build:site    # next build → out/
-npm run build:server  # perry compile server.ts → ./server
+npm run build:server  # compiles native-entry/server.ts → ./server
 npm run serve         # runs the compiled binary
 ```
 
@@ -47,14 +47,13 @@ npm run dev           # next dev on localhost:3000
 
 ```bash
 npm run build         # builds site + compiles server
-npm run serve         # starts Perry binary on port 3000
+npm run serve         # starts Perry binary on port 3850
 ```
 
 ## Deployment
 
-Static files are deployed to the server via rsync and served by nginx:
+`deploy.sh` deploys the current production arrangement. It builds the static export, uploads it together with both server sources, compiles the Perry server remotely, restarts both services, and verifies the public homepage:
 
 ```bash
-npm run build:site
-rsync -avz --delete out/ root@webserver.skelpo.net:/var/www/perryts.com/out/
+npm run deploy
 ```

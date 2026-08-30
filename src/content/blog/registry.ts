@@ -22,6 +22,9 @@ const slugs = [
   "updater-live-inspector-and-compiler-refactor",
   "closing-the-gc-gap",
   "real-npm-packages-and-a-conformance-sweep",
+  "shipping-a-watch-only-app-to-the-app-store",
+  "compiling-claude-code",
+  "gc-decisions-surprises",
 ] as const;
 
 // Build a loader map: slug -> locale -> dynamic import
@@ -297,28 +300,59 @@ const loaders: Record<string, Record<string, ContentLoader>> = {
     id: () => import("./real-npm-packages-and-a-conformance-sweep/id"),
     "zh-Hans": () => import("./real-npm-packages-and-a-conformance-sweep/zh-Hans"),
   },
+  "shipping-a-watch-only-app-to-the-app-store": {
+    en: () => import("./shipping-a-watch-only-app-to-the-app-store/en"),
+  },
+  "compiling-claude-code": {
+    en: () => import("./compiling-claude-code/en"),
+    ja: () => import("./compiling-claude-code/ja"),
+    ko: () => import("./compiling-claude-code/ko"),
+    "zh-Hans": () => import("./compiling-claude-code/zh-Hans"),
+  },
+  "gc-decisions-surprises": {
+    en: () => import("./gc-decisions-surprises/en"),
+    de: () => import("./gc-decisions-surprises/de"),
+    es: () => import("./gc-decisions-surprises/es"),
+    fr: () => import("./gc-decisions-surprises/fr"),
+    it: () => import("./gc-decisions-surprises/it"),
+    ja: () => import("./gc-decisions-surprises/ja"),
+    ko: () => import("./gc-decisions-surprises/ko"),
+    pt: () => import("./gc-decisions-surprises/pt"),
+    th: () => import("./gc-decisions-surprises/th"),
+    tr: () => import("./gc-decisions-surprises/tr"),
+    vi: () => import("./gc-decisions-surprises/vi"),
+    id: () => import("./gc-decisions-surprises/id"),
+    "zh-Hans": () => import("./gc-decisions-surprises/zh-Hans"),
+  },
 };
 
 export async function getBlogContent(
   slug: string,
   locale: string
-): Promise<ComponentType | null> {
+): Promise<{ Component: ComponentType; resolvedLocale: string } | null> {
   const slugLoaders = loaders[slug];
   if (!slugLoaders) return null;
 
-  const loader = slugLoaders[locale] ?? slugLoaders["en"];
+  const resolvedLocale = slugLoaders[locale] ? locale : "en";
+  const loader = slugLoaders[resolvedLocale];
   if (!loader) return null;
 
   try {
     const mod = await loader();
-    return mod.default;
+    return { Component: mod.default, resolvedLocale };
   } catch {
     // Fallback to English if locale file doesn't exist
     try {
       const mod = await slugLoaders["en"]();
-      return mod.default;
+      return { Component: mod.default, resolvedLocale: "en" };
     } catch {
       return null;
     }
   }
+}
+
+export function getBlogContentLocale(slug: string, locale: string): string | null {
+  const slugLoaders = loaders[slug];
+  if (!slugLoaders) return null;
+  return slugLoaders[locale] ? locale : slugLoaders.en ? "en" : null;
 }

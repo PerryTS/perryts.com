@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { PRODUCT_FACTS } from "@/lib/product-facts";
 
 export const dynamic = "force-static";
 
@@ -153,7 +154,11 @@ export default function Image() {
 
           {/* Feature pills */}
           <div style={{ display: "flex", gap: 12 }}>
-            {["10 Platforms", "25+ UI Widgets", "0 ms Startup"].map((label) => (
+            {[
+              `${PRODUCT_FACTS.documentedTargetCount} Targets`,
+              `${PRODUCT_FACTS.nativeWidgetCount} UI Widgets`,
+              "AOT via LLVM",
+            ].map((label) => (
               <div
                 key={label}
                 style={{

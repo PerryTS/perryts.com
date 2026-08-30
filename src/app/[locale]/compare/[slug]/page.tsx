@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CompareLayout } from "@/components/CompareLayout";
 import { JsonLd } from "@/components/JsonLd";
 import { getCompareItem, getAllCompareSlugs } from "@/lib/compare";
+import { getComparisonContent } from "@/lib/compare-content";
 import { breadcrumbJsonLd } from "@/lib/breadcrumbs";
 import { locales } from "@/i18n/routing";
 
@@ -24,19 +25,18 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const item = getCompareItem(slug);
-  if (!item) return {};
-  const t = await getTranslations("compare");
-  const data = t.raw(`items.${slug}`) as { metaTitle: string; metaDescription: string };
+  const data = getComparisonContent(slug);
+  if (!item || !data) return {};
   return {
     title: data.metaTitle,
     description: data.metaDescription,
     alternates: {
-      canonical: `/${locale}/compare/${slug}/`,
+      canonical: `/en/compare/${slug}/`,
     },
     openGraph: {
       title: data.metaTitle,
       description: data.metaDescription,
-      url: `/${locale}/compare/${slug}/`,
+      url: `/en/compare/${slug}/`,
       type: "article",
       publishedTime: item.updated,
     },

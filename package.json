@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:site && npm run build:server",
-    "build:site": "next build",
-    "build:server": "perry compile server.ts -o server",
+    "build:site": "next build && node scripts/fix-export-lang.mjs",
+    "build:server": "sh scripts/build-server.sh",
     "serve": "./server",
     "deploy": "./deploy.sh",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
