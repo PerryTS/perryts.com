@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/showcase",
     "/showcase/pry",
     "/newsletter",
+    "/coop",
   ];
   const englishOnlyPaths = [
     "/compare/perry-vs-electron-alternatives",
@@ -36,9 +37,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     localizedPaths.map((path) => ({
       url: `${BASE}/${locale}${path}/`,
-      lastModified: new Date("2026-08-27"),
+      lastModified: new Date(path === "" || path === "/coop" ? "2026-08-30" : "2026-08-27"),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
-      priority: path === "" ? 1 : 0.7,
+      priority: path === "" ? 1 : path === "/coop" ? 0.8 : 0.7,
     }))
   );
   staticPages.push(

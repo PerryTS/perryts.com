@@ -68,6 +68,11 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/coop" className="text-slate-400 hover:text-white transition-colors">
+                  Coop
+                </Link>
+              </li>
+              <li>
                 <a href="https://docs.perryts.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                   {t("documentation")}
                 </a>

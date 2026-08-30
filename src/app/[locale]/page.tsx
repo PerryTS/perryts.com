@@ -10,6 +10,7 @@ import { Performance } from "@/components/Performance";
 import { Installation } from "@/components/Installation";
 import { FeatureTable } from "@/components/FeatureTable";
 import { Architecture } from "@/components/Architecture";
+import { CoopTeaser } from "@/components/CoopTeaser";
 import { NativeLibraries } from "@/components/NativeLibraries";
 import { ShipIt } from "@/components/ShipIt";
 import { ShippingInProduction } from "@/components/ShippingInProduction";
@@ -87,6 +88,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <FeatureTable />
       <NativeLibraries />
       <Architecture />
+      <CoopTeaser />
       <Faq />
       <Footer />
     </main>
