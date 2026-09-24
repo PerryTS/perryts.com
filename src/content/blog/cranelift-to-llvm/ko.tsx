@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>정정 (2026년 9월):</strong> 아래에서 “factorial”이라고 부른 벤치마크는 이름이 잘못되었습니다. 루프에서 <code>i % 1000</code>을 합산할 뿐 팩토리얼을 계산하지 않습니다. 24.6배라는 수치는 재현되지 않는 오래된 Node.js 실행에서 나온 것이며, 현재 공개된 하니스에서는 Node.js와 동률입니다(93 ms 대 95 ms). 이는 정수 나머지 연산 고속 경로의 마이크로벤치마크일 뿐, 일반적인 TypeScript 성능의 척도가 아닙니다. 아래 결과는 기록으로 남겨 둡니다. Perry가 지는 벤치마크를 포함한 최신 수치는 다음에서 확인하세요:{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">Perry README</a>
+        </p>
+      </div>
       <p>
         Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. v0.5.12 기준으로 LLVM이 유일한 코드 생성 백엔드이며, Perry는 이제 모든 벤치마크에서 Node.js를 능가합니다. 그 차이는 1.7배에서 24.6배에 이릅니다(2개는 동점).
       </p>

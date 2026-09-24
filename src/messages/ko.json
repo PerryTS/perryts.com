@@ -519,8 +519,8 @@
       "excerpt": "Perry v0.4.24: 10번째 컴파일 타겟인 tvOS, ld64.lld를 통한 Linux에서 iOS 및 macOS 크로스 컴파일, 사용량 기반 과금의 perry login, Windows UI 개편, macOS 공증, 5일간 120개 커밋."
     },
     "cranelift-to-llvm": {
-      "title": "Cranelift에서 LLVM으로: Perry가 24배 빨라진 과정",
-      "excerpt": "Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. 초기 전환 시 벤치마크가 70배 느려졌지만, 6가지 최적화를 통해 Node.js 대비 14/15 승리, 최대 24.6배 속도 향상을 달성했습니다."
+      "title": "Cranelift에서 LLVM으로: 무엇이 망가졌고 어떻게 고쳤는가",
+      "excerpt": "Perry의 Cranelift에서 LLVM으로의 백엔드 마이그레이션이 완료되었습니다. 초기 전환 시 벤치마크가 70배 느려졌습니다 — 무엇이 망가졌는지, 그리고 이를 고친 6가지 최적화를 소개합니다."
     },
     "optimizing-everything": {
       "title": "모든 것을 최적화하기: 일주일, 68개 릴리스, 그리고 547배 빨라진 JSON",

@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>訂正（2026年9月）：</strong> 以下で「factorial」と呼んでいたベンチマークは名前が誤っていました。ループで <code>i % 1000</code> を合計するだけで、階乗は計算していません。24.6倍という数値は再現できない古いNode.js計測によるもので、現在公開しているハーネスではNode.jsと互角です（93 ms 対 95 ms）。これは整数剰余の高速パスのマイクロベンチマークであり、典型的なTypeScriptの性能を示すものではありません。以下の結果は履歴として残しています。Perryが負けているベンチマークを含む最新の数値は{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">Perry README</a>をご覧ください。
+        </p>
+      </div>
       <p>
         PerryのバックエンドがCraneliftからLLVMへの移行を完了しました。v0.5.12時点でLLVMが唯一のコード生成バックエンドとなり、Perryはすべてのベンチマークで Node.jsに勝利しています。その差は1.7倍から24.6倍に及びます（2つは同点）。
       </p>

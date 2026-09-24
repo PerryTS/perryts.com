@@ -111,10 +111,10 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "cranelift-to-llvm",
-    title: "From Cranelift to LLVM: How Perry Got 24x Faster",
+    title: "From Cranelift to LLVM: What Broke and How We Fixed It",
     date: "2026-04-12",
     excerpt:
-      "Perry's backend migration from Cranelift to LLVM is finished. The initial cutover made benchmarks 70x slower — then six targeted optimizations made Perry faster than Node.js on every benchmark, with up to 24.6x speedups.",
+      "Perry's backend migration from Cranelift to LLVM is finished. The initial cutover made benchmarks 70x slower — this is what broke, and the six targeted optimizations that fixed it.",
     tags: ["compilers", "llvm", "cranelift", "performance", "milestone"],
     content: () => null,
   },

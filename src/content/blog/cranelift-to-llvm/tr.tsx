@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>Düzeltme (Eylül 2026):</strong> Aşağıda “factorial” olarak adlandırılan benchmark yanlış adlandırılmıştı: bir döngüde <code>i % 1000</code> toplar ve hiçbir faktöriyel hesaplamaz. 24,6 kat rakamı, yeniden üretilemeyen eski bir Node.js çalıştırmasından geliyordu; güncel yayımlanan harness&rsquo;ımızda Node.js ile berabere (93 ms&rsquo;ye karşı 95 ms). Bu, tamsayı mod işlemi hızlı yolunun bir mikrobenchmark&rsquo;ıdır, tipik TypeScript performansının bir ölçüsü değildir. Aşağıdaki sonuçlar tarihsel kayıt olarak korunmuştur. Perry&rsquo;nin kaybettiği benchmark&rsquo;lar dahil güncel rakamlar şurada:{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">Perry README</a>
+        </p>
+      </div>
       <p>
         Perry&apos;nin Cranelift&apos;ten LLVM&apos;ye backend ge&ccedil;i&scedil;i tamamland&inodot;. v0.5.12 itibar&inodot;yla LLVM tek kod &uuml;retim backend&apos;i ve Perry art&inodot;k her benchmark&apos;ta Node.js&apos;i yeniyor &mdash; 1,7x ile 24,6x aras&inodot;nda de&gbreve;i&scedil;en marjlarla (iki beraberlikle).
       </p>

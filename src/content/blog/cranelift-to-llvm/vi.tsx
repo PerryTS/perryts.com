@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>Đính chính (tháng 9 năm 2026):</strong> Benchmark bên dưới được gọi là “factorial” đã bị đặt tên sai: nó chỉ cộng dồn <code>i % 1000</code> trong một vòng lặp và không tính giai thừa nào cả. Con số 24,6 lần đến từ một lần chạy Node.js cũ không thể tái tạo; trên harness được công bố hiện tại, kết quả hòa với Node.js (93 ms so với 95 ms). Đây là một microbenchmark cho đường nhanh của phép chia lấy dư số nguyên, không phải thước đo hiệu năng TypeScript thông thường. Kết quả bên dưới được giữ lại như một bản ghi lịch sử. Số liệu hiện tại, bao gồm cả các benchmark mà Perry thua, có trong{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">README của Perry</a>.
+        </p>
+      </div>
       <p>
         Qu&aacute; tr&igrave;nh chuyển backend của Perry từ Cranelift sang LLVM đ&atilde; ho&agrave;n tất. Kể từ v0.5.12, LLVM l&agrave; backend sinh m&atilde; duy nhất, v&agrave; Perry giờ đ&acirc;y đ&aacute;nh bại Node.js tr&ecirc;n mọi benchmark &mdash; với bi&ecirc;n độ từ 1,7x đến 24,6x (với hai kết quả h&ograve;a).
       </p>

@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>แก้ไข (กันยายน 2026):</strong> เบนช์มาร์กด้านล่างที่เรียกว่า “factorial” ตั้งชื่อผิด: มันเพียงรวมค่า <code>i % 1000</code> ในลูปและไม่ได้คำนวณแฟกทอเรียล ตัวเลข 24.6 เท่ามาจากการรัน Node.js รุ่นเก่าที่ไม่สามารถทำซ้ำได้ บน harness ที่เราเผยแพร่ปัจจุบันผลออกมาเสมอกับ Node.js (93 ms เทียบกับ 95 ms) นี่เป็นไมโครเบนช์มาร์กของ fast path สำหรับการหารเอาเศษจำนวนเต็ม ไม่ใช่ตัวชี้วัดประสิทธิภาพ TypeScript ทั่วไป ผลลัพธ์ด้านล่างเก็บไว้เป็นบันทึกทางประวัติศาสตร์ ตัวเลขปัจจุบัน รวมถึงเบนช์มาร์กที่ Perry แพ้ อยู่ใน{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">Perry README</a>
+        </p>
+      </div>
       <p>
         การย้าย backend ของ Perry จาก Cranelift ไปยัง LLVM เสร็จสมบูรณ์แล้ว ตั้งแต่ v0.5.12 เป็นต้นไป LLVM เป็น backend สำหรับ code generation เพียงตัวเดียว และตอนนี้ Perry เอาชนะ Node.js ได้ในทุก benchmark &mdash; ด้วยมาร์จินตั้งแต่ 1.7x ถึง 24.6x (มีสองรายการเสมอกัน)
       </p>
