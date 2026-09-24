@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>Correzione (settembre 2026):</strong> Il benchmark qui sotto chiamato “factorial” aveva un nome sbagliato: somma <code>i % 1000</code> in un ciclo e non calcola alcun fattoriale. Il valore di 24,6x proveniva da una vecchia esecuzione di Node.js che non si riproduce; con il nostro harness pubblicato attuale è un pareggio con Node.js (93 ms contro 95 ms). È un microbenchmark di un percorso rapido per il modulo intero, non una misura delle prestazioni tipiche di TypeScript. I risultati qui sotto sono conservati come documentazione storica. I numeri attuali, compresi i benchmark che Perry perde, sono nel{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">README di Perry</a>.
+        </p>
+      </div>
       <p>
         La migrazione del backend di Perry da Cranelift a LLVM è completata. A partire da v0.5.12, LLVM è l&apos;unico backend di generazione del codice, e Perry ora batte Node.js su ogni benchmark — con margini che vanno da 1,7x a 24,6x (con due pareggi).
       </p>

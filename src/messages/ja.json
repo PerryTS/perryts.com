@@ -519,8 +519,8 @@
       "excerpt": "Perry v0.4.24：10 番目のコンパイルターゲットとしての tvOS、ld64.lld 経由で Linux から iOS・macOS へのクロスコンパイル、従量課金制の perry login、Windows UI 刷新、macOS 公証、5 日間で 120 コミット。"
     },
     "cranelift-to-llvm": {
-      "title": "CraneliftからLLVMへ：Perryが24倍高速になるまで",
-      "excerpt": "PerryのバックエンドがCraneliftからLLVMに移行完了。初回の切り替えではベンチマークが70倍遅くなりましたが、6つのターゲット最適化により、Node.jsに対して14/15勝、最大24.6倍の高速化を達成しました。"
+      "title": "CraneliftからLLVMへ：何が壊れ、どう直したか",
+      "excerpt": "PerryのバックエンドがCraneliftからLLVMに移行完了。初回の切り替えではベンチマークが70倍遅くなりました — 何が壊れたのか、そしてそれを直した6つのターゲット最適化について。"
     },
     "optimizing-everything": {
       "title": "すべてを最適化する：一週間、68リリース、そしてJSONの547倍高速化",

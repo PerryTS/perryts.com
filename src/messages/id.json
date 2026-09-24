@@ -519,8 +519,8 @@
       "excerpt": "Perry v0.4.24: tvOS sebagai target kompilasi ke-10, kompilasi silang iOS dan macOS dari Linux via ld64.lld, perry login dengan penagihan berbasis penggunaan, perombakan UI Windows, notarisasi macOS, dan 120 commit dalam 5 hari."
     },
     "cranelift-to-llvm": {
-      "title": "Dari Cranelift ke LLVM: Bagaimana Perry Menjadi 24x Lebih Cepat",
-      "excerpt": "Migrasi backend Perry dari Cranelift ke LLVM telah selesai. Peralihan awal membuat benchmark 70x lebih lambat — kemudian enam optimasi terarah membawa Perry meraih 14/15 kemenangan melawan Node.js, dengan percepatan hingga 24,6x."
+      "title": "Dari Cranelift ke LLVM: Apa yang Rusak dan Bagaimana Kami Memperbaikinya",
+      "excerpt": "Migrasi backend Perry dari Cranelift ke LLVM telah selesai. Peralihan awal membuat benchmark 70x lebih lambat — inilah yang rusak, dan enam optimasi terarah yang memperbaikinya."
     },
     "optimizing-everything": {
       "title": "Mengoptimalkan Semuanya: Satu Minggu, 68 Rilis, dan Percepatan JSON 547x",

@@ -519,8 +519,8 @@
       "excerpt": "Perry v0.4.24: tvOS als 10. Kompilierungsziel, Cross-Compile für iOS und macOS von Linux via ld64.lld, perry login mit nutzungsbasierter Abrechnung, Windows-UI-Überarbeitung, macOS-Notarisierung und 120 Commits in 5 Tagen."
     },
     "cranelift-to-llvm": {
-      "title": "Von Cranelift zu LLVM: Wie Perry 24x schneller wurde",
-      "excerpt": "Perrys Backend-Migration von Cranelift zu LLVM ist abgeschlossen. Die anfängliche Umstellung machte Benchmarks 70x langsamer — dann brachten sechs gezielte Optimierungen Perry auf 14/15 Siege gegen Node.js, mit bis zu 24,6-facher Beschleunigung."
+      "title": "Von Cranelift zu LLVM: Was kaputtging und wie wir es repariert haben",
+      "excerpt": "Perrys Backend-Migration von Cranelift zu LLVM ist abgeschlossen. Die anfängliche Umstellung machte Benchmarks 70x langsamer — das ist, was kaputtging, und die sechs gezielten Optimierungen, die es behoben haben."
     },
     "optimizing-everything": {
       "title": "Alles optimieren: Eine Woche, 68 Releases und ein 547x JSON-Speedup",

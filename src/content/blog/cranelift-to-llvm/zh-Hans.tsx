@@ -1,6 +1,12 @@
 export default function Content() {
   return (
     <>
+      <div className="border-l-4 border-amber-400 bg-slate-800/60 rounded px-4 py-3 my-6">
+        <p>
+          <strong>更正（2026 年 9 月）：</strong> 下文中名为“factorial”的基准测试命名有误：它只是在循环中累加 <code>i % 1000</code>，并不计算阶乘。24.6 倍这一数字来自一次无法复现的旧 Node.js 运行；在我们当前公开的测试框架中，它与 Node.js 持平（93 ms 对 95 ms）。这是一个针对整数取模快速路径的微基准测试，并不代表典型的 TypeScript 性能。下面的结果作为历史记录保留。包括 Perry 落后的基准测试在内的最新数据，请见{" "}
+          <a href="https://github.com/PerryTS/perry#performance" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300">Perry README</a>
+        </p>
+      </div>
       <p>
         Perry 从 Cranelift 到 LLVM 的后端迁移已完成。自 v0.5.12 起，LLVM 是唯一的代码生成后端，Perry 现在在每项基准测试中都击败了 Node.js——优势从 1.7 倍到 24.6 倍不等（其中两项持平）。
       </p>

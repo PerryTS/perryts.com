@@ -519,8 +519,8 @@
       "excerpt": "Perry v0.4.24: 10. derleme hedefi olarak tvOS, ld64.lld ile Linux'tan iOS ve macOS çapraz derleme, kullanım bazlı faturalandırma ile perry login, Windows UI yenilemesi, macOS noter onayı ve 5 günde 120 commit."
     },
     "cranelift-to-llvm": {
-      "title": "Cranelift'ten LLVM'ye: Perry Nasıl 24 Kat Hızlandı",
-      "excerpt": "Perry'nin Cranelift'ten LLVM'ye backend geçişi tamamlandı. İlk geçiş benchmark'ları 70 kat yavaşlattı — ardından altı hedefli optimizasyon Perry'yi Node.js'e karşı 14/15 galibiyete taşıdı, 24,6 kata kadar hızlanma sağladı."
+      "title": "Cranelift'ten LLVM'ye: Ne Bozuldu ve Nasıl Düzelttik",
+      "excerpt": "Perry'nin Cranelift'ten LLVM'ye backend geçişi tamamlandı. İlk geçiş benchmark'ları 70 kat yavaşlattı — işte neyin bozulduğu ve onu düzelten altı hedefli optimizasyon."
     },
     "optimizing-everything": {
       "title": "Her Şeyi Optimize Etmek: Bir Hafta, 68 Sürüm ve 547x JSON Hızlanması",
