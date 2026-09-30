@@ -223,7 +223,7 @@ br i1 %fits, label %fast, label %slow`}</code>
             <p className="text-slate-400 mb-6">
               <code className="text-slate-300">perry compile main.ts</code> —
               native machine code with the Perry runtime and GC statically
-              linked, and no external JavaScript engine by default.
+              linked, and no external JavaScript engine.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/getting-started" className="btn-primary">

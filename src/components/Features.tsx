@@ -6,7 +6,7 @@ export async function Features() {
 
   const featureKeys = [
     "noRuntime", "fastCompilation", "smallBinaries", "deterministicBuilds", "stdLib",
-    "v8Runtime", "widgets", "plugins", "threading", "i18n",
+    "npmPackages", "widgets", "plugins", "threading", "i18n",
   ] as const;
 
   const icons = [

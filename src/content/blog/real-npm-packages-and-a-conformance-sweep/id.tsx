@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>, dirilis sebagai bundle terminifikasi, melatih dispatch prototype-method JS-classic (<code>Class.prototype.m = fn</code>) yang di-lower Perry secara salah (v0.5.924/932).</li>
       </ul>
       <p>
-        Di bawah semua itu duduk bagian yang membuat paket yang Perry <em>tidak bisa</em> compile secara native tetap berjalan: <strong>runtime fallback-V8</strong> menjadi nyata di jendela ini. ModuleLoader-nya kini membaca dari module map ter-embed, sehingga binary fallback tetap <strong>self-contained</strong> — tanpa <code>node_modules</code> lepas saat runtime (v0.5.994). <code>createServer</code> menjembatani ke server hyper nyata (v0.5.999), dan global Web Fetch <code>Response</code> / <code>Request</code> / <code>Headers</code> ada di jalur fallback (v0.5.1006). Dan <strong>dynamic <code>import()</code> compile-time</strong> — <code>await import(&apos;./foo.ts&apos;)</code> string-literal diselesaikan saat build — akhirnya mendarat (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        Semua paket ini dikompilasi secara native — tanpa JavaScript engine tertanam, tanpa <code>node_modules</code> lepas saat runtime. Dan <strong>dynamic <code>import()</code> compile-time</strong> — <code>await import(&apos;./foo.ts&apos;)</code> string-literal diselesaikan saat build — akhirnya mendarat (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>Sapuan konformansi test262</h2>

@@ -138,15 +138,6 @@ export default function Content() {
         gecis basittir.
       </p>
 
-      <h2>Istege Bagli V8 Uyumluluk Katmani</h2>
-      <p>
-        Henuz yerel Perry uygulamalari olmayan npm paketleri icin Perry, istege bagli bir
-        V8 gomme modu sunar. Etkinlestirildiginde Perry bir V8 calisma zamani paketler ve
-        standart JavaScript npm paketlerini derlenenmis TypeScript&apos;inizle birlikte calistirir. Bu, Perry&apos;yi
-        kademeli olarak benimsemenizi saglayan pragmatik bir kacis kapisidir — sicak yollari yerel
-        koda derlerken geri kalan her sey icin tam npm ekosistemine erismeye devam edin.
-      </p>
-
       <h2>Capraz Derleme</h2>
       <p>
         Perry, kutudan cikar cikmaz capraz derlemeyi destekler. macOS gelistirme makinenizden

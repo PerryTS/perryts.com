@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>, livré sous forme de bundle minifié, exerçait un dispatch de méthode de prototype JS-classique (<code>Class.prototype.m = fn</code>) que Perry abaissait mal (v0.5.924/932).</li>
       </ul>
       <p>
-        Sous tout cela repose la partie qui fait tourner les packages que Perry <em>ne peut pas</em> compiler nativement : le <strong>runtime de repli V8</strong> est devenu réel cette fenêtre. Son ModuleLoader lit désormais depuis une carte de modules embarquée, donc un binaire de repli reste <strong>autonome</strong> — pas de <code>node_modules</code> volants à l&apos;exécution (v0.5.994). <code>createServer</code> fait le pont vers un vrai serveur hyper (v0.5.999), et les globales Web Fetch <code>Response</code> / <code>Request</code> / <code>Headers</code> existent dans le chemin de repli (v0.5.1006). Et l&apos;<strong><code>import()</code> dynamique à la compilation</strong> — <code>await import(&apos;./foo.ts&apos;)</code> en littéral de chaîne résolu au build — a enfin atterri (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        Tous ces packages sont compilés nativement — aucun moteur JavaScript embarqué, pas de <code>node_modules</code> volants à l&apos;exécution. Et l&apos;<strong><code>import()</code> dynamique à la compilation</strong> — <code>await import(&apos;./foo.ts&apos;)</code> en littéral de chaîne résolu au build — a enfin atterri (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>Une passe de conformité test262</h2>

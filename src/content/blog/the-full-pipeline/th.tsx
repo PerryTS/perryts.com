@@ -159,8 +159,7 @@ export default function Content() {
       <p>
         Windows ได้รับการรองรับ timer (ติ๊ก <code className="text-amber-400">WM_TIMER</code> 50ms),
         ปุ่ม owner-drawn พร้อมพื้นหลังธีมมืด และการแก้ไขบั๊ก use-after-free ใน{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code> ในไฟล์วิดเจ็ต 18 ไฟล์ V8 runtime
-        ตอนนี้ทำงานบน Windows โดยมีไลบรารีระบบที่จำเป็นลิงก์แล้ว
+        <code className="text-amber-400">to_wide().as_ptr()</code> ในไฟล์วิดเจ็ต 18 ไฟล์
       </p>
 
       <h3>GTK4 (Linux)</h3>

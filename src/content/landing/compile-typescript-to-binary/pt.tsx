@@ -251,7 +251,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Crescente: axios, zod v4, express, fastify, hono compilam
-                    nativamente; runtime V8 opcional para o restante
+                    nativamente, sem motor JS embutido
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Completa — é o próprio runtime do Bun

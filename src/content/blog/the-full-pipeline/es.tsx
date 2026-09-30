@@ -120,7 +120,7 @@ export default function Content() {
 
       <h3>Windows</h3>
       <p>
-        Windows obtuvo soporte de temporizadores (tick de 50ms <code className="text-amber-400">WM_TIMER</code>), botones owner-drawn con fondos de tema oscuro y correcciones para un bug use-after-free en <code className="text-amber-400">to_wide().as_ptr()</code> en 18 archivos de widgets. El runtime V8 ahora funciona en Windows con las bibliotecas del sistema requeridas enlazadas.
+        Windows obtuvo soporte de temporizadores (tick de 50ms <code className="text-amber-400">WM_TIMER</code>), botones owner-drawn con fondos de tema oscuro y correcciones para un bug use-after-free en <code className="text-amber-400">to_wide().as_ptr()</code> en 18 archivos de widgets.
       </p>
 
       <h3>GTK4 (Linux)</h3>

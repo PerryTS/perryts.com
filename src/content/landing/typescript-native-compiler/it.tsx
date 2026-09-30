@@ -159,9 +159,9 @@ export default function Content() {
             nativamente tramite{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify e hono compilano e funzionano già
-            oggi. Il codice che necessita della piena semantica del motore può
-            optare per un fallback V8 embedded con{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            oggi. Non c&apos;è alcun motore JavaScript embedded: la semantica
+            dinamica non ancora supportata produce un errore di compilazione
+            invece di ripiegare silenziosamente su un interprete.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             La storia completa è in{" "}

@@ -142,15 +142,6 @@ export default function Content() {
         di chuyển rất đơn giản.
       </p>
 
-      <h2>Lớp tương thích V8 tùy chọn</h2>
-      <p>
-        Đối với các gói npm chưa có triển khai gốc của Perry, Perry cung cấp một chế độ nhúng V8
-        tùy chọn. Khi được bật, Perry đóng gói một runtime V8 và có thể thực thi các gói npm JavaScript
-        tiêu chuẩn cùng với TypeScript đã biên dịch của bạn. Đây là một cửa thoát thực dụng cho phép
-        bạn áp dụng Perry dần dần — biên dịch các đường dẫn nóng thành mã gốc trong khi vẫn truy cập
-        toàn bộ hệ sinh thái npm cho mọi thứ khác.
-      </p>
-
       <h2>Biên dịch chéo</h2>
       <p>
         Perry hỗ trợ biên dịch chéo ngay từ đầu. Từ máy phát triển macOS, bạn có thể biên dịch cho

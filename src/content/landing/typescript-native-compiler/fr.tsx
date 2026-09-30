@@ -163,10 +163,9 @@ export default function Content() {
             compilent nativement via{" "}
             <code className="text-slate-300">perry.compilePackages</code> :
             axios, zod v4, express, fastify et hono compilent et
-            s&apos;exécutent dès aujourd&apos;hui. Le code qui nécessite la
-            sémantique complète d&apos;un moteur peut opter pour un V8
-            embarqué en repli avec{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            s&apos;exécutent dès aujourd&apos;hui. La sémantique dynamique non prise en
+            charge produit une erreur de compilation plutôt que de basculer
+            silencieusement vers un interpréteur.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             Le récit complet se trouve dans{" "}

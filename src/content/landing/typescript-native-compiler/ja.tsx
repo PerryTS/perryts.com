@@ -159,9 +159,8 @@ export default function Content() {
             <code className="text-slate-300">perry.compilePackages</code>{" "}
             を通じてネイティブにコンパイルされます：axios、zod v4、
             express、fastify、hono は今日時点でコンパイルして実行できます。
-            完全なエンジンセマンティクスを必要とするコードは、
-            <code className="text-slate-300">--enable-js-runtime</code>{" "}
-            で組み込み V8 フォールバックを利用できます。
+            未対応の動的セマンティクスは、インタプリタへ黙ってフォールバック
+            するのではなく、コンパイルエラーになります。
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             詳しい経緯は

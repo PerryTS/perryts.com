@@ -124,7 +124,7 @@ export default function Content() {
 
       <h3>Windows</h3>
       <p>
-        Windows bekam Timer-Unterstützung (50ms <code className="text-amber-400">WM_TIMER</code>-Tick), owner-drawn Buttons mit Dark-Theme-Hintergründen und Fixes für einen Use-After-Free-Bug in <code className="text-amber-400">to_wide().as_ptr()</code> über 18 Widget-Dateien. Die V8-Runtime funktioniert jetzt unter Windows mit den erforderlichen verlinkten Systembibliotheken.
+        Windows bekam Timer-Unterstützung (50ms <code className="text-amber-400">WM_TIMER</code>-Tick), owner-drawn Buttons mit Dark-Theme-Hintergründen und Fixes für einen Use-After-Free-Bug in <code className="text-amber-400">to_wide().as_ptr()</code> über 18 Widget-Dateien.
       </p>
 
       <h3>GTK4 (Linux)</h3>

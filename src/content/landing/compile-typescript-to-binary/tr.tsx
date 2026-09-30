@@ -252,8 +252,8 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Artıyor: axios, zod v4, express, fastify, hono yerel
-                    olarak derlenir; geri kalanı için isteğe bağlı V8
-                    fallback&apos;i
+                    olarak derlenir; desteklenmeyen paketler henüz
+                    çalışmayabilir
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Tam — zaten Bun runtime&apos;ının kendisi

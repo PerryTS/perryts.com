@@ -246,7 +246,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     확장 중: axios, zod v4, express, fastify, hono는 네이티브로
-                    컴파일되며, 나머지는 선택적 V8 폴백 지원
+                    컴파일되며, 나머지도 네이티브로 컴파일
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     완전함 — Bun 런타임 그 자체이므로

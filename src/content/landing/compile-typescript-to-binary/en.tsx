@@ -77,15 +77,14 @@ export default function Content() {
             that no <em>external</em> JavaScript runtime installation is needed;
             it is not accurate to say that Perry has no runtime at all. Native
             builds use a garbage collector, object and string support, async
-            machinery, and other linked helpers. The optional V8 fallback adds
-            an embedded JavaScript engine when enabled.
+            machinery, and other linked helpers. There is no embedded
+            JavaScript engine: npm dependencies are compiled natively too.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             The public examples show a hello-world binary around {PRODUCT_FACTS.helloWorldSize}
             {" "}and the Mango application around {PRODUCT_FACTS.mangoSize}. Those are examples,
             not a promised range. Output size changes with the target, imports,
-            build profile, standard-library surface, debug information, and
-            optional V8 fallback.
+            build profile, standard-library surface, and debug information.
           </p>
 
           <h2 className="text-2xl font-bold mb-6">Compatibility and targets</h2>

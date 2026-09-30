@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>는 미니파이된 번들로 배포되며, Perry가 잘못 lowering하던 JS-클래식 프로토타입 메서드 디스패치(<code>Class.prototype.m = fn</code>)를 행사했습니다(v0.5.924/932).</li>
       </ul>
       <p>
-        그 모든 것 아래에는 Perry가 네이티브로 컴파일<em>할 수 없는</em> 패키지를 여전히 실행되게 만드는 부분이 있습니다: 이 윈도우에서 <strong>V8 폴백 런타임</strong>이 실체를 갖췄습니다. 그 ModuleLoader는 이제 임베디드 모듈 맵에서 읽으므로, 폴백 바이너리도 여전히 <strong>자기 완결적</strong>입니다 — 런타임에 떠도는 <code>node_modules</code>가 없습니다(v0.5.994). <code>createServer</code>는 실제 hyper 서버에 다리를 놓고(v0.5.999), <code>Response</code> / <code>Request</code> / <code>Headers</code> Web Fetch 전역이 폴백 경로에 존재합니다(v0.5.1006). 그리고 <strong>컴파일 타임 동적 <code>import()</code></strong> — 빌드 타임에 해소되는 문자열 리터럴 <code>await import(&apos;./foo.ts&apos;)</code> — 가 마침내 안착했습니다(v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        이 패키지들은 모두 네이티브로 컴파일됩니다 — 임베디드 JavaScript 엔진도, 런타임에 떠도는 <code>node_modules</code>도 없습니다. 그리고 <strong>컴파일 타임 동적 <code>import()</code></strong> — 빌드 타임에 해소되는 문자열 리터럴 <code>await import(&apos;./foo.ts&apos;)</code> — 가 마침내 안착했습니다(v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>test262 적합성 스윕</h2>

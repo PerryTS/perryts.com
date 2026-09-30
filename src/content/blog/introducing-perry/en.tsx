@@ -144,15 +144,6 @@ export default function Content() {
         package, so migration is straightforward.
       </p>
 
-      <h2>Optional V8 Compatibility Layer</h2>
-      <p>
-        For npm packages that don&apos;t have native Perry implementations yet, Perry offers an
-        optional V8 embedding mode. When enabled, Perry bundles a V8 runtime and can execute
-        standard JavaScript npm packages alongside your compiled TypeScript. This is a pragmatic
-        escape hatch that lets you adopt Perry incrementally — compile the hot paths to native
-        code while still accessing the full npm ecosystem for everything else.
-      </p>
-
       <h2>Cross-Compilation</h2>
       <p>
         Perry supports cross-compilation out of the box. From your macOS development machine,

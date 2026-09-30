@@ -247,8 +247,8 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     拡大中：axios、zod v4、express、fastify、hono は
-                    ネイティブにコンパイル可能。それ以外はオプションの
-                    V8 フォールバック
+                    ネイティブにコンパイル可能。それ以外もネイティブに
+                    コンパイル
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     完全——Bun ランタイムそのものなので

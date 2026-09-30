@@ -120,7 +120,7 @@ export default function Content() {
 
       <h3>Windows</h3>
       <p>
-        Windows a reçu le support des minuteries (tick de 50ms <code className="text-amber-400">WM_TIMER</code>), des boutons owner-drawn avec des fonds de thème sombre et des corrections pour un bug use-after-free dans <code className="text-amber-400">to_wide().as_ptr()</code> sur 18 fichiers de widgets. Le runtime V8 fonctionne désormais sur Windows avec les bibliothèques système requises liées.
+        Windows a reçu le support des minuteries (tick de 50ms <code className="text-amber-400">WM_TIMER</code>), des boutons owner-drawn avec des fonds de thème sombre et des corrections pour un bug use-after-free dans <code className="text-amber-400">to_wide().as_ptr()</code> sur 18 fichiers de widgets.
       </p>
 
       <h3>GTK4 (Linux)</h3>

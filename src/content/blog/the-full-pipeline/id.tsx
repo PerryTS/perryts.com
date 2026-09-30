@@ -159,8 +159,7 @@ export default function Content() {
       <p>
         Windows got timer support (50ms <code className="text-amber-400">WM_TIMER</code> tick),
         owner-drawn buttons with dark theme backgrounds, and fixes for a use-after-free bug in{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code> across 18 widget files. V8 runtime
-        now works on Windows with the required system libraries linked.
+        <code className="text-amber-400">to_wide().as_ptr()</code> across 18 widget files.
       </p>
 
       <h3>GTK4 (Linux)</h3>

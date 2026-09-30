@@ -160,10 +160,9 @@ export default function Content() {
             Reine TypeScript-/JavaScript-npm-Pakete kompilieren nativ über{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify und hono kompilieren und laufen
-            bereits heute. Code, der volle Engine-Semantik benötigt, kann sich
-            für einen eingebetteten V8-Fallback mit{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>{" "}
-            entscheiden.
+            bereits heute. Nicht unterstützte dynamische Semantik führt zu
+            einem Kompilierfehler, statt stillschweigend auf einen Interpreter
+            zurückzufallen.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             Die vollständige Geschichte steht in{" "}

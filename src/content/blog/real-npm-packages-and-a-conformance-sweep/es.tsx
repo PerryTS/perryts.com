@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>, enviado como un bundle minificado, ejercitaba el dispatch de método de prototipo JS-clásico (<code>Class.prototype.m = fn</code>) que Perry hacía lowering mal (v0.5.924/932).</li>
       </ul>
       <p>
-        Debajo de todo eso está la parte que hace que los paquetes que Perry <em>no puede</em> compilar nativamente sigan corriendo: el <strong>runtime de fallback de V8</strong> se volvió real en esta ventana. Su ModuleLoader ahora lee de un mapa de módulos embebido, así que un binario de fallback sigue siendo <strong>autocontenido</strong> — sin <code>node_modules</code> sueltos en runtime (v0.5.994). <code>createServer</code> hace de puente a un servidor hyper real (v0.5.999), y los globales Web Fetch <code>Response</code> / <code>Request</code> / <code>Headers</code> existen en el camino de fallback (v0.5.1006). Y el <strong><code>import()</code> dinámico en tiempo de compilación</strong> — <code>await import(&apos;./foo.ts&apos;)</code> con string-literal resuelto en build time — por fin aterrizó (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        Todos estos paquetes se compilan de forma nativa — sin motor de JavaScript embebido, sin <code>node_modules</code> sueltos en runtime. Y el <strong><code>import()</code> dinámico en tiempo de compilación</strong> — <code>await import(&apos;./foo.ts&apos;)</code> con string-literal resuelto en build time — por fin aterrizó (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>Un barrido de conformidad de test262</h2>

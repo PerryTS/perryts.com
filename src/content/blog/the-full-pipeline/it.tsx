@@ -159,8 +159,7 @@ export default function Content() {
       <p>
         Windows ha ottenuto il supporto timer (tick <code className="text-amber-400">WM_TIMER</code> da 50ms),
         pulsanti owner-drawn con sfondi tema scuro e correzioni per un bug use-after-free in{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code> in 18 file di widget. Il runtime V8
-        ora funziona su Windows con le librerie di sistema richieste collegate.
+        <code className="text-amber-400">to_wide().as_ptr()</code> in 18 file di widget.
       </p>
 
       <h3>GTK4 (Linux)</h3>

@@ -38,7 +38,7 @@ const approaches = [
   {
     name: "Perry",
     summary:
-      "Perry compiles supported TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine by default, and remains a pre-1.0 compatibility surface.",
+      "Perry compiles supported TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine, and remains a pre-1.0 compatibility surface.",
     bestFor: "Validated applications where native widgets or Perry’s mobile, wearable, TV, and Web/WASM targets solve a specific product need.",
     source: "https://github.com/PerryTS/perry#readme",
     compare: "/typescript-native-compiler" as const,

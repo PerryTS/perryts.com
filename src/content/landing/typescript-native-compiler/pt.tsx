@@ -159,9 +159,9 @@ export default function Content() {
             TypeScript/JavaScript puro compilam nativamente via{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify e hono compilam e rodam hoje.
-            Código que precisa da semântica completa de um motor pode optar
-            por um runtime V8 embutido opcional com{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            Não há motor JavaScript embutido: semântica dinâmica ainda não
+            suportada gera um erro de compilação em vez de recorrer
+            silenciosamente a um interpretador.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             A história completa está em{" "}

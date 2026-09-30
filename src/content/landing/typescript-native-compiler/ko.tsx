@@ -148,10 +148,9 @@ export default function Content() {
             올라가고 있습니다. 순수 TypeScript/JavaScript npm 패키지는{" "}
             <code className="text-slate-300">perry.compilePackages</code>를
             통해 네이티브로 컴파일됩니다: axios, zod v4, express, fastify,
-            hono는 오늘 바로 컴파일되어 실행됩니다. 완전한 엔진 의미론이
-            필요한 코드는{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>으로
-            임베디드 V8 폴백을 선택할 수 있습니다.
+            hono는 오늘 바로 컴파일되어 실행됩니다. 지원되지 않는 동적
+            의미론은 인터프리터로 조용히 폴백하는 대신 컴파일 오류를
+            냅니다.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             자세한 이야기는{" "}

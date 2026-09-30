@@ -51,7 +51,6 @@ export function Installation() {
     { id: "doctor", label: t("doctor"), command: "perry doctor", description: t("doctorDesc") },
     { id: "build", label: t("compileFile"), command: "perry compile main.ts", description: t("compileFileDesc") },
     { id: "output", label: t("customOutput"), command: "perry compile main.ts -o myapp", description: t("customOutputDesc") },
-    { id: "jsruntime", label: t("withV8"), command: "perry compile main.ts --enable-js-runtime", description: t("withV8Desc") },
     { id: "check", label: t("checkCompat"), command: "perry check ./src", description: t("checkCompatDesc") },
   ];
 

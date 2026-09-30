@@ -111,11 +111,6 @@ export default function Content() {
         Estos no son wrappers delgados alrededor de módulos Node.js. Se compilan directamente en tu binario usando bibliotecas nativas del sistema — libpq para PostgreSQL, OpenSSL para criptografía, libcurl para HTTP. La superficie de API coincide con lo que esperarías del paquete npm, por lo que la migración es directa.
       </p>
 
-      <h2>Capa de compatibilidad V8 opcional</h2>
-      <p>
-        Para paquetes npm que aún no tienen implementaciones nativas de Perry, Perry ofrece un modo de incrustación V8 opcional. Cuando está habilitado, Perry empaqueta un runtime V8 y puede ejecutar paquetes npm JavaScript estándar junto a tu TypeScript compilado. Esta es una válvula de escape pragmática que te permite adoptar Perry incrementalmente — compila los caminos calientes a código nativo mientras sigues accediendo al ecosistema npm completo para todo lo demás.
-      </p>
-
       <h2>Compilación cruzada</h2>
       <p>
         Perry soporta compilación cruzada de fábrica. Desde tu máquina de desarrollo macOS, puedes compilar para Linux (x86_64 y ARM64) e iOS. Esto significa que puedes construir tu pipeline CI/CD en macOS y producir binarios para todos tus objetivos de despliegue sin necesitar máquinas de compilación dedicadas para cada plataforma.

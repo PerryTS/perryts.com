@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong> ที่ปล่อยมาเป็น bundle แบบ minified ออกแรงกับ prototype-method dispatch สไตล์ JS-classic (<code>Class.prototype.m = fn</code>) ที่ Perry lower ผิด (v0.5.924/932)</li>
       </ul>
       <p>
-        ใต้ทั้งหมดนั้นคือส่วนที่ทำให้ package ที่ Perry <em>คอมไพล์ native ไม่ได้</em> ยังรันได้: <strong>V8-fallback runtime</strong> เป็นจริงเป็นจังขึ้นในช่วงนี้ ModuleLoader ของมันตอนนี้อ่านจาก embedded module map ดังนั้น binary แบบ fallback ก็ยัง <strong>self-contained</strong> — ไม่มี <code>node_modules</code> กระจัดกระจายตอน runtime (v0.5.994) <code>createServer</code> เชื่อมไปยัง hyper server จริง (v0.5.999) และ global ของ Web Fetch อย่าง <code>Response</code> / <code>Request</code> / <code>Headers</code> มีอยู่ใน path แบบ fallback (v0.5.1006) และ <strong><code>import()</code> แบบ dynamic ที่ compile-time</strong> — <code>await import(&apos;./foo.ts&apos;)</code> แบบ string-literal ที่ resolve ตอน build — ในที่สุดก็ลงจอด (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>)
+        package เหล่านี้ทั้งหมดถูกคอมไพล์แบบ native — ไม่มี JavaScript engine ฝังอยู่ และไม่มี <code>node_modules</code> กระจัดกระจายตอน runtime และ <strong><code>import()</code> แบบ dynamic ที่ compile-time</strong> — <code>await import(&apos;./foo.ts&apos;)</code> แบบ string-literal ที่ resolve ตอน build — ในที่สุดก็ลงจอด (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>)
       </p>
 
       <h2>A test262 conformance sweep</h2>

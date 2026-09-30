@@ -159,10 +159,9 @@ export default function Content() {
             TypeScript/JavaScript murni dikompilasi secara native melalui{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify, dan hono sudah bisa
-            dikompilasi dan berjalan hari ini. Kode yang membutuhkan
-            semantik engine penuh dapat memilih fallback V8 tertanam
-            dengan{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            dikompilasi dan berjalan hari ini. Tidak ada JavaScript engine
+            tertanam: semantik dinamis yang belum didukung menghasilkan
+            error kompilasi, bukan fallback diam-diam ke interpreter.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             Cerita lengkapnya ada di{" "}

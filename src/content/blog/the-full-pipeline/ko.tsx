@@ -156,8 +156,7 @@ export default function Content() {
       <p>
         Windows가 타이머 지원(50ms <code className="text-amber-400">WM_TIMER</code> 틱),
         다크 테마 배경의 오너 드로운 버튼, 18개 위젯 파일에 걸친{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code>의 use-after-free 버그 수정을 받았습니다. V8 런타임이
-        필요한 시스템 라이브러리가 링크된 상태로 Windows에서 작동합니다.
+        <code className="text-amber-400">to_wide().as_ptr()</code>의 use-after-free 버그 수정을 받았습니다.
       </p>
 
       <h3>GTK4 (Linux)</h3>

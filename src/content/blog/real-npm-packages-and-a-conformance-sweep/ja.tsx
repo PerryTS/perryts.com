@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong> は minify されたバンドルとして出荷されており、Perry が誤って lowering していた JS クラシックなプロトタイプメソッドのディスパッチ（<code>Class.prototype.m = fn</code>）を行使していました（v0.5.924/932）。</li>
       </ul>
       <p>
-        そのすべての下には、Perry が <em>ネイティブに</em>コンパイルできないパッケージをそれでも動かす部分があります：このウィンドウで <strong>V8 フォールバックランタイム</strong>が本物になりました。その ModuleLoader は今や埋め込まれたモジュールマップから読み込むので、フォールバックバイナリも依然として <strong>自己完結</strong> です — ランタイムにバラバラの <code>node_modules</code> はありません（v0.5.994）。<code>createServer</code> は本物の hyper サーバにブリッジし（v0.5.999）、<code>Response</code> / <code>Request</code> / <code>Headers</code> という Web Fetch のグローバルがフォールバックパスに存在します（v0.5.1006）。そして <strong>コンパイル時の動的 <code>import()</code></strong> — ビルド時に解決される文字列リテラルの <code>await import(&apos;./foo.ts&apos;)</code> — がついに着地しました（v0.5.905、<a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>）。
+        これらのパッケージはすべてネイティブにコンパイルされます — 組み込みの JavaScript エンジンも、ランタイムにバラバラの <code>node_modules</code> もありません。そして <strong>コンパイル時の動的 <code>import()</code></strong> — ビルド時に解決される文字列リテラルの <code>await import(&apos;./foo.ts&apos;)</code> — がついに着地しました（v0.5.905、<a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>）。
       </p>
 
       <h2>test262 適合性の一掃</h2>

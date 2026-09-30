@@ -51,7 +51,7 @@
     },
     "smallBinaries": {
       "title": "Size Scales With Features",
-      "description": "Hello world can be about 330 KB and Mango is published at about 7 MB. Applications that link the full standard library or optional V8 fallback can be much larger; size depends on target, imports, and build profile."
+      "description": "Hello world can be about 330 KB and Mango is published at about 7 MB. Applications that link the full standard library can be much larger; size depends on target, imports, and build profile."
     },
     "deterministicBuilds": {
       "title": "Cacheable Builds",
@@ -61,9 +61,9 @@
       "title": "Tracked Node.js APIs",
       "description": "Native implementations cover many familiar Node.js APIs across 53 tracked modules. Coverage is broad but not complete; use perry check and the published limitations for your project."
     },
-    "v8Runtime": {
+    "npmPackages": {
       "title": "실제 npm 패키지",
-      "description": "Many pure TypeScript and JavaScript packages compile natively. Packages that depend on unsupported dynamic or engine-specific semantics may need the optional embedded V8 fallback or may not work."
+      "description": "npm packages are compiled natively alongside your code — there is no embedded JavaScript engine. Packages that depend on native addons or not-yet-supported dynamic semantics may not work yet."
     },
     "widgets": {
       "title": "35+ Native UI Widgets",
@@ -107,9 +107,9 @@
     "noSharedUI": "공유 UI 없음",
     "nativeCompiled": "Ahead-of-time machine code through LLVM",
     "realPlatformWidgets": "Real platform widgets where each target supports them",
-    "noExternalEngine": "No external Node.js installation or JavaScript engine by default",
+    "noExternalEngine": "No external Node.js installation or JavaScript engine",
     "linkedRuntime": "The Perry runtime and GC are statically linked; overhead is not “none”",
-    "compatibilityTradeoff": "Perry implements a practical TypeScript and Node.js subset; some packages need the optional V8 fallback",
+    "compatibilityTradeoff": "Perry implements a practical TypeScript and Node.js subset; some packages are not supported yet",
     "platformMaturityTradeoff": "Platform capabilities and maturity differ across desktop, mobile, wearable, TV, and Web/WASM targets",
     "designedFor": "Designed for",
     "tradeoffs": "Tradeoffs to evaluate",
@@ -167,8 +167,6 @@
     "compileFileDesc": "main.ts를 네이티브 실행 파일로 컴파일합니다",
     "customOutput": "사용자 지정 출력",
     "customOutputDesc": "출력 실행 파일 이름 지정",
-    "withV8": "V8 런타임 포함",
-    "withV8Desc": "JavaScript npm 패키지 호환성을 위해 V8 활성화",
     "checkCompat": "호환성 확인",
     "checkCompatDesc": "네이티브 컴파일을 위한 TypeScript 코드 유효성 검사",
     "npmNote": "Recommended cross-platform install. Native targets still require the relevant platform SDK and linker; run perry doctor after installation.",
@@ -602,15 +600,15 @@
     "items": [
       {
         "question": "Perry는 Node.js나 런타임이 필요한가요?",
-        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. npm packages are compiled natively too; no JavaScript engine is embedded."
       },
       {
         "question": "컴파일된 바이너리는 크기가 얼마나 되나요?",
-        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library builds can be much larger. Treat any size as a measured example, not a universal output size."
       },
       {
         "question": "npm 패키지를 사용할 수 있나요?",
-        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons or not-yet-supported dynamic behavior may not work yet. Run perry check and consult the limitations."
       },
       {
         "question": "Perry는 어떤 플랫폼을 지원하나요?",
@@ -622,7 +620,7 @@
       },
       {
         "question": "Perry는 Bun이나 Deno compile과 어떻게 다른가요?",
-        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
       },
       {
         "question": "Perry는 Electron이나 Tauri와 어떻게 다른가요?",

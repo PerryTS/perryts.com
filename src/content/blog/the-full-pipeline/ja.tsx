@@ -157,8 +157,7 @@ export default function Content() {
       <p>
         Windowsがタイマーサポート（50ms <code className="text-amber-400">WM_TIMER</code>ティック）、
         ダークテーマ背景のオーナー描画ボタン、18のウィジェットファイルにわたる{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code>のuse-after-freeバグの修正を得ました。V8ランタイムは
-        必要なシステムライブラリがリンクされた状態でWindowsで動作するようになりました。
+        <code className="text-amber-400">to_wide().as_ptr()</code>のuse-after-freeバグの修正を得ました。
       </p>
 
       <h3>GTK4 (Linux)</h3>

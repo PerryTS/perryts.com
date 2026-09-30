@@ -144,15 +144,6 @@ export default function Content() {
         sehingga migrasi mudah dilakukan.
       </p>
 
-      <h2>Layer Kompatibilitas V8 Opsional</h2>
-      <p>
-        Untuk paket npm yang belum memiliki implementasi native Perry, Perry menawarkan mode
-        embedding V8 opsional. Ketika diaktifkan, Perry membundel runtime V8 dan dapat mengeksekusi
-        paket npm JavaScript standar bersama TypeScript yang dikompilasi. Ini adalah escape hatch
-        pragmatis yang memungkinkan Anda mengadopsi Perry secara bertahap — kompilasi hot path ke
-        kode native sambil tetap mengakses seluruh ekosistem npm untuk yang lainnya.
-      </p>
-
       <h2>Cross-Compilation</h2>
       <p>
         Perry mendukung cross-compilation secara bawaan. Dari mesin pengembangan macOS Anda,

@@ -249,7 +249,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Đang mở rộng: axios, zod v4, express, fastify, hono biên
-                    dịch gốc; phần còn lại có tùy chọn V8 dự phòng
+                    dịch gốc; các gói chưa được hỗ trợ có thể chưa chạy được
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Đầy đủ — vì đó chính là runtime Bun

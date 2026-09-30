@@ -132,14 +132,6 @@ export default function Content() {
         与您期望的 npm 包一致，因此迁移非常简单。
       </p>
 
-      <h2>可选的 V8 兼容层</h2>
-      <p>
-        对于尚未有 Perry 原生实现的 npm 包，Perry 提供了可选的 V8 嵌入模式。
-        启用后，Perry 会捆绑 V8 运行时，可以在编译的 TypeScript 旁边执行标准
-        JavaScript npm 包。这是一个务实的应急方案，让您可以渐进式地采用 Perry
-        —— 将热路径编译为原生代码，同时仍然可以访问完整的 npm 生态系统。
-      </p>
-
       <h2>交叉编译</h2>
       <p>
         Perry 开箱即用地支持交叉编译。从您的 macOS 开发机器上，您可以为 Linux（x86_64 和

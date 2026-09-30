@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>, minify edilmiş bir bundle olarak yayınlanmış halde, Perry&apos;nin yanlış lower ettiği JS-klasik prototype-metot dispatch&apos;ini (<code>Class.prototype.m = fn</code>) çalıştırıyordu (v0.5.924/932).</li>
       </ul>
       <p>
-        Tüm bunların altında, Perry&apos;nin native derleyemediği paketlerin yine de çalışmasını sağlayan kısım yatıyor: <strong>V8-fallback runtime</strong> bu pencerede gerçek oldu. ModuleLoader&apos;ı artık gömülü bir modül haritasından okuyor, dolayısıyla bir fallback ikiliği hâlâ <strong>kendi kendine yeterli</strong> — runtime&apos;da gevşek <code>node_modules</code> yok (v0.5.994). <code>createServer</code> gerçek bir hyper sunucusuna köprü kuruyor (v0.5.999) ve <code>Response</code> / <code>Request</code> / <code>Headers</code> Web Fetch global&apos;leri fallback yolunda mevcut (v0.5.1006). Ve <strong>derleme zamanı dinamik <code>import()</code></strong> — build zamanında çözülen string-literal <code>await import(&apos;./foo.ts&apos;)</code> — nihayet indi (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        Bu paketlerin hepsi native olarak derleniyor — gömülü bir JavaScript motoru yok, runtime&apos;da gevşek <code>node_modules</code> yok. Ve <strong>derleme zamanı dinamik <code>import()</code></strong> — build zamanında çözülen string-literal <code>await import(&apos;./foo.ts&apos;)</code> — nihayet indi (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>Bir test262 uygunluk süpürmesi</h2>

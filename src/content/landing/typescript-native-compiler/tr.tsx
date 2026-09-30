@@ -157,9 +157,8 @@ export default function Content() {
             TypeScript/JavaScript npm paketleri{" "}
             <code className="text-slate-300">perry.compilePackages</code> ile
             yerel olarak derlenir: axios, zod v4, express, fastify ve hono
-            bugün derlenip çalışıyor. Tam motor semantiğine ihtiyaç duyan kod,{" "}
-            <code className="text-slate-300">--enable-js-runtime</code> ile
-            gömülü bir V8 fallback&apos;ine geçiş yapabilir.
+            bugün derlenip çalışıyor. Desteklenmeyen dinamik semantik, sessizce bir
+            yorumlayıcıya (interpreter) geçmek yerine derleme hatası verir.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             Tüm hikaye şurada:{" "}

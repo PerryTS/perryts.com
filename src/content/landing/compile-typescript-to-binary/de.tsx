@@ -254,7 +254,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Wachsend: axios, zod v4, express, fastify, hono kompilieren
-                    nativ; optionaler V8-Fallback für den Rest
+                    nativ, ohne eingebettete JS-Engine
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     Vollständig — es ist die Bun-Laufzeitumgebung

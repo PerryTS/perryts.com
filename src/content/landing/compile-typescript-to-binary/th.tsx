@@ -247,7 +247,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     กำลังเติบโต: axios, zod v4, express, fastify, hono คอมไพล์
-                    แบบเนทีฟได้แล้ว; ส่วนที่เหลือมี V8 fallback แบบเสริม
+                    แบบเนทีฟได้แล้ว; แพ็กเกจที่ยังไม่รองรับอาจใช้งานไม่ได้
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     เต็มรูปแบบ — เพราะมันคือรันไทม์ Bun เอง

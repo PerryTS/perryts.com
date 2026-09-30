@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong> 以压缩后的 bundle 形式发布，触及了 Perry 降级错误的 JS-classic 原型方法派发（<code>Class.prototype.m = fn</code>）（v0.5.924/932）。</li>
       </ul>
       <p>
-        在这一切之下，还有让 Perry <em>无法</em>原生编译的包仍能运行的那一部分：<strong>V8-fallback 运行时</strong>在这一窗口里变成了真东西。它的 ModuleLoader 现在从一个内嵌的模块映射中读取，因此一个 fallback 二进制仍然是<strong>自包含的</strong> — 运行时没有散落的 <code>node_modules</code>（v0.5.994）。<code>createServer</code> 桥接到一个真正的 hyper server（v0.5.999），并且 <code>Response</code> / <code>Request</code> / <code>Headers</code> 这些 Web Fetch 全局对象在 fallback 路径里存在（v0.5.1006）。还有<strong>编译期动态 <code>import()</code></strong> — 字符串字面量 <code>await import(&apos;./foo.ts&apos;)</code> 在构建时解析 — 终于落地（v0.5.905，<a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>）。
+        所有这些包都是原生编译的 — 没有内嵌的 JavaScript 引擎，运行时也没有散落的 <code>node_modules</code>。还有<strong>编译期动态 <code>import()</code></strong> — 字符串字面量 <code>await import(&apos;./foo.ts&apos;)</code> 在构建时解析 — 终于落地（v0.5.905，<a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>）。
       </p>
 
       <h2>一次 test262 一致性扫尾</h2>

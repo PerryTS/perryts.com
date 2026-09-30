@@ -152,9 +152,8 @@ export default function Content() {
             TypeScript/JavaScript thuần biên dịch gốc qua{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify và hono đã có thể biên dịch và
-            chạy ngay hôm nay. Mã cần đầy đủ ngữ nghĩa engine có thể dùng
-            tùy chọn V8 nhúng dự phòng với{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            chạy ngay hôm nay. Ngữ nghĩa động chưa được hỗ trợ sẽ gây ra lỗi
+            biên dịch thay vì âm thầm chuyển sang một trình thông dịch.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             Câu chuyện đầy đủ nằm trong{" "}

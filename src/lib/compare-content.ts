@@ -15,7 +15,7 @@ export interface ComparisonContent {
 }
 
 const perryWhat =
-  "Perry parses TypeScript and JavaScript with SWC and compiles supported code ahead of time through LLVM. Native builds do not require an external Node.js installation or JavaScript engine, but they do statically link the Perry runtime and garbage collector. Perry is pre-1.0, implements a practical language and Node.js subset, and offers an optional embedded V8 fallback for code that needs engine semantics.";
+  "Perry parses TypeScript and JavaScript with SWC and compiles supported code ahead of time through LLVM. Native builds do not require an external Node.js installation or JavaScript engine, but they do statically link the Perry runtime and garbage collector. Perry is pre-1.0, implements a practical language and Node.js subset, and compiles npm dependencies natively rather than embedding a JavaScript engine.";
 
 const perrySources = [
   { label: "Perry README and current support summary", url: "https://github.com/PerryTS/perry#readme" },
@@ -28,19 +28,19 @@ export const comparisonContent: Record<string, ComparisonContent> = {
     title: "Perry vs Bun",
     metaTitle: "Perry vs Bun: AOT native compiler vs JavaScript runtime",
     metaDescription: "A sourced comparison of Perry's LLVM AOT model and Bun's standalone executable model, including runtimes, targets, compatibility, and tradeoffs.",
-    tldr: "Both can produce a single executable, but the contents differ. Bun bundles the application with a copy of the Bun runtime. Perry compiles supported code to native machine code and statically links its own runtime and GC without a JavaScript engine by default.",
+    tldr: "Both can produce a single executable, but the contents differ. Bun bundles the application with a copy of the Bun runtime. Perry compiles supported code to native machine code and statically links its own runtime and GC without a JavaScript engine.",
     competitorWhat: "Bun is an all-in-one JavaScript and TypeScript runtime, package manager, test runner, and bundler. Bun's official executable documentation says --compile bundles imported code and packages together with a copy of the Bun runtime.",
     perryWhat,
     table: [
       { feature: "Execution model", perry: "LLVM ahead-of-time machine code", competitor: "JavaScriptCore through the Bun runtime" },
       { feature: "Standalone executable", perry: "Target-specific native binary", competitor: "Application plus a copy of the Bun runtime" },
-      { feature: "Runtime model", perry: "Perry runtime + GC statically linked; no JS engine by default", competitor: "Bun runtime and JavaScriptCore embedded" },
+      { feature: "Runtime model", perry: "Perry runtime + GC statically linked; no JS engine", competitor: "Bun runtime and JavaScriptCore embedded" },
       { feature: "Documented targets", perry: "11 targets plus HarmonyOS preview", competitor: "Official --compile targets cover macOS, Linux, and Windows variants" },
       { feature: "Native UI", perry: "Platform widgets where supported", competitor: "No built-in cross-platform native-widget layer" },
-      { feature: "Package compatibility", perry: "Practical subset; optional V8 fallback", competitor: "Broad Bun and Node API compatibility" },
+      { feature: "Package compatibility", perry: "Practical subset, compiled natively", competitor: "Broad Bun and Node API compatibility" },
       { feature: "Benchmark position", perry: "Wins, mixed results, and losses in the published suite", competitor: "Wins several current suite rows, including prime sieve and matrix multiply" },
     ],
-    perryWins: ["Mobile, wearable, TV, and Web/WASM targets", "A native-widget UI model", "No JavaScript engine in native output by default", "Small outputs are possible when few features are linked"],
+    perryWins: ["Mobile, wearable, TV, and Web/WASM targets", "A native-widget UI model", "No JavaScript engine in native output", "Small outputs are possible when few features are linked"],
     competitorWins: ["More mature runtime and tooling ecosystem", "Broader npm and dynamic JavaScript compatibility", "Integrated package manager, test runner, and bundler", "JIT execution can win on important workloads"],
     whenPerry: "Choose Perry when native widgets or Perry's mobile, wearable, TV, and Web/WASM targets are central, and you can validate your code against Perry's current compatibility surface.",
     whenCompetitor: "Choose Bun when you need a mature all-in-one runtime, broad package compatibility, or its integrated package-manager, test, and bundling workflow.",
@@ -51,18 +51,18 @@ export const comparisonContent: Record<string, ComparisonContent> = {
     title: "Perry vs Deno",
     metaTitle: "Perry vs Deno: AOT native compiler vs Deno compile",
     metaDescription: "A sourced comparison of Perry's LLVM AOT model and Deno compile, including runtimes, permissions, targets, compatibility, and tradeoffs.",
-    tldr: "Deno compile produces a standalone executable by bundling a slimmed-down Deno runtime with the program. Perry compiles supported code through LLVM and does not include a JavaScript engine by default, while statically linking its own runtime and GC.",
+    tldr: "Deno compile produces a standalone executable by bundling a slimmed-down Deno runtime with the program. Perry compiles supported code through LLVM and does not include a JavaScript engine, while statically linking its own runtime and GC.",
     competitorWhat: "Deno is a JavaScript and TypeScript runtime with built-in tooling and a permissions model. Its official compile documentation describes a standalone executable that contains the program and a slimmed-down Deno runtime.",
     perryWhat,
     table: [
       { feature: "Execution model", perry: "LLVM ahead-of-time machine code", competitor: "V8 through the bundled Deno runtime" },
       { feature: "Standalone executable", perry: "Target-specific native binary", competitor: "Program plus slimmed-down Deno runtime" },
-      { feature: "Runtime model", perry: "Perry runtime + GC statically linked; no JS engine by default", competitor: "Deno runtime and V8 embedded" },
+      { feature: "Runtime model", perry: "Perry runtime + GC statically linked; no JS engine", competitor: "Deno runtime and V8 embedded" },
       { feature: "Permissions", perry: "Operating-system process permissions", competitor: "Runtime permission flags and policy" },
       { feature: "Native UI and mobile", perry: "Perry UI targets desktop, mobile, wearable, TV, and Web/WASM", competitor: "Runtime/CLI/server focus" },
-      { feature: "Compatibility", perry: "Practical subset; optional V8 fallback", competitor: "V8 plus Deno, web, and Node compatibility layers" },
+      { feature: "Compatibility", perry: "Practical subset, compiled natively", competitor: "V8 plus Deno, web, and Node compatibility layers" },
     ],
-    perryWins: ["Native-widget UI targets", "No JavaScript engine in native output by default", "Mobile, wearable, TV, and Web/WASM target model", "Small outputs are possible for narrowly linked applications"],
+    perryWins: ["Native-widget UI targets", "No JavaScript engine in native output", "Mobile, wearable, TV, and Web/WASM target model", "Small outputs are possible for narrowly linked applications"],
     competitorWins: ["Mature runtime and tooling", "Granular runtime permissions", "Broad dynamic JavaScript and package compatibility", "Built-in formatter, linter, test runner, and related tools"],
     whenPerry: "Choose Perry for validated native applications where its targets, UI model, and AOT tradeoffs fit the product.",
     whenCompetitor: "Choose Deno for runtime-centric server, CLI, or scripting work where its permissions model, tooling, and V8 compatibility are more important.",
@@ -99,7 +99,7 @@ export const comparisonContent: Record<string, ComparisonContent> = {
     perryWhat,
     table: [
       { feature: "UI rendering", perry: "Platform widgets where supported", competitor: "HTML/CSS in Chromium renderer processes" },
-      { feature: "Runtime", perry: "Perry runtime + GC; no JS engine by default", competitor: "Chromium, V8, Node.js, and Electron APIs" },
+      { feature: "Runtime", perry: "Perry runtime + GC; no JS engine", competitor: "Chromium, V8, Node.js, and Electron APIs" },
       { feature: "Targets", perry: "Desktop plus mobile, wearable, TV, Web/WASM", competitor: "Desktop: macOS, Windows, Linux" },
       { feature: "Web compatibility", perry: "Perry UI and supported APIs", competitor: "Chromium web platform" },
       { feature: "Ecosystem maturity", perry: "Pre-1.0", competitor: "Established framework and tooling ecosystem" },
@@ -144,9 +144,9 @@ export const comparisonContent: Record<string, ComparisonContent> = {
       { feature: "UI", perry: "Perry UI mapped to platform widgets", competitor: "React renderer plus host/native components" },
       { feature: "Primary mobile platforms", perry: "iOS, iPadOS, visionOS, Android, Wear OS, watchOS, tvOS", competitor: "Core documentation centers on iOS and Android; additional platforms use ecosystem projects" },
       { feature: "Ecosystem", perry: "Pre-1.0 Perry packages and native APIs", competitor: "Established React Native and Expo ecosystem" },
-      { feature: "Compatibility", perry: "Practical subset; optional V8 fallback", competitor: "Hermes/React Native JavaScript environment" },
+      { feature: "Compatibility", perry: "Practical subset, compiled natively", competitor: "Hermes/React Native JavaScript environment" },
     ],
-    perryWins: ["AOT native machine code for supported TypeScript", "No JavaScript engine in native output by default", "Declared wearable, TV, desktop, and Web/WASM target model"],
+    perryWins: ["AOT native machine code for supported TypeScript", "No JavaScript engine in native output", "Declared wearable, TV, desktop, and Web/WASM target model"],
     competitorWins: ["Far larger production ecosystem", "Mature React and Expo tooling", "Broad library and community support", "Deeply developed iOS and Android workflows"],
     whenPerry: "Choose Perry when its AOT model, target set, and validated widget/API coverage fit the application.",
     whenCompetitor: "Choose React Native when ecosystem maturity, Expo, community libraries, and established iOS/Android production workflows are decisive.",

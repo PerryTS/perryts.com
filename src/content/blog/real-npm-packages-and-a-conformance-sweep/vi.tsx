@@ -24,7 +24,7 @@ export default function Content() {
         <li><strong>dayjs</strong>, được ship dưới dạng một bundle đã minify, kích hoạt dispatch method prototype kiểu JS-classic (<code>Class.prototype.m = fn</code>) mà Perry lower sai (v0.5.924/932).</li>
       </ul>
       <p>
-        Bên dưới tất cả những thứ đó là phần làm cho các package mà Perry <em>không thể</em> compile native vẫn chạy được: <strong>runtime V8-fallback</strong> trở nên thực sự trong cửa sổ này. ModuleLoader của nó giờ đọc từ một module map nhúng, nên một binary fallback vẫn <strong>tự chứa</strong> — không có <code>node_modules</code> rời rạc lúc runtime (v0.5.994). <code>createServer</code> bắc cầu tới một hyper server thực (v0.5.999), và các global Web Fetch <code>Response</code> / <code>Request</code> / <code>Headers</code> tồn tại trong đường fallback (v0.5.1006). Và <strong><code>import()</code> động tại compile-time</strong> — chuỗi literal <code>await import(&apos;./foo.ts&apos;)</code> được giải tại lúc build — cuối cùng đã đáp xuống (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
+        Tất cả các package này đều được compile native — không có JavaScript engine nhúng, không có <code>node_modules</code> rời rạc lúc runtime. Và <strong><code>import()</code> động tại compile-time</strong> — chuỗi literal <code>await import(&apos;./foo.ts&apos;)</code> được giải tại lúc build — cuối cùng đã đáp xuống (v0.5.905, <a href="https://github.com/PerryTS/perry/issues/100" className="text-amber-400 hover:text-amber-300">#100</a>).
       </p>
 
       <h2>Một lượt quét conformance test262</h2>

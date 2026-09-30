@@ -151,9 +151,8 @@ export default function Content() {
             คอมไพล์แบบเนทีฟได้ผ่าน{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify และ hono คอมไพล์และรันได้แล้วใน
-            วันนี้ โค้ดที่ต้องการ semantics ของ engine เต็มรูปแบบสามารถเลือก
-            ใช้ V8 fallback แบบฝังตัวด้วย{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>
+            วันนี้ semantics แบบไดนามิกที่ยังไม่รองรับจะทำให้เกิด compile error
+            แทนที่จะ fallback ไปใช้ interpreter อย่างเงียบ ๆ
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             เรื่องราวแบบเต็มอยู่ใน{" "}

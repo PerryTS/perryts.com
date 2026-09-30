@@ -24,7 +24,7 @@ export default function Content() {
           <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
             Perry compiles supported TypeScript and JavaScript ahead of time to
             machine code. Native builds do not require an external JavaScript
-            engine by default, while the Perry runtime and GC remain part of
+            engine, while the Perry runtime and GC remain part of
             the executable.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -47,8 +47,9 @@ export default function Content() {
           <p className="text-slate-400 leading-relaxed mb-12">
             That distinction matters: known numeric operations or object shapes
             may become direct machine operations, while other code uses the
-            statically linked runtime and garbage collector. Some unsupported
-            engine semantics require the optional V8 fallback or do not compile.
+            statically linked runtime and garbage collector. Unsupported
+            dynamic semantics produce a compile error rather than silently
+            falling back to an interpreter.
           </p>
         </article>
       </section>

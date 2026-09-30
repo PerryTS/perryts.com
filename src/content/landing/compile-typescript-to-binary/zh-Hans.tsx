@@ -235,7 +235,7 @@ export default function Content() {
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     不断增长：axios、zod v4、express、fastify、hono 已可原生
-                    编译；其余可通过可选的 V8 回退方案运行
+                    编译；其余同样原生编译，不内嵌 JavaScript 引擎
                   </td>
                   <td className="px-4 py-3 text-slate-400">
                     完整——因为它本身就是 Bun 运行时

@@ -144,9 +144,8 @@ export default function Content() {
             npm 包可以通过{" "}
             <code className="text-slate-300">perry.compilePackages</code>{" "}
             原生编译：axios、zod v4、express、fastify 和 hono 如今已能编译
-            并运行。需要完整引擎语义的代码，可以通过{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>{" "}
-            选择使用内嵌的 V8 回退方案。
+            并运行。不受支持的动态语义会产生编译错误，而不是悄悄回退到
+            解释器。
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             完整的故事见{" "}

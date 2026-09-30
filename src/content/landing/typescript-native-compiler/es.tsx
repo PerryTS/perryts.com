@@ -161,9 +161,8 @@ export default function Content() {
             nativa mediante{" "}
             <code className="text-slate-300">perry.compilePackages</code>:
             axios, zod v4, express, fastify y hono compilan y se ejecutan
-            hoy. El código que necesita la semántica completa de un motor
-            puede optar por un fallback embebido con V8 mediante{" "}
-            <code className="text-slate-300">--enable-js-runtime</code>.
+            hoy. La semántica dinámica no soportada produce un error de
+            compilación en lugar de recurrir silenciosamente a un intérprete.
           </p>
           <p className="text-slate-400 leading-relaxed mb-12">
             La historia completa está en{" "}

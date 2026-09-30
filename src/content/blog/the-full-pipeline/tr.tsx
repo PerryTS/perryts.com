@@ -158,8 +158,7 @@ export default function Content() {
       <p>
         Windows zamanlayıcı desteği (50ms <code className="text-amber-400">WM_TIMER</code> tiki),
         koyu tema arka planlı sahip-çizimli düğmeler ve 18 widget dosyasında{" "}
-        <code className="text-amber-400">to_wide().as_ptr()</code>&apos;daki use-after-free hatası düzeltmeleri aldı. V8 çalışma zamanı
-        artık gerekli sistem kütüphaneleri bağlanmış olarak Windows&apos;ta çalışıyor.
+        <code className="text-amber-400">to_wide().as_ptr()</code>&apos;daki use-after-free hatası düzeltmeleri aldı.
       </p>
 
       <h3>GTK4 (Linux)</h3>
