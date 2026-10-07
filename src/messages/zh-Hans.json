@@ -11,7 +11,7 @@
     "comingSoon": "即将推出"
   },
   "nav": {
-    "showcase": "Showcase",
+    "showcase": "案例",
     "blog": "博客",
     "compare": "对比",
     "roadmap": "路线图",
@@ -23,81 +23,81 @@
     "discord": "Discord"
   },
   "hero": {
-    "badge": "AOT TypeScript via SWC + LLVM — native builds with no external JavaScript engine",
+    "badge": "借助 SWC + LLVM 的 AOT TypeScript——原生构建无需任何外部 JavaScript 引擎",
     "headline1": "将 TypeScript 编译为原生。",
-    "headline2": "One Codebase, Many Targets.",
-    "subheadline": "Perry compiles TypeScript to native GUI and CLI apps for <platforms>macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WebAssembly</platforms>, with a separate HarmonyOS preview. Native binaries statically link the Perry runtime and GC; they do not require Node.js or an external JavaScript engine.",
+    "headline2": "一份代码，多个平台。",
+    "subheadline": "Perry 把 TypeScript 编译为原生 GUI 与 CLI 应用，支持 <platforms>macOS、iOS、iPadOS、visionOS、tvOS、watchOS、Android、Wear OS、Windows、Linux 以及 Web/WebAssembly</platforms>，另有独立的 HarmonyOS 预览。原生二进制文件静态链接了 Perry 运行时与 GC，无需 Node.js 或任何外部 JavaScript 引擎。",
     "getStarted": "开始使用",
     "viewOnGithub": "在 GitHub 上查看",
     "compiling": "正在编译 main.ts...",
-    "compiled": "✓ Example executable written: main (size varies by linked features)",
-    "targetsLabel": "Documented targets + preview",
+    "compiled": "✓ 示例可执行文件已生成：main（体积随所链接的功能而变）",
+    "targetsLabel": "已文档化平台 + 预览",
     "widgetsLabel": "原生 UI 组件",
-    "startupLabel": "Measured runtime-only macOS hello",
-    "appStore": "Store workflows",
+    "startupLabel": "实测仅运行时的 macOS hello",
+    "appStore": "商店工作流",
     "readyLabel": "perry publish",
     "factsLanguageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
   },
   "features": {
     "title": "为什么选择 <brand>Perry</brand>？",
-    "subtitle": "The current compiler, runtime, UI, and tooling surfaces — with limitations called out",
+    "subtitle": "当前编译器、运行时、UI 与工具链的实际能力——并明确标出局限",
     "noRuntime": {
-      "title": "No External JS Engine",
-      "description": "Native builds run without Node.js, Bun, Deno, or an external JavaScript engine installed. The Perry runtime and garbage collector are statically linked into each target-specific binary."
+      "title": "无外部 JS 引擎",
+      "description": "原生构建无需安装 Node.js、Bun、Deno 或任何外部 JavaScript 引擎。Perry 运行时与垃圾回收器被静态链接进每个平台对应的二进制文件。"
     },
     "fastCompilation": {
       "title": "快速编译",
       "description": "使用 SWC 解析和 LLVM 优化代码生成，将 TypeScript 直接编译为原生代码。无中间 JavaScript。"
     },
     "smallBinaries": {
-      "title": "Size Scales With Features",
-      "description": "Hello world can be about 330 KB and Mango is published at about 7 MB. Applications that link the full standard library or optional V8 fallback can be much larger; size depends on target, imports, and build profile."
+      "title": "体积随功能增长",
+      "description": "Hello world 可以只有约 330 KB，Mango 发布版约 7 MB。链接完整标准库或可选 V8 回退的应用会大得多；体积取决于目标平台、导入项与构建配置。"
     },
     "deterministicBuilds": {
-      "title": "Cacheable Builds",
-      "description": "Perry caches module objects and can pin a CPU baseline for portable output. Default host builds tune for the local CPU, and final binaries may contain platform UUIDs, timestamps, or signatures, so byte-for-byte cross-machine reproducibility is not promised."
+      "title": "可缓存的构建",
+      "description": "Perry 会缓存模块对象，并可锁定 CPU 基线以获得可移植的产物。默认的主机构建会针对本机 CPU 调优，最终二进制文件可能包含平台 UUID、时间戳或签名，因此不承诺跨机器的逐字节可复现性。"
     },
     "stdLib": {
-      "title": "Tracked Node.js APIs",
-      "description": "Native implementations cover many familiar Node.js APIs across 53 tracked modules. Coverage is broad but not complete; use perry check and the published limitations for your project."
+      "title": "已跟踪的 Node.js API",
+      "description": "原生实现覆盖了 53 个已跟踪模块中许多常见的 Node.js API。覆盖范围广但不完整；请对你的项目使用 perry check 并参考已发布的限制说明。"
     },
     "v8Runtime": {
       "title": "真实的 npm 包",
-      "description": "Many pure TypeScript and JavaScript packages compile natively. Packages that depend on unsupported dynamic or engine-specific semantics may need the optional embedded V8 fallback or may not work."
+      "description": "许多纯 TypeScript 和 JavaScript 的包可以直接原生编译。依赖不受支持的动态特性或引擎专属语义的包，可能需要可选的内嵌 V8 回退，也可能无法工作。"
     },
     "widgets": {
-      "title": "35+ Native UI Widgets",
-      "description": "35+ native UI widgets map to platform toolkits including AppKit, UIKit, GTK4, Win32, Android SDK APIs, SwiftUI on watches, and a DOM/CSS bridge on Web/WASM. Availability varies by target."
+      "title": "35+ 原生 UI 组件",
+      "description": "35+ 个原生 UI 组件映射到各平台工具包，包括 AppKit、UIKit、GTK4、Win32、Android SDK API、手表上的 SwiftUI，以及 Web/WASM 上的 DOM/CSS 桥接。是否可用取决于目标平台。"
     },
     "plugins": {
-      "title": "Compile-Time Plugin System",
-      "description": "Modules can compose at build time and statically linked dependencies can become direct native calls. Dynamic dispatch and runtime support remain where JavaScript semantics require them."
+      "title": "编译期插件系统",
+      "description": "模块可以在构建期组合，静态链接的依赖可以变成直接的原生调用。在 JavaScript 语义要求的地方，仍然保留动态分发与运行时支持。"
     },
     "threading": {
-      "title": "True Multi-Threading",
-      "description": "Real OS threads with parallelMap, parallelFilter, and spawn. Mutable captures are rejected by default; SharedArrayBuffer and Atomics provide explicit shared-memory coordination, with documented typed-view caveats."
+      "title": "真正的多线程",
+      "description": "真正的操作系统线程，配合 parallelMap、parallelFilter 和 spawn。默认可变捕获会被拒绝；SharedArrayBuffer 与 Atomics 提供显式的共享内存协作，并有已记录的带类型视图注意事项。"
     },
     "i18n": {
-      "title": "Compile-Time i18n",
-      "description": "Automatic string extraction, CLDR plural rules for 30+ locales, and compile-time validation. Translations are baked into the binary; lookup cost depends on the generated catalog and call site."
+      "title": "编译期国际化",
+      "description": "自动字符串提取、面向 30+ 语言的 CLDR 复数规则，以及编译期校验。翻译会被烘焙进二进制文件；查找开销取决于生成的目录与调用点。"
     },
     "goDeeper": "深入了解：Perry 如何<binaryLink>将 TypeScript 编译为二进制文件</binaryLink>、是什么让它成为<compilerLink>TypeScript 原生编译器</compilerLink>，以及它与<electronAltLink>Electron 替代方案</electronAltLink>相比表现如何。"
   },
   "platforms": {
-    "title": "Native across <gradient>documented targets</gradient>",
-    "subtitle": "Eleven documented targets share Perry’s compiler and UI model. Web and WASM are aliases; visionOS, watchOS, and Wear OS have narrower core support, and HarmonyOS is a separate preview.",
-    "core": "Core support",
-    "preview": "Preview",
-    "countNote": "{count} documented targets; HarmonyOS is listed separately as a preview.",
-    "platformGuide": "See the platform status guide",
-    "webAliasNote": "--target web and --target wasm are aliases",
-    "harmonyPreviewNote": "Separate preview; not included in the 11 documented targets",
-    "broad": "Broad support"
+    "title": "原生覆盖<gradient>已文档化平台</gradient>",
+    "subtitle": "11 个已文档化平台共用 Perry 的编译器与 UI 模型。Web 和 WASM 是别名；visionOS、watchOS 和 Wear OS 的核心支持较窄，HarmonyOS 则作为独立预览提供。",
+    "core": "核心支持",
+    "preview": "预览",
+    "countNote": "已文档化目标 {count} 个；HarmonyOS 作为预览单独列出。",
+    "platformGuide": "查看平台状态指南",
+    "webAliasNote": "--target web 与 --target wasm 是别名",
+    "harmonyPreviewNote": "独立预览；不计入 11 个已文档化平台",
+    "broad": "广泛支持"
   },
   "comparison": {
     "badge": "框架对比",
-    "title": "Perry’s native compilation <gradient>model</gradient>",
-    "subtitle": "Ahead-of-time machine code and real platform widgets, with an explicitly linked runtime and documented compatibility tradeoffs.",
+    "title": "Perry 的原生编译<gradient>模型</gradient>",
+    "subtitle": "提前生成的机器码与真实的平台控件，运行时显式链接，兼容性取舍均有明确记录。",
     "framework": "框架",
     "language": "语言",
     "nativeCode": "原生代码",
@@ -105,25 +105,25 @@
     "runtimeOverhead": "运行时开销",
     "partial": "部分",
     "noSharedUI": "无共享 UI",
-    "nativeCompiled": "Ahead-of-time machine code through LLVM",
-    "realPlatformWidgets": "Real platform widgets where each target supports them",
-    "noExternalEngine": "No external Node.js installation or JavaScript engine by default",
-    "linkedRuntime": "The Perry runtime and GC are statically linked; overhead is not “none”",
-    "compatibilityTradeoff": "Perry implements a practical TypeScript and Node.js subset; some packages need the optional V8 fallback",
-    "platformMaturityTradeoff": "Platform capabilities and maturity differ across desktop, mobile, wearable, TV, and Web/WASM targets",
-    "designedFor": "Designed for",
-    "tradeoffs": "Tradeoffs to evaluate",
-    "compareNote": "Competitor-specific pages are dated and link to upstream documentation.",
-    "viewComparisons": "View sourced comparisons"
+    "nativeCompiled": "通过 LLVM 提前生成机器码",
+    "realPlatformWidgets": "在各目标平台支持的范围内使用真实平台控件",
+    "noExternalEngine": "默认无需安装外部 Node.js 或 JavaScript 引擎",
+    "linkedRuntime": "Perry 运行时与 GC 静态链接；开销并非「零」",
+    "compatibilityTradeoff": "Perry 实现了 TypeScript 与 Node.js 的实用子集；部分包需要可选的 V8 回退",
+    "platformMaturityTradeoff": "桌面、移动、穿戴、电视与 Web/WASM 各目标的能力与成熟度并不相同",
+    "designedFor": "专为以下场景打造",
+    "tradeoffs": "需要权衡的取舍",
+    "compareNote": "竞品专页内容可能过时，并会链接到上游文档。",
+    "viewComparisons": "查看有来源依据的对比"
   },
   "codeExample": {
     "title": "编写 <gradient>TypeScript</gradient>，交付原生应用",
-    "subtitle": "Use familiar TypeScript syntax and validate each API or package against Perry’s current compatibility surface.",
+    "subtitle": "沿用熟悉的 TypeScript 语法，并针对 Perry 当前的兼容范围逐一验证每个 API 或包。",
     "nativeBinary": "原生二进制文件"
   },
   "performance": {
-    "title": "Published <gradient>measurements</gradient>",
-    "subtitle": "Current public results include wins, mixed results, and losses. Treat microbenchmarks as workload-specific measurements, not a universal speed claim.",
+    "title": "已发布的<gradient>实测数据</gradient>",
+    "subtitle": "当前公开结果中有胜出、有互有胜负，也有落后。请把微基准视为针对特定工作负载的实测数据，而不是通用的速度结论。",
     "metric": "指标",
     "binarySize": "二进制文件大小",
     "startupTime": "启动时间",
@@ -131,24 +131,24 @@
     "memoryOverhead": "内存开销",
     "none": "无",
     "minimal": "极少",
-    "benchmarkTitle": "Full public suite: <gradient>wins and losses</gradient>",
-    "benchmarkSubtitle": "Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.",
+    "benchmarkTitle": "完整公开套件：<gradient>有胜也有负</gradient>",
+    "benchmarkSubtitle": "挂钟时间中位数越低越好。取五次完整进程采样；正确性检查均已通过。基准测试名称与说明保持为英文技术标识。",
     "lowerIsBetter": "越低越好",
-    "nodeDistribution": "Application plus an installed Node.js runtime",
-    "bunDistribution": "Standalone executable embeds the Bun runtime",
-    "engineStartup": "Engine boot and warmup; workload-dependent",
-    "linkedRuntime": "Statically linked Perry runtime + GC",
-    "externalRuntime": "External Node.js runtime",
-    "embeddedRuntime": "Embedded Bun / JavaScriptCore runtime",
-    "workloadDependent": "Workload-dependent",
-    "startupFootnote": "Measured runtime-only macOS hello world on an Apple M-series host (5.0 → 3.2 ms after removing unused dynamic-library links). Application startup varies.",
-    "benchmark": "Benchmark",
-    "result": "Result",
-    "result_win": "Win vs both",
-    "result_mixed": "Mixed",
-    "result_loss": "Loss vs both",
-    "benchmarkSource": "Raw benchmark artifact",
-    "methodology": "Methodology and caveats"
+    "nodeDistribution": "应用程序 + 另装的 Node.js 运行时",
+    "bunDistribution": "独立可执行文件内嵌 Bun 运行时",
+    "engineStartup": "引擎启动与预热；取决于工作负载",
+    "linkedRuntime": "静态链接的 Perry 运行时 + GC",
+    "externalRuntime": "外部 Node.js 运行时",
+    "embeddedRuntime": "内嵌 Bun / JavaScriptCore 运行时",
+    "workloadDependent": "取决于工作负载",
+    "startupFootnote": "在 Apple M 系列主机上实测的仅运行时 macOS hello world（移除未使用的动态库链接后从 5.0 → 3.2 ms）。应用启动时间会有差异。",
+    "benchmark": "基准测试",
+    "result": "结果",
+    "result_win": "对两者均胜",
+    "result_mixed": "互有胜负",
+    "result_loss": "对两者均负",
+    "benchmarkSource": "原始基准测试产物",
+    "methodology": "方法与注意事项"
   },
   "installation": {
     "title": "<gradient>开始使用</gradient>",
@@ -159,10 +159,10 @@
     "apt": "APT（Debian/Ubuntu）",
     "windows": "Windows（winget）",
     "source": "从源码构建",
-    "homebrewNote": "Supports macOS arm64 and x86_64. Xcode Command Line Tools are required for native linking.",
-    "aptNote": "Supports x86_64 and arm64 Linux. Install GCC or Clang; some targets require Clang 15 or newer.",
-    "windowsNote": "Supports Windows x86_64 and arm64. Native and cross-target builds may require LLVM plus MSVC or xwin tooling.",
-    "sourceNote": "Requires Rust, LLVM/Clang, and the SDK/toolchain for the target platform. The binary is written to target/release/perry.",
+    "homebrewNote": "支持 macOS arm64 与 x86_64。原生链接需要安装 Xcode Command Line Tools。",
+    "aptNote": "支持 x86_64 与 arm64 Linux。请安装 GCC 或 Clang；部分目标需要 Clang 15 或更高版本。",
+    "windowsNote": "支持 Windows x86_64 与 arm64。原生构建与交叉目标构建可能需要 LLVM 以及 MSVC 或 xwin 工具链。",
+    "sourceNote": "需要 Rust、LLVM/Clang，以及目标平台对应的 SDK/工具链。二进制文件会输出到 target/release/perry。",
     "compileFile": "编译文件",
     "compileFileDesc": "将 main.ts 编译为原生可执行文件",
     "customOutput": "自定义输出",
@@ -171,67 +171,67 @@
     "withV8Desc": "启用 V8 以兼容 JavaScript npm 包",
     "checkCompat": "检查兼容性",
     "checkCompatDesc": "验证 TypeScript 代码是否可进行原生编译",
-    "npmNote": "Recommended cross-platform install. Native targets still require the relevant platform SDK and linker; run perry doctor after installation.",
-    "doctor": "Verify the toolchain",
-    "doctorDesc": "Checks the compiler, linker, SDK, and target setup"
+    "npmNote": "推荐的跨平台安装方式。原生目标仍需要对应平台的 SDK 与链接器；安装后请运行 perry doctor。",
+    "doctor": "校验工具链",
+    "doctorDesc": "检查编译器、链接器、SDK 与目标平台配置"
   },
   "featureTable": {
     "title": "功能<gradient>支持</gradient>",
-    "subtitle": "Tested surfaces and known partial areas — not a blanket claim of complete TypeScript or Node.js compatibility",
+    "subtitle": "已验证的能力面与已知不完整的部分——并非宣称 TypeScript 或 Node.js 已完全兼容",
     "coreLanguage": "核心语言",
     "functions": "函数",
     "classes": "类",
     "typeSystem": "类型系统",
     "standardLibrary": "标准库",
-    "partial": "Partial",
-    "tested": "Tested in the current implementation",
-    "limitationsNote": "“Partial” means the API or syntax exists with documented gaps. Exact behavior changes as parity work lands.",
-    "limitationsLink": "Read the current limitations"
+    "partial": "部分支持",
+    "tested": "当前实现中已验证",
+    "limitationsNote": "「部分支持」指该 API 或语法存在，但存在已记录的功能缺口。具体行为会随着对齐工作的推进而变化。",
+    "limitationsLink": "查看当前的限制说明"
   },
   "nativeLibs": {
-    "title": "<gradient>~50</gradient> Native Packages and Node APIs",
-    "subtitle": "Many popular packages and Node APIs have native implementations. Coverage is package- and feature-specific; perry check and the compatibility documentation are the source of truth.",
+    "title": "<gradient>约 50</gradient> 个原生包与 Node API",
+    "subtitle": "许多常用包和 Node API 都有原生实现。覆盖范围因包和功能而异；perry check 与兼容性文档是唯一权威依据。",
     "database": "数据库",
     "security": "安全",
     "http": "HTTP",
     "dataProcessing": "数据处理",
     "dateTime": "日期和时间",
     "utilities": "工具",
-    "info": "Import the package normally. Perry selects a native implementation when one is available, otherwise compilation may use another supported path or report a limitation."
+    "info": "照常 import 该包即可。Perry 会在有原生实现时优先选用；否则编译可能改走其他受支持的路径，或直接报告相应限制。"
   },
   "shipIt": {
     "title": "从代码到 <gradient>App Store</gradient>",
-    "subtitle": "The perry publish command supports build, signing, packaging, verification, and submission workflows. Availability and prerequisites vary by platform and hosted-service configuration.",
+    "subtitle": "perry publish 命令支持构建、签名、打包、验证与提交流程。各平台的可用性与前置条件不同，并取决于托管服务的配置。",
     "compileSign": "编译并签名",
     "packageSubmit": "打包并提交",
     "storesDownloads": "商店和下载",
     "storesList": "App Store、Play Store、直接分发",
-    "testEveryPlatform": "Verify supported targets",
+    "testEveryPlatform": "验证受支持的目标平台",
     "buildSign": {
-      "title": "Build & Sign",
-      "description": "Create platform artifacts and use configured signing credentials. Apple, Android, and Windows workflows require their platform SDKs, accounts, and certificates."
+      "title": "构建与签名",
+      "description": "生成平台产物并使用已配置的签名凭据。Apple、Android 和 Windows 的流程各自需要对应平台的 SDK、账号与证书。"
     },
     "distribute": {
-      "title": "Distribute",
-      "description": "Prepare store submissions or direct-download artifacts for supported targets. Store acceptance and processing remain controlled by each store."
+      "title": "分发",
+      "description": "为受支持的目标准备商店提审或直接下载产物。商店是否受理以及处理方式，仍由各商店自行决定。"
     },
     "verify": {
-      "title": "Verify",
-      "description": "Run available launch and UI checks through Perry and Geisterhand. Test depth and target coverage depend on the selected environment."
+      "title": "验证",
+      "description": "通过 Perry 与 Geisterhand 执行可用的启动与 UI 检查。测试深度与目标覆盖范围取决于所选环境。"
     },
-    "freeForOpenSource": "Local compilation is free and MIT licensed.",
-    "plansForTeams": "Check hosted-service availability"
+    "freeForOpenSource": "本地编译免费，且采用 MIT 许可。",
+    "plansForTeams": "查看托管服务可用性"
   },
   "architecture": {
     "title": "<gradient>工作原理</gradient>",
-    "subtitle": "From TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime",
+    "subtitle": "从 TypeScript 源码出发，经过 SWC、Perry HIR、LLVM，直到链接后的运行时",
     "parser": "解析器",
     "fastParsing": "快速解析",
     "transform": "转换",
     "codegen": "代码生成",
     "machineCode": "机器码",
     "executable": "可执行文件",
-    "binarySize": "From ~330 KB; varies by features",
+    "binarySize": "起始约 330 KB；随所链接的功能而变",
     "tsFiles": ".ts 文件",
     "compilerInternalsPrompt": "想了解编译器内部是如何工作的吗？",
     "compilerInternals": "编译器内部原理",
@@ -239,17 +239,17 @@
   },
   "footer": {
     "newsletter": "新闻通讯",
-    "brand": "TypeScript → Native. Compile ahead of time for desktop, mobile, wearable, TV, and Web/WASM targets. No external Node.js installation or JavaScript engine is required for native builds; the Perry runtime and GC are statically linked.",
+    "brand": "TypeScript → 原生。面向桌面、移动、穿戴、电视以及 Web/WASM 平台提前编译。原生构建无需安装外部 Node.js 或 JavaScript 引擎；Perry 运行时与 GC 静态链接。",
     "resources": "资源",
     "gettingStarted": "快速入门",
     "documentation": "文档",
     "perryPublish": "Perry Publish",
     "community": "社区",
-    "issues": "Issues",
+    "issues": "问题反馈",
     "discussions": "讨论",
     "contributing": "贡献",
-    "tagline": "Built with Rust, SWC, and LLVM. The static site is served by a Perry-compiled binary; newsletter subscriptions use a separate Node helper.",
-    "enterprise": "Enterprise",
+    "tagline": "基于 Rust、SWC 和 LLVM 构建。本静态站点由 Perry 编译的二进制文件提供服务；newsletter 订阅使用独立的 Node 辅助服务。",
+    "enterprise": "企业版",
     "imprint": "法律声明",
     "privacy": "隐私"
   },
@@ -263,7 +263,7 @@
     "errorGeneric": "出错了。请重试。",
     "blockTitle": "喜欢这篇文章？获取下一篇。",
     "blockSubtitle": "关于 Perry 发布和我们下一步开发内容的简短笔记。",
-    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
+    "privacy": "你的邮箱会发送至 Resend 以投递 Perry newsletter。你可以随时申请退订或删除。",
     "pageTitle": "Perry 新闻通讯",
     "pageDescription": "关于 Perry 新发布、平台支持和工程文章的更新。无垃圾邮件。",
     "pageSubtitle": "关于 Perry 中正在发布的内容的简短笔记 —— 发布、平台和工程深度解析。",
@@ -271,148 +271,148 @@
     "bullet1Body": "每个重要的 Perry 发布，附带变更内容和原因。",
     "bullet2Title": "工程文章",
     "bullet2Body": "编译器内部、基准测试，以及我们正在学习的内容。",
-    "bullet3Title": "Privacy controls",
-    "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled.",
-    "privacyLink": "Privacy notice"
+    "bullet3Title": "隐私控制",
+    "bullet3Body": "随时可以申请退订或删除；隐私声明中说明了该邮箱地址的处理方式。",
+    "privacyLink": "隐私声明"
   },
   "pricing": {
     "breadcrumbPricing": "价格",
-    "title": "Perry pricing and availability",
-    "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
-    "localTitle": "Compiler and local builds",
-    "localDescription": "Use Perry locally without an account or usage fee.",
-    "localFeature1": "MIT-licensed compiler and runtime",
-    "localFeature2": "Local compile, run, check, doctor, and verify workflows",
-    "localFeature3": "No hosted-service quota for work performed on your own machine",
-    "viewSource": "View source and license",
-    "hostedAvailability": "Availability varies",
-    "hostedTitle": "Hosted Perry Publish",
-    "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
-    "hostedFeature1": "Build and packaging workflows for supported targets",
-    "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
-    "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
-    "publishDetails": "Read how publish works",
+    "title": "Perry 的价格与服务范围",
+    "subtitle": "编译器与本地构建流程免费，采用 MIT 许可。托管构建、签名、验证与支持属于独立服务，可用性与条款需另行确认。",
+    "localTitle": "编译器与本地构建",
+    "localDescription": "无需账号、无需按量付费即可在本地使用 Perry。",
+    "localFeature1": "MIT 许可的编译器与运行时",
+    "localFeature2": "本地的编译、运行、check、doctor 与 verify 工作流",
+    "localFeature3": "在你自己机器上完成的工作不占用托管服务额度",
+    "viewSource": "查看源码与许可",
+    "hostedAvailability": "可用性视情况而定",
+    "hostedTitle": "托管版 Perry Publish",
+    "hostedDescription": "CLI 中包含发布客户端与相关工作流。托管平台的覆盖范围、额度、价格、队列优先级与超额计费，均需在购买前于服务中确认。",
+    "hostedFeature1": "面向受支持目标的构建与打包工作流",
+    "hostedFeature2": "在凭据与平台前置条件配置完成后进行签名与商店提交",
+    "hostedFeature3": "验证深度取决于所选目标与托管环境",
+    "publishDetails": "了解 publish 的工作方式",
     "selfHost": {
-      "title": "What is open source and self-hostable today?",
-      "description": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
-      "selfHostingGuide": "Deployment documentation"
+      "title": "目前有哪些内容是开源且可自托管的？",
+      "description": "所链接仓库中的 Perry 编译器与运行时采用 MIT 许可。该仓库包含发布与验证客户端以及可配置的端点，但不包含完整的公共中心服务、验证服务或 worker 部署。因此 Perry 目前并不宣称「克隆一个仓库就能自托管全部功能」。",
+      "selfHostingGuide": "部署文档"
     },
     "currentFaq": {
-      "q1": "Does local compilation require an account?",
-      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
-      "q2": "What are the hosted quotas and prices?",
-      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
-      "q3": "Can I self-host the complete publish service?",
-      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+      "q1": "本地编译需要账号吗？",
+      "a1": "不需要。安装 Perry 并在你自己的机器上编译，不需要 Perry 账号。",
+      "q2": "托管服务的额度和价格是多少？",
+      "a2": "本页不承诺具体数值。在依赖这些额度之前，请通过托管服务或书面形式确认当前可用性、上限与费用。",
+      "q3": "我可以自托管完整的 publish 服务吗？",
+      "a3": "仅凭 Perry 编译器仓库还不行。客户端支持自定义端点，但完整的公共中心服务和 worker 部署目前并不包含在其中。"
     },
-    "needTermsTitle": "Need hosted builds or a support agreement?",
-    "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
-    "contact": "Contact the team",
+    "needTermsTitle": "需要托管构建或支持协议？",
+    "needTermsDescription": "请就当前可用性、平台覆盖范围、价格以及书面服务条款与 Perry 团队联系。",
+    "contact": "联系团队",
     "languageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。",
     "faq": {
       "title": "常见问题"
     }
   },
   "enterprise": {
-    "metaTitle": "Perry for Teams",
-    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "metaTitle": "Perry 企业版",
+    "metaDescription": "与团队沟通生产环境支持、迁移协助以及托管版 Perry 的需求。范围、响应目标、价格与服务条款均以书面形式约定。",
     "hero": {
-      "title": "Production support scoped to your team",
-      "subtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+      "title": "为你的团队量身定制的生产支持",
+      "subtitle": "就迁移、架构、发布规划以及托管构建需求，直接与 Perry 维护者沟通。可用性与条款在购买前确认。",
       "primaryCta": "Email ralph@perryts.com"
     },
-    "availableTitle": "Available to discuss",
-    "available1": "Architecture and migration reviews",
-    "available2": "Onboarding and paired implementation sessions",
-    "available3": "Release planning and upgrade guidance",
-    "available4": "Hosted build, signing, and verification requirements",
-    "scopedTitle": "Defined in your agreement",
-    "scoped1": "Support channels and response targets",
-    "scoped2": "Release maintenance or backport commitments",
-    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
-    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
-    "termsTitle": "No implied SLA or self-hosting promise",
-    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "availableTitle": "可协商的内容",
+    "available1": "架构与迁移评估",
+    "available2": "上手指导与结对实施",
+    "available3": "发布规划与升级指引",
+    "available4": "托管构建、签名与验证需求",
+    "scopedTitle": "在你的协议中约定",
+    "scoped1": "支持渠道与响应目标",
+    "scoped2": "版本维护或回合移植承诺",
+    "scoped3": "托管服务的平台覆盖范围、额度与基础设施",
+    "scoped4": "价格、期限、采购、安全与合规交付物",
+    "termsTitle": "不隐含 SLA，也不承诺自托管",
+    "termsBody": "本页只是协商支持范围的邀请，并非服务等级协议。除非相应条款出现在已签署的协议中，Perry 不承诺具体响应时间、维护周期、SSO 功能、审计日志功能、额度或完整的自托管中心服务。",
     "closing": {
-      "title": "Talk to the maintainers",
-      "body": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+      "title": "与维护者沟通",
+      "body": "请说明你的产品、目标平台、时间计划与支持需求。团队会确认可提供的范围，并将任何承诺落实为书面形式。",
       "emailCta": "Email ralph@perryts.com"
     },
     "languageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
   },
   "roadmap": {
     "title": "路线图",
-    "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
+    "subtitle": "这是一份当前状态页，而不是冻结的发布历史。具体支持情况请以链接的平台说明、限制说明、基准测试和更新日志为准。",
     "shipped": "已发布",
     "inProgress": "进行中",
     "planned": "已规划",
     "vision": "愿景",
-    "currentTitle": "Verified today",
-    "activeTitle": "Active development areas",
-    "policyTitle": "How to read Perry claims",
+    "currentTitle": "今日已核实",
+    "activeTitle": "正在开发的领域",
+    "policyTitle": "如何理解 Perry 的各项声明",
     "currentItems": [
-      "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
-      "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
-      "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
-      "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
-      "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+      "面向 TypeScript 与 JavaScript 原生构建的 SWC 解析与 LLVM 提前代码生成。",
+      "53 个模块的已跟踪 Node 测试套件中约 97% 通过，另有约 50 个原生包/API 实现。",
+      "11 个已文档化的目标：macOS、iOS、iPadOS、visionOS、tvOS、watchOS、Android、Wear OS、Windows、Linux，以及 Web/WASM。",
+      "Web 和 WASM 是同一个后端的别名；HarmonyOS 是独立的预览。",
+      "当前 CLI 已提供 perry compile、run、check、doctor、verify 和 publish 这些命令。"
     ],
     "activeItems": [
-      "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
-      "Improving platform parity, especially core and preview targets.",
-      "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
-      "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+      "补齐 TypeScript、JavaScript、Node.js、npm 包、Proxy、装饰器、弱引用以及动态代码方面的兼容性缺口。",
+      "提升平台对齐程度，尤其是核心目标与预览目标。",
+      "GC、表示方式选择、动态分派、启动速度、二进制体积，以及贴近真实工作负载的性能。",
+      "托管构建、签名、验证与分发等运维能力；其公开可用性与条款独立于编译器支持另行确认。"
     ],
     "policyItems": [
-      "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
-      "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-      "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
-      "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+      "当前页面为目标数量和基准测试数据行使用生成的事实，而不是把数字复制到多个组件里。",
+      "历史博客文章保留其日期与版本背景，不会被当作当前的基准测试呈现。",
+      "「支持」指的是有文档记载、经过测试的行为，而不是与任意 TypeScript 程序或 npm 包全面兼容。",
+      "具体价格、额度、SLA 与托管服务可用性，在服务内确认或写入已签署协议之前不作承诺。"
     ],
-    "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
-    "platformStatus": "Platform status",
-    "knownLimitations": "Known limitations",
-    "benchmarkArtifact": "Benchmark artifact",
-    "changelog": "Changelog",
+    "snapshotNote": "Perry 仍处于 1.0 之前，变化很快。做技术或商业决策时，请以这些实时来源为准。",
+    "platformStatus": "平台状态",
+    "knownLimitations": "已知限制",
+    "benchmarkArtifact": "基准测试产物",
+    "changelog": "更新日志",
     "languageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
   },
   "publish": {
     "title": "Perry Publish",
-    "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
+    "subtitle": "使用 perry publish 驱动受支持的构建、签名、打包、验证与提交流程。具体的平台支持、凭据和托管可用性取决于你的配置。",
     "buildingForIos": "正在为 iOS 构建...",
     "signingCert": "正在使用您的证书签名...",
-    "verifyingLaunch": "Running the configured verification steps...",
-    "publishedToAppStore": "Submission requested; final store status is reported by the store.",
+    "verifyingLaunch": "正在运行已配置的验证步骤……",
+    "publishedToAppStore": "已提交申请；最终商店状态由商店反馈。",
     "buildSign": "构建并签名",
-    "buildSignPlatforms": "Target, host, SDK, and credential dependent",
+    "buildSignPlatforms": "取决于目标平台、主机、SDK 与凭据",
     "distribute": "分发",
-    "distributePlatforms": "Available stores and channels depend on the target",
+    "distributePlatforms": "可用的商店与分发渠道取决于目标平台",
     "verify": "验证",
-    "verifyDesc": "Configured launch and UI checks; coverage varies by target",
-    "metaTitle": "Perry Publish workflows",
-    "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats."
+    "verifyDesc": "已配置的启动与 UI 检查；覆盖范围因目标平台而异",
+    "metaTitle": "Perry Publish 工作流",
+    "metaDescription": "Perry CLI 中的构建、签名、验证与提交流程，并附平台与托管可用性方面的注意事项。"
   },
   "internals": {
-    "title": "Compiler <gradient>Internals</gradient>",
-    "subtitle": "The key design decisions that make Perry fast",
+    "title": "编译器<gradient>内部实现</gradient>",
+    "subtitle": "让 Perry 变快的关键设计决策",
     "nanBoxing": {
-      "p1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
-      "p2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries."
+      "p1": "Perry 采用 64 位 JavaScript 值表示，其中动态值既可以承载数字，也可以承载带标签的、类似指针的载荷。表示方式的选择可以让已被证明的值保持未装箱状态，而不必让每个值都走通用形式。",
+      "p2": "在可能的情况下数字使用 IEEE 754 表示；字符串、对象、闭包及其他堆值使用带标签的编码与由 GC 管理的存储。编译器与运行时协同工作，在动态边界处保持 JavaScript 语义。"
     },
     "monomorphization": {
-      "p1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
-      "p2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves."
+      "p1": "泛型和已知的调用形态可以在编译期特化。当接收者或值类型无法被证明时，Perry 同样保留动态回退路径。",
+      "p2": "特化可以把已知的数值与对象操作转换为直接的机器操作，但 TypeScript 注解大多会被擦除，本身并不保证具体的运行时表示。"
     },
     "staticDispatch": {
-      "p1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
-      "p2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time."
+      "p1": "已知的接收者可以使用直接调用和内联。未知或动态的接收者则走运行时方法分派、原型查找和类虚表路径。",
+      "p2": "这种混合模型给了 LLVM 进行静态优化的机会，同时并不宣称每一次 JavaScript 方法调用都在编译期被解析。"
     },
     "zeroCost": {
-      "p1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
-      "p2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally."
+      "p1": "TypeScript 类型用于指导编译，而 Perry 仍会链接运行时与垃圾回收器，以实现 JavaScript 语义、异步工作、对象、字符串和动态值。",
+      "p2": "接口和许多注解可以干净地擦除，但类、动态分派、内存分配与 GC 可能带来运行时开销。Perry 优化的是已被证明的情形，而不是普遍承诺零成本抽象。"
     },
-    "metaTitle": "Perry compiler internals",
-    "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior."
+    "metaTitle": "Perry 编译器内部实现",
+    "metaDescription": "Perry 如何选择值的表示方式、特化已知代码、使用 LLVM，并为动态的 JavaScript 行为保留运行时回退。"
   },
   "shipping": {
     "eyebrow": "已在生产环境运行",
@@ -420,16 +420,16 @@
   },
   "appShowcase": {
     "title": "看看人们在<gradient>构建</gradient>什么",
-    "subtitle": "Public native applications compiled from TypeScript, with platforms and capabilities taken from their current project pages.",
+    "subtitle": "公开的、由 TypeScript 编译而来的原生应用；平台与能力均取自各自当前的项目页面。",
     "mangoTagline": "原生 MongoDB GUI — 完全用 TypeScript 构建",
     "honeTagline": "原生 AI 代码编辑器 — TypeScript 编译为原生二进制",
     "viewAll": "查看所有展示项目"
   },
   "showcase": {
-    "title": "Showcase",
-    "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-    "metaTitle": "Perry showcase",
-    "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
+    "title": "案例展示",
+    "subtitle": "使用 Perry 构建的公开项目。仅在项目或仓库当前有明确说明时，才会列出平台与实测数据。",
+    "metaTitle": "Perry 案例展示",
+    "metaDescription": "公开的 Perry 示例与项目；在可获得的情况下，实测数据均标注了产物版本与运行环境。"
   },
   "pry": {
     "subtitle": "使用 Perry 构建的快速原生 JSON 查看器。树形导航、搜索、键盘快捷键——从 TypeScript 编译为原生二进制文件。",
@@ -447,13 +447,13 @@
     "syntaxColoring": "语法着色",
     "syntaxColoringDesc": "按类型对值进行颜色编码——字符串、数字、布尔值、null。",
     "howItsBuilt": "构建方式",
-    "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
+    "howItsBuiltDesc": "Pry 使用 TypeScript 编写，并通过 Perry 编译为原生机器码。其可执行文件静态链接了 Perry 运行时与 GC，无需安装外部 Node.js 或 JavaScript 引擎。",
     "typeScriptSource": "TypeScript 源码",
     "typeScriptSourceDesc": "使用 Perry 原生 UI API 的标准 TypeScript",
     "perryCompile": "Perry Compile",
     "perryCompileDesc": "SWC 解析 → 类型解析 → LLVM 代码生成",
     "nativeBinary": "原生二进制文件",
-    "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
+    "nativeBinaryDesc": "静态链接 Perry 运行时与 GC 的独立可执行文件；无需安装外部 Node.js",
     "platformSupport": "平台支持",
     "nativeWidgets": "原生 {framework} 组件",
     "available": "可用",
@@ -466,9 +466,9 @@
     "title": "博客",
     "subtitle": "关于使用 Perry 构建原生应用的新闻、教程和深度解析。",
     "englishOnly": "本文仅提供英文版本。",
-    "metaTitle": "Perry blog",
-    "metaDescription": "Dated Perry release notes, tutorials, and technical articles. Historical measurements remain tied to their original versions.",
-    "historicalNotice": "This dated article records the Perry version and measurements available when it was published. Use the current limitations, platform guide, and benchmark artifact for decisions today."
+    "metaTitle": "Perry 博客",
+    "metaDescription": "带日期的 Perry 发布说明、教程与技术文章。历史实测数据始终与其原始版本对应。",
+    "historicalNotice": "本文为带日期的文章，记录的是发布当时可用的 Perry 版本与实测数据。请以当前的限制说明、平台指南和基准测试产物作为今天决策的依据。"
   },
   "languageSwitcher": {
     "label": "语言"
@@ -476,15 +476,15 @@
   "blogPosts": {
     "introducing-perry": {
       "title": "Perry 介绍",
-      "excerpt": "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+      "excerpt": "Perry 将受支持的 TypeScript 编译为独立的原生可执行文件，内含其运行时与 GC，无需安装外部 Node.js 或 JavaScript 引擎。"
     },
     "cross-platform-native-ui": {
       "title": "从 TypeScript 到跨平台原生 UI",
-      "excerpt": "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+      "excerpt": "介绍 Perry 如何把一份 TypeScript 代码库映射到各已文档化平台的原生控件上，包括平台专属的限制与前置条件。"
     },
     "building-pry": {
       "title": "构建 Pry：用 TypeScript 编写的原生 JSON 查看器",
-      "excerpt": "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+      "excerpt": "讲解如何构建 Pry：一个用 TypeScript 编译为机器码的原生 JSON 查看器，内含 Perry 运行时与 GC，不使用 webview。"
     },
     "plugin-systems-are-a-performance-tax": {
       "title": "插件系统是一种性能税",
@@ -547,8 +547,8 @@
       "excerpt": "从 v0.5.875 到 v0.5.1146 的约 270 个版本不是关于某一个基准 —— 它们是关于让真实的 npm 包能编译并运行。axios、zod v4、express、fastify 和 hono 现在都能用了；test262 等同性跃升（String 60→79%，Array 61→72%）；Windows 借助 Mica 走向 Fluent；DatePicker 与拖放在每个平台落地。"
     },
     "shipping-a-watch-only-app-to-the-app-store": {
-      "title": "Shipping a Watch-Only App to the App Store (When Nothing Else Will)",
-      "excerpt": "Every documented way to upload a standalone watchOS app to the App Store fails — altool, iTMSTransporter, xcodebuild, even Xcode 26's Organizer all refuse the watchOS platform. Here's the undocumented workaround that works and keeps arm64_32 for older watches: an ITSWatchOnlyContainer iOS stub, uploaded with iTMSTransporter."
+      "title": "在别无他法时，把仅 watchOS 的应用送进 App Store",
+      "excerpt": "把仅 watchOS 的独立应用上传到 App Store，所有有文档记载的方式都会失败——altool、iTMSTransporter、xcodebuild，甚至 Xcode 26 的 Organizer 都拒绝 watchOS 平台。下面介绍这个能奏效、同时为旧款手表保留 arm64_32 的未记载变通办法：一个 ITSWatchOnlyContainer 的 iOS 桩程序，用 iTMSTransporter 上传。"
     },
     "compiling-claude-code": {
       "title": "编译 Claude Code：一个压缩包，160 个编译器修复",
@@ -591,9 +591,9 @@
   },
   "meta": {
     "title": "Perry — 将 TypeScript 编译为原生可执行文件 | TypeScript 原生编译器",
-    "description": "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; the Perry runtime and GC are statically linked.",
+    "description": "Perry 提前把 TypeScript 编译为原生可执行文件。原生构建无需安装外部 Node.js 或 JavaScript 引擎；Perry 运行时与 GC 静态链接。",
     "ogTitle": "Perry — 将 TypeScript 编译为原生可执行文件",
-    "ogDescription": "AOT TypeScript via SWC and LLVM. 11 documented targets plus a HarmonyOS preview, 35+ native UI widgets, and transparent benchmark results."
+    "ogDescription": "基于 SWC 和 LLVM 的 AOT TypeScript。11 个已文档化平台加上 HarmonyOS 预览、35+ 个原生 UI 组件，以及完全透明的基准测试结果。"
   },
   "faq": {
     "title": "常见<gradient>问题</gradient>",
@@ -602,71 +602,71 @@
     "items": [
       {
         "question": "Perry 需要 Node.js 或运行时吗？",
-        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+        "answer": "原生的 Perry 二进制文件无需安装 Node.js、Bun、Deno 或任何外部 JavaScript 引擎即可运行。它们确实包含 Perry 运行时与垃圾回收器，并已静态链接。需要引擎语义的包可以使用可选的内嵌 V8 回退。"
       },
       {
         "question": "编译出的二进制文件有多大？",
-        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+        "answer": "体积取决于目标平台、导入项与构建配置。已发布的示例从 hello world 的约 330 KB 到 Mango 的约 7 MB 不等；链接完整标准库或启用可选 V8 的构建会大得多。请把任何体积当作实测样例，而不是通用的产物大小。"
       },
       {
         "question": "可以使用 npm 包吗？",
-        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+        "answer": "许多纯 TypeScript/JavaScript 的包可以原生编译，目前已跟踪约 50 个包/API 实现。兼容性并非全面的：使用原生插件、不受支持的动态行为或引擎专属语义的包，可能需要可选的 V8 回退，也可能无法工作。请运行 perry check 并查阅限制说明。"
       },
       {
         "question": "Perry 支持哪些平台？",
-        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+        "answer": "Perry 有文档记载的目标共 11 个：macOS、iOS、iPadOS、visionOS、tvOS、watchOS、Android、Wear OS、Windows、Linux，以及 Web/WASM。Web 和 WASM 是别名；HarmonyOS 是独立的预览。各平台的成熟度与 API 覆盖范围不同，请查阅平台指南。"
       },
       {
         "question": "Perry 是免费且开源的吗？",
-        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+        "answer": "编译器与运行时仓库采用 MIT 许可，本地编译无需账号。托管版 Perry Publish 与商业支持属于独立服务；可用性、上限和价格需在服务内或以书面形式确认。"
       },
       {
         "question": "Perry 与 Bun 或 Deno compile 有什么不同？",
-        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+        "answer": "Bun 和 Deno 的独立可执行文件会打包各自的运行时；Perry 的原生构建通过 LLVM 编译，默认不嵌入 JavaScript 引擎，但会静态链接 Perry 运行时与 GC。体积和启动速度的具体比较取决于版本、平台与工作负载。请参阅带日期的 <bunLink>Perry vs Bun</bunLink> 与 <denoLink>Perry vs Deno</denoLink> 页面。"
       },
       {
         "question": "Perry 与 Electron 或 Tauri 有什么不同？",
-        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+        "answer": "Electron 搭载 Chromium 和 Node.js；Tauri 使用系统 webview 加上原生侧的应用代码。Perry 则把 UI 模型映射到受支持平台的原生控件上。各方案的体积和平台能力各不相同，因此请参考带日期的 <electronLink>Perry vs Electron</electronLink> 与 <tauriLink>Perry vs Tauri</tauriLink> 对比，而不是笼统的体积结论。"
       },
       {
         "question": "Perry 成熟度如何？",
-        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+        "answer": "Perry 仍处于 1.0 之前，变化很快。今天已有真实项目在使用它，但语言、包和平台的对齐工作仍在进行中。在投入生产负载之前，请先查看<showcaseLink>案例展示</showcaseLink>、当前的限制说明和更新日志。"
       }
     ]
   },
   "privacy": {
-    "metaTitle": "Privacy notice",
-    "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
-    "title": "Privacy notice",
-    "updated": "Last updated: August 27, 2026",
-    "controllerTitle": "1. Controller",
-    "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
-    "dataTitle": "2. Data processed",
+    "metaTitle": "隐私声明",
+    "metaDescription": "perryts.com 如何处理分析与 newsletter 订阅数据。",
+    "title": "隐私声明",
+    "updated": "最后更新：2026 年 8 月 27 日",
+    "controllerTitle": "1. 控制者",
+    "controllerBody": "Skelpo GmbH（Köttingstraße 41, 58339 Breckerfeld, Germany）运营本网站，并负责此处所述的数据处理。",
+    "dataTitle": "2. 处理的数据",
     "dataItems": [
-      "Page-view and technical request data produced when you visit the site.",
-      "Your email address and the source form when you choose to subscribe to the newsletter."
+      "你访问本站时产生的页面浏览数据与技术请求数据。",
+      "你选择订阅 newsletter 时提交的邮箱地址与来源表单。"
     ],
-    "analyticsTitle": "3. Analytics",
-    "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
-    "newsletterTitle": "4. Newsletter and Resend",
-    "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
-    "purposesTitle": "5. Purposes and legal bases",
+    "analyticsTitle": "3. 分析",
+    "analyticsBody": "本站从 pa.skelpo.com 加载 Plausible 分析脚本，用于统计页面浏览量并了解站点的整体使用情况。应用代码不会设置广告 Cookie。技术请求数据仍可能由分析与托管基础设施处理。",
+    "newsletterTitle": "4. Newsletter 与 Resend",
+    "newsletterBody": "当你提交 newsletter 表单时，本站会把你的邮箱地址和一个简短的来源标签发送到服务端的订阅端点。该端点会将邮箱地址转发给 Resend 及配置好的 Resend 受众。该地址用于发送你所订阅的 Perry newsletter，并会一直保留，直到你退订、要求删除，或配置的受众被移除。",
+    "purposesTitle": "5. 用途与法律依据",
     "purposesItems": [
-      "Operate, secure, and diagnose the website and its supporting services.",
-      "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
-      "Send the newsletter after your request or consent."
+      "运行、保护并排查本网站及其配套服务的问题。",
+      "基于运营该服务的合法利益，衡量整体使用情况并改进网站。",
+      "在你提出请求或表示同意之后发送 newsletter。"
     ],
-    "retentionTitle": "6. Retention and recipients",
-    "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
-    "rightsTitle": "7. Your rights",
+    "retentionTitle": "6. 保留期限与接收方",
+    "retentionBody": "Skelpo、其托管与分析基础设施以及 Resend，只会收到上述用途所必需的数据。运行日志按相关服务的配置保留；newsletter 联系人信息会保留至退订或删除。如需了解当前的保留设置或请求删除，请联系我们。",
+    "rightsTitle": "7. 你的权利",
     "rightsItems": [
-      "Request access, correction, deletion, restriction, or portability where applicable.",
-      "Object to processing based on legitimate interests.",
-      "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
-      "Complain to a competent data-protection supervisory authority."
+      "在适用情况下，要求访问、更正、删除、限制处理或数据可携带。",
+      "对基于合法利益的处理提出异议。",
+      "随时撤回 newsletter 的同意，且不影响此前的合法处理。",
+      "向有管辖权的数据保护监管机构投诉。"
     ],
-    "contactTitle": "8. Contact",
-    "contactBody": "For privacy questions or requests, contact",
+    "contactTitle": "8. 联系方式",
+    "contactBody": "如有隐私方面的问题或请求，请联系",
     "languageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
   }
 }
