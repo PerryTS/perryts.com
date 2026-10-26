@@ -163,7 +163,8 @@ const t = pick(copy, lang);
   .spec:first-child {
     padding-inline: 0 28px;
   }
-  .spec + .spec {
+  /* :not() instead of "+" keeps the specificity low enough for the 2-column override below. */
+  .spec:not(:first-child) {
     border-left: 1px solid var(--border);
   }
   .idx {
@@ -202,19 +203,14 @@ const t = pick(copy, lang);
     }
   }
   @media (max-width: 480px) {
-    .specs {
-      grid-template-columns: 1fr;
+    .spec:nth-child(odd) {
+      padding-inline: 0 14px;
     }
-    .spec,
     .spec:nth-child(even) {
-      padding: 24px 0;
-      border-left: 0;
-    }
-    .spec + .spec {
-      border-top: 1px solid var(--border);
+      padding-inline: 14px 0;
     }
     .value {
-      font-size: 34px;
+      font-size: 30px;
     }
   }
 </style>

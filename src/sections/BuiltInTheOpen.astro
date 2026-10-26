@@ -198,7 +198,8 @@ const figures = [
   .cell {
     padding: 36px 28px;
   }
-  .cell + .cell {
+  /* :not() instead of "+": Astro scoping doubles the specificity of "a + b", which beat the responsive overrides. */
+  .cell:not(:first-child) {
     border-left: 1px solid var(--border);
   }
   .foot {

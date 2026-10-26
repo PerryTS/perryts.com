@@ -219,7 +219,8 @@ const RAMP = 12;
   .stage:first-child {
     padding-left: 0;
   }
-  .stage + .stage {
+  /* :not() instead of "+": Astro scoping doubles the specificity of "a + b", which beat the responsive overrides. */
+  .stage:not(:first-child) {
     border-left: 1px solid var(--border);
   }
   .top {
@@ -317,9 +318,17 @@ const RAMP = 12;
       row-gap: 0;
     }
     .stage,
+    .stage:not(:first-child),
     .stage:nth-child(3n + 1) {
-      padding: 24px 0;
+      padding: 18px 0;
+      gap: 8px;
       border-left: 0;
+    }
+    .name {
+      font-size: 22px;
+    }
+    .desc {
+      font-size: 15px;
     }
     .stage + .stage {
       border-top: 1px solid var(--border);
