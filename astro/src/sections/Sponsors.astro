@@ -23,6 +23,83 @@ const copy: Copy<{ title: string; premium: string; sponsor: string; pitch: strin
     pitch: "Patrocinar Perry financia el trabajo en el compilador open source.",
     cta: "Hazte patrocinador",
   },
+  de: {
+    title: "Gesponsert von",
+    premium: "Premium-Sponsor",
+    sponsor: "Sponsor · nubjs.com",
+    pitch: "Wer Perry sponsert, finanziert die Arbeit am Open-Source-Compiler.",
+    cta: "Sponsor werden",
+  },
+  fr: {
+    title: "Avec le soutien de",
+    premium: "Sponsor premium",
+    sponsor: "Sponsor · nubjs.com",
+    pitch: "Sponsoriser Perry finance le travail sur le compilateur open source.",
+    cta: "Devenir sponsor",
+  },
+  it: {
+    title: "Sponsorizzato da",
+    premium: "Sponsor premium",
+    sponsor: "Sponsor · nubjs.com",
+    pitch: "Sponsorizzare Perry finanzia il lavoro sul compilatore open source.",
+    cta: "Diventa sponsor",
+  },
+  ja: {
+    title: "スポンサー",
+    premium: "プレミアムスポンサー",
+    sponsor: "スポンサー · nubjs.com",
+    pitch: "Perryへのスポンサーは、オープンソースのコンパイラ開発の資金になります。",
+    cta: "スポンサーになる",
+  },
+  ko: {
+    title: "후원사",
+    premium: "프리미엄 후원사",
+    sponsor: "후원사 · nubjs.com",
+    pitch: "Perry를 후원하면 오픈 소스 컴파일러 개발에 쓰입니다.",
+    cta: "후원하기",
+  },
+  pt: {
+    title: "Patrocinado por",
+    premium: "Patrocinador premium",
+    sponsor: "Patrocinador · nubjs.com",
+    pitch: "Patrocinar o Perry financia o trabalho no compilador open source.",
+    cta: "Seja um patrocinador",
+  },
+  th: {
+    title: "ผู้สนับสนุน",
+    premium: "ผู้สนับสนุนระดับพรีเมียม",
+    sponsor: "ผู้สนับสนุน · nubjs.com",
+    pitch: "การสนับสนุน Perry ช่วยให้มีทุนพัฒนาคอมไพเลอร์โอเพนซอร์ส",
+    cta: "ร่วมเป็นผู้สนับสนุน",
+  },
+  tr: {
+    title: "Sponsorlarımız",
+    premium: "Premium sponsor",
+    sponsor: "Sponsor · nubjs.com",
+    pitch: "Perry'ye sponsor olmak, açık kaynak derleyici üzerindeki çalışmaları finanse eder.",
+    cta: "Sponsor olun",
+  },
+  vi: {
+    title: "Được tài trợ bởi",
+    premium: "Nhà tài trợ premium",
+    sponsor: "Nhà tài trợ · nubjs.com",
+    pitch: "Tài trợ Perry giúp duy trì công việc trên trình biên dịch mã nguồn mở.",
+    cta: "Trở thành nhà tài trợ",
+  },
+  id: {
+    title: "Disponsori oleh",
+    premium: "Sponsor premium",
+    sponsor: "Sponsor · nubjs.com",
+    pitch: "Mensponsori Perry mendanai pengembangan compiler open source.",
+    cta: "Jadi sponsor",
+  },
+  "zh-Hans": {
+    title: "赞助商",
+    premium: "高级赞助商",
+    sponsor: "赞助商 · nubjs.com",
+    pitch: "赞助 Perry，即是资助开源编译器的开发。",
+    cta: "成为赞助商",
+  },
 };
 const t = pick(copy, lang);
 ---
@@ -144,7 +221,8 @@ const t = pick(copy, lang);
   .become:hover {
     background: color-mix(in srgb, var(--accent) 12%, transparent);
   }
-  @media (max-width: 1100px) {
+  /* Title, logos and call-to-action only fit side by side from ~1320px. */
+  @media (max-width: 1320px) {
     .row {
       flex-wrap: wrap;
       gap: 32px;
