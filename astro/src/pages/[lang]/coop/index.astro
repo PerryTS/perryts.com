@@ -1,0 +1,379 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Button from "../../../components/Button.astro";
+import Terminal from "../../../components/Terminal.astro";
+import JsonLd from "../../../components/JsonLd.astro";
+import Lines from "../../../components/Lines.astro";
+import CheckList from "../../../components/pages/CheckList.astro";
+import CoopTopology from "../../../components/coop/CoopTopology.astro";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Check from "@lucide/astro/icons/check";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { getCoopContent } from "../../../lib/coop-content.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const content = getCoopContent(lang);
+
+const REPOSITORY = "https://github.com/PerryTS/coop";
+const QUICK_START = `${REPOSITORY}/blob/main/docs/src/quickstart.md`;
+const BENCHMARKS = `${REPOSITORY}/blob/main/docs/src/benchmarks.md`;
+const STATUS = `${REPOSITORY}/blob/main/docs/src/status.md`;
+
+const config = `name = "hello"
+version = "0.1.0"
+
+[hosts]
+domains = ["hello.test"]
+
+[[handlers]]
+file = "handlers/hello.ts"
+path = "/hello"
+method = "GET"`;
+const handler = `import { CoopRequest, respond } from "@coop/runtime";
+
+export function handle(reqJson: string): string {
+  const req = new CoopRequest(reqJson);
+  return respond(200, {}, \`hello from \${req.path}\`);
+}`;
+const toLines = (code: string) => code.split("\n").map((text) => ({ text }));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: "Coop",
+  description: content.metaDescription,
+  codeRepository: REPOSITORY,
+  license: "https://opensource.org/license/mit",
+  programmingLanguage: ["Rust", "TypeScript"],
+  runtimePlatform: "Linux and macOS",
+};
+---
+
+<Base lang={lang} title={content.metaTitle} description={content.metaDescription} path="coop" titleIsAbsolute>
+  <JsonLd slot="head" data={jsonLd} />
+
+  <header class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__text">
+        <p class="t-label accent" data-reveal>{content.adjacent}</p>
+        <h1 class="t-h1" data-reveal style="--i: 1"><Lines text={content.tagline} /></h1>
+        <p class="t-lead muted" data-reveal style="--i: 2">{content.intro}</p>
+        <p class="t-mono experimental" data-reveal style="--i: 3">{content.experimental}</p>
+        <div class="actions" data-reveal style="--i: 4">
+          <Button href={REPOSITORY}>{content.viewSource}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+          <Button href={QUICK_START} variant="secondary">{content.quickStart}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+        </div>
+      </div>
+      <div data-reveal style="--i: 2"><CoopTopology content={content} /></div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap stack">
+      <div class="intro">
+        <h2 class="t-h2" data-reveal>{content.whyTitle}</h2>
+        <p class="t-lead muted" data-reveal style="--i: 1">{content.whyBody}</p>
+      </div>
+      <div class="compare">
+        <article class="compare__item" data-reveal>
+          <span class="t-label accent">Perry</span>
+          <h3 class="name">{content.perryTitle}</h3>
+          <p class="muted">{content.perryBody}</p>
+          <code class="t-mono formula">app + runtime + stdlib → executable</code>
+        </article>
+        <article class="compare__item" data-reveal style="--i: 1">
+          <span class="t-label coop-tone">Coop</span>
+          <h3 class="name">{content.coopTitle}</h3>
+          <p class="muted">{content.coopBody}</p>
+          <code class="t-mono formula">apps → shared runtime + stdlib</code>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap stack">
+      <div class="intro">
+        <h2 class="t-h2" data-reveal>{content.architectureTitle}</h2>
+        <p class="t-lead muted" data-reveal style="--i: 1">{content.architectureBody}</p>
+      </div>
+      <ol class="tiers">
+        {content.tiers.map((tier, i) => (
+          <li class="tier" data-reveal style={`--i: ${i}`}>
+            <span class="t-mono accent">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="name">{tier.title}</h3>
+            <p class="muted">{tier.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap working">
+      <div class="intro">
+        <h2 class="t-h2" data-reveal>{content.workingTitle}</h2>
+        <p class="t-lead muted" data-reveal style="--i: 1">{content.workingBody}</p>
+      </div>
+      <ul class="working__list">
+        {content.workingItems.map((item, i) => (
+          <li data-reveal style={`--i: ${i % 2}`}><Check size={16} stroke-width={2} aria-hidden="true" /><span>{item}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="quick-start" class="section section--surface">
+    <div class="wrap stack">
+      <div class="intro">
+        <h2 class="t-h2" data-reveal>{content.developerTitle}</h2>
+        <p class="t-lead muted" data-reveal style="--i: 1">{content.developerBody}</p>
+      </div>
+      <div class="code">
+        <div data-reveal><Terminal title={content.configLabel} lines={toLines(config)} /></div>
+        <div data-reveal style="--i: 1"><Terminal title={content.handlerLabel} lines={toLines(handler)} /></div>
+      </div>
+      <div class="run" data-reveal><Terminal title={content.runLabel} lines={[{ text: "coop-cli dev ./hello", prompt: true }]} /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack">
+      <h2 class="t-h2" data-reveal>{content.fitTitle}</h2>
+      <div class="fit">
+        <div class="fit__col" data-reveal>
+          <h3 class="t-label fit--good">{content.rightTitle}</h3>
+          <CheckList items={content.rightItems} tone="done" />
+        </div>
+        <div class="fit__col" data-reveal style="--i: 1">
+          <h3 class="t-label muted">{content.notYetTitle}</h3>
+          <CheckList items={content.notYetItems} tone="note" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap band" data-reveal>
+      <div>
+        <h2 class="t-h3">{content.benchmarkTitle}</h2>
+        <p class="muted">{content.benchmarkBody}</p>
+      </div>
+      <div class="actions">
+        <Button href={BENCHMARKS} variant="secondary">{content.benchmarks}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+        <Button href={STATUS} variant="secondary">{content.status}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap band" data-reveal>
+      <div>
+        <h2 class="t-h2">{content.closingTitle}</h2>
+        <p class="t-lead muted">{content.closingBody}</p>
+      </div>
+      <div class="actions">
+        <Button href={REPOSITORY}>{content.viewSource}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+        <Button href={QUICK_START} variant="secondary">{content.quickStart}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    background: var(--surface-tint);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: center;
+    gap: 64px;
+    padding-block: 96px 88px;
+  }
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .experimental {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--pixel-amber);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 820px;
+  }
+  .name {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+  }
+  .compare {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .compare__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 36px 40px 40px 0;
+  }
+  .compare__item + .compare__item {
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+  .coop-tone,
+  .fit--good {
+    color: var(--success);
+  }
+  .formula {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .tier {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 32px 28px 36px;
+  }
+  .tier:first-child {
+    padding-left: 0;
+  }
+  .tier + .tier {
+    border-left: 1px solid var(--border);
+  }
+  .working {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 64px;
+  }
+  .working__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .working__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 16px 18px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .working__list :global(svg) {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--success);
+  }
+  .code {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .code > div,
+  .run {
+    min-width: 0;
+  }
+  .run {
+    max-width: 640px;
+  }
+  .fit {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .fit__col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px 40px 40px 0;
+  }
+  .fit__col + .fit__col {
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+  .band {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .band > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 760px;
+  }
+  @media (max-width: 1024px) {
+    .hero__inner,
+    .working {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+  @media (max-width: 900px) {
+    .compare,
+    .tiers,
+    .code,
+    .fit {
+      grid-template-columns: 1fr;
+    }
+    .compare__item,
+    .compare__item + .compare__item,
+    .tier,
+    .tier:first-child,
+    .fit__col,
+    .fit__col + .fit__col {
+      padding: 28px 0;
+      border-left: 0;
+    }
+    .compare__item + .compare__item,
+    .tier + .tier,
+    .fit__col + .fit__col {
+      border-top: 1px solid var(--border);
+    }
+    .band {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero__inner {
+      padding-block: 64px 48px;
+    }
+    .working__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

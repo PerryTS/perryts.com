@@ -1,0 +1,23 @@
+---
+/** Small bordered note, e.g. "this page is maintained in English". */
+import Info from "@lucide/astro/icons/info";
+---
+
+<p class="notice t-mono muted" data-reveal><Info size={14} stroke-width={1.75} aria-hidden="true" /><span><slot /></span></p>
+
+<style>
+  .notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 720px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .notice :global(svg) {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--accent);
+  }
+</style>

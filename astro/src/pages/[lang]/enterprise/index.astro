@@ -1,0 +1,428 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Button from "../../../components/Button.astro";
+import Notice from "../../../components/pages/Notice.astro";
+import CheckList from "../../../components/pages/CheckList.astro";
+import Mail from "@lucide/astro/icons/mail";
+import { localeStaticPaths, localePath, pick, type Copy, type Locale } from "../../../i18n/index.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const CONTACT_EMAIL = "ralph@perryts.com";
+
+const en = {
+  "metaTitle": "Perry for Teams",
+  "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+  "availableTitle": "Available to discuss",
+  "available1": "Architecture and migration reviews",
+  "available2": "Onboarding and paired implementation sessions",
+  "available3": "Release planning and upgrade guidance",
+  "available4": "Hosted build, signing, and verification requirements",
+  "scopedTitle": "Defined in your agreement",
+  "scoped1": "Support channels and response targets",
+  "scoped2": "Release maintenance or backport commitments",
+  "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+  "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+  "termsTitle": "No implied SLA or self-hosting promise",
+  "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+  "languageNotice": "Commercial terms are maintained in English so contractual wording does not drift between translations.",
+  "heroTitle": "Production support scoped to your team",
+  "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+  "heroCta": "Email ralph@perryts.com",
+  "closingTitle": "Talk to the maintainers",
+  "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+  "closingCta": "Email ralph@perryts.com",
+  "pricing": "Pricing"
+};
+const copy: Copy<typeof en> = {
+  en,
+  "de": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Preise"
+  },
+  "es": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Los datos técnicos y las notas de medición se mantienen en inglés para evitar divergencias entre traducciones.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Precios"
+  },
+  "fr": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Les faits techniques et les notes de mesure sont conservés en anglais afin d’éviter toute divergence entre les traductions.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Tarifs"
+  },
+  "it": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "I dati tecnici e le note di misurazione sono mantenuti in inglese per evitare discrepanze tra le traduzioni.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Prezzi"
+  },
+  "ja": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "技術的な事実と測定上の注意事項は、翻訳間のずれを防ぐため英語を正本として管理しています。",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "料金"
+  },
+  "ko": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "기술 사실과 측정 주의사항은 번역 간 불일치를 막기 위해 영어를 기준으로 관리합니다.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "요금"
+  },
+  "pt": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Os dados técnicos e as notas de medição são mantidos em inglês para evitar divergências entre traduções.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Preços"
+  },
+  "th": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "ข้อมูลทางเทคนิคและหมายเหตุการวัดผลใช้ฉบับภาษาอังกฤษเป็นหลักเพื่อป้องกันความคลาดเคลื่อนระหว่างคำแปล",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "ราคา"
+  },
+  "tr": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Fiyatlandırma"
+  },
+  "vi": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Bảng giá"
+  },
+  "id": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "Harga"
+  },
+  "zh-Hans": {
+    "metaTitle": "Perry for Teams",
+    "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+    "availableTitle": "Available to discuss",
+    "available1": "Architecture and migration reviews",
+    "available2": "Onboarding and paired implementation sessions",
+    "available3": "Release planning and upgrade guidance",
+    "available4": "Hosted build, signing, and verification requirements",
+    "scopedTitle": "Defined in your agreement",
+    "scoped1": "Support channels and response targets",
+    "scoped2": "Release maintenance or backport commitments",
+    "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+    "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+    "termsTitle": "No implied SLA or self-hosting promise",
+    "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+    "languageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。",
+    "heroTitle": "Production support scoped to your team",
+    "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+    "heroCta": "Email ralph@perryts.com",
+    "closingTitle": "Talk to the maintainers",
+    "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+    "closingCta": "Email ralph@perryts.com",
+    "pricing": "价格"
+  },
+};
+const t = pick(copy, lang);
+const columns = [
+  { title: t.availableTitle, items: [t.available1, t.available2, t.available3, t.available4] },
+  { title: t.scopedTitle, items: [t.scoped1, t.scoped2, t.scoped3, t.scoped4] },
+];
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="enterprise" canonical="/en/enterprise/" alternates={["en"]}>
+  <PageHeader title={t.heroTitle} lead={t.heroSubtitle} back={{ href: localePath(lang, "pricing"), label: t.pricing }}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+    <div data-reveal style="--i: 2">
+      <Button href={`mailto:${CONTACT_EMAIL}`}><Mail size={16} stroke-width={1.75} aria-hidden="true" />{t.heroCta}</Button>
+    </div>
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="columns">
+        {columns.map((col, i) => (
+          <div class="column" data-reveal style={`--i: ${i}`}>
+            <h2 class="t-label muted">{col.title}</h2>
+            <CheckList items={col.items} />
+          </div>
+        ))}
+      </div>
+
+      <div class="terms" data-reveal>
+        <h2 class="t-h3">{t.termsTitle}</h2>
+        <p class="muted">{t.termsBody}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap closing" data-reveal>
+      <div>
+        <h2 class="t-h2">{t.closingTitle}</h2>
+        <p class="t-lead muted">{t.closingBody}</p>
+      </div>
+      <Button href={`mailto:${CONTACT_EMAIL}`}><Mail size={16} stroke-width={1.75} aria-hidden="true" />{t.closingCta}</Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 40px 44px 0;
+  }
+  .column + .column {
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 880px;
+    margin-top: 64px;
+    padding-left: 24px;
+    border-left: 2px solid var(--accent);
+  }
+  .closing {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .closing > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+  @media (max-width: 900px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+    .column,
+    .column + .column {
+      padding: 32px 0;
+      border-left: 0;
+    }
+    .column + .column {
+      border-top: 1px solid var(--border);
+    }
+    .closing {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

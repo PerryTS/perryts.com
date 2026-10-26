@@ -1,0 +1,80 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Prose from "../../../components/Prose.astro";
+import Notice from "../../../components/pages/Notice.astro";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+// Mandatory German legal information: same text in every locale, canonical on /de/.
+const lang = Astro.params.lang as Locale;
+---
+
+<Base lang={lang} title="Impressum" description="Rechtliche Informationen — Skelpo GmbH" path="imprint" canonical="/de/imprint/" alternates={["de"]}>
+  <PageHeader title="Impressum" lead="Rechtliche Informationen">
+    {lang !== "de" && <Fragment slot="above"><Notice>This mandatory legal information is published in German.</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <Prose class="legal">
+        <div lang="de">
+          <h2>Angaben gemäß § 5 DDG</h2>
+          <p>
+            <strong>Skelpo GmbH</strong><br />
+            Köttingstraße 41<br />
+            58339 Breckerfeld<br />
+            Deutschland<br />
+            Telefon +49 (0) 2338 8733446<br />
+            E-Mail: <a href="mailto:info@skelpo.com">info@skelpo.com</a><br />
+            Handelsregister: Amtsgericht Hagen HRB 8266
+          </p>
+
+          <h2>Kontaktinformationen</h2>
+          <p>
+            E-Mail: <a href="mailto:info@skelpo.com">info@skelpo.com</a><br />
+            Website: www.skelpo.com
+          </p>
+
+          <h2>Vertreter</h2>
+          <p>Vertretungsberechtigter Geschäftsführer: Ralph Küpper</p>
+
+          <h2>Umsatzsteuer-Identifikationsnummer</h2>
+          <p>Umsatzsteuer-Identifikationsnummer DE266573808</p>
+
+          <h2>Haftungsausschluss (Disclaimer)</h2>
+          <h3>Haftung für Inhalte</h3>
+          <p>
+            Die Inhalte dieser Website werden mit größter Sorgfalt erstellt. Wir übernehmen jedoch keine Gewähr für die Richtigkeit,
+            Vollständigkeit und Aktualität der bereitgestellten Inhalte. Für eigene Inhalte auf diesen Seiten gelten die allgemeinen
+            Gesetze.
+          </p>
+          <h3>Haftung für Links</h3>
+          <p>
+            Unsere Website enthält Links zu externen Websites. Für deren Inhalte tragen wir keine Haftung, da diese außerhalb unseres
+            Einflussbereiches liegen. Der Anbieter der Website, auf die verlinkt wird, ist allein verantwortlich für seinen Inhalt.
+          </p>
+          <h3>Urheberrecht</h3>
+          <p>
+            Die auf diesen Seiten veröffentlichten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigungen,
+            Bearbeitungen, Verbreitungen und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+            schriftlichen Zustimmung des Autors oder Erstellers.
+          </p>
+        </div>
+      </Prose>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap :global(.legal) {
+    max-width: 760px;
+  }
+  .wrap :global(.legal h2:first-child) {
+    margin-top: 0;
+  }
+  .wrap :global(.legal > div > * + *) {
+    margin-top: 1.1em;
+  }
+</style>
