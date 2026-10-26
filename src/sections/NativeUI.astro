@@ -208,9 +208,9 @@ const code: Tok[][] = [
       </div>
 
       <div class="toolkits">
-        <ul aria-label={t.toolkitsLabel}>
+        <ul aria-label={t.toolkitsLabel} data-cycle="loop" data-cycle-interval="1400">
           {toolkits.map((tk, i) => (
-            <li class:list={["toolkit", { "is-preview": tk.preview }]} data-reveal style={`--i: ${i}`}>
+            <li class:list={["toolkit", { "is-preview": tk.preview }]} data-reveal data-cycle-item={tk.preview ? undefined : ""} style={`--i: ${i}`}>
               <span class="tk-name">{tk.name}</span>
               <span class="platforms">
                 {tk.platforms.map(([p, cov], j) => (
@@ -365,9 +365,14 @@ const code: Tok[][] = [
     border-bottom: 0;
   }
   .tk-name {
+    transition: color 300ms linear;
     font-size: 22px;
     font-weight: 500;
     letter-spacing: -0.023em;
+  }
+  /* One codebase, many toolkits: the highlight walks through them while visible (data-cycle). */
+  .toolkit.is-current .tk-name {
+    color: var(--accent);
   }
   .is-preview .tk-name {
     color: var(--text-muted);

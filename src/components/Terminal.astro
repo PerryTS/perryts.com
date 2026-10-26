@@ -20,7 +20,7 @@ const { title, meta, lines, class: className } = Astro.props;
     {meta && <span>{meta}</span>}
   </figcaption>
   <pre class="body" data-typing>{lines.map((l) => (
-    <span class:list={["line", l.tone ?? "text"]} data-line>{l.prompt && <span class="prompt">$ </span>}{l.text}{"\n"}</span>
+    <span class:list={["line", l.tone ?? "text"]} data-line>{l.prompt && <span class="prompt">$ </span>}{l.text === "█" ? <span class="cursor">█</span> : l.text}{"\n"}</span>
   ))}</pre>
 </figure>
 
@@ -55,5 +55,13 @@ const { title, meta, lines, class: className } = Astro.props;
   }
   .success {
     color: var(--success);
+  }
+  .cursor {
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
 </style>

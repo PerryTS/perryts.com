@@ -178,9 +178,9 @@ const RAMP = 12;
   <div class="wrap">
     <SectionHeader title={t.title} aside={t.aside} />
 
-    <ol class="pipeline">
+    <ol class="pipeline" data-cycle="once" data-cycle-interval="450">
       {t.stages.map((s, i) => (
-        <li class="stage" data-reveal style={`--i: ${i}`}>
+        <li class="stage" data-reveal data-cycle-item style={`--i: ${i}`}>
           <div class="top">
             <span class="idx">{String(i + 1).padStart(2, "0")}</span>
             {i < t.stages.length - 1 && <ArrowRight size={16} stroke-width={1.75} aria-hidden="true" />}
@@ -210,6 +210,7 @@ const RAMP = 12;
     border-top: 1px solid var(--paper-text);
   }
   .stage {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -230,6 +231,27 @@ const RAMP = 12;
   .idx {
     font-family: var(--font-mono);
     font-size: 13px;
+    transition: color 300ms linear;
+  }
+  /* Code moving through the compiler: each stage's top edge fills in turn (data-cycle). */
+  .stage::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 420ms var(--ease-out);
+  }
+  .stage.is-current::before,
+  .stage.is-past::before {
+    transform: none;
+  }
+  .stage.is-current .idx {
+    color: var(--accent);
   }
   .name {
     font-size: 28px;
