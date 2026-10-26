@@ -1,9 +1,14 @@
 ---
-/** Renders copy that uses "\n" for designed line breaks. */
+/**
+ * Renders copy that uses "\n" for designed line breaks. The breaks are hidden on phones
+ * (.designed-break in global.css), so a space separates the lines unless they meet CJK text.
+ */
 interface Props {
   text: string;
 }
 const lines = Astro.props.text.split("\n");
+const cjk = /[　-鿿가-힯＀-￯]/;
+const joiner = (prev: string, next: string) => (cjk.test(prev.slice(-1)) || cjk.test(next.charAt(0)) ? "" : " ");
 ---
 
-{lines.map((line, i) => (<>{i > 0 && <br />}{line}</>))}
+{lines.map((line, i) => (<>{i > 0 && <>{joiner(lines[i - 1], line)}<br class="designed-break" /></>}{line}</>))}

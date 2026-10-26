@@ -56,6 +56,13 @@ const { title, meta, lines, class: className } = Astro.props;
   .success {
     color: var(--success);
   }
+  @media (max-width: 640px) {
+    .body {
+      padding: 16px;
+      font-size: 12.5px;
+      line-height: 20px;
+    }
+  }
   .cursor {
     animation: blink 1.1s steps(1) infinite;
   }

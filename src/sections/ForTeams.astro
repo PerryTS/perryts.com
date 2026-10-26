@@ -311,11 +311,16 @@ const t = pick(copy, lang);
     }
   }
   @media (max-width: 560px) {
+    .title {
+      font-size: 30px;
+    }
     .offers {
       grid-template-columns: 1fr;
+      margin-block: 32px;
     }
     .offer {
-      padding-inline: 0;
+      padding: 20px 0;
+      gap: 8px;
       border-left: 0 !important;
     }
     .offer + .offer {

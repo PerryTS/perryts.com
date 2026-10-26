@@ -259,7 +259,30 @@ button {
 
 @media (max-width: 640px) {
   :root {
-    --page-x: 16px;
-    --section-y: 64px;
+    --page-x: 20px;
+    --section-y: 56px;
+  }
+  /* Designed line breaks (Lines component) are tuned for wide screens; on phones text flows freely. */
+  .designed-break {
+    display: none;
+  }
+  /* Phone type scale: smaller display sizes and body copy so sections read as one screen at a time. */
+  .t-display {
+    font-size: 42px;
+    letter-spacing: -0.03em;
+  }
+  .t-h1 {
+    font-size: 34px;
+  }
+  .t-h2 {
+    font-size: 30px;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+  .t-h3 {
+    font-size: 22px;
+  }
+  .t-lead {
+    font-size: 17px;
   }
 }

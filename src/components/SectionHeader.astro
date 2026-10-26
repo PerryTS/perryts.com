@@ -35,4 +35,12 @@ const { title, aside, as: Heading = "h2" } = Astro.props;
       gap: 20px;
     }
   }
+  @media (max-width: 640px) {
+    .section-header {
+      gap: 14px;
+    }
+    .aside {
+      font-size: 15px;
+    }
+  }
 </style>

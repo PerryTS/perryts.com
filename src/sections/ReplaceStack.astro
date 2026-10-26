@@ -445,7 +445,7 @@ const t = pick(copy, lang);
       display: none;
     }
     .compare tr {
-      padding-block: 20px;
+      padding-block: 16px;
       border-bottom: 1px solid var(--border);
     }
     .compare th,
@@ -456,13 +456,15 @@ const t = pick(copy, lang);
       background: none;
     }
     .compare .key {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .compare td {
       display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 12px;
-      padding-block: 6px;
+      grid-template-columns: 104px 1fr;
+      gap: 10px;
+      padding-block: 3px;
+      font-size: 14px;
+      line-height: 1.45;
     }
     .compare td::before {
       content: attr(data-label);
@@ -472,8 +474,9 @@ const t = pick(copy, lang);
       padding-top: 3px;
     }
     .compare td.perry {
-      margin-top: 4px;
-      padding: 10px 12px;
+      margin-top: 6px;
+      padding: 8px 10px;
+      font-size: 15px;
       border-left: 2px solid var(--accent);
       background: color-mix(in srgb, var(--accent) 10%, transparent);
       color: var(--text);

@@ -194,5 +194,18 @@ const lines: TerminalLine[] = [
       letter-spacing: 0.06em;
       text-wrap: balance;
     }
+    .ctas {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .ctas :global(.install) {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .ctas :global(.docs) {
+      padding: 12px 0;
+    }
   }
 </style>

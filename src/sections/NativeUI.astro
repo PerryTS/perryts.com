@@ -460,9 +460,12 @@ const code: Tok[][] = [
 
   @media (max-width: 1100px) {
     .map {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       align-items: stretch;
       gap: 24px;
+    }
+    .editor {
+      min-width: 0;
     }
     .editor {
       max-width: 640px;
@@ -489,19 +492,34 @@ const code: Tok[][] = [
   }
   @media (max-width: 480px) {
     .code {
-      font-size: 13px;
-      line-height: 24px;
+      font-size: 12px;
+      line-height: 21px;
     }
     .gutter {
-      padding: 0 12px;
+      padding: 0 10px;
     }
+    .src {
+      display: none;
+    }
+    /* Keep each toolkit on one row: name left, its platforms right. */
     .toolkit {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
+      padding: 11px 0;
+    }
+    .tk-name {
+      font-size: 18px;
     }
     .platforms {
-      justify-content: flex-start;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 2px 6px;
+    }
+    .plat,
+    .sep {
+      font-size: 11.5px;
+    }
+    .widget-list {
+      font-size: 13px;
+      line-height: 24px;
     }
   }
 </style>
