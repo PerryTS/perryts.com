@@ -43,3 +43,12 @@ export function localePath(lang: Locale, path = ""): string {
 export function localeStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
+
+/**
+ * Locale of a content entry id like "<slug>/<locale>". Astro lowercases ids ("zh-Hans" → "zh-hans"),
+ * so the configured casing is restored here; unknown locales return undefined.
+ */
+export function localeFromId(id: string): Locale | undefined {
+  const raw = id.slice(id.lastIndexOf("/") + 1).toLowerCase();
+  return locales.find((l) => l.toLowerCase() === raw);
+}

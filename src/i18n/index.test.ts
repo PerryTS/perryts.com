@@ -19,3 +19,10 @@ test("isLocale only accepts configured locales", () => {
   assert.equal(isLocale("zh"), false);
   assert.equal(isLocale(undefined), false);
 });
+
+test("localeFromId restores the configured casing of lowercased content ids", async () => {
+  const { localeFromId } = await import("./index.ts");
+  assert.equal(localeFromId("compiling-claude-code/zh-hans"), "zh-Hans");
+  assert.equal(localeFromId("cranelift-to-llvm/de"), "de");
+  assert.equal(localeFromId("post/xx"), undefined);
+});

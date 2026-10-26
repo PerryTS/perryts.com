@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { Locale } from "../i18n/index.ts";
+import { localeFromId, type Locale } from "../i18n/index.ts";
 
 export type PostEntry = CollectionEntry<"blog">;
 
@@ -14,8 +14,9 @@ export interface Post {
 }
 
 function splitId(id: string): { slug: string; locale: Locale } {
-  const i = id.lastIndexOf("/");
-  return { slug: id.slice(0, i), locale: id.slice(i + 1) as Locale };
+  const locale = localeFromId(id);
+  if (!locale) throw new Error(`Blog file "${id}" is not named after a configured locale.`);
+  return { slug: id.slice(0, id.lastIndexOf("/")), locale };
 }
 
 /** All published posts grouped by slug, newest first. */
