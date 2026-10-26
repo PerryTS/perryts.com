@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import { locales, localePath, type Locale } from "../i18n/index.ts";
+import { metaDescription, pageTitle } from "../lib/seo.ts";
 
 interface Props {
   lang: Locale;
@@ -19,6 +20,10 @@ interface Props {
   /** Absolute or root-relative social image; defaults to the site-wide preview. */
   image?: string;
   type?: "website" | "article";
+  /** ISO date for articles (article:published_time; also read by the sitemap for lastmod). */
+  publishedTime?: string;
+  /** Keep the page out of search results (404). Drops canonical and alternates. */
+  noindex?: boolean;
 }
 const {
   lang,
@@ -30,8 +35,11 @@ const {
   alternates = locales,
   image = "/og.png",
   type = "website",
+  publishedTime,
+  noindex = false,
 } = Astro.props;
-const fullTitle = titleIsAbsolute ? title : `${title} — Perry`;
+const fullTitle = pageTitle(title, titleIsAbsolute);
+const descriptionText = metaDescription(description);
 const canonicalUrl = new URL(canonical ?? localePath(lang, path), Astro.site);
 const imageUrl = new URL(image, Astro.site);
 const ogLocale = lang.replace("-", "_");
@@ -43,10 +51,11 @@ const ogLocale = lang.replace("-", "_");
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    {alternates.length > 1 && alternates.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
-    {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />}
+    <meta name="description" content={descriptionText} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && <link rel="canonical" href={canonicalUrl} />}
+    {!noindex && alternates.length > 1 && alternates.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
+    {!noindex && alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />}
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/perry-icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
@@ -54,7 +63,7 @@ const ogLocale = lang.replace("-", "_");
     <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:site_name" content="Perry" />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={descriptionText} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={ogLocale} />
@@ -63,7 +72,8 @@ const ogLocale = lang.replace("-", "_");
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={descriptionText} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     <meta name="twitter:image" content={imageUrl} />
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");</script>
