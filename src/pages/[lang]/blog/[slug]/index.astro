@@ -9,6 +9,7 @@ import Prose from "../../../../components/Prose.astro";
 import Tag from "../../../../components/Tag.astro";
 import CopyButton from "../../../../components/CopyButton.astro";
 import NewsletterForm from "../../../../components/NewsletterForm.astro";
+import JsonLd from "../../../../components/JsonLd.astro";
 import { blogCopy } from "../../../../components/blog/copy.ts";
 import { locales, localePath, pick, type Locale } from "../../../../i18n/index.ts";
 import { formatPostDate, getPosts, type Post } from "../../../../lib/blog.ts";
@@ -44,6 +45,21 @@ const minutes = readingMinutes(entry.body ?? "", isFallback ? "en" : lang);
 const path = `blog/${post.slug}`;
 const url = new URL(localePath(lang, path), Astro.site).toString();
 const contentLang = isFallback ? "en" : lang;
+const published = entry.data.date.toISOString();
+const blogPosting = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.excerpt,
+  datePublished: published,
+  inLanguage: contentLang,
+  keywords: entry.data.tags.join(", "),
+  url,
+  mainEntityOfPage: url,
+  image: new URL("/og.png", Astro.site).toString(),
+  author: { "@type": "Organization", name: "Perry", url: "https://perryts.com/" },
+  publisher: { "@type": "Organization", name: "Perry", logo: { "@type": "ImageObject", url: new URL("/perry-icon.svg", Astro.site).toString() } },
+};
 ---
 
 <Base
@@ -54,7 +70,9 @@ const contentLang = isFallback ? "en" : lang;
   type="article"
   canonical={isFallback ? localePath("en", path) : undefined}
   alternates={post.locales}
+  publishedTime={published}
 >
+  <JsonLd slot="head" data={blogPosting} />
   <PageHeader title={entry.data.title} back={{ href: localePath(lang, "blog"), label: t.back }}>
     <ul slot="above" class="tags">{entry.data.tags.map((tag) => <li><Tag>{tag}</Tag></li>)}</ul>
     <div class="meta t-mono muted">

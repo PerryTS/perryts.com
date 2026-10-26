@@ -7,11 +7,18 @@ export function canonicalOf(html) {
   return html.match(/<link rel="canonical" href="([^"]+)"/)?.[1] ?? null;
 }
 
-export function sitemapXml(urls) {
+/** Publication date declared by an article page (article:published_time), as YYYY-MM-DD, or null. */
+export function publishedDateOf(html) {
+  return html.match(/<meta property="article:published_time" content="(\d{4}-\d{2}-\d{2})/)?.[1] ?? null;
+}
+
+/** Entries are URLs or { url, lastmod } objects; duplicates are dropped and output is sorted. */
+export function sitemapXml(entries) {
   const escape = (s) => s.replace(/&/g, "&amp;");
-  const body = [...new Set(urls)]
-    .sort()
-    .map((url) => `  <url><loc>${escape(url)}</loc></url>`)
+  const byUrl = new Map(entries.map((e) => (typeof e === "string" ? [e, null] : [e.url, e.lastmod ?? null])));
+  const body = [...byUrl]
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([url, lastmod]) => `  <url><loc>${escape(url)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`)
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
@@ -32,7 +39,7 @@ export default function sitemap() {
           if (!pathname || pathname === "404/") continue;
           const html = await readFile(join(outDir, pathname, "index.html"), "utf8").catch(() => null);
           const canonical = html && canonicalOf(html);
-          if (canonical && new URL(canonical).pathname === `/${pathname}`) urls.push(canonical);
+          if (canonical && new URL(canonical).pathname === `/${pathname}`) urls.push({ url: canonical, lastmod: publishedDateOf(html) });
         }
         await writeFile(join(outDir, "sitemap.xml"), sitemapXml(urls));
         logger.info(`sitemap.xml: ${urls.length} URLs`);
