@@ -1,0 +1,41 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Cards from "../../../components/landing-pages/Cards.astro";
+import FactsNotice from "../../../components/landing-pages/FactsNotice.astro";
+import { copy } from "../../../components/compare/copy.ts";
+import { localePath, localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
+import { compareItems } from "../../../lib/compare.ts";
+import { getComparisonContent } from "../../../lib/compare-content.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+const t = pick(copy, lang);
+
+const items = [
+  ...compareItems.map((item) => {
+    const data = getComparisonContent(item.slug)!;
+    return {
+      label: t.ui.category[item.category],
+      title: data.title,
+      text: data.tldr,
+      href: localePath(lang, `compare/${item.slug}`),
+    };
+  }),
+  {
+    label: t.ui.category["ui-framework"],
+    title: t.electronAlternatives.title,
+    text: t.electronAlternatives.tldr,
+    href: localePath(lang, "compare/perry-vs-electron-alternatives"),
+  },
+];
+---
+
+<Base lang={lang} title={t.ui.indexMetaTitle} description={t.ui.indexMetaDescription} path="compare">
+  <PageHeader title={t.ui.indexTitle} lead={t.ui.indexSubtitle}>
+    <FactsNotice slot="above" lang={lang} />
+  </PageHeader>
+  <section class="section">
+    <div class="wrap"><Cards items={items} min={320} /></div>
+  </section>
+</Base>

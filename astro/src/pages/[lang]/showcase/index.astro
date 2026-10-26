@@ -1,0 +1,35 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import FactsNotice from "../../../components/landing-pages/FactsNotice.astro";
+import ShowcaseCard from "../../../components/showcase/ShowcaseCard.astro";
+import { copy } from "../../../components/showcase/copy.ts";
+import { localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
+import { showcaseProjects } from "../../../lib/showcase.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+const t = pick(copy, lang).showcase;
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="showcase">
+  <PageHeader title={t.title} lead={t.subtitle}>
+    <FactsNotice slot="above" lang={lang} />
+  </PageHeader>
+  <section class="section">
+    <div class="wrap">
+      <ul class="grid">
+        {showcaseProjects.map((project, i) => <ShowcaseCard lang={lang} project={project} index={i} />)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+</style>

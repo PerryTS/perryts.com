@@ -1,0 +1,27 @@
+---
+/** Long-form section: Prose in a readable column. `tight` shortens the bottom padding (heading before a grid). */
+import Prose from "../Prose.astro";
+
+interface Props {
+  tight?: boolean;
+}
+---
+
+<section class:list={["section", "article", Astro.props.tight && "tight"]}>
+  <div class="wrap">
+    <Prose class="column"><slot /></Prose>
+  </div>
+</section>
+
+<style>
+  .article + :global(.article),
+  .tight + :global(.section) {
+    padding-top: 0;
+  }
+  .tight {
+    padding-bottom: 40px;
+  }
+  .article :global(.column) {
+    max-width: 760px;
+  }
+</style>

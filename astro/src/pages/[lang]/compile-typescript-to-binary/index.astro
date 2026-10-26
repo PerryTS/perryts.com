@@ -1,0 +1,119 @@
+---
+import LandingLayout from "../../../components/landing-pages/LandingLayout.astro";
+import Article from "../../../components/landing-pages/Article.astro";
+import Cards from "../../../components/landing-pages/Cards.astro";
+import Cta from "../../../components/landing-pages/Cta.astro";
+import Performance from "../../../components/landing-pages/Performance.astro";
+import Button from "../../../components/Button.astro";
+import Terminal from "../../../components/Terminal.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+import { PRODUCT_FACTS } from "../../../lib/product-facts.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Compile TypeScript to a Binary (Standalone Executables)",
+  description:
+    "How Perry compiles supported TypeScript through LLVM into a native executable, what is linked into the file, and how the result differs from runtime bundling.",
+  breadcrumb: "Compile TypeScript to a Binary",
+};
+
+const meanings = [
+  {
+    label: "01",
+    title: "Transpile",
+    text: "TypeScript compilers and bundlers can emit JavaScript. That output still runs in Node.js, Bun, Deno, or a browser.",
+  },
+  {
+    label: "02",
+    title: "Bundle a runtime",
+    text: "Bun, Deno, and Node SEA can produce one file by packaging the program with their runtime or executable machinery. Consult each tool's documentation for its exact format.",
+  },
+  {
+    label: "03",
+    title: "Ahead-of-time compile",
+    text: "Perry parses with SWC and uses LLVM to emit machine code for supported behavior, then links the Perry runtime and GC.",
+  },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="compile-typescript-to-binary"
+  meta={meta}
+  heading="Compile TypeScript to a Binary"
+  lead="Perry turns supported TypeScript into target-specific machine code. Native output needs no external Node.js installation or JavaScript engine, but it does statically link the Perry runtime and garbage collector."
+>
+  <Fragment slot="actions">
+    <Button href={localePath(lang, "getting-started")}>Install Perry</Button>
+    <Button href={links.github} variant="secondary">View source</Button>
+  </Fragment>
+  <Terminal
+    slot="header"
+    class="demo"
+    title="terminal"
+    lines={[
+      { prompt: true, text: "perry compile main.ts" },
+      { tone: "success", text: "✓ Example executable written: main (size varies)" },
+      { text: "" },
+      { prompt: true, text: "./main" },
+      { text: "Hello, World!" },
+    ]}
+  />
+
+  <Article tight>
+    <h2>Three different meanings of “compile”</h2>
+  </Article>
+  <section class="section">
+    <div class="wrap"><Cards items={meanings} /></div>
+  </section>
+
+  <Article>
+    <h2>What is actually in a Perry binary?</h2>
+    <p>
+      The file contains compiled application code plus the Perry runtime pieces required by the program. It is therefore
+      accurate to say that no <em>external</em> JavaScript runtime installation is needed; it is not accurate to say that
+      Perry has no runtime at all. Native builds use a garbage collector, object and string support, async machinery, and
+      other linked helpers. The optional V8 fallback adds an embedded JavaScript engine when enabled.
+    </p>
+    <p>
+      The public examples show a hello-world binary around {PRODUCT_FACTS.helloWorldSize} and the Mango application around
+      {" "}{PRODUCT_FACTS.mangoSize}. Those are examples, not a promised range. Output size changes with the target, imports,
+      build profile, standard-library surface, debug information, and optional V8 fallback.
+    </p>
+
+    <h2>Compatibility and targets</h2>
+    <p>
+      Perry documents {PRODUCT_FACTS.documentedTargetCount} targets plus a separate HarmonyOS preview. Web and WASM are
+      aliases for one backend. Platform SDKs, host tools, signing credentials, and UI/API depth differ by target, so
+      cross-compilation is not an unconditional “build any target from any host” promise.
+    </p>
+    <p>
+      Perry reports {PRODUCT_FACTS.nodeParity} of its tracked Node suite across {PRODUCT_FACTS.nodeModuleCount} modules and
+      roughly {PRODUCT_FACTS.nativePackageCount} package/API implementations. That does not mean every npm package or
+      JavaScript feature works. Run <code>perry check</code> and test the real application against the published limitations.
+    </p>
+
+    <h2>Primary sources</h2>
+    <ul>
+      <li><a href="https://bun.sh/docs/bundler/executables">Bun standalone executable documentation</a></li>
+      <li><a href="https://nodejs.org/api/single-executable-applications.html">Node.js single executable application documentation</a></li>
+      <li><a href={PRODUCT_FACTS.limitationsUrl}>Perry language limitations</a></li>
+      <li><a href={PRODUCT_FACTS.platformsUrl}>Perry platform status</a></li>
+    </ul>
+  </Article>
+
+  <Performance />
+
+  <Cta title="Validate your application" text="Install Perry, run its compatibility check, and measure the actual output you plan to ship.">
+    <Button href={localePath(lang, "getting-started")}>Get started</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  :global(.demo) {
+    max-width: 640px;
+  }
+</style>

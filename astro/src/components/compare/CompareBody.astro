@@ -1,0 +1,155 @@
+---
+/** Body of a Perry-vs-X page: what each is, table, wins, when to choose, verdict, sources. */
+import Plus from "@lucide/astro/icons/plus";
+import Cards from "../landing-pages/Cards.astro";
+import Prose from "../Prose.astro";
+import { pick, type Locale } from "../../i18n/index.ts";
+import type { CompareItem } from "../../lib/compare.ts";
+import type { ComparisonContent } from "../../lib/compare-content.ts";
+import { copy } from "./copy.ts";
+
+interface Props {
+  lang: Locale;
+  item: CompareItem;
+  data: ComparisonContent;
+}
+const { lang, item, data } = Astro.props;
+const ui = pick(copy, lang).ui;
+const named = (s: string, name: string) => s.replace("{name}", name);
+const wins = [
+  { title: ui.wherePerryWins, items: data.perryWins, perry: true },
+  { title: named(ui.whereCompetitorWins, item.competitor), items: data.competitorWins, perry: false },
+];
+---
+
+<section class="section">
+  <div class="wrap stack">
+    <Cards
+      min={360}
+      items={[
+        { title: named(ui.whatIs, item.competitor), text: data.competitorWhat },
+        { title: named(ui.whatIs, "Perry"), text: data.perryWhat },
+      ]}
+    />
+
+    <div>
+      <h2 class="t-h3 head" data-reveal>{ui.sideBySide}</h2>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">{ui.feature}</th><th scope="col" class="accent">Perry</th><th scope="col">{item.competitor}</th></tr>
+          </thead>
+          <tbody>
+            {data.table.map((row, i) => (
+              <tr data-reveal style={`--i: ${i}`}>
+                <th scope="row">{row.feature}</th>
+                <td>{row.perry}</td>
+                <td class="muted">{row.competitor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="wins">
+      {wins.map((w) => (
+        <div data-reveal>
+          <h2 class:list={["t-h3 head", w.perry && "accent"]}>{w.title}</h2>
+          <ul class="list">
+            {w.items.map((p) => (
+              <li><Plus size={16} stroke-width={1.75} aria-hidden="true" class={w.perry ? "accent" : "muted"} /><span>{p}</span></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <Cards
+      min={360}
+      items={[
+        { title: named(ui.whenChoose, "Perry"), text: data.whenPerry },
+        { title: named(ui.whenChoose, item.competitor), text: data.whenCompetitor },
+      ]}
+    />
+
+    <Prose class="column">
+      <h2>{ui.verdict}</h2>
+      <p>{data.verdict}</p>
+      <h2>{ui.sources}</h2>
+      <ul>
+        {data.sources.map((s) => <li><a href={s.url}>{s.label}</a></li>)}
+      </ul>
+    </Prose>
+  </div>
+</section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+  .head {
+    margin-bottom: 20px;
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  th,
+  td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  thead th.accent {
+    color: var(--accent);
+  }
+  tbody th {
+    width: 22%;
+    font-weight: 500;
+  }
+  .wins {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .list {
+    border-top: 1px solid var(--border);
+  }
+  .list li {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .list :global(svg) {
+    flex: none;
+    margin-top: 4px;
+  }
+  .stack :global(.column) {
+    max-width: 760px;
+  }
+  @media (max-width: 900px) {
+    .wins {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

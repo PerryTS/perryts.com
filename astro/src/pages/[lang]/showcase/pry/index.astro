@@ -1,0 +1,174 @@
+---
+import FileCode from "@lucide/astro/icons/file-code";
+import Zap from "@lucide/astro/icons/zap";
+import Monitor from "@lucide/astro/icons/monitor";
+import Base from "../../../../layouts/Base.astro";
+import PageHeader from "../../../../components/PageHeader.astro";
+import SectionHeader from "../../../../components/SectionHeader.astro";
+import Button from "../../../../components/Button.astro";
+import BrandIcon from "../../../../components/BrandIcon.astro";
+import Tag from "../../../../components/Tag.astro";
+import Terminal from "../../../../components/Terminal.astro";
+import Cards from "../../../../components/landing-pages/Cards.astro";
+import { copy } from "../../../../components/showcase/copy.ts";
+import { localePath, localeStaticPaths, pick, type Locale } from "../../../../i18n/index.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+const { pry: t, common } = pick(copy, lang);
+
+const features = [
+  { title: t.treeView, text: t.treeViewDesc },
+  { title: t.search, text: t.searchDesc },
+  { title: t.keyboardShortcuts, text: t.keyboardShortcutsDesc },
+  { title: t.clipboardSupport, text: t.clipboardSupportDesc },
+  { title: t.statusBar, text: t.statusBarDesc },
+  { title: t.syntaxColoring, text: t.syntaxColoringDesc },
+];
+const steps = [
+  { Icon: FileCode, title: t.typeScriptSource, text: t.typeScriptSourceDesc },
+  { Icon: Zap, title: t.perryCompile, text: t.perryCompileDesc },
+  { Icon: Monitor, title: t.nativeBinary, text: t.nativeBinaryDesc },
+];
+const platforms = [
+  { name: "macOS", framework: "AppKit" },
+  { name: "iOS", framework: "UIKit" },
+  { name: "Android", framework: "Views" },
+];
+const shots = [t.macOsScreenshot, t.iosScreenshot];
+---
+
+<Base lang={lang} title="Pry — Perry showcase" description={t.subtitle} path="showcase/pry">
+  <PageHeader title="Pry" lead={t.subtitle} back={{ href: localePath(lang, "showcase"), label: common.backToShowcase }}>
+    <ul slot="above" class="tags">{platforms.map((p) => <li><Tag>{p.name}</Tag></li>)}</ul>
+    <div class="actions" data-reveal style="--i: 2">
+      <Button href="https://github.com/perryts/pry"><BrandIcon name="github" />{common.viewOnGithub}</Button>
+      <Button href={localePath(lang, "blog/building-pry")} variant="secondary">{common.readTheBlogPost}</Button>
+    </div>
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap stack">
+      <SectionHeader title={t.features} />
+      <Cards items={features} />
+    </div>
+  </section>
+
+  <section class="section bordered">
+    <div class="wrap stack">
+      <SectionHeader title={t.howItsBuilt} aside={t.howItsBuiltDesc} />
+      <ol class="steps">
+        {steps.map(({ Icon, title, text }, i) => (
+          <li class="step" data-reveal style={`--i: ${i}`}>
+            <Icon size={22} stroke-width={1.5} class="accent" aria-hidden="true" />
+            <h3 class="step__title">{title}</h3>
+            <p class="muted">{text}</p>
+          </li>
+        ))}
+      </ol>
+      <div>
+        <Terminal title={common.terminal} lines={[{ prompt: true, text: "perry compile src/main.ts -o pry" }]} />
+        <p class="note muted">
+          The complete, platform-specific source is linked below; this page does not substitute a fictional simplified API for
+          the real code.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bordered">
+    <div class="wrap stack">
+      <SectionHeader title={t.platformSupport} />
+      <Cards
+        items={platforms.map((p) => ({ label: t.available, title: p.name, text: t.nativeWidgets.replace("{framework}", p.framework) }))}
+      />
+    </div>
+  </section>
+
+  <section class="section bordered">
+    <div class="wrap stack">
+      <SectionHeader title={t.screenshots} aside={t.screenshotsNote} />
+      <div class="shots">
+        {shots.map((s, i) => <div class="shot t-mono muted" data-reveal style={`--i: ${i}`}>{s}</div>)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .bordered {
+    border-top: 1px solid var(--border);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border-left: 1px solid var(--border);
+  }
+  .step:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .step__title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .step p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .note {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .shot {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    padding: 24px;
+    border: 1px dashed var(--border);
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .steps,
+    .shots {
+      grid-template-columns: 1fr;
+    }
+    .steps {
+      border-block: 0;
+      border-top: 1px solid var(--border);
+    }
+    .step,
+    .step:first-child {
+      padding: 24px 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+</style>

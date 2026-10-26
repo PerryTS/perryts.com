@@ -1,0 +1,91 @@
+---
+/** Hairline grid of short items (title + text), optionally linked. */
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+
+export interface CardItem {
+  title: string;
+  text: string;
+  /** Small mono label above the title. */
+  label?: string;
+  href?: string;
+}
+interface Props {
+  items: CardItem[];
+  /** Minimum column width before wrapping. */
+  min?: number;
+}
+const { items, min = 260 } = Astro.props;
+---
+
+<ul class="cards" style={`--min: ${min}px`}>
+  {items.map((item, i) => {
+    const Tag = item.href ? "a" : "div";
+    const external = item.href?.startsWith("http");
+    const Icon = external ? ArrowUpRight : ArrowRight;
+    return (
+      <li data-reveal style={`--i: ${i}`}>
+        <Tag class:list={["card", item.href && "card--link"]} href={item.href}>
+          {item.label && <span class="t-label muted">{item.label}</span>}
+          <h3 class="card__title">
+            {item.title}
+            {item.href && <Icon size={16} stroke-width={1.75} aria-hidden="true" />}
+          </h3>
+          <p class="muted">{item.text}</p>
+        </Tag>
+      </li>
+    );
+  })}
+</ul>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--min), 100%), 1fr));
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+  li {
+    display: flex;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 28px;
+  }
+  .card__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .card--link :global(svg) {
+    flex: none;
+    color: var(--text-muted);
+    transition: transform 200ms var(--ease-out), color 150ms linear;
+  }
+  .card--link:hover {
+    background: var(--surface);
+  }
+  .card--link:hover :global(svg) {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+  @media (max-width: 640px) {
+    .card {
+      padding: 22px;
+    }
+  }
+</style>

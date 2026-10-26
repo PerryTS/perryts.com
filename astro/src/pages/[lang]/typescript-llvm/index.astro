@@ -1,0 +1,135 @@
+---
+import LandingLayout from "../../../components/landing-pages/LandingLayout.astro";
+import Article from "../../../components/landing-pages/Article.astro";
+import Code from "../../../components/landing-pages/Code.astro";
+import Cta from "../../../components/landing-pages/Cta.astro";
+import Button from "../../../components/Button.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "TypeScript on LLVM: Monomorphization and Native Codegen",
+  description:
+    "How Perry lowers TypeScript to LLVM IR — a typed HIR, monomorphization, NaN-boxing — and why the backend moved from Cranelift to LLVM for AOT performance.",
+  breadcrumb: "TypeScript on LLVM",
+};
+
+const ir = [
+  { tone: "muted" as const, text: "; LLVM IR — inline bump allocation" },
+  { text: "%off_ptr = getelementptr i8, ptr %state, i64 8" },
+  { text: "%offset  = load i64, ptr %off_ptr        ; current bump offset" },
+  { text: "%new_off = add i64 %offset, 96           ; headers + 8 fields" },
+  { text: "%sz_ptr  = getelementptr i8, ptr %state, i64 16" },
+  { text: "%size    = load i64, ptr %sz_ptr         ; block capacity" },
+  { text: "%fits    = icmp ule i64 %new_off, %size" },
+  { text: "br i1 %fits, label %fast, label %slow" },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="typescript-llvm"
+  meta={meta}
+  heading="TypeScript on LLVM"
+  lead="How Perry lowers a language designed for JIT engines into LLVM IR — monomorphization, NaN-boxing, inline lowerings — and why it left Cranelift."
+>
+  <Fragment slot="actions">
+    <Button href={localePath(lang, "internals")}>Compiler Internals</Button>
+    <Button href={links.github} variant="secondary">View on GitHub</Button>
+  </Fragment>
+
+  <Article>
+    <h2>Why LLVM for TypeScript?</h2>
+    <p>
+      An ahead-of-time compiler lives in a different regime than a JIT. A JIT compiles while the user waits, so compile
+      latency is the constraint. An AOT compiler like Perry compiles once — on the developer's machine or in CI — and the
+      binary is executed millions of times afterwards. That asymmetry is exactly where a heavyweight optimizer pays for itself.
+    </p>
+    <p>
+      LLVM brings two decades of middle-end work: loop vectorization, loop-invariant code motion, global value numbering,
+      sparse conditional constant propagation, aggressive inlining, alias analysis. Perry's job is to hand that machinery IR
+      it can actually optimize — which is where TypeScript's type information comes in.
+    </p>
+
+    <h2>The lowering pipeline</h2>
+    <p>
+      Source is parsed with SWC, then lowered to a typed high-level IR (HIR) where the interesting decisions happen before
+      LLVM ever sees the code:
+    </p>
+    <ul>
+      <li>
+        <strong>Monomorphization.</strong> Known function and generic call shapes can be specialized for a bounded set of
+        representations. <code>{"Stack<number>"}</code> and <code>{"Stack<string>"}</code> become can therefore give the
+        optimizer more specific inputs, while unproved or highly polymorphic calls retain dynamic fallbacks.
+      </li>
+      <li>
+        <strong>Static dispatch.</strong> Where the receiver type is known at compile time, method calls can compile to direct
+        calls that LLVM can inline. Unknown receivers retain runtime method and prototype dispatch.
+      </li>
+      <li>
+        <strong>Direct field access.</strong> Shape-proved object fields can resolve to fixed offsets. Dynamic property access
+        keeps the runtime lookup path required for JavaScript behavior.
+      </li>
+    </ul>
+
+    <h2>NaN-boxing and inline lowerings</h2>
+    <p>
+      Perry's canonical dynamic value is a 64-bit NaN-boxed word, while representation selection can keep proved values in
+      native forms. Doubles are stored directly; objects, strings, booleans, <code>null</code>, and <code>undefined</code> can
+      be encoded in the unused bit patterns of an IEEE 754 quiet NaN. This can avoid heap boxing for numeric arithmetic, but
+      conversions and dynamic operations can still have runtime cost.
+    </p>
+    <p>
+      The catch is that operations on non-number values need unpack-operate-repack bit sequences. If those sequences live as
+      calls into a separately-compiled runtime, LLVM sees opaque black boxes and can't optimize across them. So Perry emits
+      hot operations — property loads, method dispatch, object allocation — as inline LLVM IR that the optimizer can fuse and
+      simplify. Object allocation, for example, compiles down to an inline thread-local bump allocation:
+    </p>
+    <Code lines={ir} />
+
+    <h2>Why not Cranelift?</h2>
+    <p>
+      Perry's first backend was Cranelift — the codegen behind wasmtime, built for fast, predictable compilation. It was the
+      right starting point, and it remains an excellent choice for JITs and sandboxed runtimes. Two things forced the switch:
+    </p>
+    <ul>
+      <li>
+        <strong>The optimizer ceiling.</strong> Cranelift is deliberately a fast single-tier compiler: “decent code quickly,”
+        which is the right trade for a JIT and the wrong one for an AOT compiler whose selling point is peak native performance.
+      </li>
+      <li>
+        <strong>arm64_32.</strong> Apple Watch uses an ABI (64-bit instructions, 32-bit pointers) that Cranelift doesn't
+        support. For watchOS to exist as a target, LLVM was required — and maintaining two backends meant two sets of bugs,
+        tests, and performance baselines.
+      </li>
+    </ul>
+    <p>
+      The migration was not free: the first LLVM-only release regressed some benchmarks by up to 70x because hot operations
+      initially went through opaque runtime helper calls. Recovering — inline lowerings, the bump allocator above, better
+      inlining boundaries — took the backend past its earlier baseline. That April 2026 result is historical, not a current
+      universal speed claim. The current public suite includes Perry wins, mixed rows, and losses against Node.js and Bun.
+      The migration post-mortem is worth reading: <a href={localePath(lang, "blog/cranelift-to-llvm")}>From Cranelift to LLVM</a>.
+    </p>
+
+    <h2>Going deeper</h2>
+    <p>
+      The <a href={localePath(lang, "internals")}>compiler internals page</a> covers NaN-boxing, monomorphization, and static
+      dispatch in more detail. On the blog, <a href={localePath(lang, "blog/optimizing-everything")}>Optimizing Everything</a>
+      {" "}walks through the optimization work release by release, and
+      {" "}<a href={localePath(lang, "blog/gen-gc-lazy-json-and-defensible-benchmarks")}>Gen GC, lazy JSON, and defensible benchmarks</a>
+      {" "}explains how the benchmark methodology works (RUNS=11, median + p95). For the bigger picture, start at the
+      {" "}<a href={localePath(lang, "typescript-native-compiler")}>TypeScript native compiler</a> overview.
+    </p>
+  </Article>
+
+  <Cta
+    title="See the output yourself"
+    text="perry compile main.ts — native machine code with the Perry runtime and GC statically linked, and no external JavaScript engine by default."
+  >
+    <Button href={localePath(lang, "getting-started")}>Get Started</Button>
+    <Button href={links.github} variant="secondary">View on GitHub</Button>
+  </Cta>
+</LandingLayout>

@@ -1,0 +1,166 @@
+---
+/** Published measurements (English, from the previous site's Performance section). */
+import SectionHeader from "../SectionHeader.astro";
+import LinkArrow from "../LinkArrow.astro";
+import { PRODUCT_FACTS, PUBLIC_BENCHMARKS } from "../../lib/product-facts.ts";
+
+const comparisons = [
+  {
+    metric: "Binary Size",
+    perry: `${PRODUCT_FACTS.helloWorldSize} hello world; ${PRODUCT_FACTS.mangoSize} Mango`,
+    node: "Application plus an installed Node.js runtime",
+    bun: "Standalone executable embeds the Bun runtime",
+  },
+  {
+    metric: "Startup Time",
+    perry: `${PRODUCT_FACTS.measuredMacStartup}*`,
+    node: "Engine boot and warmup; workload-dependent",
+    bun: "Engine boot and warmup; workload-dependent",
+  },
+  {
+    metric: "Runtime Dependencies",
+    perry: "Statically linked Perry runtime + GC",
+    node: "External Node.js runtime",
+    bun: "Embedded Bun / JavaScriptCore runtime",
+  },
+  { metric: "Memory Overhead", perry: "Workload-dependent", node: "Workload-dependent", bun: "Workload-dependent" },
+];
+const resultLabel = { win: "Win vs both", mixed: "Mixed", loss: "Loss vs both" } as const;
+---
+
+<section class="section perf">
+  <div class="wrap stack">
+    <SectionHeader
+      title="Published measurements"
+      aside="Current public results include wins, mixed results, and losses. Treat microbenchmarks as workload-specific measurements, not a universal speed claim."
+    />
+
+    <div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col" class="accent">Perry</th><th scope="col">Node.js</th><th scope="col">Bun</th></tr>
+          </thead>
+          <tbody>
+            {comparisons.map((row, i) => (
+              <tr data-reveal style={`--i: ${i}`}>
+                <th scope="row">{row.metric}</th>
+                <td>{row.perry}</td>
+                <td class="muted">{row.node}</td>
+                <td class="muted">{row.bun}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="foot muted">* Measured runtime-only macOS hello world on an Apple M-series host (5.0 → 3.2 ms after removing unused dynamic-library links). Application startup varies.</p>
+    </div>
+
+    <div>
+      <h3 class="t-h3">Full public suite: wins and losses</h3>
+      <p class="t-mono muted meta">
+        {PRODUCT_FACTS.benchmarkVersion} · {PRODUCT_FACTS.benchmarkNode} · {PRODUCT_FACTS.benchmarkBun} · {PRODUCT_FACTS.benchmarkHost} · {PRODUCT_FACTS.benchmarkDate}
+      </p>
+      <p class="foot muted">Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.</p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Benchmark</th>
+              <th scope="col" class="num accent">Perry</th>
+              <th scope="col" class="num">Node.js</th>
+              <th scope="col" class="num">Bun</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {PUBLIC_BENCHMARKS.map((b, i) => (
+              <tr data-reveal style={`--i: ${i}`}>
+                <th scope="row">{b.name}<span class="detail t-mono muted">{b.description}</span></th>
+                <td class="num">{b.perry} ms</td>
+                <td class="num muted">{b.node} ms</td>
+                <td class="num muted">{b.bun} ms</td>
+                <td class:list={["t-mono", b.result]}>{resultLabel[b.result]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="links">
+        <LinkArrow href={PRODUCT_FACTS.benchmarkSource}>Raw benchmark artifact</LinkArrow>
+        <LinkArrow href={PRODUCT_FACTS.benchmarkMethodology}>Methodology and caveats</LinkArrow>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perf {
+    border-top: 1px solid var(--border);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .meta {
+    margin-top: 12px;
+  }
+  .foot {
+    margin-block: 12px 20px;
+    font-size: 14px;
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  th,
+  td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  thead th.accent {
+    color: var(--accent);
+  }
+  tbody th {
+    font-weight: 500;
+  }
+  .detail {
+    display: block;
+    margin-top: 4px;
+  }
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .win {
+    color: var(--success);
+  }
+  .mixed {
+    color: var(--text-muted);
+  }
+  .loss {
+    color: var(--danger);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 20px;
+  }
+</style>

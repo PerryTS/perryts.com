@@ -1,0 +1,68 @@
+---
+/**
+ * Shell for the English-only technical pages: generated for every locale, canonical to /en/,
+ * with breadcrumbs JSON-LD, the language notice and an inner-page header.
+ * Slots: `actions` (header buttons), `header` (extra header content), default (page body).
+ */
+import Base from "../../layouts/Base.astro";
+import JsonLd from "../JsonLd.astro";
+import PageHeader from "../PageHeader.astro";
+import FactsNotice from "./FactsNotice.astro";
+import { breadcrumbJsonLd } from "../../lib/breadcrumbs.ts";
+import { localePath, type Locale } from "../../i18n/index.ts";
+
+export interface LandingMeta {
+  title: string;
+  description: string;
+  /** Leaf name in the BreadcrumbList. */
+  breadcrumb: string;
+  absoluteTitle?: boolean;
+}
+interface Props {
+  lang: Locale;
+  /** Page path without locale, e.g. "getting-started". */
+  path: string;
+  meta: LandingMeta;
+  heading: string;
+  lead?: string;
+  /** Intermediate breadcrumbs between Home and this page. */
+  parents?: { name: string; path: string }[];
+  back?: { href: string; label: string };
+  type?: "website" | "article";
+  /** Language notice text override; pass null to hide it. */
+  notice?: string | null;
+}
+const { lang, path, meta, heading, lead, parents = [], back, type = "website", notice } = Astro.props;
+const crumbs = breadcrumbJsonLd([
+  { name: "Home", path: localePath(lang) },
+  ...parents.map((p) => ({ name: p.name, path: localePath(lang, p.path) })),
+  { name: meta.breadcrumb, path: localePath(lang, path) },
+]);
+---
+
+<Base
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  titleIsAbsolute={meta.absoluteTitle}
+  canonical={localePath("en", path)}
+  alternates={["en"]}
+  type={type}
+>
+  <JsonLd slot="head" data={crumbs} />
+  <PageHeader title={heading} lead={lead} back={back}>
+    <Fragment slot="above">{notice !== null && <FactsNotice lang={lang} text={notice} />}</Fragment>
+    <slot name="header" />
+    {Astro.slots.has("actions") && <div class="actions" data-reveal style="--i: 2"><slot name="actions" /></div>}
+  </PageHeader>
+  <slot />
+</Base>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

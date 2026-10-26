@@ -1,0 +1,55 @@
+---
+import LandingLayout from "../../../../components/landing-pages/LandingLayout.astro";
+import Cta from "../../../../components/landing-pages/Cta.astro";
+import CompareBody from "../../../../components/compare/CompareBody.astro";
+import Button from "../../../../components/Button.astro";
+import Tag from "../../../../components/Tag.astro";
+import { copy } from "../../../../components/compare/copy.ts";
+import { locales, localePath, pick, type Locale } from "../../../../i18n/index.ts";
+import { compareItems, type CompareItem } from "../../../../lib/compare.ts";
+import { getComparisonContent } from "../../../../lib/compare-content.ts";
+
+export function getStaticPaths() {
+  return locales.flatMap((lang) => compareItems.map((item) => ({ params: { lang, slug: item.slug }, props: { item } })));
+}
+
+const lang = Astro.params.lang as Locale;
+const { item } = Astro.props as { item: CompareItem };
+const data = getComparisonContent(item.slug)!;
+const t = pick(copy, lang);
+const updated = new Intl.DateTimeFormat(lang, { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(
+  new Date(item.updated),
+);
+---
+
+<LandingLayout
+  lang={lang}
+  path={`compare/${item.slug}`}
+  meta={{ title: data.metaTitle, description: data.metaDescription, breadcrumb: `Perry vs ${item.competitor}` }}
+  heading={data.title}
+  lead={data.tldr}
+  parents={[{ name: "Compare", path: "compare" }]}
+  back={{ href: localePath(lang, "compare"), label: t.ui.backToCompare }}
+  type="article"
+  notice={t.ui.factsLanguageNotice}
+>
+  <div slot="header" class="meta" data-reveal style="--i: 2">
+    <Tag>{t.ui.category[item.category]}</Tag>
+    <time class="t-mono muted" datetime={item.updated}>{t.ui.lastUpdated} {updated}</time>
+  </div>
+
+  <CompareBody lang={lang} item={item} data={data} />
+
+  <Cta title={t.ui.ctaTitle} text={t.ui.ctaSubtitle}>
+    <Button href={localePath(lang)}>{t.getStarted}</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+</style>

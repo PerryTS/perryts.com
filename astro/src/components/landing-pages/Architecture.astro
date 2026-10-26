@@ -1,0 +1,99 @@
+---
+/** Compiler pipeline overview (English, from the previous site's Architecture section). */
+import SectionHeader from "../SectionHeader.astro";
+import { localePath, type Locale } from "../../i18n/index.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+const steps = [
+  { mark: "TS", name: "TypeScript", detail: ".ts files" },
+  { mark: "SWC", name: "Parser", detail: "Fast parsing" },
+  { mark: "HIR", name: "Transform", detail: "Monomorphization" },
+  { mark: "LLVM", name: "Codegen", detail: "Machine code" },
+  { mark: "BIN", name: "Executable", detail: "From ~330 KB; varies by features" },
+];
+---
+
+<section class="section arch">
+  <div class="wrap stack">
+    <SectionHeader title="How it works" aside="From TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime" />
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="step" data-reveal style={`--i: ${i}`}>
+          <span class="t-label muted">{String(i + 1).padStart(2, "0")}</span>
+          <span class:list={["mark t-mono", i === steps.length - 1 && "accent"]}>{s.mark}</span>
+          <span class="name">{s.name}</span>
+          <span class="muted detail">{s.detail}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="links muted">
+      <p>Want to know how the compiler works under the hood? <a href={localePath(lang, "internals")}>Compiler internals</a></p>
+      <p>Deep dive: <a href={localePath(lang, "typescript-llvm")}>TypeScript on LLVM</a> — monomorphization, NaN-boxing, and why Perry left Cranelift.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .arch {
+    border-top: 1px solid var(--border);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 28px 24px;
+    border-left: 1px solid var(--border);
+  }
+  .step:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .mark {
+    margin-top: 8px;
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .name {
+    font-weight: 600;
+  }
+  .detail {
+    font-size: 14px;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .links a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr;
+      border-block: 0;
+      border-top: 1px solid var(--border);
+    }
+    .step,
+    .step:first-child {
+      padding: 20px 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+</style>
