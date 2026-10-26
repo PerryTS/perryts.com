@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { formatInteger } from "../lib/format.ts";
 import { links } from "../lib/links.ts";
 
@@ -46,7 +46,7 @@ const copy: Copy<{
     perModule: "Tasa de éxito por módulo →",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section class="section section--paper parity">

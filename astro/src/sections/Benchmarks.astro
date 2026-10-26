@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { formatInteger } from "../lib/format.ts";
 import { links } from "../lib/links.ts";
 import Lines from "../components/Lines.astro";
@@ -101,7 +101,7 @@ const copy: Copy<{
     all: "Los 12 benchmarks y el JSON en bruto",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 const decimal = (n: number, digits = 0) =>
   new Intl.NumberFormat(lang, { minimumFractionDigits: digits, maximumFractionDigits: 1 }).format(n);

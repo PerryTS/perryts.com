@@ -10,9 +10,31 @@ interface Props {
   description: string;
   /** Page path without locale prefix, used for alternates and the language switcher. */
   path?: string;
+  /** Render the title as-is instead of "<title> — Perry". */
+  titleIsAbsolute?: boolean;
+  /** Override the canonical URL (e.g. English-only pages point to /en/). */
+  canonical?: string;
+  /** Locales this page really exists in; defaults to all. Drives hreflang alternates. */
+  alternates?: readonly Locale[];
+  /** Absolute or root-relative social image. */
+  image?: string;
+  type?: "website" | "article";
 }
-const { lang, title, description, path = "" } = Astro.props;
-const canonical = new URL(localePath(lang, path), Astro.site);
+const {
+  lang,
+  title,
+  description,
+  path = "",
+  titleIsAbsolute = false,
+  canonical,
+  alternates = locales,
+  image,
+  type = "website",
+} = Astro.props;
+const fullTitle = titleIsAbsolute ? title : `${title} — Perry`;
+const canonicalUrl = new URL(canonical ?? localePath(lang, path), Astro.site);
+const imageUrl = image ? new URL(image, Astro.site) : undefined;
+const ogLocale = lang.replace("-", "_");
 ---
 
 <!doctype html>
@@ -20,20 +42,34 @@ const canonical = new URL(localePath(lang, path), Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {locales.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />
+    <link rel="canonical" href={canonicalUrl} />
+    {alternates.length > 1 && alternates.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
+    {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />}
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/perry-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" />
     <link rel="preload" href="/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="Perry" />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content={ogLocale} />
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");</script>
+    <!-- Plausible (self-hosted), same snippet as the previous site. -->
+    <script is:inline async src="https://pa.skelpo.com/js/pa-RM9JdedWZTuKvQnKJaGmY.js"></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()
+    </script>
   </head>
   <body>
     <Nav lang={lang} path={path} />

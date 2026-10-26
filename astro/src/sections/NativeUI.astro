@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import SectionHeader from "../components/SectionHeader.astro";
 import Lines from "../components/Lines.astro";
 
@@ -40,7 +40,7 @@ const copy: Copy<{
     widgetsDesc: "State(), stacks, spacers.\nSin CSS.",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 // Toolkit names and platforms are product names: not translated.
 const toolkits: { name: string; platforms: [string, Coverage][]; preview?: boolean }[] = [

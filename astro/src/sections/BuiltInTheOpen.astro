@@ -2,7 +2,7 @@
 import LinkArrow from "../components/LinkArrow.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import Stat from "../components/Stat.astro";
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { formatCompact, formatInteger, perDay } from "../lib/format.ts";
 import { getRepoStats } from "../lib/github.ts";
 import { links } from "../lib/links.ts";
@@ -46,7 +46,7 @@ const copy: Copy<{
     browse: "Ver las pull requests",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 const figures = [
   { value: formatInteger(stats.mergedPrs, lang), text: t.merged },

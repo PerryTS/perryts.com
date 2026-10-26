@@ -2,7 +2,7 @@
 import CopyButton from "../components/CopyButton.astro";
 import Lines from "../components/Lines.astro";
 import PixelWall from "../components/PixelWall.astro";
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 
 interface Props {
   lang: Locale;
@@ -31,7 +31,7 @@ const copy: Copy<{ title: string; copy: string; rows: [string, string][] }> = {
     ],
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section class="get-started" id="get-started">

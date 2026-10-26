@@ -1,6 +1,6 @@
 ---
 import Heart from "@lucide/astro/icons/heart";
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { links } from "../lib/links.ts";
 
 interface Props {
@@ -24,7 +24,7 @@ const copy: Copy<{ title: string; premium: string; sponsor: string; pitch: strin
     cta: "Hazte patrocinador",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section class="sponsors" aria-labelledby="sponsors-title">

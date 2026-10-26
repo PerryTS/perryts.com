@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import SectionHeader from "../components/SectionHeader.astro";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
 
@@ -41,7 +41,7 @@ const copy: Copy<{ title: string; aside: string; stages: Stage[] }> = {
     ],
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 // Pixel band from the design, one string per column, top pixel first. Each letter is a colour step;
 // the first columns fade in with an opacity ramp. Decorative only.

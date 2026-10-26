@@ -1,7 +1,7 @@
 ---
 import Mail from "@lucide/astro/icons/mail";
 import LinkArrow from "../components/LinkArrow.astro";
-import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
 
 interface Props {
   lang: Locale;
@@ -42,7 +42,7 @@ const copy: Copy<{
     teams: "Perry para empresas",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section id="teams" class="section teams">

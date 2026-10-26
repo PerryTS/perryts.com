@@ -4,7 +4,7 @@ import Mail from "@lucide/astro/icons/mail";
 import MessageCircle from "@lucide/astro/icons/message-circle";
 import BrandIcon from "../components/BrandIcon.astro";
 import LinkArrow from "../components/LinkArrow.astro";
-import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
 import { formatCompact } from "../lib/format.ts";
 import { getRepoStats } from "../lib/github.ts";
 import { links } from "../lib/links.ts";
@@ -41,7 +41,7 @@ const copy: Copy<{
     allPosts: "Todos los artículos",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 const channels = [
   { name: "Discord", meta: t.discord, href: links.discord, icon: "discord" },

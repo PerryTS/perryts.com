@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import Lines from "../components/Lines.astro";
 import InstallCommand from "../components/InstallCommand.astro";
 import LinkArrow from "../components/LinkArrow.astro";
@@ -27,7 +27,7 @@ const copy: Copy<{ eyebrow: string; title: string; sub: string; docs: string; co
     copyLabel: "Copiar el comando de instalación",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 
 // Terminal output is product output, not copy: it stays the same in every locale.
 const lines: TerminalLine[] = [

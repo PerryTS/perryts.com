@@ -1,0 +1,24 @@
+---
+import Base from "../../layouts/Base.astro";
+import Landing from "../../components/Landing.astro";
+import { localeStaticPaths, pick, type Copy, type Locale } from "../../i18n/index.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const copy: Copy<{ title: string; description: string }> = {
+  en: {
+    title: "Perry — TypeScript compiled to native",
+    description: "Perry is an open-source, ahead-of-time TypeScript compiler. One codebase, 11 platforms, no Node.js at runtime.",
+  },
+  es: {
+    title: "Perry — TypeScript compilado a nativo",
+    description: "Perry es un compilador de TypeScript ahead-of-time y de código abierto. Un código, 11 plataformas, sin Node.js en ejecución.",
+  },
+};
+const t = pick(copy, lang);
+---
+
+<Base lang={lang} title={t.title} description={t.description} titleIsAbsolute>
+  <Landing lang={lang} />
+</Base>

@@ -1,6 +1,6 @@
 ---
 import ArrowRight from "@lucide/astro/icons/arrow-right";
-import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
 import { links } from "../lib/links.ts";
 import SectionHeader from "../components/SectionHeader.astro";
 import Bird from "../components/Bird.astro";
@@ -53,7 +53,7 @@ const copy: Copy<{
     coopStatus: "Pre-1.0",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 const statuses = [t.perryStatus, tools[1].status, tools[2].status, t.coopStatus];
 ---
 

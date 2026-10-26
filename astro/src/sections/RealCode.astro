@@ -1,5 +1,5 @@
 ---
-import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
 import Lines from "../components/Lines.astro";
 import LinkArrow from "../components/LinkArrow.astro";
 
@@ -77,7 +77,7 @@ const copy: Copy<{
     ],
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section class="section real">

@@ -3,7 +3,7 @@ import Menu from "@lucide/astro/icons/menu";
 import Bird from "./Bird.astro";
 import BrandIcon from "./BrandIcon.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
-import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
 import { formatCompact } from "../lib/format.ts";
 import { getRepoStats } from "../lib/github.ts";
 import { links } from "../lib/links.ts";
@@ -29,7 +29,7 @@ const copy: Copy<{ items: [string, string][]; menu: string; language: string; ho
     home: "Inicio de Perry",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <header class="nav">

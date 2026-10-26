@@ -1,5 +1,5 @@
 ---
-import type { Copy, Locale } from "../i18n/index.ts";
+import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { localePath } from "../i18n/index.ts";
 import Lines from "../components/Lines.astro";
 import LinkArrow from "../components/LinkArrow.astro";
@@ -59,7 +59,7 @@ const copy: Copy<{ title: string; sub: string; caption: string; columns: Column[
     link: "Ver las comparativas con fuentes",
   },
 };
-const t = copy[lang];
+const t = pick(copy, lang);
 ---
 
 <section class="section replace">
