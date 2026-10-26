@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "./src/integrations/sitemap.mjs";
+import legacyOgImages from "./src/integrations/legacy-og.mjs";
 import { locales } from "./src/i18n/locales.mjs";
 
 // URLs match the previous Next.js site: every page lives under a locale prefix
@@ -9,7 +10,7 @@ export default defineConfig({
   site: "https://perryts.com",
   // server.ts and deploy.sh serve and upload ./out.
   outDir: "./out",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), legacyOgImages()],
   markdown: { shikiConfig: { theme: "github-dark-dimmed" } },
   trailingSlash: "always",
   build: { format: "directory" },
