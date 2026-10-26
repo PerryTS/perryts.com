@@ -18,6 +18,13 @@ function mimeType(filePath: string): string {
   if (filePath.endsWith(".woff")) return "font/woff";
   if (filePath.endsWith(".txt")) return "text/plain; charset=utf-8";
   if (filePath.endsWith(".xml")) return "application/xml";
+  if (filePath.endsWith(".mjs")) return "application/javascript; charset=utf-8";
+  if (filePath.endsWith(".webp")) return "image/webp";
+  if (filePath.endsWith(".avif")) return "image/avif";
+  if (filePath.endsWith(".gif")) return "image/gif";
+  if (filePath.endsWith(".mp4")) return "video/mp4";
+  if (filePath.endsWith(".webm")) return "video/webm";
+  if (filePath.endsWith(".webmanifest")) return "application/manifest+json";
   return "application/octet-stream";
 }
 
