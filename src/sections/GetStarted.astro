@@ -164,7 +164,7 @@ const t = pick(copy, lang);
 
 <style>
   .get-started {
-    padding-top: max(var(--section-y), 104px);
+    padding-top: min(var(--section-y), 104px);
     border-top: 1px solid var(--border);
     overflow: hidden;
   }
@@ -194,6 +194,7 @@ const t = pick(copy, lang);
     gap: 16px;
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
+    line-height: 1.3;
   }
   .row dt {
     letter-spacing: 1px;
@@ -209,6 +210,7 @@ const t = pick(copy, lang);
     overflow-wrap: anywhere;
   }
   .action {
+    display: flex;
     color: var(--text-muted);
   }
   @media (max-width: 900px) {
