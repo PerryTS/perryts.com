@@ -1,0 +1,37 @@
+---
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+
+interface Props {
+  href: string;
+  /** External links get the up-right arrow and open in the same tab. */
+  external?: boolean;
+  class?: string;
+}
+const { href, external = href.startsWith("http"), class: className } = Astro.props;
+const Icon = external ? ArrowUpRight : ArrowRight;
+---
+
+<a class:list={["link-arrow", className]} href={href}>
+  <span><slot /></span>
+  <Icon size={16} stroke-width={1.75} aria-hidden="true" />
+</a>
+
+<style>
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .link-arrow :global(svg) {
+    transition: transform 200ms var(--ease-out);
+  }
+  .link-arrow:hover {
+    color: var(--accent);
+  }
+  .link-arrow:hover :global(svg) {
+    transform: translateX(2px);
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import Globe from "@lucide/astro/icons/globe";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
+import { locales, localeLabels, localePath, type Locale } from "../i18n/index.ts";
+
+interface Props {
+  lang: Locale;
+  /** Path of the current page without locale prefix. */
+  path?: string;
+  label: string;
+}
+const { lang, path = "", label } = Astro.props;
+---
+
+<details class="lang">
+  <summary aria-label={label}>
+    <Globe size={14} stroke-width={1.75} aria-hidden="true" />
+    <span>{localeLabels[lang].short}</span>
+    <ChevronDown size={12} stroke-width={1.75} aria-hidden="true" />
+  </summary>
+  <ul>
+    {locales.map((l) => (
+      <li>
+        <a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? "true" : undefined}>
+          {localeLabels[l].name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<style>
+  .lang {
+    position: relative;
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary :global(svg) {
+    color: var(--text-muted);
+  }
+  ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    min-width: 140px;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    z-index: 20;
+  }
+  a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  a:hover {
+    background: var(--bg);
+  }
+  a[aria-current] {
+    color: var(--accent);
+  }
+</style>

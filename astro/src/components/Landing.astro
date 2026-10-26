@@ -1,0 +1,39 @@
+---
+import type { Locale } from "../i18n/index.ts";
+import Hero from "../sections/Hero.astro";
+import SpecStrip from "../sections/SpecStrip.astro";
+import ReplaceStack from "../sections/ReplaceStack.astro";
+import HowItWorks from "../sections/HowItWorks.astro";
+import NativeUI from "../sections/NativeUI.astro";
+import NodeParity from "../sections/NodeParity.astro";
+import Benchmarks from "../sections/Benchmarks.astro";
+import RealCode from "../sections/RealCode.astro";
+import Ecosystem from "../sections/Ecosystem.astro";
+import Roadmap from "../sections/Roadmap.astro";
+import ForTeams from "../sections/ForTeams.astro";
+import BuiltInTheOpen from "../sections/BuiltInTheOpen.astro";
+import Community from "../sections/Community.astro";
+import Sponsors from "../sections/Sponsors.astro";
+import GetStarted from "../sections/GetStarted.astro";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+---
+
+<Hero lang={lang} />
+<SpecStrip lang={lang} />
+<ReplaceStack lang={lang} />
+<HowItWorks lang={lang} />
+<NativeUI lang={lang} />
+<NodeParity lang={lang} />
+<Benchmarks lang={lang} />
+<RealCode lang={lang} />
+<Ecosystem lang={lang} />
+<Roadmap lang={lang} />
+<ForTeams lang={lang} />
+<BuiltInTheOpen lang={lang} />
+<Community lang={lang} />
+<Sponsors lang={lang} />
+<GetStarted lang={lang} />

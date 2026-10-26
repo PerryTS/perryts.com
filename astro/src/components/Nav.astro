@@ -1,0 +1,166 @@
+---
+import Menu from "@lucide/astro/icons/menu";
+import Bird from "./Bird.astro";
+import BrandIcon from "./BrandIcon.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { formatCompact } from "../lib/format.ts";
+import { getRepoStats } from "../lib/github.ts";
+import { links } from "../lib/links.ts";
+
+interface Props {
+  lang: Locale;
+  path?: string;
+}
+const { lang, path } = Astro.props;
+const stats = await getRepoStats();
+
+const copy: Copy<{ items: [string, string][]; menu: string; language: string; home: string }> = {
+  en: {
+    items: [["Docs", links.docs], ["Showcase", localePath("en", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("en", "publish")], ["For teams", "#teams"], ["Blog", localePath("en", "blog")]],
+    menu: "Menu",
+    language: "Change language",
+    home: "Perry home",
+  },
+  es: {
+    items: [["Docs", links.docs], ["Showcase", localePath("es", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("es", "publish")], ["Empresas", "#teams"], ["Blog", localePath("es", "blog")]],
+    menu: "Menú",
+    language: "Cambiar idioma",
+    home: "Inicio de Perry",
+  },
+};
+const t = copy[lang];
+---
+
+<header class="nav">
+  <div class="wrap row">
+    <a class="brand" href={localePath(lang)} aria-label={t.home}>
+      <Bird size={28} />
+      <span>perry</span>
+    </a>
+    <nav class="links" aria-label="Main">
+      {t.items.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+    <div class="right">
+      <LanguageSwitcher lang={lang} path={path} label={t.language} />
+      <a class="discord" href={links.discord}><BrandIcon name="discord" /><span>Discord</span></a>
+      <a class="github" href={links.github}>
+        <BrandIcon name="github" />
+        <span>GitHub</span>
+        <span class="stars">{formatCompact(stats.stars, lang)}</span>
+      </a>
+      <details class="mobile">
+        <summary aria-label={t.menu}><Menu size={20} stroke-width={1.75} aria-hidden="true" /></summary>
+        <nav aria-label={t.menu}>
+          {t.items.map(([label, href]) => <a href={href}>{label}</a>)}
+          <a href={links.discord}>Discord</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .links {
+    display: flex;
+    gap: 32px;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .links a:hover,
+  .discord:hover {
+    color: var(--text);
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .discord {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .github {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .github:hover {
+    border-color: var(--text-muted);
+  }
+  .stars {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .mobile {
+    display: none;
+    position: relative;
+  }
+  .mobile summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    z-index: 20;
+  }
+  .mobile nav a {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+  @media (max-width: 1100px) {
+    .links,
+    .discord {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }
+  @media (max-width: 480px) {
+    .github span:not(.stars) {
+      display: none;
+    }
+  }
+</style>

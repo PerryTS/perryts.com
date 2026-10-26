@@ -1,0 +1,48 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { locales, localePath, type Locale } from "../i18n/index.ts";
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  /** Page path without locale prefix, used for alternates and the language switcher. */
+  path?: string;
+}
+const { lang, title, description, path = "" } = Astro.props;
+const canonical = new URL(localePath(lang, path), Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/perry-icon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body>
+    <Nav lang={lang} path={path} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      import "../scripts/motion.ts";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+---
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Bird from "./Bird.astro";
+import { localePath, localeLabels, type Copy, type Locale } from "../i18n/index.ts";
+import { links } from "../lib/links.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const p = (path: string) => localePath(lang, path);
+
+type Column = { title: string; items: [string, string][] };
+const copy: Copy<{ tagline: string; columns: Column[]; served: string; source: string; rights: string; legal: string; privacy: string }> = {
+  en: {
+    tagline: "An open-source, ahead-of-time TypeScript compiler. Built in Rust, on SWC and LLVM.",
+    columns: [
+      { title: "Product", items: [["Getting started", p("getting-started")], ["Showcase", p("showcase")], ["Perry Publish", p("publish")], ["Roadmap", p("roadmap")], ["Enterprise", p("enterprise")]] },
+      { title: "Learn", items: [["Documentation", links.docs], ["Blog", p("blog")], ["Compare", p("compare")], ["Internals", p("internals")], ["Coop", p("coop")]] },
+      { title: "Community", items: [["GitHub", links.github], ["Discord", links.discord], ["Issues", links.issues], ["Contributing", links.contributing], ["Newsletter", p("newsletter")]] },
+    ],
+    served: "This page was served by a native binary compiled with Perry.",
+    source: "View the server source",
+    rights: "© 2026 Perry · MIT licensed",
+    legal: "Legal notice",
+    privacy: "Privacy",
+  },
+  es: {
+    tagline: "Un compilador de TypeScript ahead-of-time y de código abierto. Escrito en Rust, sobre SWC y LLVM.",
+    columns: [
+      { title: "Producto", items: [["Primeros pasos", p("getting-started")], ["Showcase", p("showcase")], ["Perry Publish", p("publish")], ["Roadmap", p("roadmap")], ["Empresas", p("enterprise")]] },
+      { title: "Aprender", items: [["Documentación", links.docs], ["Blog", p("blog")], ["Comparativas", p("compare")], ["Internals", p("internals")], ["Coop", p("coop")]] },
+      { title: "Comunidad", items: [["GitHub", links.github], ["Discord", links.discord], ["Issues", links.issues], ["Contribuir", links.contributing], ["Newsletter", p("newsletter")]] },
+    ],
+    served: "Esta página la ha servido un binario nativo compilado con Perry.",
+    source: "Ver el código del servidor",
+    rights: "© 2026 Perry · Licencia MIT",
+    legal: "Aviso legal",
+    privacy: "Privacidad",
+  },
+};
+const t = copy[lang];
+---
+
+<footer class="footer">
+  <div class="wrap inner">
+    <div class="row">
+      <div class="brand">
+        <a class="lockup" href={p("")}><Bird size={26} /><span>perry</span></a>
+        <p class="muted">{t.tagline}</p>
+      </div>
+      <div class="columns">
+        {t.columns.map((c) => (
+          <nav aria-label={c.title}>
+            <p class="t-label accent">{c.title}</p>
+            <ul>{c.items.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
+          </nav>
+        ))}
+      </div>
+    </div>
+    <div class="served">
+      <div class="served__left">
+        <span class="live" aria-hidden="true"></span>
+        <span>{t.served}</span>
+        <code class="t-mono accent">$ perry compile native-entry/server.ts</code>
+      </div>
+      <a class="served__link muted" href={links.serverSource}>{t.source}<ArrowUpRight size={14} stroke-width={1.75} aria-hidden="true" /></a>
+    </div>
+    <div class="bottom t-mono muted">
+      <span>{t.rights}</span>
+      <span class="legal">
+        <a href={p("imprint")}>{t.legal}</a>
+        <a href={p("privacy")}>{t.privacy}</a>
+        <span>{localeLabels[lang].name}</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-block: 72px 40px;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 360px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .columns {
+    display: flex;
+    gap: 80px;
+  }
+  .columns nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .columns ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .columns a:hover,
+  .legal a:hover,
+  .served__link:hover {
+    color: var(--text);
+  }
+  .served {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 24px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    font-size: 14px;
+  }
+  .served__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .live {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+  .served__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .legal {
+    display: flex;
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .row,
+    .served,
+    .bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .columns {
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+  }
+</style>

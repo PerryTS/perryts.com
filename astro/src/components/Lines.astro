@@ -1,0 +1,9 @@
+---
+/** Renders copy that uses "\n" for designed line breaks. */
+interface Props {
+  text: string;
+}
+const lines = Astro.props.text.split("\n");
+---
+
+{lines.map((line, i) => (<>{i > 0 && <br />}{line}</>))}
