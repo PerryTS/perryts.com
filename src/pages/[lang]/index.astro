@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Landing from "../../components/Landing.astro";
+import JsonLd from "../../components/JsonLd.astro";
 import { localeStaticPaths, pick, type Copy, type Locale } from "../../i18n/index.ts";
 
 export const getStaticPaths = localeStaticPaths;
@@ -61,8 +62,23 @@ const copy: Copy<{ title: string; description: string }> = {
   },
 };
 const t = pick(copy, lang);
+
+// Same structured data the previous home page emitted.
+const softwareApplication = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Perry",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "macOS, Windows, Linux, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Web/WebAssembly",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
+  url: "https://perryts.com/en/",
+  sameAs: ["https://github.com/PerryTS/perry", "https://docs.perryts.com"],
+};
 ---
 
 <Base lang={lang} title={t.title} description={t.description} titleIsAbsolute>
+  <JsonLd slot="head" data={softwareApplication} />
   <Landing lang={lang} />
 </Base>
