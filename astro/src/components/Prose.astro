@@ -5,10 +5,13 @@
  */
 interface Props {
   class?: string;
+  /** Language of the content when it differs from the page (e.g. English fallback). */
+  lang?: string;
 }
+const { class: className, lang } = Astro.props;
 ---
 
-<div class:list={["prose", Astro.props.class]}><slot /></div>
+<div class:list={["prose", className]} lang={lang}><slot /></div>
 
 <style>
   .prose {
@@ -64,12 +67,14 @@ interface Props {
   .prose :global(li::marker) {
     color: var(--text-muted);
   }
+  /* Used for notes and corrections converted from the old posts, so it stays body-sized. */
   .prose :global(blockquote) {
-    padding-left: 24px;
+    padding: 4px 0 4px 20px;
     border-left: 2px solid var(--accent);
-    font-size: 21px;
-    line-height: 1.5;
-    font-weight: 500;
+    color: var(--text);
+  }
+  .prose :global(blockquote > * + *) {
+    margin-top: 0.8em;
   }
   .prose :global(hr) {
     border: 0;

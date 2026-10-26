@@ -1,0 +1,128 @@
+---
+title: "UI เนทีฟข้ามแพลตฟอร์มจาก TypeScript"
+excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+date: 2025-02-01
+tags: ["architecture", "UI", "cross-platform"]
+---
+หนึ่งในเป้าหมายที่ทะเยอทะยานที่สุดของ Perry คือการส่งมอบแอปพลิเคชัน GUI ที่เป็นเนทีฟอย่างแท้จริง จากโค้ดเบส TypeScript เดียว ไม่ใช่ web views ที่ห่อด้วยเชลล์เนทีฟ ไม่ใช่ เอนจินเรนเดอร์แบบกำหนดเองที่วาดพิกเซลของตัวเอง วิดเจ็ตเนทีฟจริงๆ เรนเดอร์โดย เฟรมเวิร์ก UI ของแต่ละแพลตฟอร์มเอง คอมไพล์จาก TypeScript ในเวลา build
+
+โพสต์นี้อธิบายว่ามันทำงานอย่างไร — สถาปัตยกรรม การแมปแพลตฟอร์ม ข้อแลกเปลี่ยน และเราอยู่ตรงไหนในวันนี้
+
+## ปัญหาของแนวทางปัจจุบัน
+
+การพัฒนา GUI ข้ามแพลตฟอร์มเป็นปัญหาที่ยากมาหลายทศวรรษ ทุกเฟรมเวิร์กหลัก ได้ทำชุดของการประนีประนอมที่แตกต่างกัน:
+
+### Electron / Tauri (แบบ Web)
+
+Electron บันเดิล Chromium และ Node.js ให้คุณได้เว็บเบราว์เซอร์เป็นเชลล์แอป คุณเข้าถึงแพลตฟอร์มเว็บได้เต็มที่ แต่แอป "เนทีฟ" ของคุณเป็นการดาวน์โหลด 150+ MB ที่ใช้หน่วยความจำหลายร้อยเมกะไบต์แค่เพื่อแสดงหน้าต่าง Tauri แทนที่ Chromium ด้วย web view ของ OS ลดขนาดได้มาก แต่ UI ของคุณยังเป็น HTML/CSS ที่เรนเดอร์ใน web view — ไม่ใช่วิดเจ็ตเนทีฟ
+
+### React Native (แบบ Bridge)
+
+React Native รัน JavaScript ของคุณในเอนจิน JS (Hermes หรือ V8) และทำ bridge ไปยังวิดเจ็ต เนทีฟผ่านคิวข้อความแบบซีเรียลไลซ์ คุณได้วิดเจ็ตเนทีฟจริง แต่ bridge เพิ่มความล่าช้า โดยเฉพาะสำหรับเจสเจอร์และแอนิเมชัน การโต้ตอบที่ซับซ้อนต้อง ลงไปเขียนโค้ดเนทีฟ (Swift/Kotlin) ทำลายคำสัญญาของโค้ดเบสเดียว
+
+### Flutter (เรนเดอร์แบบกำหนดเอง)
+
+Flutter คอมไพล์ Dart เป็นโค้ดเนทีฟและวาดทุกอย่างด้วยเอนจินเรนเดอร์ที่ใช้ Skia ของตัวเอง ประสิทธิภาพยอดเยี่ยม แต่วิดเจ็ตของคุณไม่ใช่เนทีฟ — มันเป็น แบบจำลองที่สมบูรณ์แบบในระดับพิกเซล ซึ่งหมายความว่าอนุสัญญาของแพลตฟอร์ม (ฟิสิกส์การเลื่อน การเลือกข้อความ พฤติกรรมการเข้าถึง) ต้องถูกนำไปใช้ใหม่แทนที่จะสืบทอดมา และบนเดสก์ท็อป ความแตกต่างจะเห็นได้ชัดขึ้น
+
+### KMP + Compose Multiplatform (เนทีฟบางส่วน)
+
+Kotlin Multiplatform คอมไพล์เป็น JVM บน Android และเนทีฟบน iOS แต่ UI ที่แชร์ผ่าน Compose Multiplatform ใช้เรนเดอร์ที่ใช้ Skia — ข้อแลกเปลี่ยนเดียวกับ Flutter สำหรับ UI ที่เป็นเนทีฟจริงๆ คุณต้องกลับไปเขียนโค้ดเฉพาะแพลตฟอร์ม
+
+## แนวทางของ Perry: คอมไพล์เป็น Toolkit เนทีฟ
+
+Perry ใช้แนวทางที่แตกต่างกันโดยพื้นฐาน แทนที่จะรันโค้ดของคุณในรันไทม์ แล้วทำ bridge ไปยังวิดเจ็ตเนทีฟ หรือวาดพิกเซลแบบกำหนดเอง Perry คอมไพล์โค้ด UI TypeScript ของคุณเป็นการเรียก toolkit เนทีฟของแต่ละแพลตฟอร์มโดยตรงในเวลา build
+
+ความแตกต่างที่สำคัญ: **ไม่มีเลเยอร์รันไทม์ระหว่างโค้ดของคุณและ SDK ของแพลตฟอร์ม** ไบนารีที่คอมไพล์แล้วเรียก AppKit, UIKit, Android Views, GTK4 หรือ Win32 โดยตรง เหมือนกับ แอปที่เขียนด้วย Swift, Kotlin หรือ C++ จะทำ
+
+## API UI แบบรวม
+
+Perry จัดเตรียม API TypeScript ทั่วไปสำหรับสร้างอินเทอร์เฟซผู้ใช้ API นี้ ถูกออกแบบให้เป็นระดับสูงโดยเจตนา — คุณอธิบายว่า UI ของคุณควรประกอบด้วยอะไรและควร ทำงานอย่างไร และ Perry จะแมปไปยังโครงสร้างเนทีฟที่เหมาะสม
+
+counter.ts
+
+import { App, Text, Button, VStack, State } from "perry/ui";
+
+const count = new State(0);
+
+const app = new App("Counter", { width: 400, height: 300 });
+
+app.body(() => {
+
+return VStack({ spacing: 16, alignment: "center" }, \[
+
+Text(\`Count: ${count.value}\`, { fontSize: 32 }),
+
+Button("Increment", () => count.value++),
+
+Button("Reset", () => count.value = 0),
+
+\]);
+
+});
+
+app.run();
+
+โค้ดเดียวกันนี้คอมไพล์เป็น UI เนทีฟบนทั้งหกแพลตฟอร์ม ไม่มี `#ifdef`ไม่มีการตรวจสอบแพลตฟอร์ม ไม่มี import แบบมีเงื่อนไข
+
+## การแมปแพลตฟอร์มโดยละเอียด
+
+นี่คือวิธีที่ Perry แมป API แบบรวมไปยังเฟรมเวิร์กเนทีฟของแต่ละแพลตฟอร์ม:
+
+### macOS — AppKit
+
+บน macOS Perry สร้างโค้ดที่สร้างและจัดการออบเจ็กต์ AppKit โดยตรง`App` กลายเป็น `NSApplication` พร้อม`NSWindow` `Text` กลายเป็น `NSTextField` (ปิดการแก้ไข) `Button` กลายเป็น `NSButton` พร้อมรูปแบบ target-action ที่เชื่อมต่อกับ callback ของคุณ `VStack` กลายเป็น `NSStackView` ในแนวตั้ง เลย์เอาต์ใช้ข้อจำกัด Auto Layout
+
+ไบนารีที่คอมไพล์แล้วเชื่อมต่อกับ AppKit framework และเรียกฟังก์ชัน Objective-C runtime โดยตรง เหมือนกับที่ Swift ที่คอมไพล์โดย Xcode จะทำ
+
+### iOS & iPadOS — UIKit
+
+บน iOS การแมปคล้ายกันแต่เป้าหมายคือ UIKit `App` กลายเป็น `UIApplication` พร้อม`UIWindow` และ `UIViewController` ราก `Text` แมปเป็น `UILabel` `Button` แมปเป็น `UIButton` เลย์เอาต์ใช้ `UIStackView` และ Auto Layout อีเวนต์สัมผัสจะถูกจัดการผ่าน responder chain ของ UIKit
+
+### Android — JNI + Views
+
+บน Android Perry สร้างไลบรารีเนทีฟที่โหลดผ่าน JNI (Java Native Interface) `App` แมปเป็น `Activity` `Text` กลายเป็น `TextView` `Button` กลายเป็น `android.widget.Button` พร้อม`OnClickListener` `VStack` แมปเป็น `LinearLayout` แนวตั้ง โค้ดเนทีฟเรียกกลับไปยัง Android framework ผ่าน JNI สร้างและ จัดการ Android views จริง
+
+### Linux — GTK4
+
+บน Linux Perry ใช้เป้าหมาย GTK4 `App` กลายเป็น `GtkApplication` พร้อม`GtkApplicationWindow` `Text` แมปเป็น `GtkLabel` `Button` แมปเป็น `GtkButton` พร้อม signal handler `VStack` แมปเป็น `GtkBox` ในแนวตั้ง CSS theming ของ GTK หมายความว่าแอปของคุณจะติดตามธีมเดสก์ท็อปของผู้ใช้โดยอัตโนมัติ
+
+### Windows — Win32
+
+บน Windows Perry สร้างการเรียก Win32 API `App` สร้าง window class ลงทะเบียน และรัน message loop `Button` กลายเป็นคอนโทรล `BUTTON`ที่สร้างด้วย `CreateWindowEx` `Text` แมปเป็นคอนโทรล `STATIC`อีเวนต์จะถูกจัดการผ่าน Win32 message pump (`WM_COMMAND`, `WM_NOTIFY` เป็นต้น)
+
+## การจัดการสถานะ
+
+พื้นฐาน `State<T>` ของ Perry ให้การจัดการ สถานะแบบรีแอคทีฟที่คอมไพล์เป็นกลไกอัปเดตเนทีฟของแพลตฟอร์ม เมื่อ ค่าสถานะเปลี่ยน Perry จะทริกเกอร์การอัปเดต UI ผ่านระบบ การทำให้ไม่ถูกต้องของแพลตฟอร์มเอง — `setNeedsDisplay` บน macOS/iOS, `invalidate()` บน Android, `gtk_widget_queue_draw` บน Linux
+
+ไม่มีการ diffing DOM เสมือน ไม่มี reconciliation pass ไม่มีการซีเรียลไลซ์ การเปลี่ยนแปลง สถานะจะส่งตรงไปยังวิดเจ็ตเนทีฟที่แสดงค่า
+
+## ทำไมไม่ใช้ไวยากรณ์ SwiftUI / Jetpack Compose?
+
+คุณอาจสงสัยว่าทำไม Perry ไม่ใช้ไวยากรณ์แบบ declarative คล้ายกับ SwiftUI หรือ Jetpack Compose คำตอบคือเชิงปฏิบัติ: Perry คอมไพล์ TypeScript และ TypeScript มีสำนวนของตัวเอง แทนที่จะประดิษฐ์ DSL ที่ดูแปลกสำหรับนักพัฒนา TypeScript Perry ใช้ API แบบ builder ที่รู้สึกเป็นธรรมชาติใน TypeScript — constructors การเรียกเมธอด callbacks และ closures เป็นรูปแบบเดียวกับที่คุณใช้อยู่แล้วเมื่อ ทำงานกับ Express, React hooks หรือไลบรารี TypeScript อื่นๆ
+
+## สิ่งที่มีอยู่ในวันนี้
+
+แบ็กเอนด์ทั้งหกแพลตฟอร์มถูกนำไปใช้งานและมีเสถียรภาพ ชุดวิดเจ็ตปัจจุบันประกอบด้วย:
+
+-   **เลย์เอาต์** — VStack, HStack, Spacer, ScrollView, Divider
+-   **การแสดงผล** — Text, Image
+-   **อินพุต** — Button, TextField, Toggle, Slider
+-   **การนำทาง** — NavigationView, TabView, List
+-   **คอนเทนเนอร์** — TreeView, SearchBar, StatusBar
+-   **สถานะ** — State<T> สำหรับการอัปเดตแบบรีแอคทีฟ
+
+## สิ่งที่จะมาถัดไป
+
+เรากำลังขยายไลบรารีวิดเจ็ตอย่างแข็งขัน รายการถัดไป:
+
+-   `SecureField` — อินพุตรหัสผ่านพร้อมช่องข้อความปลอดภัยเนทีฟของแพลตฟอร์ม
+-   `ProgressView` — ตัวบ่งชี้ความคืบหน้าแบบกำหนดและไม่กำหนด
+-   `Alert` — กล่องโต้ตอบแจ้งเตือนเนทีฟพร้อมปุ่มและช่องข้อความ
+-   `DatePicker` — การเลือกวันที่/เวลาเนทีฟของแพลตฟอร์ม
+-   `Menu` — แถบเมนูและเมนูบริบทเนทีฟ
+
+เป้าหมายคือความเท่าเทียมของเฟรมเวิร์ก GUI เต็มรูปแบบข้ามทุกแพลตฟอร์ม — ทุกวิดเจ็ต เลย์เอาต์ เจสเจอร์ และแอนิเมชันมีอยู่ทุกที่ ดู [แผนงาน](/th/roadmap/) สำหรับ ภาพรวมทั้งหมด
+
+## ลองใช้งาน
+
+วิธีที่ดีที่สุดในการเข้าใจ UI เนทีฟของ Perry คือดูมันทำงานจริง [Pry](/th/showcase/pry/) เป็นตัวดู JSON เนทีฟที่สร้างขึ้นทั้งหมดด้วย TypeScript กับ Perry — แอปจริงที่มีการนำทางแบบต้นไม้ การค้นหา และปุ่มลัด คอมไพล์เป็นไบนารีเนทีฟบน macOS, iOS และ Android อ่าน [บทความแนะนำฉบับเต็ม](/th/blog/building-pry/) เกี่ยวกับวิธีการสร้าง

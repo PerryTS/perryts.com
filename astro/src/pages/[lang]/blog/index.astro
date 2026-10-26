@@ -1,0 +1,203 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import NewsletterForm from "../../../components/NewsletterForm.astro";
+import Badge from "../../../components/blog/Badge.astro";
+import LinkArrow from "../../../components/LinkArrow.astro";
+import { blogCopy, filterKeys } from "../../../components/blog/copy.ts";
+import { localePath, localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
+import { formatPostDate, getPosts } from "../../../lib/blog.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const t = pick(blogCopy, lang);
+const posts = await getPosts(lang);
+const [featured, ...rest] = posts;
+
+const tagKeys = (tags: string[]) => tags.map((tag) => tag.toLowerCase()).join(" ");
+const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="blog">
+  <PageHeader title={t.title} lead={t.aside}>
+    <div class="filters" data-filters>
+      <div class="chips" role="group">
+        <button type="button" class="chip" aria-pressed="true" data-filter="">{t.all}</button>
+        {filterKeys.map((key) => (
+          <button type="button" class="chip" aria-pressed="false" data-filter={key}>{t.filters[key]}</button>
+        ))}
+      </div>
+    </div>
+  </PageHeader>
+
+  {featured && (
+    <section class="featured" data-post data-tags={tagKeys(featured.entry.data.tags)}>
+      <div class="wrap featured__inner">
+        <p class="meta t-mono muted">
+          <Badge>{t.latest}</Badge>
+          <time datetime={featured.entry.data.date.toISOString()}>{formatPostDate(featured.entry.data.date, lang, "short")}</time>
+          <span>{featured.entry.data.tags.slice(0, 3).join(" · ")}</span>
+        </p>
+        <h2 class="featured__title" lang={featured.isFallback ? "en" : undefined}>
+          <a href={localePath(lang, `blog/${featured.slug}`)}>{featured.entry.data.title}</a>
+        </h2>
+        <p class="featured__excerpt t-lead muted" lang={featured.isFallback ? "en" : undefined}>{featured.entry.data.excerpt}</p>
+        <LinkArrow href={localePath(lang, `blog/${featured.slug}`)}>{t.read}</LinkArrow>
+      </div>
+    </section>
+  )}
+
+  <section class="list">
+    <div class="wrap">
+      {years.map((year) => {
+        const inYear = rest.filter((p) => p.entry.data.date.getUTCFullYear() === year);
+        return (
+          <div class="year" data-year>
+            <h2 class="year__head t-mono">
+              <span>{year}</span>
+              <span class="muted">{t.posts(inYear.length)}</span>
+            </h2>
+            <ul>
+              {inYear.map((post, i) => (
+                <li class="row" data-post data-tags={tagKeys(post.entry.data.tags)} data-reveal style={`--i: ${Math.min(i, 6)}`}>
+                  <time class="row__date t-mono muted" datetime={post.entry.data.date.toISOString()}>
+                    {formatPostDate(post.entry.data.date, lang, "short")}
+                  </time>
+                  <div class="row__copy" lang={post.isFallback ? "en" : undefined}>
+                    <h3 class="row__title"><a href={localePath(lang, `blog/${post.slug}`)}>{post.entry.data.title}</a></h3>
+                    <p class="muted">{post.entry.data.excerpt}</p>
+                  </div>
+                  <p class="row__tags t-mono accent">{post.entry.data.tags.slice(0, 2).join(" · ")}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <NewsletterForm lang={lang} source="blog-index" variant="block" />
+</Base>
+
+<script>
+  // Tag filter: hides posts whose tags don't include the selected key. Purely progressive:
+  // without JS every post stays visible.
+  const root = document.querySelector<HTMLElement>("[data-filters]");
+  const chips = root ? [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")] : [];
+  for (const chip of chips) {
+    chip.addEventListener("click", () => {
+      const key = chip.dataset.filter ?? "";
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      document.querySelectorAll<HTMLElement>("[data-post]").forEach((post) => {
+        const tags = (post.dataset.tags ?? "").split(" ");
+        post.hidden = key !== "" && !tags.includes(key);
+      });
+      document.querySelectorAll<HTMLElement>("[data-year]").forEach((year) => {
+        year.hidden = !year.querySelector("[data-post]:not([hidden])");
+      });
+    });
+  }
+</script>
+
+<style>
+  .filters {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .chip:hover {
+    border-color: var(--text-muted);
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
+  .featured__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-block: 72px 80px;
+    max-width: calc(980px + 2 * var(--page-x));
+    margin-inline: 0;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+  .featured__title {
+    font-size: clamp(32px, 3.2vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+  .featured__title a:hover,
+  .row__title a:hover {
+    color: var(--accent);
+  }
+  .list {
+    padding-bottom: 96px;
+  }
+  .year + .year {
+    margin-top: 64px;
+  }
+  .year__head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 140px 1fr 220px;
+    gap: 40px;
+    padding-block: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .row__date,
+  .row__tags {
+    padding-top: 6px;
+  }
+  .row__tags {
+    text-align: right;
+  }
+  .row__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .row__title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .row__date,
+    .row__tags {
+      padding-top: 0;
+      text-align: left;
+    }
+  }
+</style>
