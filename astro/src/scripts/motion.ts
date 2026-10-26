@@ -23,7 +23,8 @@ function countUp(el: HTMLElement) {
   const start = performance.now();
   const duration = 800;
   const frame = (now: number) => {
-    const t = Math.min(1, (now - start) / duration);
+    // rAF timestamps can predate `start`; clamp so the first frame never goes negative.
+    const t = Math.min(1, Math.max(0, (now - start) / duration));
     const eased = 1 - Math.pow(1 - t, 3);
     el.textContent = t < 1 ? final.replace(digits, fmt.format(target * eased)) : final;
     if (t < 1) requestAnimationFrame(frame);
