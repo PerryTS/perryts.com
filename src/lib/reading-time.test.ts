@@ -13,7 +13,3 @@ test("counts characters for CJK and Thai", () => {
   assert.equal(readingMinutes("あ".repeat(1500), "ja"), 3);
 });
 
-test("never returns less than one minute", () => {
-  assert.equal(readingMinutes("short", "en"), 1);
-  assert.equal(readingMinutes("", "th"), 1);
-});

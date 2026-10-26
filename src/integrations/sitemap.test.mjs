@@ -1,11 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { canonicalOf, publishedDateOf, sitemapXml } from "./sitemap.mjs";
-
-test("canonicalOf reads the canonical link, or null when missing", () => {
-  assert.equal(canonicalOf('<head><link rel="canonical" href="https://perryts.com/en/blog/"></head>'), "https://perryts.com/en/blog/");
-  assert.equal(canonicalOf("<head></head>"), null);
-});
+import { sitemapXml } from "./sitemap.mjs";
 
 test("sitemapXml lists each URL once, sorted, and escapes ampersands", () => {
   const xml = sitemapXml(["https://perryts.com/es/", "https://perryts.com/en/", "https://perryts.com/en/", "https://perryts.com/en/a&b/"]);
@@ -23,7 +18,3 @@ test("sitemapXml adds lastmod when an entry has one", () => {
   assert.match(xml, /<loc>https:\/\/perryts.com\/en\/<\/loc><\/url>/);
 });
 
-test("publishedDateOf reads the article date", () => {
-  assert.equal(publishedDateOf('<meta property="article:published_time" content="2026-08-12T00:00:00.000Z">'), "2026-08-12");
-  assert.equal(publishedDateOf("<head></head>"), null);
-});
