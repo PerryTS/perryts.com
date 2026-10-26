@@ -1,8 +1,216 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import Mail from "@lucide/astro/icons/mail";
+import MessageCircle from "@lucide/astro/icons/message-circle";
+import BrandIcon from "../components/BrandIcon.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { formatCompact } from "../lib/format.ts";
+import { getRepoStats } from "../lib/github.ts";
+import { links } from "../lib/links.ts";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+const stats = await getRepoStats();
+const stars = formatCompact(stats.stars, lang);
+
+const copy: Copy<{
+  title: string;
+  discord: string;
+  github: string;
+  newsletter: [string, string];
+  log: string;
+  allPosts: string;
+}> = {
+  en: {
+    title: "Join the community.",
+    discord: "Talk to maintainers and other builders",
+    github: `${stars} stars · MIT · issues & discussions`,
+    newsletter: ["Newsletter", "Release notes and engineering posts"],
+    log: "From the engineering log",
+    allPosts: "All posts",
+  },
+  es: {
+    title: "Únete a la comunidad.",
+    discord: "Habla con los mantenedores y con otros desarrolladores",
+    github: `${stars} estrellas · MIT · issues y discusiones`,
+    newsletter: ["Newsletter", "Notas de versión y artículos de ingeniería"],
+    log: "Del registro de ingeniería",
+    allPosts: "Todos los artículos",
+  },
+};
+const t = copy[lang];
+
+const channels = [
+  { name: "Discord", meta: t.discord, href: links.discord, icon: "discord" },
+  { name: "GitHub", meta: t.github, href: links.github, icon: "github" },
+  { name: t.newsletter[0], meta: t.newsletter[1], href: localePath(lang, "newsletter"), icon: "mail" },
+] as const;
+
+// Post titles stay in English: the posts themselves are written in English.
+const posts = [
+  { date: "2026-08-12", slug: "gc-decisions-surprises", tag: "runtime", title: "Building a GC for a native TypeScript compiler: decisions, surprises, and how it's going" },
+  { date: "2026-07-25", slug: "compiling-claude-code", tag: "compiler", title: "Compiling Claude Code: one minified bundle, 160 compiler fixes" },
+  { date: "2026-07-07", slug: "shipping-a-watch-only-app-to-the-app-store", tag: "watchOS", title: "Shipping a watch-only app to the App Store (when nothing else will)" },
+  { date: "2026-06-09", slug: "real-npm-packages-and-a-conformance-sweep", tag: "npm", title: "Real npm packages now compile: axios, zod, express — and a conformance sweep" },
+];
 ---
 
-<section class="section"><div class="wrap">Community</div></section>
+<section class="section section--surface community">
+  <div class="wrap grid">
+    <div class="join">
+      <h2 class="title" data-reveal>{t.title}</h2>
+      <ul class="channels">
+        {channels.map((c, i) => (
+          <li data-reveal style={`--i: ${i + 1}`}>
+            <a class="channel" href={c.href}>
+              <span class:list={["icon", { accent: c.icon === "discord" }]}>
+                {c.icon === "discord" && <MessageCircle size={20} stroke-width={1.75} aria-hidden="true" />}
+                {c.icon === "github" && <BrandIcon name="github" size={20} />}
+                {c.icon === "mail" && <Mail size={20} stroke-width={1.75} aria-hidden="true" />}
+              </span>
+              <span class="text">
+                <span class="name">{c.name}</span>
+                <span class="t-mono muted">{c.meta}</span>
+              </span>
+              <ArrowUpRight class="arrow muted" size={16} stroke-width={1.75} aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="blog">
+      <div class="head">
+        <h3 class="t-label muted">{t.log}</h3>
+        <LinkArrow href={localePath(lang, "blog")}>{t.allPosts}</LinkArrow>
+      </div>
+      <ul class="posts">
+        {posts.map((p, i) => (
+          <li data-reveal style={`--i: ${i}`}>
+            <a class="post" href={localePath(lang, `blog/${p.slug}`)} lang="en">
+              <time class="t-mono muted" datetime={p.date}>{p.date}</time>
+              <span class="post-title">{p.title}</span>
+              <span class="t-mono accent">{p.tag}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .community {
+    padding-block: min(96px, var(--section-y));
+    border-top: 1px solid var(--border);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .join {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .title {
+    font-size: clamp(34px, 3.1vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.032em;
+    line-height: 1.05;
+  }
+  .channels {
+    border-top: 1px solid var(--border);
+  }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .icon {
+    flex: none;
+  }
+  .text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .channel :global(.arrow) {
+    flex: none;
+    transition: transform 200ms var(--ease-out), color 150ms linear;
+  }
+  .channel:hover .name,
+  .channel:hover :global(.arrow) {
+    color: var(--accent);
+  }
+  .channel:hover :global(.arrow) {
+    transform: translate(2px, -2px);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 16px;
+  }
+  .head h3 {
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .post {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: start;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+  .post time {
+    padding-top: 5px;
+  }
+  .post .accent {
+    padding-top: 5px;
+  }
+  .post-title {
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    line-height: 27px;
+    max-width: 600px;
+    transition: color 150ms linear;
+  }
+  .post:hover .post-title {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 64px;
+    }
+  }
+  @media (max-width: 560px) {
+    .post {
+      grid-template-columns: 1fr auto;
+      gap: 8px 16px;
+    }
+    .post-title {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+</style>

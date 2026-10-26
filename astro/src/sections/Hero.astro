@@ -1,8 +1,119 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import Lines from "../components/Lines.astro";
+import InstallCommand from "../components/InstallCommand.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+import Terminal, { type TerminalLine } from "../components/Terminal.astro";
+import { links } from "../lib/links.ts";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+const copy: Copy<{ eyebrow: string; title: string; sub: string; docs: string; copyLabel: string }> = {
+  en: {
+    eyebrow: "AHEAD-OF-TIME TYPESCRIPT COMPILER · SWC + LLVM",
+    title: "Your TypeScript,\ncompiled to native.",
+    sub: "Perry compiles TypeScript and JavaScript into a small native executable. One codebase, 11 platforms, no Node.js at runtime.",
+    docs: "Read the docs",
+    copyLabel: "Copy install command",
+  },
+  es: {
+    eyebrow: "COMPILADOR AHEAD-OF-TIME DE TYPESCRIPT · SWC + LLVM",
+    title: "Tu TypeScript,\ncompilado a nativo.",
+    sub: "Perry compila TypeScript y JavaScript en un ejecutable nativo pequeño. Un solo código, 11 plataformas y nada de Node.js en tiempo de ejecución.",
+    docs: "Leer la documentación",
+    copyLabel: "Copiar el comando de instalación",
+  },
+};
+const t = copy[lang];
+
+// Terminal output is product output, not copy: it stays the same in every locale.
+const lines: TerminalLine[] = [
+  { text: "perry compile main.ts", prompt: true },
+  { text: "  parse      swc", tone: "muted" },
+  { text: "  transform  hir", tone: "muted" },
+  { text: "  codegen    llvm", tone: "muted" },
+  { text: "  link       runtime + gc", tone: "muted" },
+  { text: "✓ wrote ./main   ~330 KB", tone: "success" },
+  { text: "./main", prompt: true },
+  { text: "Hello, World!" },
+  { text: "█", prompt: true, tone: "accent" },
+];
 ---
 
-<section class="section"><div class="wrap">Hero</div></section>
+<section class="hero">
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow" data-reveal>{t.eyebrow}</p>
+      <h1 class="t-display" data-reveal style="--i: 1"><Lines text={t.title} /></h1>
+      <p class="t-lead muted sub" data-reveal style="--i: 2">{t.sub}</p>
+      <div class="ctas" data-reveal style="--i: 3">
+        <InstallCommand command="npm i -g @perryts/perry" copyLabel={t.copyLabel} />
+        <LinkArrow href={links.docs} external={false} class="docs">{t.docs}</LinkArrow>
+      </div>
+    </div>
+    <Terminal class="hero__terminal" title="~/hello" meta="zsh" lines={lines} />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: 96px 72px;
+  }
+  .hero__inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 64px;
+  }
+  .hero__copy {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    color: var(--accent);
+  }
+  .sub {
+    max-width: 480px;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+  .ctas :global(.docs) {
+    padding: 16px 8px;
+  }
+  .hero :global(.hero__terminal) {
+    flex: none;
+    width: 520px;
+  }
+  @media (max-width: 1100px) {
+    .hero__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 48px;
+    }
+    .hero :global(.hero__terminal) {
+      width: 100%;
+      max-width: 560px;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero {
+      padding-block: 64px 48px;
+    }
+    .eyebrow {
+      font-size: 12px;
+    }
+  }
+</style>

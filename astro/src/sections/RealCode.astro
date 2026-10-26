@@ -1,8 +1,215 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import { localePath, type Copy, type Locale } from "../i18n/index.ts";
+import Lines from "../components/Lines.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+const showcaseUrl = localePath(lang, "showcase");
+const writeUpUrl = localePath(lang, "blog/compiling-claude-code");
+
+const copy: Copy<{
+  title: string;
+  apps: string;
+  kicker: string;
+  unit: string;
+  description: string;
+  fixes: string;
+  writeUp: string;
+  more: { kicker: string; title: string; description: string }[];
+}> = {
+  en: {
+    title: "Real projects,\ncompiled with Perry.",
+    apps: "Apps built with Perry",
+    kicker: "CASE · CLAUDE CODE",
+    unit: "of minified cli.js\nfrom npm",
+    description:
+      "We pointed Perry at the bundle npm ships for Claude Code. The native binary launches, logs in, streams a real API response and paints what you type.",
+    fixes: "compiler fixes landed along the way",
+    writeUp: "Read the write-up",
+    more: [
+      {
+        kicker: "NPM PACKAGES",
+        title: "axios · zod v4 · express\nfastify · hono",
+        description: "Pure TypeScript and JavaScript packages compile natively. Some need the optional V8 fallback.",
+      },
+      {
+        kicker: "FRAMEWORKS",
+        title: "Hono · tRPC · Strapi",
+        description: "Native ARM64 executables under 2 MB, compiled in under a second.",
+      },
+      {
+        kicker: "THIS SITE",
+        title: "perryts.com",
+        description: "The server answering this page is a binary compiled with Perry.",
+      },
+    ],
+  },
+  es: {
+    title: "Proyectos reales,\ncompilados con Perry.",
+    apps: "Apps creadas con Perry",
+    kicker: "CASO · CLAUDE CODE",
+    unit: "de cli.js minificado\ndesde npm",
+    description:
+      "Apuntamos Perry al bundle que npm distribuye para Claude Code. El binario nativo arranca, inicia sesión, recibe en streaming una respuesta real de la API y pinta lo que escribes.",
+    fixes: "correcciones del compilador incorporadas por el camino",
+    writeUp: "Leer el artículo",
+    more: [
+      {
+        kicker: "PAQUETES NPM",
+        title: "axios · zod v4 · express\nfastify · hono",
+        description:
+          "Los paquetes de TypeScript y JavaScript puros compilan a nativo. Algunos necesitan el fallback opcional de V8.",
+      },
+      {
+        kicker: "FRAMEWORKS",
+        title: "Hono · tRPC · Strapi",
+        description: "Ejecutables nativos ARM64 de menos de 2 MB, compilados en menos de un segundo.",
+      },
+      {
+        kicker: "ESTE SITIO",
+        title: "perryts.com",
+        description: "El servidor que responde a esta página es un binario compilado con Perry.",
+      },
+    ],
+  },
+};
+const t = copy[lang];
 ---
 
-<section class="section"><div class="wrap">RealCode</div></section>
+<section class="section real">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="t-h2" data-reveal><Lines text={t.title} /></h2>
+      <LinkArrow href={showcaseUrl}>{t.apps}</LinkArrow>
+    </header>
+
+    <div class="body">
+      <article class="case" data-reveal>
+        <p class="kicker accent">{t.kicker}</p>
+        <p class="figure">
+          <span class="figure__n" data-count>13 MB</span>
+          <span class="figure__unit t-mono muted"><Lines text={t.unit} /></span>
+        </p>
+        <p class="case__text muted">{t.description}</p>
+        <p class="stat">
+          <span class="stat__n accent" data-count>160</span>
+          <span class="t-mono muted">{t.fixes}</span>
+        </p>
+        <LinkArrow href={writeUpUrl}>{t.writeUp}</LinkArrow>
+      </article>
+
+      <ul class="more">
+        {t.more.map((item, i) => (
+          <li class="item" data-reveal style={`--i: ${i + 1}`}>
+            <p class="kicker muted">{item.kicker}</p>
+            <h3 class="item__title"><Lines text={item.title} /></h3>
+            <p class="item__text muted">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .real .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    border-top: 1px solid var(--border);
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1.2px;
+  }
+  .case {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 48px 56px 48px 0;
+    border-right: 1px solid var(--border);
+  }
+  .figure {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .figure__n {
+    font-size: clamp(72px, 8.4vw, 120px);
+    font-weight: 600;
+    letter-spacing: -0.042em;
+    line-height: 0.9;
+    white-space: nowrap;
+  }
+  .figure__unit {
+    line-height: 20px;
+  }
+  .case__text {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-block: 8px;
+  }
+  .stat__n {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px 0 40px 48px;
+  }
+  .item + .item {
+    border-top: 1px solid var(--border);
+  }
+  .item__title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    line-height: 30px;
+  }
+  .item__text {
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  @media (max-width: 900px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .body {
+      grid-template-columns: 1fr;
+    }
+    .case {
+      padding-right: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .item {
+      padding-left: 0;
+    }
+  }
+</style>

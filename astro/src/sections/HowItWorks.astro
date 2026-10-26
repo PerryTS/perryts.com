@@ -1,8 +1,196 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import SectionHeader from "../components/SectionHeader.astro";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+interface Stage {
+  name: string;
+  tool: string;
+  desc: string;
+  /** Names that are file names render in mono. */
+  mono?: boolean;
+  /** The tool label in accent (LLVM). */
+  accent?: boolean;
+}
+const copy: Copy<{ title: string; aside: string; stages: Stage[] }> = {
+  en: {
+    title: "How Perry\nbuilds your app.",
+    aside: "SWC parses your code, Perry lowers it, and LLVM generates machine code. The runtime and garbage collector are linked into the same binary.",
+    stages: [
+      { name: "main.ts / .js", tool: "Source", desc: "TypeScript or plain JavaScript. Classes, generics, async/await and npm packages.", mono: true },
+      { name: "Parse", tool: "SWC", desc: "Fast parsing into an AST." },
+      { name: "Transform", tool: "Perry IR", desc: "Type resolution and lowering." },
+      { name: "Codegen", tool: "LLVM", desc: "Machine code for ARM64, x86-64 and WASM.", accent: true },
+      { name: "./main", tool: "Executable", desc: "A single file, from ~330 KB.", mono: true },
+    ],
+  },
+  es: {
+    title: "Cómo Perry\ncompila tu app.",
+    aside: "SWC analiza tu código, Perry lo transforma y LLVM genera código máquina. El runtime y el recolector de basura se enlazan en el mismo binario.",
+    stages: [
+      { name: "main.ts / .js", tool: "Código fuente", desc: "TypeScript o JavaScript sin más. Clases, genéricos, async/await y paquetes de npm.", mono: true },
+      { name: "Parseo", tool: "SWC", desc: "Parseo rápido a un AST." },
+      { name: "Transformación", tool: "Perry IR", desc: "Resolución de tipos y lowering." },
+      { name: "Codegen", tool: "LLVM", desc: "Código máquina para ARM64, x86-64 y WASM.", accent: true },
+      { name: "./main", tool: "Ejecutable", desc: "Un único archivo, desde ~330 KB.", mono: true },
+    ],
+  },
+};
+const t = copy[lang];
+
+// Pixel band from the design, one string per column, top pixel first. Each letter is a colour step;
+// the first columns fade in with an opacity ramp. Decorative only.
+const columns = [
+  "b", "b", "bb", "b", "b", "bb", "b", "bb", "bb", "i", "ii", "ii", "i", "ii", "ii", "ii", "ii", "ii", "pi", "pp",
+  "ppp", "pp", "pp", "ppp", "pp", "ppp", "kpp", "kp", "kkp", "kkk", "kkk", "kkk", "kkkk", "kkk", "kkk", "okkk", "ook", "oook", "oook", "oooo",
+  "oooo", "ooooo", "oooo", "aooo", "aoooo", "aaoo", "aaaoo", "aaaao", "aaaaa", "aaaaa", "aaaaaa", "aaaaa", "yaaaa", "yyaaaa", "yyyaa", "yyyaaa", "yyyyaa", "yyyyya", "yyyyyy", "yyyyyya",
+];
+const RAMP = 12;
 ---
 
-<section class="section"><div class="wrap">HowItWorks</div></section>
+<section class="section section--paper how">
+  <div class="wrap">
+    <SectionHeader title={t.title} aside={t.aside} />
+
+    <ol class="pipeline">
+      {t.stages.map((s, i) => (
+        <li class="stage" data-reveal style={`--i: ${i}`}>
+          <div class="top">
+            <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+            {i < t.stages.length - 1 && <ArrowRight size={16} stroke-width={1.75} aria-hidden="true" />}
+          </div>
+          <h3 class:list={["name", { mono: s.mono }]}>{s.name}</h3>
+          <span class:list={["tool", "t-label", { accent: s.accent }]}>{s.tool}</span>
+          <p class="desc">{s.desc}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="band" aria-hidden="true">
+      {columns.map((col, i) => (
+        <div class="col" data-grow="y" style={`--i: ${i}; opacity: ${i < RAMP ? (0.25 + i * 0.06).toFixed(2) : 1}`}>
+          {[...col].map((c) => <span class={`px px--${c}`} />)}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pipeline {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--paper-text);
+  }
+  .stage {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 24px 0;
+  }
+  .stage:first-child {
+    padding-left: 0;
+  }
+  .stage + .stage {
+    border-left: 1px solid var(--border);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+  }
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .name {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.028em;
+    line-height: 1.2;
+  }
+  .name.mono {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+  .tool {
+    color: var(--text-muted);
+  }
+  .tool.accent {
+    color: var(--accent);
+  }
+  .desc {
+    font-size: 15px;
+    line-height: 23px;
+    color: var(--text-muted);
+  }
+
+  .band {
+    margin-top: 72px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .px {
+    height: 16px;
+    border-radius: 2px;
+  }
+  .px--b { background: var(--pixel-blue); }
+  .px--i { background: var(--accent-strong); }
+  .px--p { background: var(--pixel-lilac); }
+  .px--k { background: var(--pixel-pink); }
+  .px--o { background: var(--pixel-orange); }
+  .px--a { background: color-mix(in srgb, var(--pixel-amber) 50%, var(--pixel-orange)); }
+  .px--y { background: var(--pixel-amber); }
+
+  @media (max-width: 1024px) {
+    .pipeline {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 32px;
+    }
+    .stage:nth-child(3n + 1) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+  @media (max-width: 640px) {
+    .pipeline {
+      margin-top: 48px;
+      grid-template-columns: 1fr;
+      row-gap: 0;
+    }
+    .stage,
+    .stage:nth-child(3n + 1) {
+      padding: 24px 0;
+      border-left: 0;
+    }
+    .stage + .stage {
+      border-top: 1px solid var(--border);
+    }
+    .band {
+      margin-top: 48px;
+      gap: 2px;
+    }
+    .col {
+      gap: 2px;
+    }
+    .px {
+      height: 8px;
+      border-radius: 1px;
+    }
+  }
+</style>

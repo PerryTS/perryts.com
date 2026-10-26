@@ -1,8 +1,417 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import { formatInteger } from "../lib/format.ts";
+import { links } from "../lib/links.ts";
+import Lines from "../components/Lines.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+type Kind = "memory" | "faster";
+type Headline = { value: number; kind: Kind; perry: number; node: number; unit: "MB" | "ms" };
+type Row = { name: string; perry: number; node: number };
+
+// Values from the design: Perry 0.5.1639 vs Node.js v22.23.1, Apple M1, 2026-09-23.
+const headlines: Headline[] = [
+  { value: 10, kind: "memory", perry: 3.5, node: 36, unit: "MB" },
+  { value: 3.7, kind: "faster", perry: 39, node: 144, unit: "ms" },
+  { value: 3.4, kind: "faster", perry: 354, node: 1207, unit: "ms" },
+  { value: 3.2, kind: "faster", perry: 309, node: 987, unit: "ms" },
+];
+const rows: Row[] = [
+  { name: "string concat", perry: 6, node: 31 },
+  { name: "object allocation", perry: 2, node: 8 },
+  { name: "array write", perry: 3, node: 9 },
+  { name: "mandelbrot", perry: 25, node: 24 },
+  { name: "binary trees", perry: 13, node: 6 },
+  { name: "method calls", perry: 35, node: 11 },
+];
+
+const copy: Copy<{
+  title: string;
+  meta: string[];
+  memory: string;
+  faster: string;
+  headlines: string[];
+  benchmark: string;
+  perryFaster: string;
+  nodeFaster: string;
+  ratio: string;
+  rows: string[];
+  rowFaster: string;
+  rowSlower: string;
+  even: string;
+  footnote: string;
+  all: string;
+}> = {
+  en: {
+    title: "Benchmarks against Node.js,\nwins and losses.",
+    meta: ["Perry 0.5.1639 · Node.js v22.23.1", "Apple M1 · macOS · 2026-09-23", "wall-clock ms · lower is better"],
+    memory: "less memory",
+    faster: "faster",
+    headlines: ["JSON pipeline peak", "JSON pipeline, 100 records", "4K Gaussian image convolution", "Recursive Fibonacci"],
+    benchmark: "BENCHMARK",
+    perryFaster: "← PERRY FASTER",
+    nodeFaster: "NODE FASTER →",
+    ratio: "RATIO",
+    rows: [
+      "String append loop",
+      "1M objects",
+      "10M elements",
+      "Complex-number iteration",
+      "Tree allocation + traversal",
+      "Class method dispatch",
+    ],
+    rowFaster: "faster",
+    rowSlower: "slower",
+    even: "≈ even",
+    footnote: "Perry is currently slower on method dispatch, tree allocation and very large JSON pipelines.",
+    all: "All 12 benchmarks & raw JSON",
+  },
+  es: {
+    title: "Benchmarks frente a Node.js,\ncon victorias y derrotas.",
+    meta: ["Perry 0.5.1639 · Node.js v22.23.1", "Apple M1 · macOS · 2026-09-23", "ms de tiempo real · menos es mejor"],
+    memory: "menos memoria",
+    faster: "más rápido",
+    headlines: [
+      "Pico del pipeline JSON",
+      "Pipeline JSON, 100 registros",
+      "Convolución gaussiana de imagen 4K",
+      "Fibonacci recursivo",
+    ],
+    benchmark: "BENCHMARK",
+    perryFaster: "← PERRY MÁS RÁPIDO",
+    nodeFaster: "NODE MÁS RÁPIDO →",
+    ratio: "RATIO",
+    rows: [
+      "Bucle de concatenación de strings",
+      "1M de objetos",
+      "10M de elementos",
+      "Iteración con números complejos",
+      "Creación y recorrido de árboles",
+      "Llamadas a métodos de clase",
+    ],
+    rowFaster: "más rápido",
+    rowSlower: "más lento",
+    even: "≈ igual",
+    footnote: "Por ahora Perry es más lento en el despacho de métodos, la creación de árboles y los pipelines JSON muy grandes.",
+    all: "Los 12 benchmarks y el JSON en bruto",
+  },
+};
+const t = copy[lang];
+
+const decimal = (n: number, digits = 0) =>
+  new Intl.NumberFormat(lang, { minimumFractionDigits: digits, maximumFractionDigits: 1 }).format(n);
+const amount = (n: number, unit: string) => `${Number.isInteger(n) ? formatInteger(n, lang) : decimal(n)} ${unit}`;
+
+// Bars use a log scale: 167px per ln(ratio) on a 290px half-axis, as drawn in the design.
+const SCALE = 167 / 290;
+const EVEN = 1.1;
+const table = rows.map((row, i) => {
+  const ratio = Math.max(row.perry, row.node) / Math.min(row.perry, row.node);
+  const perryWins = row.node > row.perry;
+  const even = ratio < EVEN;
+  return {
+    ...row,
+    detail: t.rows[i],
+    tone: even ? "even" : perryWins ? "win" : "loss",
+    side: perryWins ? "perry" : "node",
+    width: Math.min(100, Math.log(ratio) * SCALE * 100),
+    label: even ? t.even : `${decimal(ratio, 1)}× ${perryWins ? t.rowFaster : t.rowSlower}`,
+  };
+});
 ---
 
-<section class="section"><div class="wrap">Benchmarks</div></section>
+<section id="benchmarks" class="section bench">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="t-h2" data-reveal><Lines text={t.title} /></h2>
+      <p class="meta t-mono muted" data-reveal style="--i: 1">
+        {t.meta.map((line, i) => (<>{i > 0 && <br />}{line}</>))}
+      </p>
+    </header>
+
+    <ul class="headlines">
+      {headlines.map((h, i) => (
+        <li class="headline" data-reveal style={`--i: ${i}`}>
+          <p class="headline__value">
+            <span class="headline__x accent" data-count>{decimal(h.value)}×</span>
+            <span class="headline__word">{h.kind === "memory" ? t.memory : t.faster}</span>
+          </p>
+          <p class="headline__name muted">{t.headlines[i]}</p>
+          <p class="headline__pair t-mono dim">perry {amount(h.perry, h.unit)} · node {amount(h.node, h.unit)}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="col-name">{t.benchmark}</th>
+            <th scope="col" class="col-bar">
+              <div class="direction">
+                <span class="win">{t.perryFaster}</span>
+                <span class="loss">{t.nodeFaster}</span>
+              </div>
+            </th>
+            <th scope="col" class="num">PERRY</th>
+            <th scope="col" class="num">NODE</th>
+            <th scope="col" class="num col-ratio">{t.ratio}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {table.map((row, i) => (
+            <tr data-reveal style={`--i: ${i}`}>
+              <th scope="row" class="col-name">
+                <span class="row__name">{row.name}</span>
+                <span class="row__detail t-mono muted">{row.detail}</span>
+              </th>
+              <td class="col-bar" aria-hidden="true">
+                <div class="chart">
+                  <div class="chart__side chart__side--perry">
+                    {row.side === "perry" && (
+                      <span class:list={["bar", `bar--${row.tone}`]} data-grow="x" style={`width: ${row.width}%; --i: ${i}`} />
+                    )}
+                  </div>
+                  <span class="chart__axis" />
+                  <div class="chart__side">
+                    {row.side === "node" && (
+                      <span class:list={["bar", `bar--${row.tone}`]} data-grow="x" style={`width: ${row.width}%; --i: ${i}`} />
+                    )}
+                  </div>
+                </div>
+              </td>
+              <td class="num perry">{formatInteger(row.perry, lang)} ms</td>
+              <td class="num muted">{formatInteger(row.node, lang)} ms</td>
+              <td class:list={["num", "col-ratio", row.tone]}>{row.label}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="foot">
+      <p class="muted">{t.footnote}</p>
+      <LinkArrow href={links.benchmarks}>{t.all}</LinkArrow>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .bench .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .meta {
+    text-align: right;
+    line-height: 23px;
+  }
+  .dim {
+    color: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+
+  /* Headline figures */
+  .headlines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .headline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 32px 28px;
+    border-left: 1px solid var(--border);
+  }
+  .headline:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .headline__value {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .headline__x {
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: -2px;
+    line-height: 56px;
+    font-variant-numeric: tabular-nums;
+  }
+  .headline__word {
+    padding-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .headline__name {
+    font-size: 15px;
+  }
+
+  /* Table */
+  .table-scroll {
+    overflow-x: auto;
+  }
+  .table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+  }
+  .table th,
+  .table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-weight: inherit;
+    vertical-align: middle;
+  }
+  thead th {
+    padding-block: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .col-name {
+    width: 280px;
+  }
+  .table .col-bar {
+    padding-inline: 40px;
+  }
+  .direction {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .table .num {
+    width: 110px;
+    text-align: right;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+  .table td.num {
+    font-size: 14px;
+  }
+  .table .col-ratio {
+    width: 150px;
+  }
+  .row__name {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .row__detail {
+    display: block;
+    margin-top: 3px;
+  }
+  .perry {
+    font-weight: 600;
+  }
+  .win {
+    color: var(--success);
+  }
+  .loss {
+    color: var(--danger);
+  }
+  .even {
+    color: var(--text-muted);
+  }
+
+  /* Diverging bars around a shared axis */
+  .chart {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    align-items: center;
+    height: 24px;
+  }
+  .chart__side {
+    display: flex;
+    height: 10px;
+  }
+  .chart__side--perry {
+    justify-content: flex-end;
+  }
+  .chart__side--perry .bar {
+    transform-origin: right center;
+  }
+  .chart__axis {
+    height: 24px;
+    background: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .bar {
+    display: block;
+    height: 10px;
+  }
+  .bar--win {
+    background: var(--success);
+  }
+  .bar--loss {
+    background: var(--danger);
+  }
+  .bar--even {
+    background: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .head,
+    .foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .meta {
+      text-align: left;
+    }
+    .headlines {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .headline:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .headline:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 640px) {
+    /* On phones the figures matter more than the bars: drop the chart column so the table fits. */
+    .table {
+      min-width: 0;
+    }
+    .col-bar {
+      display: none;
+    }
+  }
+  @media (max-width: 520px) {
+    .headlines {
+      grid-template-columns: 1fr;
+    }
+    .headline {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .headline + .headline {
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

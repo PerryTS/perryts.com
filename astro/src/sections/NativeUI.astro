@@ -1,8 +1,392 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import SectionHeader from "../components/SectionHeader.astro";
+import Lines from "../components/Lines.astro";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+type Coverage = "broad" | "core" | "preview";
+const copy: Copy<{
+  title: string;
+  aside: string;
+  fan: string;
+  toolkitsLabel: string;
+  preview: string;
+  legend: Record<Coverage, string>;
+  widgets: string;
+  widgetsDesc: string;
+}> = {
+  en: {
+    title: "One UI codebase,\neleven native targets.",
+    aside: "perry/ui is a declarative UI library built on stacks. Each widget maps to the platform's own toolkit: AppKit, UIKit, Win32, GTK4, Android Views or the DOM.",
+    fan: "perry compile",
+    toolkitsLabel: "Native toolkits and the platforms they cover",
+    preview: "preview",
+    legend: { broad: "broad", core: "core · gaps documented", preview: "preview" },
+    widgets: "35+ widgets",
+    widgetsDesc: "State(), stacks, spacers.\nNo CSS.",
+  },
+  es: {
+    title: "Un solo código de UI,\nonce plataformas nativas.",
+    aside: "perry/ui es una librería de UI declarativa basada en stacks. Cada widget se corresponde con el toolkit propio de la plataforma: AppKit, UIKit, Win32, GTK4, Android Views o el DOM.",
+    fan: "perry compile",
+    toolkitsLabel: "Toolkits nativos y las plataformas que cubren",
+    preview: "preview",
+    legend: { broad: "amplia", core: "base · carencias documentadas", preview: "preview" },
+    widgets: "35+ widgets",
+    widgetsDesc: "State(), stacks, spacers.\nSin CSS.",
+  },
+};
+const t = copy[lang];
+
+// Toolkit names and platforms are product names: not translated.
+const toolkits: { name: string; platforms: [string, Coverage][]; preview?: boolean }[] = [
+  { name: "AppKit", platforms: [["macOS", "broad"]] },
+  { name: "UIKit", platforms: [["iOS", "broad"], ["iPadOS", "broad"], ["tvOS", "broad"], ["visionOS", "core"]] },
+  { name: "SwiftUI", platforms: [["watchOS", "core"]] },
+  { name: "Android Views", platforms: [["Android", "broad"], ["Wear OS", "core"]] },
+  { name: "Win32", platforms: [["Windows", "broad"]] },
+  { name: "GTK4", platforms: [["Linux", "broad"]] },
+  { name: "DOM", platforms: [["Web / WASM", "broad"]] },
+  { name: "ArkUI", platforms: [["HarmonyOS", "preview"]], preview: true },
+];
+
+const widgets = [
+  "VStack", "HStack", "ZStack", "Spacer", "Text", "Button", "TextField", "SecureField", "Toggle", "Slider", "Picker",
+  "WheelPicker", "ImageFile", "ImageSymbol", "ProgressView", "TextArea", "Section", "State", "…",
+];
+
+// Source from docs/examples/ui/overview/quickstart.ts, tokenized by hand: [class, text].
+type Tok = [string, string];
+const code: Tok[][] = [
+  [["kw", "import"], ["", " { App, Text, VStack } "], ["kw", "from"], ["", " "], ["str", '"perry/ui"']],
+  [],
+  [["fn", "App"], ["", "({"]],
+  [["", "    title: "], ["str", '"My App"'], ["", ","]],
+  [["", "    width: "], ["num", "400"], ["", ","]],
+  [["", "    height: "], ["num", "300"], ["", ","]],
+  [["", "    body: "], ["type", "VStack"], ["", "("], ["num", "16"], ["", ", ["]],
+  [["", "        "], ["type", "Text"], ["", "("], ["str", '"Hello from Perry!"'], ["", "),"]],
+  [["", "    ]),"]],
+  [["", "})"]],
+];
 ---
 
-<section class="section"><div class="wrap">NativeUI</div></section>
+<section class="section native">
+  <div class="wrap">
+    <SectionHeader title={t.title} aside={t.aside} />
+
+    <div class="map">
+      <figure class="editor" data-reveal>
+        <figcaption class="tabs">
+          <span class="tab">app.ts</span>
+          <span class="src">docs/examples/ui/overview/quickstart.ts</span>
+        </figcaption>
+        <div class="code">
+          <span class="gutter" aria-hidden="true">{code.map((_, i) => `${i + 1}\n`)}</span>
+          <pre><code>{code.map((line) => (<>{line.map(([cls, text]) => (cls ? <span class={cls}>{text}</span> : text))}{"\n"}</>))}</code></pre>
+        </div>
+        <p class="cmd">$ perry compile app.ts --target &lt;any of 11&gt;</p>
+      </figure>
+
+      <div class="fan" aria-hidden="true">
+        <span class="rule"></span>
+        <span class="fan-label">{t.fan}</span>
+      </div>
+
+      <div class="toolkits">
+        <ul aria-label={t.toolkitsLabel}>
+          {toolkits.map((tk, i) => (
+            <li class:list={["toolkit", { "is-preview": tk.preview }]} data-reveal style={`--i: ${i}`}>
+              <span class="tk-name">{tk.name}</span>
+              <span class="platforms">
+                {tk.platforms.map(([p, cov], j) => (
+                  <>
+                    {j > 0 && <span class="sep" aria-hidden="true">·</span>}
+                    <span class={`plat plat--${cov}`}>{cov === "preview" ? `${p} · ${t.preview}` : p}</span>
+                  </>
+                ))}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <ul class="legend">
+          {(Object.keys(t.legend) as Coverage[]).map((k) => (
+            <li><span class={`sq sq--${k}`} aria-hidden="true"></span>{t.legend[k]}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="widgets">
+      <div class="widgets-label">
+        <h3 class="widgets-title">{t.widgets}</h3>
+        <p class="widgets-desc"><Lines text={t.widgetsDesc} /></p>
+      </div>
+      <ul class="widget-list">
+        {widgets.map((w) => <li>{w}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .native {
+    padding-block: calc(var(--section-y) + 8px);
+  }
+  .map {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 560px) minmax(96px, 1fr) minmax(0, 460px);
+    align-items: center;
+  }
+
+  /* Editor */
+  .editor {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    overflow: hidden;
+    font-family: var(--font-mono);
+  }
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-right: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    flex: none;
+    padding: 12px 20px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: -1px;
+    font-size: 13px;
+  }
+  .src {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .code {
+    display: flex;
+    padding: 24px 0 28px;
+    font-size: 15px;
+    line-height: 29px;
+  }
+  .gutter {
+    flex: none;
+    padding: 0 20px;
+    text-align: right;
+    white-space: pre;
+    color: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .code pre {
+    flex: 1;
+    min-width: 0;
+    padding-right: 20px;
+    overflow-x: auto;
+    font: inherit;
+  }
+  .kw {
+    color: var(--pixel-amber);
+  }
+  .str {
+    color: var(--success);
+  }
+  .fn {
+    color: color-mix(in srgb, var(--text) 85%, var(--text-muted));
+  }
+  .num {
+    color: var(--pixel-pink);
+  }
+  .type {
+    color: var(--pixel-blue);
+  }
+  .cmd {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+
+  /* Fan between editor and toolkits */
+  .fan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+  }
+  .rule {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+  .fan-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  /* Toolkits */
+  .toolkits > ul:first-child {
+    border-top: 1px solid var(--border);
+  }
+  .toolkit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .toolkit.is-preview {
+    border-bottom: 0;
+  }
+  .tk-name {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.023em;
+  }
+  .is-preview .tk-name {
+    color: var(--text-muted);
+  }
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .sep {
+    color: var(--border);
+  }
+  .plat--core {
+    color: var(--accent);
+  }
+  .plat--preview {
+    color: var(--text-muted);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sq {
+    width: 8px;
+    height: 8px;
+  }
+  .sq--broad {
+    background: var(--text);
+  }
+  .sq--core {
+    background: var(--accent);
+  }
+  .sq--preview {
+    background: var(--text-muted);
+  }
+
+  /* Widgets */
+  .widgets {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 32px;
+  }
+  .widgets-label {
+    flex: none;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .widgets-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.023em;
+  }
+  .widgets-desc {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-muted);
+  }
+  .widget-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 27px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    line-height: 27px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 1100px) {
+    .map {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+      gap: 24px;
+    }
+    .editor {
+      max-width: 640px;
+    }
+    .fan {
+      flex-direction: row;
+      padding: 0;
+    }
+    .fan .rule {
+      flex: 1;
+    }
+    .fan::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+  }
+  @media (max-width: 900px) {
+    .widgets {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 480px) {
+    .code {
+      font-size: 13px;
+      line-height: 24px;
+    }
+    .gutter {
+      padding: 0 12px;
+    }
+    .toolkit {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .platforms {
+      justify-content: flex-start;
+    }
+  }
+</style>

@@ -1,8 +1,211 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import { localePath } from "../i18n/index.ts";
+import Lines from "../components/Lines.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+interface Column {
+  name: string;
+  sub: string;
+}
+interface Row {
+  key: string;
+  values: [string, string, string];
+}
+const copy: Copy<{ title: string; sub: string; caption: string; columns: Column[]; rows: Row[]; note: string; link: string }> = {
+  en: {
+    title: "Stop shipping a browser\nwith every app.",
+    sub: "Electron bundles Chromium. React Native bundles a JavaScript engine. Perry compiles your code to machine code, so there is nothing extra to ship.",
+    caption: "Electron, React Native and Perry compared",
+    columns: [
+      { name: "Electron", sub: "Chromium + Node.js per app" },
+      { name: "React Native", sub: "JS engine + native views" },
+      { name: "Perry", sub: "LLVM machine code" },
+    ],
+    rows: [
+      { key: "What ships", values: ["Your JS + a full browser", "Your JS bundle + an engine", "A single native executable"] },
+      { key: "UI", values: ["HTML/CSS in a webview", "Native views over a bridge", "AppKit, UIKit, Win32, GTK4, Android, DOM"] },
+      { key: "Targets from one codebase", values: ["Desktop", "Mobile first", "11: desktop, mobile, watch, TV and web"] },
+      { key: "JavaScript at runtime", values: ["Yes", "Yes", "No. Optional V8 fallback for packages that need it"] },
+      { key: "App size", values: ["Includes Chromium", "Includes a JS engine", "~330 KB hello world"] },
+      { key: "Honest tradeoff", values: ["Mature, huge ecosystem", "Mature on mobile", "Implements a practical TS + Node subset; pre-1.0"] },
+    ],
+    note: "Each comparison links to the framework's own documentation.",
+    link: "Read the sourced comparisons",
+  },
+  es: {
+    title: "Deja de distribuir un navegador\ncon cada app.",
+    sub: "Electron incluye Chromium. React Native incluye un motor de JavaScript. Perry compila tu código a código máquina, así que no hay nada extra que distribuir.",
+    caption: "Comparativa de Electron, React Native y Perry",
+    columns: [
+      { name: "Electron", sub: "Chromium + Node.js por app" },
+      { name: "React Native", sub: "Motor JS + vistas nativas" },
+      { name: "Perry", sub: "Código máquina LLVM" },
+    ],
+    rows: [
+      { key: "Qué se distribuye", values: ["Tu JS + un navegador completo", "Tu bundle JS + un motor", "Un único ejecutable nativo"] },
+      { key: "UI", values: ["HTML/CSS en un webview", "Vistas nativas a través de un bridge", "AppKit, UIKit, Win32, GTK4, Android, DOM"] },
+      { key: "Plataformas con un solo código", values: ["Escritorio", "Pensado para móvil", "11: escritorio, móvil, reloj, TV y web"] },
+      { key: "JavaScript en ejecución", values: ["Sí", "Sí", "No. Fallback opcional a V8 para paquetes que lo necesiten"] },
+      { key: "Tamaño de la app", values: ["Incluye Chromium", "Incluye un motor JS", "Hello world de ~330 KB"] },
+      { key: "La contrapartida", values: ["Maduro, ecosistema enorme", "Maduro en móvil", "Implementa un subconjunto práctico de TS + Node; pre-1.0"] },
+    ],
+    note: "Cada comparativa enlaza a la documentación oficial del framework.",
+    link: "Ver las comparativas con fuentes",
+  },
+};
+const t = copy[lang];
 ---
 
-<section class="section"><div class="wrap">ReplaceStack</div></section>
+<section class="section replace">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="t-h1" data-reveal><Lines text={t.title} /></h2>
+      <p class="sub muted" data-reveal style="--i: 1">{t.sub}</p>
+    </header>
+
+    <div class="scroll">
+      <table class="compare">
+        <caption class="sr-only">{t.caption}</caption>
+        <thead>
+          <tr>
+            <td class="key"></td>
+            {t.columns.map((c, i) => (
+              <th scope="col" class:list={["col", { perry: i === 2 }]}>
+                <span class="name">{c.name}</span>
+                <span class="col-sub">{c.sub}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {t.rows.map((r, i) => (
+            <tr data-reveal style={`--i: ${i}`}>
+              <th scope="row" class="key t-label">{r.key}</th>
+              {r.values.map((v, j) => <td class:list={{ perry: j === 2 }}>{v}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="foot">
+      <p class="muted">{t.note}</p>
+      <LinkArrow href={localePath(lang, "compare")}>{t.link}</LinkArrow>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .replace {
+    padding-top: calc(var(--section-y) + 16px);
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1000px;
+  }
+  .sub {
+    max-width: 720px;
+    font-size: 19px;
+    line-height: 29px;
+  }
+  .scroll {
+    margin-top: 72px;
+    overflow-x: auto;
+  }
+  .compare {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+  }
+  .compare th,
+  .compare td {
+    padding: 20px 28px;
+    vertical-align: top;
+    font-weight: inherit;
+  }
+  .compare .key {
+    width: 260px;
+    padding: 22px 0;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+  .compare .col {
+    padding: 24px 28px;
+    vertical-align: bottom;
+  }
+  .name {
+    display: block;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.023em;
+  }
+  .col-sub {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  thead .perry {
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 6px 6px 0 0;
+  }
+  thead .perry .col-sub {
+    color: color-mix(in srgb, var(--accent-strong) 70%, var(--bg));
+  }
+  tbody tr {
+    border-top: 1px solid var(--border);
+  }
+  tbody td {
+    font-size: 16px;
+    line-height: 23px;
+    color: var(--text-muted);
+  }
+  tbody .perry {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-inline: 1px solid var(--accent);
+    color: var(--text);
+    font-weight: 500;
+  }
+  tbody tr:last-child .perry {
+    border-bottom: 1px solid var(--accent);
+  }
+  .foot {
+    margin-top: 72px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px 32px;
+    font-size: 15px;
+  }
+  @media (max-width: 900px) {
+    .scroll {
+      margin-top: 48px;
+    }
+    .compare .key {
+      width: 180px;
+    }
+    .compare th,
+    .compare td {
+      padding-inline: 20px;
+    }
+    .compare .key {
+      padding-inline: 0 16px;
+    }
+    .foot {
+      margin-top: 48px;
+    }
+  }
+</style>

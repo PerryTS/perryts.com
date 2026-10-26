@@ -1,8 +1,125 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import CopyButton from "../components/CopyButton.astro";
+import Lines from "../components/Lines.astro";
+import PixelWall from "../components/PixelWall.astro";
+import type { Copy, Locale } from "../i18n/index.ts";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+const copy: Copy<{ title: string; copy: string; rows: [string, string][] }> = {
+  en: {
+    title: "Install\nPerry.",
+    copy: "Copy command",
+    rows: [
+      ["macOS", "brew install perryts/perry/perry"],
+      ["Any OS", "npm i -g @perryts/perry"],
+      ["Windows", "winget install PerryTS.Perry"],
+      ["Then", "perry init my-app && perry run ."],
+    ],
+  },
+  es: {
+    title: "Instala\nPerry.",
+    copy: "Copiar comando",
+    rows: [
+      ["macOS", "brew install perryts/perry/perry"],
+      ["Cualquier SO", "npm i -g @perryts/perry"],
+      ["Windows", "winget install PerryTS.Perry"],
+      ["Después", "perry init my-app && perry run ."],
+    ],
+  },
+};
+const t = copy[lang];
 ---
 
-<section class="section"><div class="wrap">GetStarted</div></section>
+<section class="get-started" id="get-started">
+  <div class="wrap">
+    <div class="top">
+      <h2 class="title" data-reveal><Lines text={t.title} /></h2>
+      <dl class="install">
+        {t.rows.map(([os, command], i) => (
+          <div class="row" data-reveal style={`--i: ${i}`}>
+            <dt class="t-label muted">{os}</dt>
+            <dd><code>$ {command}</code></dd>
+            <dd class="action"><CopyButton text={command} label={`${t.copy}: ${command}`} /></dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <PixelWall />
+  </div>
+</section>
+
+<style>
+  .get-started {
+    padding-top: max(var(--section-y), 104px);
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .title {
+    font-size: clamp(56px, 6.2vw, 88px);
+    font-weight: 600;
+    letter-spacing: -0.039em;
+    line-height: 0.98;
+  }
+  .install {
+    width: 480px;
+    max-width: 100%;
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .row dt {
+    letter-spacing: 1px;
+  }
+  dd {
+    margin: 0;
+    min-width: 0;
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+  .action {
+    color: var(--text-muted);
+  }
+  @media (max-width: 900px) {
+    .top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .install {
+      width: 100%;
+    }
+  }
+  @media (max-width: 480px) {
+    .row {
+      grid-template-columns: 1fr auto;
+      gap: 6px 16px;
+    }
+    .row dt {
+      grid-column: 1 / -1;
+    }
+    code {
+      font-size: 14px;
+    }
+  }
+</style>

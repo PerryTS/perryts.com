@@ -1,8 +1,208 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import { formatInteger } from "../lib/format.ts";
+import { links } from "../lib/links.ts";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+const parity = { passing: 3364, total: 4342, modules: 53, target: 97 };
+const passing = formatInteger(parity.passing, lang);
+const total = formatInteger(parity.total, lang);
+const donePct = (parity.passing / parity.total) * 100;
+
+const copy: Copy<{
+  caption: string;
+  body: string;
+  progress: string;
+  target: string;
+  npmTitle: string;
+  npmList: string;
+  wall: string;
+  perModule: string;
+}> = {
+  en: {
+    caption: `is the target for Node 26 compatibility. ${passing} of ${total} tests pass today.`,
+    body: `We run Node 26's test suite against Perry module by module and compare the output with Node. ${total} tests across ${parity.modules} modules. Failing tests are listed in the repository.`,
+    progress: `${passing} / ${total} passing`,
+    target: `target: ${parity.target}%`,
+    npmTitle: "REAL NPM PACKAGES, COMPILED NATIVELY",
+    npmList:
+      "Fastify · Express · mysql2 · pg · ioredis · ws · bcrypt · jsonwebtoken and more. Plain JavaScript compiles too. Known gaps are listed in the repository.",
+    wall: `${parity.modules} TRACKED node:* MODULES`,
+    perModule: "Per-module pass rates →",
+  },
+  es: {
+    caption: `es el objetivo de compatibilidad con Node 26. Hoy pasan ${passing} de ${total} pruebas.`,
+    body: `Ejecutamos la suite de pruebas de Node 26 contra Perry, módulo a módulo, y comparamos la salida con la de Node. ${total} pruebas en ${parity.modules} módulos. Las pruebas que fallan están listadas en el repositorio.`,
+    progress: `${passing} / ${total} superadas`,
+    target: `objetivo: ${parity.target}%`,
+    npmTitle: "PAQUETES NPM REALES, COMPILADOS A NATIVO",
+    npmList:
+      "Fastify · Express · mysql2 · pg · ioredis · ws · bcrypt · jsonwebtoken y más. El JavaScript puro también compila. Las limitaciones conocidas están listadas en el repositorio.",
+    wall: `${parity.modules} MÓDULOS node:* MONITORIZADOS`,
+    perModule: "Tasa de éxito por módulo →",
+  },
+};
+const t = copy[lang];
 ---
 
-<section class="section"><div class="wrap">NodeParity</div></section>
+<section class="section section--paper parity">
+  <div class="wrap">
+    <div class="top">
+      <div class="figure">
+        <h2 class="figure__heading">
+          <span class="number" data-count data-reveal>{parity.target}%</span>
+          <span class="caption" data-reveal style="--i: 1">{t.caption}</span>
+        </h2>
+      </div>
+      <div class="explain">
+        <p class="body muted" data-reveal style="--i: 2">{t.body}</p>
+        <div class="progress" data-reveal style="--i: 3">
+          <div class="progress__labels t-mono">
+            <span class="progress__value">{t.progress}</span>
+            <span class="accent">{t.target}</span>
+          </div>
+          <div class="track" aria-hidden="true">
+            <div class="track__done" data-grow="x" style={`width: ${donePct}%`}></div>
+            <div class="track__target" style={`left: ${parity.target}%`}></div>
+          </div>
+        </div>
+        <div class="npm" data-reveal style="--i: 4">
+          <h3 class="npm__title mono-label">{t.npmTitle}</h3>
+          <p class="npm__list">{t.npmList}</p>
+        </div>
+      </div>
+    </div>
+    <div class="wall">
+      <span class="mono-label muted">{t.wall}</span>
+      <a class="wall__link mono-label" href={links.github}>{t.perModule}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .parity .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .top {
+    display: flex;
+    align-items: flex-end;
+    gap: 80px;
+  }
+  .figure {
+    flex: 0 0 560px;
+  }
+  .figure__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .number {
+    font-size: clamp(112px, 14vw, 200px);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+  }
+  .caption {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.6px;
+    line-height: 34px;
+  }
+  .explain {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+  }
+  .body {
+    font-size: 17px;
+    line-height: 26px;
+  }
+  .progress {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .progress__labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .progress__value {
+    font-weight: 600;
+  }
+  .track {
+    position: relative;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--paper-border);
+  }
+  .track__done {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--paper-text);
+  }
+  .track__target {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 18px;
+    background: var(--accent);
+  }
+  .npm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .npm__title {
+    font-weight: 600;
+  }
+  .npm__list {
+    font-size: 17px;
+  }
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .wall {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 14px;
+    border-top: 1px solid var(--paper-text);
+  }
+  .wall__link {
+    letter-spacing: 0;
+  }
+  .wall__link:hover {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .top {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 48px;
+    }
+    .figure {
+      flex-basis: auto;
+    }
+    .caption {
+      font-size: 22px;
+      line-height: 28px;
+    }
+    .wall {
+      flex-direction: column;
+    }
+  }
+</style>

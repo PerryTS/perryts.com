@@ -1,8 +1,235 @@
 ---
-import type { Locale } from "../i18n/index.ts";
+import type { Copy, Locale } from "../i18n/index.ts";
+import { links } from "../lib/links.ts";
+import Lines from "../components/Lines.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+
 interface Props {
   lang: Locale;
 }
+const { lang } = Astro.props;
+
+type Phase = { key: string; when: string; title: string; items: string[] };
+
+const copy: Copy<{ title: string; body: string; releases: string; current: string; phases: Phase[] }> = {
+  en: {
+    title: "Roadmap:\ncore first.",
+    body: "Perry is at v0.5 and hasn't reached 0.6 yet. Until the core is stable, most of the work goes into Node compatibility and performance.",
+    releases: "Release notes on GitHub",
+    current: "CURRENT",
+    phases: [
+      {
+        key: "NOW",
+        when: "v0.5 → 0.6",
+        title: "Stabilise the core",
+        items: [
+          "Node 26 parity from ~77% toward 97%",
+          "Performance: GC, dispatch, startup, binary size",
+          "Close TypeScript and npm gaps: Proxy, decorators, weak refs",
+        ],
+      },
+      {
+        key: "NEXT",
+        when: "after the core",
+        title: "perry/ui",
+        items: ["Wider widget coverage", "UI parity across the 11 targets", "Core and preview targets moving up a level"],
+      },
+      {
+        key: "LATER",
+        when: "on a stable base",
+        title: "Extensions",
+        items: ["Perry Publish hosted builds and signing", "Coop hosting", "More first-party packages and tooling"],
+      },
+    ],
+  },
+  es: {
+    title: "Hoja de ruta:\nprimero el núcleo.",
+    body: "Perry está en la v0.5 y aún no ha llegado a la 0.6. Hasta que el núcleo sea estable, la mayor parte del trabajo se centra en la compatibilidad con Node y el rendimiento.",
+    releases: "Notas de versión en GitHub",
+    current: "ACTUAL",
+    phases: [
+      {
+        key: "AHORA",
+        when: "v0.5 → 0.6",
+        title: "Estabilizar el núcleo",
+        items: [
+          "Paridad con Node 26 de ~77% hacia el 97%",
+          "Rendimiento: GC, despacho, arranque, tamaño del binario",
+          "Cerrar huecos de TypeScript y npm: Proxy, decoradores, weak refs",
+        ],
+      },
+      {
+        key: "DESPUÉS",
+        when: "tras el núcleo",
+        title: "perry/ui",
+        items: [
+          "Más cobertura de widgets",
+          "Paridad de UI en las 11 plataformas",
+          "Las plataformas core y preview suben de nivel",
+        ],
+      },
+      {
+        key: "MÁS ADELANTE",
+        when: "sobre una base estable",
+        title: "Extensiones",
+        items: ["Builds y firma alojados en Perry Publish", "Alojamiento en Coop", "Más paquetes y herramientas propios"],
+      },
+    ],
+  },
+};
+const t = copy[lang];
 ---
 
-<section class="section"><div class="wrap">Roadmap</div></section>
+<section class="section section--paper roadmap">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="title" data-reveal><Lines text={t.title} /></h2>
+      <div class="aside" data-reveal style="--i: 1">
+        <p class="muted">{t.body}</p>
+        <LinkArrow href={links.releases}>{t.releases}</LinkArrow>
+      </div>
+    </header>
+
+    <ol class="phases">
+      {t.phases.map((phase, i) => (
+        <li class:list={["phase", { "is-current": i === 0 }]} data-reveal style={`--i: ${i}`} aria-current={i === 0 ? "step" : undefined}>
+          <div class="track" aria-hidden="true">
+            <span class="node" />
+            <span class="line" />
+          </div>
+          <div class="phase__body">
+            <p class="kicker">
+              <span class="kicker__key">{phase.key}</span>
+              <span class="kicker__when muted">{phase.when}</span>
+              {i === 0 && <span class="badge">{t.current}</span>}
+            </p>
+            <h3 class="phase__title">{phase.title}</h3>
+            <ul class="items">
+              {phase.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .roadmap .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .title {
+    font-size: clamp(36px, 3.6vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+  }
+  .aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 420px;
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .track {
+    display: flex;
+    align-items: center;
+  }
+  .node {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+  .line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+  }
+  .is-current .node {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .is-current .line {
+    background: var(--accent);
+  }
+  .phase__body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 40px 0 0;
+    color: var(--text-muted);
+  }
+  .is-current .phase__body {
+    color: var(--paper-text);
+  }
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .kicker__key {
+    font-weight: 600;
+    letter-spacing: 1.2px;
+  }
+  .is-current .kicker__key {
+    color: var(--accent);
+  }
+  .badge {
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .phase__title {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.9px;
+  }
+  .items {
+    border-top: 1px solid var(--border);
+  }
+  .items li {
+    padding-block: 13px;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+    line-height: 23px;
+  }
+
+  @media (max-width: 900px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .phases {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .phase__body {
+      padding-right: 0;
+    }
+  }
+</style>
