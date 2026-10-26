@@ -11,7 +11,7 @@ import Tag from "../../../../components/Tag.astro";
 import Terminal from "../../../../components/Terminal.astro";
 import Cards from "../../../../components/landing-pages/Cards.astro";
 import { copy } from "../../../../components/showcase/copy.ts";
-import { localePath, localeStaticPaths, pick, type Locale } from "../../../../i18n/index.ts";
+import { localePath, localeStaticPaths, pick, type Copy, type Locale } from "../../../../i18n/index.ts";
 
 export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
@@ -36,9 +36,24 @@ const platforms = [
   { name: "Android", framework: "Views" },
 ];
 const shots = [t.macOsScreenshot, t.iosScreenshot];
+const pageTitles: Copy<string> = {
+  en: "Pry: a native JSON viewer built with Perry",
+  de: "Pry: nativer JSON-Viewer, gebaut mit Perry",
+  es: "Pry: visor JSON nativo hecho con Perry",
+  fr: "Pry : visionneuse JSON native créée avec Perry",
+  it: "Pry: visualizzatore JSON nativo realizzato con Perry",
+  ja: "Pry：Perry で作ったネイティブ JSON ビューア",
+  ko: "Pry: Perry로 만든 네이티브 JSON 뷰어",
+  pt: "Pry: visualizador JSON nativo feito com Perry",
+  th: "Pry: โปรแกรมดู JSON แบบเนทีฟที่สร้างด้วย Perry",
+  tr: "Pry: Perry ile geliştirilmiş yerel JSON görüntüleyici",
+  vi: "Pry: trình xem JSON gốc xây dựng bằng Perry",
+  id: "Pry: penampil JSON native yang dibuat dengan Perry",
+  "zh-Hans": "Pry：使用 Perry 构建的原生 JSON 查看器",
+};
 ---
 
-<Base lang={lang} title="Pry — Perry showcase" description={t.subtitle} path="showcase/pry">
+<Base lang={lang} title={pick(pageTitles, lang)} description={t.subtitle} path="showcase/pry">
   <PageHeader title="Pry" lead={t.subtitle} back={{ href: localePath(lang, "showcase"), label: common.backToShowcase }}>
     <ul slot="above" class="tags">{platforms.map((p) => <li><Tag>{p.name}</Tag></li>)}</ul>
     <div class="actions" data-reveal style="--i: 2">

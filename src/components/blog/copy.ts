@@ -1,7 +1,6 @@
 import type { Copy } from "../../i18n/index.ts";
 
 export interface BlogCopy {
-  metaTitle: string;
   metaDescription: string;
   title: string;
   aside: string;
@@ -29,7 +28,6 @@ const filters = (f: Filters) => f;
 
 export const blogCopy: Copy<BlogCopy> = {
   en: {
-    metaTitle: "Perry blog",
     metaDescription: "Dated Perry release notes, tutorials, and technical articles. Historical measurements remain tied to their original versions.",
     title: "Release notes, deep dives\nand how-tos.",
     aside: "Every post is dated. Measurements stay tied to the Perry version they were taken on.",
@@ -50,7 +48,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "This dated article records the Perry version and measurements available when it was published. Use the current limitations, platform guide, and benchmark artifact for decisions today.",
   },
   de: {
-    metaTitle: "Perry-Blog",
     metaDescription: "Datierte Perry-Release-Notes, Tutorials und technische Artikel. Historische Messwerte bleiben an ihre ursprünglichen Versionen gebunden.",
     title: "Release Notes, Deep Dives\nund Anleitungen.",
     aside: "Jeder Beitrag ist datiert. Messwerte bleiben an die Perry-Version gebunden, mit der sie erhoben wurden.",
@@ -71,7 +68,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Dieser datierte Artikel hält die Perry-Version und die Messwerte zum Zeitpunkt der Veröffentlichung fest. Für aktuelle Entscheidungen gelten die aktuellen Einschränkungen, der Plattform-Leitfaden und die Benchmark-Daten.",
   },
   es: {
-    metaTitle: "Blog de Perry",
     metaDescription: "Notas de versión, tutoriales y artículos técnicos de Perry, con fecha. Las mediciones históricas quedan ligadas a su versión original.",
     title: "Notas de versión, análisis\ny guías prácticas.",
     aside: "Cada artículo está fechado. Las mediciones quedan ligadas a la versión de Perry con la que se tomaron.",
@@ -92,7 +88,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Este artículo fechado recoge la versión de Perry y las mediciones disponibles cuando se publicó. Para decidir hoy, consulta las limitaciones actuales, la guía de plataformas y los datos de benchmarks.",
   },
   fr: {
-    metaTitle: "Blog Perry",
     metaDescription: "Notes de version, tutoriels et articles techniques de Perry, datés. Les mesures historiques restent liées à leur version d'origine.",
     title: "Notes de version, analyses\net guides pratiques.",
     aside: "Chaque article est daté. Les mesures restent liées à la version de Perry utilisée.",
@@ -113,7 +108,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Cet article daté reflète la version de Perry et les mesures disponibles à sa publication. Pour décider aujourd'hui, reportez-vous aux limitations actuelles, au guide des plateformes et aux données de benchmark.",
   },
   it: {
-    metaTitle: "Blog di Perry",
     metaDescription: "Note di rilascio, tutorial e articoli tecnici di Perry, datati. Le misurazioni storiche restano legate alla versione originale.",
     title: "Note di rilascio, approfondimenti\ne guide pratiche.",
     aside: "Ogni articolo è datato. Le misurazioni restano legate alla versione di Perry con cui sono state fatte.",
@@ -134,7 +128,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Questo articolo datato riporta la versione di Perry e le misurazioni disponibili al momento della pubblicazione. Per le decisioni di oggi, consulta le limitazioni attuali, la guida alle piattaforme e i dati dei benchmark.",
   },
   ja: {
-    metaTitle: "Perry ブログ",
     metaDescription: "日付入りの Perry リリースノート、チュートリアル、技術記事。過去の計測値は当時のバージョンに基づいています。",
     title: "リリースノート、技術解説、\nハウツー。",
     aside: "すべての記事に日付があります。計測値は、計測時の Perry バージョンに基づきます。",
@@ -155,7 +148,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "この記事は、公開時点の Perry のバージョンと計測値を記録したものです。現在の判断には、最新の制限事項、プラットフォームガイド、ベンチマークデータを参照してください。",
   },
   ko: {
-    metaTitle: "Perry 블로그",
     metaDescription: "날짜가 표기된 Perry 릴리스 노트, 튜토리얼, 기술 글. 과거 측정값은 당시 버전을 기준으로 합니다.",
     title: "릴리스 노트, 심층 분석,\n실전 가이드.",
     aside: "모든 글에는 날짜가 있습니다. 측정값은 측정 당시의 Perry 버전을 기준으로 합니다.",
@@ -176,7 +168,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "이 글은 게시 시점의 Perry 버전과 측정값을 기록합니다. 현재 판단에는 최신 제한 사항, 플랫폼 가이드, 벤치마크 데이터를 참고하세요.",
   },
   pt: {
-    metaTitle: "Blog do Perry",
     metaDescription: "Notas de versão, tutoriais e artigos técnicos do Perry, com data. As medições históricas ficam ligadas à versão original.",
     title: "Notas de versão, análises\ne guias práticos.",
     aside: "Todo artigo tem data. As medições ficam ligadas à versão do Perry em que foram feitas.",
@@ -197,7 +188,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Este artigo datado registra a versão do Perry e as medições disponíveis quando foi publicado. Para decidir hoje, consulte as limitações atuais, o guia de plataformas e os dados de benchmark.",
   },
   th: {
-    metaTitle: "บล็อก Perry",
     metaDescription: "บันทึกการออกรุ่น บทแนะนำ และบทความเชิงเทคนิคของ Perry พร้อมวันที่ ผลการวัดในอดีตอ้างอิงตามเวอร์ชันเดิม",
     title: "บันทึกการออกรุ่น เจาะลึก\nและคู่มือใช้งาน",
     aside: "ทุกบทความมีวันที่กำกับ ผลการวัดอ้างอิงตามเวอร์ชันของ Perry ที่ใช้วัด",
@@ -218,7 +208,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "บทความนี้บันทึกเวอร์ชันของ Perry และผลการวัด ณ เวลาที่เผยแพร่ หากต้องตัดสินใจในวันนี้ โปรดดูข้อจำกัดปัจจุบัน คู่มือแพลตฟอร์ม และข้อมูลเบนช์มาร์ก",
   },
   tr: {
-    metaTitle: "Perry blogu",
     metaDescription: "Tarihli Perry sürüm notları, eğitimler ve teknik yazılar. Geçmiş ölçümler ilk sürümlerine bağlı kalır.",
     title: "Sürüm notları, derinlemesine\nyazılar ve rehberler.",
     aside: "Her yazı tarihlidir. Ölçümler, alındıkları Perry sürümüne bağlıdır.",
@@ -239,7 +228,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Bu tarihli yazı, yayımlandığı andaki Perry sürümünü ve ölçümleri kaydeder. Bugünkü kararlar için güncel sınırlamalara, platform kılavuzuna ve benchmark verilerine bakın.",
   },
   vi: {
-    metaTitle: "Blog Perry",
     metaDescription: "Ghi chú phát hành, hướng dẫn và bài viết kỹ thuật của Perry, có ghi ngày. Số liệu đo trước đây gắn với phiên bản gốc.",
     title: "Ghi chú phát hành, phân tích\nchuyên sâu và hướng dẫn.",
     aside: "Mỗi bài viết đều có ngày. Số liệu đo gắn với phiên bản Perry được dùng khi đo.",
@@ -260,7 +248,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Bài viết có ghi ngày này phản ánh phiên bản Perry và số liệu đo tại thời điểm xuất bản. Để ra quyết định hôm nay, hãy xem các giới hạn hiện tại, hướng dẫn nền tảng và dữ liệu benchmark.",
   },
   id: {
-    metaTitle: "Blog Perry",
     metaDescription: "Catatan rilis, tutorial, dan artikel teknis Perry yang bertanggal. Hasil pengukuran lama tetap terikat pada versi aslinya.",
     title: "Catatan rilis, ulasan mendalam,\ndan panduan.",
     aside: "Setiap artikel bertanggal. Hasil pengukuran terikat pada versi Perry yang dipakai saat mengukur.",
@@ -281,7 +268,6 @@ export const blogCopy: Copy<BlogCopy> = {
     historical: "Artikel bertanggal ini mencatat versi Perry dan hasil pengukuran saat diterbitkan. Untuk keputusan hari ini, lihat batasan terkini, panduan platform, dan data benchmark.",
   },
   "zh-Hans": {
-    metaTitle: "Perry 博客",
     metaDescription: "注明日期的 Perry 发布说明、教程和技术文章。历史测量数据与其原始版本对应。",
     title: "发布说明、深度解析\n与实践指南。",
     aside: "每篇文章都注明日期。测量数据对应测量时所用的 Perry 版本。",

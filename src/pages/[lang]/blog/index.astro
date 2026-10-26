@@ -12,6 +12,11 @@ export const getStaticPaths = localeStaticPaths;
 
 const lang = Astro.params.lang as Locale;
 const t = pick(blogCopy, lang);
+// The heading's designed line break becomes a space, except next to CJK characters.
+const docTitle = t.title
+  .replace(/(?<=[\u3000-\u9fff\uff00-\uffef])\n|\n(?=[\u3000-\u9fff\uff00-\uffef])/g, "")
+  .replace(/\n/g, " ")
+  .replace(/[.。]$/, "");
 const posts = await getPosts(lang);
 const [featured, ...rest] = posts;
 
@@ -19,7 +24,7 @@ const tagKeys = (tags: string[]) => tags.map((tag) => tag.toLowerCase()).join(" 
 const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
 ---
 
-<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="blog">
+<Base lang={lang} title={docTitle} description={t.metaDescription} path="blog">
   <PageHeader title={t.title} lead={t.aside}>
     <div class="filters" data-filters>
       <div class="chips" role="group">

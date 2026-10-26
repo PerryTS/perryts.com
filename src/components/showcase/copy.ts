@@ -6,7 +6,7 @@ const en = {
   "showcase": {
     "title": "Showcase",
     "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-    "metaTitle": "Perry showcase",
+    "metaTitle": "Projects built with Perry",
     "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
   },
   "pry": {
@@ -59,7 +59,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Mit Perry gebaute Projekte",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -109,7 +109,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Proyectos hechos con Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -159,7 +159,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Projets construits avec Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -209,7 +209,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Progetti realizzati con Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -259,7 +259,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Perry で作られたプロジェクト",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -309,7 +309,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Perry로 만든 프로젝트",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -359,7 +359,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Projetos feitos com Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -409,7 +409,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "โปรเจกต์ที่สร้างด้วย Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -459,7 +459,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Perry ile geliştirilen projeler",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -509,7 +509,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Dự án xây dựng bằng Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -559,7 +559,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "Proyek yang dibuat dengan Perry",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
@@ -609,7 +609,7 @@ export const copy: Copy<typeof en> = {
     "showcase": {
       "title": "Showcase",
       "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
-      "metaTitle": "Perry showcase",
+      "metaTitle": "使用 Perry 构建的项目",
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
