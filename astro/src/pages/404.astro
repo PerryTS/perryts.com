@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import LinkArrow from "../components/LinkArrow.astro";
+import PixelWall from "../components/PixelWall.astro";
+---
+
+<Base lang="en" title="Page not found" description="This page doesn't exist on perryts.com.">
+  <section class="section notfound">
+    <div class="wrap inner">
+      <p class="t-label accent">404</p>
+      <h1 class="t-h1">This page doesn't exist.</h1>
+      <p class="t-lead muted">It may have moved when the site was rebuilt.</p>
+      <div class="links">
+        <LinkArrow href="/en/">Home</LinkArrow>
+        <LinkArrow href="/en/blog/">Blog</LinkArrow>
+        <LinkArrow href="https://docs.perryts.com">Docs</LinkArrow>
+      </div>
+    </div>
+  </section>
+  <div class="wrap"><PixelWall heights={[1, 1, 2, 1, 2, 3, 2, 2, 3, 2, 1, 2, 1, 1, 2, 3, 2, 1]} /></div>
+</Base>
+
+<style>
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+  }
+</style>

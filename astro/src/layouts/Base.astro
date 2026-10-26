@@ -16,7 +16,7 @@ interface Props {
   canonical?: string;
   /** Locales this page really exists in; defaults to all. Drives hreflang alternates. */
   alternates?: readonly Locale[];
-  /** Absolute or root-relative social image. */
+  /** Absolute or root-relative social image; defaults to the site-wide preview. */
   image?: string;
   type?: "website" | "article";
 }
@@ -28,12 +28,12 @@ const {
   titleIsAbsolute = false,
   canonical,
   alternates = locales,
-  image,
+  image = "/og.png",
   type = "website",
 } = Astro.props;
 const fullTitle = titleIsAbsolute ? title : `${title} — Perry`;
 const canonicalUrl = new URL(canonical ?? localePath(lang, path), Astro.site);
-const imageUrl = image ? new URL(image, Astro.site) : undefined;
+const imageUrl = new URL(image, Astro.site);
 const ogLocale = lang.replace("-", "_");
 ---
 
@@ -58,11 +58,13 @@ const ogLocale = lang.replace("-", "_");
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={ogLocale} />
-    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    <meta name="twitter:image" content={imageUrl} />
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");</script>
     <!-- Plausible (self-hosted), same snippet as the previous site. -->

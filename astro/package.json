@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node --test 'src/**/*.test.ts'"
+    "test": "node --test 'src/**/*.test.ts' 'src/**/*.test.mjs'"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.1",
