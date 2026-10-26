@@ -1,4 +1,5 @@
-import type { Locale } from "@/i18n/routing";
+/** Coop page copy, ported verbatim from the previous site (all locales). */
+import type { Locale } from "../i18n/index.ts";
 
 export type CoopContent = {
   metaTitle: string;
@@ -686,6 +687,6 @@ const content: Record<Locale, CoopContent> = {
   },
 };
 
-export function getCoopContent(locale: string): CoopContent {
-  return content[locale as Locale] ?? content.en;
+export function getCoopContent(locale: Locale): CoopContent {
+  return content[locale] ?? content.en;
 }

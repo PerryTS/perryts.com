@@ -7,6 +7,8 @@ import { locales } from "./src/i18n/locales.mjs";
 // (`/en/…`) with a trailing slash, and `/` redirects to `/en/`.
 export default defineConfig({
   site: "https://perryts.com",
+  // server.ts and deploy.sh serve and upload ./out.
+  outDir: "./out",
   integrations: [mdx(), sitemap()],
   markdown: { shikiConfig: { theme: "github-dark-dimmed" } },
   trailingSlash: "always",

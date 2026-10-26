@@ -1,29 +1,27 @@
 {
-  "name": "perry-landing",
-  "version": "1.0.0",
+  "name": "perryts.com",
+  "type": "module",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "astro dev",
     "build": "npm run build:site && npm run build:server",
-    "build:site": "next build && node scripts/fix-export-lang.mjs",
+    "build:site": "astro build",
     "build:server": "sh scripts/build-server.sh",
+    "preview": "astro preview",
     "serve": "./server",
     "deploy": "./deploy.sh",
-    "start": "next start",
-    "lint": "tsc --noEmit"
+    "check": "astro check",
+    "test": "node --test 'src/**/*.test.ts' 'src/**/*.test.mjs'"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^25.0.9",
-    "@types/react": "^19.2.8",
-    "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.23",
-    "next": "^16.1.3",
-    "next-intl": "^4.8.3",
-    "postcss": "^8.5.6",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "@astrojs/mdx": "^8.1.1",
+    "@lucide/astro": "^1.61.0",
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.5",
+    "typescript": "^6.0.3"
   }
 }

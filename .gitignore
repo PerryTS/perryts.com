@@ -1,7 +1,6 @@
 node_modules
 out
-.next
+.astro
 server
 .perry-cache
-tsconfig.tsbuildinfo
 __perry_js_bundle.js
