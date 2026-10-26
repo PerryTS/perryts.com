@@ -1,6 +1,7 @@
 ---
 import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { links } from "../lib/links.ts";
+import { getParity } from "../lib/perry-data.ts";
 import Lines from "../components/Lines.astro";
 import LinkArrow from "../components/LinkArrow.astro";
 
@@ -23,7 +24,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Stabilise the core",
         items: [
-          "Node 26 parity from ~77% toward 97%",
+          "Node 26 parity from ~{parity}% toward 97%",
           "Performance: GC, dispatch, startup, binary size",
           "Close TypeScript and npm gaps: Proxy, decorators, weak refs",
         ],
@@ -53,7 +54,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Estabilizar el núcleo",
         items: [
-          "Paridad con Node 26 de ~77% hacia el 97%",
+          "Paridad con Node 26 de ~{parity}% hacia el 97%",
           "Rendimiento: GC, despacho, arranque, tamaño del binario",
           "Cerrar huecos de TypeScript y npm: Proxy, decoradores, weak refs",
         ],
@@ -87,7 +88,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Den Kern stabilisieren",
         items: [
-          "Node-26-Parität von ~77 % in Richtung 97 %",
+          "Node-26-Parität von ~{parity} % in Richtung 97 %",
           "Performance: GC, Dispatch, Start, Binary-Größe",
           "Lücken bei TypeScript und npm schließen: Proxy, Decorators, Weak Refs",
         ],
@@ -117,7 +118,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Stabiliser le cœur",
         items: [
-          "Parité Node 26 de ~77 % vers 97 %",
+          "Parité Node 26 de ~{parity} % vers 97 %",
           "Performances : GC, dispatch, démarrage, taille du binaire",
           "Combler les lacunes TypeScript et npm : Proxy, décorateurs, weak refs",
         ],
@@ -147,7 +148,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Stabilizzare il core",
         items: [
-          "Parità con Node 26 da ~77% verso il 97%",
+          "Parità con Node 26 da ~{parity}% verso il 97%",
           "Prestazioni: GC, dispatch, avvio, dimensione del binario",
           "Colmare le lacune di TypeScript e npm: Proxy, decorator, weak ref",
         ],
@@ -177,7 +178,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "コアの安定化",
         items: [
-          "Node 26互換性を~77%から97%へ",
+          "Node 26互換性を~{parity}%から97%へ",
           "パフォーマンス：GC、ディスパッチ、起動、バイナリサイズ",
           "TypeScriptとnpmの未対応箇所の解消：Proxy、デコレータ、弱参照",
         ],
@@ -207,7 +208,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "코어 안정화",
         items: [
-          "Node 26 호환성을 ~77%에서 97%로",
+          "Node 26 호환성을 ~{parity}%에서 97%로",
           "성능: GC, 디스패치, 시작 시간, 바이너리 크기",
           "TypeScript와 npm 미지원 항목 해소: Proxy, 데코레이터, 약한 참조",
         ],
@@ -237,7 +238,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Estabilizar o núcleo",
         items: [
-          "Paridade com o Node 26 de ~77% rumo a 97%",
+          "Paridade com o Node 26 de ~{parity}% rumo a 97%",
           "Desempenho: GC, dispatch, inicialização, tamanho do binário",
           "Fechar lacunas de TypeScript e npm: Proxy, decorators, weak refs",
         ],
@@ -267,7 +268,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "ทำให้แกนหลักเสถียร",
         items: [
-          "ความเข้ากันได้กับ Node 26 จาก ~77% สู่ 97%",
+          "ความเข้ากันได้กับ Node 26 จาก ~{parity}% สู่ 97%",
           "ประสิทธิภาพ: GC, dispatch, การเริ่มต้น, ขนาดไบนารี",
           "ปิดช่องว่างของ TypeScript และ npm: Proxy, decorators, weak refs",
         ],
@@ -327,7 +328,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Ổn định phần lõi",
         items: [
-          "Tương thích Node 26 từ ~77% hướng tới 97%",
+          "Tương thích Node 26 từ ~{parity}% hướng tới 97%",
           "Hiệu năng: GC, dispatch, khởi động, kích thước binary",
           "Lấp các thiếu sót của TypeScript và npm: Proxy, decorator, weak ref",
         ],
@@ -357,7 +358,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "Menstabilkan inti",
         items: [
-          "Paritas Node 26 dari ~77% menuju 97%",
+          "Paritas Node 26 dari ~{parity}% menuju 97%",
           "Performa: GC, dispatch, startup, ukuran binary",
           "Menutup kekurangan TypeScript dan npm: Proxy, decorator, weak ref",
         ],
@@ -387,7 +388,7 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
         when: "v0.5 → 0.6",
         title: "稳定核心",
         items: [
-          "Node 26 兼容性从 ~77% 提升至 97%",
+          "Node 26 兼容性从 ~{parity}% 提升至 97%",
           "性能：GC、分派、启动、二进制体积",
           "补齐 TypeScript 和 npm 的差距：Proxy、装饰器、弱引用",
         ],
@@ -407,7 +408,9 @@ const copy: Copy<{ title: string; body: string; releases: string; current: strin
     ],
   },
 };
-const t = pick(copy, lang);
+// "~{parity}" in the copy is the current Node 26 pass rate from the Perry repo.
+const parity = Math.round((await getParity()).percent);
+const t: typeof copy.en = JSON.parse(JSON.stringify(pick(copy, lang)).replaceAll("{parity}", String(parity)));
 ---
 
 <section class="section section--paper roadmap">

@@ -1,6 +1,7 @@
 ---
 import { pick, type Copy, type Locale } from "../i18n/index.ts";
 import { formatInteger } from "../lib/format.ts";
+import { getParity } from "../lib/perry-data.ts";
 import { links } from "../lib/links.ts";
 
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 }
 const { lang } = Astro.props;
 
-const parity = { passing: 3364, total: 4342, modules: 53, target: 97 };
+// Measured figures come from test-parity/node_suite_baseline.json in the Perry repo; 97% is the goal.
+const measured = await getParity();
+const parity = { passing: measured.pass, total: measured.total, modules: measured.modules, target: 97 };
 const passing = formatInteger(parity.passing, lang);
 const total = formatInteger(parity.total, lang);
 const donePct = (parity.passing / parity.total) * 100;

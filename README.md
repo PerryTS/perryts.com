@@ -63,6 +63,14 @@ Images and videos go in `public/blog/<slug>/` and are referenced as `/blog/<slug
 
 **Page copy** lives next to the markup: each section or page has a `Copy` object keyed by locale (`src/i18n/index.ts`). English is required; missing locales fall back to English. `sitemap.xml` is generated after the build from every page whose canonical URL points at itself.
 
+**Live figures** are read at build time, with committed fallbacks when the network fails:
+
+- GitHub stars, forks, contributors and merged PRs: GitHub API (`src/lib/github.ts`).
+- Benchmarks (table, headline wins, versions, machine, date): `benchmarks/results/public-node-bun-v1.json` in the Perry repo (`src/lib/perry-data.ts`, fallback `src/data/benchmarks-snapshot.json`).
+- Node 26 compatibility (passing / total tests, modules): `test-parity/node_suite_baseline.json` in the Perry repo (fallback `src/data/node-parity-snapshot.json`).
+
+Rebuilding the site picks up new numbers; refresh the snapshots occasionally so offline builds stay close.
+
 ## Production build
 
 ```bash
