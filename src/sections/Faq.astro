@@ -1,0 +1,625 @@
+---
+/**
+ * FAQ from the previous home page (same questions and translations), restyled.
+ * Its FAQPage JSON-LD mirrors the visible text, as search engines require.
+ */
+import Plus from "@lucide/astro/icons/plus";
+import SectionHeader from "../components/SectionHeader.astro";
+import JsonLd from "../components/JsonLd.astro";
+import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { links } from "../lib/links.ts";
+import { richText, stripTags } from "../lib/rich-text.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+type FaqCopy = { title: string; subtitle: string; items: { question: string; answer: string }[]; more: string };
+const copy: Copy<FaqCopy> = {
+  en: {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything people ask before compiling their first binary",
+    "items": [
+      {
+        "question": "Does Perry need Node.js or a runtime?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "How big are the compiled binaries?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Can I use npm packages?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Which platforms does Perry support?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Is Perry free and open source?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "How is Perry different from Bun or Deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "How is Perry different from Electron or Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "How mature is Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "More questions? Read the <guideLink>getting-started guide</guideLink> or ask on <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  de: {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Alles, was Leute fragen, bevor sie ihre erste Binary kompilieren",
+    "items": [
+      {
+        "question": "Braucht Perry Node.js oder eine Laufzeitumgebung?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Wie groß sind die kompilierten Binaries?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Kann ich npm-Pakete verwenden?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Welche Plattformen unterstützt Perry?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Ist Perry kostenlos und Open Source?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Wie unterscheidet sich Perry von Bun oder Deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Wie unterscheidet sich Perry von Electron oder Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Wie ausgereift ist Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Weitere Fragen? Lies den <guideLink>Getting-Started-Guide</guideLink> oder frag in den <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  es: {
+    "title": "Preguntas frecuentes",
+    "subtitle": "Todo lo que la gente pregunta antes de compilar su primer binario",
+    "items": [
+      {
+        "question": "¿Perry necesita Node.js o un runtime?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "¿Qué tamaño tienen los binarios compilados?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "¿Puedo usar paquetes npm?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "¿Qué plataformas soporta Perry?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "¿Perry es gratis y de código abierto?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "¿En qué se diferencia Perry de Bun o de deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "¿En qué se diferencia Perry de Electron o de Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "¿Qué tan maduro es Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "¿Más preguntas? Lee la <guideLink>guía para comenzar</guideLink> o pregunta en <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  fr: {
+    "title": "Foire aux questions",
+    "subtitle": "Tout ce que les gens demandent avant de compiler leur premier binaire",
+    "items": [
+      {
+        "question": "Perry a-t-il besoin de Node.js ou d'un runtime ?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Quelle est la taille des binaires compilés ?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Puis-je utiliser des paquets npm ?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Quelles plateformes Perry prend-il en charge ?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry est-il gratuit et open source ?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "En quoi Perry diffère-t-il de Bun ou de deno compile ?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "En quoi Perry diffère-t-il d'Electron ou de Tauri ?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Quel est le niveau de maturité de Perry ?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "D'autres questions ? Consultez le <guideLink>guide de prise en main</guideLink> ou posez votre question sur <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  it: {
+    "title": "Domande frequenti",
+    "subtitle": "Tutto quello che si chiede prima di compilare il primo binario",
+    "items": [
+      {
+        "question": "Perry ha bisogno di Node.js o di un runtime?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Quanto sono grandi i binari compilati?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Posso usare i pacchetti npm?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Quali piattaforme supporta Perry?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry è gratuito e open source?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "In cosa Perry è diverso da Bun o da deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "In cosa Perry è diverso da Electron o Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Quanto è maturo Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Altre domande? Leggi la <guideLink>guida introduttiva</guideLink> o chiedi su <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  ja: {
+    "title": "よくある質問",
+    "subtitle": "最初のバイナリをコンパイルする前に、誰もが疑問に思うこと",
+    "items": [
+      {
+        "question": "Perry には Node.js やランタイムが必要ですか？",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "コンパイルされたバイナリのサイズはどれくらいですか？",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "npm パッケージは使えますか？",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry はどのプラットフォームに対応していますか？",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry は無料でオープンソースですか？",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry は Bun や Deno compile とどう違いますか？",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry は Electron や Tauri とどう違いますか？",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry の成熟度はどれくらいですか？",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "他に質問があれば、<guideLink>はじめにガイド</guideLink>を読むか、<discussionsLink>GitHub Discussions</discussionsLink>で質問してください。"
+  },
+  ko: {
+    "title": "자주 묻는 질문",
+    "subtitle": "사람들이 첫 바이너리를 컴파일하기 전에 묻는 모든 것",
+    "items": [
+      {
+        "question": "Perry는 Node.js나 런타임이 필요한가요?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "컴파일된 바이너리는 크기가 얼마나 되나요?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "npm 패키지를 사용할 수 있나요?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry는 어떤 플랫폼을 지원하나요?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry는 무료이고 오픈 소스인가요?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry는 Bun이나 Deno compile과 어떻게 다른가요?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry는 Electron이나 Tauri와 어떻게 다른가요?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry는 얼마나 성숙한 상태인가요?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "더 궁금한 점이 있나요? <guideLink>시작하기 가이드</guideLink>를 읽어보거나 <discussionsLink>GitHub Discussions</discussionsLink>에 질문해보세요."
+  },
+  pt: {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Tudo o que as pessoas perguntam antes de compilar seu primeiro binário",
+    "items": [
+      {
+        "question": "O Perry precisa de Node.js ou de um runtime?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Qual é o tamanho dos binários compilados?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Posso usar pacotes npm?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Quais plataformas o Perry suporta?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "O Perry é gratuito e de código aberto?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Como o Perry se diferencia do Bun ou do Deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Como o Perry se diferencia do Electron ou do Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Quão maduro é o Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Mais perguntas? Leia o <guideLink>guia de primeiros passos</guideLink> ou pergunte no <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  th: {
+    "title": "คำถามที่พบบ่อย",
+    "subtitle": "ทุกอย่างที่คนถามก่อนคอมไพล์ไบนารีตัวแรกของพวกเขา",
+    "items": [
+      {
+        "question": "Perry ต้องมี Node.js หรือรันไทม์หรือไม่?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "ไบนารีที่คอมไพล์แล้วมีขนาดใหญ่แค่ไหน?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "ใช้แพ็กเกจ npm ได้หรือไม่?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry รองรับแพลตฟอร์มใดบ้าง?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry ฟรีและเป็นโอเพนซอร์สหรือไม่?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry ต่างจาก Bun หรือ Deno compile อย่างไร?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry ต่างจาก Electron หรือ Tauri อย่างไร?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry มีความสมบูรณ์แค่ไหน?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "มีคำถามเพิ่มเติมไหม? อ่าน<guideLink>คู่มือเริ่มต้นใช้งาน</guideLink> หรือถามได้ที่ <discussionsLink>GitHub Discussions</discussionsLink>"
+  },
+  tr: {
+    "title": "Sıkça Sorulan Sorular",
+    "subtitle": "İnsanların ilk ikili dosyalarını derlemeden önce sorduğu her şey",
+    "items": [
+      {
+        "question": "Perry'nin Node.js'e veya bir runtime'a ihtiyacı var mı?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Derlenen ikili dosyalar ne kadar büyük?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "npm paketlerini kullanabilir miyim?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry hangi platformları destekliyor?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry ücretsiz ve açık kaynaklı mı?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry, Bun veya Deno compile'dan nasıl farklı?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry, Electron veya Tauri'den nasıl farklı?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry ne kadar olgun?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Başka sorularınız mı var? <guideLink>Başlarken kılavuzunu</guideLink> okuyun veya <discussionsLink>GitHub Discussions</discussionsLink>'da sorun."
+  },
+  vi: {
+    "title": "Các câu hỏi thường gặp",
+    "subtitle": "Mọi điều mọi người thắc mắc trước khi biên dịch binary đầu tiên của mình",
+    "items": [
+      {
+        "question": "Perry có cần Node.js hay runtime không?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Các binary đã biên dịch lớn cỡ nào?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Tôi có thể dùng gói npm không?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry hỗ trợ những nền tảng nào?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry có miễn phí và mã nguồn mở không?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry khác gì so với Bun hay Deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry khác gì so với Electron hay Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry đã trưởng thành đến mức nào?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Còn thắc mắc khác? Đọc <guideLink>hướng dẫn bắt đầu</guideLink> hoặc hỏi trên <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  id: {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "subtitle": "Semua yang ditanyakan orang-orang sebelum mengompilasi binary pertama mereka",
+    "items": [
+      {
+        "question": "Apakah Perry membutuhkan Node.js atau runtime?",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "Seberapa besar binary yang dikompilasi?",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "Bisakah saya menggunakan paket npm?",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Platform apa saja yang didukung Perry?",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Apakah Perry gratis dan open source?",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Apa bedanya Perry dengan Bun atau Deno compile?",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Apa bedanya Perry dengan Electron atau Tauri?",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Seberapa matang Perry?",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "Ada pertanyaan lain? Baca <guideLink>panduan memulai</guideLink> atau tanyakan di <discussionsLink>GitHub Discussions</discussionsLink>."
+  },
+  "zh-Hans": {
+    "title": "常见问题",
+    "subtitle": "编译第一个二进制文件之前，人们想问的一切",
+    "items": [
+      {
+        "question": "Perry 需要 Node.js 或运行时吗？",
+        "answer": "Native Perry binaries run without Node.js, Bun, Deno, or an external JavaScript engine installed. They do include the Perry runtime and garbage collector, statically linked. Packages that need engine semantics can use the optional embedded V8 fallback."
+      },
+      {
+        "question": "编译出的二进制文件有多大？",
+        "answer": "Size depends on the target, imports, and build profile. The published examples range from about 330 KB for hello world to about 7 MB for Mango; full-standard-library or optional-V8 builds can be much larger. Treat any size as a measured example, not a universal output size."
+      },
+      {
+        "question": "可以使用 npm 包吗？",
+        "answer": "Many pure TypeScript/JavaScript packages compile natively, and roughly 50 package/API implementations are tracked. Compatibility is not universal: packages using native addons, unsupported dynamic behavior, or engine-specific semantics may need the optional V8 fallback or may not work. Run perry check and consult the limitations."
+      },
+      {
+        "question": "Perry 支持哪些平台？",
+        "answer": "Perry documents 11 targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM. Web and WASM are aliases; HarmonyOS is a separate preview. Platform maturity and API coverage differ, so consult the platform guide."
+      },
+      {
+        "question": "Perry 是免费且开源的吗？",
+        "answer": "The compiler and runtime repository is MIT licensed, and local compilation requires no account. Hosted Perry Publish and commercial support are separate services; availability, limits, and pricing are confirmed in the service or in writing."
+      },
+      {
+        "question": "Perry 与 Bun 或 Deno compile 有什么不同？",
+        "answer": "Bun and Deno standalone executables bundle their runtimes; Perry native builds compile through LLVM and do not embed a JavaScript engine by default, although they statically link the Perry runtime and GC. Exact size and startup comparisons are version-, platform-, and workload-specific. See the dated <bunLink>Perry vs Bun</bunLink> and <denoLink>Perry vs Deno</denoLink> pages."
+      },
+      {
+        "question": "Perry 与 Electron 或 Tauri 有什么不同？",
+        "answer": "Electron ships Chromium and Node.js; Tauri uses a system webview with native-side application code. Perry instead maps its UI model to platform widgets where supported. Bundle size and platform capability vary, so use the dated <electronLink>Perry vs Electron</electronLink> and <tauriLink>Perry vs Tauri</tauriLink> comparisons rather than a universal size claim."
+      },
+      {
+        "question": "Perry 成熟度如何？",
+        "answer": "Perry is pre-1.0 and changes quickly. Real projects use it today, but language, package, and platform parity are still active work. Review the <showcaseLink>showcase</showcaseLink>, current limitations, and changelog before committing a production workload."
+      }
+    ],
+    "more": "还有其他问题？阅读<guideLink>快速入门指南</guideLink>，或在<discussionsLink>GitHub Discussions</discussionsLink>上提问。"
+  },
+};
+const t = pick(copy, lang);
+const tagLinks = {
+  bunLink: localePath(lang, "compare/bun"),
+  denoLink: localePath(lang, "compare/deno"),
+  electronLink: localePath(lang, "compare/electron"),
+  tauriLink: localePath(lang, "compare/tauri"),
+  showcaseLink: localePath(lang, "showcase"),
+  guideLink: localePath(lang, "getting-started"),
+  discussionsLink: links.discussions,
+};
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: t.items.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: stripTags(f.answer) },
+  })),
+};
+---
+
+<section class="section faq" id="faq">
+  <JsonLd data={faqJsonLd} />
+  <div class="wrap inner">
+    <SectionHeader title={t.title} aside={t.subtitle} />
+    <div class="list">
+      {t.items.map((item, i) => (
+        <details class="item" data-reveal style={`--i: ${Math.min(i, 6)}`}>
+          <summary>
+            <span class="q">{item.question}</span>
+            <Plus class="icon" size={18} stroke-width={1.75} aria-hidden="true" />
+          </summary>
+          <p class="a muted" set:html={richText(item.answer, tagLinks)} />
+        </details>
+      ))}
+    </div>
+    <p class="more muted" set:html={richText(t.more, tagLinks)} />
+  </div>
+</section>
+
+<style>
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .list {
+    border-top: 1px solid var(--border);
+  }
+  .item {
+    border-bottom: 1px solid var(--border);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-block: 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .q {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+  summary:hover .q {
+    color: var(--accent);
+  }
+  summary :global(.icon) {
+    flex: none;
+    color: var(--text-muted);
+    transition: transform 200ms var(--ease-out);
+  }
+  .item[open] summary :global(.icon) {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+  .a {
+    max-width: 820px;
+    padding-bottom: 28px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .a :global(a),
+  .more :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .more {
+    font-size: 15px;
+  }
+</style>
