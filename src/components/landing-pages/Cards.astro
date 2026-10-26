@@ -14,8 +14,10 @@ interface Props {
   items: CardItem[];
   /** Minimum column width before wrapping. */
   min?: number;
+  /** Heading level of each card title; h2 when the cards sit directly under the page h1. */
+  heading?: "h2" | "h3";
 }
-const { items, min = 260 } = Astro.props;
+const { items, min = 260, heading: Heading = "h3" } = Astro.props;
 ---
 
 <ul class="cards" style={`--min: ${min}px`}>
@@ -27,10 +29,10 @@ const { items, min = 260 } = Astro.props;
       <li data-reveal style={`--i: ${i}`}>
         <Tag class:list={["card", item.href && "card--link"]} href={item.href}>
           {item.label && <span class="t-label muted">{item.label}</span>}
-          <h3 class="card__title">
+          <Heading class="card__title">
             {item.title}
             {item.href && <Icon size={16} stroke-width={1.75} aria-hidden="true" />}
-          </h3>
+          </Heading>
           <p class="muted">{item.text}</p>
         </Tag>
       </li>
