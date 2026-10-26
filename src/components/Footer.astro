@@ -325,5 +325,15 @@ const t = pick(copy, lang);
       gap: 40px;
       flex-wrap: wrap;
     }
+    .served__left {
+      gap: 10px 12px;
+    }
+    .served__left > span:not(.live) {
+      flex: 1 1 200px;
+    }
+    .served__left code {
+      flex-basis: 100%;
+      overflow-wrap: anywhere;
+    }
   }
 </style>

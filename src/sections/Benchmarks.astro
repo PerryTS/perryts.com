@@ -639,15 +639,24 @@ const table = rows.map((row, i) => {
     }
   }
   @media (max-width: 520px) {
-    .headlines {
-      grid-template-columns: 1fr;
-    }
     .headline {
-      padding-left: 0;
-      border-left: 0;
+      padding-inline: 14px 0;
     }
-    .headline + .headline {
-      border-top: 1px solid var(--border);
+    .headline:nth-child(odd) {
+      padding-inline: 0 14px;
+    }
+    .headline__value {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .headline__x {
+      font-size: 40px;
+      line-height: 1;
+    }
+    .headline__word {
+      padding-bottom: 0;
+      font-size: 15px;
     }
   }
 </style>

@@ -132,6 +132,22 @@ const { class: className, lang } = Astro.props;
     border: 1px solid var(--border);
     border-radius: 8px;
   }
+  @media (max-width: 640px) {
+    .prose {
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .prose :global(h2) {
+      font-size: 28px;
+    }
+    .prose :global(h3) {
+      font-size: 21px;
+    }
+    .prose :global(pre) {
+      padding: 16px;
+      font-size: 12.5px;
+    }
+  }
   .prose :global(figcaption) {
     margin-top: 10px;
     font-size: 14px;
