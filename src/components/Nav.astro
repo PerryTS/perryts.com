@@ -3,7 +3,8 @@ import Menu from "@lucide/astro/icons/menu";
 import Bird from "./Bird.astro";
 import BrandIcon from "./BrandIcon.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
-import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
+import { localePath, type Locale } from "../i18n/index.ts";
+import { messages } from "../i18n/messages.ts";
 import { formatCompact } from "../lib/format.ts";
 import { getRepoStats } from "../lib/github.ts";
 import { links } from "../lib/links.ts";
@@ -15,87 +16,15 @@ interface Props {
 const { lang, path } = Astro.props;
 const stats = await getRepoStats();
 
-const copy: Copy<{ items: [string, string][]; menu: string; language: string; home: string }> = {
-  en: {
-    items: [["Docs", links.docs], ["Showcase", localePath("en", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("en", "publish")], ["For teams", "#teams"], ["Blog", localePath("en", "blog")]],
-    menu: "Menu",
-    language: "Change language",
-    home: "Perry home",
-  },
-  es: {
-    items: [["Docs", links.docs], ["Showcase", localePath("es", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("es", "publish")], ["Empresas", "#teams"], ["Blog", localePath("es", "blog")]],
-    menu: "Menú",
-    language: "Cambiar idioma",
-    home: "Inicio de Perry",
-  },
-  de: {
-    items: [["Dokumentation", links.docs], ["Showcase", localePath("de", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("de", "publish")], ["Für Teams", "#teams"], ["Blog", localePath("de", "blog")]],
-    menu: "Menü",
-    language: "Sprache ändern",
-    home: "Perry Startseite",
-  },
-  fr: {
-    items: [["Documentation", links.docs], ["Showcase", localePath("fr", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("fr", "publish")], ["Entreprises", "#teams"], ["Blog", localePath("fr", "blog")]],
-    menu: "Menu",
-    language: "Changer de langue",
-    home: "Accueil Perry",
-  },
-  it: {
-    items: [["Documentazione", links.docs], ["Showcase", localePath("it", "showcase")], ["Benchmark", "#benchmarks"], ["Publish", localePath("it", "publish")], ["Per i team", "#teams"], ["Blog", localePath("it", "blog")]],
-    menu: "Menu",
-    language: "Cambia lingua",
-    home: "Home di Perry",
-  },
-  ja: {
-    items: [["ドキュメント", links.docs], ["Showcase", localePath("ja", "showcase")], ["ベンチマーク", "#benchmarks"], ["Publish", localePath("ja", "publish")], ["チーム向け", "#teams"], ["ブログ", localePath("ja", "blog")]],
-    menu: "メニュー",
-    language: "言語を変更",
-    home: "Perryホーム",
-  },
-  ko: {
-    items: [["문서", links.docs], ["Showcase", localePath("ko", "showcase")], ["벤치마크", "#benchmarks"], ["Publish", localePath("ko", "publish")], ["팀용", "#teams"], ["블로그", localePath("ko", "blog")]],
-    menu: "메뉴",
-    language: "언어 변경",
-    home: "Perry 홈",
-  },
-  pt: {
-    items: [["Documentação", links.docs], ["Showcase", localePath("pt", "showcase")], ["Benchmarks", "#benchmarks"], ["Publish", localePath("pt", "publish")], ["Para equipes", "#teams"], ["Blog", localePath("pt", "blog")]],
-    menu: "Menu",
-    language: "Mudar idioma",
-    home: "Página inicial do Perry",
-  },
-  th: {
-    items: [["เอกสาร", links.docs], ["Showcase", localePath("th", "showcase")], ["เบนช์มาร์ก", "#benchmarks"], ["Publish", localePath("th", "publish")], ["สำหรับทีม", "#teams"], ["บล็อก", localePath("th", "blog")]],
-    menu: "เมนู",
-    language: "เปลี่ยนภาษา",
-    home: "หน้าแรก Perry",
-  },
-  tr: {
-    items: [["Dokümantasyon", links.docs], ["Showcase", localePath("tr", "showcase")], ["Benchmark'lar", "#benchmarks"], ["Publish", localePath("tr", "publish")], ["Ekipler için", "#teams"], ["Blog", localePath("tr", "blog")]],
-    menu: "Menü",
-    language: "Dili değiştir",
-    home: "Perry ana sayfa",
-  },
-  vi: {
-    items: [["Tài liệu", links.docs], ["Showcase", localePath("vi", "showcase")], ["Benchmark", "#benchmarks"], ["Publish", localePath("vi", "publish")], ["Cho đội nhóm", "#teams"], ["Blog", localePath("vi", "blog")]],
-    menu: "Menu",
-    language: "Đổi ngôn ngữ",
-    home: "Trang chủ Perry",
-  },
-  id: {
-    items: [["Dokumentasi", links.docs], ["Showcase", localePath("id", "showcase")], ["Benchmark", "#benchmarks"], ["Publish", localePath("id", "publish")], ["Untuk tim", "#teams"], ["Blog", localePath("id", "blog")]],
-    menu: "Menu",
-    language: "Ganti bahasa",
-    home: "Beranda Perry",
-  },
-  "zh-Hans": {
-    items: [["文档", links.docs], ["Showcase", localePath("zh-Hans", "showcase")], ["基准测试", "#benchmarks"], ["Publish", localePath("zh-Hans", "publish")], ["团队版", "#teams"], ["博客", localePath("zh-Hans", "blog")]],
-    menu: "菜单",
-    language: "切换语言",
-    home: "Perry 首页",
-  },
-};
-const t = pick(copy, lang);
+const t = messages(lang).nav;
+const items: [string, string][] = [
+  [t.items.docs, links.docs],
+  [t.items.showcase, localePath(lang, "showcase")],
+  [t.items.benchmarks, "#benchmarks"],
+  [t.items.publish, localePath(lang, "publish")],
+  [t.items.teams, "#teams"],
+  [t.items.blog, localePath(lang, "blog")],
+];
 ---
 
 <header class="nav">
@@ -105,7 +34,7 @@ const t = pick(copy, lang);
       <span>perry</span>
     </a>
     <nav class="links" aria-label="Main">
-      {t.items.map(([label, href]) => <a href={href}>{label}</a>)}
+      {items.map(([label, href]) => <a href={href}>{label}</a>)}
     </nav>
     <div class="right">
       <LanguageSwitcher lang={lang} path={path} label={t.language} />
@@ -118,7 +47,7 @@ const t = pick(copy, lang);
       <details class="mobile">
         <summary aria-label={t.menu}><Menu size={20} stroke-width={1.75} aria-hidden="true" /></summary>
         <nav aria-label={t.menu}>
-          {t.items.map(([label, href]) => <a href={href}>{label}</a>)}
+          {items.map(([label, href]) => <a href={href}>{label}</a>)}
           <a href={links.discord}>Discord</a>
         </nav>
       </details>

@@ -1,10 +1,10 @@
 ---
 /** TypeScript → Perry → app library → Coop worker, with shared runtime providers below (one per machine). */
 import ArrowRight from "@lucide/astro/icons/arrow-right";
-import type { CoopContent } from "../../data/coop-content.ts";
+import type { Messages } from "../../i18n/messages.ts";
 
 interface Props {
-  content: CoopContent;
+  content: Messages["pages"]["coop"];
 }
 const { content } = Astro.props;
 const steps = [

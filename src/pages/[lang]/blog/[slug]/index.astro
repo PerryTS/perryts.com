@@ -10,8 +10,8 @@ import Tag from "../../../../components/Tag.astro";
 import CopyButton from "../../../../components/CopyButton.astro";
 import NewsletterForm from "../../../../components/NewsletterForm.astro";
 import JsonLd from "../../../../components/JsonLd.astro";
-import { blogCopy } from "../../../../components/blog/copy.ts";
-import { locales, localePath, pick, type Locale } from "../../../../i18n/index.ts";
+import { messages, plural } from "../../../../i18n/messages.ts";
+import { locales, localePath, type Locale } from "../../../../i18n/index.ts";
 import { formatPostDate, getPosts, type Post } from "../../../../lib/blog.ts";
 import { readingMinutes } from "../../../../lib/reading-time.ts";
 
@@ -37,7 +37,7 @@ interface Props {
 }
 const { post, newer, older } = Astro.props;
 const lang = Astro.params.lang as Locale;
-const t = pick(blogCopy, lang);
+const t = messages(lang).blog;
 const { entry, isFallback } = post;
 const { Content, headings } = await render(entry);
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
@@ -78,7 +78,7 @@ const blogPosting = {
     <div class="meta t-mono muted">
       <div class="meta__left">
         <span><Calendar size={14} stroke-width={1.75} aria-hidden="true" /><time datetime={entry.data.date.toISOString()}>{formatPostDate(entry.data.date, lang)}</time></span>
-        <span><Timer size={14} stroke-width={1.75} aria-hidden="true" />{t.minutes(minutes)}</span>
+        <span><Timer size={14} stroke-width={1.75} aria-hidden="true" />{plural(lang, t.minutes, minutes)}</span>
       </div>
       <div class="meta__share">
         <span>{t.share}</span>

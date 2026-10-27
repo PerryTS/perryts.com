@@ -2,7 +2,8 @@
 import LinkArrow from "../LinkArrow.astro";
 import SectionHeader from "../SectionHeader.astro";
 import Stat from "../Stat.astro";
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
+import { fillDeep, messages } from "../../i18n/messages.ts";
 import { formatCompact, formatInteger, perDay } from "../../lib/format.ts";
 import { getRepoStats } from "../../lib/github.ts";
 import { links } from "../../lib/links.ts";
@@ -15,148 +16,7 @@ const stats = await getRepoStats();
 const started = new Intl.DateTimeFormat(lang, { month: "long", year: "numeric" }).format(new Date(stats.createdAt));
 const forks = formatInteger(stats.forks, lang);
 
-const copy: Copy<{
-  title: string;
-  aside: string;
-  merged: [string, string];
-  perDay: [string, string];
-  contributors: [string, string];
-  stars: [string, string];
-  source: string;
-  browse: string;
-}> = {
-  en: {
-    title: "Built in the open.",
-    aside: `Perry started in ${started} and is pre-1.0. All work happens in public pull requests on GitHub.`,
-    merged: ["pull requests merged", `since ${started}`],
-    perDay: ["merged per day", "over the last 30 days"],
-    contributors: ["contributors", "on GitHub"],
-    stars: ["GitHub stars", `${forks} forks`],
-    source: "Figures read from the GitHub API at build time.",
-    browse: "Browse the pull requests",
-  },
-  es: {
-    title: "Hecho en abierto.",
-    aside: `Perry empezó en ${started} y aún no ha llegado a la 1.0. Todo el trabajo se hace en pull requests públicas en GitHub.`,
-    merged: ["pull requests fusionadas", `desde ${started}`],
-    perDay: ["fusionadas al día", "en los últimos 30 días"],
-    contributors: ["colaboradores", "en GitHub"],
-    stars: ["estrellas en GitHub", `${forks} forks`],
-    source: "Cifras obtenidas de la API de GitHub al compilar el sitio.",
-    browse: "Ver las pull requests",
-  },
-  de: {
-    title: "Offen entwickelt.",
-    aside: `Perry startete im ${started} und ist noch vor Version 1.0. Die gesamte Arbeit findet in öffentlichen Pull Requests auf GitHub statt.`,
-    merged: ["gemergte Pull Requests", `seit ${started}`],
-    perDay: ["Merges pro Tag", "in den letzten 30 Tagen"],
-    contributors: ["Mitwirkende", "auf GitHub"],
-    stars: ["GitHub-Sterne", `${forks} Forks`],
-    source: "Zahlen beim Build aus der GitHub-API gelesen.",
-    browse: "Pull Requests ansehen",
-  },
-  fr: {
-    title: "Développé en public.",
-    aside: `Perry a démarré en ${started} et n'a pas encore atteint la 1.0. Tout le travail se fait dans des pull requests publiques sur GitHub.`,
-    merged: ["pull requests fusionnées", `depuis ${started}`],
-    perDay: ["fusionnées par jour", "sur les 30 derniers jours"],
-    contributors: ["contributeurs", "sur GitHub"],
-    stars: ["étoiles GitHub", `${forks} forks`],
-    source: "Chiffres lus depuis l'API GitHub lors du build.",
-    browse: "Parcourir les pull requests",
-  },
-  it: {
-    title: "Sviluppato alla luce del sole.",
-    aside: `Perry è nato nel ${started} ed è ancora pre-1.0. Tutto il lavoro avviene in pull request pubbliche su GitHub.`,
-    merged: ["pull request unite", `dal ${started}`],
-    perDay: ["unite al giorno", "negli ultimi 30 giorni"],
-    contributors: ["contributori", "su GitHub"],
-    stars: ["stelle su GitHub", `${forks} fork`],
-    source: "Dati letti dall'API di GitHub al momento della build.",
-    browse: "Sfoglia le pull request",
-  },
-  ja: {
-    title: "オープンに開発。",
-    aside: `Perryは${started}に始まり、現在1.0前です。すべての作業はGitHubの公開プルリクエストで行われています。`,
-    merged: ["マージされたプルリクエスト", `${started}以降`],
-    perDay: ["1日あたりのマージ", "直近30日間"],
-    contributors: ["コントリビューター", "GitHub上"],
-    stars: ["GitHubスター", `${forks} フォーク`],
-    source: "数値はビルド時にGitHub APIから取得しています。",
-    browse: "プルリクエストを見る",
-  },
-  ko: {
-    title: "공개적으로 개발합니다.",
-    aside: `Perry는 ${started}에 시작되었으며 아직 1.0 이전입니다. 모든 작업은 GitHub의 공개 풀 리퀘스트에서 이루어집니다.`,
-    merged: ["병합된 풀 리퀘스트", `${started} 이후`],
-    perDay: ["일일 병합 수", "최근 30일 기준"],
-    contributors: ["기여자", "GitHub"],
-    stars: ["GitHub 스타", `포크 ${forks}개`],
-    source: "수치는 빌드 시점에 GitHub API에서 가져왔습니다.",
-    browse: "풀 리퀘스트 둘러보기",
-  },
-  pt: {
-    title: "Feito em público.",
-    aside: `O Perry começou em ${started} e ainda não chegou à 1.0. Todo o trabalho acontece em pull requests públicos no GitHub.`,
-    merged: ["pull requests mesclados", `desde ${started}`],
-    perDay: ["mesclados por dia", "nos últimos 30 dias"],
-    contributors: ["colaboradores", "no GitHub"],
-    stars: ["estrelas no GitHub", `${forks} forks`],
-    source: "Números lidos da API do GitHub no momento do build.",
-    browse: "Ver os pull requests",
-  },
-  th: {
-    title: "พัฒนาอย่างเปิดเผย",
-    aside: `Perry เริ่มต้นเมื่อ ${started} และยังไม่ถึง 1.0 งานทั้งหมดเกิดขึ้นใน pull request สาธารณะบน GitHub`,
-    merged: ["pull request ที่ merge แล้ว", `ตั้งแต่ ${started}`],
-    perDay: ["merge ต่อวัน", "ในช่วง 30 วันที่ผ่านมา"],
-    contributors: ["ผู้ร่วมพัฒนา", "บน GitHub"],
-    stars: ["ดาวบน GitHub", `${forks} forks`],
-    source: "ตัวเลขดึงจาก GitHub API ตอนบิลด์เว็บไซต์",
-    browse: "ดู pull request",
-  },
-  tr: {
-    title: "Açık geliştiriliyor.",
-    aside: `Perry ${started} tarihinde başladı ve henüz 1.0 öncesinde. Tüm çalışmalar GitHub'daki herkese açık pull request'lerde yürütülüyor.`,
-    merged: ["birleştirilen pull request", `${started} tarihinden beri`],
-    perDay: ["günlük birleştirme", "son 30 günde"],
-    contributors: ["katkıda bulunan", "GitHub'da"],
-    stars: ["GitHub yıldızı", `${forks} fork`],
-    source: "Rakamlar derleme sırasında GitHub API'sinden okunur.",
-    browse: "Pull request'lere göz atın",
-  },
-  vi: {
-    title: "Phát triển công khai.",
-    aside: `Perry bắt đầu từ ${started} và vẫn chưa đến 1.0. Mọi công việc đều diễn ra trong các pull request công khai trên GitHub.`,
-    merged: ["pull request đã merge", `kể từ ${started}`],
-    perDay: ["merge mỗi ngày", "trong 30 ngày qua"],
-    contributors: ["người đóng góp", "trên GitHub"],
-    stars: ["sao GitHub", `${forks} fork`],
-    source: "Số liệu được lấy từ GitHub API khi build.",
-    browse: "Xem các pull request",
-  },
-  id: {
-    title: "Dibangun secara terbuka.",
-    aside: `Perry dimulai pada ${started} dan masih pra-1.0. Semua pekerjaan dilakukan lewat pull request publik di GitHub.`,
-    merged: ["pull request di-merge", `sejak ${started}`],
-    perDay: ["di-merge per hari", "dalam 30 hari terakhir"],
-    contributors: ["kontributor", "di GitHub"],
-    stars: ["bintang GitHub", `${forks} fork`],
-    source: "Angka dibaca dari API GitHub saat build.",
-    browse: "Lihat pull request",
-  },
-  "zh-Hans": {
-    title: "公开开发。",
-    aside: `Perry 始于 ${started}，目前尚未到 1.0。所有工作都在 GitHub 的公开 pull request 中进行。`,
-    merged: ["已合并的 pull request", `自 ${started} 起`],
-    perDay: ["每日合并数", "最近 30 天"],
-    contributors: ["贡献者", "GitHub 上"],
-    stars: ["GitHub 星标", `${forks} 个 fork`],
-    source: "数据在构建时从 GitHub API 读取。",
-    browse: "浏览 pull request",
-  },
-};
-const t = pick(copy, lang);
+const t = fillDeep(messages(lang).home.builtInTheOpen, { started, forks });
 
 const figures = [
   { value: formatInteger(stats.mergedPrs, lang), text: t.merged },

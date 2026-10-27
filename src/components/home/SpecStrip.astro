@@ -1,5 +1,6 @@
 ---
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
 
 interface Props {
   lang: Locale;
@@ -11,126 +12,8 @@ interface Spec {
   label: string;
   note: string;
 }
-const copy: Copy<{ label: string; specs: Spec[] }> = {
-  en: {
-    label: "Perry at a glance",
-    specs: [
-      { value: "11", label: "documented targets", note: "+ HarmonyOS preview" },
-      { value: "~330 KB", label: "hello-world binary", note: "size grows with features" },
-      { value: "3.5 MB", label: "peak memory, JSON pipeline", note: "Node.js uses 36 MB" },
-      { value: "35+", label: "native widgets", note: "no WebView, no CSS" },
-    ],
-  },
-  es: {
-    label: "Perry de un vistazo",
-    specs: [
-      { value: "11", label: "plataformas documentadas", note: "+ HarmonyOS en preview" },
-      { value: "~330 KB", label: "binario hello-world", note: "crece con las funcionalidades" },
-      { value: "3,5 MB", label: "memoria máxima, pipeline JSON", note: "Node.js usa 36 MB" },
-      { value: "35+", label: "widgets nativos", note: "sin WebView, sin CSS" },
-    ],
-  },
-  de: {
-    label: "Perry auf einen Blick",
-    specs: [
-      { value: "11", label: "dokumentierte Plattformen", note: "+ HarmonyOS als Preview" },
-      { value: "~330 KB", label: "Hello-World-Binary", note: "wächst mit dem Funktionsumfang" },
-      { value: "3,5 MB", label: "Spitzenspeicher, JSON-Pipeline", note: "Node.js braucht 36 MB" },
-      { value: "35+", label: "native Widgets", note: "kein WebView, kein CSS" },
-    ],
-  },
-  fr: {
-    label: "Perry en bref",
-    specs: [
-      { value: "11", label: "plateformes documentées", note: "+ HarmonyOS en preview" },
-      { value: "~330 KB", label: "binaire hello-world", note: "augmente avec les fonctionnalités" },
-      { value: "3,5 MB", label: "pic mémoire, pipeline JSON", note: "Node.js utilise 36 MB" },
-      { value: "35+", label: "widgets natifs", note: "sans WebView, sans CSS" },
-    ],
-  },
-  it: {
-    label: "Perry in breve",
-    specs: [
-      { value: "11", label: "piattaforme documentate", note: "+ HarmonyOS in preview" },
-      { value: "~330 KB", label: "binario hello-world", note: "cresce con le funzionalità" },
-      { value: "3,5 MB", label: "picco di memoria, pipeline JSON", note: "Node.js usa 36 MB" },
-      { value: "35+", label: "widget nativi", note: "niente WebView, niente CSS" },
-    ],
-  },
-  ja: {
-    label: "Perryの概要",
-    specs: [
-      { value: "11", label: "ドキュメント化された対応先", note: "+ HarmonyOSプレビュー" },
-      { value: "~330 KB", label: "hello-worldバイナリ", note: "機能に応じて増加" },
-      { value: "3.5 MB", label: "ピークメモリ（JSONパイプライン）", note: "Node.jsは36 MB" },
-      { value: "35+", label: "ネイティブウィジェット", note: "WebViewもCSSも不要" },
-    ],
-  },
-  ko: {
-    label: "한눈에 보는 Perry",
-    specs: [
-      { value: "11", label: "문서화된 타깃", note: "+ HarmonyOS 프리뷰" },
-      { value: "~330 KB", label: "hello-world 바이너리", note: "기능에 따라 증가" },
-      { value: "3.5 MB", label: "최대 메모리, JSON 파이프라인", note: "Node.js는 36 MB 사용" },
-      { value: "35+", label: "네이티브 위젯", note: "WebView 없음, CSS 없음" },
-    ],
-  },
-  pt: {
-    label: "Perry em resumo",
-    specs: [
-      { value: "11", label: "plataformas documentadas", note: "+ HarmonyOS em preview" },
-      { value: "~330 KB", label: "binário hello-world", note: "cresce com as funcionalidades" },
-      { value: "3,5 MB", label: "pico de memória, pipeline JSON", note: "Node.js usa 36 MB" },
-      { value: "35+", label: "widgets nativos", note: "sem WebView, sem CSS" },
-    ],
-  },
-  th: {
-    label: "Perry โดยสรุป",
-    specs: [
-      { value: "11", label: "แพลตฟอร์มที่มีเอกสาร", note: "+ HarmonyOS รุ่นพรีวิว" },
-      { value: "~330 KB", label: "ไบนารี hello-world", note: "ขนาดเพิ่มตามฟีเจอร์" },
-      { value: "3.5 MB", label: "หน่วยความจำสูงสุด, JSON pipeline", note: "Node.js ใช้ 36 MB" },
-      { value: "35+", label: "วิดเจ็ตเนทีฟ", note: "ไม่มี WebView ไม่มี CSS" },
-    ],
-  },
-  tr: {
-    label: "Bir bakışta Perry",
-    specs: [
-      { value: "11", label: "belgelenmiş platform", note: "+ HarmonyOS önizlemesi" },
-      { value: "~330 KB", label: "hello-world ikili dosyası", note: "özelliklerle birlikte büyür" },
-      { value: "3,5 MB", label: "en yüksek bellek, JSON hattı", note: "Node.js 36 MB kullanır" },
-      { value: "35+", label: "yerel widget", note: "WebView yok, CSS yok" },
-    ],
-  },
-  vi: {
-    label: "Tổng quan về Perry",
-    specs: [
-      { value: "11", label: "nền tảng có tài liệu", note: "+ HarmonyOS bản preview" },
-      { value: "~330 KB", label: "binary hello-world", note: "tăng theo tính năng" },
-      { value: "3,5 MB", label: "bộ nhớ đỉnh, pipeline JSON", note: "Node.js dùng 36 MB" },
-      { value: "35+", label: "widget gốc", note: "không WebView, không CSS" },
-    ],
-  },
-  id: {
-    label: "Perry sekilas",
-    specs: [
-      { value: "11", label: "platform terdokumentasi", note: "+ HarmonyOS versi preview" },
-      { value: "~330 KB", label: "binary hello-world", note: "bertambah sesuai fitur" },
-      { value: "3,5 MB", label: "memori puncak, pipeline JSON", note: "Node.js memakai 36 MB" },
-      { value: "35+", label: "widget native", note: "tanpa WebView, tanpa CSS" },
-    ],
-  },
-  "zh-Hans": {
-    label: "Perry 速览",
-    specs: [
-      { value: "11", label: "个有文档的目标平台", note: "+ HarmonyOS 预览版" },
-      { value: "~330 KB", label: "hello-world 二进制", note: "随功能增加" },
-      { value: "3.5 MB", label: "峰值内存，JSON 管道", note: "Node.js 需 36 MB" },
-      { value: "35+", label: "个原生组件", note: "无 WebView，无 CSS" },
-    ],
-  },
-};
-const t = pick(copy, lang);
+
+const t = messages(lang).home.specStrip;
 ---
 
 <section class="spec-strip" aria-label={t.label}>

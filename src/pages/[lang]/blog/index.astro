@@ -4,14 +4,16 @@ import PageHeader from "../../../components/PageHeader.astro";
 import NewsletterForm from "../../../components/NewsletterForm.astro";
 import Badge from "../../../components/blog/Badge.astro";
 import LinkArrow from "../../../components/LinkArrow.astro";
-import { blogCopy, filterKeys } from "../../../components/blog/copy.ts";
-import { localePath, localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
+import { messages, plural } from "../../../i18n/messages.ts";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
 import { formatPostDate, getPosts } from "../../../lib/blog.ts";
 
 export const getStaticPaths = localeStaticPaths;
 
 const lang = Astro.params.lang as Locale;
-const t = pick(blogCopy, lang);
+const t = messages(lang).blog;
+/** Tag filters, keyed by the lowercase tag they match (labels in the locale files under blog.filters). */
+const filterKeys = ["milestone", "performance", "gc", "compiler", "how-to"] as const;
 // The heading's designed line break becomes a space, except next to CJK characters.
 const docTitle = t.title
   .replace(/(?<=[\u3000-\u9fff\uff00-\uffef])\n|\n(?=[\u3000-\u9fff\uff00-\uffef])/g, "")
@@ -61,7 +63,7 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
           <div class="year" data-year>
             <h2 class="year__head t-mono">
               <span>{year}</span>
-              <span class="muted">{t.posts(inYear.length)}</span>
+              <span class="muted">{plural(lang, t.posts, inYear.length)}</span>
             </h2>
             <ul>
               {inYear.map((post, i) => (

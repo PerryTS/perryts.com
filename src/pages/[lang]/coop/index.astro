@@ -9,12 +9,12 @@ import CoopTopology from "../../../components/coop/CoopTopology.astro";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Check from "@lucide/astro/icons/check";
 import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
-import { getCoopContent } from "../../../data/coop-content.ts";
+import { messages } from "../../../i18n/messages.ts";
 
 export const getStaticPaths = localeStaticPaths;
 
 const lang = Astro.params.lang as Locale;
-const content = getCoopContent(lang);
+const content = messages(lang).pages.coop;
 
 const REPOSITORY = "https://github.com/PerryTS/coop";
 const QUICK_START = `${REPOSITORY}/blob/main/docs/src/quickstart.md`;

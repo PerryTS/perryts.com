@@ -3,13 +3,13 @@ import Base from "../../../layouts/Base.astro";
 import PageHeader from "../../../components/PageHeader.astro";
 import FactsNotice from "../../../components/guides/FactsNotice.astro";
 import ShowcaseCard from "../../../components/showcase/ShowcaseCard.astro";
-import { copy } from "../../../components/showcase/copy.ts";
-import { localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
 import { showcaseProjects } from "../../../data/showcase.ts";
 
 export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
-const t = pick(copy, lang).showcase;
+const t = messages(lang).showcase.showcase;
 ---
 
 <Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="showcase">

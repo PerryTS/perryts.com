@@ -1,7 +1,8 @@
 ---
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
 import SectionHeader from "../SectionHeader.astro";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
+import { messages } from "../../i18n/messages.ts";
 
 interface Props {
   lang: Locale;
@@ -17,152 +18,8 @@ interface Stage {
   /** The tool label in accent (LLVM). */
   accent?: boolean;
 }
-const copy: Copy<{ title: string; aside: string; stages: Stage[] }> = {
-  en: {
-    title: "How Perry\nbuilds your app.",
-    aside: "SWC parses your code, Perry lowers it, and LLVM generates machine code. The runtime and garbage collector are linked into the same binary.",
-    stages: [
-      { name: "main.ts / .js", tool: "Source", desc: "TypeScript or plain JavaScript. Classes, generics, async/await and npm packages.", mono: true },
-      { name: "Parse", tool: "SWC", desc: "Fast parsing into an AST." },
-      { name: "Transform", tool: "Perry IR", desc: "Type resolution and lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Machine code for ARM64, x86-64 and WASM.", accent: true },
-      { name: "./main", tool: "Executable", desc: "A single file, from ~330 KB.", mono: true },
-    ],
-  },
-  es: {
-    title: "Cómo Perry\ncompila tu app.",
-    aside: "SWC analiza tu código, Perry lo transforma y LLVM genera código máquina. El runtime y el recolector de basura se enlazan en el mismo binario.",
-    stages: [
-      { name: "main.ts / .js", tool: "Código fuente", desc: "TypeScript o JavaScript sin más. Clases, genéricos, async/await y paquetes de npm.", mono: true },
-      { name: "Parseo", tool: "SWC", desc: "Parseo rápido a un AST." },
-      { name: "Transformación", tool: "Perry IR", desc: "Resolución de tipos y lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Código máquina para ARM64, x86-64 y WASM.", accent: true },
-      { name: "./main", tool: "Ejecutable", desc: "Un único archivo, desde ~330 KB.", mono: true },
-    ],
-  },
-  de: {
-    title: "So baut Perry\ndeine App.",
-    aside: "SWC parst deinen Code, Perry senkt ihn ab und LLVM erzeugt Maschinencode. Runtime und Garbage Collector werden in dasselbe Binary gelinkt.",
-    stages: [
-      { name: "main.ts / .js", tool: "Quellcode", desc: "TypeScript oder reines JavaScript. Klassen, Generics, async/await und npm-Pakete.", mono: true },
-      { name: "Parsen", tool: "SWC", desc: "Schnelles Parsen in einen AST." },
-      { name: "Transformieren", tool: "Perry IR", desc: "Typauflösung und Lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Maschinencode für ARM64, x86-64 und WASM.", accent: true },
-      { name: "./main", tool: "Programmdatei", desc: "Eine einzige Datei, ab ~330 KB.", mono: true },
-    ],
-  },
-  fr: {
-    title: "Comment Perry\ncompile votre app.",
-    aside: "SWC analyse votre code, Perry l'abaisse et LLVM génère le code machine. Le runtime et le ramasse-miettes sont liés dans le même binaire.",
-    stages: [
-      { name: "main.ts / .js", tool: "Source", desc: "TypeScript ou JavaScript simple. Classes, génériques, async/await et paquets npm.", mono: true },
-      { name: "Parsing", tool: "SWC", desc: "Parsing rapide vers un AST." },
-      { name: "Transformation", tool: "Perry IR", desc: "Résolution des types et lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Code machine pour ARM64, x86-64 et WASM.", accent: true },
-      { name: "./main", tool: "Exécutable", desc: "Un seul fichier, à partir de ~330 KB.", mono: true },
-    ],
-  },
-  it: {
-    title: "Come Perry\ncompila la tua app.",
-    aside: "SWC analizza il tuo codice, Perry lo trasforma e LLVM genera codice macchina. Il runtime e il garbage collector vengono linkati nello stesso binario.",
-    stages: [
-      { name: "main.ts / .js", tool: "Sorgente", desc: "TypeScript o JavaScript semplice. Classi, generics, async/await e pacchetti npm.", mono: true },
-      { name: "Parsing", tool: "SWC", desc: "Parsing veloce in un AST." },
-      { name: "Trasformazione", tool: "Perry IR", desc: "Risoluzione dei tipi e lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Codice macchina per ARM64, x86-64 e WASM.", accent: true },
-      { name: "./main", tool: "Eseguibile", desc: "Un unico file, da ~330 KB.", mono: true },
-    ],
-  },
-  ja: {
-    title: "Perryが\nアプリをビルドする仕組み。",
-    aside: "SWCがコードを解析し、Perryがそれを変換し、LLVMがマシンコードを生成します。ランタイムとガベージコレクタは同じバイナリにリンクされます。",
-    stages: [
-      { name: "main.ts / .js", tool: "ソース", desc: "TypeScriptまたは素のJavaScript。クラス、ジェネリクス、async/await、npmパッケージに対応。", mono: true },
-      { name: "パース", tool: "SWC", desc: "ASTへの高速なパース。" },
-      { name: "変換", tool: "Perry IR", desc: "型解決とロワリング。" },
-      { name: "Codegen", tool: "LLVM", desc: "ARM64、x86-64、WASM向けのマシンコード。", accent: true },
-      { name: "./main", tool: "実行ファイル", desc: "単一ファイル、~330 KBから。", mono: true },
-    ],
-  },
-  ko: {
-    title: "Perry가 앱을\n빌드하는 방식.",
-    aside: "SWC가 코드를 파싱하고, Perry가 이를 로우어링하며, LLVM이 기계어를 생성합니다. 런타임과 가비지 컬렉터는 같은 바이너리에 링크됩니다.",
-    stages: [
-      { name: "main.ts / .js", tool: "소스", desc: "TypeScript 또는 순수 JavaScript. 클래스, 제네릭, async/await, npm 패키지.", mono: true },
-      { name: "파싱", tool: "SWC", desc: "AST로 빠르게 파싱." },
-      { name: "변환", tool: "Perry IR", desc: "타입 해석과 로우어링." },
-      { name: "Codegen", tool: "LLVM", desc: "ARM64, x86-64, WASM용 기계어.", accent: true },
-      { name: "./main", tool: "실행 파일", desc: "단일 파일, ~330 KB부터.", mono: true },
-    ],
-  },
-  pt: {
-    title: "Como o Perry\ncompila seu app.",
-    aside: "O SWC analisa seu código, o Perry o transforma e o LLVM gera código de máquina. O runtime e o coletor de lixo são linkados no mesmo binário.",
-    stages: [
-      { name: "main.ts / .js", tool: "Código-fonte", desc: "TypeScript ou JavaScript puro. Classes, genéricos, async/await e pacotes npm.", mono: true },
-      { name: "Parsing", tool: "SWC", desc: "Parsing rápido para uma AST." },
-      { name: "Transformação", tool: "Perry IR", desc: "Resolução de tipos e lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Código de máquina para ARM64, x86-64 e WASM.", accent: true },
-      { name: "./main", tool: "Executável", desc: "Um único arquivo, a partir de ~330 KB.", mono: true },
-    ],
-  },
-  th: {
-    title: "Perry\nบิลด์แอปของคุณอย่างไร",
-    aside: "SWC พาร์สโค้ดของคุณ Perry แปลงลงสู่ระดับล่าง แล้ว LLVM สร้างแมชชีนโค้ด รันไทม์และ garbage collector ถูกลิงก์ไว้ในไบนารีเดียวกัน",
-    stages: [
-      { name: "main.ts / .js", tool: "ซอร์สโค้ด", desc: "TypeScript หรือ JavaScript ธรรมดา รองรับคลาส generics, async/await และแพ็กเกจ npm", mono: true },
-      { name: "พาร์ส", tool: "SWC", desc: "พาร์สเป็น AST อย่างรวดเร็ว" },
-      { name: "แปลง", tool: "Perry IR", desc: "การระบุชนิดข้อมูลและ lowering" },
-      { name: "Codegen", tool: "LLVM", desc: "แมชชีนโค้ดสำหรับ ARM64, x86-64 และ WASM", accent: true },
-      { name: "./main", tool: "ไฟล์ปฏิบัติการ", desc: "ไฟล์เดียว เริ่มต้นที่ ~330 KB", mono: true },
-    ],
-  },
-  tr: {
-    title: "Perry uygulamanızı\nnasıl derler.",
-    aside: "SWC kodunuzu ayrıştırır, Perry onu alt seviyeye indirir ve LLVM makine kodu üretir. Çalışma zamanı ve çöp toplayıcı aynı ikili dosyaya bağlanır.",
-    stages: [
-      { name: "main.ts / .js", tool: "Kaynak", desc: "TypeScript veya düz JavaScript. Sınıflar, generic'ler, async/await ve npm paketleri.", mono: true },
-      { name: "Ayrıştırma", tool: "SWC", desc: "Hızlı biçimde AST'ye ayrıştırma." },
-      { name: "Dönüştürme", tool: "Perry IR", desc: "Tür çözümleme ve lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "ARM64, x86-64 ve WASM için makine kodu.", accent: true },
-      { name: "./main", tool: "Yürütülebilir dosya", desc: "Tek bir dosya, ~330 KB'tan başlar.", mono: true },
-    ],
-  },
-  vi: {
-    title: "Cách Perry\nbuild ứng dụng của bạn.",
-    aside: "SWC phân tích mã của bạn, Perry hạ cấp nó và LLVM sinh mã máy. Runtime và bộ thu gom rác được liên kết vào cùng một binary.",
-    stages: [
-      { name: "main.ts / .js", tool: "Mã nguồn", desc: "TypeScript hoặc JavaScript thuần. Class, generic, async/await và gói npm.", mono: true },
-      { name: "Phân tích", tool: "SWC", desc: "Phân tích nhanh thành AST." },
-      { name: "Biến đổi", tool: "Perry IR", desc: "Phân giải kiểu và lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Mã máy cho ARM64, x86-64 và WASM.", accent: true },
-      { name: "./main", tool: "Tệp thực thi", desc: "Một tệp duy nhất, từ ~330 KB.", mono: true },
-    ],
-  },
-  id: {
-    title: "Cara Perry\nmembangun aplikasi Anda.",
-    aside: "SWC mem-parsing kode Anda, Perry menurunkannya, dan LLVM menghasilkan kode mesin. Runtime dan garbage collector di-link ke dalam binary yang sama.",
-    stages: [
-      { name: "main.ts / .js", tool: "Sumber", desc: "TypeScript atau JavaScript biasa. Class, generics, async/await, dan paket npm.", mono: true },
-      { name: "Parsing", tool: "SWC", desc: "Parsing cepat menjadi AST." },
-      { name: "Transformasi", tool: "Perry IR", desc: "Resolusi tipe dan lowering." },
-      { name: "Codegen", tool: "LLVM", desc: "Kode mesin untuk ARM64, x86-64, dan WASM.", accent: true },
-      { name: "./main", tool: "Executable", desc: "Satu file, mulai dari ~330 KB.", mono: true },
-    ],
-  },
-  "zh-Hans": {
-    title: "Perry 如何\n构建你的应用。",
-    aside: "SWC 解析你的代码，Perry 对其进行降级转换，LLVM 生成机器码。运行时和垃圾回收器链接进同一个二进制文件。",
-    stages: [
-      { name: "main.ts / .js", tool: "源码", desc: "TypeScript 或纯 JavaScript。支持类、泛型、async/await 和 npm 包。", mono: true },
-      { name: "解析", tool: "SWC", desc: "快速解析为 AST。" },
-      { name: "转换", tool: "Perry IR", desc: "类型解析与降级。" },
-      { name: "Codegen", tool: "LLVM", desc: "面向 ARM64、x86-64 和 WASM 的机器码。", accent: true },
-      { name: "./main", tool: "可执行文件", desc: "单个文件，最小 ~330 KB。", mono: true },
-    ],
-  },
-};
-const t = pick(copy, lang);
+
+const t = messages(lang).home.howItWorks;
 
 // Pixel band from the design, one string per column, top pixel first. Each letter is a colour step;
 // the first columns fade in with an opacity ramp. Decorative only.

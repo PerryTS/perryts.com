@@ -2,68 +2,16 @@
 import Base from "../../layouts/Base.astro";
 import Landing from "../../components/home/Landing.astro";
 import JsonLd from "../../components/JsonLd.astro";
-import { localeStaticPaths, pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { localeStaticPaths, type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
 
 export const getStaticPaths = localeStaticPaths;
 
 const lang = Astro.params.lang as Locale;
 // Titles kept from the previous site (tuned for search, already ranking); descriptions are the
 // previous ones where they were translated, otherwise the new localized copy.
-const copy: Copy<{ title: string; description: string }> = {
-  en: {
-    title: "Perry — Compile TypeScript to Native Executables | TypeScript Native Compiler",
-    description: "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; the Perry runtime and GC are statically linked.",
-  },
-  de: {
-    title: "Perry — TypeScript zu nativen Executables kompilieren | Nativer TypeScript-Compiler",
-    description: "Perry ist ein quelloffener Ahead-of-Time-Compiler für TypeScript. Eine Codebasis, 11 Plattformen, kein Node.js zur Laufzeit.",
-  },
-  es: {
-    title: "Perry — Compila TypeScript a ejecutables nativos | Compilador nativo de TypeScript",
-    description: "Perry es un compilador de TypeScript ahead-of-time y de código abierto. Un código, 11 plataformas, sin Node.js en ejecución.",
-  },
-  fr: {
-    title: "Perry — Compiler TypeScript en exécutables natifs | Compilateur TypeScript natif",
-    description: "Perry est un compilateur TypeScript ahead-of-time et open source. Une seule base de code, 11 plateformes, sans Node.js à l'exécution.",
-  },
-  it: {
-    title: "Perry — Compila TypeScript in Eseguibili Nativi | Compilatore Nativo per TypeScript",
-    description: "Perry è un compilatore TypeScript ahead-of-time e open source. Un'unica codebase, 11 piattaforme, nessun Node.js a runtime.",
-  },
-  ja: {
-    title: "Perry — TypeScript をネイティブ実行ファイルにコンパイル | TypeScript ネイティブコンパイラ",
-    description: "Perryはオープンソースのahead-of-time TypeScriptコンパイラです。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。",
-  },
-  ko: {
-    title: "Perry — TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 TypeScript 컴파일러",
-    description: "Perry는 오픈 소스 ahead-of-time TypeScript 컴파일러입니다. 하나의 코드베이스, 11개 플랫폼, 런타임에 Node.js가 필요 없습니다.",
-  },
-  pt: {
-    title: "Perry — Compile TypeScript para Executáveis Nativos | Compilador Nativo de TypeScript",
-    description: "Perry é um compilador de TypeScript ahead-of-time e de código aberto. Uma única base de código, 11 plataformas, sem Node.js em tempo de execução.",
-  },
-  th: {
-    title: "Perry — คอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ | คอมไพเลอร์ TypeScript เนทีฟ",
-    description: "Perry คือคอมไพเลอร์ TypeScript แบบ ahead-of-time ที่เป็นโอเพนซอร์ส โค้ดเบสเดียว 11 แพลตฟอร์ม ไม่ต้องใช้ Node.js ขณะรัน",
-  },
-  tr: {
-    title: "Perry — TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin | TypeScript Yerel Derleyicisi",
-    description: "Perry, açık kaynaklı ve ahead-of-time çalışan bir TypeScript derleyicisidir. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok.",
-  },
-  vi: {
-    title: "Perry — Biên dịch TypeScript thành tệp thực thi gốc | Trình biên dịch TypeScript gốc",
-    description: "Perry là trình biên dịch TypeScript ahead-of-time mã nguồn mở. Một codebase, 11 nền tảng, không cần Node.js khi chạy.",
-  },
-  id: {
-    title: "Perry — Kompilasi TypeScript ke Executable Native | Kompiler TypeScript Native",
-    description: "Perry adalah compiler TypeScript ahead-of-time yang open source. Satu codebase, 11 platform, tanpa Node.js saat runtime.",
-  },
-  "zh-Hans": {
-    title: "Perry — 将 TypeScript 编译为原生可执行文件 | TypeScript 原生编译器",
-    description: "Perry 是开源的 ahead-of-time TypeScript 编译器。一套代码，11 个平台，运行时无需 Node.js。",
-  },
-};
-const t = pick(copy, lang);
+
+const t = messages(lang).pages.home;
 
 // Same structured data the previous home page emitted.
 const softwareApplication = {

@@ -61,7 +61,7 @@ tags: ["compiler", "milestone"]
 
 Images and videos go in `public/blog/<slug>/` and are referenced as `/blog/<slug>/file.png`.
 
-**Page copy** lives next to the markup: each section or page has a `Copy` object keyed by locale (`src/i18n/index.ts`). English is required; missing locales fall back to English. `sitemap.xml` is generated after the build from every page whose canonical URL points at itself.
+**Page copy** lives in one JSON file per locale (`src/i18n/locales/<locale>.json`), grouped by page or section and read with `messages(lang)` (`src/i18n/messages.ts`). English is complete; any key a locale lacks falls back to English. `sitemap.xml` is generated after the build from every page whose canonical URL points at itself.
 
 **Live figures** are read at build time, with committed fallbacks when the network fails:
 

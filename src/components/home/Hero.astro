@@ -1,110 +1,18 @@
 ---
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
 import Lines from "../Lines.astro";
 import InstallCommand from "../InstallCommand.astro";
 import LinkArrow from "../LinkArrow.astro";
 import Terminal, { type TerminalLine } from "../Terminal.astro";
 import { links } from "../../lib/links.ts";
+import { messages } from "../../i18n/messages.ts";
 
 interface Props {
   lang: Locale;
 }
 const { lang } = Astro.props;
 
-const copy: Copy<{ eyebrow: string; title: string; sub: string; docs: string; copyLabel: string }> = {
-  en: {
-    eyebrow: "AHEAD-OF-TIME TYPESCRIPT COMPILER · SWC + LLVM",
-    title: "Your TypeScript,\ncompiled to native.",
-    sub: "Perry compiles TypeScript and JavaScript into a small native executable. One codebase, 11 platforms, no Node.js at runtime.",
-    docs: "Read the docs",
-    copyLabel: "Copy install command",
-  },
-  es: {
-    eyebrow: "COMPILADOR AHEAD-OF-TIME DE TYPESCRIPT · SWC + LLVM",
-    title: "Tu TypeScript,\ncompilado a nativo.",
-    sub: "Perry compila TypeScript y JavaScript en un ejecutable nativo pequeño. Un solo código, 11 plataformas y nada de Node.js en tiempo de ejecución.",
-    docs: "Leer la documentación",
-    copyLabel: "Copiar el comando de instalación",
-  },
-  de: {
-    eyebrow: "AHEAD-OF-TIME-COMPILER FÜR TYPESCRIPT · SWC + LLVM",
-    title: "Dein TypeScript,\nnativ kompiliert.",
-    sub: "Perry kompiliert TypeScript und JavaScript zu einer kleinen nativen Programmdatei. Eine Codebasis, 11 Plattformen, kein Node.js zur Laufzeit.",
-    docs: "Zur Dokumentation",
-    copyLabel: "Installationsbefehl kopieren",
-  },
-  fr: {
-    eyebrow: "COMPILATEUR TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
-    title: "Votre TypeScript,\ncompilé en natif.",
-    sub: "Perry compile TypeScript et JavaScript en un petit exécutable natif. Une seule base de code, 11 plateformes, sans Node.js à l'exécution.",
-    docs: "Lire la documentation",
-    copyLabel: "Copier la commande d'installation",
-  },
-  it: {
-    eyebrow: "COMPILATORE AHEAD-OF-TIME PER TYPESCRIPT · SWC + LLVM",
-    title: "Il tuo TypeScript,\ncompilato in nativo.",
-    sub: "Perry compila TypeScript e JavaScript in un piccolo eseguibile nativo. Un'unica codebase, 11 piattaforme, nessun Node.js a runtime.",
-    docs: "Leggi la documentazione",
-    copyLabel: "Copia il comando di installazione",
-  },
-  ja: {
-    eyebrow: "TYPESCRIPT AHEAD-OF-TIME コンパイラ · SWC + LLVM",
-    title: "TypeScriptを、\nネイティブに。",
-    sub: "PerryはTypeScriptとJavaScriptを小さなネイティブ実行ファイルにコンパイルします。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。",
-    docs: "ドキュメントを読む",
-    copyLabel: "インストールコマンドをコピー",
-  },
-  ko: {
-    eyebrow: "AHEAD-OF-TIME TYPESCRIPT 컴파일러 · SWC + LLVM",
-    title: "당신의 TypeScript를\n네이티브로 컴파일.",
-    sub: "Perry는 TypeScript와 JavaScript를 작은 네이티브 실행 파일로 컴파일합니다. 하나의 코드베이스로 11개 플랫폼을 지원하며, 런타임에 Node.js가 필요 없습니다.",
-    docs: "문서 읽기",
-    copyLabel: "설치 명령어 복사",
-  },
-  pt: {
-    eyebrow: "COMPILADOR AHEAD-OF-TIME DE TYPESCRIPT · SWC + LLVM",
-    title: "Seu TypeScript,\ncompilado para nativo.",
-    sub: "Perry compila TypeScript e JavaScript em um executável nativo pequeno. Uma única base de código, 11 plataformas e nada de Node.js em tempo de execução.",
-    docs: "Ler a documentação",
-    copyLabel: "Copiar o comando de instalação",
-  },
-  th: {
-    eyebrow: "คอมไพเลอร์ TYPESCRIPT แบบ AHEAD-OF-TIME · SWC + LLVM",
-    title: "TypeScript ของคุณ\nคอมไพล์เป็นเนทีฟ",
-    sub: "Perry คอมไพล์ TypeScript และ JavaScript เป็นไฟล์ปฏิบัติการเนทีฟขนาดเล็ก โค้ดเบสเดียว 11 แพลตฟอร์ม ไม่ต้องใช้ Node.js ขณะรัน",
-    docs: "อ่านเอกสาร",
-    copyLabel: "คัดลอกคำสั่งติดตั้ง",
-  },
-  tr: {
-    eyebrow: "AHEAD-OF-TIME TYPESCRIPT DERLEYİCİSİ · SWC + LLVM",
-    title: "TypeScript kodunuz,\nyerel koda derlenmiş.",
-    sub: "Perry, TypeScript ve JavaScript'i küçük bir yerel yürütülebilir dosyaya derler. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok.",
-    docs: "Dokümantasyonu okuyun",
-    copyLabel: "Kurulum komutunu kopyala",
-  },
-  vi: {
-    eyebrow: "TRÌNH BIÊN DỊCH TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
-    title: "TypeScript của bạn,\nbiên dịch thành mã gốc.",
-    sub: "Perry biên dịch TypeScript và JavaScript thành một tệp thực thi gốc nhỏ gọn. Một codebase, 11 nền tảng, không cần Node.js khi chạy.",
-    docs: "Đọc tài liệu",
-    copyLabel: "Sao chép lệnh cài đặt",
-  },
-  id: {
-    eyebrow: "KOMPILER TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
-    title: "TypeScript Anda,\ndikompilasi ke native.",
-    sub: "Perry mengompilasi TypeScript dan JavaScript menjadi executable native yang kecil. Satu codebase, 11 platform, tanpa Node.js saat runtime.",
-    docs: "Baca dokumentasi",
-    copyLabel: "Salin perintah instalasi",
-  },
-  "zh-Hans": {
-    eyebrow: "AHEAD-OF-TIME TYPESCRIPT 编译器 · SWC + LLVM",
-    title: "你的 TypeScript，\n编译为原生。",
-    sub: "Perry 将 TypeScript 和 JavaScript 编译为小巧的原生可执行文件。一套代码，11 个平台，运行时无需 Node.js。",
-    docs: "阅读文档",
-    copyLabel: "复制安装命令",
-  },
-};
-const t = pick(copy, lang);
+const t = messages(lang).home.hero;
 
 // Terminal output is product output, not copy: it stays the same in every locale.
 const lines: TerminalLine[] = [

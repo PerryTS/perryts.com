@@ -3,16 +3,6 @@ import { locales } from "./locales.mjs";
 export { locales };
 export type Locale = (typeof locales)[number];
 
-/**
- * Per-locale copy. English is required; other locales are optional and fall back
- * to English through `pick`, so untranslated strings never render empty.
- */
-export type Copy<T> = { en: T } & Partial<Record<Locale, T>>;
-
-export function pick<T>(copy: Copy<T>, lang: Locale): T {
-  return copy[lang] ?? copy.en;
-}
-
 export function isLocale(value: string | undefined): value is Locale {
   return (locales as readonly string[]).includes(value ?? "");
 }

@@ -2,146 +2,15 @@
 import CopyButton from "../CopyButton.astro";
 import Lines from "../Lines.astro";
 import PixelWall from "../PixelWall.astro";
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
 
 interface Props {
   lang: Locale;
 }
 const { lang } = Astro.props;
 
-const copy: Copy<{ title: string; copy: string; rows: [string, string][] }> = {
-  en: {
-    title: "Install\nPerry.",
-    copy: "Copy command",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Any OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Then", "perry init my-app && perry run ."],
-    ],
-  },
-  es: {
-    title: "Instala\nPerry.",
-    copy: "Copiar comando",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Cualquier SO", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Después", "perry init my-app && perry run ."],
-    ],
-  },
-  de: {
-    title: "Perry\ninstallieren.",
-    copy: "Befehl kopieren",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Jedes OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Danach", "perry init my-app && perry run ."],
-    ],
-  },
-  fr: {
-    title: "Installez\nPerry.",
-    copy: "Copier la commande",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Tout OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Ensuite", "perry init my-app && perry run ."],
-    ],
-  },
-  it: {
-    title: "Installa\nPerry.",
-    copy: "Copia comando",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Qualsiasi OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Poi", "perry init my-app && perry run ."],
-    ],
-  },
-  ja: {
-    title: "Perryを\nインストール。",
-    copy: "コマンドをコピー",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["全OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["次に", "perry init my-app && perry run ."],
-    ],
-  },
-  ko: {
-    title: "Perry\n설치하기.",
-    copy: "명령어 복사",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["모든 OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["그다음", "perry init my-app && perry run ."],
-    ],
-  },
-  pt: {
-    title: "Instale\no Perry.",
-    copy: "Copiar comando",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Qualquer SO", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Depois", "perry init my-app && perry run ."],
-    ],
-  },
-  th: {
-    title: "ติดตั้ง\nPerry",
-    copy: "คัดลอกคำสั่ง",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["ทุก OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["จากนั้น", "perry init my-app && perry run ."],
-    ],
-  },
-  tr: {
-    title: "Perry'yi\nkurun.",
-    copy: "Komutu kopyala",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Tüm sistemler", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Ardından", "perry init my-app && perry run ."],
-    ],
-  },
-  vi: {
-    title: "Cài đặt\nPerry.",
-    copy: "Sao chép lệnh",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Mọi OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Sau đó", "perry init my-app && perry run ."],
-    ],
-  },
-  id: {
-    title: "Instal\nPerry.",
-    copy: "Salin perintah",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["Semua OS", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["Lalu", "perry init my-app && perry run ."],
-    ],
-  },
-  "zh-Hans": {
-    title: "安装\nPerry。",
-    copy: "复制命令",
-    rows: [
-      ["macOS", "brew install perryts/perry/perry"],
-      ["任意系统", "npm i -g @perryts/perry"],
-      ["Windows", "winget install PerryTS.Perry"],
-      ["然后", "perry init my-app && perry run ."],
-    ],
-  },
-};
-const t = pick(copy, lang);
+const t = messages(lang).home.getStarted;
 ---
 
 <section class="get-started" id="get-started">

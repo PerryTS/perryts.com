@@ -1,0 +1,829 @@
+{
+  "blog": {
+    "metaDescription": "Catatan rilis, tutorial, dan artikel teknis Perry yang bertanggal. Hasil pengukuran lama tetap terikat pada versi aslinya.",
+    "title": "Catatan rilis, ulasan mendalam,\ndan panduan.",
+    "aside": "Setiap artikel bertanggal. Hasil pengukuran terikat pada versi Perry yang dipakai saat mengukur.",
+    "all": "Semua",
+    "filters": {
+      "milestone": "Tonggak",
+      "performance": "Performa",
+      "gc": "GC",
+      "compiler": "Kompiler",
+      "how-to": "Panduan"
+    },
+    "latest": "Terbaru",
+    "read": "Baca artikel",
+    "posts": {
+      "other": "{n} artikel"
+    },
+    "minutes": {
+      "other": "{n} menit baca"
+    },
+    "back": "Semua artikel",
+    "onThisPage": "Di halaman ini",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "noNext": "Ini artikel terbaru",
+    "share": "Bagikan",
+    "copyLink": "Salin tautan",
+    "englishOnly": "Artikel ini hanya tersedia dalam bahasa Inggris.",
+    "historical": "Artikel bertanggal ini mencatat versi Perry dan hasil pengukuran saat diterbitkan. Untuk keputusan hari ini, lihat batasan terkini, panduan platform, dan data benchmark."
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry vs alternatif lainnya",
+      "indexSubtitle": "Bagaimana Perry dibandingkan dengan cara lain mengirimkan TypeScript: runtime, kompiler, dan framework UI lintas platform. Jujur, bersumber, dengan angka terukur jika tersedia.",
+      "indexMetaTitle": "Bandingkan Perry dengan Bun, Deno, Electron, Tauri, React Native, dan Static Hermes",
+      "indexMetaDescription": "Perbandingan berdampingan Perry dengan alternatif yang sering digunakan developer: runtime TypeScript (Bun, Deno), kompiler AOT TS (Static Hermes), dan framework UI lintas platform (Electron, Tauri, React Native).",
+      "backToCompare": "Kembali ke perbandingan",
+      "lastUpdated": "Terakhir diperbarui",
+      "whatIs": "Apa itu {name}?",
+      "sideBySide": "Berdampingan",
+      "feature": "Fitur",
+      "wherePerryWins": "Di mana Perry unggul",
+      "whereCompetitorWins": "Di mana {name} unggul",
+      "whenChoose": "Kapan memilih {name}",
+      "verdict": "Kesimpulan",
+      "ctaTitle": "Coba Perry",
+      "ctaSubtitle": "Kompilasi TypeScript Anda menjadi native hari ini.",
+      "category": {
+        "runtime": "Runtime TypeScript",
+        "compiler": "Kompiler TS-ke-native",
+        "ui-framework": "UI lintas platform"
+      },
+      "sources": "Sumber",
+      "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
+    },
+    "electronAlternatives": {
+      "title": "Alternatif Electron untuk TypeScript",
+      "tldr": "Empat jalur realistis untuk aplikasi desktop TypeScript di 2026: Electron, Tauri, binary file tunggal Bun, dan widget native Perry. Ukuran binary, memori, stack UI, dan bahasa dibandingkan secara jujur."
+    },
+    "getStarted": "Mulai"
+  },
+  "footer": {
+    "tagline": "Compiler TypeScript ahead-of-time yang open source. Dibuat dengan Rust, di atas SWC dan LLVM.",
+    "served": "Halaman ini dilayani oleh binary native yang dikompilasi dengan Perry.",
+    "source": "Lihat kode sumber server",
+    "rights": "© 2026 Perry · Lisensi MIT",
+    "legal": "Pemberitahuan hukum",
+    "privacy": "Privasi",
+    "columns": [
+      {
+        "title": "Produk",
+        "items": [
+          "Memulai",
+          "Showcase",
+          "Perry Publish",
+          "Peta Jalan",
+          "Enterprise"
+        ]
+      },
+      {
+        "title": "Pelajari",
+        "items": [
+          "Dokumentasi",
+          "Blog",
+          "Bandingkan",
+          "Internal",
+          "Coop"
+        ]
+      },
+      {
+        "title": "Komunitas",
+        "items": [
+          "GitHub",
+          "Discord",
+          "Issues",
+          "Kontribusi",
+          "Buletin"
+        ]
+      }
+    ]
+  },
+  "guides": {
+    "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
+  },
+  "home": {
+    "benchmarks": {
+      "title": "Benchmark melawan Node.js,\nmenang dan kalah.",
+      "meta": [
+        "Perry {perry} · Node.js {node}",
+        "{cpu} · macOS · {date}",
+        "ms waktu nyata · makin rendah makin baik"
+      ],
+      "faster": "lebih cepat",
+      "benchmark": "BENCHMARK",
+      "perryFaster": "← PERRY LEBIH CEPAT",
+      "nodeFaster": "NODE LEBIH CEPAT →",
+      "ratio": "RASIO",
+      "rows": [
+        "Loop penggabungan string",
+        "1 juta objek",
+        "10 juta elemen",
+        "Iterasi bilangan kompleks",
+        "Alokasi + penelusuran pohon",
+        "Pemanggilan metode class"
+      ],
+      "rowFaster": "lebih cepat",
+      "rowSlower": "lebih lambat",
+      "even": "≈ seimbang",
+      "footnote": "Saat ini Perry lebih lambat pada: {list}.",
+      "all": "Ke-{n} benchmark & JSON mentah"
+    },
+    "builtInTheOpen": {
+      "title": "Dibangun secara terbuka.",
+      "aside": "Perry dimulai pada {started} dan masih pra-1.0. Semua pekerjaan dilakukan lewat pull request publik di GitHub.",
+      "merged": [
+        "pull request di-merge",
+        "sejak {started}"
+      ],
+      "perDay": [
+        "di-merge per hari",
+        "dalam 30 hari terakhir"
+      ],
+      "contributors": [
+        "kontributor",
+        "di GitHub"
+      ],
+      "stars": [
+        "bintang GitHub",
+        "{forks} fork"
+      ],
+      "source": "Angka dibaca dari API GitHub saat build.",
+      "browse": "Lihat pull request"
+    },
+    "community": {
+      "title": "Bergabunglah dengan komunitas.",
+      "discord": "Ngobrol dengan maintainer dan developer lain",
+      "github": "{stars} bintang · MIT · issue & diskusi",
+      "newsletter": [
+        "Buletin",
+        "Catatan rilis dan artikel engineering"
+      ],
+      "log": "Dari log engineering",
+      "allPosts": "Semua artikel"
+    },
+    "ecosystem": {
+      "title": "Uji, rilis, dan hosting\ndengan toolchain yang sama.",
+      "aside": "Compiler adalah intinya. Alat-alat ini menangani pengujian, publikasi, dan hosting.",
+      "steps": [
+        "KOMPILASI",
+        "UJI",
+        "RILIS",
+        "HOSTING"
+      ],
+      "descriptions": [
+        "Dari TypeScript ke binary native untuk 11 platform.",
+        "Pengujian UI yang mengendalikan widget asli aplikasi Anda.",
+        "Dari main.ts ke App Store: build, tanda tangani, verifikasi, dan kirim.",
+        "Menjalankan aplikasi TypeScript hasil kompilasi Perry melalui HTTP."
+      ],
+      "perryStatus": "MIT · open source",
+      "coopStatus": "Pra-1.0"
+    },
+    "faq": {
+      "title": "Pertanyaan yang Sering Diajukan",
+      "subtitle": "Semua yang ditanyakan orang-orang sebelum mengompilasi binary pertama mereka",
+      "items": [
+        {
+          "question": "Apakah Perry membutuhkan Node.js atau runtime?",
+          "answer": "Binary native Perry berjalan tanpa perlu Node.js, Bun, Deno, atau mesin JavaScript eksternal terpasang. Namun, binary tersebut tetap menyertakan runtime dan garbage collector Perry yang ditautkan secara statis. Paket yang membutuhkan semantik mesin dapat menggunakan fallback V8 tertanam yang bersifat opsional."
+        },
+        {
+          "question": "Seberapa besar binary yang dikompilasi?",
+          "answer": "Ukuran bergantung pada target, import, dan profil build. Contoh yang dipublikasikan berkisar dari sekitar 330 KB untuk hello world hingga sekitar 7 MB untuk Mango; build dengan pustaka standar lengkap atau V8 opsional bisa jauh lebih besar. Anggap setiap ukuran sebagai contoh hasil pengukuran, bukan ukuran output yang berlaku umum."
+        },
+        {
+          "question": "Bisakah saya menggunakan paket npm?",
+          "answer": "Banyak paket TypeScript/JavaScript murni dapat dikompilasi secara native, dan sekitar 50 implementasi paket/API dilacak. Kompatibilitasnya tidak universal: paket yang memakai addon native, perilaku dinamis yang belum didukung, atau semantik khusus mesin mungkin membutuhkan fallback V8 opsional atau mungkin tidak berfungsi. Jalankan perry check dan baca daftar keterbatasannya."
+        },
+        {
+          "question": "Platform apa saja yang didukung Perry?",
+          "answer": "Perry mendokumentasikan 11 target: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, dan Web/WASM. Web dan WASM adalah alias; HarmonyOS merupakan pratinjau terpisah. Kematangan platform dan cakupan API berbeda-beda, jadi lihat panduan platform."
+        },
+        {
+          "question": "Apakah Perry gratis dan open source?",
+          "answer": "Repositori compiler dan runtime berlisensi MIT, dan kompilasi lokal tidak memerlukan akun. Perry Publish yang di-hosting dan dukungan komersial adalah layanan terpisah; ketersediaan, batasan, dan harga dikonfirmasi di dalam layanan atau secara tertulis."
+        },
+        {
+          "question": "Apa bedanya Perry dengan Bun atau Deno compile?",
+          "answer": "Executable mandiri Bun dan Deno membundel runtime masing-masing; build native Perry dikompilasi melalui LLVM dan secara default tidak menyematkan mesin JavaScript, meskipun tetap menautkan runtime dan GC Perry secara statis. Perbandingan ukuran dan waktu startup yang tepat bergantung pada versi, platform, dan beban kerja. Lihat halaman bertanggal <bunLink>Perry vs Bun</bunLink> dan <denoLink>Perry vs Deno</denoLink>."
+        },
+        {
+          "question": "Apa bedanya Perry dengan Electron atau Tauri?",
+          "answer": "Electron menyertakan Chromium dan Node.js; Tauri menggunakan webview sistem dengan kode aplikasi di sisi native. Sebaliknya, Perry memetakan model UI-nya ke widget platform jika didukung. Ukuran bundle dan kemampuan platform bervariasi, jadi gunakan perbandingan bertanggal <electronLink>Perry vs Electron</electronLink> dan <tauriLink>Perry vs Tauri</tauriLink> alih-alih klaim ukuran yang berlaku umum."
+        },
+        {
+          "question": "Seberapa matang Perry?",
+          "answer": "Perry masih pra-1.0 dan berubah dengan cepat. Proyek nyata sudah menggunakannya saat ini, tetapi paritas bahasa, paket, dan platform masih terus dikerjakan. Tinjau <showcaseLink>showcase</showcaseLink>, keterbatasan saat ini, dan changelog sebelum memercayakan beban kerja produksi kepadanya."
+        }
+      ],
+      "more": "Ada pertanyaan lain? Baca <guideLink>panduan memulai</guideLink> atau tanyakan di <discussionsLink>GitHub Discussions</discussionsLink>."
+    },
+    "forTeams": {
+      "title": "Butuh bantuan pindah dari Electron atau React Native?",
+      "body": "Perry adalah proyek independen yang dijalankan oleh para maintainer-nya. Jika perusahaan Anda membutuhkan platform, paket, atau fitur tertentu, hubungi kami. Cakupan, jadwal, dan ketentuan disepakati secara tertulis.",
+      "offers": [
+        {
+          "name": "Tinjauan migrasi",
+          "description": "Kami meninjau aplikasi Electron atau React Native Anda dan memberi tahu apa yang sudah bisa dikompilasi dan apa yang masih perlu dikerjakan."
+        },
+        {
+          "name": "Implementasi bersama",
+          "description": "Bekerja bersama para maintainer selagi tim Anda merilis build Perry pertamanya."
+        },
+        {
+          "name": "Fitur yang disponsori",
+          "description": "Danai widget, modul Node, atau platform. Hasil kerjanya masuk ke compiler open source."
+        },
+        {
+          "name": "Build ter-hosting & dukungan",
+          "description": "Penandatanganan, verifikasi, dan perencanaan rilis, dengan ketentuan dukungan yang diatur dalam perjanjian Anda."
+        }
+      ],
+      "contactNote": "Ceritakan produk, platform target, dan jadwal Anda.",
+      "teams": "Perry untuk tim"
+    },
+    "getStarted": {
+      "title": "Instal\nPerry.",
+      "copy": "Salin perintah",
+      "rows": [
+        [
+          "macOS",
+          "brew install perryts/perry/perry"
+        ],
+        [
+          "Semua OS",
+          "npm i -g @perryts/perry"
+        ],
+        [
+          "Windows",
+          "winget install PerryTS.Perry"
+        ],
+        [
+          "Lalu",
+          "perry init my-app && perry run ."
+        ]
+      ]
+    },
+    "hero": {
+      "eyebrow": "KOMPILER TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
+      "title": "TypeScript Anda,\ndikompilasi ke native.",
+      "sub": "Perry mengompilasi TypeScript dan JavaScript menjadi executable native yang kecil. Satu codebase, 11 platform, tanpa Node.js saat runtime.",
+      "docs": "Baca dokumentasi",
+      "copyLabel": "Salin perintah instalasi"
+    },
+    "howItWorks": {
+      "title": "Cara Perry\nmembangun aplikasi Anda.",
+      "aside": "SWC mem-parsing kode Anda, Perry menurunkannya, dan LLVM menghasilkan kode mesin. Runtime dan garbage collector di-link ke dalam binary yang sama.",
+      "stages": [
+        {
+          "name": "main.ts / .js",
+          "tool": "Sumber",
+          "desc": "TypeScript atau JavaScript biasa. Class, generics, async/await, dan paket npm.",
+          "mono": true
+        },
+        {
+          "name": "Parsing",
+          "tool": "SWC",
+          "desc": "Parsing cepat menjadi AST."
+        },
+        {
+          "name": "Transformasi",
+          "tool": "Perry IR",
+          "desc": "Resolusi tipe dan lowering."
+        },
+        {
+          "name": "Codegen",
+          "tool": "LLVM",
+          "desc": "Kode mesin untuk ARM64, x86-64, dan WASM.",
+          "accent": true
+        },
+        {
+          "name": "./main",
+          "tool": "Executable",
+          "desc": "Satu file, mulai dari ~330 KB.",
+          "mono": true
+        }
+      ]
+    },
+    "nativeUi": {
+      "title": "Satu codebase UI,\nsebelas platform native.",
+      "aside": "perry/ui adalah library UI deklaratif berbasis stack. Setiap widget dipetakan ke toolkit bawaan platform: AppKit, UIKit, Win32, GTK4, Android Views, atau DOM.",
+      "fan": "perry compile",
+      "toolkitsLabel": "Toolkit native dan platform yang dicakupnya",
+      "preview": "preview",
+      "legend": {
+        "broad": "luas",
+        "core": "inti · kekurangan terdokumentasi",
+        "preview": "preview"
+      },
+      "widgets": "35+ widget",
+      "widgetsDesc": "State(), stack, spacer.\nTanpa CSS."
+    },
+    "nodeParity": {
+      "caption": "adalah target kompatibilitas Node 26. Saat ini {passing} dari {total} tes lulus.",
+      "body": "Kami menjalankan test suite Node 26 terhadap Perry modul demi modul dan membandingkan output-nya dengan Node. {total} tes di {modules} modul. Tes yang gagal tercantum di repositori.",
+      "progress": "{passing} / {total} lulus",
+      "target": "target: {target}%",
+      "npmTitle": "PAKET NPM NYATA, DIKOMPILASI KE NATIVE",
+      "npmList": "Fastify · Express · mysql2 · pg · ioredis · ws · bcrypt · jsonwebtoken, dan lainnya. JavaScript biasa juga bisa dikompilasi. Kekurangan yang diketahui tercantum di repositori.",
+      "wall": "{modules} MODUL node:* YANG DIPANTAU",
+      "perModule": "Tingkat kelulusan per modul →"
+    },
+    "realCode": {
+      "title": "Proyek nyata,\ndikompilasi dengan Perry.",
+      "apps": "Aplikasi yang dibuat dengan Perry",
+      "kicker": "STUDI KASUS · CLAUDE CODE",
+      "unit": "cli.js ter-minify\ndari npm",
+      "description": "Kami mengarahkan Perry ke bundle yang didistribusikan npm untuk Claude Code. Binary native-nya berjalan, login, men-stream respons API sungguhan, dan menampilkan apa yang Anda ketik.",
+      "fixes": "perbaikan compiler yang masuk selama prosesnya",
+      "writeUp": "Baca tulisannya",
+      "more": [
+        {
+          "kicker": "PAKET NPM",
+          "title": "axios · zod v4 · express\nfastify · hono",
+          "description": "Paket TypeScript dan JavaScript murni dikompilasi ke native. Sebagian membutuhkan fallback V8 opsional."
+        },
+        {
+          "kicker": "FRAMEWORK",
+          "title": "Hono · tRPC · Strapi",
+          "description": "Executable native ARM64 di bawah 2 MB, dikompilasi dalam waktu kurang dari satu detik."
+        },
+        {
+          "kicker": "SITUS INI",
+          "title": "perryts.com",
+          "description": "Server yang melayani halaman ini adalah binary yang dikompilasi dengan Perry."
+        }
+      ]
+    },
+    "replaceStack": {
+      "title": "Berhenti menyertakan browser\ndi setiap aplikasi.",
+      "sub": "Electron membundel Chromium. React Native membundel engine JavaScript. Perry mengompilasi kode Anda menjadi kode mesin, jadi tidak ada yang perlu dikirim tambahan.",
+      "caption": "Perbandingan Electron, React Native, dan Perry",
+      "columns": [
+        {
+          "name": "Electron",
+          "sub": "Chromium + Node.js per aplikasi"
+        },
+        {
+          "name": "React Native",
+          "sub": "Engine JS + view native"
+        },
+        {
+          "name": "Perry",
+          "sub": "Kode mesin LLVM"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Yang dikirim",
+          "values": [
+            "JS Anda + browser lengkap",
+            "Bundle JS Anda + engine",
+            "Satu executable native"
+          ]
+        },
+        {
+          "key": "UI",
+          "values": [
+            "HTML/CSS di dalam webview",
+            "View native melalui bridge",
+            "AppKit, UIKit, Win32, GTK4, Android, DOM"
+          ]
+        },
+        {
+          "key": "Platform dari satu codebase",
+          "values": [
+            "Desktop",
+            "Utamakan mobile",
+            "11: desktop, mobile, jam tangan, TV, dan web"
+          ]
+        },
+        {
+          "key": "JavaScript saat runtime",
+          "values": [
+            "Ya",
+            "Ya",
+            "Tidak. Fallback V8 opsional untuk paket yang membutuhkannya"
+          ]
+        },
+        {
+          "key": "Ukuran aplikasi",
+          "values": [
+            "Termasuk Chromium",
+            "Termasuk engine JS",
+            "Hello world ~330 KB"
+          ]
+        },
+        {
+          "key": "Kompromi yang jujur",
+          "values": [
+            "Matang, ekosistem sangat besar",
+            "Matang di mobile",
+            "Mengimplementasikan subset praktis TS + Node; pra-1.0"
+          ]
+        }
+      ],
+      "note": "Setiap perbandingan menautkan ke dokumentasi resmi framework terkait.",
+      "link": "Baca perbandingan beserta sumbernya"
+    },
+    "roadmap": {
+      "title": "Peta jalan:\ninti lebih dulu.",
+      "body": "Perry ada di v0.5 dan belum mencapai 0.6. Sampai intinya stabil, sebagian besar pekerjaan difokuskan pada kompatibilitas Node dan performa.",
+      "releases": "Catatan rilis di GitHub",
+      "current": "SAAT INI",
+      "phases": [
+        {
+          "key": "SEKARANG",
+          "when": "v0.5 → 0.6",
+          "title": "Menstabilkan inti",
+          "items": [
+            "Paritas Node 26 dari ~{parity}% menuju 97%",
+            "Performa: GC, dispatch, startup, ukuran binary",
+            "Menutup kekurangan TypeScript dan npm: Proxy, decorator, weak ref"
+          ]
+        },
+        {
+          "key": "BERIKUTNYA",
+          "when": "setelah inti",
+          "title": "perry/ui",
+          "items": [
+            "Cakupan widget lebih luas",
+            "Paritas UI di ke-11 platform",
+            "Platform core dan preview naik satu tingkat"
+          ]
+        },
+        {
+          "key": "NANTI",
+          "when": "di atas fondasi yang stabil",
+          "title": "Ekstensi",
+          "items": [
+            "Build dan penandatanganan ter-hosting di Perry Publish",
+            "Hosting di Coop",
+            "Lebih banyak paket dan tool resmi"
+          ]
+        }
+      ]
+    },
+    "specStrip": {
+      "label": "Perry sekilas",
+      "specs": [
+        {
+          "value": "11",
+          "label": "platform terdokumentasi",
+          "note": "+ HarmonyOS versi preview"
+        },
+        {
+          "value": "~330 KB",
+          "label": "binary hello-world",
+          "note": "bertambah sesuai fitur"
+        },
+        {
+          "value": "3,5 MB",
+          "label": "memori puncak, pipeline JSON",
+          "note": "Node.js memakai 36 MB"
+        },
+        {
+          "value": "35+",
+          "label": "widget native",
+          "note": "tanpa WebView, tanpa CSS"
+        }
+      ]
+    },
+    "sponsors": {
+      "title": "Disponsori oleh",
+      "premium": "Sponsor premium",
+      "sponsor": "Sponsor · nubjs.com",
+      "pitch": "Mensponsori Perry mendanai pengembangan compiler open source.",
+      "cta": "Jadi sponsor"
+    }
+  },
+  "nav": {
+    "items": {
+      "docs": "Dokumentasi",
+      "showcase": "Showcase",
+      "benchmarks": "Benchmark",
+      "publish": "Publish",
+      "teams": "Untuk tim",
+      "blog": "Blog"
+    },
+    "menu": "Menu",
+    "language": "Ganti bahasa",
+    "home": "Beranda Perry"
+  },
+  "newsletterForm": {
+    "placeholder": "you@example.com",
+    "subscribe": "Berlangganan",
+    "success": "Terima kasih — kamu sudah ada di daftar.",
+    "errorInvalid": "Mohon masukkan email yang valid.",
+    "errorGeneric": "Ada yang salah. Silakan coba lagi.",
+    "blockTitle": "Suka postingan ini? Dapatkan yang berikutnya.",
+    "blockSubtitle": "Catatan singkat tentang rilis Perry dan apa yang sedang kami bangun selanjutnya.",
+    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
+    "privacyLink": "Privacy notice"
+  },
+  "pages": {
+    "coop": {
+      "metaTitle": "Coop — Hosting TypeScript native untuk Perry",
+      "metaDescription": "Coop meng-host aplikasi TypeScript yang dikompilasi Perry dengan runtime bersama, worker deployment terisolasi, dan rollback berbasis alamat konten.",
+      "adjacent": "Proyek yang berdekatan dengan Perry · Pre-1.0",
+      "tagline": "Tempat kode Perry beristirahat dan berjalan.",
+      "intro": "Coop mengubah direktori TypeScript yang kompatibel dengan Perry menjadi pustaka aplikasi native dan menyajikannya lewat HTTP, sementara runtime dan pustaka standar Perry disediakan sekali per mesin.",
+      "experimental": "Infrastruktur eksperimental untuk kode milik Anda",
+      "explore": "Jelajahi Coop",
+      "viewSource": "Lihat sumber",
+      "quickStart": "Mulai cepat",
+      "facts": [
+        "Runtime bersama",
+        "Satu worker per deployment",
+        "Deploy, periksa, dan rollback"
+      ],
+      "appLibrary": "Pustaka aplikasi",
+      "worker": "Worker Coop",
+      "sharedProviders": "Runtime + pustaka standar bersama",
+      "onePerMachine": "satu per mesin",
+      "diagramAria": "Perry mengompilasi TypeScript menjadi pustaka aplikasi, worker Coop memuatnya, lalu menghubungkannya ke runtime bersama.",
+      "whyTitle": "Perry mengompilasi. Coop menjaganya tetap berjalan.",
+      "whyBody": "Perbedaannya adalah tempat runtime bahasa berada. Coop menjaga image aplikasi tetap kecil dan menyediakan runtime Perry yang kompatibel beserta pustaka standar di tingkat host.",
+      "perryTitle": "Executable Perry biasa",
+      "perryBody": "Aplikasi, runtime, garbage collector, dan fitur pustaka standar terpilih ditautkan ke satu executable khusus target.",
+      "coopTitle": "Deployment Coop",
+      "coopBody": "Aplikasi dikompilasi sebagai pustaka bersama yang hanya berisi app. Runtime yang kompatibel dibangun sekali per mesin dan identitasnya diverifikasi sebelum aplikasi dipetakan.",
+      "architectureTitle": "Dipisahkan menurut batas kegagalan",
+      "architectureBody": "Mesin, setiap deployment, dan setiap permintaan memiliki tanggung jawab berbeda. Kode aplikasi tidak pernah berjalan di daemon mesin.",
+      "tiers": [
+        {
+          "title": "Daemon · satu per mesin",
+          "body": "Mengakhiri TLS, merutekan berdasarkan host dan path, serta mengelola deployment, artefak, API admin, dan metrik."
+        },
+        {
+          "title": "Worker · satu per deployment",
+          "body": "Memuat pustaka aplikasi, memiliki status runtime Perry, serta menjalankan cron dan antrean tahan lama."
+        },
+        {
+          "title": "Invokasi · satu per permintaan",
+          "body": "Berjalan sebagai task di dalam worker dan berbagi ruang alamat tanpa membuat proses untuk setiap permintaan."
+        }
+      ],
+      "workingTitle": "Yang bekerja hari ini",
+      "workingBody": "Coop adalah infrastruktur yang telah diuji, tetapi belum menjadi produk hosting yang selesai. Implementasi saat ini mencakup:",
+      "workingItems": [
+        "Kompilasi TypeScript, routing HTTP, dan mount statis",
+        "Pemeriksaan identitas runtime bersama",
+        "Deployment berbasis alamat konten dan rollback",
+        "Cron dan antrean tahan lama",
+        "KV dan penyimpanan objek untuk worker khusus",
+        "CLI, metrik Prometheus, peringatan, dan dashboard Grafana"
+      ],
+      "developerTitle": "Permukaan deployment yang kecil",
+      "developerBody": "Deployment adalah direktori dengan coop.toml dan satu atau beberapa handler. Coop mengompilasinya, menyimpan hasil di cache, dan memulai worker lokal.",
+      "configLabel": "coop.toml",
+      "handlerLabel": "handlers/hello.ts",
+      "runLabel": "Jalankan lokal",
+      "fitTitle": "Sengaja dibuat sempit",
+      "rightTitle": "Cocok digunakan hari ini",
+      "rightItems": [
+        "Layanan dan aplikasi kecil dengan kode milik Anda",
+        "Satu operator menjalankan portofolio pada satu mesin",
+        "Beban kerja yang dapat dikompilasi dalam subset TypeScript Perry",
+        "Tim yang menghargai kepadatan, artefak eksplisit, dan rollback cepat"
+      ],
+      "notYetTitle": "Yang belum dijanjikan Coop",
+      "notYetItems": [
+        "Kompatibilitas npm atau Node.js secara sembarang",
+        "Sandbox untuk kode pihak ketiga yang tidak tepercaya",
+        "Pengganti Kubernetes atau platform multiwilayah",
+        "Keunggulan kinerja universal atas Node.js"
+      ],
+      "benchmarkTitle": "Kepadatan adalah tesisnya. Benchmark masih terus dikerjakan.",
+      "benchmarkBody": "Pengukuran saat ini menunjukkan arah berbeda untuk beban kerja berbeda. Coop menunjukkan kepadatan menjanjikan pada aplikasi Linux kecil, sementara route Next.js lengkap memakai lebih banyak CPU daripada Node.js dalam pengujian lain. Baca metodologi sebelum mengutip hasilnya.",
+      "benchmarks": "Baca benchmark",
+      "status": "Lihat status saat ini",
+      "closingTitle": "Bangun dengan Perry. Jalankan di Coop.",
+      "closingBody": "Jelajahi sumber, jalankan deployment contoh, dan bantu menjadikan model runtime bersama sebagai infrastruktur yang andal."
+    },
+    "enterprise": {
+      "metaTitle": "Perry for Teams",
+      "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+      "availableTitle": "Available to discuss",
+      "available1": "Architecture and migration reviews",
+      "available2": "Onboarding and paired implementation sessions",
+      "available3": "Release planning and upgrade guidance",
+      "available4": "Hosted build, signing, and verification requirements",
+      "scopedTitle": "Defined in your agreement",
+      "scoped1": "Support channels and response targets",
+      "scoped2": "Release maintenance or backport commitments",
+      "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+      "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+      "termsTitle": "No implied SLA or self-hosting promise",
+      "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
+      "heroTitle": "Production support scoped to your team",
+      "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+      "heroCta": "Email ralph@perryts.com",
+      "closingTitle": "Talk to the maintainers",
+      "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+      "closingCta": "Email ralph@perryts.com",
+      "pricing": "Harga"
+    },
+    "home": {
+      "title": "Perry — Kompilasi TypeScript ke Executable Native | Kompiler TypeScript Native",
+      "description": "Perry adalah compiler TypeScript ahead-of-time yang open source. Satu codebase, 11 platform, tanpa Node.js saat runtime."
+    },
+    "internals": {
+      "metaTitle": "Perry compiler internals",
+      "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior.",
+      "title": "Compiler <gradient>Internals</gradient>",
+      "subtitle": "The key design decisions that make Perry fast",
+      "nanBoxing1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
+      "nanBoxing2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries.",
+      "monomorphization1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
+      "monomorphization2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves.",
+      "staticDispatch1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
+      "staticDispatch2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time.",
+      "zeroCost1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
+      "zeroCost2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally.",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
+      "backToHome": "Kembali ke Beranda"
+    },
+    "newsletter": {
+      "pageTitle": "Newsletter Perry",
+      "pageDescription": "Update tentang rilis Perry baru, dukungan platform, dan artikel teknis. Tanpa spam.",
+      "pageSubtitle": "Catatan singkat tentang apa yang sedang dirilis di Perry — rilis, platform, dan pembahasan teknis mendalam.",
+      "bullet1Title": "Catatan rilis",
+      "bullet1Body": "Setiap rilis Perry yang penting, dengan apa yang berubah dan kenapa.",
+      "bullet2Title": "Artikel teknis",
+      "bullet2Body": "Internal kompiler, benchmark, dan apa yang sedang kami pelajari.",
+      "bullet3Title": "Privacy controls",
+      "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled."
+    },
+    "pricing": {
+      "title": "Perry pricing and availability",
+      "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
+      "localTitle": "Compiler and local builds",
+      "localDescription": "Use Perry locally without an account or usage fee.",
+      "localFeature1": "MIT-licensed compiler and runtime",
+      "localFeature2": "Local compile, run, check, doctor, and verify workflows",
+      "localFeature3": "No hosted-service quota for work performed on your own machine",
+      "viewSource": "View source and license",
+      "hostedAvailability": "Availability varies",
+      "hostedTitle": "Hosted Perry Publish",
+      "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
+      "hostedFeature1": "Build and packaging workflows for supported targets",
+      "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
+      "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
+      "publishDetails": "Read how publish works",
+      "needTermsTitle": "Need hosted builds or a support agreement?",
+      "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
+      "contact": "Contact the team",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
+      "selfHostTitle": "What is open source and self-hostable today?",
+      "selfHostDescription": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
+      "faqTitle": "Pertanyaan",
+      "q1": "Does local compilation require an account?",
+      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
+      "q2": "What are the hosted quotas and prices?",
+      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
+      "q3": "Can I self-host the complete publish service?",
+      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+    },
+    "privacy": {
+      "metaTitle": "Privacy notice",
+      "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
+      "title": "Privacy notice",
+      "updated": "Last updated: August 27, 2026",
+      "controllerTitle": "1. Controller",
+      "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
+      "dataTitle": "2. Data processed",
+      "dataItems": [
+        "Page-view and technical request data produced when you visit the site.",
+        "Your email address and the source form when you choose to subscribe to the newsletter."
+      ],
+      "analyticsTitle": "3. Analytics",
+      "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
+      "newsletterTitle": "4. Newsletter and Resend",
+      "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
+      "purposesTitle": "5. Purposes and legal bases",
+      "purposesItems": [
+        "Operate, secure, and diagnose the website and its supporting services.",
+        "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
+        "Send the newsletter after your request or consent."
+      ],
+      "retentionTitle": "6. Retention and recipients",
+      "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
+      "rightsTitle": "7. Your rights",
+      "rightsItems": [
+        "Request access, correction, deletion, restriction, or portability where applicable.",
+        "Object to processing based on legitimate interests.",
+        "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
+        "Complain to a competent data-protection supervisory authority."
+      ],
+      "contactTitle": "8. Contact",
+      "contactBody": "For privacy questions or requests, contact",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
+    },
+    "pryTitle": "Pry: penampil JSON native yang dibuat dengan Perry",
+    "publish": {
+      "metaTitle": "Perry Publish workflows",
+      "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats.",
+      "title": "Perry Publish",
+      "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
+      "buildingForIos": "Building untuk iOS...",
+      "signingCert": "Menandatangani dengan sertifikat Anda...",
+      "verifyingLaunch": "Running the configured verification steps...",
+      "publishedToAppStore": "Submission requested; final store status is reported by the store.",
+      "buildSign": "Build & Tanda Tangani",
+      "buildSignPlatforms": "Target, host, SDK, and credential dependent",
+      "distribute": "Distribusi",
+      "distributePlatforms": "Available stores and channels depend on the target",
+      "verify": "Verifikasi",
+      "verifyDesc": "Configured launch and UI checks; coverage varies by target",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan.",
+      "seePricing": "Lihat harga",
+      "backToHome": "Kembali ke Beranda"
+    },
+    "roadmap": {
+      "title": "Peta Jalan",
+      "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
+      "currentTitle": "Verified today",
+      "activeTitle": "Active development areas",
+      "policyTitle": "How to read Perry claims",
+      "currentItems": [
+        "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
+        "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
+        "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
+        "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
+        "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+      ],
+      "activeItems": [
+        "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
+        "Improving platform parity, especially core and preview targets.",
+        "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
+        "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+      ],
+      "policyItems": [
+        "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
+        "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
+        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+      ],
+      "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
+      "platformStatus": "Platform status",
+      "knownLimitations": "Known limitations",
+      "benchmarkArtifact": "Benchmark artifact",
+      "changelog": "Changelog",
+      "languageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
+    }
+  },
+  "showcase": {
+    "showcase": {
+      "title": "Showcase",
+      "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
+      "metaTitle": "Proyek yang dibuat dengan Perry",
+      "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
+    },
+    "pry": {
+      "subtitle": "Penampil JSON yang cepat dan native dibangun dengan Perry. Navigasi pohon, pencarian, pintasan keyboard — dikompilasi dari TypeScript ke binary native.",
+      "features": "Fitur",
+      "treeView": "Tampilan Pohon",
+      "treeViewDesc": "Rendering pohon yang dapat dilipat dan dinavigasi untuk struktur JSON yang sangat bertingkat.",
+      "search": "Pencarian",
+      "searchDesc": "Pencarian teks lengkap pada kunci dan nilai dengan penyorotan instan.",
+      "keyboardShortcuts": "Pintasan Keyboard",
+      "keyboardShortcutsDesc": "Navigasi, perluas, lipat, dan salin dengan alur kerja keyboard saja.",
+      "clipboardSupport": "Dukungan Clipboard",
+      "clipboardSupportDesc": "Salin node atau subtree apa pun ke clipboard sebagai JSON terformat.",
+      "statusBar": "Bilah Status",
+      "statusBarDesc": "Menampilkan jumlah node, kedalaman saat ini, ukuran file, dan waktu parsing.",
+      "syntaxColoring": "Pewarnaan Sintaks",
+      "syntaxColoringDesc": "Nilai diberi kode warna berdasarkan tipe — string, angka, boolean, null.",
+      "howItsBuilt": "Cara Pembuatannya",
+      "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
+      "typeScriptSource": "Kode Sumber TypeScript",
+      "typeScriptSourceDesc": "TypeScript standar dengan API UI native Perry",
+      "perryCompile": "Perry Compile",
+      "perryCompileDesc": "Parsing SWC → resolusi tipe → codegen LLVM",
+      "nativeBinary": "Binary Native",
+      "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
+      "platformSupport": "Dukungan Platform",
+      "nativeWidgets": "Widget {framework} native",
+      "available": "Tersedia",
+      "screenshots": "Tangkapan Layar",
+      "macOsScreenshot": "Tangkapan layar macOS — segera hadir",
+      "iosScreenshot": "Tangkapan layar iOS — segera hadir",
+      "screenshotsNote": "Tangkapan layar akan ditambahkan seiring perkembangan Pry. Periksa repo GitHub untuk informasi terbaru."
+    },
+    "common": {
+      "backToHome": "Kembali ke Beranda",
+      "viewOnGithub": "Lihat di GitHub",
+      "getStarted": "Mulai",
+      "readTheBlogPost": "Baca Artikel Blog",
+      "backToShowcase": "Kembali ke Showcase",
+      "backToBlog": "Kembali ke Blog",
+      "seePricing": "Lihat harga",
+      "terminal": "terminal",
+      "comingSoon": "segera hadir"
+    }
+  }
+}

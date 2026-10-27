@@ -1,10 +1,11 @@
 ---
-import { pick, type Copy, type Locale } from "../../i18n/index.ts";
+import { type Locale } from "../../i18n/index.ts";
 import { formatInteger } from "../../lib/format.ts";
 import { benchmarkLabel, getBenchmarks } from "../../lib/perry-data.ts";
 import { links } from "../../lib/links.ts";
 import Lines from "../Lines.astro";
 import LinkArrow from "../LinkArrow.astro";
+import { fill, messages } from "../../i18n/messages.ts";
 
 interface Props {
   lang: Locale;
@@ -23,288 +24,12 @@ const TABLE: [id: string, name: string][] = [
   ["09_method_calls", "method calls"],
 ];
 
-const copy: Copy<{
-  title: string;
-  meta: string[];
-  faster: string;
-  benchmark: string;
-  perryFaster: string;
-  nodeFaster: string;
-  ratio: string;
-  rows: string[];
-  rowFaster: string;
-  rowSlower: string;
-  even: string;
-  footnote: string;
-  all: string;
-}> = {
-  en: {
-    title: "Benchmarks against Node.js,\nwins and losses.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "wall-clock ms · lower is better"],
-    faster: "faster",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY FASTER",
-    nodeFaster: "NODE FASTER →",
-    ratio: "RATIO",
-    rows: [
-      "String append loop",
-      "1M objects",
-      "10M elements",
-      "Complex-number iteration",
-      "Tree allocation + traversal",
-      "Class method dispatch",
-    ],
-    rowFaster: "faster",
-    rowSlower: "slower",
-    even: "≈ even",
-    footnote: "Perry is currently slower on: {list}.",
-    all: "All {n} benchmarks & raw JSON",
-  },
-  es: {
-    title: "Benchmarks frente a Node.js,\ncon victorias y derrotas.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms de tiempo real · menos es mejor"],
-    faster: "más rápido",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY MÁS RÁPIDO",
-    nodeFaster: "NODE MÁS RÁPIDO →",
-    ratio: "RATIO",
-    rows: [
-      "Bucle de concatenación de strings",
-      "1M de objetos",
-      "10M de elementos",
-      "Iteración con números complejos",
-      "Creación y recorrido de árboles",
-      "Llamadas a métodos de clase",
-    ],
-    rowFaster: "más rápido",
-    rowSlower: "más lento",
-    even: "≈ igual",
-    footnote: "Por ahora Perry es más lento en: {list}.",
-    all: "Los {n} benchmarks y el JSON en bruto",
-  },
-  de: {
-    title: "Benchmarks gegen Node.js,\nmit Siegen und Niederlagen.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "Laufzeit in ms · niedriger ist besser"],
-    faster: "schneller",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY SCHNELLER",
-    nodeFaster: "NODE SCHNELLER →",
-    ratio: "FAKTOR",
-    rows: [
-      "String-Verkettung in einer Schleife",
-      "1 Mio. Objekte",
-      "10 Mio. Elemente",
-      "Iteration mit komplexen Zahlen",
-      "Baum anlegen + durchlaufen",
-      "Aufruf von Klassenmethoden",
-    ],
-    rowFaster: "schneller",
-    rowSlower: "langsamer",
-    even: "≈ gleichauf",
-    footnote: "Derzeit ist Perry langsamer bei: {list}.",
-    all: "Alle {n} Benchmarks & Roh-JSON",
-  },
-  fr: {
-    title: "Benchmarks face à Node.js,\nvictoires et défaites.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms en temps réel · plus bas = mieux"],
-    faster: "plus rapide",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY PLUS RAPIDE",
-    nodeFaster: "NODE PLUS RAPIDE →",
-    ratio: "RATIO",
-    rows: [
-      "Boucle de concaténation de chaînes",
-      "1M d'objets",
-      "10M d'éléments",
-      "Itération sur nombres complexes",
-      "Allocation + parcours d'arbres",
-      "Appels de méthodes de classe",
-    ],
-    rowFaster: "plus rapide",
-    rowSlower: "plus lent",
-    even: "≈ égalité",
-    footnote: "Perry est actuellement plus lent sur : {list}.",
-    all: "Les {n} benchmarks et le JSON brut",
-  },
-  it: {
-    title: "Benchmark contro Node.js,\nvittorie e sconfitte.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms di tempo reale · più basso è meglio"],
-    faster: "più veloce",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY PIÙ VELOCE",
-    nodeFaster: "NODE PIÙ VELOCE →",
-    ratio: "RAPPORTO",
-    rows: [
-      "Ciclo di concatenazione di stringhe",
-      "1M di oggetti",
-      "10M di elementi",
-      "Iterazione su numeri complessi",
-      "Allocazione + visita di alberi",
-      "Chiamate a metodi di classe",
-    ],
-    rowFaster: "più veloce",
-    rowSlower: "più lento",
-    even: "≈ pari",
-    footnote: "Al momento Perry è più lento in: {list}.",
-    all: "Tutti i {n} benchmark e il JSON grezzo",
-  },
-  ja: {
-    title: "Node.jsとのベンチマーク、\n勝ちも負けも。",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "実時間 ms · 低いほど高速"],
-    faster: "高速",
-    benchmark: "ベンチマーク",
-    perryFaster: "← PERRYが高速",
-    nodeFaster: "NODEが高速 →",
-    ratio: "比率",
-    rows: ["文字列連結ループ", "100万オブジェクト", "1,000万要素", "複素数の反復計算", "木の生成 + 走査", "クラスメソッド呼び出し"],
-    rowFaster: "高速",
-    rowSlower: "低速",
-    even: "≈ 互角",
-    footnote: "現在 Perry の方が遅いもの：{list}。",
-    all: "全{n}ベンチマークと生JSON",
-  },
-  ko: {
-    title: "Node.js 대비 벤치마크,\n이긴 것도 진 것도.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "실측 ms · 낮을수록 좋음"],
-    faster: "더 빠름",
-    benchmark: "벤치마크",
-    perryFaster: "← PERRY가 더 빠름",
-    nodeFaster: "NODE가 더 빠름 →",
-    ratio: "비율",
-    rows: ["문자열 연결 루프", "객체 100만 개", "요소 1,000만 개", "복소수 반복 연산", "트리 할당 + 순회", "클래스 메서드 호출"],
-    rowFaster: "더 빠름",
-    rowSlower: "더 느림",
-    even: "≈ 비슷",
-    footnote: "현재 Perry가 더 느린 항목: {list}.",
-    all: "{n}개 벤치마크 전체와 원본 JSON",
-  },
-  pt: {
-    title: "Benchmarks contra o Node.js,\ncom vitórias e derrotas.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms de tempo real · menor é melhor"],
-    faster: "mais rápido",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY MAIS RÁPIDO",
-    nodeFaster: "NODE MAIS RÁPIDO →",
-    ratio: "RAZÃO",
-    rows: [
-      "Loop de concatenação de strings",
-      "1M de objetos",
-      "10M de elementos",
-      "Iteração com números complexos",
-      "Alocação + percurso de árvores",
-      "Chamadas a métodos de classe",
-    ],
-    rowFaster: "mais rápido",
-    rowSlower: "mais lento",
-    even: "≈ empate",
-    footnote: "No momento, o Perry é mais lento em: {list}.",
-    all: "Os {n} benchmarks e o JSON bruto",
-  },
-  th: {
-    title: "เบนช์มาร์กเทียบ Node.js\nทั้งชนะและแพ้",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "เวลาจริง ms · ยิ่งต่ำยิ่งดี"],
-    faster: "เร็วกว่า",
-    benchmark: "เบนช์มาร์ก",
-    perryFaster: "← PERRY เร็วกว่า",
-    nodeFaster: "NODE เร็วกว่า →",
-    ratio: "อัตราส่วน",
-    rows: ["ลูปต่อสตริง", "1 ล้านอ็อบเจกต์", "10 ล้านอิลิเมนต์", "การวนคำนวณจำนวนเชิงซ้อน", "สร้างและท่องต้นไม้", "เรียกเมธอดของคลาส"],
-    rowFaster: "เร็วกว่า",
-    rowSlower: "ช้ากว่า",
-    even: "≈ พอ ๆ กัน",
-    footnote: "ตอนนี้ Perry ยังช้ากว่าใน: {list}",
-    all: "เบนช์มาร์กทั้ง {n} รายการและ JSON ดิบ",
-  },
-  tr: {
-    title: "Node.js'e karşı benchmark'lar,\nkazanılanlar ve kaybedilenler.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "gerçek süre ms · düşük olan daha iyi"],
-    faster: "daha hızlı",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY DAHA HIZLI",
-    nodeFaster: "NODE DAHA HIZLI →",
-    ratio: "ORAN",
-    rows: [
-      "Dize birleştirme döngüsü",
-      "1M nesne",
-      "10M öğe",
-      "Karmaşık sayı yinelemesi",
-      "Ağaç oluşturma + gezinme",
-      "Sınıf metodu çağrıları",
-    ],
-    rowFaster: "daha hızlı",
-    rowSlower: "daha yavaş",
-    even: "≈ başa baş",
-    footnote: "Perry şu anda şunlarda daha yavaş: {list}.",
-    all: "{n} benchmark'ın tamamı ve ham JSON",
-  },
-  vi: {
-    title: "Benchmark so với Node.js,\ncả thắng lẫn thua.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms thời gian thực · càng thấp càng tốt"],
-    faster: "nhanh hơn",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY NHANH HƠN",
-    nodeFaster: "NODE NHANH HƠN →",
-    ratio: "TỶ LỆ",
-    rows: [
-      "Vòng lặp nối chuỗi",
-      "1 triệu đối tượng",
-      "10 triệu phần tử",
-      "Lặp với số phức",
-      "Cấp phát + duyệt cây",
-      "Gọi phương thức của class",
-    ],
-    rowFaster: "nhanh hơn",
-    rowSlower: "chậm hơn",
-    even: "≈ ngang nhau",
-    footnote: "Hiện Perry vẫn chậm hơn ở: {list}.",
-    all: "Toàn bộ {n} benchmark và JSON gốc",
-  },
-  id: {
-    title: "Benchmark melawan Node.js,\nmenang dan kalah.",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "ms waktu nyata · makin rendah makin baik"],
-    faster: "lebih cepat",
-    benchmark: "BENCHMARK",
-    perryFaster: "← PERRY LEBIH CEPAT",
-    nodeFaster: "NODE LEBIH CEPAT →",
-    ratio: "RASIO",
-    rows: [
-      "Loop penggabungan string",
-      "1 juta objek",
-      "10 juta elemen",
-      "Iterasi bilangan kompleks",
-      "Alokasi + penelusuran pohon",
-      "Pemanggilan metode class",
-    ],
-    rowFaster: "lebih cepat",
-    rowSlower: "lebih lambat",
-    even: "≈ seimbang",
-    footnote: "Saat ini Perry lebih lambat pada: {list}.",
-    all: "Ke-{n} benchmark & JSON mentah",
-  },
-  "zh-Hans": {
-    title: "与 Node.js 的基准测试，\n有赢有输。",
-    meta: ["Perry {perry} · Node.js {node}", "{cpu} · macOS · {date}", "实际耗时 ms · 越低越好"],
-    faster: "更快",
-    benchmark: "基准测试",
-    perryFaster: "← PERRY 更快",
-    nodeFaster: "NODE 更快 →",
-    ratio: "倍数",
-    rows: ["字符串拼接循环", "100 万个对象", "1000 万个元素", "复数迭代", "树的分配 + 遍历", "类方法调用"],
-    rowFaster: "更快",
-    rowSlower: "更慢",
-    even: "≈ 持平",
-    footnote: "目前 Perry 在以下项目上更慢：{list}。",
-    all: "全部 {n} 项基准测试与原始 JSON",
-  },
-};
-const t = pick(copy, lang);
+const t = messages(lang).home.benchmarks;
 
 const decimal = (n: number, digits = 0) =>
   new Intl.NumberFormat(lang, { minimumFractionDigits: digits, maximumFractionDigits: 1 }).format(n);
 const amount = (n: number, unit: string) => `${Number.isInteger(n) ? formatInteger(n, lang) : decimal(n)} ${unit}`;
 
-const fill = (text: string, values: Record<string, string>) =>
-  text.replace(/\{(\w+)\}/g, (_, k: string) => values[k] ?? "");
 const meta = t.meta.map((line) => fill(line, { perry: data.perryVersion, node: data.nodeVersion, cpu: data.cpu, date: data.date }));
 const headlines = data.headlines;
 const losses = [...data.byId.values()].filter((r) => r.tone === "loss").sort((a, b) => b.ratio - a.ratio);
@@ -402,7 +127,7 @@ const table = TABLE.flatMap(([id, name], i) => {
 
     <footer class="foot">
       <p class="muted">{footnote}</p>
-      <LinkArrow href={links.benchmarks}>{fill(t.all, { n: String(data.count) })}</LinkArrow>
+      <LinkArrow href={links.benchmarks}>{fill(t.all, { n: data.count })}</LinkArrow>
     </footer>
   </div>
 </section>
