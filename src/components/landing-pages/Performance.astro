@@ -2,7 +2,33 @@
 /** Published measurements (English, from the previous site's Performance section). */
 import SectionHeader from "../SectionHeader.astro";
 import LinkArrow from "../LinkArrow.astro";
-import { PRODUCT_FACTS, PUBLIC_BENCHMARKS } from "../../lib/product-facts.ts";
+import { PRODUCT_FACTS } from "../../lib/product-facts.ts";
+import { getBenchmarks, resultVsBoth } from "../../lib/perry-data.ts";
+
+// Same workloads as before; figures come from the published benchmark file (perry-data.ts).
+const SUITE: [id: string, name: string, description: string][] = [
+  ["13_factorial", "factorial", "Modular accumulation"],
+  ["09_method_calls", "method calls", "Class method dispatch"],
+  ["14_closure", "closure", "Closure creation and invocation"],
+  ["12_binary_trees", "binary trees", "Tree allocation and traversal"],
+  ["08_string_concat", "string concat", "String append loop"],
+  ["11_prime_sieve", "prime sieve", "Sieve of Eratosthenes"],
+  ["15_mandelbrot", "mandelbrot", "Complex-number iteration"],
+  ["16_matrix_multiply", "matrix multiply", "Matrix multiplication"],
+  ["bench_json_roundtrip", "JSON roundtrip", "Parse and stringify ~1 MB JSON"],
+];
+const data = await getBenchmarks();
+const suite = SUITE.flatMap(([id, name, description]) => {
+  const r = data.byId.get(id);
+  return r ? [{ name, description, perry: r.perry, node: r.node, bun: r.bun, result: resultVsBoth(r) }] : [];
+});
+const meta = [
+  `Perry ${data.perryVersion}`,
+  `Node.js ${data.nodeVersion.replace(/^v/, "")}`,
+  data.bunVersion && `Bun ${data.bunVersion}`,
+  data.ramGb ? `${data.cpu}, ${data.ramGb} GB` : data.cpu,
+  data.date,
+].filter(Boolean);
 
 const comparisons = [
   {
@@ -25,7 +51,7 @@ const comparisons = [
   },
   { metric: "Memory Overhead", perry: "Workload-dependent", node: "Workload-dependent", bun: "Workload-dependent" },
 ];
-const resultLabel = { win: "Win vs both", mixed: "Mixed", loss: "Loss vs both" } as const;
+const resultLabel = { win: "Win vs both", even: "Even with both", mixed: "Mixed", loss: "Loss vs both" } as const;
 ---
 
 <section class="section perf">
@@ -59,7 +85,7 @@ const resultLabel = { win: "Win vs both", mixed: "Mixed", loss: "Loss vs both" }
     <div>
       <h3 class="t-h3">Full public suite: wins and losses</h3>
       <p class="t-mono muted meta">
-        {PRODUCT_FACTS.benchmarkVersion} · {PRODUCT_FACTS.benchmarkNode} · {PRODUCT_FACTS.benchmarkBun} · {PRODUCT_FACTS.benchmarkHost} · {PRODUCT_FACTS.benchmarkDate}
+        {meta.join(" · ")}
       </p>
       <p class="foot muted">Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.</p>
       <div class="scroll">
@@ -74,12 +100,12 @@ const resultLabel = { win: "Win vs both", mixed: "Mixed", loss: "Loss vs both" }
             </tr>
           </thead>
           <tbody>
-            {PUBLIC_BENCHMARKS.map((b, i) => (
+            {suite.map((b, i) => (
               <tr data-reveal style={`--i: ${i}`}>
                 <th scope="row">{b.name}<span class="detail t-mono muted">{b.description}</span></th>
                 <td class="num">{b.perry} ms</td>
                 <td class="num muted">{b.node} ms</td>
-                <td class="num muted">{b.bun} ms</td>
+                <td class="num muted">{b.bun === undefined ? "—" : `${b.bun} ms`}</td>
                 <td class:list={["t-mono", b.result]}>{resultLabel[b.result]}</td>
               </tr>
             ))}
@@ -151,7 +177,8 @@ const resultLabel = { win: "Win vs both", mixed: "Mixed", loss: "Loss vs both" }
   .win {
     color: var(--success);
   }
-  .mixed {
+  .mixed,
+  .even {
     color: var(--text-muted);
   }
   .loss {

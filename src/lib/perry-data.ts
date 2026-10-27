@@ -14,8 +14,8 @@ type RawBenchmark = { runtimes?: Record<string, { wall_ms?: Median } | undefined
 type RawBenchmarks = {
   perry_version?: string;
   generated_at?: string;
-  host?: { cpu?: string };
-  runtimes?: { node?: { version?: string } };
+  host?: { cpu?: string; ram_gb?: number };
+  runtimes?: { node?: { version?: string }; bun?: { version?: string } };
   components?: Record<string, { benchmarks?: Record<string, RawBenchmark> }>;
 };
 type RawParity = { modules?: Record<string, { pass: number; total: number }> };
@@ -28,6 +28,14 @@ export interface Result {
   /** Always >= 1: how many times faster the winner is. */
   ratio: number;
   tone: Tone;
+  /** Bun median when the run includes it. */
+  bun?: number;
+}
+
+/** Against both Node and Bun: the same outcome against both, otherwise "mixed". */
+export function resultVsBoth(r: Result): "win" | "even" | "mixed" | "loss" {
+  const vsBun = r.bun === undefined ? r.tone : comparePerryToNode(r.perry, r.bun).tone;
+  return r.tone === vsBun ? r.tone : "mixed";
 }
 
 /** Within 10% either way counts as even. */
@@ -46,7 +54,8 @@ export function summarizeBenchmarks(raw: RawBenchmarks, headlineCount = 4) {
       const perry = b.runtimes?.perry?.wall_ms?.median;
       const node = b.runtimes?.node?.wall_ms?.median;
       if (!perry || !node) continue;
-      byId.set(id, { id, perry, node, ...comparePerryToNode(perry, node) });
+      const bun = b.runtimes?.bun?.wall_ms?.median;
+      byId.set(id, { id, perry, node, ...comparePerryToNode(perry, node), ...(bun ? { bun } : {}) });
     }
   }
   const headlines = [...byId.values()]
@@ -56,7 +65,9 @@ export function summarizeBenchmarks(raw: RawBenchmarks, headlineCount = 4) {
   return {
     perryVersion: (raw.perry_version ?? "").replace(/^perry\s+/, ""),
     nodeVersion: raw.runtimes?.node?.version ?? "",
+    bunVersion: raw.runtimes?.bun?.version ?? "",
     cpu: raw.host?.cpu ?? "",
+    ramGb: raw.host?.ram_gb,
     date: (raw.generated_at ?? "").slice(0, 10),
     count: byId.size,
     byId,
