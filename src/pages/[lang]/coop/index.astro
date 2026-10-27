@@ -4,12 +4,12 @@ import Button from "../../../components/Button.astro";
 import Terminal from "../../../components/Terminal.astro";
 import JsonLd from "../../../components/JsonLd.astro";
 import Lines from "../../../components/Lines.astro";
-import CheckList from "../../../components/pages/CheckList.astro";
+import CheckList from "../../../components/CheckList.astro";
 import CoopTopology from "../../../components/coop/CoopTopology.astro";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Check from "@lucide/astro/icons/check";
 import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
-import { getCoopContent } from "../../../lib/coop-content.ts";
+import { getCoopContent } from "../../../data/coop-content.ts";
 
 export const getStaticPaths = localeStaticPaths;
 

@@ -1,11 +1,11 @@
 ---
 /** Body of a Perry-vs-X page: what each is, table, wins, when to choose, verdict, sources. */
 import Plus from "@lucide/astro/icons/plus";
-import Cards from "../landing-pages/Cards.astro";
+import Cards from "../guides/Cards.astro";
 import Prose from "../Prose.astro";
 import { pick, type Locale } from "../../i18n/index.ts";
-import type { CompareItem } from "../../lib/compare.ts";
-import type { ComparisonContent } from "../../lib/compare-content.ts";
+import type { CompareItem } from "../../data/compare.ts";
+import type { ComparisonContent } from "../../data/compare-content.ts";
 import { copy } from "./copy.ts";
 
 interface Props {

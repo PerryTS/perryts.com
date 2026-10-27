@@ -1,12 +1,12 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import PageHeader from "../../../components/PageHeader.astro";
-import Cards from "../../../components/landing-pages/Cards.astro";
-import FactsNotice from "../../../components/landing-pages/FactsNotice.astro";
+import Cards from "../../../components/guides/Cards.astro";
+import FactsNotice from "../../../components/guides/FactsNotice.astro";
 import { copy } from "../../../components/compare/copy.ts";
 import { localePath, localeStaticPaths, pick, type Locale } from "../../../i18n/index.ts";
-import { compareItems } from "../../../lib/compare.ts";
-import { getComparisonContent } from "../../../lib/compare-content.ts";
+import { compareItems } from "../../../data/compare.ts";
+import { getComparisonContent } from "../../../data/compare-content.ts";
 
 export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;

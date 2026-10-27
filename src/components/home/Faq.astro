@@ -4,11 +4,11 @@
  * Its FAQPage JSON-LD mirrors the visible text, as search engines require.
  */
 import Plus from "@lucide/astro/icons/plus";
-import SectionHeader from "../components/SectionHeader.astro";
-import JsonLd from "../components/JsonLd.astro";
-import { pick, localePath, type Copy, type Locale } from "../i18n/index.ts";
-import { links } from "../lib/links.ts";
-import { richText, stripTags } from "../lib/rich-text.ts";
+import SectionHeader from "../SectionHeader.astro";
+import JsonLd from "../JsonLd.astro";
+import { pick, localePath, type Copy, type Locale } from "../../i18n/index.ts";
+import { links } from "../../lib/links.ts";
+import { richText, stripTags } from "../../lib/rich-text.ts";
 
 interface Props {
   lang: Locale;

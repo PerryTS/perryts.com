@@ -1,5 +1,5 @@
-import benchmarksSnapshot from "../data/benchmarks-snapshot.json";
-import paritySnapshot from "../data/node-parity-snapshot.json";
+import benchmarksSnapshot from "../data/snapshots/benchmarks-snapshot.json";
+import paritySnapshot from "../data/snapshots/node-parity-snapshot.json";
 
 /**
  * Figures published in the Perry repository, read once per build. If GitHub is unreachable the

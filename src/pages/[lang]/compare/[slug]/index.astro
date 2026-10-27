@@ -1,13 +1,13 @@
 ---
-import LandingLayout from "../../../../components/landing-pages/LandingLayout.astro";
-import Cta from "../../../../components/landing-pages/Cta.astro";
+import LandingLayout from "../../../../components/guides/LandingLayout.astro";
+import Cta from "../../../../components/guides/Cta.astro";
 import CompareBody from "../../../../components/compare/CompareBody.astro";
 import Button from "../../../../components/Button.astro";
 import Tag from "../../../../components/Tag.astro";
 import { copy } from "../../../../components/compare/copy.ts";
 import { locales, localePath, pick, type Locale } from "../../../../i18n/index.ts";
-import { compareItems, type CompareItem } from "../../../../lib/compare.ts";
-import { getComparisonContent } from "../../../../lib/compare-content.ts";
+import { compareItems, type CompareItem } from "../../../../data/compare.ts";
+import { getComparisonContent } from "../../../../data/compare-content.ts";
 
 export function getStaticPaths() {
   return locales.flatMap((lang) => compareItems.map((item) => ({ params: { lang, slug: item.slug }, props: { item } })));
