@@ -11,8 +11,7 @@
     "preview": "astro preview",
     "serve": "./server",
     "deploy": "./deploy.sh",
-    "check": "astro check",
-    "test": "node --test 'src/**/*.test.ts' 'src/**/*.test.mjs'"
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.1",

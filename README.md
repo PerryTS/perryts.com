@@ -5,7 +5,7 @@ Landing site for [Perry](https://github.com/PerryTS/perry) — a TypeScript-to-n
 ## Stack
 
 - **Astro 7**, static output (`astro build` → `out/`), no client framework
-- **Plain CSS** with design tokens in `src/styles/global.css` (mirrors the Pencil design system)
+- **Plain CSS** with design tokens in `src/styles/global.css`
 - **13 locales** under prefixed URLs (`/en/`, `/es/`, …, `/zh-Hans/`); `/` redirects to `/en/`
 - **Perry-compiled server** for production hosting
 
@@ -42,7 +42,6 @@ npm run serve         # runs the compiled binary
 ```bash
 npm install
 npm run dev           # astro dev on localhost:4321
-npm test              # logic tests (node --test)
 npm run check         # astro check (types)
 ```
 
@@ -66,8 +65,8 @@ Images and videos go in `public/blog/<slug>/` and are referenced as `/blog/<slug
 **Live figures** are read at build time, with committed fallbacks when the network fails:
 
 - GitHub stars, forks, contributors and merged PRs: GitHub API (`src/lib/github.ts`).
-- Benchmarks (table, headline wins, versions, machine, date): `benchmarks/results/public-node-bun-v1.json` in the Perry repo (`src/lib/perry-data.ts`, fallback `src/data/benchmarks-snapshot.json`).
-- Node 26 compatibility (passing / total tests, modules): `test-parity/node_suite_baseline.json` in the Perry repo (fallback `src/data/node-parity-snapshot.json`).
+- Benchmarks (table, headline wins, versions, machine, date): `benchmarks/results/public-node-bun-v1.json` in the Perry repo (`src/lib/perry-data.ts`, fallback `src/data/snapshots/benchmarks-snapshot.json`).
+- Node 26 compatibility (passing / total tests, modules): `test-parity/node_suite_baseline.json` in the Perry repo (fallback `src/data/snapshots/node-parity-snapshot.json`).
 
 Rebuilding the site picks up new numbers; refresh the snapshots occasionally so offline builds stay close.
 
