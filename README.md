@@ -15,13 +15,14 @@ This site used to deploy on Vercel, but we kept hitting routing issues — sub-r
 
 So we dogfooded Perry instead.
 
-`server.ts` is a small static file server written in TypeScript and compiled with Perry. It uses the Fastify-compatible native HTTP implementation and handles:
+`server.ts` is a small static file server written in TypeScript and compiled with Perry. It uses only `node:http`, `node:fs` and `node:path` (no npm dependencies) and handles:
 
 - Static file serving from the `out/` directory
 - Clean URL resolution (`/blog` → `out/blog/index.html`)
 - Correct MIME types for all asset types
 - 404 fallback page
 - URL percent-decoding
+- `/` → `/en/` and locale-less paths → `/en/...` redirects
 
 The server compiles to a native binary. Exact size and compile time vary with the Perry version, host, and linked feature set:
 
