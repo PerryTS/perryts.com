@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry vs alternatif lainnya",
-      "indexSubtitle": "Bagaimana Perry dibandingkan dengan cara lain mengirimkan TypeScript: runtime, kompiler, dan framework UI lintas platform. Jujur, bersumber, dengan angka terukur jika tersedia.",
+      "indexSubtitle": "Bagaimana Perry dibandingkan dengan cara lain mengirimkan JavaScript/TypeScript: runtime, kompiler, dan framework UI lintas platform. Jujur, bersumber, dengan angka terukur jika tersedia.",
       "indexMetaTitle": "Bandingkan Perry dengan Bun, Deno, Electron, Tauri, React Native, dan Static Hermes",
-      "indexMetaDescription": "Perbandingan berdampingan Perry dengan alternatif yang sering digunakan developer: runtime TypeScript (Bun, Deno), kompiler AOT TS (Static Hermes), dan framework UI lintas platform (Electron, Tauri, React Native).",
+      "indexMetaDescription": "Perbandingan berdampingan Perry dengan alternatif yang sering digunakan developer: runtime JavaScript/TypeScript (Bun, Deno), kompiler AOT TS (Static Hermes), dan framework UI lintas platform (Electron, Tauri, React Native).",
       "backToCompare": "Kembali ke perbandingan",
       "lastUpdated": "Terakhir diperbarui",
       "whatIs": "Apa itu {name}?",
@@ -45,9 +45,9 @@
       "whenChoose": "Kapan memilih {name}",
       "verdict": "Kesimpulan",
       "ctaTitle": "Coba Perry",
-      "ctaSubtitle": "Kompilasi TypeScript Anda menjadi native hari ini.",
+      "ctaSubtitle": "Kompilasi JavaScript/TypeScript Anda menjadi native hari ini.",
       "category": {
-        "runtime": "Runtime TypeScript",
+        "runtime": "Runtime JavaScript/TypeScript",
         "compiler": "Kompiler TS-ke-native",
         "ui-framework": "UI lintas platform"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
     },
     "electronAlternatives": {
-      "title": "Alternatif Electron untuk TypeScript",
-      "tldr": "Empat jalur realistis untuk aplikasi desktop TypeScript di 2026: Electron, Tauri, binary file tunggal Bun, dan widget native Perry. Ukuran binary, memori, stack UI, dan bahasa dibandingkan secara jujur."
+      "title": "Alternatif Electron untuk JavaScript/TypeScript",
+      "tldr": "Empat jalur realistis untuk aplikasi desktop JavaScript/TypeScript di 2026: Electron, Tauri, binary file tunggal Bun, dan widget native Perry. Ukuran binary, memori, stack UI, dan bahasa dibandingkan secara jujur."
     },
     "getStarted": "Mulai"
   },
   "footer": {
-    "tagline": "Compiler TypeScript ahead-of-time yang open source. Dibuat dengan Rust, di atas SWC dan LLVM.",
+    "tagline": "Compiler JavaScript/TypeScript ahead-of-time yang open source. Dibuat dengan Rust, di atas SWC dan LLVM.",
     "served": "Halaman ini dilayani oleh binary native yang dikompilasi dengan Perry.",
     "source": "Lihat kode sumber server",
     "rights": "© 2026 Perry · Lisensi MIT",
@@ -98,7 +98,9 @@
           "Buletin"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "Jeda animasi kata",
+    "resumeLanguageAnimation": "Lanjutkan animasi kata"
   },
   "guides": {
     "factsLanguageNotice": "Fakta teknis dan catatan pengukuran dipelihara dalam bahasa Inggris untuk mencegah perbedaan antar-terjemahan."
@@ -173,10 +175,10 @@
         "HOSTING"
       ],
       "descriptions": [
-        "Dari TypeScript ke binary native untuk 11 platform.",
+        "Dari JavaScript/TypeScript ke binary native untuk 11 platform.",
         "Pengujian UI yang mengendalikan widget asli aplikasi Anda.",
         "Dari main.ts ke App Store: build, tanda tangani, verifikasi, dan kirim.",
-        "Menjalankan aplikasi TypeScript hasil kompilasi Perry melalui HTTP."
+        "Menjalankan aplikasi JavaScript/TypeScript hasil kompilasi Perry melalui HTTP."
       ],
       "perryStatus": "MIT · open source",
       "coopStatus": "Pra-1.0"
@@ -195,7 +197,7 @@
         },
         {
           "question": "Bisakah saya menggunakan paket npm?",
-          "answer": "Banyak paket TypeScript/JavaScript murni dapat dikompilasi secara native, dan sekitar 50 implementasi paket/API dilacak. Kompatibilitasnya tidak universal: paket yang memakai addon native, perilaku dinamis yang belum didukung, atau semantik khusus mesin mungkin membutuhkan fallback V8 opsional atau mungkin tidak berfungsi. Jalankan perry check dan baca daftar keterbatasannya."
+          "answer": "Banyak paket JavaScript/TypeScript murni dapat dikompilasi secara native, dan sekitar 50 implementasi paket/API dilacak. Kompatibilitasnya tidak universal: paket yang memakai addon native, perilaku dinamis yang belum didukung, atau semantik khusus mesin mungkin membutuhkan fallback V8 opsional atau mungkin tidak berfungsi. Jalankan perry check dan baca daftar keterbatasannya."
         },
         {
           "question": "Platform apa saja yang didukung Perry?",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "KOMPILER TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
-      "title": "TypeScript Anda,\ndikompilasi ke native.",
+      "title": "JavaScript/TypeScript Anda,\ndikompilasi ke native.",
       "sub": "Perry mengompilasi TypeScript dan JavaScript menjadi executable native yang kecil. Satu codebase, 11 platform, tanpa Node.js saat runtime.",
       "docs": "Baca dokumentasi",
       "copyLabel": "Salin perintah instalasi"
@@ -441,7 +443,7 @@
           "items": [
             "Paritas Node 26 dari ~{parity}% menuju 97%",
             "Performa: GC, dispatch, startup, ukuran binary",
-            "Menutup kekurangan TypeScript dan npm: Proxy, decorator, weak ref"
+            "Menutup kekurangan JavaScript/TypeScript dan npm: Proxy, decorator, weak ref"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Hosting TypeScript native untuk Perry",
-      "metaDescription": "Coop meng-host aplikasi TypeScript yang dikompilasi Perry dengan runtime bersama, worker deployment terisolasi, dan rollback berbasis alamat konten.",
+      "metaTitle": "Coop — Hosting JavaScript/TypeScript native untuk Perry",
+      "metaDescription": "Coop meng-host aplikasi JavaScript/TypeScript yang dikompilasi Perry dengan runtime bersama, worker deployment terisolasi, dan rollback berbasis alamat konten.",
       "adjacent": "Proyek yang berdekatan dengan Perry · Pre-1.0",
       "tagline": "Tempat kode Perry beristirahat dan berjalan.",
-      "intro": "Coop mengubah direktori TypeScript yang kompatibel dengan Perry menjadi pustaka aplikasi native dan menyajikannya lewat HTTP, sementara runtime dan pustaka standar Perry disediakan sekali per mesin.",
+      "intro": "Coop mengubah direktori JavaScript/TypeScript yang kompatibel dengan Perry menjadi pustaka aplikasi native dan menyajikannya lewat HTTP, sementara runtime dan pustaka standar Perry disediakan sekali per mesin.",
       "experimental": "Infrastruktur eksperimental untuk kode milik Anda",
       "explore": "Jelajahi Coop",
       "viewSource": "Lihat sumber",
@@ -543,7 +545,7 @@
       "worker": "Worker Coop",
       "sharedProviders": "Runtime + pustaka standar bersama",
       "onePerMachine": "satu per mesin",
-      "diagramAria": "Perry mengompilasi TypeScript menjadi pustaka aplikasi, worker Coop memuatnya, lalu menghubungkannya ke runtime bersama.",
+      "diagramAria": "Perry mengompilasi JavaScript/TypeScript menjadi pustaka aplikasi, worker Coop memuatnya, lalu menghubungkannya ke runtime bersama.",
       "whyTitle": "Perry mengompilasi. Coop menjaganya tetap berjalan.",
       "whyBody": "Perbedaannya adalah tempat runtime bahasa berada. Coop menjaga image aplikasi tetap kecil dan menyediakan runtime Perry yang kompatibel beserta pustaka standar di tingkat host.",
       "perryTitle": "Executable Perry biasa",
@@ -569,7 +571,7 @@
       "workingTitle": "Yang bekerja hari ini",
       "workingBody": "Coop adalah infrastruktur yang telah diuji, tetapi belum menjadi produk hosting yang selesai. Implementasi saat ini mencakup:",
       "workingItems": [
-        "Kompilasi TypeScript, routing HTTP, dan mount statis",
+        "Kompilasi JavaScript/TypeScript, routing HTTP, dan mount statis",
         "Pemeriksaan identitas runtime bersama",
         "Deployment berbasis alamat konten dan rollback",
         "Cron dan antrean tahan lama",
@@ -586,7 +588,7 @@
       "rightItems": [
         "Layanan dan aplikasi kecil dengan kode milik Anda",
         "Satu operator menjalankan portofolio pada satu mesin",
-        "Beban kerja yang dapat dikompilasi dalam subset TypeScript Perry",
+        "Beban kerja yang dapat dikompilasi dalam subset JavaScript/TypeScript Perry",
         "Tim yang menghargai kepadatan, artefak eksplisit, dan rollback cepat"
       ],
       "notYetTitle": "Yang belum dijanjikan Coop",
@@ -628,8 +630,8 @@
       "pricing": "Harga"
     },
     "home": {
-      "title": "Perry — Kompilasi TypeScript ke Executable Native | Kompiler TypeScript Native",
-      "description": "Perry adalah compiler TypeScript ahead-of-time yang open source. Satu codebase, 11 platform, tanpa Node.js saat runtime."
+      "title": "Perry — Kompilasi JavaScript/TypeScript ke Executable Native | Kompiler JavaScript/TypeScript Native",
+      "description": "Perry adalah compiler JavaScript/TypeScript ahead-of-time yang open source. Satu codebase, 11 platform, tanpa Node.js saat runtime."
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

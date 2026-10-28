@@ -6,6 +6,7 @@
 import Plus from "@lucide/astro/icons/plus";
 import SectionHeader from "../SectionHeader.astro";
 import JsonLd from "../JsonLd.astro";
+import LanguageName from "../LanguageName.astro";
 import { localePath, type Locale } from "../../i18n/index.ts";
 import { links } from "../../lib/links.ts";
 import { richText, stripTags } from "../../lib/rich-text.ts";
@@ -50,7 +51,9 @@ const faqJsonLd = {
             <span class="q">{item.question}</span>
             <Plus class="icon" size={18} stroke-width={1.75} aria-hidden="true" />
           </summary>
-          <p class="a muted" set:html={richText(item.answer, tagLinks)} />
+          <p class="a muted">{richText(item.answer, tagLinks).split("JavaScript/TypeScript").map((part, index) => (
+            <>{index > 0 && <LanguageName />}<Fragment set:html={part} /></>
+          ))}</p>
         </details>
       ))}
     </div>

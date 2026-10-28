@@ -1,0 +1,53 @@
+---
+/** Stable accessible text, with both words sharing one grid cell to prevent layout shifts. */
+---
+
+<span class="language-name" data-language-name><span class="language-name__label">JavaScript/<wbr />TypeScript</span><span class="language-name__word language-name__js" aria-hidden="true">JavaScript</span><span class="language-name__word language-name__ts" aria-hidden="true">TypeScript</span></span>
+
+<style>
+  .language-name {
+    display: inline-grid;
+    position: relative;
+    vertical-align: baseline;
+    perspective: 600px;
+  }
+  .language-name__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .language-name__word {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    animation: language-flip 8s ease-in-out infinite;
+  }
+  .language-name__ts {
+    animation-delay: -4s;
+  }
+  .language-name:hover .language-name__word,
+  :global(html[data-language-motion="paused"]) .language-name__word {
+    animation-play-state: paused;
+  }
+  @keyframes language-flip {
+    0%, 43%, 100% { opacity: 1; transform: translateY(0) rotateX(0); }
+    49% { opacity: 0; transform: translateY(-0.15em) rotateX(65deg); }
+    50%, 93% { opacity: 0; transform: translateY(0.15em) rotateX(-65deg); }
+  }
+  @media (prefers-reduced-motion: reduce), print {
+    .language-name { display: inline; }
+    .language-name__word { display: none; animation: none; }
+    .language-name__label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+      white-space: normal;
+    }
+  }
+</style>

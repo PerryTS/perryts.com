@@ -1,6 +1,7 @@
 ---
 /** Compiler pipeline overview (English, from the previous site's Architecture section). */
 import SectionHeader from "../SectionHeader.astro";
+import LanguageText from "../LanguageText.astro";
 import { localePath, type Locale } from "../../i18n/index.ts";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 
 const steps = [
-  { mark: "TS", name: "TypeScript", detail: ".ts files" },
+  { mark: "JS/TS", name: "JavaScript/TypeScript", detail: ".js / .ts files" },
   { mark: "SWC", name: "Parser", detail: "Fast parsing" },
   { mark: "HIR", name: "Transform", detail: "Monomorphization" },
   { mark: "LLVM", name: "Codegen", detail: "Machine code" },
@@ -19,20 +20,20 @@ const steps = [
 
 <section class="section arch">
   <div class="wrap stack">
-    <SectionHeader title="How it works" aside="From TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime" />
+    <SectionHeader title="How it works" aside="From JavaScript/TypeScript source through SWC, Perry HIR, LLVM, and the linked runtime" />
     <ol class="steps">
       {steps.map((s, i) => (
         <li class="step" data-reveal style={`--i: ${i}`}>
           <span class="t-label muted">{String(i + 1).padStart(2, "0")}</span>
           <span class:list={["mark t-mono", i === steps.length - 1 && "accent"]}>{s.mark}</span>
-          <span class="name">{s.name}</span>
+          <span class="name"><LanguageText text={s.name} /></span>
           <span class="muted detail">{s.detail}</span>
         </li>
       ))}
     </ol>
     <div class="links muted">
       <p>Want to know how the compiler works under the hood? <a href={localePath(lang, "internals")}>Compiler internals</a></p>
-      <p>Deep dive: <a href={localePath(lang, "typescript-llvm")}>TypeScript on LLVM</a> — monomorphization, NaN-boxing, and why Perry left Cranelift.</p>
+      <p>Deep dive: <a href={localePath(lang, "typescript-llvm")}><LanguageText text="JavaScript/TypeScript on LLVM" /></a> — monomorphization, NaN-boxing, and why Perry left Cranelift.</p>
     </div>
   </div>
 </section>

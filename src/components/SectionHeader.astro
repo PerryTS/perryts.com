@@ -1,5 +1,6 @@
 ---
 import Lines from "./Lines.astro";
+import LanguageText from "./LanguageText.astro";
 
 interface Props {
   title: string;
@@ -12,7 +13,7 @@ const { title, aside, as: Heading = "h2" } = Astro.props;
 
 <header class="section-header">
   <Heading class="t-h2" data-reveal><Lines text={title} /></Heading>
-  {aside && <p class="aside muted" data-reveal style="--i: 1">{aside}</p>}
+  {aside && <p class="aside muted" data-reveal style="--i: 1"><LanguageText text={aside} /></p>}
   <slot />
 </header>
 

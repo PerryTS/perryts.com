@@ -1,6 +1,7 @@
 ---
 /** Closing call to action band; buttons go in the default slot. */
 import Lines from "../Lines.astro";
+import LanguageText from "../LanguageText.astro";
 
 interface Props {
   title: string;
@@ -13,7 +14,7 @@ const { title, text } = Astro.props;
   <div class="wrap inner">
     <div>
       <h2 class="t-h2" data-reveal><Lines text={title} /></h2>
-      <p class="t-lead muted" data-reveal style="--i: 1">{text}</p>
+      <p class="t-lead muted" data-reveal style="--i: 1"><LanguageText text={text} /></p>
     </div>
     <div class="actions" data-reveal style="--i: 2"><slot /></div>
   </div>

@@ -1,4 +1,5 @@
 ---
+import LanguageText from "../LanguageText.astro";
 /** Install methods and first commands (English, from the previous site's Installation section). */
 import CopyButton from "../CopyButton.astro";
 import SectionHeader from "../SectionHeader.astro";
@@ -38,15 +39,16 @@ const methods = [
 const usage = [
   { label: "Verify the toolchain", command: "perry doctor", description: "Checks the compiler, linker, SDK, and target setup" },
   { label: "Compile a file", command: "perry compile main.ts", description: "Compiles main.ts to a native executable" },
+  { label: "Compile JavaScript", command: "perry compile main.js", description: "Plain JavaScript uses the same native compilation pipeline" },
   { label: "Custom output", command: "perry compile main.ts -o myapp", description: "Specify the output executable name" },
   { label: "With V8 runtime", command: "perry compile main.ts --enable-js-runtime", description: "Enable V8 for JavaScript npm package compatibility" },
-  { label: "Check compatibility", command: "perry check ./src", description: "Validate TypeScript code for native compilation" },
+  { label: "Check compatibility", command: "perry check ./src", description: "Validate JavaScript/TypeScript code for native compilation" },
 ];
 ---
 
 <section class="section install" id="installation">
   <div class="wrap stack">
-    <SectionHeader title={"Get started"} aside="Install Perry and start compiling TypeScript to native executables" />
+    <SectionHeader title={"Get started"} aside="Install Perry and start compiling JavaScript/TypeScript to native executables" />
     <div class="cols">
       <div>
         <h3 class="t-label muted step">01 · Installation</h3>
@@ -69,7 +71,7 @@ const usage = [
             <div class="item" data-reveal style={`--i: ${i}`}>
               <dt class="name">{u.label}</dt>
               <dd class="cmd"><code><span class="accent">$ </span>{u.command}</code><CopyButton text={u.command} label={`Copy command: ${u.command}`} /></dd>
-              <dd class="note muted">{u.description}</dd>
+              <dd class="note muted"><LanguageText text={u.description} /></dd>
             </div>
           ))}
         </dl>

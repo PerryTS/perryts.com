@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry ve alternatifleri",
-      "indexSubtitle": "Perry, TypeScript göndermenin diğer yollarıyla nasıl karşılaştırılır: çalışma zamanları, derleyiciler ve çapraz platform UI framework'leri. Dürüst, kaynaklı ve mevcut olduğu yerde ölçülmüş sayılarla.",
+      "indexSubtitle": "Perry, JavaScript/TypeScript göndermenin diğer yollarıyla nasıl karşılaştırılır: çalışma zamanları, derleyiciler ve çapraz platform UI framework'leri. Dürüst, kaynaklı ve mevcut olduğu yerde ölçülmüş sayılarla.",
       "indexMetaTitle": "Perry'yi Bun, Deno, Electron, Tauri, React Native ve Static Hermes ile karşılaştırın",
-      "indexMetaDescription": "Geliştiricilerin başvurduğu alternatiflere karşı Perry'nin yan yana karşılaştırmaları: TypeScript çalışma zamanları (Bun, Deno), AOT TS derleyicileri (Static Hermes) ve çapraz platform UI framework'leri (Electron, Tauri, React Native).",
+      "indexMetaDescription": "Geliştiricilerin başvurduğu alternatiflere karşı Perry'nin yan yana karşılaştırmaları: JavaScript/TypeScript çalışma zamanları (Bun, Deno), AOT TS derleyicileri (Static Hermes) ve çapraz platform UI framework'leri (Electron, Tauri, React Native).",
       "backToCompare": "Karşılaştırmalara geri dön",
       "lastUpdated": "Son güncelleme",
       "whatIs": "{name} nedir?",
@@ -45,9 +45,9 @@
       "whenChoose": "{name}'i ne zaman seçmeli",
       "verdict": "Karar",
       "ctaTitle": "Perry'yi deneyin",
-      "ctaSubtitle": "TypeScript'inizi bugün yerel koda derleyin.",
+      "ctaSubtitle": "JavaScript/TypeScript'inizi bugün yerel koda derleyin.",
       "category": {
-        "runtime": "TypeScript çalışma zamanı",
+        "runtime": "JavaScript/TypeScript çalışma zamanı",
         "compiler": "TS-yerel derleyici",
         "ui-framework": "Çapraz platform UI"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
     },
     "electronAlternatives": {
-      "title": "TypeScript İçin Electron Alternatifleri",
-      "tldr": "2026'da TypeScript masaüstü uygulamaları için dört gerçekçi yol: Electron, Tauri, Bun tek dosyalı ikili dosyalar ve Perry'nin yerel widget'ları. İkili dosya boyutu, bellek, UI yığını ve dil dürüstçe karşılaştırılıyor."
+      "title": "JavaScript/TypeScript İçin Electron Alternatifleri",
+      "tldr": "2026'da JavaScript/TypeScript masaüstü uygulamaları için dört gerçekçi yol: Electron, Tauri, Bun tek dosyalı ikili dosyalar ve Perry'nin yerel widget'ları. İkili dosya boyutu, bellek, UI yığını ve dil dürüstçe karşılaştırılıyor."
     },
     "getStarted": "Başlayın"
   },
   "footer": {
-    "tagline": "Açık kaynaklı, ahead-of-time bir TypeScript derleyicisi. Rust ile, SWC ve LLVM üzerine geliştirildi.",
+    "tagline": "Açık kaynaklı, ahead-of-time bir JavaScript/TypeScript derleyicisi. Rust ile, SWC ve LLVM üzerine geliştirildi.",
     "served": "Bu sayfa, Perry ile derlenmiş yerel bir ikili dosya tarafından sunuldu.",
     "source": "Sunucu kaynak kodunu görüntüle",
     "rights": "© 2026 Perry · MIT lisanslı",
@@ -98,7 +98,9 @@
           "Bülten"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "Sözcük animasyonunu duraklat",
+    "resumeLanguageAnimation": "Sözcük animasyonunu sürdür"
   },
   "guides": {
     "factsLanguageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
@@ -173,10 +175,10 @@
         "BARINDIR"
       ],
       "descriptions": [
-        "TypeScript'ten 11 platform için yerel ikili dosyaya.",
+        "JavaScript/TypeScript'ten 11 platform için yerel ikili dosyaya.",
         "Uygulamanızın gerçek widget'larını kullanan UI testleri.",
         "main.ts'ten App Store'a: derleyin, imzalayın, doğrulayın ve gönderin.",
-        "Perry ile derlenmiş TypeScript uygulamalarını HTTP üzerinden çalıştırır."
+        "Perry ile derlenmiş JavaScript/TypeScript uygulamalarını HTTP üzerinden çalıştırır."
       ],
       "perryStatus": "MIT · açık kaynak",
       "coopStatus": "1.0 öncesi"
@@ -195,7 +197,7 @@
         },
         {
           "question": "npm paketlerini kullanabilir miyim?",
-          "answer": "Birçok saf TypeScript/JavaScript paketi yerel olarak derlenir ve yaklaşık 50 paket/API uygulaması takip edilmektedir. Uyumluluk evrensel değildir: yerel eklentiler, desteklenmeyen dinamik davranışlar veya motora özgü semantik kullanan paketler isteğe bağlı V8 yedeğine ihtiyaç duyabilir ya da hiç çalışmayabilir. perry check komutunu çalıştırın ve sınırlamalara göz atın."
+          "answer": "Birçok saf JavaScript/TypeScript paketi yerel olarak derlenir ve yaklaşık 50 paket/API uygulaması takip edilmektedir. Uyumluluk evrensel değildir: yerel eklentiler, desteklenmeyen dinamik davranışlar veya motora özgü semantik kullanan paketler isteğe bağlı V8 yedeğine ihtiyaç duyabilir ya da hiç çalışmayabilir. perry check komutunu çalıştırın ve sınırlamalara göz atın."
         },
         {
           "question": "Perry hangi platformları destekliyor?",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "AHEAD-OF-TIME TYPESCRIPT DERLEYİCİSİ · SWC + LLVM",
-      "title": "TypeScript kodunuz,\nyerel koda derlenmiş.",
+      "title": "JavaScript/TypeScript kodunuz,\nyerel koda derlenmiş.",
       "sub": "Perry, TypeScript ve JavaScript'i küçük bir yerel yürütülebilir dosyaya derler. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok.",
       "docs": "Dokümantasyonu okuyun",
       "copyLabel": "Kurulum komutunu kopyala"
@@ -441,7 +443,7 @@
           "items": [
             "Node 26 uyumluluğunu ~%77'den %97'ye taşımak",
             "Performans: GC, dağıtım, başlatma, ikili dosya boyutu",
-            "TypeScript ve npm eksiklerini kapatmak: Proxy, dekoratörler, zayıf referanslar"
+            "JavaScript/TypeScript ve npm eksiklerini kapatmak: Proxy, dekoratörler, zayıf referanslar"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Perry için yerel TypeScript barındırma",
-      "metaDescription": "Coop, Perry ile derlenen TypeScript uygulamalarını paylaşılan çalışma zamanı sağlayıcıları, yalıtılmış dağıtım worker'ları ve içerik adresli geri dönüşlerle barındırır.",
+      "metaTitle": "Coop — Perry için yerel JavaScript/TypeScript barındırma",
+      "metaDescription": "Coop, Perry ile derlenen JavaScript/TypeScript uygulamalarını paylaşılan çalışma zamanı sağlayıcıları, yalıtılmış dağıtım worker'ları ve içerik adresli geri dönüşlerle barındırır.",
       "adjacent": "Perry'ye komşu proje · Pre-1.0",
       "tagline": "Perry kodunun dinlenip çalışabileceği bir yer.",
-      "intro": "Coop, Perry uyumlu bir TypeScript dizinini yerel uygulama kitaplığına dönüştürüp HTTP üzerinden sunar; Perry çalışma zamanı ve standart kitaplık ise makine başına yalnızca bir kez sağlanır.",
+      "intro": "Coop, Perry uyumlu bir JavaScript/TypeScript dizinini yerel uygulama kitaplığına dönüştürüp HTTP üzerinden sunar; Perry çalışma zamanı ve standart kitaplık ise makine başına yalnızca bir kez sağlanır.",
       "experimental": "Sahibi olduğunuz kod için deneysel altyapı",
       "explore": "Coop'u keşfet",
       "viewSource": "Kaynak kodu gör",
@@ -543,7 +545,7 @@
       "worker": "Coop worker",
       "sharedProviders": "Paylaşılan çalışma zamanı + standart kitaplık",
       "onePerMachine": "makine başına bir",
-      "diagramAria": "TypeScript, Perry tarafından uygulama kitaplığına derlenir; Coop worker bunu yükler ve paylaşılan çalışma zamanı sağlayıcılarına bağlar.",
+      "diagramAria": "JavaScript/TypeScript, Perry tarafından uygulama kitaplığına derlenir; Coop worker bunu yükler ve paylaşılan çalışma zamanı sağlayıcılarına bağlar.",
       "whyTitle": "Perry derler. Coop çalışır tutar.",
       "whyBody": "Fark, dil çalışma zamanının nerede yaşadığıdır. Coop uygulama imajını küçük tutar ve uyumlu Perry çalışma zamanı ile standart kitaplığı host düzeyinde sağlar.",
       "perryTitle": "Normal bir Perry çalıştırılabilir dosyası",
@@ -569,7 +571,7 @@
       "workingTitle": "Bugün çalışanlar",
       "workingBody": "Coop test edilmiş bir altyapıdır ancak henüz tamamlanmış bir barındırma ürünü değildir. Güncel uygulama şunları içerir:",
       "workingItems": [
-        "TypeScript derleme, HTTP yönlendirme ve statik bağlama",
+        "JavaScript/TypeScript derleme, HTTP yönlendirme ve statik bağlama",
         "Paylaşılan sağlayıcı kimlik kontrolleri",
         "İçerik adresli dağıtımlar ve geri dönüş",
         "Cron ve kalıcı kuyruk",
@@ -586,7 +588,7 @@
       "rightItems": [
         "Koduna sahip olduğunuz servisler ve küçük uygulamalar",
         "Tek makinede portföy çalıştıran tek operatör",
-        "Perry'nin TypeScript alt kümesinde derlenen iş yükleri",
+        "Perry'nin JavaScript/TypeScript alt kümesinde derlenen iş yükleri",
         "Yoğunluk, açık artefaktlar ve hızlı geri dönüşe önem veren ekipler"
       ],
       "notYetTitle": "Coop'un henüz vaat etmedikleri",
@@ -628,8 +630,8 @@
       "pricing": "Fiyatlandırma"
     },
     "home": {
-      "title": "Perry — TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin | TypeScript Yerel Derleyicisi",
-      "description": "Perry, açık kaynaklı ve ahead-of-time çalışan bir TypeScript derleyicisidir. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok."
+      "title": "Perry — JavaScript/TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin | JavaScript/TypeScript Yerel Derleyicisi",
+      "description": "Perry, açık kaynaklı ve ahead-of-time çalışan bir JavaScript/TypeScript derleyicisidir. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok."
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

@@ -4,6 +4,7 @@ import Article from "../../../components/guides/Article.astro";
 import Code from "../../../components/guides/Code.astro";
 import Cards from "../../../components/guides/Cards.astro";
 import Installation from "../../../components/guides/Installation.astro";
+import LanguageText from "../../../components/LanguageText.astro";
 import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
 import { links } from "../../../lib/links.ts";
 
@@ -11,9 +12,9 @@ export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
 
 const meta = {
-  title: "Get Started with Perry — Install & Compile TypeScript to Native",
+  title: "Get Started with Perry — Install & Compile JavaScript/TypeScript to Native",
   description:
-    "Install Perry and compile a TypeScript file into a native executable. Native output needs no external Node.js installation or JavaScript engine.",
+    "Install Perry and compile a JavaScript/TypeScript file into a native executable. Native output needs no external Node.js installation or JavaScript engine.",
   breadcrumb: "Get Started",
   absoluteTitle: true,
 };
@@ -49,7 +50,7 @@ const next = [
 
   <Article tight>
     <h2>Your first binary, step by step</h2>
-    <p>Once Perry is installed, compiling TypeScript to a native executable is a single command. Write a file:</p>
+    <p><LanguageText text="Once Perry is installed, compiling JavaScript/TypeScript to a native executable is a single command." /> Write a file:</p>
     <Code
       lines={[
         { tone: "muted", text: "// hello.ts" },
@@ -57,7 +58,7 @@ const next = [
         { text: "console.log(`Hello, ${name}!`);" },
       ]}
     />
-    <p>Compile it and run the result — the output is a self-contained machine-code binary, not a bundled script:</p>
+    <p>This example also works as <code>hello.js</code>. Compile it and run the result — the output is a self-contained machine-code binary, not a bundled script:</p>
     <Code
       lines={[
         { prompt: true, text: "perry compile hello.ts" },
@@ -69,8 +70,8 @@ const next = [
     <p>
       The published runtime-only hello-world measurement is about 3.2 ms on the documented Apple M-series test host. Real
       startup depends on the target, linked features, I/O, and hardware. Read more about
-      <a href={localePath(lang, "compile-typescript-to-binary")}>how Perry compiles TypeScript to a binary</a> or what
-      happens inside the <a href={localePath(lang, "typescript-native-compiler")}>TypeScript native compiler</a>.
+      <a href={localePath(lang, "compile-typescript-to-binary")}><LanguageText text="how Perry compiles JavaScript/TypeScript to a binary" /></a> or what
+      happens inside the <a href={localePath(lang, "typescript-native-compiler")}><LanguageText text="JavaScript/TypeScript native compiler" /></a>.
     </p>
     <h2>Where to go next</h2>
   </Article>

@@ -14,10 +14,10 @@ export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
 
 const meta = {
-  title: "Compile TypeScript to a Binary (Standalone Executables)",
+  title: "Compile JavaScript/TypeScript to a Binary (Standalone Executables)",
   description:
-    "How Perry compiles supported TypeScript through LLVM into a native executable, what is linked into the file, and how the result differs from runtime bundling.",
-  breadcrumb: "Compile TypeScript to a Binary",
+    "How Perry compiles supported JavaScript/TypeScript through LLVM into a native executable, what is linked into the file, and how the result differs from runtime bundling.",
+  breadcrumb: "Compile JavaScript/TypeScript to a Binary",
 };
 
 const meanings = [
@@ -43,8 +43,8 @@ const meanings = [
   lang={lang}
   path="compile-typescript-to-binary"
   meta={meta}
-  heading="Compile TypeScript to a Binary"
-  lead="Perry turns supported TypeScript into target-specific machine code. Native output needs no external Node.js installation or JavaScript engine, but it does statically link the Perry runtime and garbage collector."
+  heading="Compile JavaScript/TypeScript to a Binary"
+  lead="Perry turns supported JavaScript/TypeScript into target-specific machine code. Native output needs no external Node.js installation or JavaScript engine, but it does statically link the Perry runtime and garbage collector."
 >
   <Fragment slot="actions">
     <Button href={localePath(lang, "getting-started")}>Install Perry</Button>

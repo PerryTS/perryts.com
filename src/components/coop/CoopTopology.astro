@@ -2,13 +2,14 @@
 /** TypeScript → Perry → app library → Coop worker, with shared runtime providers below (one per machine). */
 import ArrowRight from "@lucide/astro/icons/arrow-right";
 import type { Messages } from "../../i18n/messages.ts";
+import LanguageText from "../LanguageText.astro";
 
 interface Props {
   content: Messages["pages"]["coop"];
 }
 const { content } = Astro.props;
 const steps = [
-  { label: "TypeScript", tone: "--pixel-blue" },
+  { label: "JavaScript/TypeScript", tone: "--pixel-blue" },
   { label: "Perry", tone: "--pixel-amber" },
   { label: content.appLibrary, tone: "--pixel-lilac" },
   { label: content.worker, tone: "--success" },
@@ -19,7 +20,7 @@ const steps = [
   <div class="steps">
     {steps.map((step, i) => (
       <>
-        <div class="step t-mono" style={`--tone: var(${step.tone})`}>{step.label}</div>
+        <div class="step t-mono" style={`--tone: var(${step.tone})`}><LanguageText text={step.label} /></div>
         {i < steps.length - 1 && <ArrowRight class="arrow" size={16} stroke-width={1.75} aria-hidden="true" />}
       </>
     ))}
