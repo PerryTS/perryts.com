@@ -29,6 +29,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build:site
+        env:
+          SOCIAL_IMAGE_ORIGIN: https://beta.perryts.com
       - run: npm run check:blog
 
       - name: Deploy beta

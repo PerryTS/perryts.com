@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import { locales, localePath, type Locale } from "../i18n/index.ts";
-import { metaDescription, pageTitle } from "../lib/seo.ts";
+import { DEFAULT_SOCIAL_IMAGE, metaDescription, pageTitle, socialImageUrl } from "../lib/seo.ts";
 
 interface Props {
   lang: Locale;
@@ -33,15 +33,17 @@ const {
   titleIsAbsolute = false,
   canonical,
   alternates = locales,
-  image = "/og.png",
+  image = DEFAULT_SOCIAL_IMAGE,
   type = "website",
   publishedTime,
   noindex = false,
 } = Astro.props;
 const fullTitle = pageTitle(title, titleIsAbsolute);
 const descriptionText = metaDescription(description);
+const socialTitle = fullTitle.replaceAll("JavaScript/TypeScript", "TypeScript/JavaScript");
+const socialDescription = descriptionText.replaceAll("JavaScript/TypeScript", "TypeScript/JavaScript");
 const canonicalUrl = new URL(canonical ?? localePath(lang, path), Astro.site);
-const imageUrl = new URL(image, Astro.site);
+const imageUrl = socialImageUrl(image, Astro.site);
 const ogLocale = lang.replace("-", "_");
 ---
 
@@ -62,19 +64,21 @@ const ogLocale = lang.replace("-", "_");
     <link rel="preload" href="/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:site_name" content="Perry" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={descriptionText} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="1731" />
+    <meta property="og:image:height" content="909" />
+    {image === DEFAULT_SOCIAL_IMAGE && <meta property="og:image:alt" content="Your TypeScript/JavaScript, compiled to native. Perry." />}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={descriptionText} />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={socialDescription} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     <meta name="twitter:image" content={imageUrl} />
+    {image === DEFAULT_SOCIAL_IMAGE && <meta name="twitter:image:alt" content="Your TypeScript/JavaScript, compiled to native. Perry." />}
     <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");</script>
     <!-- Plausible (self-hosted), same snippet as the previous site. -->

@@ -14,6 +14,7 @@ import { messages, plural } from "../../../../i18n/messages.ts";
 import { locales, localePath, type Locale } from "../../../../i18n/index.ts";
 import { formatPostDate, getPosts, type Post } from "../../../../lib/blog.ts";
 import { readingMinutes } from "../../../../lib/reading-time.ts";
+import { DEFAULT_SOCIAL_IMAGE, socialImageUrl } from "../../../../lib/seo.ts";
 
 // Every post exists under every locale, like the previous site; untranslated ones show English with a notice.
 export async function getStaticPaths() {
@@ -56,7 +57,7 @@ const blogPosting = {
   keywords: entry.data.tags.join(", "),
   url,
   mainEntityOfPage: url,
-  image: new URL("/og.png", Astro.site).toString(),
+  image: socialImageUrl(DEFAULT_SOCIAL_IMAGE, Astro.site).toString(),
   author: { "@type": "Organization", name: "Perry", url: "https://perryts.com/" },
   publisher: { "@type": "Organization", name: "Perry", logo: { "@type": "ImageObject", url: new URL("/perry-icon.svg", Astro.site).toString() } },
 };

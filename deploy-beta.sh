@@ -7,7 +7,7 @@ REMOTE_DIR="/var/www/beta.perryts.com"
 RELEASE="$(date -u +%Y%m%dT%H%M%SZ)-$(git rev-parse --short HEAD)"
 
 case "${1:-}" in
-    "") npm run build:site ;;
+    "") SOCIAL_IMAGE_ORIGIN=https://beta.perryts.com npm run build:site ;;
     --skip-build) ;; # CI has already built and checked this checkout.
     *) echo "Usage: $0 [--skip-build]" >&2; exit 2 ;;
 esac

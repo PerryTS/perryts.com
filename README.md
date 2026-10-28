@@ -121,6 +121,8 @@ The Nginx configuration is in `deploy/nginx-beta.conf`, installed at
 `/etc/nginx/sites-available/beta.perryts.com` and linked from `sites-enabled`.
 It uses the existing Certbot certificate, redirects `/` to `/en/`, handles clean
 URLs, and excludes beta from indexing. Canonical URLs still point to production.
+Beta builds set `SOCIAL_IMAGE_ORIGIN=https://beta.perryts.com` so social previews
+fetch beta's image. Builds without this override use the production origin.
 
 Newsletter requests use a separate `perryts-beta-subscribe` systemd service on
 loopback port 3852 (`deploy/perryts-beta-subscribe.service`). It reads the existing
