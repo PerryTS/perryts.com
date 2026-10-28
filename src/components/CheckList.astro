@@ -3,6 +3,7 @@
 import Check from "@lucide/astro/icons/check";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
 import Dot from "@lucide/astro/icons/dot";
+import LanguageText from "./LanguageText.astro";
 
 interface Props {
   items: string[];
@@ -14,7 +15,7 @@ const Icon = { done: Check, next: ArrowRight, note: Dot }[tone];
 
 <ul class:list={["list", tone]}>
   {items.map((item) => (
-    <li><Icon size={16} stroke-width={2} aria-hidden="true" /><span>{item}</span></li>
+    <li><Icon size={16} stroke-width={2} aria-hidden="true" /><span><LanguageText text={item} /></span></li>
   ))}
 </ul>
 

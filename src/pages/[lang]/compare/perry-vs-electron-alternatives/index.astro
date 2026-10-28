@@ -1,4 +1,5 @@
 ---
+import LanguageText from "../../../../components/LanguageText.astro";
 import LandingLayout from "../../../../components/guides/LandingLayout.astro";
 import Article from "../../../../components/guides/Article.astro";
 import Cta from "../../../../components/guides/Cta.astro";
@@ -11,10 +12,10 @@ export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
 
 const meta = {
-  title: "Electron Alternatives for TypeScript: Architecture and Tradeoffs",
+  title: "Electron Alternatives for JavaScript/TypeScript: Architecture and Tradeoffs",
   description:
     "A sourced guide to Electron, Tauri, Bun standalone executables, and Perry, focused on runtime and UI architecture instead of universal size or speed claims.",
-  breadcrumb: "Electron Alternatives for TypeScript",
+  breadcrumb: "Electron Alternatives for JavaScript/TypeScript",
 };
 
 const approaches = [
@@ -45,7 +46,7 @@ const approaches = [
   {
     name: "Perry",
     summary:
-      "Perry compiles supported TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine by default, and remains a pre-1.0 compatibility surface.",
+      "Perry compiles supported JavaScript/TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine by default, and remains a pre-1.0 compatibility surface.",
     bestFor: "Validated applications where native widgets or Perry’s mobile, wearable, TV, and Web/WASM targets solve a specific product need.",
     source: "https://github.com/PerryTS/perry#readme",
     compare: "typescript-native-compiler",
@@ -57,7 +58,7 @@ const approaches = [
   lang={lang}
   path="compare/perry-vs-electron-alternatives"
   meta={meta}
-  heading="Electron Alternatives for TypeScript"
+  heading="Electron Alternatives for JavaScript/TypeScript"
   lead="“Electron alternative” can mean a smaller webview application, a single-file runtime, or a real native-widget application. These are different architectural choices, so this guide avoids invented universal installer, memory, and startup numbers."
   parents={[{ name: "Compare", path: "compare" }]}
   back={{ href: localePath(lang, "compare"), label: "Back to comparisons" }}
@@ -71,7 +72,7 @@ const approaches = [
             <span class="t-label muted">{String(i + 1).padStart(2, "0")}</span>
             <h2 class="t-h3">{a.name}</h2>
             <div class="body">
-              <p class="muted">{a.summary}</p>
+              <p class="muted"><LanguageText text={a.summary} /></p>
               <p><strong>Best fit:</strong> {a.bestFor}</p>
               <div class="links">
                 <LinkArrow href={a.source}>Primary source</LinkArrow>

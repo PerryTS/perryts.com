@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry 与替代方案对比",
-      "indexSubtitle": "Perry 与其他交付 TypeScript 方式的对比：运行时、编译器以及跨平台 UI 框架。诚实、有出处，并在数据存在的地方给出实测数字。",
+      "indexSubtitle": "Perry 与其他交付 JavaScript/TypeScript 方式的对比：运行时、编译器以及跨平台 UI 框架。诚实、有出处，并在数据存在的地方给出实测数字。",
       "indexMetaTitle": "将 Perry 与 Bun、Deno、Electron、Tauri、React Native 和 Static Hermes 进行对比",
-      "indexMetaDescription": "将 Perry 与开发者会选择的替代方案逐一并列对比:TypeScript 运行时(Bun、Deno)、AOT TS 编译器(Static Hermes),以及跨平台 UI 框架(Electron、Tauri、React Native)。",
+      "indexMetaDescription": "将 Perry 与开发者会选择的替代方案逐一并列对比:JavaScript/TypeScript 运行时(Bun、Deno)、AOT TS 编译器(Static Hermes),以及跨平台 UI 框架(Electron、Tauri、React Native)。",
       "backToCompare": "返回对比页",
       "lastUpdated": "最后更新",
       "whatIs": "什么是 {name}？",
@@ -45,9 +45,9 @@
       "whenChoose": "何时选择 {name}",
       "verdict": "结论",
       "ctaTitle": "试用 Perry",
-      "ctaSubtitle": "今天就把你的 TypeScript 编译为原生代码。",
+      "ctaSubtitle": "今天就把你的 JavaScript/TypeScript 编译为原生代码。",
       "category": {
-        "runtime": "TypeScript 运行时",
+        "runtime": "JavaScript/TypeScript 运行时",
         "compiler": "TS 转原生编译器",
         "ui-framework": "跨平台 UI"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
     },
     "electronAlternatives": {
-      "title": "TypeScript 的 Electron 替代方案",
-      "tldr": "2026 年 TypeScript 桌面应用的四条现实路径：Electron、Tauri、Bun 单文件二进制，以及 Perry 的原生组件。从二进制大小、内存占用、UI 技术栈和语言等方面进行如实比较。"
+      "title": "JavaScript/TypeScript 的 Electron 替代方案",
+      "tldr": "2026 年 JavaScript/TypeScript 桌面应用的四条现实路径：Electron、Tauri、Bun 单文件二进制，以及 Perry 的原生组件。从二进制大小、内存占用、UI 技术栈和语言等方面进行如实比较。"
     },
     "getStarted": "开始使用"
   },
   "footer": {
-    "tagline": "开源的 ahead-of-time TypeScript 编译器。使用 Rust 编写，基于 SWC 和 LLVM。",
+    "tagline": "开源的 ahead-of-time JavaScript/TypeScript 编译器。使用 Rust 编写，基于 SWC 和 LLVM。",
     "served": "本页面由 Perry 编译的原生二进制提供服务。",
     "source": "查看服务器源码",
     "rights": "© 2026 Perry · MIT 许可",
@@ -98,7 +98,9 @@
           "新闻通讯"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "暂停文字动画",
+    "resumeLanguageAnimation": "继续文字动画"
   },
   "guides": {
     "factsLanguageNotice": "技术事实和测量说明以英文为准，以避免不同翻译之间出现偏差。"
@@ -173,10 +175,10 @@
         "托管"
       ],
       "descriptions": [
-        "将 TypeScript 编译为面向 11 个平台的原生二进制。",
+        "将 JavaScript/TypeScript 编译为面向 11 个平台的原生二进制。",
         "驱动应用真实组件的 UI 测试。",
         "从 main.ts 到 App Store：构建、签名、验证并提交。",
-        "通过 HTTP 运行用 Perry 编译的 TypeScript 应用。"
+        "通过 HTTP 运行用 Perry 编译的 JavaScript/TypeScript 应用。"
       ],
       "perryStatus": "MIT · 开源",
       "coopStatus": "1.0 之前"
@@ -195,7 +197,7 @@
         },
         {
           "question": "可以使用 npm 包吗？",
-          "answer": "许多纯 TypeScript/JavaScript 包可以原生编译，目前跟踪了约 50 个包/API 实现。兼容性并非全面覆盖：使用原生插件、不受支持的动态行为或特定引擎语义的包，可能需要可选的 V8 回退方案，也可能无法运行。请运行 perry check 并查阅限制说明。"
+          "answer": "许多纯 JavaScript/TypeScript 包可以原生编译，目前跟踪了约 50 个包/API 实现。兼容性并非全面覆盖：使用原生插件、不受支持的动态行为或特定引擎语义的包，可能需要可选的 V8 回退方案，也可能无法运行。请运行 perry check 并查阅限制说明。"
         },
         {
           "question": "Perry 支持哪些平台？",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "AHEAD-OF-TIME TYPESCRIPT 编译器 · SWC + LLVM",
-      "title": "你的 TypeScript，\n编译为原生。",
+      "title": "你的 JavaScript/TypeScript，\n编译为原生。",
       "sub": "Perry 将 TypeScript 和 JavaScript 编译为小巧的原生可执行文件。一套代码，11 个平台，运行时无需 Node.js。",
       "docs": "阅读文档",
       "copyLabel": "复制安装命令"
@@ -441,7 +443,7 @@
           "items": [
             "Node 26 兼容性从 ~{parity}% 提升至 97%",
             "性能：GC、分派、启动、二进制体积",
-            "补齐 TypeScript 和 npm 的差距：Proxy、装饰器、弱引用"
+            "补齐 JavaScript/TypeScript 和 npm 的差距：Proxy、装饰器、弱引用"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — 面向 Perry 的原生 TypeScript 托管",
-      "metaDescription": "Coop 托管由 Perry 编译的 TypeScript 应用，提供共享运行时、隔离的部署工作进程以及内容寻址回滚。",
+      "metaTitle": "Coop — 面向 Perry 的原生 JavaScript/TypeScript 托管",
+      "metaDescription": "Coop 托管由 Perry 编译的 JavaScript/TypeScript 应用，提供共享运行时、隔离的部署工作进程以及内容寻址回滚。",
       "adjacent": "Perry 相邻项目 · Pre-1.0",
       "tagline": "让 Perry 代码安顿并运行的地方。",
-      "intro": "Coop 将一个兼容 Perry 的 TypeScript 目录编译为原生应用库并通过 HTTP 提供服务，而 Perry 运行时和标准库在每台机器上只需提供一次。",
+      "intro": "Coop 将一个兼容 Perry 的 JavaScript/TypeScript 目录编译为原生应用库并通过 HTTP 提供服务，而 Perry 运行时和标准库在每台机器上只需提供一次。",
       "experimental": "面向自有代码的实验性基础设施",
       "explore": "探索 Coop",
       "viewSource": "查看源码",
@@ -543,7 +545,7 @@
       "worker": "Coop 工作进程",
       "sharedProviders": "共享运行时 + 标准库",
       "onePerMachine": "每台机器一个",
-      "diagramAria": "Perry 将 TypeScript 编译为应用库，Coop 工作进程加载该库并连接共享运行时。",
+      "diagramAria": "Perry 将 JavaScript/TypeScript 编译为应用库，Coop 工作进程加载该库并连接共享运行时。",
       "whyTitle": "Perry 负责编译，Coop 负责持续运行。",
       "whyBody": "区别在于语言运行时所在的位置。Coop 保持应用镜像小巧，并在主机层提供兼容的 Perry 运行时和标准库。",
       "perryTitle": "普通的 Perry 可执行文件",
@@ -569,7 +571,7 @@
       "workingTitle": "当前可用的能力",
       "workingBody": "Coop 是经过测试的基础设施，但还不是完成的托管产品。当前实现包括：",
       "workingItems": [
-        "TypeScript 编译、HTTP 路由和静态挂载",
+        "JavaScript/TypeScript 编译、HTTP 路由和静态挂载",
         "共享提供程序身份检查",
         "内容寻址部署和回滚",
         "Cron 和持久队列",
@@ -586,7 +588,7 @@
       "rightItems": [
         "代码由你拥有的服务和小型应用",
         "单个运维人员在一台机器上运行一组服务",
-        "可在 Perry TypeScript 子集中编译的工作负载",
+        "可在 Perry JavaScript/TypeScript 子集中编译的工作负载",
         "重视密度、明确制品和快速回滚的团队"
       ],
       "notYetTitle": "Coop 尚未承诺的能力",
@@ -628,8 +630,8 @@
       "pricing": "价格"
     },
     "home": {
-      "title": "Perry — 将 TypeScript 编译为原生可执行文件 | TypeScript 原生编译器",
-      "description": "Perry 是开源的 ahead-of-time TypeScript 编译器。一套代码，11 个平台，运行时无需 Node.js。"
+      "title": "Perry — 将 JavaScript/TypeScript 编译为原生可执行文件 | JavaScript/TypeScript 原生编译器",
+      "description": "Perry 是开源的 ahead-of-time JavaScript/TypeScript 编译器。一套代码，11 个平台，运行时无需 Node.js。"
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

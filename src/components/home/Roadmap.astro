@@ -3,6 +3,7 @@ import { type Locale } from "../../i18n/index.ts";
 import { links } from "../../lib/links.ts";
 import { getParity } from "../../lib/perry-data.ts";
 import Lines from "../Lines.astro";
+import LanguageText from "../LanguageText.astro";
 import LinkArrow from "../LinkArrow.astro";
 import { fillDeep, messages } from "../../i18n/messages.ts";
 
@@ -43,7 +44,7 @@ const t = fillDeep(messages(lang).home.roadmap, { parity });
             </p>
             <h3 class="phase__title">{phase.title}</h3>
             <ul class="items">
-              {phase.items.map((item) => <li>{item}</li>)}
+              {phase.items.map((item) => <li><LanguageText text={item} /></li>)}
             </ul>
           </div>
         </li>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  pause: string;
+  resume: string;
+}
+const { pause, resume } = Astro.props;
+---
+
+<button class="language-motion" type="button" data-language-motion-toggle data-pause-label={pause} data-resume-label={resume} hidden>{pause}</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("[data-language-motion-toggle]");
+  if (button) {
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      const paused = document.documentElement.dataset.languageMotion !== "paused";
+      document.documentElement.dataset.languageMotion = paused ? "paused" : "playing";
+      button.textContent = (paused ? button.dataset.resumeLabel : button.dataset.pauseLabel) ?? "";
+    });
+  }
+</script>
+
+<style>
+  .language-motion {
+    width: fit-content;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .language-motion:hover { color: var(--text); }
+  @media (prefers-reduced-motion: reduce), print {
+    .language-motion { display: none; }
+  }
+</style>

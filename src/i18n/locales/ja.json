@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry と他の選択肢を比較",
-      "indexSubtitle": "TypeScript を出荷するさまざまな手段（ランタイム、コンパイラ、クロスプラットフォーム UI フレームワーク）と Perry を比較します。出典を明示し、計測値があるところは実数で、誠実にお伝えします。",
+      "indexSubtitle": "JavaScript/TypeScript を出荷するさまざまな手段（ランタイム、コンパイラ、クロスプラットフォーム UI フレームワーク）と Perry を比較します。出典を明示し、計測値があるところは実数で、誠実にお伝えします。",
       "indexMetaTitle": "Perry を Bun、Deno、Electron、Tauri、React Native、Static Hermes と比較",
-      "indexMetaDescription": "開発者がよく選ぶ選択肢――TypeScript ランタイム（Bun、Deno）、AOT TS コンパイラ（Static Hermes）、クロスプラットフォーム UI フレームワーク（Electron、Tauri、React Native）――と Perry を並べて比較します。",
+      "indexMetaDescription": "開発者がよく選ぶ選択肢――JavaScript/TypeScript ランタイム（Bun、Deno）、AOT TS コンパイラ（Static Hermes）、クロスプラットフォーム UI フレームワーク（Electron、Tauri、React Native）――と Perry を並べて比較します。",
       "backToCompare": "比較一覧に戻る",
       "lastUpdated": "最終更新",
       "whatIs": "{name} とは？",
@@ -45,9 +45,9 @@
       "whenChoose": "{name} を選ぶべきとき",
       "verdict": "結論",
       "ctaTitle": "Perry を試す",
-      "ctaSubtitle": "今日から TypeScript をネイティブにコンパイルしましょう。",
+      "ctaSubtitle": "今日から JavaScript/TypeScript をネイティブにコンパイルしましょう。",
       "category": {
-        "runtime": "TypeScript ランタイム",
+        "runtime": "JavaScript/TypeScript ランタイム",
         "compiler": "TS-to-native コンパイラ",
         "ui-framework": "クロスプラットフォーム UI"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "技術的な事実と測定上の注意事項は、翻訳間のずれを防ぐため英語を正本として管理しています。"
     },
     "electronAlternatives": {
-      "title": "TypeScript のための Electron 代替",
-      "tldr": "2026 年時点で TypeScript デスクトップアプリを作る現実的な道は 4 つ：Electron、Tauri、Bun のシングルファイルバイナリ、そして Perry のネイティブウィジェット。バイナリサイズ、メモリ、UI スタック、言語を誠実に比較します。"
+      "title": "JavaScript/TypeScript のための Electron 代替",
+      "tldr": "2026 年時点で JavaScript/TypeScript デスクトップアプリを作る現実的な道は 4 つ：Electron、Tauri、Bun のシングルファイルバイナリ、そして Perry のネイティブウィジェット。バイナリサイズ、メモリ、UI スタック、言語を誠実に比較します。"
     },
     "getStarted": "はじめる"
   },
   "footer": {
-    "tagline": "オープンソースのahead-of-time TypeScriptコンパイラ。Rust製で、SWCとLLVMを基盤としています。",
+    "tagline": "オープンソースのahead-of-time JavaScript/TypeScriptコンパイラ。Rust製で、SWCとLLVMを基盤としています。",
     "served": "このページは、Perryでコンパイルされたネイティブバイナリから配信されています。",
     "source": "サーバーのソースを見る",
     "rights": "© 2026 Perry · MITライセンス",
@@ -98,7 +98,9 @@
           "ニュースレター"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "単語のアニメーションを一時停止",
+    "resumeLanguageAnimation": "単語のアニメーションを再開"
   },
   "guides": {
     "factsLanguageNotice": "技術的な事実と測定上の注意事項は、翻訳間のずれを防ぐため英語を正本として管理しています。"
@@ -173,10 +175,10 @@
         "ホスト"
       ],
       "descriptions": [
-        "TypeScriptを11の対応先向けネイティブバイナリに。",
+        "JavaScript/TypeScriptを11の対応先向けネイティブバイナリに。",
         "アプリの実際のウィジェットを操作するUIテスト。",
         "main.tsからApp Storeまで：ビルド、署名、検証、提出。",
-        "PerryでコンパイルしたTypeScriptアプリをHTTPで実行。"
+        "PerryでコンパイルしたJavaScript/TypeScriptアプリをHTTPで実行。"
       ],
       "perryStatus": "MIT · オープンソース",
       "coopStatus": "1.0前"
@@ -195,7 +197,7 @@
         },
         {
           "question": "npm パッケージは使えますか？",
-          "answer": "純粋な TypeScript/JavaScript パッケージの多くはネイティブにコンパイルでき、約 50 のパッケージ/API 実装が追跡されています。ただし、互換性は万全ではありません。ネイティブアドオン、未対応の動的な挙動、エンジン固有のセマンティクスを使うパッケージは、オプションの V8 フォールバックが必要になるか、動作しない場合があります。perry check を実行し、制限事項を確認してください。"
+          "answer": "純粋な JavaScript/TypeScript パッケージの多くはネイティブにコンパイルでき、約 50 のパッケージ/API 実装が追跡されています。ただし、互換性は万全ではありません。ネイティブアドオン、未対応の動的な挙動、エンジン固有のセマンティクスを使うパッケージは、オプションの V8 フォールバックが必要になるか、動作しない場合があります。perry check を実行し、制限事項を確認してください。"
         },
         {
           "question": "Perry はどのプラットフォームに対応していますか？",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "TYPESCRIPT AHEAD-OF-TIME コンパイラ · SWC + LLVM",
-      "title": "TypeScriptを、\nネイティブに。",
+      "title": "JavaScript/TypeScriptを、\nネイティブに。",
       "sub": "PerryはTypeScriptとJavaScriptを小さなネイティブ実行ファイルにコンパイルします。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。",
       "docs": "ドキュメントを読む",
       "copyLabel": "インストールコマンドをコピー"
@@ -441,7 +443,7 @@
           "items": [
             "Node 26互換性を~{parity}%から97%へ",
             "パフォーマンス：GC、ディスパッチ、起動、バイナリサイズ",
-            "TypeScriptとnpmの未対応箇所の解消：Proxy、デコレータ、弱参照"
+            "JavaScript/TypeScriptとnpmの未対応箇所の解消：Proxy、デコレータ、弱参照"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Perry向けネイティブTypeScriptホスティング",
-      "metaDescription": "Coopは、共有ランタイム、分離されたデプロイワーカー、コンテンツアドレス方式のロールバックで、PerryがコンパイルしたTypeScriptアプリをホストします。",
+      "metaTitle": "Coop — Perry向けネイティブJavaScript/TypeScriptホスティング",
+      "metaDescription": "Coopは、共有ランタイム、分離されたデプロイワーカー、コンテンツアドレス方式のロールバックで、PerryがコンパイルしたJavaScript/TypeScriptアプリをホストします。",
       "adjacent": "Perry隣接プロジェクト · Pre-1.0",
       "tagline": "Perryコードが休み、動ける場所。",
-      "intro": "CoopはPerry互換のTypeScriptディレクトリをネイティブアプリライブラリに変換してHTTPで配信し、Perryランタイムと標準ライブラリをマシンごとに一度だけ提供します。",
+      "intro": "CoopはPerry互換のJavaScript/TypeScriptディレクトリをネイティブアプリライブラリに変換してHTTPで配信し、Perryランタイムと標準ライブラリをマシンごとに一度だけ提供します。",
       "experimental": "自分で所有するコード向けの実験的インフラ",
       "explore": "Coopを見る",
       "viewSource": "ソースを見る",
@@ -543,7 +545,7 @@
       "worker": "Coopワーカー",
       "sharedProviders": "共有ランタイム + 標準ライブラリ",
       "onePerMachine": "マシンごとに1つ",
-      "diagramAria": "TypeScriptをPerryがアプリライブラリへコンパイルし、Coopワーカーが読み込み、共有ランタイムへ接続します。",
+      "diagramAria": "JavaScript/TypeScriptをPerryがアプリライブラリへコンパイルし、Coopワーカーが読み込み、共有ランタイムへ接続します。",
       "whyTitle": "Perryがコンパイルし、Coopが動かし続けます。",
       "whyBody": "違いは言語ランタイムの置き場所です。Coopはアプリイメージを小さく保ち、互換性のあるPerryランタイムと標準ライブラリをホスト側で提供します。",
       "perryTitle": "通常のPerry実行ファイル",
@@ -569,7 +571,7 @@
       "workingTitle": "現在動作するもの",
       "workingBody": "Coopはテスト済みのインフラですが、完成したホスティング製品ではありません。現在の実装には次が含まれます。",
       "workingItems": [
-        "TypeScriptコンパイル、HTTPルーティング、静的マウント",
+        "JavaScript/TypeScriptコンパイル、HTTPルーティング、静的マウント",
         "共有プロバイダーの同一性チェック",
         "コンテンツアドレス方式のデプロイとロールバック",
         "cronと永続キュー",
@@ -586,7 +588,7 @@
       "rightItems": [
         "自分で所有するコードのサービスや小規模アプリ",
         "1台のマシンでポートフォリオを運用する1人の管理者",
-        "PerryのTypeScriptサブセットでコンパイルできるワークロード",
+        "PerryのJavaScript/TypeScriptサブセットでコンパイルできるワークロード",
         "密度、明示的な成果物、高速ロールバックを重視するチーム"
       ],
       "notYetTitle": "まだ約束していないこと",
@@ -628,8 +630,8 @@
       "pricing": "料金"
     },
     "home": {
-      "title": "Perry — TypeScript をネイティブ実行ファイルにコンパイル | TypeScript ネイティブコンパイラ",
-      "description": "Perryはオープンソースのahead-of-time TypeScriptコンパイラです。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。"
+      "title": "Perry — JavaScript/TypeScript をネイティブ実行ファイルにコンパイル | JavaScript/TypeScript ネイティブコンパイラ",
+      "description": "Perryはオープンソースのahead-of-time JavaScript/TypeScriptコンパイラです。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。"
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

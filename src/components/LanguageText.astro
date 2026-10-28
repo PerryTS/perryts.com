@@ -1,0 +1,10 @@
+---
+import LanguageName from "./LanguageName.astro";
+
+interface Props {
+  text: string;
+}
+// Only explicit paired language labels animate. Technical TypeScript references stay literal.
+const parts = Astro.props.text.split("JavaScript/TypeScript");
+---
+{parts.map((part, i) => <>{i > 0 && <LanguageName />}{part}</>)}

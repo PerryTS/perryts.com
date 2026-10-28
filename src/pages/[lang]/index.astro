@@ -8,12 +8,11 @@ import { messages } from "../../i18n/messages.ts";
 export const getStaticPaths = localeStaticPaths;
 
 const lang = Astro.params.lang as Locale;
-// Titles kept from the previous site (tuned for search, already ranking); descriptions are the
-// previous ones where they were translated, otherwise the new localized copy.
+// Localized metadata names both supported source languages.
 
 const t = messages(lang).pages.home;
 
-// Same structured data the previous home page emitted.
+// Static structured data includes both languages regardless of the visible animation frame.
 const softwareApplication = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -22,7 +21,7 @@ const softwareApplication = {
   operatingSystem: "macOS, Windows, Linux, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Web/WebAssembly",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   description:
-    "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
+    "Perry compiles JavaScript/TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
   url: "https://perryts.com/en/",
   sameAs: ["https://github.com/PerryTS/perry", "https://docs.perryts.com"],
 };

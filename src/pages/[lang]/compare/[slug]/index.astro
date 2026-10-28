@@ -4,6 +4,7 @@ import Cta from "../../../../components/guides/Cta.astro";
 import CompareBody from "../../../../components/compare/CompareBody.astro";
 import Button from "../../../../components/Button.astro";
 import Tag from "../../../../components/Tag.astro";
+import LanguageText from "../../../../components/LanguageText.astro";
 import { messages } from "../../../../i18n/messages.ts";
 import { locales, localePath, type Locale } from "../../../../i18n/index.ts";
 import { compareItems, type CompareItem } from "../../../../data/compare.ts";
@@ -34,7 +35,7 @@ const updated = new Intl.DateTimeFormat(lang, { year: "numeric", month: "long", 
   notice={t.ui.factsLanguageNotice}
 >
   <div slot="header" class="meta" data-reveal style="--i: 2">
-    <Tag>{t.ui.category[item.category]}</Tag>
+    <Tag><LanguageText text={t.ui.category[item.category]} /></Tag>
     <time class="t-mono muted" datetime={item.updated}>{t.ui.lastUpdated} {updated}</time>
   </div>
 

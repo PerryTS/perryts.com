@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry เทียบกับทางเลือกอื่น",
-      "indexSubtitle": "Perry เปรียบเทียบกับวิธีอื่นในการส่งมอบ TypeScript ได้อย่างไร: รันไทม์ คอมไพเลอร์ และเฟรมเวิร์ก UI ข้ามแพลตฟอร์ม ตรงไปตรงมา มีแหล่งอ้างอิง พร้อมตัวเลขที่วัดผลได้จริงเมื่อมีข้อมูล",
+      "indexSubtitle": "Perry เปรียบเทียบกับวิธีอื่นในการส่งมอบ JavaScript/TypeScript ได้อย่างไร: รันไทม์ คอมไพเลอร์ และเฟรมเวิร์ก UI ข้ามแพลตฟอร์ม ตรงไปตรงมา มีแหล่งอ้างอิง พร้อมตัวเลขที่วัดผลได้จริงเมื่อมีข้อมูล",
       "indexMetaTitle": "เปรียบเทียบ Perry กับ Bun, Deno, Electron, Tauri, React Native และ Static Hermes",
-      "indexMetaDescription": "เปรียบเทียบ Perry กับทางเลือกที่นักพัฒนาเลือกใช้แบบเคียงข้างกัน: รันไทม์ TypeScript (Bun, Deno), คอมไพเลอร์ AOT TS-to-native (Static Hermes) และเฟรมเวิร์ก UI ข้ามแพลตฟอร์ม (Electron, Tauri, React Native)",
+      "indexMetaDescription": "เปรียบเทียบ Perry กับทางเลือกที่นักพัฒนาเลือกใช้แบบเคียงข้างกัน: รันไทม์ JavaScript/TypeScript (Bun, Deno), คอมไพเลอร์ AOT TS-to-native (Static Hermes) และเฟรมเวิร์ก UI ข้ามแพลตฟอร์ม (Electron, Tauri, React Native)",
       "backToCompare": "กลับไปยังการเปรียบเทียบ",
       "lastUpdated": "อัปเดตล่าสุด",
       "whatIs": "{name} คืออะไร?",
@@ -45,9 +45,9 @@
       "whenChoose": "เมื่อใดควรเลือก {name}",
       "verdict": "บทสรุป",
       "ctaTitle": "ลองใช้ Perry",
-      "ctaSubtitle": "คอมไพล์ TypeScript ของคุณเป็นเนทีฟวันนี้",
+      "ctaSubtitle": "คอมไพล์ JavaScript/TypeScript ของคุณเป็นเนทีฟวันนี้",
       "category": {
-        "runtime": "รันไทม์ TypeScript",
+        "runtime": "รันไทม์ JavaScript/TypeScript",
         "compiler": "คอมไพเลอร์ TS-to-native",
         "ui-framework": "UI ข้ามแพลตฟอร์ม"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "ข้อมูลทางเทคนิคและหมายเหตุการวัดผลใช้ฉบับภาษาอังกฤษเป็นหลักเพื่อป้องกันความคลาดเคลื่อนระหว่างคำแปล"
     },
     "electronAlternatives": {
-      "title": "ทางเลือกแทน Electron สำหรับ TypeScript",
-      "tldr": "สี่เส้นทางที่ใช้งานได้จริงสำหรับแอปเดสก์ท็อป TypeScript ในปี 2026: Electron, Tauri, ไบนารีไฟล์เดียวของ Bun และวิดเจ็ตเนทีฟของ Perry เปรียบเทียบขนาดไบนารี หน่วยความจำ UI stack และภาษาอย่างตรงไปตรงมา"
+      "title": "ทางเลือกแทน Electron สำหรับ JavaScript/TypeScript",
+      "tldr": "สี่เส้นทางที่ใช้งานได้จริงสำหรับแอปเดสก์ท็อป JavaScript/TypeScript ในปี 2026: Electron, Tauri, ไบนารีไฟล์เดียวของ Bun และวิดเจ็ตเนทีฟของ Perry เปรียบเทียบขนาดไบนารี หน่วยความจำ UI stack และภาษาอย่างตรงไปตรงมา"
     },
     "getStarted": "เริ่มต้น"
   },
   "footer": {
-    "tagline": "คอมไพเลอร์ TypeScript แบบ ahead-of-time ที่เป็นโอเพนซอร์ส เขียนด้วย Rust บนพื้นฐาน SWC และ LLVM",
+    "tagline": "คอมไพเลอร์ JavaScript/TypeScript แบบ ahead-of-time ที่เป็นโอเพนซอร์ส เขียนด้วย Rust บนพื้นฐาน SWC และ LLVM",
     "served": "หน้านี้ส่งมาจากไบนารีเนทีฟที่คอมไพล์ด้วย Perry",
     "source": "ดูซอร์สโค้ดของเซิร์ฟเวอร์",
     "rights": "© 2026 Perry · สัญญาอนุญาต MIT",
@@ -98,7 +98,9 @@
           "จดหมายข่าว"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "หยุดภาพเคลื่อนไหวของคำ",
+    "resumeLanguageAnimation": "เล่นภาพเคลื่อนไหวของคำต่อ"
   },
   "guides": {
     "factsLanguageNotice": "ข้อมูลทางเทคนิคและหมายเหตุการวัดผลใช้ฉบับภาษาอังกฤษเป็นหลักเพื่อป้องกันความคลาดเคลื่อนระหว่างคำแปล"
@@ -173,10 +175,10 @@
         "โฮสต์"
       ],
       "descriptions": [
-        "จาก TypeScript เป็นไบนารีเนทีฟสำหรับ 11 แพลตฟอร์ม",
+        "จาก JavaScript/TypeScript เป็นไบนารีเนทีฟสำหรับ 11 แพลตฟอร์ม",
         "ทดสอบ UI โดยควบคุมวิดเจ็ตจริงของแอปคุณ",
         "จาก main.ts สู่ App Store: บิลด์ เซ็น ตรวจสอบ และส่ง",
-        "รันแอป TypeScript ที่คอมไพล์ด้วย Perry ผ่าน HTTP"
+        "รันแอป JavaScript/TypeScript ที่คอมไพล์ด้วย Perry ผ่าน HTTP"
       ],
       "perryStatus": "MIT · โอเพนซอร์ส",
       "coopStatus": "ก่อน 1.0"
@@ -195,7 +197,7 @@
         },
         {
           "question": "ใช้แพ็กเกจ npm ได้หรือไม่?",
-          "answer": "แพ็กเกจ TypeScript/JavaScript ล้วนจำนวนมากคอมไพล์เป็นเนทีฟได้ และมีการติดตามการรองรับแพ็กเกจ/API ไว้ประมาณ 50 รายการ แต่ความเข้ากันได้ไม่ได้ครอบคลุมทุกกรณี แพ็กเกจที่ใช้ native addon, พฤติกรรมแบบไดนามิกที่ยังไม่รองรับ หรือพฤติกรรมเฉพาะของเอนจิน อาจต้องใช้ V8 fallback ซึ่งเป็นตัวเลือกเสริม หรืออาจใช้งานไม่ได้ ให้รัน perry check และตรวจสอบข้อจำกัด"
+          "answer": "แพ็กเกจ JavaScript/TypeScript ล้วนจำนวนมากคอมไพล์เป็นเนทีฟได้ และมีการติดตามการรองรับแพ็กเกจ/API ไว้ประมาณ 50 รายการ แต่ความเข้ากันได้ไม่ได้ครอบคลุมทุกกรณี แพ็กเกจที่ใช้ native addon, พฤติกรรมแบบไดนามิกที่ยังไม่รองรับ หรือพฤติกรรมเฉพาะของเอนจิน อาจต้องใช้ V8 fallback ซึ่งเป็นตัวเลือกเสริม หรืออาจใช้งานไม่ได้ ให้รัน perry check และตรวจสอบข้อจำกัด"
         },
         {
           "question": "Perry รองรับแพลตฟอร์มใดบ้าง?",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "คอมไพเลอร์ TYPESCRIPT แบบ AHEAD-OF-TIME · SWC + LLVM",
-      "title": "TypeScript ของคุณ\nคอมไพล์เป็นเนทีฟ",
+      "title": "JavaScript/TypeScript ของคุณ\nคอมไพล์เป็นเนทีฟ",
       "sub": "Perry คอมไพล์ TypeScript และ JavaScript เป็นไฟล์ปฏิบัติการเนทีฟขนาดเล็ก โค้ดเบสเดียว 11 แพลตฟอร์ม ไม่ต้องใช้ Node.js ขณะรัน",
       "docs": "อ่านเอกสาร",
       "copyLabel": "คัดลอกคำสั่งติดตั้ง"
@@ -441,7 +443,7 @@
           "items": [
             "ความเข้ากันได้กับ Node 26 จาก ~{parity}% สู่ 97%",
             "ประสิทธิภาพ: GC, dispatch, การเริ่มต้น, ขนาดไบนารี",
-            "ปิดช่องว่างของ TypeScript และ npm: Proxy, decorators, weak refs"
+            "ปิดช่องว่างของ JavaScript/TypeScript และ npm: Proxy, decorators, weak refs"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — โฮสติ้ง TypeScript แบบเนทีฟสำหรับ Perry",
-      "metaDescription": "Coop โฮสต์แอป TypeScript ที่คอมไพล์ด้วย Perry โดยใช้รันไทม์ร่วมกัน เวิร์กเกอร์แยกต่อการดีพลอย และการย้อนกลับแบบอ้างอิงเนื้อหา",
+      "metaTitle": "Coop — โฮสติ้ง JavaScript/TypeScript แบบเนทีฟสำหรับ Perry",
+      "metaDescription": "Coop โฮสต์แอป JavaScript/TypeScript ที่คอมไพล์ด้วย Perry โดยใช้รันไทม์ร่วมกัน เวิร์กเกอร์แยกต่อการดีพลอย และการย้อนกลับแบบอ้างอิงเนื้อหา",
       "adjacent": "โปรเจกต์ข้างเคียง Perry · Pre-1.0",
       "tagline": "ที่พักและที่รันสำหรับโค้ด Perry",
-      "intro": "Coop เปลี่ยนไดเรกทอรี TypeScript ที่เข้ากับ Perry ให้เป็นไลบรารีแอปแบบเนทีฟและให้บริการผ่าน HTTP โดยมีรันไทม์และไลบรารีมาตรฐานของ Perry เพียงชุดเดียวต่อเครื่อง",
+      "intro": "Coop เปลี่ยนไดเรกทอรี JavaScript/TypeScript ที่เข้ากับ Perry ให้เป็นไลบรารีแอปแบบเนทีฟและให้บริการผ่าน HTTP โดยมีรันไทม์และไลบรารีมาตรฐานของ Perry เพียงชุดเดียวต่อเครื่อง",
       "experimental": "โครงสร้างพื้นฐานทดลองสำหรับโค้ดที่คุณเป็นเจ้าของ",
       "explore": "สำรวจ Coop",
       "viewSource": "ดูซอร์สโค้ด",
@@ -543,7 +545,7 @@
       "worker": "เวิร์กเกอร์ Coop",
       "sharedProviders": "รันไทม์ + ไลบรารีมาตรฐานร่วมกัน",
       "onePerMachine": "หนึ่งต่อเครื่อง",
-      "diagramAria": "Perry คอมไพล์ TypeScript เป็นไลบรารีแอป จากนั้นเวิร์กเกอร์ Coop โหลดและเชื่อมต่อกับรันไทม์ที่ใช้ร่วมกัน",
+      "diagramAria": "Perry คอมไพล์ JavaScript/TypeScript เป็นไลบรารีแอป จากนั้นเวิร์กเกอร์ Coop โหลดและเชื่อมต่อกับรันไทม์ที่ใช้ร่วมกัน",
       "whyTitle": "Perry คอมไพล์ ส่วน Coop ดูแลให้รันต่อไป",
       "whyBody": "ความแตกต่างอยู่ที่ตำแหน่งของรันไทม์ภาษา Coop ทำให้อิมเมจแอปมีขนาดเล็กและจัดหารันไทม์ Perry ที่เข้ากันได้พร้อมไลบรารีมาตรฐานในระดับโฮสต์",
       "perryTitle": "ไฟล์รัน Perry แบบปกติ",
@@ -569,7 +571,7 @@
       "workingTitle": "สิ่งที่ใช้งานได้วันนี้",
       "workingBody": "Coop เป็นโครงสร้างพื้นฐานที่ผ่านการทดสอบ แต่ยังไม่ใช่ผลิตภัณฑ์โฮสติ้งที่เสร็จสมบูรณ์ การทำงานปัจจุบันประกอบด้วย:",
       "workingItems": [
-        "คอมไพล์ TypeScript จัดเส้นทาง HTTP และเมานต์ไฟล์สแตติก",
+        "คอมไพล์ JavaScript/TypeScript จัดเส้นทาง HTTP และเมานต์ไฟล์สแตติก",
         "ตรวจสอบตัวตนของรันไทม์ร่วม",
         "ดีพลอยแบบอ้างอิงเนื้อหาและย้อนกลับ",
         "cron และคิวแบบทนทาน",
@@ -586,7 +588,7 @@
       "rightItems": [
         "บริการและแอปขนาดเล็กที่คุณเป็นเจ้าของโค้ด",
         "ผู้ดูแลหนึ่งรายที่รันหลายบริการบนเครื่องเดียว",
-        "งานที่คอมไพล์ได้ในชุดย่อย TypeScript ของ Perry",
+        "งานที่คอมไพล์ได้ในชุดย่อย JavaScript/TypeScript ของ Perry",
         "ทีมที่ให้ความสำคัญกับความหนาแน่น อาร์ติแฟกต์ชัดเจน และการย้อนกลับเร็ว"
       ],
       "notYetTitle": "สิ่งที่ Coop ยังไม่รับประกัน",
@@ -628,8 +630,8 @@
       "pricing": "ราคา"
     },
     "home": {
-      "title": "Perry — คอมไพล์ TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ | คอมไพเลอร์ TypeScript เนทีฟ",
-      "description": "Perry คือคอมไพเลอร์ TypeScript แบบ ahead-of-time ที่เป็นโอเพนซอร์ส โค้ดเบสเดียว 11 แพลตฟอร์ม ไม่ต้องใช้ Node.js ขณะรัน"
+      "title": "Perry — คอมไพล์ JavaScript/TypeScript เป็นไฟล์ปฏิบัติการเนทีฟ | คอมไพเลอร์ JavaScript/TypeScript เนทีฟ",
+      "description": "Perry คือคอมไพเลอร์ JavaScript/TypeScript แบบ ahead-of-time ที่เป็นโอเพนซอร์ส โค้ดเบสเดียว 11 แพลตฟอร์ม ไม่ต้องใช้ Node.js ขณะรัน"
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

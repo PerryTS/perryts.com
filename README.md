@@ -1,6 +1,6 @@
 # perryts.com
 
-Landing site for [Perry](https://github.com/PerryTS/perry) — a TypeScript-to-native compiler built with Rust, SWC, and LLVM.
+Landing site for [Perry](https://github.com/PerryTS/perry) — a JavaScript/TypeScript-to-native compiler built with Rust, SWC, and LLVM.
 
 ## Stack
 
@@ -90,11 +90,32 @@ npm run serve         # starts Perry binary on port 3850
 
 ### Beta
 
-PR previews run at `https://beta.perryts.com/` on `root@webserver.skelpo.net`.
+Beta runs at `https://beta.perryts.com/` on `webserver.skelpo.net`.
 Nginx serves the Astro export from `/var/www/beta.perryts.com/current/out`.
 Deploy the current checkout with `npm run deploy:beta`. Releases are stored in
 `/var/www/beta.perryts.com/releases`; `current` is switched atomically, and older
 releases are retained for rollback. This command requires the server setup below.
+
+The [Check and deploy beta](.github/workflows/deploy-beta.yml) GitHub Actions
+workflow runs type checks, builds the site, and verifies all blog translations on
+every pull request. Pushes and merges to `main` automatically deploy beta after
+those checks pass. It can also be run manually from the Actions tab on `main`.
+Other branches only run the checks. Deployments are serialized, and failed server
+health checks restore the previous release.
+
+Actions connects as `perryts-beta-deploy`, using the repository secrets
+`BETA_DEPLOY_SSH_KEY` and `BETA_DEPLOY_KNOWN_HOSTS`. The latter contains the server's
+verified SSH host key; host verification is required. The dedicated account owns
+the beta deployment directory and has passwordless sudo only for
+`/usr/bin/systemctl restart perryts-beta-subscribe`. Its authorized key disables
+SSH forwarding and PTYs. Production is deployed separately.
+
+Local deployments default to the existing root SSH connection; set
+`BETA_DEPLOY_SERVER=perryts-beta-deploy@webserver.skelpo.net` to use the CI account
+with its key configured locally. CI uses `--skip-build` to upload the output it
+already checked; blog verification still runs before upload. To rotate the CI
+key, replace its entry in the account's `~/.ssh/authorized_keys` and update the
+`BETA_DEPLOY_SSH_KEY` repository secret together.
 
 The Nginx configuration is in `deploy/nginx-beta.conf`, installed at
 `/etc/nginx/sites-available/beta.perryts.com` and linked from `sites-enabled`.

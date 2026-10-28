@@ -1,6 +1,8 @@
 ---
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Bird from "./Bird.astro";
+import LanguageText from "./LanguageText.astro";
+import LanguageMotionControl from "./LanguageMotionControl.astro";
 import { localePath, localeLabels, type Locale } from "../i18n/index.ts";
 import { messages } from "../i18n/messages.ts";
 import { links } from "../lib/links.ts";
@@ -26,7 +28,8 @@ const columns = t.columns.map((c, i) => ({ title: c.title, items: c.items.map((l
     <div class="row">
       <div class="brand">
         <a class="lockup" href={p("")}><Bird size={26} /><span>perry</span></a>
-        <p class="muted">{t.tagline}</p>
+        <p class="muted"><LanguageText text={t.tagline} /></p>
+        <LanguageMotionControl pause={t.pauseLanguageAnimation} resume={t.resumeLanguageAnimation} />
       </div>
       <div class="columns">
         {columns.map((c) => (

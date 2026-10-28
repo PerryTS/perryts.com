@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry so với các lựa chọn thay thế",
-      "indexSubtitle": "Cách Perry so sánh với các phương thức xuất bản TypeScript khác: runtime, trình biên dịch và framework UI đa nền tảng. Trung thực, có nguồn dẫn, kèm số liệu đo được khi có.",
+      "indexSubtitle": "Cách Perry so sánh với các phương thức xuất bản JavaScript/TypeScript khác: runtime, trình biên dịch và framework UI đa nền tảng. Trung thực, có nguồn dẫn, kèm số liệu đo được khi có.",
       "indexMetaTitle": "So sánh Perry với Bun, Deno, Electron, Tauri, React Native và Static Hermes",
-      "indexMetaDescription": "So sánh song song Perry với các lựa chọn thay thế mà nhà phát triển thường dùng: runtime TypeScript (Bun, Deno), trình biên dịch TS-to-native AOT (Static Hermes) và framework UI đa nền tảng (Electron, Tauri, React Native).",
+      "indexMetaDescription": "So sánh song song Perry với các lựa chọn thay thế mà nhà phát triển thường dùng: runtime JavaScript/TypeScript (Bun, Deno), trình biên dịch TS-to-native AOT (Static Hermes) và framework UI đa nền tảng (Electron, Tauri, React Native).",
       "backToCompare": "Quay lại các so sánh",
       "lastUpdated": "Cập nhật lần cuối",
       "whatIs": "{name} là gì?",
@@ -45,9 +45,9 @@
       "whenChoose": "Khi nào nên chọn {name}",
       "verdict": "Kết luận",
       "ctaTitle": "Thử Perry",
-      "ctaSubtitle": "Biên dịch TypeScript của bạn thành mã gốc ngay hôm nay.",
+      "ctaSubtitle": "Biên dịch JavaScript/TypeScript của bạn thành mã gốc ngay hôm nay.",
       "category": {
-        "runtime": "Runtime TypeScript",
+        "runtime": "Runtime JavaScript/TypeScript",
         "compiler": "Trình biên dịch TS-to-native",
         "ui-framework": "UI đa nền tảng"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
     },
     "electronAlternatives": {
-      "title": "Giải pháp thay thế Electron cho TypeScript",
-      "tldr": "Bốn hướng đi thực tế cho ứng dụng desktop TypeScript năm 2026: Electron, Tauri, binary đơn tệp của Bun và widget gốc của Perry. So sánh trung thực về kích thước binary, bộ nhớ, UI stack và ngôn ngữ."
+      "title": "Giải pháp thay thế Electron cho JavaScript/TypeScript",
+      "tldr": "Bốn hướng đi thực tế cho ứng dụng desktop JavaScript/TypeScript năm 2026: Electron, Tauri, binary đơn tệp của Bun và widget gốc của Perry. So sánh trung thực về kích thước binary, bộ nhớ, UI stack và ngôn ngữ."
     },
     "getStarted": "Bắt đầu"
   },
   "footer": {
-    "tagline": "Trình biên dịch TypeScript ahead-of-time mã nguồn mở. Viết bằng Rust, dựa trên SWC và LLVM.",
+    "tagline": "Trình biên dịch JavaScript/TypeScript ahead-of-time mã nguồn mở. Viết bằng Rust, dựa trên SWC và LLVM.",
     "served": "Trang này được phục vụ bởi một binary gốc biên dịch bằng Perry.",
     "source": "Xem mã nguồn máy chủ",
     "rights": "© 2026 Perry · Giấy phép MIT",
@@ -98,7 +98,9 @@
           "Bản tin"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "Tạm dừng hiệu ứng chuyển từ",
+    "resumeLanguageAnimation": "Tiếp tục hiệu ứng chuyển từ"
   },
   "guides": {
     "factsLanguageNotice": "Các dữ kiện kỹ thuật và ghi chú đo lường được duy trì bằng tiếng Anh để tránh sai lệch giữa các bản dịch."
@@ -173,10 +175,10 @@
         "LƯU TRỮ"
       ],
       "descriptions": [
-        "Từ TypeScript thành binary gốc cho 11 nền tảng.",
+        "Từ JavaScript/TypeScript thành binary gốc cho 11 nền tảng.",
         "Kiểm thử UI điều khiển các widget thật của ứng dụng.",
         "Từ main.ts đến App Store: build, ký, xác minh và gửi duyệt.",
-        "Chạy ứng dụng TypeScript biên dịch bằng Perry qua HTTP."
+        "Chạy ứng dụng JavaScript/TypeScript biên dịch bằng Perry qua HTTP."
       ],
       "perryStatus": "MIT · mã nguồn mở",
       "coopStatus": "Trước 1.0"
@@ -195,7 +197,7 @@
         },
         {
           "question": "Tôi có thể dùng gói npm không?",
-          "answer": "Nhiều gói TypeScript/JavaScript thuần biên dịch được sang mã gốc, và khoảng 50 bản triển khai gói/API đang được theo dõi. Khả năng tương thích không phải là tuyệt đối: các gói dùng native addon, hành vi động chưa được hỗ trợ hoặc ngữ nghĩa riêng của engine có thể cần đến cơ chế dự phòng V8 tùy chọn, hoặc có thể không hoạt động. Hãy chạy perry check và xem phần giới hạn."
+          "answer": "Nhiều gói JavaScript/TypeScript thuần biên dịch được sang mã gốc, và khoảng 50 bản triển khai gói/API đang được theo dõi. Khả năng tương thích không phải là tuyệt đối: các gói dùng native addon, hành vi động chưa được hỗ trợ hoặc ngữ nghĩa riêng của engine có thể cần đến cơ chế dự phòng V8 tùy chọn, hoặc có thể không hoạt động. Hãy chạy perry check và xem phần giới hạn."
         },
         {
           "question": "Perry hỗ trợ những nền tảng nào?",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "TRÌNH BIÊN DỊCH TYPESCRIPT AHEAD-OF-TIME · SWC + LLVM",
-      "title": "TypeScript của bạn,\nbiên dịch thành mã gốc.",
+      "title": "JavaScript/TypeScript của bạn,\nbiên dịch thành mã gốc.",
       "sub": "Perry biên dịch TypeScript và JavaScript thành một tệp thực thi gốc nhỏ gọn. Một codebase, 11 nền tảng, không cần Node.js khi chạy.",
       "docs": "Đọc tài liệu",
       "copyLabel": "Sao chép lệnh cài đặt"
@@ -441,7 +443,7 @@
           "items": [
             "Tương thích Node 26 từ ~{parity}% hướng tới 97%",
             "Hiệu năng: GC, dispatch, khởi động, kích thước binary",
-            "Lấp các thiếu sót của TypeScript và npm: Proxy, decorator, weak ref"
+            "Lấp các thiếu sót của JavaScript/TypeScript và npm: Proxy, decorator, weak ref"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Lưu trữ TypeScript native cho Perry",
-      "metaDescription": "Coop lưu trữ ứng dụng TypeScript được Perry biên dịch với runtime dùng chung, worker triển khai tách biệt và rollback định địa chỉ theo nội dung.",
+      "metaTitle": "Coop — Lưu trữ JavaScript/TypeScript native cho Perry",
+      "metaDescription": "Coop lưu trữ ứng dụng JavaScript/TypeScript được Perry biên dịch với runtime dùng chung, worker triển khai tách biệt và rollback định địa chỉ theo nội dung.",
       "adjacent": "Dự án liền kề Perry · Pre-1.0",
       "tagline": "Nơi mã Perry có thể nghỉ và chạy.",
-      "intro": "Coop biến một thư mục TypeScript tương thích với Perry thành thư viện ứng dụng native và phục vụ qua HTTP, trong khi runtime và thư viện chuẩn Perry chỉ được cung cấp một lần trên mỗi máy.",
+      "intro": "Coop biến một thư mục JavaScript/TypeScript tương thích với Perry thành thư viện ứng dụng native và phục vụ qua HTTP, trong khi runtime và thư viện chuẩn Perry chỉ được cung cấp một lần trên mỗi máy.",
       "experimental": "Hạ tầng thử nghiệm cho mã bạn sở hữu",
       "explore": "Khám phá Coop",
       "viewSource": "Xem mã nguồn",
@@ -543,7 +545,7 @@
       "worker": "Worker Coop",
       "sharedProviders": "Runtime + thư viện chuẩn dùng chung",
       "onePerMachine": "một trên mỗi máy",
-      "diagramAria": "Perry biên dịch TypeScript thành thư viện ứng dụng, worker Coop tải nó và kết nối với runtime dùng chung.",
+      "diagramAria": "Perry biên dịch JavaScript/TypeScript thành thư viện ứng dụng, worker Coop tải nó và kết nối với runtime dùng chung.",
       "whyTitle": "Perry biên dịch. Coop giữ cho nó hoạt động.",
       "whyBody": "Khác biệt nằm ở nơi runtime ngôn ngữ tồn tại. Coop giữ image ứng dụng nhỏ và cung cấp runtime Perry tương thích cùng thư viện chuẩn ở cấp host.",
       "perryTitle": "Một tệp thực thi Perry thông thường",
@@ -569,7 +571,7 @@
       "workingTitle": "Những gì hoạt động hôm nay",
       "workingBody": "Coop là hạ tầng đã được kiểm thử nhưng chưa phải sản phẩm lưu trữ hoàn thiện. Bản triển khai hiện tại gồm:",
       "workingItems": [
-        "Biên dịch TypeScript, định tuyến HTTP và mount tĩnh",
+        "Biên dịch JavaScript/TypeScript, định tuyến HTTP và mount tĩnh",
         "Kiểm tra danh tính runtime dùng chung",
         "Triển khai định địa chỉ theo nội dung và rollback",
         "Cron và hàng đợi bền vững",
@@ -586,7 +588,7 @@
       "rightItems": [
         "Dịch vụ và ứng dụng nhỏ có mã do bạn sở hữu",
         "Một người vận hành danh mục trên một máy",
-        "Khối lượng công việc biên dịch được trong tập con TypeScript của Perry",
+        "Khối lượng công việc biên dịch được trong tập con JavaScript/TypeScript của Perry",
         "Nhóm coi trọng mật độ, artifact rõ ràng và rollback nhanh"
       ],
       "notYetTitle": "Những điều Coop chưa hứa hẹn",
@@ -628,8 +630,8 @@
       "pricing": "Bảng giá"
     },
     "home": {
-      "title": "Perry — Biên dịch TypeScript thành tệp thực thi gốc | Trình biên dịch TypeScript gốc",
-      "description": "Perry là trình biên dịch TypeScript ahead-of-time mã nguồn mở. Một codebase, 11 nền tảng, không cần Node.js khi chạy."
+      "title": "Perry — Biên dịch JavaScript/TypeScript thành tệp thực thi gốc | Trình biên dịch JavaScript/TypeScript gốc",
+      "description": "Perry là trình biên dịch JavaScript/TypeScript ahead-of-time mã nguồn mở. Một codebase, 11 nền tảng, không cần Node.js khi chạy."
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

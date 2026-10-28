@@ -2,6 +2,7 @@
 /** Hairline grid of short items (title + text), optionally linked. */
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import ArrowRight from "@lucide/astro/icons/arrow-right";
+import LanguageText from "../LanguageText.astro";
 
 export interface CardItem {
   title: string;
@@ -28,12 +29,12 @@ const { items, min = 260, heading: Heading = "h3" } = Astro.props;
     return (
       <li data-reveal style={`--i: ${i}`}>
         <Tag class:list={["card", item.href && "card--link"]} href={item.href}>
-          {item.label && <span class="t-label muted">{item.label}</span>}
+          {item.label && <span class="t-label muted"><LanguageText text={item.label} /></span>}
           <Heading class="card__title">
-            {item.title}
+            <span><LanguageText text={item.title} /></span>
             {item.href && <Icon size={16} stroke-width={1.75} aria-hidden="true" />}
           </Heading>
-          <p class="muted">{item.text}</p>
+          <p class="muted"><LanguageText text={item.text} /></p>
         </Tag>
       </li>
     );

@@ -4,6 +4,7 @@ import { localePath, type Locale } from "../../i18n/index.ts";
 import { links } from "../../lib/links.ts";
 import SectionHeader from "../SectionHeader.astro";
 import Bird from "../Bird.astro";
+import LanguageText from "../LanguageText.astro";
 import { messages } from "../../i18n/messages.ts";
 
 interface Props {
@@ -43,7 +44,7 @@ const statuses = [t.perryStatus, tools[1].status, tools[2].status, t.coopStatus]
                 {tool.bird && <Bird size={26} />}
                 {tool.name}
               </h3>
-              <p class="card__text muted">{t.descriptions[i]}</p>
+              <p class="card__text muted"><LanguageText text={t.descriptions[i]} /></p>
               <p class:list={["card__status", tool.tone]}>{statuses[i]}</p>
             </Tag>
           </li>

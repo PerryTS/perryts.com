@@ -33,9 +33,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry vs le alternative",
-      "indexSubtitle": "Come Perry si confronta con altri modi di distribuire TypeScript: runtime, compilatori e framework UI multipiattaforma. Onesto, documentato, con numeri misurati dove esistono.",
+      "indexSubtitle": "Come Perry si confronta con altri modi di distribuire JavaScript/TypeScript: runtime, compilatori e framework UI multipiattaforma. Onesto, documentato, con numeri misurati dove esistono.",
       "indexMetaTitle": "Confronta Perry con Bun, Deno, Electron, Tauri, React Native e Static Hermes",
-      "indexMetaDescription": "Confronti diretti tra Perry e le alternative a cui ricorrono gli sviluppatori: runtime TypeScript (Bun, Deno), compilatori AOT da TS a nativo (Static Hermes) e framework UI multipiattaforma (Electron, Tauri, React Native).",
+      "indexMetaDescription": "Confronti diretti tra Perry e le alternative a cui ricorrono gli sviluppatori: runtime JavaScript/TypeScript (Bun, Deno), compilatori AOT da TS a nativo (Static Hermes) e framework UI multipiattaforma (Electron, Tauri, React Native).",
       "backToCompare": "Torna ai confronti",
       "lastUpdated": "Ultimo aggiornamento",
       "whatIs": "Cos'è {name}?",
@@ -46,9 +46,9 @@
       "whenChoose": "Quando scegliere {name}",
       "verdict": "Verdetto",
       "ctaTitle": "Prova Perry",
-      "ctaSubtitle": "Compila il tuo TypeScript in nativo oggi.",
+      "ctaSubtitle": "Compila il tuo JavaScript/TypeScript in nativo oggi.",
       "category": {
-        "runtime": "Runtime TypeScript",
+        "runtime": "Runtime JavaScript/TypeScript",
         "compiler": "Compilatore da TS a nativo",
         "ui-framework": "UI multipiattaforma"
       },
@@ -56,13 +56,13 @@
       "factsLanguageNotice": "I dati tecnici e le note di misurazione sono mantenuti in inglese per evitare discrepanze tra le traduzioni."
     },
     "electronAlternatives": {
-      "title": "Alternative a Electron per TypeScript",
-      "tldr": "Quattro percorsi realistici per le app desktop TypeScript nel 2026: Electron, Tauri, i binari a file singolo di Bun e i widget nativi di Perry. Dimensione del binario, memoria, stack UI e linguaggio confrontati onestamente."
+      "title": "Alternative a Electron per JavaScript/TypeScript",
+      "tldr": "Quattro percorsi realistici per le app desktop JavaScript/TypeScript nel 2026: Electron, Tauri, i binari a file singolo di Bun e i widget nativi di Perry. Dimensione del binario, memoria, stack UI e linguaggio confrontati onestamente."
     },
     "getStarted": "Inizia"
   },
   "footer": {
-    "tagline": "Un compilatore TypeScript ahead-of-time e open source. Scritto in Rust, basato su SWC e LLVM.",
+    "tagline": "Un compilatore JavaScript/TypeScript ahead-of-time e open source. Scritto in Rust, basato su SWC e LLVM.",
     "served": "Questa pagina è stata servita da un binario nativo compilato con Perry.",
     "source": "Vedi il codice del server",
     "rights": "© 2026 Perry · Licenza MIT",
@@ -99,7 +99,9 @@
           "Newsletter"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "Metti in pausa l’animazione delle parole",
+    "resumeLanguageAnimation": "Riprendi l’animazione delle parole"
   },
   "guides": {
     "factsLanguageNotice": "I dati tecnici e le note di misurazione sono mantenuti in inglese per evitare discrepanze tra le traduzioni."
@@ -174,10 +176,10 @@
         "OSPITA"
       ],
       "descriptions": [
-        "Da TypeScript a un binario nativo per 11 piattaforme.",
+        "Da JavaScript/TypeScript a un binario nativo per 11 piattaforme.",
         "Test di UI che pilotano i veri widget della tua app.",
         "Da main.ts all'App Store: build, firma, verifica e invio.",
-        "Esegue su HTTP app TypeScript compilate con Perry."
+        "Esegue su HTTP app JavaScript/TypeScript compilate con Perry."
       ],
       "perryStatus": "MIT · open source",
       "coopStatus": "Pre-1.0"
@@ -196,7 +198,7 @@
         },
         {
           "question": "Posso usare i pacchetti npm?",
-          "answer": "Molti pacchetti TypeScript/JavaScript puri si compilano in modo nativo, e sono tracciate circa 50 implementazioni di pacchetti/API. La compatibilità non è universale: i pacchetti che usano addon nativi, comportamenti dinamici non supportati o semantiche specifiche di un motore potrebbero richiedere il fallback opzionale a V8 o non funzionare affatto. Esegui perry check e consulta le limitazioni."
+          "answer": "Molti pacchetti JavaScript/TypeScript puri si compilano in modo nativo, e sono tracciate circa 50 implementazioni di pacchetti/API. La compatibilità non è universale: i pacchetti che usano addon nativi, comportamenti dinamici non supportati o semantiche specifiche di un motore potrebbero richiedere il fallback opzionale a V8 o non funzionare affatto. Esegui perry check e consulta le limitazioni."
         },
         {
           "question": "Quali piattaforme supporta Perry?",
@@ -269,7 +271,7 @@
     },
     "hero": {
       "eyebrow": "COMPILATORE AHEAD-OF-TIME PER TYPESCRIPT · SWC + LLVM",
-      "title": "Il tuo TypeScript,\ncompilato in nativo.",
+      "title": "Il tuo JavaScript/TypeScript,\ncompilato in nativo.",
       "sub": "Perry compila TypeScript e JavaScript in un piccolo eseguibile nativo. Un'unica codebase, 11 piattaforme, nessun Node.js a runtime.",
       "docs": "Leggi la documentazione",
       "copyLabel": "Copia il comando di installazione"
@@ -442,7 +444,7 @@
           "items": [
             "Parità con Node 26 da ~{parity}% verso il 97%",
             "Prestazioni: GC, dispatch, avvio, dimensione del binario",
-            "Colmare le lacune di TypeScript e npm: Proxy, decorator, weak ref"
+            "Colmare le lacune di JavaScript/TypeScript e npm: Proxy, decorator, weak ref"
           ]
         },
         {
@@ -526,11 +528,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Hosting TypeScript nativo per Perry",
-      "metaDescription": "Coop ospita applicazioni TypeScript compilate da Perry con runtime condivisi, worker di deployment isolati e rollback indirizzati dal contenuto.",
+      "metaTitle": "Coop — Hosting JavaScript/TypeScript nativo per Perry",
+      "metaDescription": "Coop ospita applicazioni JavaScript/TypeScript compilate da Perry con runtime condivisi, worker di deployment isolati e rollback indirizzati dal contenuto.",
       "adjacent": "Progetto adiacente a Perry · Pre-1.0",
       "tagline": "Un posto dove il codice Perry può riposare ed essere eseguito.",
-      "intro": "Coop trasforma una directory di TypeScript compatibile con Perry in una libreria applicativa nativa e la serve via HTTP, fornendo runtime e libreria standard di Perry una sola volta per macchina.",
+      "intro": "Coop trasforma una directory di JavaScript/TypeScript compatibile con Perry in una libreria applicativa nativa e la serve via HTTP, fornendo runtime e libreria standard di Perry una sola volta per macchina.",
       "experimental": "Infrastruttura sperimentale per codice di tua proprietà",
       "explore": "Scopri Coop",
       "viewSource": "Vedi il sorgente",
@@ -544,7 +546,7 @@
       "worker": "Worker Coop",
       "sharedProviders": "Runtime + libreria standard condivisi",
       "onePerMachine": "uno per macchina",
-      "diagramAria": "Perry compila TypeScript in una libreria applicativa, caricata da un worker Coop e collegata ai runtime condivisi.",
+      "diagramAria": "Perry compila JavaScript/TypeScript in una libreria applicativa, caricata da un worker Coop e collegata ai runtime condivisi.",
       "whyTitle": "Perry compila. Coop mantiene in esecuzione.",
       "whyBody": "La differenza è dove risiede il runtime del linguaggio. Coop mantiene piccola l'immagine applicativa e fornisce il runtime Perry compatibile e la libreria standard a livello host.",
       "perryTitle": "Un normale eseguibile Perry",
@@ -570,7 +572,7 @@
       "workingTitle": "Cosa funziona oggi",
       "workingBody": "Coop è infrastruttura testata, ma non ancora un prodotto di hosting completo. L'implementazione attuale include:",
       "workingItems": [
-        "Compilazione TypeScript, routing HTTP e mount statici",
+        "Compilazione JavaScript/TypeScript, routing HTTP e mount statici",
         "Controlli di identità dei provider condivisi",
         "Deployment indirizzati dal contenuto e rollback",
         "Cron e coda durevole",
@@ -587,7 +589,7 @@
       "rightItems": [
         "Servizi e piccole applicazioni di cui possiedi il codice",
         "Un operatore con un portafoglio su una macchina",
-        "Carichi che compilano nel sottoinsieme TypeScript di Perry",
+        "Carichi che compilano nel sottoinsieme JavaScript/TypeScript di Perry",
         "Team che apprezzano densità, artefatti espliciti e rollback rapido"
       ],
       "notYetTitle": "Cosa Coop non promette ancora",
@@ -629,8 +631,8 @@
       "pricing": "Prezzi"
     },
     "home": {
-      "title": "Perry — Compila TypeScript in Eseguibili Nativi | Compilatore Nativo per TypeScript",
-      "description": "Perry è un compilatore TypeScript ahead-of-time e open source. Un'unica codebase, 11 piattaforme, nessun Node.js a runtime."
+      "title": "Perry — Compila JavaScript/TypeScript in Eseguibili Nativi | Compilatore Nativo per JavaScript/TypeScript",
+      "description": "Perry è un compilatore JavaScript/TypeScript ahead-of-time e open source. Un'unica codebase, 11 piattaforme, nessun Node.js a runtime."
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -766,7 +768,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

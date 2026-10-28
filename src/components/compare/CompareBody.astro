@@ -3,6 +3,7 @@
 import Plus from "@lucide/astro/icons/plus";
 import Cards from "../guides/Cards.astro";
 import Prose from "../Prose.astro";
+import LanguageText from "../LanguageText.astro";
 import { type Locale } from "../../i18n/index.ts";
 import type { CompareItem } from "../../data/compare.ts";
 import type { ComparisonContent } from "../../data/compare-content.ts";
@@ -44,7 +45,7 @@ const wins = [
             {data.table.map((row, i) => (
               <tr data-reveal style={`--i: ${i}`}>
                 <th scope="row">{row.feature}</th>
-                <td>{row.perry}</td>
+                <td><LanguageText text={row.perry} /></td>
                 <td class="muted">{row.competitor}</td>
               </tr>
             ))}
@@ -59,7 +60,7 @@ const wins = [
           <h2 class:list={["t-h3 head", w.perry && "accent"]}>{w.title}</h2>
           <ul class="list">
             {w.items.map((p) => (
-              <li><Plus size={16} stroke-width={1.75} aria-hidden="true" class={w.perry ? "accent" : "muted"} /><span>{p}</span></li>
+              <li><Plus size={16} stroke-width={1.75} aria-hidden="true" class={w.perry ? "accent" : "muted"} /><span><LanguageText text={p} /></span></li>
             ))}
           </ul>
         </div>
@@ -76,7 +77,7 @@ const wins = [
 
     <Prose class="column">
       <h2>{ui.verdict}</h2>
-      <p>{data.verdict}</p>
+      <p><LanguageText text={data.verdict} /></p>
       <h2>{ui.sources}</h2>
       <ul>
         {data.sources.map((s) => <li><a href={s.url}>{s.label}</a></li>)}

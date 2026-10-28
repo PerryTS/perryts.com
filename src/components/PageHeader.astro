@@ -2,6 +2,7 @@
 /** Header band for inner pages: optional back link, title, lead and extra slot (tags, meta, CTAs). */
 import ArrowLeft from "@lucide/astro/icons/arrow-left";
 import Lines from "./Lines.astro";
+import LanguageText from "./LanguageText.astro";
 
 interface Props {
   title: string;
@@ -20,7 +21,7 @@ const { title, lead, back, size = "h1" } = Astro.props;
     )}
     <slot name="above" />
     <h1 class:list={[size === "display" ? "t-display" : "t-h1", "title"]} data-reveal><Lines text={title} /></h1>
-    {lead && <p class="lead t-lead muted" data-reveal style="--i: 1">{lead}</p>}
+    {lead && <p class="lead t-lead muted" data-reveal style="--i: 1"><LanguageText text={lead} /></p>}
     <slot />
   </div>
 </header>

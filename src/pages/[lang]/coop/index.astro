@@ -4,6 +4,7 @@ import Button from "../../../components/Button.astro";
 import Terminal from "../../../components/Terminal.astro";
 import JsonLd from "../../../components/JsonLd.astro";
 import Lines from "../../../components/Lines.astro";
+import LanguageText from "../../../components/LanguageText.astro";
 import CheckList from "../../../components/CheckList.astro";
 import CoopTopology from "../../../components/coop/CoopTopology.astro";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
@@ -59,7 +60,7 @@ const jsonLd = {
       <div class="hero__text">
         <p class="t-label accent" data-reveal>{content.adjacent}</p>
         <h1 class="t-h1" data-reveal style="--i: 1"><Lines text={content.tagline} /></h1>
-        <p class="t-lead muted" data-reveal style="--i: 2">{content.intro}</p>
+        <p class="t-lead muted" data-reveal style="--i: 2"><LanguageText text={content.intro} /></p>
         <p class="t-mono experimental" data-reveal style="--i: 3">{content.experimental}</p>
         <div class="actions" data-reveal style="--i: 4">
           <Button href={REPOSITORY}>{content.viewSource}<ArrowUpRight size={16} stroke-width={1.75} aria-hidden="true" /></Button>
@@ -119,7 +120,7 @@ const jsonLd = {
       </div>
       <ul class="working__list">
         {content.workingItems.map((item, i) => (
-          <li data-reveal style={`--i: ${i % 2}`}><Check size={16} stroke-width={2} aria-hidden="true" /><span>{item}</span></li>
+          <li data-reveal style={`--i: ${i % 2}`}><Check size={16} stroke-width={2} aria-hidden="true" /><span><LanguageText text={item} /></span></li>
         ))}
       </ul>
     </div>

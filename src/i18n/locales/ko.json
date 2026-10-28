@@ -32,9 +32,9 @@
   "compare": {
     "ui": {
       "indexTitle": "Perry vs. 대안들",
-      "indexSubtitle": "TypeScript를 배포하는 다른 방법들 — 런타임, 컴파일러, 크로스 플랫폼 UI 프레임워크 — 과 Perry를 비교합니다. 솔직하고, 출처가 명시되어 있으며, 측정 가능한 수치는 그대로 제시합니다.",
+      "indexSubtitle": "JavaScript/TypeScript를 배포하는 다른 방법들 — 런타임, 컴파일러, 크로스 플랫폼 UI 프레임워크 — 과 Perry를 비교합니다. 솔직하고, 출처가 명시되어 있으며, 측정 가능한 수치는 그대로 제시합니다.",
       "indexMetaTitle": "Perry를 Bun, Deno, Electron, Tauri, React Native, Static Hermes와 비교하기",
-      "indexMetaDescription": "개발자들이 선택하는 대안들에 대한 Perry의 나란한 비교: TypeScript 런타임 (Bun, Deno), AOT TS 컴파일러 (Static Hermes), 크로스 플랫폼 UI 프레임워크 (Electron, Tauri, React Native).",
+      "indexMetaDescription": "개발자들이 선택하는 대안들에 대한 Perry의 나란한 비교: JavaScript/TypeScript 런타임 (Bun, Deno), AOT TS 컴파일러 (Static Hermes), 크로스 플랫폼 UI 프레임워크 (Electron, Tauri, React Native).",
       "backToCompare": "비교 목록으로 돌아가기",
       "lastUpdated": "최종 업데이트",
       "whatIs": "{name}란 무엇인가?",
@@ -45,9 +45,9 @@
       "whenChoose": "{name}을 선택해야 할 때",
       "verdict": "결론",
       "ctaTitle": "Perry 사용해보기",
-      "ctaSubtitle": "오늘 바로 TypeScript를 네이티브로 컴파일하세요.",
+      "ctaSubtitle": "오늘 바로 JavaScript/TypeScript를 네이티브로 컴파일하세요.",
       "category": {
-        "runtime": "TypeScript 런타임",
+        "runtime": "JavaScript/TypeScript 런타임",
         "compiler": "TS-네이티브 컴파일러",
         "ui-framework": "크로스 플랫폼 UI"
       },
@@ -55,13 +55,13 @@
       "factsLanguageNotice": "기술 사실과 측정 주의사항은 번역 간 불일치를 막기 위해 영어를 기준으로 관리합니다."
     },
     "electronAlternatives": {
-      "title": "TypeScript를 위한 Electron 대안",
-      "tldr": "2026년 TypeScript 데스크톱 앱을 위한 네 가지 현실적인 선택지: Electron, Tauri, Bun 단일 파일 바이너리, 그리고 Perry의 네이티브 위젯. 바이너리 크기, 메모리, UI 스택, 언어를 솔직하게 비교합니다."
+      "title": "JavaScript/TypeScript를 위한 Electron 대안",
+      "tldr": "2026년 JavaScript/TypeScript 데스크톱 앱을 위한 네 가지 현실적인 선택지: Electron, Tauri, Bun 단일 파일 바이너리, 그리고 Perry의 네이티브 위젯. 바이너리 크기, 메모리, UI 스택, 언어를 솔직하게 비교합니다."
     },
     "getStarted": "시작하기"
   },
   "footer": {
-    "tagline": "오픈 소스 ahead-of-time TypeScript 컴파일러. Rust로 작성되었으며 SWC와 LLVM을 기반으로 합니다.",
+    "tagline": "오픈 소스 ahead-of-time JavaScript/TypeScript 컴파일러. Rust로 작성되었으며 SWC와 LLVM을 기반으로 합니다.",
     "served": "이 페이지는 Perry로 컴파일한 네이티브 바이너리가 제공했습니다.",
     "source": "서버 소스 보기",
     "rights": "© 2026 Perry · MIT 라이선스",
@@ -98,7 +98,9 @@
           "뉴스레터"
         ]
       }
-    ]
+    ],
+    "pauseLanguageAnimation": "단어 애니메이션 일시 정지",
+    "resumeLanguageAnimation": "단어 애니메이션 재개"
   },
   "guides": {
     "factsLanguageNotice": "기술 사실과 측정 주의사항은 번역 간 불일치를 막기 위해 영어를 기준으로 관리합니다."
@@ -173,10 +175,10 @@
         "호스팅"
       ],
       "descriptions": [
-        "TypeScript를 11개 타깃용 네이티브 바이너리로.",
+        "JavaScript/TypeScript를 11개 타깃용 네이티브 바이너리로.",
         "앱의 실제 위젯을 조작하는 UI 테스트.",
         "main.ts에서 App Store까지: 빌드, 서명, 검증, 제출.",
-        "Perry로 컴파일한 TypeScript 앱을 HTTP로 실행."
+        "Perry로 컴파일한 JavaScript/TypeScript 앱을 HTTP로 실행."
       ],
       "perryStatus": "MIT · 오픈 소스",
       "coopStatus": "1.0 이전"
@@ -195,7 +197,7 @@
         },
         {
           "question": "npm 패키지를 사용할 수 있나요?",
-          "answer": "많은 순수 TypeScript/JavaScript 패키지가 네이티브로 컴파일되며, 약 50개의 패키지/API 구현이 추적되고 있습니다. 다만 호환성이 보편적이지는 않습니다. 네이티브 애드온, 지원되지 않는 동적 동작, 엔진 고유 시맨틱을 사용하는 패키지는 선택 사항인 V8 폴백이 필요하거나 동작하지 않을 수 있습니다. perry check를 실행하고 제한 사항을 확인하세요."
+          "answer": "많은 순수 JavaScript/TypeScript 패키지가 네이티브로 컴파일되며, 약 50개의 패키지/API 구현이 추적되고 있습니다. 다만 호환성이 보편적이지는 않습니다. 네이티브 애드온, 지원되지 않는 동적 동작, 엔진 고유 시맨틱을 사용하는 패키지는 선택 사항인 V8 폴백이 필요하거나 동작하지 않을 수 있습니다. perry check를 실행하고 제한 사항을 확인하세요."
         },
         {
           "question": "Perry는 어떤 플랫폼을 지원하나요?",
@@ -268,7 +270,7 @@
     },
     "hero": {
       "eyebrow": "AHEAD-OF-TIME TYPESCRIPT 컴파일러 · SWC + LLVM",
-      "title": "당신의 TypeScript를\n네이티브로 컴파일.",
+      "title": "당신의 JavaScript/TypeScript를\n네이티브로 컴파일.",
       "sub": "Perry는 TypeScript와 JavaScript를 작은 네이티브 실행 파일로 컴파일합니다. 하나의 코드베이스로 11개 플랫폼을 지원하며, 런타임에 Node.js가 필요 없습니다.",
       "docs": "문서 읽기",
       "copyLabel": "설치 명령어 복사"
@@ -441,7 +443,7 @@
           "items": [
             "Node 26 호환성을 ~{parity}%에서 97%로",
             "성능: GC, 디스패치, 시작 시간, 바이너리 크기",
-            "TypeScript와 npm 미지원 항목 해소: Proxy, 데코레이터, 약한 참조"
+            "JavaScript/TypeScript와 npm 미지원 항목 해소: Proxy, 데코레이터, 약한 참조"
           ]
         },
         {
@@ -525,11 +527,11 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Perry용 네이티브 TypeScript 호스팅",
-      "metaDescription": "Coop은 공유 런타임 공급자, 격리된 배포 워커, 콘텐츠 주소 기반 롤백으로 Perry가 컴파일한 TypeScript 앱을 호스팅합니다.",
+      "metaTitle": "Coop — Perry용 네이티브 JavaScript/TypeScript 호스팅",
+      "metaDescription": "Coop은 공유 런타임 공급자, 격리된 배포 워커, 콘텐츠 주소 기반 롤백으로 Perry가 컴파일한 JavaScript/TypeScript 앱을 호스팅합니다.",
       "adjacent": "Perry 인접 프로젝트 · Pre-1.0",
       "tagline": "Perry 코드가 쉬고 실행되는 곳.",
-      "intro": "Coop은 Perry 호환 TypeScript 디렉터리를 네이티브 앱 라이브러리로 만들고 HTTP로 제공하며, Perry 런타임과 표준 라이브러리는 머신마다 한 번만 제공합니다.",
+      "intro": "Coop은 Perry 호환 JavaScript/TypeScript 디렉터리를 네이티브 앱 라이브러리로 만들고 HTTP로 제공하며, Perry 런타임과 표준 라이브러리는 머신마다 한 번만 제공합니다.",
       "experimental": "직접 소유한 코드를 위한 실험적 인프라",
       "explore": "Coop 살펴보기",
       "viewSource": "소스 보기",
@@ -543,7 +545,7 @@
       "worker": "Coop 워커",
       "sharedProviders": "공유 런타임 + 표준 라이브러리",
       "onePerMachine": "머신마다 하나",
-      "diagramAria": "Perry가 TypeScript를 앱 라이브러리로 컴파일하고 Coop 워커가 이를 로드해 공유 런타임 공급자에 연결합니다.",
+      "diagramAria": "Perry가 JavaScript/TypeScript를 앱 라이브러리로 컴파일하고 Coop 워커가 이를 로드해 공유 런타임 공급자에 연결합니다.",
       "whyTitle": "Perry가 컴파일하고 Coop이 계속 실행합니다.",
       "whyBody": "차이는 언어 런타임이 어디에 있는가입니다. Coop은 앱 이미지를 작게 유지하고 호스트 수준에서 호환 Perry 런타임과 표준 라이브러리를 제공합니다.",
       "perryTitle": "일반 Perry 실행 파일",
@@ -569,7 +571,7 @@
       "workingTitle": "현재 동작하는 기능",
       "workingBody": "Coop은 테스트된 인프라이지만 아직 완성된 호스팅 제품은 아닙니다. 현재 구현에는 다음이 포함됩니다.",
       "workingItems": [
-        "TypeScript 컴파일, HTTP 라우팅, 정적 마운트",
+        "JavaScript/TypeScript 컴파일, HTTP 라우팅, 정적 마운트",
         "공유 공급자 신원 검사",
         "콘텐츠 주소 기반 배포와 롤백",
         "cron과 내구성 큐",
@@ -586,7 +588,7 @@
       "rightItems": [
         "직접 소유한 코드의 서비스와 소규모 앱",
         "한 머신에서 포트폴리오를 운영하는 한 명의 운영자",
-        "Perry의 TypeScript 하위 집합에서 컴파일되는 워크로드",
+        "Perry의 JavaScript/TypeScript 하위 집합에서 컴파일되는 워크로드",
         "밀도, 명시적 아티팩트, 빠른 롤백을 중시하는 팀"
       ],
       "notYetTitle": "아직 약속하지 않는 것",
@@ -628,8 +630,8 @@
       "pricing": "요금"
     },
     "home": {
-      "title": "Perry — TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 TypeScript 컴파일러",
-      "description": "Perry는 오픈 소스 ahead-of-time TypeScript 컴파일러입니다. 하나의 코드베이스, 11개 플랫폼, 런타임에 Node.js가 필요 없습니다."
+      "title": "Perry — JavaScript/TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 JavaScript/TypeScript 컴파일러",
+      "description": "Perry는 오픈 소스 ahead-of-time JavaScript/TypeScript 컴파일러입니다. 하나의 코드베이스, 11개 플랫폼, 런타임에 Node.js가 필요 없습니다."
     },
     "internals": {
       "metaTitle": "Perry compiler internals",
@@ -765,7 +767,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",

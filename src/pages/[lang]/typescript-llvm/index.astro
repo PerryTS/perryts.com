@@ -4,6 +4,7 @@ import Article from "../../../components/guides/Article.astro";
 import Code from "../../../components/guides/Code.astro";
 import Cta from "../../../components/guides/Cta.astro";
 import Button from "../../../components/Button.astro";
+import LanguageText from "../../../components/LanguageText.astro";
 import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
 import { links } from "../../../lib/links.ts";
 
@@ -11,10 +12,10 @@ export const getStaticPaths = localeStaticPaths;
 const lang = Astro.params.lang as Locale;
 
 const meta = {
-  title: "TypeScript on LLVM: Monomorphization and Native Codegen",
+  title: "JavaScript/TypeScript on LLVM: Monomorphization and Native Codegen",
   description:
-    "How Perry lowers TypeScript to LLVM IR — a typed HIR, monomorphization, NaN-boxing — and why the backend moved from Cranelift to LLVM for AOT performance.",
-  breadcrumb: "TypeScript on LLVM",
+    "How Perry lowers JavaScript/TypeScript to LLVM IR — a typed HIR, monomorphization, NaN-boxing — and why the backend moved from Cranelift to LLVM for AOT performance.",
+  breadcrumb: "JavaScript/TypeScript on LLVM",
 };
 
 const ir = [
@@ -33,7 +34,7 @@ const ir = [
   lang={lang}
   path="typescript-llvm"
   meta={meta}
-  heading="TypeScript on LLVM"
+  heading="JavaScript/TypeScript on LLVM"
   lead="How Perry lowers a language designed for JIT engines into LLVM IR — monomorphization, NaN-boxing, inline lowerings — and why it left Cranelift."
 >
   <Fragment slot="actions">
@@ -42,7 +43,7 @@ const ir = [
   </Fragment>
 
   <Article>
-    <h2>Why LLVM for TypeScript?</h2>
+    <h2><LanguageText text="Why LLVM for JavaScript/TypeScript?" /></h2>
     <p>
       An ahead-of-time compiler lives in a different regime than a JIT. A JIT compiles while the user waits, so compile
       latency is the constraint. An AOT compiler like Perry compiles once — on the developer's machine or in CI — and the
@@ -121,7 +122,7 @@ const ir = [
       {" "}walks through the optimization work release by release, and
       {" "}<a href={localePath(lang, "blog/gen-gc-lazy-json-and-defensible-benchmarks")}>Gen GC, lazy JSON, and defensible benchmarks</a>
       {" "}explains how the benchmark methodology works (RUNS=11, median + p95). For the bigger picture, start at the
-      {" "}<a href={localePath(lang, "typescript-native-compiler")}>TypeScript native compiler</a> overview.
+      {" "}<a href={localePath(lang, "typescript-native-compiler")}><LanguageText text="JavaScript/TypeScript native compiler" /></a> overview.
     </p>
   </Article>
 
