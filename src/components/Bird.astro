@@ -1,0 +1,8 @@
+---
+interface Props {
+  size?: number;
+}
+const { size = 28 } = Astro.props;
+---
+
+<img src="/perry-icon.svg" width={size} height={size} alt="" />

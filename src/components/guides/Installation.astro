@@ -1,0 +1,138 @@
+---
+/** Install methods and first commands (English, from the previous site's Installation section). */
+import CopyButton from "../CopyButton.astro";
+import SectionHeader from "../SectionHeader.astro";
+
+const methods = [
+  {
+    label: "npm / npx",
+    commands: ["npm install -g @perryts/perry"],
+    note: "Recommended cross-platform install. Native targets still require the relevant platform SDK and linker; run perry doctor after installation.",
+  },
+  {
+    label: "Homebrew (macOS)",
+    commands: ["brew tap PerryTS/perry", "brew install perry"],
+    note: "Supports macOS arm64 and x86_64. Xcode Command Line Tools are required for native linking.",
+  },
+  {
+    label: "APT (Debian/Ubuntu)",
+    commands: [
+      "curl -fsSL https://perryts.github.io/perry-apt/perry.gpg.pub | sudo gpg --dearmor -o /usr/share/keyrings/perry.gpg",
+      "echo 'deb [signed-by=/usr/share/keyrings/perry.gpg] https://perryts.github.io/perry-apt stable main' | sudo tee /etc/apt/sources.list.d/perry.list",
+      "sudo apt update && sudo apt install perry",
+    ],
+    note: "Supports x86_64 and arm64 Linux. Install GCC or Clang; some targets require Clang 15 or newer.",
+  },
+  {
+    label: "Windows (winget)",
+    commands: ["winget install PerryTS.Perry"],
+    note: "Supports Windows x86_64 and arm64. Native and cross-target builds may require LLVM plus MSVC or xwin tooling.",
+  },
+  {
+    label: "From Source",
+    commands: ["git clone https://github.com/PerryTS/perry.git", "cd perry", "cargo build --release"],
+    note: "Requires Rust, LLVM/Clang, and the SDK/toolchain for the target platform. The binary is written to target/release/perry.",
+  },
+];
+
+const usage = [
+  { label: "Verify the toolchain", command: "perry doctor", description: "Checks the compiler, linker, SDK, and target setup" },
+  { label: "Compile a file", command: "perry compile main.ts", description: "Compiles main.ts to a native executable" },
+  { label: "Custom output", command: "perry compile main.ts -o myapp", description: "Specify the output executable name" },
+  { label: "With V8 runtime", command: "perry compile main.ts --enable-js-runtime", description: "Enable V8 for JavaScript npm package compatibility" },
+  { label: "Check compatibility", command: "perry check ./src", description: "Validate TypeScript code for native compilation" },
+];
+---
+
+<section class="section install" id="installation">
+  <div class="wrap stack">
+    <SectionHeader title={"Get started"} aside="Install Perry and start compiling TypeScript to native executables" />
+    <div class="cols">
+      <div>
+        <h3 class="t-label muted step">01 · Installation</h3>
+        <dl class="list">
+          {methods.map((m, i) => (
+            <div class="item" data-reveal style={`--i: ${i}`}>
+              <dt class="name">{m.label}</dt>
+              {m.commands.map((cmd) => (
+                <dd class="cmd"><code>$ {cmd}</code><CopyButton text={cmd} label={`Copy command: ${cmd}`} /></dd>
+              ))}
+              <dd class="note muted">{m.note}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h3 class="t-label muted step">02 · Usage</h3>
+        <dl class="list">
+          {usage.map((u, i) => (
+            <div class="item" data-reveal style={`--i: ${i}`}>
+              <dt class="name">{u.label}</dt>
+              <dd class="cmd"><code><span class="accent">$ </span>{u.command}</code><CopyButton text={u.command} label={`Copy command: ${u.command}`} /></dd>
+              <dd class="note muted">{u.description}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .install {
+    border-top: 1px solid var(--border);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .step {
+    margin-bottom: 16px;
+  }
+  .list {
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .name {
+    font-weight: 600;
+  }
+  dd {
+    margin: 0;
+    min-width: 0;
+  }
+  .cmd {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--text-muted);
+  }
+  code {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+  .note {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

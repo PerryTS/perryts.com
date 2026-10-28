@@ -1,0 +1,52 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Prose from "../../../components/Prose.astro";
+import Notice from "../../../components/Notice.astro";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+
+const t = messages(lang).pages.privacy;
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="privacy" canonical="/en/privacy/" alternates={["en"]}>
+  <PageHeader title={t.title} lead={t.updated}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <Prose class="legal">
+        <h2>{t.controllerTitle}</h2>
+        <p>{t.controllerBody}</p>
+        <h2>{t.dataTitle}</h2>
+        <ul>{t.dataItems.map((item) => <li>{item}</li>)}</ul>
+        <h2>{t.analyticsTitle}</h2>
+        <p>{t.analyticsBody}</p>
+        <h2>{t.newsletterTitle}</h2>
+        <p>{t.newsletterBody}</p>
+        <h2>{t.purposesTitle}</h2>
+        <ul>{t.purposesItems.map((item) => <li>{item}</li>)}</ul>
+        <h2>{t.retentionTitle}</h2>
+        <p>{t.retentionBody}</p>
+        <h2>{t.rightsTitle}</h2>
+        <ul>{t.rightsItems.map((item) => <li>{item}</li>)}</ul>
+        <h2>{t.contactTitle}</h2>
+        <p>{t.contactBody} <a href="mailto:info@skelpo.com">info@skelpo.com</a>.</p>
+      </Prose>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap :global(.legal) {
+    max-width: 760px;
+  }
+  .wrap :global(.legal > h2:first-child) {
+    margin-top: 0;
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+/** One showcase project: logo, platforms, name, tagline, description and tags. */
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import Tag from "../Tag.astro";
+import { localePath, type Locale } from "../../i18n/index.ts";
+import type { ShowcaseProject } from "../../data/showcase.ts";
+
+interface Props {
+  lang: Locale;
+  project: ShowcaseProject;
+  index: number;
+}
+const { lang, project, index } = Astro.props;
+const href = project.hasFeaturePage ? localePath(lang, `showcase/${project.slug}`) : project.githubUrl;
+const Icon = project.hasFeaturePage ? ArrowRight : ArrowUpRight;
+---
+
+<li data-reveal style={`--i: ${index}`}>
+  <a class="card" href={href}>
+    {project.logoUrl && (
+      <div class="logo"><img src={project.logoUrl} alt={`${project.name} logo`} width="200" height="80" loading="lazy" /></div>
+    )}
+    <div class="body">
+      <ul class="platforms" aria-label="Platforms">
+        {project.platforms.map((p) => <li><Tag>{p}</Tag></li>)}
+      </ul>
+      <h2 class="name">{project.name}<Icon size={18} stroke-width={1.75} aria-hidden="true" /></h2>
+      <p class="tagline">{project.tagline}</p>
+      <p class="muted desc">{project.description}</p>
+      <p class="tags t-mono muted">{project.tags.map((t) => `#${t}`).join("  ")}</p>
+    </div>
+  </a>
+</li>
+
+<style>
+  li[data-reveal] {
+    display: flex;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .card:hover {
+    background: var(--surface);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 112px;
+    padding-inline: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo img {
+    max-height: 64px;
+    width: auto;
+    object-fit: contain;
+  }
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+  }
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .name :global(svg) {
+    flex: none;
+    color: var(--text-muted);
+    transition: transform 200ms var(--ease-out), color 150ms linear;
+  }
+  .card:hover .name :global(svg) {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+  .tagline {
+    font-weight: 500;
+  }
+  .desc {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .tags {
+    word-spacing: 4px;
+  }
+</style>

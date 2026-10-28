@@ -1,0 +1,34 @@
+---
+import Base from "../../layouts/Base.astro";
+import Landing from "../../components/home/Landing.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { localeStaticPaths, type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+// Titles kept from the previous site (tuned for search, already ranking); descriptions are the
+// previous ones where they were translated, otherwise the new localized copy.
+
+const t = messages(lang).pages.home;
+
+// Same structured data the previous home page emitted.
+const softwareApplication = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Perry",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "macOS, Windows, Linux, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Web/WebAssembly",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Perry compiles TypeScript ahead of time to native executables. Native builds need no external Node.js installation or JavaScript engine; Perry's runtime and GC are statically linked.",
+  url: "https://perryts.com/en/",
+  sameAs: ["https://github.com/PerryTS/perry", "https://docs.perryts.com"],
+};
+---
+
+<Base lang={lang} title={t.title} description={t.description} titleIsAbsolute>
+  <JsonLd slot="head" data={softwareApplication} />
+  <Landing lang={lang} />
+</Base>

@@ -1,0 +1,91 @@
+---
+import LinkArrow from "../LinkArrow.astro";
+import SectionHeader from "../SectionHeader.astro";
+import Stat from "../Stat.astro";
+import { type Locale } from "../../i18n/index.ts";
+import { fillDeep, messages } from "../../i18n/messages.ts";
+import { formatCompact, formatInteger, perDay } from "../../lib/format.ts";
+import { getRepoStats } from "../../lib/github.ts";
+import { links } from "../../lib/links.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const stats = await getRepoStats();
+const started = new Intl.DateTimeFormat(lang, { month: "long", year: "numeric" }).format(new Date(stats.createdAt));
+const forks = formatInteger(stats.forks, lang);
+
+const t = fillDeep(messages(lang).home.builtInTheOpen, { started, forks });
+
+const figures = [
+  { value: formatInteger(stats.mergedPrs, lang), text: t.merged },
+  { value: `~${perDay(stats.mergedLast30Days, 30)}`, text: t.perDay },
+  { value: formatInteger(stats.contributors, lang), text: t.contributors },
+  { value: formatCompact(stats.stars, lang), text: t.stars },
+];
+---
+
+<section class="section section--paper open">
+  <div class="wrap">
+    <SectionHeader title={t.title} aside={t.aside} />
+
+    <div class="stats">
+      {figures.map((f, i) => (
+        <div class="cell" data-reveal style={`--i: ${i}`}>
+          <Stat value={f.value} label={f.text[0]} detail={f.text[1]} />
+        </div>
+      ))}
+    </div>
+
+    <div class="foot">
+      <p class="t-mono muted">{t.source}</p>
+      <LinkArrow href={links.pulls}>{t.browse}</LinkArrow>
+    </div>
+  </div>
+</section>
+
+<style>
+  .open {
+    padding-block: min(96px, var(--section-y));
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-block: 48px;
+    border-block: 1px solid var(--border);
+  }
+  .cell {
+    padding: 36px 28px;
+  }
+  /* :not() instead of "+": Astro scoping doubles the specificity of "a + b", which beat the responsive overrides. */
+  .cell:not(:first-child) {
+    border-left: 1px solid var(--border);
+  }
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cell:nth-child(odd) {
+      border-left: 0;
+    }
+    .cell:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+    .foot {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 480px) {
+    .cell {
+      padding: 28px 16px;
+    }
+  }
+</style>

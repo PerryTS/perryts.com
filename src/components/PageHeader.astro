@@ -1,0 +1,59 @@
+---
+/** Header band for inner pages: optional back link, title, lead and extra slot (tags, meta, CTAs). */
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import Lines from "./Lines.astro";
+
+interface Props {
+  title: string;
+  lead?: string;
+  back?: { href: string; label: string };
+  /** Long titles (blog posts) use a smaller size. */
+  size?: "h1" | "display";
+}
+const { title, lead, back, size = "h1" } = Astro.props;
+---
+
+<header class="page-header">
+  <div class="wrap inner">
+    {back && (
+      <a class="back t-mono muted" href={back.href}><ArrowLeft size={14} stroke-width={1.75} aria-hidden="true" />{back.label}</a>
+    )}
+    <slot name="above" />
+    <h1 class:list={[size === "display" ? "t-display" : "t-h1", "title"]} data-reveal><Lines text={title} /></h1>
+    {lead && <p class="lead t-lead muted" data-reveal style="--i: 1">{lead}</p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .page-header {
+    background: var(--surface-tint);
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-block: 96px 72px;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+  }
+  .back:hover {
+    color: var(--text);
+  }
+  .title {
+    max-width: 1000px;
+  }
+  .lead {
+    max-width: 720px;
+  }
+  @media (max-width: 640px) {
+    .inner {
+      padding-block: 64px 48px;
+    }
+  }
+</style>

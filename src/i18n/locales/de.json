@@ -1,0 +1,830 @@
+{
+  "blog": {
+    "metaDescription": "Datierte Perry-Release-Notes, Tutorials und technische Artikel. Historische Messwerte bleiben an ihre ursprünglichen Versionen gebunden.",
+    "title": "Release Notes, Deep Dives\nund Anleitungen.",
+    "aside": "Jeder Beitrag ist datiert. Messwerte bleiben an die Perry-Version gebunden, mit der sie erhoben wurden.",
+    "all": "Alle",
+    "filters": {
+      "milestone": "Meilensteine",
+      "performance": "Performance",
+      "gc": "GC",
+      "compiler": "Compiler",
+      "how-to": "Anleitungen"
+    },
+    "latest": "Neu",
+    "read": "Artikel lesen",
+    "posts": {
+      "one": "{n} Beitrag",
+      "other": "{n} Beiträge"
+    },
+    "minutes": {
+      "other": "{n} Min. Lesezeit"
+    },
+    "back": "Alle Beiträge",
+    "onThisPage": "Auf dieser Seite",
+    "previous": "Vorheriger",
+    "next": "Nächster",
+    "noNext": "Das ist der neueste Beitrag",
+    "share": "Teilen",
+    "copyLink": "Link kopieren",
+    "englishOnly": "Dieser Beitrag ist nur auf Englisch verfügbar.",
+    "historical": "Dieser datierte Artikel hält die Perry-Version und die Messwerte zum Zeitpunkt der Veröffentlichung fest. Für aktuelle Entscheidungen gelten die aktuellen Einschränkungen, der Plattform-Leitfaden und die Benchmark-Daten."
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry im Vergleich zu den Alternativen",
+      "indexSubtitle": "Wie Perry sich zu anderen Wegen verhält, TypeScript auszuliefern: Runtimes, Compiler und plattformübergreifende UI-Frameworks. Ehrlich, mit Quellen und gemessenen Zahlen, wo es welche gibt.",
+      "indexMetaTitle": "Perry im Vergleich zu Bun, Deno, Electron, Tauri, React Native und Static Hermes",
+      "indexMetaDescription": "Direkte Vergleiche von Perry mit den Alternativen, zu denen Entwickler greifen: TypeScript-Runtimes (Bun, Deno), AOT-TS-Compiler (Static Hermes) und plattformübergreifende UI-Frameworks (Electron, Tauri, React Native).",
+      "backToCompare": "Zurück zu den Vergleichen",
+      "lastUpdated": "Zuletzt aktualisiert",
+      "whatIs": "Was ist {name}?",
+      "sideBySide": "Direktvergleich",
+      "feature": "Feature",
+      "wherePerryWins": "Wo Perry gewinnt",
+      "whereCompetitorWins": "Wo {name} gewinnt",
+      "whenChoose": "Wann {name} wählen",
+      "verdict": "Fazit",
+      "ctaTitle": "Perry ausprobieren",
+      "ctaSubtitle": "Kompiliere dein TypeScript noch heute zu nativem Code.",
+      "category": {
+        "runtime": "TypeScript-Runtime",
+        "compiler": "TS-zu-Nativ-Compiler",
+        "ui-framework": "Plattformübergreifendes UI"
+      },
+      "sources": "Quellen",
+      "factsLanguageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt."
+    },
+    "electronAlternatives": {
+      "title": "Electron-Alternativen für TypeScript",
+      "tldr": "Vier realistische Wege für TypeScript-Desktop-Apps im Jahr 2026: Electron, Tauri, Bun-Single-File-Binaries und Perrys native Widgets. Binary-Größe, Speicherverbrauch, UI-Stack und Sprache ehrlich verglichen."
+    },
+    "getStarted": "Loslegen"
+  },
+  "footer": {
+    "tagline": "Ein quelloffener Ahead-of-Time-Compiler für TypeScript. Geschrieben in Rust, auf Basis von SWC und LLVM.",
+    "served": "Diese Seite wurde von einem nativen, mit Perry kompilierten Binary ausgeliefert.",
+    "source": "Server-Quellcode ansehen",
+    "rights": "© 2026 Perry · MIT-Lizenz",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "columns": [
+      {
+        "title": "Produkt",
+        "items": [
+          "Erste Schritte",
+          "Showcase",
+          "Perry Publish",
+          "Roadmap",
+          "Enterprise"
+        ]
+      },
+      {
+        "title": "Lernen",
+        "items": [
+          "Dokumentation",
+          "Blog",
+          "Vergleich",
+          "Internals",
+          "Coop"
+        ]
+      },
+      {
+        "title": "Community",
+        "items": [
+          "GitHub",
+          "Discord",
+          "Issues",
+          "Mitwirken",
+          "Newsletter"
+        ]
+      }
+    ]
+  },
+  "guides": {
+    "factsLanguageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt."
+  },
+  "home": {
+    "benchmarks": {
+      "title": "Benchmarks gegen Node.js,\nmit Siegen und Niederlagen.",
+      "meta": [
+        "Perry {perry} · Node.js {node}",
+        "{cpu} · macOS · {date}",
+        "Laufzeit in ms · niedriger ist besser"
+      ],
+      "faster": "schneller",
+      "benchmark": "BENCHMARK",
+      "perryFaster": "← PERRY SCHNELLER",
+      "nodeFaster": "NODE SCHNELLER →",
+      "ratio": "FAKTOR",
+      "rows": [
+        "String-Verkettung in einer Schleife",
+        "1 Mio. Objekte",
+        "10 Mio. Elemente",
+        "Iteration mit komplexen Zahlen",
+        "Baum anlegen + durchlaufen",
+        "Aufruf von Klassenmethoden"
+      ],
+      "rowFaster": "schneller",
+      "rowSlower": "langsamer",
+      "even": "≈ gleichauf",
+      "footnote": "Derzeit ist Perry langsamer bei: {list}.",
+      "all": "Alle {n} Benchmarks & Roh-JSON"
+    },
+    "builtInTheOpen": {
+      "title": "Offen entwickelt.",
+      "aside": "Perry startete im {started} und ist noch vor Version 1.0. Die gesamte Arbeit findet in öffentlichen Pull Requests auf GitHub statt.",
+      "merged": [
+        "gemergte Pull Requests",
+        "seit {started}"
+      ],
+      "perDay": [
+        "Merges pro Tag",
+        "in den letzten 30 Tagen"
+      ],
+      "contributors": [
+        "Mitwirkende",
+        "auf GitHub"
+      ],
+      "stars": [
+        "GitHub-Sterne",
+        "{forks} Forks"
+      ],
+      "source": "Zahlen beim Build aus der GitHub-API gelesen.",
+      "browse": "Pull Requests ansehen"
+    },
+    "community": {
+      "title": "Werde Teil der Community.",
+      "discord": "Sprich mit den Maintainern und anderen Entwicklern",
+      "github": "{stars} Sterne · MIT · Issues & Diskussionen",
+      "newsletter": [
+        "Newsletter",
+        "Release Notes und Engineering-Artikel"
+      ],
+      "log": "Aus dem Engineering-Log",
+      "allPosts": "Alle Artikel"
+    },
+    "ecosystem": {
+      "title": "Testen, ausliefern und hosten\nmit derselben Toolchain.",
+      "aside": "Der Compiler ist der Kern. Diese Tools übernehmen Testen, Veröffentlichen und Hosting.",
+      "steps": [
+        "KOMPILIEREN",
+        "TESTEN",
+        "AUSLIEFERN",
+        "HOSTEN"
+      ],
+      "descriptions": [
+        "TypeScript zu einem nativen Binary für 11 Plattformen.",
+        "UI-Tests, die die echten Widgets deiner App steuern.",
+        "Von main.ts in den App Store: bauen, signieren, prüfen und einreichen.",
+        "Führt mit Perry kompilierte TypeScript-Apps über HTTP aus."
+      ],
+      "perryStatus": "MIT · Open Source",
+      "coopStatus": "Vor 1.0"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "subtitle": "Alles, was Leute fragen, bevor sie ihre erste Binary kompilieren",
+      "items": [
+        {
+          "question": "Braucht Perry Node.js oder eine Laufzeitumgebung?",
+          "answer": "Native Perry-Binaries laufen, ohne dass Node.js, Bun, Deno oder eine externe JavaScript-Engine installiert sein muss. Sie enthalten allerdings die Perry-Laufzeitumgebung und den Garbage Collector, statisch gelinkt. Pakete, die Engine-Semantik benötigen, können den optionalen eingebetteten V8-Fallback nutzen."
+        },
+        {
+          "question": "Wie groß sind die kompilierten Binaries?",
+          "answer": "Die Größe hängt vom Target, den Imports und dem Build-Profil ab. Die veröffentlichten Beispiele reichen von etwa 330 KB für Hello World bis etwa 7 MB für Mango; Builds mit vollständiger Standardbibliothek oder optionalem V8 können deutlich größer sein. Jede Größenangabe ist ein gemessenes Beispiel, keine allgemeingültige Ausgabegröße."
+        },
+        {
+          "question": "Kann ich npm-Pakete verwenden?",
+          "answer": "Viele reine TypeScript/JavaScript-Pakete lassen sich nativ kompilieren, und rund 50 Paket-/API-Implementierungen werden erfasst. Die Kompatibilität ist nicht universell: Pakete mit nativen Addons, nicht unterstütztem dynamischem Verhalten oder engine-spezifischer Semantik benötigen eventuell den optionalen V8-Fallback oder funktionieren möglicherweise gar nicht. Führe perry check aus und sieh dir die Einschränkungen an."
+        },
+        {
+          "question": "Welche Plattformen unterstützt Perry?",
+          "answer": "Perry dokumentiert 11 Targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux und Web/WASM. Web und WASM sind Aliase; HarmonyOS ist eine separate Preview. Reifegrad und API-Abdeckung unterscheiden sich je nach Plattform, sieh dir daher den Plattform-Guide an."
+        },
+        {
+          "question": "Ist Perry kostenlos und Open Source?",
+          "answer": "Das Repository mit Compiler und Laufzeitumgebung steht unter der MIT-Lizenz, und lokales Kompilieren erfordert kein Konto. Das gehostete Perry Publish und kommerzieller Support sind separate Dienste; Verfügbarkeit, Limits und Preise werden im jeweiligen Dienst oder schriftlich bestätigt."
+        },
+        {
+          "question": "Wie unterscheidet sich Perry von Bun oder Deno compile?",
+          "answer": "Die Standalone-Executables von Bun und Deno bündeln ihre Laufzeitumgebungen; native Perry-Builds werden über LLVM kompiliert und betten standardmäßig keine JavaScript-Engine ein, linken aber die Perry-Laufzeitumgebung und den GC statisch. Genaue Vergleiche von Größe und Startzeit hängen von Version, Plattform und Workload ab. Siehe die datierten Seiten <bunLink>Perry vs Bun</bunLink> und <denoLink>Perry vs Deno</denoLink>."
+        },
+        {
+          "question": "Wie unterscheidet sich Perry von Electron oder Tauri?",
+          "answer": "Electron liefert Chromium und Node.js mit; Tauri nutzt eine System-WebView mit Anwendungscode auf der nativen Seite. Perry bildet sein UI-Modell stattdessen, wo unterstützt, auf Plattform-Widgets ab. Bundle-Größe und Plattformfähigkeiten variieren, nutze daher die datierten Vergleiche <electronLink>Perry vs Electron</electronLink> und <tauriLink>Perry vs Tauri</tauriLink> statt einer pauschalen Größenangabe."
+        },
+        {
+          "question": "Wie ausgereift ist Perry?",
+          "answer": "Perry ist noch vor Version 1.0 und ändert sich schnell. Echte Projekte setzen es bereits ein, aber an der Parität von Sprache, Paketen und Plattformen wird weiterhin aktiv gearbeitet. Sieh dir den <showcaseLink>Showcase</showcaseLink>, die aktuellen Einschränkungen und das Changelog an, bevor du einen Produktions-Workload darauf setzt."
+        }
+      ],
+      "more": "Weitere Fragen? Lies den <guideLink>Getting-Started-Guide</guideLink> oder frag in den <discussionsLink>GitHub Discussions</discussionsLink>."
+    },
+    "forTeams": {
+      "title": "Brauchst du Hilfe beim Umstieg von Electron oder React Native?",
+      "body": "Perry ist ein unabhängiges Projekt, das von seinen Maintainern geführt wird. Wenn dein Unternehmen eine Plattform, ein Paket oder ein Feature braucht, melde dich. Umfang, Zeitplan und Konditionen werden schriftlich vereinbart.",
+      "offers": [
+        {
+          "name": "Migrations-Reviews",
+          "description": "Wir prüfen deine Electron- oder React-Native-App und sagen dir, was heute schon kompiliert und wo noch Arbeit nötig ist."
+        },
+        {
+          "name": "Gemeinsame Umsetzung",
+          "description": "Arbeite mit den Maintainern zusammen, während dein Team seinen ersten Perry-Build ausliefert."
+        },
+        {
+          "name": "Gesponserte Features",
+          "description": "Finanziere ein Widget, ein Node-Modul oder eine Plattform. Die Arbeit fließt in den Open-Source-Compiler."
+        },
+        {
+          "name": "Gehostete Builds & Support",
+          "description": "Signierung, Verifizierung und Release-Planung, mit in deiner Vereinbarung festgelegten Support-Konditionen."
+        }
+      ],
+      "contactNote": "Erzähl uns von deinem Produkt, deinen Zielplattformen und deinem Zeitplan.",
+      "teams": "Perry für Teams"
+    },
+    "getStarted": {
+      "title": "Perry\ninstallieren.",
+      "copy": "Befehl kopieren",
+      "rows": [
+        [
+          "macOS",
+          "brew install perryts/perry/perry"
+        ],
+        [
+          "Jedes OS",
+          "npm i -g @perryts/perry"
+        ],
+        [
+          "Windows",
+          "winget install PerryTS.Perry"
+        ],
+        [
+          "Danach",
+          "perry init my-app && perry run ."
+        ]
+      ]
+    },
+    "hero": {
+      "eyebrow": "AHEAD-OF-TIME-COMPILER FÜR TYPESCRIPT · SWC + LLVM",
+      "title": "Dein TypeScript,\nnativ kompiliert.",
+      "sub": "Perry kompiliert TypeScript und JavaScript zu einer kleinen nativen Programmdatei. Eine Codebasis, 11 Plattformen, kein Node.js zur Laufzeit.",
+      "docs": "Zur Dokumentation",
+      "copyLabel": "Installationsbefehl kopieren"
+    },
+    "howItWorks": {
+      "title": "So baut Perry\ndeine App.",
+      "aside": "SWC parst deinen Code, Perry senkt ihn ab und LLVM erzeugt Maschinencode. Runtime und Garbage Collector werden in dasselbe Binary gelinkt.",
+      "stages": [
+        {
+          "name": "main.ts / .js",
+          "tool": "Quellcode",
+          "desc": "TypeScript oder reines JavaScript. Klassen, Generics, async/await und npm-Pakete.",
+          "mono": true
+        },
+        {
+          "name": "Parsen",
+          "tool": "SWC",
+          "desc": "Schnelles Parsen in einen AST."
+        },
+        {
+          "name": "Transformieren",
+          "tool": "Perry IR",
+          "desc": "Typauflösung und Lowering."
+        },
+        {
+          "name": "Codegen",
+          "tool": "LLVM",
+          "desc": "Maschinencode für ARM64, x86-64 und WASM.",
+          "accent": true
+        },
+        {
+          "name": "./main",
+          "tool": "Programmdatei",
+          "desc": "Eine einzige Datei, ab ~330 KB.",
+          "mono": true
+        }
+      ]
+    },
+    "nativeUi": {
+      "title": "Eine UI-Codebasis,\nelf native Plattformen.",
+      "aside": "perry/ui ist eine deklarative UI-Bibliothek auf Basis von Stacks. Jedes Widget wird auf das plattformeigene Toolkit abgebildet: AppKit, UIKit, Win32, GTK4, Android Views oder das DOM.",
+      "fan": "perry compile",
+      "toolkitsLabel": "Native Toolkits und die Plattformen, die sie abdecken",
+      "preview": "Preview",
+      "legend": {
+        "broad": "breit",
+        "core": "Kern · Lücken dokumentiert",
+        "preview": "Preview"
+      },
+      "widgets": "35+ Widgets",
+      "widgetsDesc": "State(), Stacks, Spacer.\nKein CSS."
+    },
+    "nodeParity": {
+      "caption": "ist das Ziel für die Kompatibilität mit Node 26. Heute bestehen {passing} von {total} Tests.",
+      "body": "Wir führen die Testsuite von Node 26 Modul für Modul gegen Perry aus und vergleichen die Ausgabe mit Node. {total} Tests in {modules} Modulen. Fehlschlagende Tests sind im Repository aufgeführt.",
+      "progress": "{passing} / {total} bestanden",
+      "target": "Ziel: {target}%",
+      "npmTitle": "ECHTE NPM-PAKETE, NATIV KOMPILIERT",
+      "npmList": "Fastify · Express · mysql2 · pg · ioredis · ws · bcrypt · jsonwebtoken und mehr. Reines JavaScript lässt sich ebenfalls kompilieren. Bekannte Lücken sind im Repository aufgeführt.",
+      "wall": "{modules} ÜBERWACHTE node:*-MODULE",
+      "perModule": "Erfolgsquote pro Modul →"
+    },
+    "realCode": {
+      "title": "Echte Projekte,\nmit Perry kompiliert.",
+      "apps": "Mit Perry gebaute Apps",
+      "kicker": "FALLSTUDIE · CLAUDE CODE",
+      "unit": "minifiziertes cli.js\nvon npm",
+      "description": "Wir haben Perry auf das Bundle angesetzt, das npm für Claude Code ausliefert. Das native Binary startet, meldet sich an, streamt eine echte API-Antwort und zeichnet, was du tippst.",
+      "fixes": "Compiler-Fixes, die dabei entstanden sind",
+      "writeUp": "Zum Bericht",
+      "more": [
+        {
+          "kicker": "NPM-PAKETE",
+          "title": "axios · zod v4 · express\nfastify · hono",
+          "description": "Reine TypeScript- und JavaScript-Pakete lassen sich nativ kompilieren. Manche brauchen den optionalen V8-Fallback."
+        },
+        {
+          "kicker": "FRAMEWORKS",
+          "title": "Hono · tRPC · Strapi",
+          "description": "Native ARM64-Programmdateien unter 2 MB, kompiliert in unter einer Sekunde."
+        },
+        {
+          "kicker": "DIESE WEBSITE",
+          "title": "perryts.com",
+          "description": "Der Server, der diese Seite ausliefert, ist ein mit Perry kompiliertes Binary."
+        }
+      ]
+    },
+    "replaceStack": {
+      "title": "Schluss damit, mit jeder App\neinen Browser auszuliefern.",
+      "sub": "Electron bündelt Chromium. React Native bündelt eine JavaScript-Engine. Perry kompiliert deinen Code zu Maschinencode, es muss also nichts zusätzlich ausgeliefert werden.",
+      "caption": "Electron, React Native und Perry im Vergleich",
+      "columns": [
+        {
+          "name": "Electron",
+          "sub": "Chromium + Node.js pro App"
+        },
+        {
+          "name": "React Native",
+          "sub": "JS-Engine + native Views"
+        },
+        {
+          "name": "Perry",
+          "sub": "LLVM-Maschinencode"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Was ausgeliefert wird",
+          "values": [
+            "Dein JS + ein kompletter Browser",
+            "Dein JS-Bundle + eine Engine",
+            "Eine einzige native Programmdatei"
+          ]
+        },
+        {
+          "key": "UI",
+          "values": [
+            "HTML/CSS in einem WebView",
+            "Native Views über eine Bridge",
+            "AppKit, UIKit, Win32, GTK4, Android, DOM"
+          ]
+        },
+        {
+          "key": "Plattformen aus einer Codebasis",
+          "values": [
+            "Desktop",
+            "Mobile first",
+            "11: Desktop, Mobile, Uhr, TV und Web"
+          ]
+        },
+        {
+          "key": "JavaScript zur Laufzeit",
+          "values": [
+            "Ja",
+            "Ja",
+            "Nein. Optionaler V8-Fallback für Pakete, die ihn brauchen"
+          ]
+        },
+        {
+          "key": "App-Größe",
+          "values": [
+            "Enthält Chromium",
+            "Enthält eine JS-Engine",
+            "~330 KB Hello World"
+          ]
+        },
+        {
+          "key": "Ehrlicher Kompromiss",
+          "values": [
+            "Ausgereift, riesiges Ökosystem",
+            "Ausgereift auf Mobile",
+            "Implementiert ein praxisnahes TS- + Node-Subset; vor 1.0"
+          ]
+        }
+      ],
+      "note": "Jeder Vergleich verlinkt auf die offizielle Dokumentation des Frameworks.",
+      "link": "Zu den belegten Vergleichen"
+    },
+    "roadmap": {
+      "title": "Roadmap:\nzuerst der Kern.",
+      "body": "Perry steht bei v0.5 und hat 0.6 noch nicht erreicht. Bis der Kern stabil ist, fließt der Großteil der Arbeit in Node-Kompatibilität und Performance.",
+      "releases": "Release Notes auf GitHub",
+      "current": "AKTUELL",
+      "phases": [
+        {
+          "key": "JETZT",
+          "when": "v0.5 → 0.6",
+          "title": "Den Kern stabilisieren",
+          "items": [
+            "Node-26-Parität von ~{parity} % in Richtung 97 %",
+            "Performance: GC, Dispatch, Start, Binary-Größe",
+            "Lücken bei TypeScript und npm schließen: Proxy, Decorators, Weak Refs"
+          ]
+        },
+        {
+          "key": "ALS NÄCHSTES",
+          "when": "nach dem Kern",
+          "title": "perry/ui",
+          "items": [
+            "Mehr Widgets",
+            "UI-Parität auf allen 11 Plattformen",
+            "Core- und Preview-Plattformen steigen eine Stufe auf"
+          ]
+        },
+        {
+          "key": "SPÄTER",
+          "when": "auf stabiler Basis",
+          "title": "Erweiterungen",
+          "items": [
+            "Gehostete Builds und Signierung mit Perry Publish",
+            "Hosting mit Coop",
+            "Mehr eigene Pakete und Tools"
+          ]
+        }
+      ]
+    },
+    "specStrip": {
+      "label": "Perry auf einen Blick",
+      "specs": [
+        {
+          "value": "11",
+          "label": "dokumentierte Plattformen",
+          "note": "+ HarmonyOS als Preview"
+        },
+        {
+          "value": "~330 KB",
+          "label": "Hello-World-Binary",
+          "note": "wächst mit dem Funktionsumfang"
+        },
+        {
+          "value": "3,5 MB",
+          "label": "Spitzenspeicher, JSON-Pipeline",
+          "note": "Node.js braucht 36 MB"
+        },
+        {
+          "value": "35+",
+          "label": "native Widgets",
+          "note": "kein WebView, kein CSS"
+        }
+      ]
+    },
+    "sponsors": {
+      "title": "Gesponsert von",
+      "premium": "Premium-Sponsor",
+      "sponsor": "Sponsor · nubjs.com",
+      "pitch": "Wer Perry sponsert, finanziert die Arbeit am Open-Source-Compiler.",
+      "cta": "Sponsor werden"
+    }
+  },
+  "nav": {
+    "items": {
+      "docs": "Dokumentation",
+      "showcase": "Showcase",
+      "benchmarks": "Benchmarks",
+      "publish": "Publish",
+      "teams": "Für Teams",
+      "blog": "Blog"
+    },
+    "menu": "Menü",
+    "language": "Sprache ändern",
+    "home": "Perry Startseite"
+  },
+  "newsletterForm": {
+    "placeholder": "you@example.com",
+    "subscribe": "Abonnieren",
+    "success": "Danke — du bist dabei.",
+    "errorInvalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "blockTitle": "Gefällt dir dieser Beitrag? Hol dir den nächsten.",
+    "blockSubtitle": "Kurze Notizen zu Perry-Releases und woran wir als Nächstes arbeiten.",
+    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
+    "privacyLink": "Privacy notice"
+  },
+  "pages": {
+    "coop": {
+      "metaTitle": "Coop — Natives TypeScript-Hosting für Perry",
+      "metaDescription": "Coop hostet mit Perry kompilierte TypeScript-Anwendungen mit gemeinsam genutzten Laufzeitbibliotheken, isolierten Deployment-Workern und inhaltsadressierten Rollbacks.",
+      "adjacent": "Perry-nahes Projekt · Pre-1.0",
+      "tagline": "Ein Ort, an dem Perry-Code ruhen und laufen kann.",
+      "intro": "Coop verwandelt ein Verzeichnis mit Perry-kompatiblem TypeScript in eine native Anwendungsbibliothek und stellt sie über HTTP bereit. Perry-Laufzeit und Standardbibliothek werden dabei nur einmal pro Maschine bereitgestellt.",
+      "experimental": "Experimentelle Infrastruktur für eigenen Code",
+      "explore": "Coop entdecken",
+      "viewSource": "Quellcode ansehen",
+      "quickStart": "Schnellstart",
+      "facts": [
+        "Gemeinsam genutzte Laufzeitbibliotheken",
+        "Ein Worker pro Deployment",
+        "Deployen, prüfen und zurückrollen"
+      ],
+      "appLibrary": "Anwendungsbibliothek",
+      "worker": "Coop-Worker",
+      "sharedProviders": "Gemeinsame Laufzeit + Standardbibliothek",
+      "onePerMachine": "einmal pro Maschine",
+      "diagramAria": "TypeScript wird von Perry zu einer Anwendungsbibliothek kompiliert, von einem Coop-Worker geladen und mit gemeinsam genutzten Laufzeitbibliotheken verbunden.",
+      "whyTitle": "Perry kompiliert. Coop hält es am Laufen.",
+      "whyBody": "Der Unterschied liegt darin, wo die Sprachlaufzeit lebt. Coop hält das Anwendungsabbild klein und stellt die kompatible Perry-Laufzeit samt Standardbibliothek auf Host-Ebene bereit.",
+      "perryTitle": "Ein reguläres Perry-Programm",
+      "perryBody": "Anwendung, Laufzeit, Garbage Collector und ausgewählte Funktionen der Standardbibliothek werden in eine zielspezifische ausführbare Datei gelinkt.",
+      "coopTitle": "Ein Coop-Deployment",
+      "coopBody": "Die Anwendung wird als reine App-Bibliothek kompiliert. Kompatible Laufzeitbibliotheken werden einmal pro Maschine gebaut und ihre Identität vor dem Einbinden der App geprüft.",
+      "architectureTitle": "Nach Fehlergrenzen getrennt",
+      "architectureBody": "Maschine, Deployment und Anfrage haben getrennte Verantwortlichkeiten. Anwendungscode läuft niemals im Box-Daemon.",
+      "tiers": [
+        {
+          "title": "Daemon · einer pro Maschine",
+          "body": "Beendet TLS, routet nach Host und Pfad und verwaltet Deployments, Artefakte, Admin-API und Metriken."
+        },
+        {
+          "title": "Worker · einer pro Deployment",
+          "body": "Lädt die Anwendungsbibliothek, besitzt den Perry-Laufzeitzustand und führt Cron- sowie dauerhafte Queue-Aufgaben aus."
+        },
+        {
+          "title": "Aufruf · einer pro Anfrage",
+          "body": "Läuft als Task im Deployment-Worker und teilt dessen Adressraum, ohne pro Anfrage einen Prozess zu starten."
+        }
+      ],
+      "workingTitle": "Was heute funktioniert",
+      "workingBody": "Coop ist getestete Infrastruktur, aber noch kein fertiges Hosting-Produkt. Die aktuelle Implementierung umfasst:",
+      "workingItems": [
+        "TypeScript-Kompilierung, HTTP-Routing und statische Mounts",
+        "Identitätsprüfungen für gemeinsame Provider",
+        "Inhaltsadressierte Deployments und Rollback",
+        "Cron und eine dauerhafte Queue",
+        "KV- und Objektspeicher für dedizierte Worker",
+        "CLI, Prometheus-Metriken, Alarme und Grafana-Dashboard"
+      ],
+      "developerTitle": "Eine kleine Deployment-Oberfläche",
+      "developerBody": "Ein Deployment ist ein Verzeichnis mit einer coop.toml-Datei und einem oder mehreren Handlern. Coop kompiliert es, speichert das Ergebnis im Cache und startet einen lokalen Worker.",
+      "configLabel": "coop.toml",
+      "handlerLabel": "handlers/hello.ts",
+      "runLabel": "Lokal ausführen",
+      "fitTitle": "Bewusst eng gefasst",
+      "rightTitle": "Heute gut geeignet für",
+      "rightItems": [
+        "Dienste und kleine Anwendungen mit eigenem Code",
+        "Einen Betreiber mit einem Portfolio auf einer Maschine",
+        "Workloads innerhalb von Perrys TypeScript-Teilmenge",
+        "Teams, die Dichte, explizite Artefakte und schnelle Rollbacks schätzen"
+      ],
+      "notYetTitle": "Was Coop noch nicht verspricht",
+      "notYetItems": [
+        "Beliebige npm- oder Node.js-Kompatibilität",
+        "Eine Sandbox für nicht vertrauenswürdigen Drittcode",
+        "Kubernetes-Ersatz oder Multi-Region-Plattform",
+        "Universelle Performance-Vorteile gegenüber Node.js"
+      ],
+      "benchmarkTitle": "Dichte ist die These. Benchmarks bleiben die Arbeit.",
+      "benchmarkBody": "Aktuelle Messungen zeigen je nach Workload in unterschiedliche Richtungen. Kleine Linux-Anwendungen zeigen vielversprechende Dichte, während eine vollständige Next.js-Route in einem anderen Test mehr CPU als Node.js benötigte. Vor dem Zitieren bitte die Methodik lesen.",
+      "benchmarks": "Benchmarks lesen",
+      "status": "Aktuellen Status ansehen",
+      "closingTitle": "Mit Perry bauen. In Coop laufen lassen.",
+      "closingBody": "Quellcode erkunden, das Beispiel-Deployment starten und helfen, das Shared-Runtime-Modell zu verlässlicher Infrastruktur zu machen."
+    },
+    "enterprise": {
+      "metaTitle": "Perry for Teams",
+      "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+      "availableTitle": "Available to discuss",
+      "available1": "Architecture and migration reviews",
+      "available2": "Onboarding and paired implementation sessions",
+      "available3": "Release planning and upgrade guidance",
+      "available4": "Hosted build, signing, and verification requirements",
+      "scopedTitle": "Defined in your agreement",
+      "scoped1": "Support channels and response targets",
+      "scoped2": "Release maintenance or backport commitments",
+      "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+      "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+      "termsTitle": "No implied SLA or self-hosting promise",
+      "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt.",
+      "heroTitle": "Production support scoped to your team",
+      "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+      "heroCta": "Email ralph@perryts.com",
+      "closingTitle": "Talk to the maintainers",
+      "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+      "closingCta": "Email ralph@perryts.com",
+      "pricing": "Preise"
+    },
+    "home": {
+      "title": "Perry — TypeScript zu nativen Executables kompilieren | Nativer TypeScript-Compiler",
+      "description": "Perry ist ein quelloffener Ahead-of-Time-Compiler für TypeScript. Eine Codebasis, 11 Plattformen, kein Node.js zur Laufzeit."
+    },
+    "internals": {
+      "metaTitle": "Perry compiler internals",
+      "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior.",
+      "title": "Compiler <gradient>Internals</gradient>",
+      "subtitle": "The key design decisions that make Perry fast",
+      "nanBoxing1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
+      "nanBoxing2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries.",
+      "monomorphization1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
+      "monomorphization2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves.",
+      "staticDispatch1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
+      "staticDispatch2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time.",
+      "zeroCost1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
+      "zeroCost2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally.",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt.",
+      "backToHome": "Zurück zur Startseite"
+    },
+    "newsletter": {
+      "pageTitle": "Perry Newsletter",
+      "pageDescription": "Updates zu neuen Perry-Releases, Plattform-Support und Engineering-Posts. Kein Spam.",
+      "pageSubtitle": "Kurze Notizen darüber, was in Perry erscheint — Releases, Plattformen und Engineering-Deep-Dives.",
+      "bullet1Title": "Release Notes",
+      "bullet1Body": "Jedes wichtige Perry-Release, mit Änderungen und Hintergründen.",
+      "bullet2Title": "Engineering-Posts",
+      "bullet2Body": "Compiler-Interna, Benchmarks und was wir dabei lernen.",
+      "bullet3Title": "Privacy controls",
+      "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled."
+    },
+    "pricing": {
+      "title": "Perry pricing and availability",
+      "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
+      "localTitle": "Compiler and local builds",
+      "localDescription": "Use Perry locally without an account or usage fee.",
+      "localFeature1": "MIT-licensed compiler and runtime",
+      "localFeature2": "Local compile, run, check, doctor, and verify workflows",
+      "localFeature3": "No hosted-service quota for work performed on your own machine",
+      "viewSource": "View source and license",
+      "hostedAvailability": "Availability varies",
+      "hostedTitle": "Hosted Perry Publish",
+      "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
+      "hostedFeature1": "Build and packaging workflows for supported targets",
+      "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
+      "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
+      "publishDetails": "Read how publish works",
+      "needTermsTitle": "Need hosted builds or a support agreement?",
+      "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
+      "contact": "Contact the team",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt.",
+      "selfHostTitle": "What is open source and self-hostable today?",
+      "selfHostDescription": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
+      "faqTitle": "Fragen",
+      "q1": "Does local compilation require an account?",
+      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
+      "q2": "What are the hosted quotas and prices?",
+      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
+      "q3": "Can I self-host the complete publish service?",
+      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+    },
+    "privacy": {
+      "metaTitle": "Privacy notice",
+      "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
+      "title": "Privacy notice",
+      "updated": "Last updated: August 27, 2026",
+      "controllerTitle": "1. Controller",
+      "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
+      "dataTitle": "2. Data processed",
+      "dataItems": [
+        "Page-view and technical request data produced when you visit the site.",
+        "Your email address and the source form when you choose to subscribe to the newsletter."
+      ],
+      "analyticsTitle": "3. Analytics",
+      "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
+      "newsletterTitle": "4. Newsletter and Resend",
+      "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
+      "purposesTitle": "5. Purposes and legal bases",
+      "purposesItems": [
+        "Operate, secure, and diagnose the website and its supporting services.",
+        "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
+        "Send the newsletter after your request or consent."
+      ],
+      "retentionTitle": "6. Retention and recipients",
+      "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
+      "rightsTitle": "7. Your rights",
+      "rightsItems": [
+        "Request access, correction, deletion, restriction, or portability where applicable.",
+        "Object to processing based on legitimate interests.",
+        "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
+        "Complain to a competent data-protection supervisory authority."
+      ],
+      "contactTitle": "8. Contact",
+      "contactBody": "For privacy questions or requests, contact",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt."
+    },
+    "pryTitle": "Pry: nativer JSON-Viewer, gebaut mit Perry",
+    "publish": {
+      "metaTitle": "Perry Publish workflows",
+      "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats.",
+      "title": "Perry Publish",
+      "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
+      "buildingForIos": "Baue für iOS...",
+      "signingCert": "Signiere mit deinem Zertifikat...",
+      "verifyingLaunch": "Running the configured verification steps...",
+      "publishedToAppStore": "Submission requested; final store status is reported by the store.",
+      "buildSign": "Bauen & Signieren",
+      "buildSignPlatforms": "Target, host, SDK, and credential dependent",
+      "distribute": "Verteilen",
+      "distributePlatforms": "Available stores and channels depend on the target",
+      "verify": "Verifizieren",
+      "verifyDesc": "Configured launch and UI checks; coverage varies by target",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt.",
+      "seePricing": "Preise ansehen",
+      "backToHome": "Zurück zur Startseite"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
+      "currentTitle": "Verified today",
+      "activeTitle": "Active development areas",
+      "policyTitle": "How to read Perry claims",
+      "currentItems": [
+        "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
+        "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
+        "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
+        "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
+        "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+      ],
+      "activeItems": [
+        "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
+        "Improving platform parity, especially core and preview targets.",
+        "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
+        "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+      ],
+      "policyItems": [
+        "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
+        "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
+        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+      ],
+      "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
+      "platformStatus": "Platform status",
+      "knownLimitations": "Known limitations",
+      "benchmarkArtifact": "Benchmark artifact",
+      "changelog": "Changelog",
+      "languageNotice": "Technische Fakten und Messhinweise werden zur Vermeidung von Abweichungen in englischer Sprache gepflegt."
+    }
+  },
+  "showcase": {
+    "showcase": {
+      "title": "Showcase",
+      "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
+      "metaTitle": "Mit Perry gebaute Projekte",
+      "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
+    },
+    "pry": {
+      "subtitle": "Ein schneller, nativer JSON-Viewer, gebaut mit Perry. Baumnavigation, Suche, Tastaturkürzel — von TypeScript zu nativen Binaries kompiliert.",
+      "features": "Features",
+      "treeView": "Baumansicht",
+      "treeViewDesc": "Auf- und zuklappbare, navigierbare Baumdarstellung für tief verschachtelte JSON-Strukturen.",
+      "search": "Suche",
+      "searchDesc": "Volltextsuche über Schlüssel und Werte mit sofortiger Hervorhebung.",
+      "keyboardShortcuts": "Tastaturkürzel",
+      "keyboardShortcutsDesc": "Navigieren, aufklappen, zuklappen und kopieren mit reiner Tastatursteuerung.",
+      "clipboardSupport": "Zwischenablage-Unterstützung",
+      "clipboardSupportDesc": "Jeden Knoten oder Teilbaum als formatierten JSON in die Zwischenablage kopieren.",
+      "statusBar": "Statusleiste",
+      "statusBarDesc": "Zeigt Knotenanzahl, aktuelle Tiefe, Dateigröße und Parsezeit.",
+      "syntaxColoring": "Syntaxfärbung",
+      "syntaxColoringDesc": "Farbkodierte Werte nach Typ — Strings, Zahlen, Booleans, Null.",
+      "howItsBuilt": "So ist es gebaut",
+      "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
+      "typeScriptSource": "TypeScript-Quellcode",
+      "typeScriptSourceDesc": "Standard-TypeScript mit Perrys nativer UI-API",
+      "perryCompile": "Perry Compile",
+      "perryCompileDesc": "SWC-Parse → Typauflösung → LLVM-Codegen",
+      "nativeBinary": "Natives Binary",
+      "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
+      "platformSupport": "Plattformunterstützung",
+      "nativeWidgets": "Native {framework}-Widgets",
+      "available": "Verfügbar",
+      "screenshots": "Screenshots",
+      "macOsScreenshot": "macOS-Screenshot — demnächst verfügbar",
+      "iosScreenshot": "iOS-Screenshot — demnächst verfügbar",
+      "screenshotsNote": "Screenshots werden hinzugefügt, wenn die Pry-Entwicklung fortschreitet. Sieh im GitHub-Repo nach dem aktuellen Stand."
+    },
+    "common": {
+      "backToHome": "Zurück zur Startseite",
+      "viewOnGithub": "Auf GitHub ansehen",
+      "getStarted": "Loslegen",
+      "readTheBlogPost": "Blogbeitrag lesen",
+      "backToShowcase": "Zurück zum Showcase",
+      "backToBlog": "Zurück zum Blog",
+      "seePricing": "Preise ansehen",
+      "terminal": "Terminal",
+      "comingSoon": "Demnächst verfügbar"
+    }
+  }
+}

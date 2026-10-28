@@ -1,0 +1,116 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Button from "../../../components/Button.astro";
+import Terminal from "../../../components/Terminal.astro";
+import Notice from "../../../components/Notice.astro";
+import Lock from "@lucide/astro/icons/lock";
+import CloudUpload from "@lucide/astro/icons/cloud-upload";
+import ShieldCheck from "@lucide/astro/icons/shield-check";
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import { localeStaticPaths, localePath, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+
+const t = messages(lang).pages.publish;
+const steps = [
+  { Icon: Lock, title: t.buildSign, body: t.buildSignPlatforms },
+  { Icon: CloudUpload, title: t.distribute, body: t.distributePlatforms },
+  { Icon: ShieldCheck, title: t.verify, body: t.verifyDesc },
+];
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="publish" canonical="/en/publish/" alternates={["en"]}>
+  <PageHeader title={t.title} lead={t.subtitle}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap layout">
+      <div data-reveal>
+        <Terminal
+          title="perry publish"
+          lines={[
+            { text: "perry publish ios", prompt: true },
+            { text: `  ${t.buildingForIos}`, tone: "muted" },
+            { text: `  ${t.signingCert}`, tone: "muted" },
+            { text: `  ${t.verifyingLaunch}`, tone: "muted" },
+            { text: `  ${t.publishedToAppStore}`, tone: "success" },
+          ]}
+        />
+      </div>
+
+      <ol class="steps">
+        {steps.map(({ Icon, title, body }, i) => (
+          <li class="step" data-reveal style={`--i: ${i}`}>
+            <Icon size={20} stroke-width={1.75} aria-hidden="true" class="accent" />
+            <h2 class="name">{title}</h2>
+            <p class="muted">{body}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="actions" data-reveal>
+        <Button href={localePath(lang, "pricing")}>{t.seePricing}</Button>
+        <Button href={localePath(lang)} variant="secondary"><ArrowLeft size={16} stroke-width={1.75} aria-hidden="true" />{t.backToHome}</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .layout :global(.terminal) {
+    max-width: 760px;
+  }
+  .layout :global(.terminal pre) {
+    white-space: pre-wrap;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 28px 36px;
+  }
+  .step:first-child {
+    padding-left: 0;
+  }
+  .step + .step {
+    border-left: 1px solid var(--border);
+  }
+  .name {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .step,
+    .step:first-child {
+      padding: 28px 0;
+    }
+    .step + .step {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

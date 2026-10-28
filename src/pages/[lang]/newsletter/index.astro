@@ -1,0 +1,83 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import NewsletterForm from "../../../components/NewsletterForm.astro";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+
+const t = messages(lang).pages.newsletter;
+const bullets = [
+  { title: t.bullet1Title, body: t.bullet1Body },
+  { title: t.bullet2Title, body: t.bullet2Body },
+  { title: t.bullet3Title, body: t.bullet3Body },
+];
+---
+
+<Base lang={lang} title={t.pageTitle} description={t.pageDescription} path="newsletter">
+  <PageHeader title={t.pageTitle} lead={t.pageSubtitle} />
+
+  <section class="section">
+    <div class="wrap layout">
+      <NewsletterForm lang={lang} source="newsletter-page" variant="hero" />
+      <ul class="bullets">
+        {bullets.map((b, i) => (
+          <li class="bullet" data-reveal style={`--i: ${i}`}>
+            <span class="t-mono accent">{String(i + 1).padStart(2, "0")}</span>
+            <h2 class="name">{b.title}</h2>
+            <p class="muted">{b.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .layout > :global(.newsletter) {
+    max-width: 760px;
+  }
+  .bullets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .bullet {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 28px 36px;
+  }
+  .bullet:first-child {
+    padding-left: 0;
+  }
+  .bullet + .bullet {
+    border-left: 1px solid var(--border);
+  }
+  .name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+  }
+  @media (max-width: 900px) {
+    .bullets {
+      grid-template-columns: 1fr;
+    }
+    .bullet,
+    .bullet:first-child {
+      padding: 28px 0;
+    }
+    .bullet + .bullet {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

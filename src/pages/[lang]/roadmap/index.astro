@@ -1,0 +1,114 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import LinkArrow from "../../../components/LinkArrow.astro";
+import Notice from "../../../components/Notice.astro";
+import CheckList from "../../../components/CheckList.astro";
+import { localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+
+const t = messages(lang).pages.roadmap;
+const sources = [
+  { label: t.platformStatus, href: links.platforms },
+  { label: t.knownLimitations, href: links.limitations },
+  { label: t.benchmarkArtifact, href: links.benchmarksJson },
+  { label: t.changelog, href: "https://github.com/PerryTS/perry/blob/main/CHANGELOG.md" },
+];
+---
+
+<Base lang={lang} title={t.title} description={t.subtitle} path="roadmap" canonical="/en/roadmap/" alternates={["en"]}>
+  <PageHeader title={t.title} lead={t.subtitle}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="columns">
+        <div class="column" data-reveal>
+          <h2 class="t-label status status--done">{t.currentTitle}</h2>
+          <CheckList items={t.currentItems} tone="done" />
+        </div>
+        <div class="column" data-reveal style="--i: 1">
+          <h2 class="t-label status status--next">{t.activeTitle}</h2>
+          <CheckList items={t.activeItems} tone="next" />
+        </div>
+      </div>
+
+      <div class="policy" data-reveal>
+        <h2 class="t-h3">{t.policyTitle}</h2>
+        <CheckList items={t.policyItems} tone="note" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap sources" data-reveal>
+      <p class="t-lead">{t.snapshotNote}</p>
+      <ul class="links">
+        {sources.map((s) => <li><LinkArrow href={s.href}>{s.label}</LinkArrow></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 40px 44px 0;
+  }
+  .column + .column {
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+  .status--done {
+    color: var(--success);
+  }
+  .status--next {
+    color: var(--accent);
+  }
+  .policy {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 880px;
+    margin-top: 64px;
+  }
+  .sources {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sources p {
+    max-width: 760px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+  }
+  @media (max-width: 900px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+    .column,
+    .column + .column {
+      padding: 32px 0;
+      border-left: 0;
+    }
+    .column + .column {
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

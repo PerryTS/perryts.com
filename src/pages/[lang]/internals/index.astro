@@ -1,0 +1,83 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Button from "../../../components/Button.astro";
+import Notice from "../../../components/Notice.astro";
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import { localeStaticPaths, localePath, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+
+const t = messages(lang).pages.internals;
+// The old page highlighted part of the title with a gradient; the new design has none.
+const title = t.title.replace(/<\/?gradient>/g, "");
+// Section names were English-only on the old page.
+const topics = [
+  { name: "Value Representation", p1: t.nanBoxing1, p2: t.nanBoxing2 },
+  { name: "Monomorphization", p1: t.monomorphization1, p2: t.monomorphization2 },
+  { name: "Static + Dynamic Dispatch", p1: t.staticDispatch1, p2: t.staticDispatch2 },
+  { name: "Runtime Model", p1: t.zeroCost1, p2: t.zeroCost2 },
+];
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="internals" canonical="/en/internals/" alternates={["en"]}>
+  <PageHeader title={title} lead={t.subtitle}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <ol class="topics">
+        {topics.map((topic, i) => (
+          <li class="topic" data-reveal style={`--i: ${i % 2}`}>
+            <span class="t-mono accent">{String(i + 1).padStart(2, "0")}</span>
+            <h2 class="t-h3">{topic.name}</h2>
+            <p>{topic.p1}</p>
+            <p class="muted">{topic.p2}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="back" data-reveal>
+        <Button href={localePath(lang)} variant="secondary"><ArrowLeft size={16} stroke-width={1.75} aria-hidden="true" />{t.backToHome}</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .topics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .topic {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 40px 40px 44px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .topic:nth-child(even) {
+    padding-left: 40px;
+    padding-right: 0;
+    border-left: 1px solid var(--border);
+  }
+  .back {
+    margin-top: 48px;
+  }
+  @media (max-width: 900px) {
+    .topics {
+      grid-template-columns: 1fr;
+    }
+    .topic,
+    .topic:nth-child(even) {
+      padding: 32px 0;
+      border-left: 0;
+    }
+  }
+</style>

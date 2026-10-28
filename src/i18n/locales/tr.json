@@ -1,0 +1,829 @@
+{
+  "blog": {
+    "metaDescription": "Tarihli Perry sürüm notları, eğitimler ve teknik yazılar. Geçmiş ölçümler ilk sürümlerine bağlı kalır.",
+    "title": "Sürüm notları, derinlemesine\nyazılar ve rehberler.",
+    "aside": "Her yazı tarihlidir. Ölçümler, alındıkları Perry sürümüne bağlıdır.",
+    "all": "Tümü",
+    "filters": {
+      "milestone": "Kilometre taşları",
+      "performance": "Performans",
+      "gc": "GC",
+      "compiler": "Derleyici",
+      "how-to": "Rehberler"
+    },
+    "latest": "En yeni",
+    "read": "Yazıyı oku",
+    "posts": {
+      "other": "{n} yazı"
+    },
+    "minutes": {
+      "other": "{n} dk okuma"
+    },
+    "back": "Tüm yazılar",
+    "onThisPage": "Bu sayfada",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "noNext": "En yeni yazıdasınız",
+    "share": "Paylaş",
+    "copyLink": "Bağlantıyı kopyala",
+    "englishOnly": "Bu yazı yalnızca İngilizce olarak mevcuttur.",
+    "historical": "Bu tarihli yazı, yayımlandığı andaki Perry sürümünü ve ölçümleri kaydeder. Bugünkü kararlar için güncel sınırlamalara, platform kılavuzuna ve benchmark verilerine bakın."
+  },
+  "compare": {
+    "ui": {
+      "indexTitle": "Perry ve alternatifleri",
+      "indexSubtitle": "Perry, TypeScript göndermenin diğer yollarıyla nasıl karşılaştırılır: çalışma zamanları, derleyiciler ve çapraz platform UI framework'leri. Dürüst, kaynaklı ve mevcut olduğu yerde ölçülmüş sayılarla.",
+      "indexMetaTitle": "Perry'yi Bun, Deno, Electron, Tauri, React Native ve Static Hermes ile karşılaştırın",
+      "indexMetaDescription": "Geliştiricilerin başvurduğu alternatiflere karşı Perry'nin yan yana karşılaştırmaları: TypeScript çalışma zamanları (Bun, Deno), AOT TS derleyicileri (Static Hermes) ve çapraz platform UI framework'leri (Electron, Tauri, React Native).",
+      "backToCompare": "Karşılaştırmalara geri dön",
+      "lastUpdated": "Son güncelleme",
+      "whatIs": "{name} nedir?",
+      "sideBySide": "Yan yana",
+      "feature": "Özellik",
+      "wherePerryWins": "Perry'nin kazandığı yerler",
+      "whereCompetitorWins": "{name}'in kazandığı yerler",
+      "whenChoose": "{name}'i ne zaman seçmeli",
+      "verdict": "Karar",
+      "ctaTitle": "Perry'yi deneyin",
+      "ctaSubtitle": "TypeScript'inizi bugün yerel koda derleyin.",
+      "category": {
+        "runtime": "TypeScript çalışma zamanı",
+        "compiler": "TS-yerel derleyici",
+        "ui-framework": "Çapraz platform UI"
+      },
+      "sources": "Kaynaklar",
+      "factsLanguageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
+    },
+    "electronAlternatives": {
+      "title": "TypeScript İçin Electron Alternatifleri",
+      "tldr": "2026'da TypeScript masaüstü uygulamaları için dört gerçekçi yol: Electron, Tauri, Bun tek dosyalı ikili dosyalar ve Perry'nin yerel widget'ları. İkili dosya boyutu, bellek, UI yığını ve dil dürüstçe karşılaştırılıyor."
+    },
+    "getStarted": "Başlayın"
+  },
+  "footer": {
+    "tagline": "Açık kaynaklı, ahead-of-time bir TypeScript derleyicisi. Rust ile, SWC ve LLVM üzerine geliştirildi.",
+    "served": "Bu sayfa, Perry ile derlenmiş yerel bir ikili dosya tarafından sunuldu.",
+    "source": "Sunucu kaynak kodunu görüntüle",
+    "rights": "© 2026 Perry · MIT lisanslı",
+    "legal": "Yasal bildirim",
+    "privacy": "Gizlilik",
+    "columns": [
+      {
+        "title": "Ürün",
+        "items": [
+          "Başlarken",
+          "Showcase",
+          "Perry Publish",
+          "Yol Haritası",
+          "Enterprise"
+        ]
+      },
+      {
+        "title": "Öğren",
+        "items": [
+          "Dokümantasyon",
+          "Blog",
+          "Karşılaştır",
+          "İç yapı",
+          "Coop"
+        ]
+      },
+      {
+        "title": "Topluluk",
+        "items": [
+          "GitHub",
+          "Discord",
+          "Sorunlar",
+          "Katkıda Bulunma",
+          "Bülten"
+        ]
+      }
+    ]
+  },
+  "guides": {
+    "factsLanguageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
+  },
+  "home": {
+    "benchmarks": {
+      "title": "Node.js'e karşı benchmark'lar,\nkazanılanlar ve kaybedilenler.",
+      "meta": [
+        "Perry {perry} · Node.js {node}",
+        "{cpu} · macOS · {date}",
+        "gerçek süre ms · düşük olan daha iyi"
+      ],
+      "faster": "daha hızlı",
+      "benchmark": "BENCHMARK",
+      "perryFaster": "← PERRY DAHA HIZLI",
+      "nodeFaster": "NODE DAHA HIZLI →",
+      "ratio": "ORAN",
+      "rows": [
+        "Dize birleştirme döngüsü",
+        "1M nesne",
+        "10M öğe",
+        "Karmaşık sayı yinelemesi",
+        "Ağaç oluşturma + gezinme",
+        "Sınıf metodu çağrıları"
+      ],
+      "rowFaster": "daha hızlı",
+      "rowSlower": "daha yavaş",
+      "even": "≈ başa baş",
+      "footnote": "Perry şu anda şunlarda daha yavaş: {list}.",
+      "all": "{n} benchmark'ın tamamı ve ham JSON"
+    },
+    "builtInTheOpen": {
+      "title": "Açık geliştiriliyor.",
+      "aside": "Perry {started} tarihinde başladı ve henüz 1.0 öncesinde. Tüm çalışmalar GitHub'daki herkese açık pull request'lerde yürütülüyor.",
+      "merged": [
+        "birleştirilen pull request",
+        "{started} tarihinden beri"
+      ],
+      "perDay": [
+        "günlük birleştirme",
+        "son 30 günde"
+      ],
+      "contributors": [
+        "katkıda bulunan",
+        "GitHub'da"
+      ],
+      "stars": [
+        "GitHub yıldızı",
+        "{forks} fork"
+      ],
+      "source": "Rakamlar derleme sırasında GitHub API'sinden okunur.",
+      "browse": "Pull request'lere göz atın"
+    },
+    "community": {
+      "title": "Topluluğa katılın.",
+      "discord": "Bakımcılarla ve diğer geliştiricilerle konuşun",
+      "github": "{stars} yıldız · MIT · issue'lar ve tartışmalar",
+      "newsletter": [
+        "Bülten",
+        "Sürüm notları ve mühendislik yazıları"
+      ],
+      "log": "Mühendislik günlüğünden",
+      "allPosts": "Tüm yazılar"
+    },
+    "ecosystem": {
+      "title": "Aynı araç zinciriyle test edin,\nyayınlayın ve barındırın.",
+      "aside": "Derleyici işin merkezinde. Test, yayınlama ve barındırmayı bu araçlar üstlenir.",
+      "steps": [
+        "DERLE",
+        "TEST ET",
+        "YAYINLA",
+        "BARINDIR"
+      ],
+      "descriptions": [
+        "TypeScript'ten 11 platform için yerel ikili dosyaya.",
+        "Uygulamanızın gerçek widget'larını kullanan UI testleri.",
+        "main.ts'ten App Store'a: derleyin, imzalayın, doğrulayın ve gönderin.",
+        "Perry ile derlenmiş TypeScript uygulamalarını HTTP üzerinden çalıştırır."
+      ],
+      "perryStatus": "MIT · açık kaynak",
+      "coopStatus": "1.0 öncesi"
+    },
+    "faq": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "İnsanların ilk ikili dosyalarını derlemeden önce sorduğu her şey",
+      "items": [
+        {
+          "question": "Perry'nin Node.js'e veya bir runtime'a ihtiyacı var mı?",
+          "answer": "Yerel Perry ikili dosyaları; Node.js, Bun, Deno veya harici bir JavaScript motoru kurulu olmadan çalışır. Bununla birlikte, statik olarak bağlanmış Perry runtime'ını ve çöp toplayıcısını içerirler. Motor semantiğine ihtiyaç duyan paketler, isteğe bağlı gömülü V8 yedeğini kullanabilir."
+        },
+        {
+          "question": "Derlenen ikili dosyalar ne kadar büyük?",
+          "answer": "Boyut; hedefe, içe aktarmalara ve derleme profiline bağlıdır. Yayımlanan örnekler, hello world için yaklaşık 330 KB'tan Mango için yaklaşık 7 MB'a kadar uzanır; tam standart kütüphaneli veya isteğe bağlı V8 içeren derlemeler çok daha büyük olabilir. Her boyutu evrensel bir çıktı boyutu olarak değil, ölçülmüş bir örnek olarak değerlendirin."
+        },
+        {
+          "question": "npm paketlerini kullanabilir miyim?",
+          "answer": "Birçok saf TypeScript/JavaScript paketi yerel olarak derlenir ve yaklaşık 50 paket/API uygulaması takip edilmektedir. Uyumluluk evrensel değildir: yerel eklentiler, desteklenmeyen dinamik davranışlar veya motora özgü semantik kullanan paketler isteğe bağlı V8 yedeğine ihtiyaç duyabilir ya da hiç çalışmayabilir. perry check komutunu çalıştırın ve sınırlamalara göz atın."
+        },
+        {
+          "question": "Perry hangi platformları destekliyor?",
+          "answer": "Perry 11 hedefi belgeler: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux ve Web/WASM. Web ve WASM takma adlardır; HarmonyOS ayrı bir önizlemedir. Platformların olgunluğu ve API kapsamı farklılık gösterdiğinden platform kılavuzuna başvurun."
+        },
+        {
+          "question": "Perry ücretsiz ve açık kaynaklı mı?",
+          "answer": "Derleyici ve runtime deposu MIT lisanslıdır ve yerel derleme için hesap gerekmez. Barındırılan Perry Publish ve ticari destek ayrı hizmetlerdir; kullanılabilirlik, limitler ve fiyatlar hizmetin içinde veya yazılı olarak teyit edilir."
+        },
+        {
+          "question": "Perry, Bun veya Deno compile'dan nasıl farklı?",
+          "answer": "Bun ve Deno'nun bağımsız yürütülebilir dosyaları kendi runtime'larını paketler; Perry'nin yerel derlemeleri ise LLVM üzerinden derlenir ve varsayılan olarak bir JavaScript motoru gömmez, ancak Perry runtime'ını ve GC'yi statik olarak bağlar. Kesin boyut ve başlatma karşılaştırmaları sürüme, platforma ve iş yüküne göre değişir. Tarihli <bunLink>Perry vs Bun</bunLink> ve <denoLink>Perry vs Deno</denoLink> sayfalarına bakın."
+        },
+        {
+          "question": "Perry, Electron veya Tauri'den nasıl farklı?",
+          "answer": "Electron, Chromium ve Node.js ile birlikte gelir; Tauri, yerel taraftaki uygulama koduyla birlikte sistem webview'ını kullanır. Perry ise desteklendiği yerlerde UI modelini platform bileşenlerine eşler. Paket boyutu ve platform yetenekleri değişkenlik gösterdiğinden, evrensel bir boyut iddiası yerine tarihli <electronLink>Perry vs Electron</electronLink> ve <tauriLink>Perry vs Tauri</tauriLink> karşılaştırmalarını kullanın."
+        },
+        {
+          "question": "Perry ne kadar olgun?",
+          "answer": "Perry henüz 1.0 öncesi aşamadadır ve hızla değişmektedir. Bugün gerçek projelerde kullanılıyor, ancak dil, paket ve platform eşdeğerliği üzerinde hâlâ aktif olarak çalışılıyor. Bir üretim iş yükünü Perry'ye emanet etmeden önce <showcaseLink>vitrini</showcaseLink>, mevcut sınırlamaları ve değişiklik günlüğünü inceleyin."
+        }
+      ],
+      "more": "Başka sorularınız mı var? <guideLink>Başlarken kılavuzunu</guideLink> okuyun veya <discussionsLink>GitHub Discussions</discussionsLink>'da sorun."
+    },
+    "forTeams": {
+      "title": "Electron veya React Native'den geçişte yardıma mı ihtiyacınız var?",
+      "body": "Perry, bakımcıları tarafından yürütülen bağımsız bir projedir. Şirketinizin bir platforma, pakete veya özelliğe ihtiyacı varsa bize ulaşın. Kapsam, takvim ve koşullar yazılı olarak kararlaştırılır.",
+      "offers": [
+        {
+          "name": "Geçiş incelemeleri",
+          "description": "Electron veya React Native uygulamanızı inceler, bugün neyin derlendiğini ve neyin üzerinde çalışılması gerektiğini söyleriz."
+        },
+        {
+          "name": "Birlikte uygulama",
+          "description": "Ekibiniz ilk Perry derlemesini yayınlarken bakımcılarla birlikte çalışın."
+        },
+        {
+          "name": "Sponsorlu özellikler",
+          "description": "Bir widget'ı, Node modülünü veya platformu finanse edin. Çalışma açık kaynak derleyiciye eklenir."
+        },
+        {
+          "name": "Barındırılan derlemeler ve destek",
+          "description": "İmzalama, doğrulama ve sürüm planlaması; destek koşulları sözleşmenizde belirlenir."
+        }
+      ],
+      "contactNote": "Bize ürününüzü, hedef platformlarınızı ve takviminizi anlatın.",
+      "teams": "Ekipler için Perry"
+    },
+    "getStarted": {
+      "title": "Perry'yi\nkurun.",
+      "copy": "Komutu kopyala",
+      "rows": [
+        [
+          "macOS",
+          "brew install perryts/perry/perry"
+        ],
+        [
+          "Tüm sistemler",
+          "npm i -g @perryts/perry"
+        ],
+        [
+          "Windows",
+          "winget install PerryTS.Perry"
+        ],
+        [
+          "Ardından",
+          "perry init my-app && perry run ."
+        ]
+      ]
+    },
+    "hero": {
+      "eyebrow": "AHEAD-OF-TIME TYPESCRIPT DERLEYİCİSİ · SWC + LLVM",
+      "title": "TypeScript kodunuz,\nyerel koda derlenmiş.",
+      "sub": "Perry, TypeScript ve JavaScript'i küçük bir yerel yürütülebilir dosyaya derler. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok.",
+      "docs": "Dokümantasyonu okuyun",
+      "copyLabel": "Kurulum komutunu kopyala"
+    },
+    "howItWorks": {
+      "title": "Perry uygulamanızı\nnasıl derler.",
+      "aside": "SWC kodunuzu ayrıştırır, Perry onu alt seviyeye indirir ve LLVM makine kodu üretir. Çalışma zamanı ve çöp toplayıcı aynı ikili dosyaya bağlanır.",
+      "stages": [
+        {
+          "name": "main.ts / .js",
+          "tool": "Kaynak",
+          "desc": "TypeScript veya düz JavaScript. Sınıflar, generic'ler, async/await ve npm paketleri.",
+          "mono": true
+        },
+        {
+          "name": "Ayrıştırma",
+          "tool": "SWC",
+          "desc": "Hızlı biçimde AST'ye ayrıştırma."
+        },
+        {
+          "name": "Dönüştürme",
+          "tool": "Perry IR",
+          "desc": "Tür çözümleme ve lowering."
+        },
+        {
+          "name": "Codegen",
+          "tool": "LLVM",
+          "desc": "ARM64, x86-64 ve WASM için makine kodu.",
+          "accent": true
+        },
+        {
+          "name": "./main",
+          "tool": "Yürütülebilir dosya",
+          "desc": "Tek bir dosya, ~330 KB'tan başlar.",
+          "mono": true
+        }
+      ]
+    },
+    "nativeUi": {
+      "title": "Tek UI kod tabanı,\non bir yerel platform.",
+      "aside": "perry/ui, stack'ler üzerine kurulu bildirimsel bir UI kütüphanesidir. Her widget platformun kendi araç takımına karşılık gelir: AppKit, UIKit, Win32, GTK4, Android Views veya DOM.",
+      "fan": "perry compile",
+      "toolkitsLabel": "Yerel araç takımları ve kapsadıkları platformlar",
+      "preview": "önizleme",
+      "legend": {
+        "broad": "geniş",
+        "core": "temel · eksikler belgelenmiş",
+        "preview": "önizleme"
+      },
+      "widgets": "35+ widget",
+      "widgetsDesc": "State(), stack'ler, spacer'lar.\nCSS yok."
+    },
+    "nodeParity": {
+      "caption": "Node 26 uyumluluğu için hedeftir. Bugün {total} testin {passing} tanesi geçiyor.",
+      "body": "Node 26'nın test paketini modül modül Perry üzerinde çalıştırıp çıktıyı Node ile karşılaştırıyoruz. {modules} modülde {total} test. Başarısız testler depoda listelenir.",
+      "progress": "{passing} / {total} geçti",
+      "target": "hedef: {target}%",
+      "npmTitle": "GERÇEK NPM PAKETLERİ, YEREL OLARAK DERLENMİŞ",
+      "npmList": "Fastify · Express · mysql2 · pg · ioredis · ws · bcrypt · jsonwebtoken ve daha fazlası. Düz JavaScript de derlenir. Bilinen eksikler depoda listelenir.",
+      "wall": "TAKİP EDİLEN {modules} node:* MODÜLÜ",
+      "perModule": "Modül bazında başarı oranları →"
+    },
+    "realCode": {
+      "title": "Gerçek projeler,\nPerry ile derlendi.",
+      "apps": "Perry ile geliştirilen uygulamalar",
+      "kicker": "VAKA · CLAUDE CODE",
+      "unit": "npm'deki küçültülmüş\ncli.js",
+      "description": "Perry'yi npm'in Claude Code için dağıttığı pakete yönelttik. Yerel ikili dosya açılıyor, oturum açıyor, gerçek bir API yanıtını akış olarak alıyor ve yazdıklarınızı ekrana çiziyor.",
+      "fixes": "bu süreçte eklenen derleyici düzeltmesi",
+      "writeUp": "Yazıyı okuyun",
+      "more": [
+        {
+          "kicker": "NPM PAKETLERİ",
+          "title": "axios · zod v4 · express\nfastify · hono",
+          "description": "Saf TypeScript ve JavaScript paketleri yerel olarak derlenir. Bazıları isteğe bağlı V8 yedeğine ihtiyaç duyar."
+        },
+        {
+          "kicker": "FRAMEWORK'LER",
+          "title": "Hono · tRPC · Strapi",
+          "description": "2 MB'ın altında yerel ARM64 yürütülebilir dosyaları, bir saniyenin altında derlenir."
+        },
+        {
+          "kicker": "BU SİTE",
+          "title": "perryts.com",
+          "description": "Bu sayfayı sunan sunucu, Perry ile derlenmiş bir ikili dosyadır."
+        }
+      ]
+    },
+    "replaceStack": {
+      "title": "Her uygulamayla birlikte\ntarayıcı dağıtmayı bırakın.",
+      "sub": "Electron, Chromium'u paketler. React Native bir JavaScript motoru paketler. Perry kodunuzu makine koduna derler; ek olarak dağıtılacak hiçbir şey kalmaz.",
+      "caption": "Electron, React Native ve Perry karşılaştırması",
+      "columns": [
+        {
+          "name": "Electron",
+          "sub": "Uygulama başına Chromium + Node.js"
+        },
+        {
+          "name": "React Native",
+          "sub": "JS motoru + yerel görünümler"
+        },
+        {
+          "name": "Perry",
+          "sub": "LLVM makine kodu"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Dağıtılan",
+          "values": [
+            "JS kodunuz + tam bir tarayıcı",
+            "JS paketiniz + bir motor",
+            "Tek bir yerel yürütülebilir dosya"
+          ]
+        },
+        {
+          "key": "UI",
+          "values": [
+            "Webview içinde HTML/CSS",
+            "Köprü üzerinden yerel görünümler",
+            "AppKit, UIKit, Win32, GTK4, Android, DOM"
+          ]
+        },
+        {
+          "key": "Tek kod tabanından platformlar",
+          "values": [
+            "Masaüstü",
+            "Önce mobil",
+            "11: masaüstü, mobil, saat, TV ve web"
+          ]
+        },
+        {
+          "key": "Çalışma zamanında JavaScript",
+          "values": [
+            "Evet",
+            "Evet",
+            "Hayır. Gereken paketler için isteğe bağlı V8 yedeği"
+          ]
+        },
+        {
+          "key": "Uygulama boyutu",
+          "values": [
+            "Chromium içerir",
+            "Bir JS motoru içerir",
+            "~330 KB hello world"
+          ]
+        },
+        {
+          "key": "Dürüst ödünleşim",
+          "values": [
+            "Olgun, devasa ekosistem",
+            "Mobilde olgun",
+            "Pratik bir TS + Node alt kümesi uygular; 1.0 öncesi"
+          ]
+        }
+      ],
+      "note": "Her karşılaştırma, ilgili framework'ün kendi dokümantasyonuna bağlantı verir.",
+      "link": "Kaynaklı karşılaştırmaları okuyun"
+    },
+    "roadmap": {
+      "title": "Yol haritası:\nönce çekirdek.",
+      "body": "Perry v0.5 sürümünde ve henüz 0.6'ya ulaşmadı. Çekirdek kararlı hale gelene kadar işin büyük kısmı Node uyumluluğuna ve performansa gidiyor.",
+      "releases": "GitHub'daki sürüm notları",
+      "current": "ŞU AN",
+      "phases": [
+        {
+          "key": "ŞİMDİ",
+          "when": "v0.5 → 0.6",
+          "title": "Çekirdeği kararlı hale getirmek",
+          "items": [
+            "Node 26 uyumluluğunu ~%77'den %97'ye taşımak",
+            "Performans: GC, dağıtım, başlatma, ikili dosya boyutu",
+            "TypeScript ve npm eksiklerini kapatmak: Proxy, dekoratörler, zayıf referanslar"
+          ]
+        },
+        {
+          "key": "SONRA",
+          "when": "çekirdekten sonra",
+          "title": "perry/ui",
+          "items": [
+            "Daha geniş widget kapsamı",
+            "11 platformda UI eşitliği",
+            "Core ve önizleme platformlarının bir seviye yükselmesi"
+          ]
+        },
+        {
+          "key": "İLERİDE",
+          "when": "kararlı bir temel üzerinde",
+          "title": "Uzantılar",
+          "items": [
+            "Perry Publish ile barındırılan derlemeler ve imzalama",
+            "Coop ile barındırma",
+            "Daha fazla birinci taraf paket ve araç"
+          ]
+        }
+      ]
+    },
+    "specStrip": {
+      "label": "Bir bakışta Perry",
+      "specs": [
+        {
+          "value": "11",
+          "label": "belgelenmiş platform",
+          "note": "+ HarmonyOS önizlemesi"
+        },
+        {
+          "value": "~330 KB",
+          "label": "hello-world ikili dosyası",
+          "note": "özelliklerle birlikte büyür"
+        },
+        {
+          "value": "3,5 MB",
+          "label": "en yüksek bellek, JSON hattı",
+          "note": "Node.js 36 MB kullanır"
+        },
+        {
+          "value": "35+",
+          "label": "yerel widget",
+          "note": "WebView yok, CSS yok"
+        }
+      ]
+    },
+    "sponsors": {
+      "title": "Sponsorlarımız",
+      "premium": "Premium sponsor",
+      "sponsor": "Sponsor · nubjs.com",
+      "pitch": "Perry'ye sponsor olmak, açık kaynak derleyici üzerindeki çalışmaları finanse eder.",
+      "cta": "Sponsor olun"
+    }
+  },
+  "nav": {
+    "items": {
+      "docs": "Dokümantasyon",
+      "showcase": "Showcase",
+      "benchmarks": "Benchmark'lar",
+      "publish": "Publish",
+      "teams": "Ekipler için",
+      "blog": "Blog"
+    },
+    "menu": "Menü",
+    "language": "Dili değiştir",
+    "home": "Perry ana sayfa"
+  },
+  "newsletterForm": {
+    "placeholder": "you@example.com",
+    "subscribe": "Abone ol",
+    "success": "Teşekkürler — listedesiniz.",
+    "errorInvalid": "Lütfen geçerli bir e-posta girin.",
+    "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "blockTitle": "Bu yazıyı beğendin mi? Bir sonrakini de al.",
+    "blockSubtitle": "Perry sürümleri ve sıradaki çalışmalarımıza dair kısa notlar.",
+    "privacy": "Your email is sent to Resend for the Perry newsletter. You can request unsubscribe or deletion at any time.",
+    "privacyLink": "Privacy notice"
+  },
+  "pages": {
+    "coop": {
+      "metaTitle": "Coop — Perry için yerel TypeScript barındırma",
+      "metaDescription": "Coop, Perry ile derlenen TypeScript uygulamalarını paylaşılan çalışma zamanı sağlayıcıları, yalıtılmış dağıtım worker'ları ve içerik adresli geri dönüşlerle barındırır.",
+      "adjacent": "Perry'ye komşu proje · Pre-1.0",
+      "tagline": "Perry kodunun dinlenip çalışabileceği bir yer.",
+      "intro": "Coop, Perry uyumlu bir TypeScript dizinini yerel uygulama kitaplığına dönüştürüp HTTP üzerinden sunar; Perry çalışma zamanı ve standart kitaplık ise makine başına yalnızca bir kez sağlanır.",
+      "experimental": "Sahibi olduğunuz kod için deneysel altyapı",
+      "explore": "Coop'u keşfet",
+      "viewSource": "Kaynak kodu gör",
+      "quickStart": "Hızlı başlangıç",
+      "facts": [
+        "Paylaşılan çalışma zamanı sağlayıcıları",
+        "Dağıtım başına bir worker",
+        "Dağıt, incele ve geri al"
+      ],
+      "appLibrary": "Uygulama kitaplığı",
+      "worker": "Coop worker",
+      "sharedProviders": "Paylaşılan çalışma zamanı + standart kitaplık",
+      "onePerMachine": "makine başına bir",
+      "diagramAria": "TypeScript, Perry tarafından uygulama kitaplığına derlenir; Coop worker bunu yükler ve paylaşılan çalışma zamanı sağlayıcılarına bağlar.",
+      "whyTitle": "Perry derler. Coop çalışır tutar.",
+      "whyBody": "Fark, dil çalışma zamanının nerede yaşadığıdır. Coop uygulama imajını küçük tutar ve uyumlu Perry çalışma zamanı ile standart kitaplığı host düzeyinde sağlar.",
+      "perryTitle": "Normal bir Perry çalıştırılabilir dosyası",
+      "perryBody": "Uygulama, çalışma zamanı, çöp toplayıcı ve seçilen standart kitaplık özellikleri hedefe özgü tek bir çalıştırılabilir dosyaya bağlanır.",
+      "coopTitle": "Bir Coop dağıtımı",
+      "coopBody": "Uygulama yalnızca app içeren paylaşılan kitaplık olarak derlenir. Uyumlu sağlayıcılar makine başına bir kez oluşturulur ve app eşlenmeden önce kimlikleri doğrulanır.",
+      "architectureTitle": "Hata sınırına göre ayrılmış",
+      "architectureBody": "Makine, her dağıtım ve her istek ayrı sorumluluklara sahiptir. Uygulama kodu makine daemon'unda asla çalışmaz.",
+      "tiers": [
+        {
+          "title": "Daemon · makine başına bir",
+          "body": "TLS'i sonlandırır; host ve yola göre yönlendirir; dağıtımları, artefaktları, yönetim API'sini ve metrikleri yönetir."
+        },
+        {
+          "title": "Worker · dağıtım başına bir",
+          "body": "Uygulama kitaplığını yükler, Perry çalışma zamanı durumunu sahiplenir ve cron ile kalıcı kuyruk işlerini çalıştırır."
+        },
+        {
+          "title": "Çağrı · istek başına bir",
+          "body": "Dağıtım worker'ı içinde görev olarak çalışır ve istek başına süreç başlatmadan adres alanını paylaşır."
+        }
+      ],
+      "workingTitle": "Bugün çalışanlar",
+      "workingBody": "Coop test edilmiş bir altyapıdır ancak henüz tamamlanmış bir barındırma ürünü değildir. Güncel uygulama şunları içerir:",
+      "workingItems": [
+        "TypeScript derleme, HTTP yönlendirme ve statik bağlama",
+        "Paylaşılan sağlayıcı kimlik kontrolleri",
+        "İçerik adresli dağıtımlar ve geri dönüş",
+        "Cron ve kalıcı kuyruk",
+        "Özel worker'lar için KV ve nesne depolama",
+        "CLI, Prometheus metrikleri, alarmlar ve Grafana panosu"
+      ],
+      "developerTitle": "Küçük bir dağıtım yüzeyi",
+      "developerBody": "Dağıtım, coop.toml ve bir veya daha fazla handler içeren dizindir. Coop bunu derler, sonucu önbelleğe alır ve yerel worker başlatır.",
+      "configLabel": "coop.toml",
+      "handlerLabel": "handlers/hello.ts",
+      "runLabel": "Yerelde çalıştır",
+      "fitTitle": "Bilinçli olarak dar",
+      "rightTitle": "Bugün iyi uyduğu yerler",
+      "rightItems": [
+        "Koduna sahip olduğunuz servisler ve küçük uygulamalar",
+        "Tek makinede portföy çalıştıran tek operatör",
+        "Perry'nin TypeScript alt kümesinde derlenen iş yükleri",
+        "Yoğunluk, açık artefaktlar ve hızlı geri dönüşe önem veren ekipler"
+      ],
+      "notYetTitle": "Coop'un henüz vaat etmedikleri",
+      "notYetItems": [
+        "Her npm veya Node.js paketiyle uyumluluk",
+        "Güvenilmeyen üçüncü taraf kodu için sandbox",
+        "Kubernetes alternatifi veya çok bölgeli platform",
+        "Node.js'e karşı evrensel performans kazancı"
+      ],
+      "benchmarkTitle": "Yoğunluk tezdir. Benchmark çalışması sürüyor.",
+      "benchmarkBody": "Güncel ölçümler iş yüküne göre farklı yönleri gösteriyor. Coop küçük Linux uygulamalarında umut verici yoğunluk sağlarken başka bir testte tam Next.js rotası Node.js'ten fazla CPU kullandı. Sonuçları alıntılamadan önce metodolojiyi okuyun.",
+      "benchmarks": "Benchmark'ları oku",
+      "status": "Güncel durumu gör",
+      "closingTitle": "Perry ile üret. Coop'ta çalıştır.",
+      "closingBody": "Kaynağı keşfedin, örnek dağıtımı çalıştırın ve paylaşılan çalışma zamanı modelini güvenilir altyapıya dönüştürmeye yardımcı olun."
+    },
+    "enterprise": {
+      "metaTitle": "Perry for Teams",
+      "metaDescription": "Discuss production support, migration help, and hosted Perry requirements with the team. Scope, response targets, pricing, and service terms are agreed in writing.",
+      "availableTitle": "Available to discuss",
+      "available1": "Architecture and migration reviews",
+      "available2": "Onboarding and paired implementation sessions",
+      "available3": "Release planning and upgrade guidance",
+      "available4": "Hosted build, signing, and verification requirements",
+      "scopedTitle": "Defined in your agreement",
+      "scoped1": "Support channels and response targets",
+      "scoped2": "Release maintenance or backport commitments",
+      "scoped3": "Hosted-service platform coverage, quotas, and infrastructure",
+      "scoped4": "Pricing, term, procurement, security, and compliance deliverables",
+      "termsTitle": "No implied SLA or self-hosting promise",
+      "termsBody": "This page is an invitation to scope support, not a service-level agreement. Perry does not promise a specific response time, maintenance period, SSO feature, audit-log feature, quota, or complete self-hosted hub unless that term appears in a signed agreement.",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur.",
+      "heroTitle": "Production support scoped to your team",
+      "heroSubtitle": "Talk directly with the Perry maintainers about migration, architecture, release planning, and hosted build requirements. Availability and terms are confirmed before purchase.",
+      "heroCta": "Email ralph@perryts.com",
+      "closingTitle": "Talk to the maintainers",
+      "closingBody": "Describe your product, targets, timeline, and support needs. The team will confirm what is available and put any commitments in writing.",
+      "closingCta": "Email ralph@perryts.com",
+      "pricing": "Fiyatlandırma"
+    },
+    "home": {
+      "title": "Perry — TypeScript'i Yerel Çalıştırılabilir Dosyalara Derleyin | TypeScript Yerel Derleyicisi",
+      "description": "Perry, açık kaynaklı ve ahead-of-time çalışan bir TypeScript derleyicisidir. Tek kod tabanı, 11 platform, çalışma zamanında Node.js yok."
+    },
+    "internals": {
+      "metaTitle": "Perry compiler internals",
+      "metaDescription": "How Perry selects value representations, specializes known code, uses LLVM, and preserves runtime fallbacks for dynamic JavaScript behavior.",
+      "title": "Compiler <gradient>Internals</gradient>",
+      "subtitle": "The key design decisions that make Perry fast",
+      "nanBoxing1": "Perry uses a 64-bit JavaScript value representation where dynamic values can carry numbers or tagged pointer-like payloads. Representation selection can keep proved values unboxed instead of forcing every value through the generic form.",
+      "nanBoxing2": "Numbers use IEEE 754 representation where possible; strings, objects, closures, and other heap values use tagged encodings and GC-managed storage. The compiler and runtime cooperate to preserve JavaScript semantics at dynamic boundaries.",
+      "monomorphization1": "Generics and known call shapes can be specialized at compile time. Perry also preserves dynamic fallbacks where the receiver or value type is not proved.",
+      "monomorphization2": "Specialization can turn known numeric and object operations into direct machine operations, but TypeScript annotations are mostly erased and do not guarantee a concrete runtime representation by themselves.",
+      "staticDispatch1": "Known receivers can use direct calls and inlining. Unknown or dynamic receivers use runtime method dispatch, prototype lookup, and class-vtable paths.",
+      "staticDispatch2": "This hybrid model gives LLVM static optimization opportunities without claiming that every JavaScript method call is resolved at compile time.",
+      "zeroCost1": "TypeScript types guide compilation, while Perry still links a runtime and garbage collector to implement JavaScript semantics, async work, objects, strings, and dynamic values.",
+      "zeroCost2": "Interfaces and many annotations erase cleanly, but classes, dynamic dispatch, allocation, and GC can have runtime costs. Perry optimizes proved cases rather than promising zero-cost abstraction universally.",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur.",
+      "backToHome": "Ana Sayfaya Dön"
+    },
+    "newsletter": {
+      "pageTitle": "Perry Bülteni",
+      "pageDescription": "Yeni Perry sürümleri, platform desteği ve mühendislik yazıları hakkında güncellemeler. Spam yok.",
+      "pageSubtitle": "Perry'de neler çıkıyor — sürümler, platformlar ve mühendislik derinlemesine yazıları hakkında kısa notlar.",
+      "bullet1Title": "Sürüm notları",
+      "bullet1Body": "Her önemli Perry sürümü, neyin değiştiği ve nedeniyle birlikte.",
+      "bullet2Title": "Mühendislik yazıları",
+      "bullet2Body": "Derleyici iç yapısı, benchmark'lar ve öğrendiklerimiz.",
+      "bullet3Title": "Privacy controls",
+      "bullet3Body": "Request unsubscribe or deletion at any time; the privacy notice explains how the address is handled."
+    },
+    "pricing": {
+      "title": "Perry pricing and availability",
+      "subtitle": "The compiler and local build workflow are free and MIT licensed. Hosted build, signing, verification, and support are separate services whose availability and terms must be confirmed.",
+      "localTitle": "Compiler and local builds",
+      "localDescription": "Use Perry locally without an account or usage fee.",
+      "localFeature1": "MIT-licensed compiler and runtime",
+      "localFeature2": "Local compile, run, check, doctor, and verify workflows",
+      "localFeature3": "No hosted-service quota for work performed on your own machine",
+      "viewSource": "View source and license",
+      "hostedAvailability": "Availability varies",
+      "hostedTitle": "Hosted Perry Publish",
+      "hostedDescription": "The CLI contains publish clients and workflows. Hosted platform coverage, quotas, pricing, queue priority, and overages are confirmed in the service before purchase.",
+      "hostedFeature1": "Build and packaging workflows for supported targets",
+      "hostedFeature2": "Signing and store submission when credentials and platform prerequisites are configured",
+      "hostedFeature3": "Verification depth depends on the selected target and hosted environment",
+      "publishDetails": "Read how publish works",
+      "needTermsTitle": "Need hosted builds or a support agreement?",
+      "needTermsDescription": "Contact the Perry team for current availability, platform coverage, pricing, and written service terms.",
+      "contact": "Contact the team",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur.",
+      "selfHostTitle": "What is open source and self-hostable today?",
+      "selfHostDescription": "The Perry compiler and runtime in the linked repository are MIT licensed. That repository includes publish and verification clients plus configurable endpoints, but it does not include a complete public hub, verification service, or worker deployment. Perry therefore does not currently advertise “clone one repo and self-host everything.”",
+      "faqTitle": "Sorular",
+      "q1": "Does local compilation require an account?",
+      "a1": "No. Installing Perry and compiling on your own machine does not require a Perry account.",
+      "q2": "What are the hosted quotas and prices?",
+      "a2": "They are not promised on this page. Confirm current availability, limits, and charges in the hosted service or in writing before relying on them.",
+      "q3": "Can I self-host the complete publish service?",
+      "a3": "Not from the Perry compiler repository alone. Custom endpoints are supported by the client, but a complete public hub and worker deployment is not currently included there."
+    },
+    "privacy": {
+      "metaTitle": "Privacy notice",
+      "metaDescription": "How perryts.com handles analytics and newsletter subscriptions.",
+      "title": "Privacy notice",
+      "updated": "Last updated: August 27, 2026",
+      "controllerTitle": "1. Controller",
+      "controllerBody": "Skelpo GmbH, Köttingstraße 41, 58339 Breckerfeld, Germany, operates this website and is responsible for the processing described here.",
+      "dataTitle": "2. Data processed",
+      "dataItems": [
+        "Page-view and technical request data produced when you visit the site.",
+        "Your email address and the source form when you choose to subscribe to the newsletter."
+      ],
+      "analyticsTitle": "3. Analytics",
+      "analyticsBody": "The site loads a Plausible analytics script from pa.skelpo.com to measure page views and understand aggregate site use. The application code does not set an advertising cookie. Technical request data may still be processed by the analytics and hosting infrastructure.",
+      "newsletterTitle": "4. Newsletter and Resend",
+      "newsletterBody": "When you submit the newsletter form, the site sends your email address and a short source label to a server-side subscription endpoint. That endpoint forwards the email address to Resend and the configured Resend audience. The address is used for the requested Perry newsletter and remains there until you unsubscribe, request deletion, or the configured audience is removed.",
+      "purposesTitle": "5. Purposes and legal bases",
+      "purposesItems": [
+        "Operate, secure, and diagnose the website and its supporting services.",
+        "Measure aggregate use and improve the website based on a legitimate interest in operating the service.",
+        "Send the newsletter after your request or consent."
+      ],
+      "retentionTitle": "6. Retention and recipients",
+      "retentionBody": "Skelpo, its hosting and analytics infrastructure, and Resend receive only the data needed for the purposes above. Operational logs are kept according to the relevant service configuration; newsletter contacts remain until unsubscribe or deletion. Contact us for the current retention setting or deletion.",
+      "rightsTitle": "7. Your rights",
+      "rightsItems": [
+        "Request access, correction, deletion, restriction, or portability where applicable.",
+        "Object to processing based on legitimate interests.",
+        "Withdraw newsletter consent at any time without affecting earlier lawful processing.",
+        "Complain to a competent data-protection supervisory authority."
+      ],
+      "contactTitle": "8. Contact",
+      "contactBody": "For privacy questions or requests, contact",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
+    },
+    "pryTitle": "Pry: Perry ile geliştirilmiş yerel JSON görüntüleyici",
+    "publish": {
+      "metaTitle": "Perry Publish workflows",
+      "metaDescription": "Build, signing, verification, and submission workflows in the Perry CLI, with platform and hosted availability caveats.",
+      "title": "Perry Publish",
+      "subtitle": "Use perry publish to drive supported build, signing, packaging, verification, and submission workflows. Exact platform support, credentials, and hosted availability depend on your configuration.",
+      "buildingForIos": "iOS için derleniyor...",
+      "signingCert": "Sertifikanızla imzalanıyor...",
+      "verifyingLaunch": "Running the configured verification steps...",
+      "publishedToAppStore": "Submission requested; final store status is reported by the store.",
+      "buildSign": "Derle ve İmzala",
+      "buildSignPlatforms": "Target, host, SDK, and credential dependent",
+      "distribute": "Dağıt",
+      "distributePlatforms": "Available stores and channels depend on the target",
+      "verify": "Doğrula",
+      "verifyDesc": "Configured launch and UI checks; coverage varies by target",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur.",
+      "seePricing": "Fiyatları gör",
+      "backToHome": "Ana Sayfaya Dön"
+    },
+    "roadmap": {
+      "title": "Yol Haritası",
+      "subtitle": "A current status page, not a frozen release history. Exact support lives in the linked platform, limitations, benchmark, and changelog sources.",
+      "currentTitle": "Verified today",
+      "activeTitle": "Active development areas",
+      "policyTitle": "How to read Perry claims",
+      "currentItems": [
+        "SWC parsing and LLVM ahead-of-time code generation for native TypeScript and JavaScript builds.",
+        "About 97% of the tracked Node suite across 53 modules, plus roughly 50 native package/API implementations.",
+        "Eleven documented targets: macOS, iOS, iPadOS, visionOS, tvOS, watchOS, Android, Wear OS, Windows, Linux, and Web/WASM.",
+        "Web and WASM are aliases for one backend; HarmonyOS is a separate preview.",
+        "The perry compile, run, check, doctor, verify, and publish command surfaces are present in the current CLI."
+      ],
+      "activeItems": [
+        "Closing TypeScript, JavaScript, Node.js, npm-package, Proxy, decorator, weak-reference, and dynamic-code compatibility gaps.",
+        "Improving platform parity, especially core and preview targets.",
+        "GC, representation selection, dynamic dispatch, startup, binary size, and realistic workload performance.",
+        "Hosted build, signing, verification, and distribution operations; public availability and terms are confirmed separately from compiler support."
+      ],
+      "policyItems": [
+        "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
+        "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
+        "Support means documented, tested behavior — not blanket compatibility with every TypeScript program or npm package.",
+        "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
+      ],
+      "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
+      "platformStatus": "Platform status",
+      "knownLimitations": "Known limitations",
+      "benchmarkArtifact": "Benchmark artifact",
+      "changelog": "Changelog",
+      "languageNotice": "Teknik bilgiler ve ölçüm notları, çeviriler arasında sapma olmaması için İngilizce olarak korunur."
+    }
+  },
+  "showcase": {
+    "showcase": {
+      "title": "Showcase",
+      "subtitle": "Public projects built with Perry. Platforms and measurements are listed only where the project or repository currently documents them.",
+      "metaTitle": "Perry ile geliştirilen projeler",
+      "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
+    },
+    "pry": {
+      "subtitle": "Perry ile inşa edilmiş hızlı, yerel JSON görüntüleyici. Ağaç gezinme, arama, klavye kısayolları — TypeScript'ten yerel ikili dosyalara derlendi.",
+      "features": "Özellikler",
+      "treeView": "Ağaç Görünümü",
+      "treeViewDesc": "Derinlemesine iç içe geçmiş JSON yapıları için katlanabilir, gezinilebilir ağaç görüntüleme.",
+      "search": "Arama",
+      "searchDesc": "Anahtar ve değerler üzerinde anında vurgulama ile tam metin araması.",
+      "keyboardShortcuts": "Klavye Kısayolları",
+      "keyboardShortcutsDesc": "Sadece klavye ile gezinin, genişletin, daraltın ve kopyalayın.",
+      "clipboardSupport": "Pano Desteği",
+      "clipboardSupportDesc": "Herhangi bir düğüm veya alt ağacı biçimlendirilmiş JSON olarak panoya kopyalayın.",
+      "statusBar": "Durum Çubuğu",
+      "statusBarDesc": "Düğüm sayısı, geçerli derinlik, dosya boyutu ve ayrıştırma süresini gösterir.",
+      "syntaxColoring": "Sözdizimi Renklendirmesi",
+      "syntaxColoringDesc": "Tipe göre renk kodlu değerler — dizeler, sayılar, boolean'lar, null.",
+      "howItsBuilt": "Nasıl İnşa Edildi",
+      "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
+      "typeScriptSource": "TypeScript Kaynağı",
+      "typeScriptSourceDesc": "Perry'nin yerel UI API'si ile standart TypeScript",
+      "perryCompile": "Perry Compile",
+      "perryCompileDesc": "SWC ayrıştırma → tip çözümleme → LLVM kod üretimi",
+      "nativeBinary": "Yerel İkili Dosya",
+      "nativeBinaryDesc": "Standalone executable with the Perry runtime and GC statically linked; no external Node.js installation required",
+      "platformSupport": "Platform Desteği",
+      "nativeWidgets": "Yerel {framework} widget'ları",
+      "available": "Mevcut",
+      "screenshots": "Ekran Görüntüleri",
+      "macOsScreenshot": "macOS ekran görüntüsü — yakında",
+      "iosScreenshot": "iOS ekran görüntüsü — yakında",
+      "screenshotsNote": "Ekran görüntüleri Pry geliştirmesi ilerledikçe eklenecektir. En son bilgiler için GitHub deposunu kontrol edin."
+    },
+    "common": {
+      "backToHome": "Ana Sayfaya Dön",
+      "viewOnGithub": "GitHub'da Görüntüle",
+      "getStarted": "Başlayın",
+      "readTheBlogPost": "Blog Yazısını Oku",
+      "backToShowcase": "Showcase'e Dön",
+      "backToBlog": "Bloga Dön",
+      "seePricing": "Fiyatları gör",
+      "terminal": "terminal",
+      "comingSoon": "yakında"
+    }
+  }
+}

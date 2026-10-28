@@ -1,0 +1,150 @@
+---
+import { localePath, type Locale } from "../../i18n/index.ts";
+import Lines from "../Lines.astro";
+import LinkArrow from "../LinkArrow.astro";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+const showcaseUrl = localePath(lang, "showcase");
+const writeUpUrl = localePath(lang, "blog/compiling-claude-code");
+
+const t = messages(lang).home.realCode;
+---
+
+<section class="section real">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="t-h2" data-reveal><Lines text={t.title} /></h2>
+      <LinkArrow href={showcaseUrl}>{t.apps}</LinkArrow>
+    </header>
+
+    <div class="body">
+      <article class="case" data-reveal>
+        <p class="kicker accent">{t.kicker}</p>
+        <p class="figure">
+          <span class="figure__n" data-count>13 MB</span>
+          <span class="figure__unit t-mono muted"><Lines text={t.unit} /></span>
+        </p>
+        <p class="case__text muted">{t.description}</p>
+        <p class="stat">
+          <span class="stat__n accent" data-count>160</span>
+          <span class="t-mono muted">{t.fixes}</span>
+        </p>
+        <LinkArrow href={writeUpUrl}>{t.writeUp}</LinkArrow>
+      </article>
+
+      <ul class="more">
+        {t.more.map((item, i) => (
+          <li class="item" data-reveal style={`--i: ${i + 1}`}>
+            <p class="kicker muted">{item.kicker}</p>
+            <h3 class="item__title"><Lines text={item.title} /></h3>
+            <p class="item__text muted">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .real .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    border-top: 1px solid var(--border);
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1.2px;
+  }
+  .case {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 48px 56px 48px 0;
+    border-right: 1px solid var(--border);
+  }
+  .figure {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .figure__n {
+    font-size: clamp(72px, 8.4vw, 120px);
+    font-weight: 600;
+    letter-spacing: -0.042em;
+    line-height: 0.9;
+    white-space: nowrap;
+  }
+  .figure__unit {
+    line-height: 20px;
+  }
+  .case__text {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-block: 8px;
+  }
+  .stat__n {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px 0 40px 48px;
+  }
+  .item + .item {
+    border-top: 1px solid var(--border);
+  }
+  .item__title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    line-height: 30px;
+  }
+  .item__text {
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  @media (max-width: 900px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .body {
+      grid-template-columns: 1fr;
+    }
+    .case {
+      padding-right: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .item {
+      padding-left: 0;
+    }
+  }
+</style>

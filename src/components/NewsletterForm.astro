@@ -1,0 +1,190 @@
+---
+/**
+ * Newsletter sign-up. POSTs JSON `{ email, source }` to /api/subscribe.
+ * "block": full-width band with the pixel wall (end of blog posts). "hero": boxed form for the /newsletter page.
+ */
+import Button from "./Button.astro";
+import PixelWall from "./PixelWall.astro";
+import { localePath, type Locale } from "../i18n/index.ts";
+import { messages } from "../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+  source: string;
+  variant?: "block" | "hero";
+}
+const { lang, source, variant = "block" } = Astro.props;
+
+const t = messages(lang).newsletterForm;
+const id = `newsletter-${source}`;
+---
+
+<div class:list={["newsletter", `newsletter--${variant}`, { "section section--surface": variant === "block" }]}>
+  <div class:list={["inner", { wrap: variant === "block" }]}>
+    <div class="text">
+      <h2 class:list={[variant === "block" ? "t-h2" : "t-h3"]} data-reveal>{t.blockTitle}</h2>
+      <p class="muted" data-reveal style="--i: 1">{t.blockSubtitle}</p>
+    </div>
+    <div class="form-col" data-reveal style="--i: 2">
+      <form
+        class="form"
+        data-newsletter
+        data-source={source}
+        data-sending="…"
+        data-success={t.success}
+        data-error-invalid={t.errorInvalid}
+        data-error-generic={t.errorGeneric}
+      >
+        <label class="sr-only" for={id}>{t.placeholder}</label>
+        <input id={id} class="input" type="email" name="email" required autocomplete="email" placeholder={t.placeholder} />
+        <Button type="submit">{t.subscribe}</Button>
+      </form>
+      <p class="status t-mono" role="status" aria-live="polite"></p>
+      <p class="privacy t-mono muted">
+        {t.privacy} <a href={localePath(lang, "privacy")}>{t.privacyLink}</a>
+      </p>
+    </div>
+  </div>
+  {variant === "block" && <div class="wall"><PixelWall pixel={14} /></div>}
+</div>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>("form[data-newsletter]")) {
+    const status = form.parentElement!.querySelector<HTMLElement>(".status")!;
+    const input = form.querySelector("input")!;
+    const button = form.querySelector("button")!;
+    const d = form.dataset;
+    let sending = false;
+    const show = (state: "idle" | "sending" | "success" | "error", message = "") => {
+      form.dataset.state = state;
+      status.textContent = message;
+      status.dataset.tone = state;
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      sending = true;
+      input.disabled = button.disabled = true;
+      show("sending", d.sending);
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: input.value, source: d.source }),
+        });
+        if (res.ok) {
+          input.value = "";
+          show("success", d.success);
+          return; // stays disabled after success, like the previous form
+        }
+        const data = await res.json().catch(() => ({}));
+        show("error", data?.error === "invalid_email" ? d.errorInvalid : d.errorGeneric);
+      } catch {
+        show("error", d.errorGeneric);
+      }
+      sending = false;
+      input.disabled = button.disabled = false;
+    });
+  }
+</script>
+
+<style>
+  .newsletter.newsletter--block {
+    padding-bottom: 0;
+    border-top: 1px solid var(--border);
+  }
+  .newsletter--hero {
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .newsletter--block .inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 64px;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 560px;
+  }
+  .form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    max-width: 560px;
+  }
+  .form {
+    display: flex;
+    gap: 8px;
+  }
+  .input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 15px;
+  }
+  .input::placeholder {
+    color: var(--text-muted);
+  }
+  .input:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .form :global(:disabled) {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .status:empty {
+    display: none;
+  }
+  .status[data-tone="success"] {
+    color: var(--success);
+  }
+  .status[data-tone="error"] {
+    color: var(--danger);
+  }
+  .privacy {
+    font-size: 12px;
+  }
+  .privacy a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .privacy a:hover {
+    color: var(--text);
+  }
+  .wall {
+    margin-top: 72px;
+  }
+  @media (max-width: 900px) {
+    .newsletter--block .inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+    }
+  }
+  @media (max-width: 640px) {
+    .newsletter--hero {
+      padding: 24px 20px;
+    }
+    .form {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+/** Code or terminal transcript block; each line can carry a tone. Prose styles the <pre>. */
+export interface CodeLine {
+  text: string;
+  prompt?: boolean;
+  tone?: "muted" | "accent" | "success";
+}
+interface Props {
+  lines: CodeLine[];
+}
+const { lines } = Astro.props;
+---
+
+<pre><code>{lines.map((l) => (
+  <span class={l.tone}>{l.prompt && <span class="accent">$ </span>}{l.text}{"\n"}</span>
+))}</code></pre>
+
+<style>
+  .success {
+    color: var(--success);
+  }
+</style>

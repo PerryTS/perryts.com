@@ -1,0 +1,165 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Button from "../../../components/Button.astro";
+import Tag from "../../../components/Tag.astro";
+import Notice from "../../../components/Notice.astro";
+import CheckList from "../../../components/CheckList.astro";
+import Mail from "@lucide/astro/icons/mail";
+import { localeStaticPaths, localePath, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const CONTACT_EMAIL = "ralph@perryts.com";
+
+const t = messages(lang).pages.pricing;
+const faq = [
+  { q: t.q1, a: t.a1 },
+  { q: t.q2, a: t.a2 },
+  { q: t.q3, a: t.a3 },
+];
+---
+
+<Base lang={lang} title={t.title} description={t.subtitle} path="pricing" canonical="/en/pricing/" alternates={["en"]}>
+  <PageHeader title={t.title} lead={t.subtitle}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="plans">
+        <article class="plan" data-reveal>
+          <Tag>MIT</Tag>
+          <h2 class="t-h3">{t.localTitle}</h2>
+          <p class="muted">{t.localDescription}</p>
+          <CheckList items={[t.localFeature1, t.localFeature2, t.localFeature3]} />
+          <Button href={links.github} variant="secondary">{t.viewSource}</Button>
+        </article>
+        <article class="plan" data-reveal style="--i: 1">
+          <Tag>{t.hostedAvailability}</Tag>
+          <h2 class="t-h3">{t.hostedTitle}</h2>
+          <p class="muted">{t.hostedDescription}</p>
+          <CheckList items={[t.hostedFeature1, t.hostedFeature2, t.hostedFeature3]} />
+          <Button href={localePath(lang, "publish")}>{t.publishDetails}</Button>
+        </article>
+      </div>
+
+      <div class="self-host" data-reveal>
+        <h2 class="t-label accent">{t.selfHostTitle}</h2>
+        <p class="t-lead">{t.selfHostDescription}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap faq-wrap">
+      <h2 class="t-h2" data-reveal>{t.faqTitle}</h2>
+      <dl class="faq">
+        {faq.map((item, i) => (
+          <div class="faq__item" data-reveal style={`--i: ${i}`}>
+            <dt>{item.q}</dt>
+            <dd class="muted">{item.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact" data-reveal>
+      <div>
+        <h2 class="t-h3">{t.needTermsTitle}</h2>
+        <p class="muted">{t.needTermsDescription}</p>
+      </div>
+      <Button href={`mailto:${CONTACT_EMAIL}`}><Mail size={16} stroke-width={1.75} aria-hidden="true" />{t.contact}</Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .plan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 40px;
+  }
+  .plan + .plan {
+    border-left: 1px solid var(--border);
+  }
+  .plan :global(.list) {
+    flex: 1;
+  }
+  .self-host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 880px;
+    margin-top: 64px;
+  }
+  .faq-wrap {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+  }
+  .faq {
+    border-top: 1px solid var(--border);
+  }
+  .faq__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-block: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  dt {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  dd {
+    margin: 0;
+  }
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .contact > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 720px;
+  }
+  @media (max-width: 900px) {
+    .plans,
+    .faq-wrap {
+      grid-template-columns: 1fr;
+    }
+    .faq-wrap {
+      gap: 32px;
+    }
+    .plan + .plan {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+    .contact {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 640px) {
+    .plan {
+      padding: 28px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,4 @@
+---
+// Static fallback for `/`. In production the Perry server answers `/` with a 308 to `/en/` first.
+return Astro.redirect("/en/", 308);
+---

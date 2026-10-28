@@ -1,0 +1,37 @@
+---
+import Copy from "@lucide/astro/icons/copy";
+import Check from "@lucide/astro/icons/check";
+
+interface Props {
+  text: string;
+  label?: string;
+}
+const { text, label = "Copy" } = Astro.props;
+---
+
+<button class="copy" type="button" data-copy={text} aria-label={label}>
+  <Copy class="copy__idle" size={15} stroke-width={1.75} aria-hidden="true" />
+  <Check class="copy__done" size={15} stroke-width={2} aria-hidden="true" />
+</button>
+
+<style>
+  .copy {
+    display: inline-grid;
+    place-items: center;
+    color: currentColor;
+    opacity: 0.7;
+  }
+  .copy:hover {
+    opacity: 1;
+  }
+  .copy > :global(*) {
+    grid-area: 1 / 1;
+  }
+  .copy :global(.copy__done),
+  .copy[data-copied] :global(.copy__idle) {
+    visibility: hidden;
+  }
+  .copy[data-copied] :global(.copy__done) {
+    visibility: visible;
+  }
+</style>

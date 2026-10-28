@@ -1,0 +1,167 @@
+---
+import Mail from "@lucide/astro/icons/mail";
+import LinkArrow from "../LinkArrow.astro";
+import { localePath, type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+const EMAIL = "ralph@perryts.com";
+
+const t = messages(lang).home.forTeams;
+---
+
+<section id="teams" class="section teams">
+  <div class="wrap">
+    <div class="top">
+      <h2 class="title" data-reveal>{t.title}</h2>
+      <p class="body muted" data-reveal style="--i: 1">{t.body}</p>
+    </div>
+
+    <ol class="offers">
+      {t.offers.map((offer, i) => (
+        <li class="offer" data-reveal style={`--i: ${i}`}>
+          <span class="index t-mono accent">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="name">{offer.name}</h3>
+          <p class="description muted">{offer.description}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="contact">
+      <div class="contact__left">
+        <a class="email" href={`mailto:${EMAIL}`}>
+          <Mail size={16} stroke-width={1.75} aria-hidden="true" />
+          {EMAIL}
+        </a>
+        <p class="t-mono muted">{t.contactNote}</p>
+      </div>
+      <LinkArrow href={localePath(lang, "enterprise")}>{t.teams}</LinkArrow>
+    </div>
+  </div>
+</section>
+
+<style>
+  .teams {
+    padding-block: max(var(--section-y), 120px);
+  }
+  .top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 96px;
+  }
+  .title {
+    max-width: 720px;
+    font-size: clamp(34px, 3.4vw, 48px);
+    font-weight: 600;
+    letter-spacing: -0.033em;
+    line-height: 1.06;
+  }
+  .body {
+    max-width: 496px;
+    font-size: 17px;
+    line-height: 26px;
+  }
+  .offers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-block: 64px;
+    border-block: 1px solid var(--border);
+  }
+  .offer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 32px 28px 36px;
+  }
+  .offer + .offer {
+    border-left: 1px solid var(--border);
+  }
+  .offer:first-child {
+    padding-left: 0;
+  }
+  .index {
+    font-size: 12px;
+  }
+  .name {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+  }
+  .description {
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .contact__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .email {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 22px;
+    border-radius: 6px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 150ms linear;
+  }
+  .email:hover {
+    background: color-mix(in srgb, var(--text) 88%, transparent);
+  }
+  @media (max-width: 900px) {
+    .top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .offers {
+      grid-template-columns: repeat(2, 1fr);
+      margin-block: 48px;
+    }
+    .offer:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .offer:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+    .contact,
+    .contact__left {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 560px) {
+    .title {
+      font-size: 30px;
+    }
+    .offers {
+      grid-template-columns: 1fr;
+      margin-block: 32px;
+    }
+    .offer {
+      padding: 20px 0;
+      gap: 8px;
+      border-left: 0 !important;
+    }
+    .offer + .offer {
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+/** TypeScript → Perry → app library → Coop worker, with shared runtime providers below (one per machine). */
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import type { Messages } from "../../i18n/messages.ts";
+
+interface Props {
+  content: Messages["pages"]["coop"];
+}
+const { content } = Astro.props;
+const steps = [
+  { label: "TypeScript", tone: "--pixel-blue" },
+  { label: "Perry", tone: "--pixel-amber" },
+  { label: content.appLibrary, tone: "--pixel-lilac" },
+  { label: content.worker, tone: "--success" },
+];
+---
+
+<div class="topology" role="img" aria-label={content.diagramAria}>
+  <div class="steps">
+    {steps.map((step, i) => (
+      <>
+        <div class="step t-mono" style={`--tone: var(${step.tone})`}>{step.label}</div>
+        {i < steps.length - 1 && <ArrowRight class="arrow" size={16} stroke-width={1.75} aria-hidden="true" />}
+      </>
+    ))}
+  </div>
+  <div class="connector" aria-hidden="true"></div>
+  <div class="shared t-mono">
+    {content.sharedProviders}
+    <span class="t-label">{content.onePerMachine}</span>
+  </div>
+</div>
+
+<style>
+  .topology {
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  .steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step {
+    flex: 1;
+    padding: 12px 10px;
+    border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--tone) 8%, transparent);
+    color: var(--tone);
+    text-align: center;
+    font-weight: 600;
+  }
+  .steps :global(.arrow) {
+    flex-shrink: 0;
+    color: var(--text-muted);
+  }
+  .connector {
+    width: 1px;
+    height: 24px;
+    margin-left: auto;
+    margin-right: 12%;
+    background: color-mix(in srgb, var(--success) 40%, transparent);
+  }
+  .shared {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 320px;
+    margin-left: auto;
+    padding: 12px 16px;
+    border: 1px dashed color-mix(in srgb, var(--success) 50%, transparent);
+    border-radius: 6px;
+    color: var(--success);
+    text-align: center;
+  }
+  .shared .t-label {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  @media (max-width: 640px) {
+    .topology {
+      padding: 20px;
+    }
+    .steps {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .steps :global(.arrow) {
+      align-self: center;
+      transform: rotate(90deg);
+    }
+    .connector {
+      margin-right: auto;
+    }
+    .shared {
+      max-width: none;
+    }
+  }
+</style>

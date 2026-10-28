@@ -1,0 +1,357 @@
+---
+import { type Locale } from "../../i18n/index.ts";
+import { formatInteger } from "../../lib/format.ts";
+import { benchmarkLabel, getBenchmarks } from "../../lib/perry-data.ts";
+import { links } from "../../lib/links.ts";
+import Lines from "../Lines.astro";
+import LinkArrow from "../LinkArrow.astro";
+import { fill, messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+// Figures come from benchmarks/results/public-node-bun-v1.json in the Perry repo (see perry-data.ts).
+const data = await getBenchmarks();
+// The table always shows these six workloads, in this order of copy (t.rows holds their descriptions).
+const TABLE: [id: string, name: string][] = [
+  ["08_string_concat", "string concat"],
+  ["07_object_create", "object allocation"],
+  ["03_array_write", "array write"],
+  ["15_mandelbrot", "mandelbrot"],
+  ["12_binary_trees", "binary trees"],
+  ["09_method_calls", "method calls"],
+];
+
+const t = messages(lang).home.benchmarks;
+
+const decimal = (n: number, digits = 0) =>
+  new Intl.NumberFormat(lang, { minimumFractionDigits: digits, maximumFractionDigits: 1 }).format(n);
+const amount = (n: number, unit: string) => `${Number.isInteger(n) ? formatInteger(n, lang) : decimal(n)} ${unit}`;
+
+const meta = t.meta.map((line) => fill(line, { perry: data.perryVersion, node: data.nodeVersion, cpu: data.cpu, date: data.date }));
+const headlines = data.headlines;
+const losses = [...data.byId.values()].filter((r) => r.tone === "loss").sort((a, b) => b.ratio - a.ratio);
+const footnote = fill(t.footnote, {
+  list: new Intl.ListFormat(lang, { type: "conjunction" }).format(losses.slice(0, 4).map((r) => benchmarkLabel(r.id))),
+});
+
+// Bars use a log scale: 167px per ln(ratio) on a 290px half-axis, as drawn in the design.
+const SCALE = 167 / 290;
+const table = TABLE.flatMap(([id, name], i) => {
+  const r = data.byId.get(id);
+  if (!r) return [];
+  const perryWins = r.tone === "win";
+  return [{
+    name,
+    perry: r.perry,
+    node: r.node,
+    detail: t.rows[i],
+    tone: r.tone,
+    side: r.perry <= r.node ? "perry" : "node",
+    width: Math.min(100, Math.log(r.ratio) * SCALE * 100),
+    label: r.tone === "even" ? t.even : `${decimal(r.ratio, 1)}× ${perryWins ? t.rowFaster : t.rowSlower}`,
+  }];
+});
+---
+
+<section id="benchmarks" class="section bench">
+  <div class="wrap">
+    <header class="head">
+      <h2 class="t-h2" data-reveal><Lines text={t.title} /></h2>
+      <p class="meta t-mono muted" data-reveal style="--i: 1">
+        {meta.map((line, i) => (<>{i > 0 && <br />}{line}</>))}
+      </p>
+    </header>
+
+    <ul class="headlines">
+      {headlines.map((h, i) => (
+        <li class="headline" data-reveal style={`--i: ${i}`}>
+          <p class="headline__value">
+            <span class="headline__x accent" data-count>{decimal(h.ratio, 1)}×</span>
+            <span class="headline__word">{t.faster}</span>
+          </p>
+          <p class="headline__name muted">{benchmarkLabel(h.id)}</p>
+          <p class="headline__pair t-mono dim">perry {amount(h.perry, "ms")} · node {amount(h.node, "ms")}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="col-name">{t.benchmark}</th>
+            <th scope="col" class="col-bar">
+              <div class="direction">
+                <span class="win">{t.perryFaster}</span>
+                <span class="loss">{t.nodeFaster}</span>
+              </div>
+            </th>
+            <th scope="col" class="num">PERRY</th>
+            <th scope="col" class="num">NODE</th>
+            <th scope="col" class="num col-ratio">{t.ratio}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {table.map((row, i) => (
+            <tr data-reveal style={`--i: ${i}`}>
+              <th scope="row" class="col-name">
+                <span class="row__name">{row.name}</span>
+                <span class="row__detail t-mono muted">{row.detail}</span>
+              </th>
+              <td class="col-bar" aria-hidden="true">
+                <div class="chart">
+                  <div class="chart__side chart__side--perry">
+                    {row.side === "perry" && (
+                      <span class:list={["bar", `bar--${row.tone}`]} data-grow="x" style={`width: ${row.width}%; --i: ${i}`} />
+                    )}
+                  </div>
+                  <span class="chart__axis" />
+                  <div class="chart__side">
+                    {row.side === "node" && (
+                      <span class:list={["bar", `bar--${row.tone}`]} data-grow="x" style={`width: ${row.width}%; --i: ${i}`} />
+                    )}
+                  </div>
+                </div>
+              </td>
+              <td class="num perry">{formatInteger(row.perry, lang)} ms</td>
+              <td class="num muted">{formatInteger(row.node, lang)} ms</td>
+              <td class:list={["num", "col-ratio", row.tone]}>{row.label}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="foot">
+      <p class="muted">{footnote}</p>
+      <LinkArrow href={links.benchmarks}>{fill(t.all, { n: data.count })}</LinkArrow>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .bench .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .meta {
+    text-align: right;
+    line-height: 23px;
+  }
+  .dim {
+    color: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+
+  /* Headline figures */
+  .headlines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .headline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 32px 28px;
+    border-left: 1px solid var(--border);
+  }
+  .headline:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .headline__value {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .headline__x {
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: -2px;
+    line-height: 56px;
+    font-variant-numeric: tabular-nums;
+  }
+  .headline__word {
+    padding-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .headline__name {
+    font-size: 15px;
+  }
+
+  /* Table */
+  .table-scroll {
+    overflow-x: auto;
+  }
+  .table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+  }
+  .table th,
+  .table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-weight: inherit;
+    vertical-align: middle;
+  }
+  thead th {
+    padding-block: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .col-name {
+    width: 280px;
+  }
+  .table .col-bar {
+    padding-inline: 40px;
+  }
+  .direction {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .table .num {
+    width: 110px;
+    text-align: right;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+  .table td.num {
+    font-size: 14px;
+  }
+  .table .col-ratio {
+    width: 150px;
+  }
+  .row__name {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .row__detail {
+    display: block;
+    margin-top: 3px;
+  }
+  .perry {
+    font-weight: 600;
+  }
+  .win {
+    color: var(--success);
+  }
+  .loss {
+    color: var(--danger);
+  }
+  .even {
+    color: var(--text-muted);
+  }
+
+  /* Diverging bars around a shared axis */
+  .chart {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    align-items: center;
+    height: 24px;
+  }
+  .chart__side {
+    display: flex;
+    height: 10px;
+  }
+  .chart__side--perry {
+    justify-content: flex-end;
+  }
+  .chart__side--perry .bar {
+    transform-origin: right center;
+  }
+  .chart__axis {
+    height: 24px;
+    background: color-mix(in srgb, var(--text-muted) 45%, transparent);
+  }
+  .bar {
+    display: block;
+    height: 10px;
+  }
+  .bar--win {
+    background: var(--success);
+  }
+  .bar--loss {
+    background: var(--danger);
+  }
+  .bar--even {
+    background: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .head,
+    .foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .meta {
+      text-align: left;
+    }
+    .headlines {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .headline:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .headline:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 640px) {
+    /* On phones the figures matter more than the bars: drop the chart column so the table fits. */
+    .table {
+      min-width: 0;
+    }
+    .col-bar {
+      display: none;
+    }
+  }
+  @media (max-width: 520px) {
+    .headline {
+      padding-inline: 14px 0;
+    }
+    .headline:nth-child(odd) {
+      padding-inline: 0 14px;
+    }
+    .headline__value {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .headline__x {
+      font-size: 40px;
+      line-height: 1;
+    }
+    .headline__word {
+      padding-bottom: 0;
+      font-size: 15px;
+    }
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Button from "../../../components/Button.astro";
+import Notice from "../../../components/Notice.astro";
+import CheckList from "../../../components/CheckList.astro";
+import Mail from "@lucide/astro/icons/mail";
+import { localeStaticPaths, localePath, type Locale } from "../../../i18n/index.ts";
+import { messages } from "../../../i18n/messages.ts";
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = Astro.params.lang as Locale;
+const CONTACT_EMAIL = "ralph@perryts.com";
+
+const t = messages(lang).pages.enterprise;
+const columns = [
+  { title: t.availableTitle, items: [t.available1, t.available2, t.available3, t.available4] },
+  { title: t.scopedTitle, items: [t.scoped1, t.scoped2, t.scoped3, t.scoped4] },
+];
+---
+
+<Base lang={lang} title={t.metaTitle} description={t.metaDescription} path="enterprise" canonical="/en/enterprise/" alternates={["en"]}>
+  <PageHeader title={t.heroTitle} lead={t.heroSubtitle} back={{ href: localePath(lang, "pricing"), label: t.pricing }}>
+    {lang !== "en" && <Fragment slot="above"><Notice>{t.languageNotice}</Notice></Fragment>}
+    <div data-reveal style="--i: 2">
+      <Button href={`mailto:${CONTACT_EMAIL}`}><Mail size={16} stroke-width={1.75} aria-hidden="true" />{t.heroCta}</Button>
+    </div>
+  </PageHeader>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="columns">
+        {columns.map((col, i) => (
+          <div class="column" data-reveal style={`--i: ${i}`}>
+            <h2 class="t-label muted">{col.title}</h2>
+            <CheckList items={col.items} />
+          </div>
+        ))}
+      </div>
+
+      <div class="terms" data-reveal>
+        <h2 class="t-h3">{t.termsTitle}</h2>
+        <p class="muted">{t.termsBody}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap closing" data-reveal>
+      <div>
+        <h2 class="t-h2">{t.closingTitle}</h2>
+        <p class="t-lead muted">{t.closingBody}</p>
+      </div>
+      <Button href={`mailto:${CONTACT_EMAIL}`}><Mail size={16} stroke-width={1.75} aria-hidden="true" />{t.closingCta}</Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 40px 44px 0;
+  }
+  .column + .column {
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 880px;
+    margin-top: 64px;
+    padding-left: 24px;
+    border-left: 2px solid var(--accent);
+  }
+  .closing {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .closing > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+  @media (max-width: 900px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+    .column,
+    .column + .column {
+      padding: 32px 0;
+      border-left: 0;
+    }
+    .column + .column {
+      border-top: 1px solid var(--border);
+    }
+    .closing {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

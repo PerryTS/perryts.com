@@ -1,0 +1,47 @@
+---
+/** Closing call to action band; buttons go in the default slot. */
+import Lines from "../Lines.astro";
+
+interface Props {
+  title: string;
+  text: string;
+}
+const { title, text } = Astro.props;
+---
+
+<section class="section section--surface cta">
+  <div class="wrap inner">
+    <div>
+      <h2 class="t-h2" data-reveal><Lines text={title} /></h2>
+      <p class="t-lead muted" data-reveal style="--i: 1">{text}</p>
+    </div>
+    <div class="actions" data-reveal style="--i: 2"><slot /></div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    border-top: 1px solid var(--border);
+  }
+  .inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .inner p {
+    max-width: 640px;
+    margin-top: 16px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  @media (max-width: 900px) {
+    .inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

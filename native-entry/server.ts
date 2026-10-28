@@ -1,4 +1,4 @@
-// Keep the Perry entry point outside the project root so a preceding Next.js
-// static build does not make Perry mistake this small Fastify server for a
-// Next.js standalone server and recursively compile `.next/server`.
+// Compile entry for the static file server (see scripts/build-server.sh and deploy.sh).
+// It originally lived outside the project root so Perry would not mistake the old
+// Next.js build for a standalone server; the path is kept so deploys stay unchanged.
 import "../server.ts";

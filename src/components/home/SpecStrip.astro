@@ -1,0 +1,99 @@
+---
+import { type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+interface Spec {
+  value: string;
+  label: string;
+  note: string;
+}
+
+const t = messages(lang).home.specStrip;
+---
+
+<section class="spec-strip" aria-label={t.label}>
+  <ul class="wrap specs">
+    {t.specs.map((s, i) => (
+      <li class="spec" data-reveal style={`--i: ${i}`}>
+        <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+        <span class="value" data-count>{s.value}</span>
+        <span class="label">{s.label}</span>
+        <span class="note">{s.note}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .spec-strip {
+    border-block: 1px solid var(--border);
+  }
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .spec {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 28px;
+  }
+  .spec:first-child {
+    padding-inline: 0 28px;
+  }
+  /* :not() instead of "+" keeps the specificity low enough for the 2-column override below. */
+  .spec:not(:first-child) {
+    border-left: 1px solid var(--border);
+  }
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .value {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    font-size: 15px;
+  }
+  .note {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  @media (max-width: 900px) {
+    .specs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .spec:nth-child(odd) {
+      padding-inline: 0 24px;
+      border-left: 0;
+    }
+    .spec:nth-child(even) {
+      padding-inline: 24px 0;
+    }
+    .spec:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 480px) {
+    .spec:nth-child(odd) {
+      padding-inline: 0 14px;
+    }
+    .spec:nth-child(even) {
+      padding-inline: 14px 0;
+    }
+    .value {
+      font-size: 30px;
+    }
+  }
+</style>

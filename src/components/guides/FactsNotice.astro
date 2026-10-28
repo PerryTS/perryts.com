@@ -1,0 +1,39 @@
+---
+/** Shown outside English: technical facts on these pages are kept in English. */
+import Info from "@lucide/astro/icons/info";
+import { type Locale } from "../../i18n/index.ts";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+  /** Override the default notice text (compare pages use their own key). */
+  text?: string;
+}
+const { lang, text = messages(lang).guides.factsLanguageNotice } = Astro.props;
+---
+
+{lang !== "en" && (
+  <p class="notice t-mono">
+    <Info size={15} stroke-width={1.75} aria-hidden="true" />
+    <span>{text}</span>
+  </p>
+)}
+
+<style>
+  .notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 720px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .notice :global(svg) {
+    flex: none;
+    margin-top: 3px;
+    color: var(--accent);
+  }
+</style>

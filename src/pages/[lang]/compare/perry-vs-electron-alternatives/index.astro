@@ -1,0 +1,143 @@
+---
+import LandingLayout from "../../../../components/guides/LandingLayout.astro";
+import Article from "../../../../components/guides/Article.astro";
+import Cta from "../../../../components/guides/Cta.astro";
+import Button from "../../../../components/Button.astro";
+import LinkArrow from "../../../../components/LinkArrow.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../../i18n/index.ts";
+import { PRODUCT_FACTS } from "../../../../data/product-facts.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Electron Alternatives for TypeScript: Architecture and Tradeoffs",
+  description:
+    "A sourced guide to Electron, Tauri, Bun standalone executables, and Perry, focused on runtime and UI architecture instead of universal size or speed claims.",
+  breadcrumb: "Electron Alternatives for TypeScript",
+};
+
+const approaches = [
+  {
+    name: "Electron",
+    summary:
+      "Electron embeds Chromium and Node.js. Web content runs in Chromium renderer processes, while the main process runs in a Node.js environment. It offers the most direct reuse of an existing web application and a mature desktop ecosystem.",
+    bestFor: "Desktop products that prioritize web compatibility, team familiarity, and ecosystem maturity.",
+    source: "https://www.electronjs.org/docs/latest/",
+    compare: "compare/electron",
+  },
+  {
+    name: "Tauri",
+    summary:
+      "Tauri combines a compiled Rust core with HTML, CSS, and JavaScript rendered in the operating system webview. It avoids bundling a browser engine, but remains a webview architecture and can vary with the platform webview.",
+    bestFor: "Teams that want a web frontend with a Rust-native core and system-webview distribution.",
+    source: "https://v2.tauri.app/concept/architecture/",
+    compare: "compare/tauri",
+  },
+  {
+    name: "Bun standalone executables",
+    summary:
+      "Bun’s --compile workflow packages the application with a copy of the Bun runtime. It is useful for single-file CLIs and servers, but Bun does not provide a built-in cross-platform native-widget layer.",
+    bestFor: "CLIs and servers that value Bun’s runtime compatibility and integrated toolchain more than a native GUI layer.",
+    source: "https://bun.sh/docs/bundler/executables",
+    compare: "compare/bun",
+  },
+  {
+    name: "Perry",
+    summary:
+      "Perry compiles supported TypeScript through LLVM and maps Perry UI to platform widgets where supported. Native output links the Perry runtime and GC, needs no external JavaScript engine by default, and remains a pre-1.0 compatibility surface.",
+    bestFor: "Validated applications where native widgets or Perry’s mobile, wearable, TV, and Web/WASM targets solve a specific product need.",
+    source: "https://github.com/PerryTS/perry#readme",
+    compare: "typescript-native-compiler",
+  },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="compare/perry-vs-electron-alternatives"
+  meta={meta}
+  heading="Electron Alternatives for TypeScript"
+  lead="“Electron alternative” can mean a smaller webview application, a single-file runtime, or a real native-widget application. These are different architectural choices, so this guide avoids invented universal installer, memory, and startup numbers."
+  parents={[{ name: "Compare", path: "compare" }]}
+  back={{ href: localePath(lang, "compare"), label: "Back to comparisons" }}
+  type="article"
+>
+  <section class="section">
+    <div class="wrap">
+      <ol class="approaches">
+        {approaches.map((a, i) => (
+          <li class="approach" data-reveal style={`--i: ${i}`}>
+            <span class="t-label muted">{String(i + 1).padStart(2, "0")}</span>
+            <h2 class="t-h3">{a.name}</h2>
+            <div class="body">
+              <p class="muted">{a.summary}</p>
+              <p><strong>Best fit:</strong> {a.bestFor}</p>
+              <div class="links">
+                <LinkArrow href={a.source}>Primary source</LinkArrow>
+                <LinkArrow href={localePath(lang, a.compare)}>Perry comparison</LinkArrow>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Article>
+    <h2>What Perry can substantiate</h2>
+    <ul>
+      <li>A hello-world example around {PRODUCT_FACTS.helloWorldSize} and a public Mango application around {PRODUCT_FACTS.mangoSize}; neither establishes a universal application-size range.</li>
+      <li>{PRODUCT_FACTS.documentedTargetCount} documented targets plus a separate HarmonyOS preview, with narrower core support on some targets.</li>
+      <li>{PRODUCT_FACTS.nativeWidgetCount} UI widgets, with platform-specific availability and behavior.</li>
+      <li>A current public benchmark suite containing Perry wins, mixed rows, and losses—not a claim that Perry is always fastest.</li>
+    </ul>
+
+    <h2>How to choose</h2>
+    <p>
+      Start with the UI model and compatibility you need. Choose Electron when Chromium consistency and mature desktop tooling
+      dominate. Choose Tauri when a system webview and Rust core fit. Choose Bun for a runtime-centric single-file CLI or
+      server. Evaluate Perry when its native widgets or broader target model justify testing against its current pre-1.0
+      limitations.
+    </p>
+    <p>
+      Then measure the real application: installer and update size, idle and working memory, cold and warm startup,
+      accessibility, package support, platform prerequisites, signing, and maintenance cost.
+    </p>
+  </Article>
+
+  <Cta title="Compare the architectures" text="Read the sourced side-by-side pages, then test the exact workload you plan to ship.">
+    <Button href={localePath(lang, "compare")}>View comparisons</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .approaches {
+    border-top: 1px solid var(--border);
+  }
+  .approach {
+    display: grid;
+    grid-template-columns: 64px 280px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .approach {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+/** Bulleted list with a status marker per item: done (check), next (arrow) or note (dot). */
+import Check from "@lucide/astro/icons/check";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import Dot from "@lucide/astro/icons/dot";
+
+interface Props {
+  items: string[];
+  tone?: "done" | "next" | "note";
+}
+const { items, tone = "done" } = Astro.props;
+const Icon = { done: Check, next: ArrowRight, note: Dot }[tone];
+---
+
+<ul class:list={["list", tone]}>
+  {items.map((item) => (
+    <li><Icon size={16} stroke-width={2} aria-hidden="true" /><span>{item}</span></li>
+  ))}
+</ul>
+
+<style>
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  li :global(svg) {
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .done :global(svg) {
+    color: var(--success);
+  }
+  .next :global(svg) {
+    color: var(--accent);
+  }
+  .note :global(svg) {
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+/**
+ * FAQ from the previous home page (same questions and translations), restyled.
+ * Its FAQPage JSON-LD mirrors the visible text, as search engines require.
+ */
+import Plus from "@lucide/astro/icons/plus";
+import SectionHeader from "../SectionHeader.astro";
+import JsonLd from "../JsonLd.astro";
+import { localePath, type Locale } from "../../i18n/index.ts";
+import { links } from "../../lib/links.ts";
+import { richText, stripTags } from "../../lib/rich-text.ts";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+type FaqCopy = { title: string; subtitle: string; items: { question: string; answer: string }[]; more: string };
+
+const t = messages(lang).home.faq;
+const tagLinks = {
+  bunLink: localePath(lang, "compare/bun"),
+  denoLink: localePath(lang, "compare/deno"),
+  electronLink: localePath(lang, "compare/electron"),
+  tauriLink: localePath(lang, "compare/tauri"),
+  showcaseLink: localePath(lang, "showcase"),
+  guideLink: localePath(lang, "getting-started"),
+  discussionsLink: links.discussions,
+};
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: t.items.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: stripTags(f.answer) },
+  })),
+};
+---
+
+<section class="section faq" id="faq">
+  <JsonLd data={faqJsonLd} />
+  <div class="wrap inner">
+    <SectionHeader title={t.title} aside={t.subtitle} />
+    <div class="list">
+      {t.items.map((item, i) => (
+        <details class="item" data-reveal style={`--i: ${Math.min(i, 6)}`}>
+          <summary>
+            <span class="q">{item.question}</span>
+            <Plus class="icon" size={18} stroke-width={1.75} aria-hidden="true" />
+          </summary>
+          <p class="a muted" set:html={richText(item.answer, tagLinks)} />
+        </details>
+      ))}
+    </div>
+    <p class="more muted" set:html={richText(t.more, tagLinks)} />
+  </div>
+</section>
+
+<style>
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .list {
+    border-top: 1px solid var(--border);
+  }
+  .item {
+    border-bottom: 1px solid var(--border);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-block: 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .q {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+  summary:hover .q {
+    color: var(--accent);
+  }
+  summary :global(.icon) {
+    flex: none;
+    color: var(--text-muted);
+    transition: transform 200ms var(--ease-out);
+  }
+  .item[open] summary :global(.icon) {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+  .a {
+    max-width: 820px;
+    padding-bottom: 28px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .a :global(a),
+  .more :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .more {
+    font-size: 15px;
+  }
+</style>

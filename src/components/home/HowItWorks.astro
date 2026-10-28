@@ -1,0 +1,205 @@
+---
+import { type Locale } from "../../i18n/index.ts";
+import SectionHeader from "../SectionHeader.astro";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+interface Stage {
+  name: string;
+  tool: string;
+  desc: string;
+  /** Names that are file names render in mono. */
+  mono?: boolean;
+  /** The tool label in accent (LLVM). */
+  accent?: boolean;
+}
+
+const t = messages(lang).home.howItWorks;
+
+// Pixel band from the design, one string per column, top pixel first. Each letter is a colour step;
+// the first columns fade in with an opacity ramp. Decorative only.
+const columns = [
+  "b", "b", "bb", "b", "b", "bb", "b", "bb", "bb", "i", "ii", "ii", "i", "ii", "ii", "ii", "ii", "ii", "pi", "pp",
+  "ppp", "pp", "pp", "ppp", "pp", "ppp", "kpp", "kp", "kkp", "kkk", "kkk", "kkk", "kkkk", "kkk", "kkk", "okkk", "ook", "oook", "oook", "oooo",
+  "oooo", "ooooo", "oooo", "aooo", "aoooo", "aaoo", "aaaoo", "aaaao", "aaaaa", "aaaaa", "aaaaaa", "aaaaa", "yaaaa", "yyaaaa", "yyyaa", "yyyaaa", "yyyyaa", "yyyyya", "yyyyyy", "yyyyyya",
+];
+const RAMP = 12;
+---
+
+<section class="section section--paper how">
+  <div class="wrap">
+    <SectionHeader title={t.title} aside={t.aside} />
+
+    <ol class="pipeline" data-cycle="once" data-cycle-interval="450">
+      {t.stages.map((s, i) => (
+        <li class="stage" data-reveal data-cycle-item style={`--i: ${i}`}>
+          <div class="top">
+            <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+            {i < t.stages.length - 1 && <ArrowRight size={16} stroke-width={1.75} aria-hidden="true" />}
+          </div>
+          <h3 class:list={["name", { mono: s.mono }]}>{s.name}</h3>
+          <span class:list={["tool", "t-label", { accent: s.accent }]}>{s.tool}</span>
+          <p class="desc">{s.desc}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="band" aria-hidden="true">
+      {columns.map((col, i) => (
+        <div class="col" data-grow="y" style={`--i: ${i}; opacity: ${i < RAMP ? (0.25 + i * 0.06).toFixed(2) : 1}`}>
+          {[...col].map((c) => <span class={`px px--${c}`} />)}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pipeline {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--paper-text);
+  }
+  .stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 24px 0;
+  }
+  .stage:first-child {
+    padding-left: 0;
+  }
+  /* :not() instead of "+": Astro scoping doubles the specificity of "a + b", which beat the responsive overrides. */
+  .stage:not(:first-child) {
+    border-left: 1px solid var(--border);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+  }
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    transition: color 300ms linear;
+  }
+  /* Code moving through the compiler: each stage's top edge fills in turn (data-cycle). */
+  .stage::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 420ms var(--ease-out);
+  }
+  .stage.is-current::before,
+  .stage.is-past::before {
+    transform: none;
+  }
+  .stage.is-current .idx {
+    color: var(--accent);
+  }
+  .name {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.028em;
+    line-height: 1.2;
+  }
+  .name.mono {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+  .tool {
+    color: var(--text-muted);
+  }
+  .tool.accent {
+    color: var(--accent);
+  }
+  .desc {
+    font-size: 15px;
+    line-height: 23px;
+    color: var(--text-muted);
+  }
+
+  .band {
+    margin-top: 72px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .px {
+    height: 16px;
+    border-radius: 2px;
+  }
+  .px--b { background: var(--pixel-blue); }
+  .px--i { background: var(--accent-strong); }
+  .px--p { background: var(--pixel-lilac); }
+  .px--k { background: var(--pixel-pink); }
+  .px--o { background: var(--pixel-orange); }
+  .px--a { background: color-mix(in srgb, var(--pixel-amber) 50%, var(--pixel-orange)); }
+  .px--y { background: var(--pixel-amber); }
+
+  @media (max-width: 1024px) {
+    .pipeline {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 32px;
+    }
+    .stage:nth-child(3n + 1) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+  @media (max-width: 640px) {
+    .pipeline {
+      margin-top: 48px;
+      grid-template-columns: 1fr;
+      row-gap: 0;
+    }
+    .stage,
+    .stage:not(:first-child),
+    .stage:nth-child(3n + 1) {
+      padding: 18px 0;
+      gap: 8px;
+      border-left: 0;
+    }
+    .name {
+      font-size: 22px;
+    }
+    .desc {
+      font-size: 15px;
+    }
+    .stage + .stage {
+      border-top: 1px solid var(--border);
+    }
+    .band {
+      margin-top: 48px;
+      gap: 2px;
+    }
+    .col {
+      gap: 2px;
+    }
+    .px {
+      height: 8px;
+      border-radius: 1px;
+    }
+  }
+</style>

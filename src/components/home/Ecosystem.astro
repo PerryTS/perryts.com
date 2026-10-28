@@ -1,0 +1,151 @@
+---
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import { localePath, type Locale } from "../../i18n/index.ts";
+import { links } from "../../lib/links.ts";
+import SectionHeader from "../SectionHeader.astro";
+import Bird from "../Bird.astro";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+type Tone = "text" | "accent" | "amber";
+const tools: { name: string; href?: string; status?: string; tone: Tone; bird?: boolean }[] = [
+  { name: "Perry", href: links.github, tone: "text", bird: true },
+  { name: "Geisterhand", href: links.geisterhand, status: "geisterhand.io", tone: "text" },
+  { name: "Perry Publish", href: localePath(lang, "publish"), status: "$ perry publish", tone: "accent" },
+  { name: "Coop", tone: "amber" },
+];
+
+const t = messages(lang).home.ecosystem;
+const statuses = [t.perryStatus, tools[1].status, tools[2].status, t.coopStatus];
+---
+
+<section class="section section--surface eco">
+  <div class="wrap">
+    <SectionHeader title={t.title} aside={t.aside} />
+
+    <ol class="chain">
+      {tools.map((tool, i) => {
+        const Tag = tool.href ? "a" : "div";
+        return (
+          <li data-reveal style={`--i: ${i}`}>
+            <Tag class="card" href={tool.href}>
+              <span class="card__top">
+                <span class="step">
+                  <span class="muted">{String(i + 1).padStart(2, "0")}</span> <span class="accent">{t.steps[i]}</span>
+                </span>
+                {tool.href && <ArrowRight class="card__arrow" size={16} stroke-width={1.75} aria-hidden="true" />}
+              </span>
+              <h3 class="card__name">
+                {tool.bird && <Bird size={26} />}
+                {tool.name}
+              </h3>
+              <p class="card__text muted">{t.descriptions[i]}</p>
+              <p class:list={["card__status", tool.tone]}>{statuses[i]}</p>
+            </Tag>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .eco .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .chain {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .chain > li + li {
+    border-left: 1px solid var(--border);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    padding: 32px 28px 36px;
+  }
+  .chain > li:first-child .card {
+    padding-left: 0;
+  }
+  .card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+  }
+  .step {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .card__name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+  }
+  .card__text {
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .card__status {
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .text {
+    color: var(--text);
+  }
+  .amber {
+    color: var(--pixel-amber);
+  }
+  a.card :global(.card__arrow) {
+    transition: transform 200ms var(--ease-out);
+  }
+  a.card:hover .card__name {
+    color: var(--accent);
+  }
+  a.card:hover :global(.card__arrow) {
+    color: var(--text);
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 900px) {
+    .chain {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .chain > li:nth-child(odd) {
+      border-left: 0;
+    }
+    .chain > li:nth-child(odd) .card {
+      padding-left: 0;
+    }
+    .chain > li:nth-child(n + 3) {
+      border-top: 1px solid var(--border);
+    }
+  }
+  @media (max-width: 560px) {
+    .chain {
+      grid-template-columns: 1fr;
+    }
+    .chain > li + li {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+    .card {
+      padding: 24px 0;
+      gap: 10px;
+    }
+  }
+</style>

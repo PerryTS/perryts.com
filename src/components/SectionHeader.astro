@@ -1,0 +1,46 @@
+---
+import Lines from "./Lines.astro";
+
+interface Props {
+  title: string;
+  aside?: string;
+  /** Heading level; sections use h2. */
+  as?: "h1" | "h2";
+}
+const { title, aside, as: Heading = "h2" } = Astro.props;
+---
+
+<header class="section-header">
+  <Heading class="t-h2" data-reveal><Lines text={title} /></Heading>
+  {aside && <p class="aside muted" data-reveal style="--i: 1">{aside}</p>}
+  <slot />
+</header>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .aside {
+    max-width: 440px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 640px) {
+    .section-header {
+      gap: 14px;
+    }
+    .aside {
+      font-size: 15px;
+    }
+  }
+</style>

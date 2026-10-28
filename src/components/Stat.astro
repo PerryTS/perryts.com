@@ -1,0 +1,35 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  detail?: string;
+  /** Count up from 0 when scrolled into view. */
+  count?: boolean;
+}
+const { value, label, detail, count = true } = Astro.props;
+---
+
+<div class="stat">
+  <span class="value" data-count={count ? "" : undefined}>{value}</span>
+  <span class="label">{label}</span>
+  {detail && <span class="detail t-mono muted">{detail}</span>}
+</div>
+
+<style>
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .value {
+    font-size: clamp(44px, 4.4vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    font-size: 17px;
+    font-weight: 500;
+  }
+</style>

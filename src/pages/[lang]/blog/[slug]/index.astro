@@ -1,0 +1,315 @@
+---
+import { render } from "astro:content";
+import Info from "@lucide/astro/icons/info";
+import Calendar from "@lucide/astro/icons/calendar";
+import Timer from "@lucide/astro/icons/timer";
+import Base from "../../../../layouts/Base.astro";
+import PageHeader from "../../../../components/PageHeader.astro";
+import Prose from "../../../../components/Prose.astro";
+import Tag from "../../../../components/Tag.astro";
+import CopyButton from "../../../../components/CopyButton.astro";
+import NewsletterForm from "../../../../components/NewsletterForm.astro";
+import JsonLd from "../../../../components/JsonLd.astro";
+import { messages, plural } from "../../../../i18n/messages.ts";
+import { locales, localePath, type Locale } from "../../../../i18n/index.ts";
+import { formatPostDate, getPosts, type Post } from "../../../../lib/blog.ts";
+import { readingMinutes } from "../../../../lib/reading-time.ts";
+
+// Every post exists under every locale, like the previous site; untranslated ones show English with a notice.
+export async function getStaticPaths() {
+  const paths: { params: { lang: Locale; slug: string }; props: Props }[] = [];
+  for (const lang of locales) {
+    const posts = await getPosts(lang);
+    posts.forEach((post, i) => {
+      paths.push({
+        params: { lang, slug: post.slug },
+        props: { post, newer: posts[i - 1], older: posts[i + 1] },
+      });
+    });
+  }
+  return paths;
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+const { post, newer, older } = Astro.props;
+const lang = Astro.params.lang as Locale;
+const t = messages(lang).blog;
+const { entry, isFallback } = post;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const minutes = readingMinutes(entry.body ?? "", isFallback ? "en" : lang);
+const path = `blog/${post.slug}`;
+const url = new URL(localePath(lang, path), Astro.site).toString();
+const contentLang = isFallback ? "en" : lang;
+const published = entry.data.date.toISOString();
+const blogPosting = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.excerpt,
+  datePublished: published,
+  inLanguage: contentLang,
+  keywords: entry.data.tags.join(", "),
+  url,
+  mainEntityOfPage: url,
+  image: new URL("/og.png", Astro.site).toString(),
+  author: { "@type": "Organization", name: "Perry", url: "https://perryts.com/" },
+  publisher: { "@type": "Organization", name: "Perry", logo: { "@type": "ImageObject", url: new URL("/perry-icon.svg", Astro.site).toString() } },
+};
+---
+
+<Base
+  lang={lang}
+  title={entry.data.title}
+  description={entry.data.excerpt}
+  path={path}
+  type="article"
+  canonical={isFallback ? localePath("en", path) : undefined}
+  alternates={post.locales}
+  publishedTime={published}
+>
+  <JsonLd slot="head" data={blogPosting} />
+  <PageHeader title={entry.data.title} back={{ href: localePath(lang, "blog"), label: t.back }}>
+    <ul slot="above" class="tags">{entry.data.tags.map((tag) => <li><Tag>{tag}</Tag></li>)}</ul>
+    <div class="meta t-mono muted">
+      <div class="meta__left">
+        <span><Calendar size={14} stroke-width={1.75} aria-hidden="true" /><time datetime={entry.data.date.toISOString()}>{formatPostDate(entry.data.date, lang)}</time></span>
+        <span><Timer size={14} stroke-width={1.75} aria-hidden="true" />{plural(lang, t.minutes, minutes)}</span>
+      </div>
+      <div class="meta__share">
+        <span>{t.share}</span>
+        <CopyButton text={url} label={t.copyLink} />
+      </div>
+    </div>
+  </PageHeader>
+
+  <div class="wrap body">
+    {toc.length > 2 && (
+      <nav class="toc" aria-label={t.onThisPage}>
+        <p class="t-label accent">{t.onThisPage}</p>
+        <ol>
+          {toc.map((h) => (
+            <li class:list={[`d${h.depth}`]}><a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a></li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
+    <article class="article">
+      {isFallback && (
+        <p class="notice notice--accent"><Info size={16} stroke-width={1.75} aria-hidden="true" />{t.englishOnly}</p>
+      )}
+      <p class="notice"><Info size={16} stroke-width={1.75} aria-hidden="true" />{t.historical}</p>
+      <Prose lang={contentLang}><Content /></Prose>
+
+      <nav class="pager" aria-label={`${t.previous} / ${t.next}`}>
+        {older ? (
+          <a class="pager__item" href={localePath(lang, `blog/${older.slug}`)}>
+            <span class="t-label muted">← {t.previous}</span>
+            <span class="pager__title" lang={older.isFallback ? "en" : undefined}>{older.entry.data.title}</span>
+          </a>
+        ) : <span />}
+        {newer ? (
+          <a class="pager__item pager__item--next" href={localePath(lang, `blog/${newer.slug}`)}>
+            <span class="t-label muted">{t.next} →</span>
+            <span class="pager__title" lang={newer.isFallback ? "en" : undefined}>{newer.entry.data.title}</span>
+          </a>
+        ) : (
+          <span class="pager__item pager__item--next">
+            <span class="t-label muted">{t.next}</span>
+            <span class="pager__title muted">{t.noNext}</span>
+          </span>
+        )}
+      </nav>
+    </article>
+  </div>
+
+  <NewsletterForm lang={lang} source={`blog:${post.slug}`} variant="block" />
+</Base>
+
+<script>
+  // Highlight the TOC entry for the heading currently being read.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")].map((a) => [a.dataset.tocLink!, a]),
+  );
+  if (links.size) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          links.forEach((a) => a.removeAttribute("aria-current"));
+          links.get(entry.target.id)?.setAttribute("aria-current", "true");
+        }
+      },
+      { rootMargin: "0px 0px -70% 0px" },
+    );
+    links.forEach((_a, id) => {
+      const heading = document.getElementById(id);
+      if (heading) observer.observe(heading);
+    });
+  }
+</script>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .meta__left,
+  .meta__share {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .meta__left span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .meta__share {
+    gap: 12px;
+    color: var(--text);
+  }
+  .body {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 720px);
+    gap: 96px;
+    padding-block: 72px 96px;
+  }
+  .toc {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+  .toc ol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .toc a {
+    display: block;
+    padding-left: 12px;
+    border-left: 2px solid transparent;
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--text-muted);
+  }
+  .toc .d2 a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .toc .d3 a {
+    padding-left: 24px;
+  }
+  .toc a:hover {
+    color: var(--text);
+  }
+  .toc a[aria-current] {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .article {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+  }
+  .notice {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .notice :global(svg) {
+    flex: none;
+    margin-top: 2px;
+  }
+  .notice--accent {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .pager__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 24px 0 0;
+  }
+  .pager__item--next {
+    align-items: flex-end;
+    text-align: right;
+    padding: 24px 0 0 24px;
+    border-left: 1px solid var(--border);
+  }
+  .pager__title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  a.pager__item:hover .pager__title {
+    color: var(--accent);
+  }
+  @media (max-width: 1024px) {
+    .body {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+    .toc {
+      display: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .meta__left {
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+    .meta__left span {
+      white-space: nowrap;
+    }
+    .pager {
+      grid-template-columns: 1fr;
+    }
+    .pager__item--next {
+      align-items: flex-start;
+      text-align: left;
+      padding: 24px 0 0;
+      border-left: 0;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+  }
+</style>

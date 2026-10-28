@@ -1,0 +1,161 @@
+---
+import Heart from "@lucide/astro/icons/heart";
+import { type Locale } from "../../i18n/index.ts";
+import { links } from "../../lib/links.ts";
+import { messages } from "../../i18n/messages.ts";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
+const t = messages(lang).home.sponsors;
+---
+
+<section class="sponsors" aria-labelledby="sponsors-title">
+  <div class="wrap row">
+    <h2 id="sponsors-title" class="title">{t.title}</h2>
+
+    <ul class="logos">
+      <li class="sponsor" data-reveal>
+        <a href="https://skelpo.com" class="logo">
+          <img src="/skelpo-logo.png" width="170" height="40" alt="Skelpo" />
+        </a>
+        <span class="t-label muted">{t.premium}</span>
+      </li>
+      <li class="divider" aria-hidden="true"></li>
+      <li class="sponsor" data-reveal style="--i: 1">
+        <a href="https://nubjs.com" class="logo lockup">
+          <img src="/nub-icon.png" width="40" height="40" alt="" />
+          <span class="nub">Nub</span>
+        </a>
+        <span class="t-label muted">{t.sponsor}</span>
+      </li>
+    </ul>
+
+    <div class="cta" data-reveal style="--i: 2">
+      <p class="muted">{t.pitch}</p>
+      <a class="become" href={links.sponsor}>
+        <Heart size={15} stroke-width={1.75} aria-hidden="true" />
+        {t.cta}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsors {
+    padding-block: 64px;
+    border-top: 1px solid var(--border);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+  .title {
+    width: 300px;
+    flex: none;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25px;
+  }
+  .logos {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 56px;
+    padding-inline: 48px;
+    border-inline: 1px solid var(--border);
+  }
+  .sponsor {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sponsor .t-label {
+    letter-spacing: 1px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  .logo img {
+    height: 40px;
+    width: auto;
+  }
+  .lockup {
+    gap: 12px;
+  }
+  .lockup img {
+    border-radius: 9px;
+  }
+  .nub {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+  }
+  .divider {
+    width: 1px;
+    height: 56px;
+    background: var(--border);
+  }
+  .cta {
+    width: 320px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cta p {
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .become {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 150ms linear;
+  }
+  .become:hover {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  /* Title, logos and call-to-action only fit side by side from ~1320px. */
+  @media (max-width: 1320px) {
+    .row {
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .title {
+      width: 100%;
+    }
+    .logos {
+      flex: none;
+      justify-content: flex-start;
+      padding-inline: 0;
+      border-inline: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .logos {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+    .divider {
+      display: none;
+    }
+    .cta {
+      width: 100%;
+    }
+  }
+</style>

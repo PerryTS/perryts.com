@@ -1,0 +1,81 @@
+---
+import LandingLayout from "../../../components/guides/LandingLayout.astro";
+import Article from "../../../components/guides/Article.astro";
+import Code from "../../../components/guides/Code.astro";
+import Cards from "../../../components/guides/Cards.astro";
+import Installation from "../../../components/guides/Installation.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Get Started with Perry — Install & Compile TypeScript to Native",
+  description:
+    "Install Perry and compile a TypeScript file into a native executable. Native output needs no external Node.js installation or JavaScript engine.",
+  breadcrumb: "Get Started",
+  absoluteTitle: true,
+};
+
+const next = [
+  {
+    title: "Documentation",
+    text: "Guides for the CLI, Perry UI widgets, threading, i18n, platform prerequisites, and known limitations.",
+    href: links.docs,
+  },
+  {
+    title: "Showcase",
+    text: "Public applications and examples built with Perry, with measurements labeled where evidence is available.",
+    href: localePath(lang, "showcase"),
+  },
+  {
+    title: "Compare",
+    text: "How Perry stacks up against Bun, Deno, Electron, Tauri, React Native, and Static Hermes.",
+    href: localePath(lang, "compare"),
+  },
+  { title: "GitHub", text: "Source, issues, and discussions — Perry is open source.", href: links.github },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="getting-started"
+  meta={meta}
+  heading="Get Started with Perry"
+  lead="From zero to a running native executable in three steps. Native output does not need Node.js or an external JavaScript engine on the target machine; Perry's runtime and GC are linked into it."
+>
+  <Installation />
+
+  <Article tight>
+    <h2>Your first binary, step by step</h2>
+    <p>Once Perry is installed, compiling TypeScript to a native executable is a single command. Write a file:</p>
+    <Code
+      lines={[
+        { tone: "muted", text: "// hello.ts" },
+        { text: 'const name = process.argv[2] ?? "World";' },
+        { text: "console.log(`Hello, ${name}!`);" },
+      ]}
+    />
+    <p>Compile it and run the result — the output is a self-contained machine-code binary, not a bundled script:</p>
+    <Code
+      lines={[
+        { prompt: true, text: "perry compile hello.ts" },
+        { tone: "success", text: "✓ Compiled executable: hello" },
+        { prompt: true, text: "./hello Perry" },
+        { text: "Hello, Perry!" },
+      ]}
+    />
+    <p>
+      The published runtime-only hello-world measurement is about 3.2 ms on the documented Apple M-series test host. Real
+      startup depends on the target, linked features, I/O, and hardware. Read more about
+      <a href={localePath(lang, "compile-typescript-to-binary")}>how Perry compiles TypeScript to a binary</a> or what
+      happens inside the <a href={localePath(lang, "typescript-native-compiler")}>TypeScript native compiler</a>.
+    </p>
+    <h2>Where to go next</h2>
+  </Article>
+
+  <section class="section">
+    <div class="wrap"><Cards items={next} /></div>
+  </section>
+</LandingLayout>

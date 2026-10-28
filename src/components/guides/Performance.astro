@@ -1,0 +1,193 @@
+---
+/** Published measurements (English, from the previous site's Performance section). */
+import SectionHeader from "../SectionHeader.astro";
+import LinkArrow from "../LinkArrow.astro";
+import { PRODUCT_FACTS } from "../../data/product-facts.ts";
+import { getBenchmarks, resultVsBoth } from "../../lib/perry-data.ts";
+
+// Same workloads as before; figures come from the published benchmark file (perry-data.ts).
+const SUITE: [id: string, name: string, description: string][] = [
+  ["13_factorial", "factorial", "Modular accumulation"],
+  ["09_method_calls", "method calls", "Class method dispatch"],
+  ["14_closure", "closure", "Closure creation and invocation"],
+  ["12_binary_trees", "binary trees", "Tree allocation and traversal"],
+  ["08_string_concat", "string concat", "String append loop"],
+  ["11_prime_sieve", "prime sieve", "Sieve of Eratosthenes"],
+  ["15_mandelbrot", "mandelbrot", "Complex-number iteration"],
+  ["16_matrix_multiply", "matrix multiply", "Matrix multiplication"],
+  ["bench_json_roundtrip", "JSON roundtrip", "Parse and stringify ~1 MB JSON"],
+];
+const data = await getBenchmarks();
+const suite = SUITE.flatMap(([id, name, description]) => {
+  const r = data.byId.get(id);
+  return r ? [{ name, description, perry: r.perry, node: r.node, bun: r.bun, result: resultVsBoth(r) }] : [];
+});
+const meta = [
+  `Perry ${data.perryVersion}`,
+  `Node.js ${data.nodeVersion.replace(/^v/, "")}`,
+  data.bunVersion && `Bun ${data.bunVersion}`,
+  data.ramGb ? `${data.cpu}, ${data.ramGb} GB` : data.cpu,
+  data.date,
+].filter(Boolean);
+
+const comparisons = [
+  {
+    metric: "Binary Size",
+    perry: `${PRODUCT_FACTS.helloWorldSize} hello world; ${PRODUCT_FACTS.mangoSize} Mango`,
+    node: "Application plus an installed Node.js runtime",
+    bun: "Standalone executable embeds the Bun runtime",
+  },
+  {
+    metric: "Startup Time",
+    perry: `${PRODUCT_FACTS.measuredMacStartup}*`,
+    node: "Engine boot and warmup; workload-dependent",
+    bun: "Engine boot and warmup; workload-dependent",
+  },
+  {
+    metric: "Runtime Dependencies",
+    perry: "Statically linked Perry runtime + GC",
+    node: "External Node.js runtime",
+    bun: "Embedded Bun / JavaScriptCore runtime",
+  },
+  { metric: "Memory Overhead", perry: "Workload-dependent", node: "Workload-dependent", bun: "Workload-dependent" },
+];
+const resultLabel = { win: "Win vs both", even: "Even with both", mixed: "Mixed", loss: "Loss vs both" } as const;
+---
+
+<section class="section perf">
+  <div class="wrap stack">
+    <SectionHeader
+      title="Published measurements"
+      aside="Current public results include wins, mixed results, and losses. Treat microbenchmarks as workload-specific measurements, not a universal speed claim."
+    />
+
+    <div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col" class="accent">Perry</th><th scope="col">Node.js</th><th scope="col">Bun</th></tr>
+          </thead>
+          <tbody>
+            {comparisons.map((row, i) => (
+              <tr data-reveal style={`--i: ${i}`}>
+                <th scope="row">{row.metric}</th>
+                <td>{row.perry}</td>
+                <td class="muted">{row.node}</td>
+                <td class="muted">{row.bun}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="foot muted">* Measured runtime-only macOS hello world on an Apple M-series host (5.0 → 3.2 ms after removing unused dynamic-library links). Application startup varies.</p>
+    </div>
+
+    <div>
+      <h3 class="t-h3">Full public suite: wins and losses</h3>
+      <p class="t-mono muted meta">
+        {meta.join(" · ")}
+      </p>
+      <p class="foot muted">Lower wall-clock median is better. Five complete process samples; correctness checks passed. Benchmark names and descriptions remain English technical identifiers.</p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Benchmark</th>
+              <th scope="col" class="num accent">Perry</th>
+              <th scope="col" class="num">Node.js</th>
+              <th scope="col" class="num">Bun</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {suite.map((b, i) => (
+              <tr data-reveal style={`--i: ${i}`}>
+                <th scope="row">{b.name}<span class="detail t-mono muted">{b.description}</span></th>
+                <td class="num">{b.perry} ms</td>
+                <td class="num muted">{b.node} ms</td>
+                <td class="num muted">{b.bun === undefined ? "—" : `${b.bun} ms`}</td>
+                <td class:list={["t-mono", b.result]}>{resultLabel[b.result]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="links">
+        <LinkArrow href={PRODUCT_FACTS.benchmarkSource}>Raw benchmark artifact</LinkArrow>
+        <LinkArrow href={PRODUCT_FACTS.benchmarkMethodology}>Methodology and caveats</LinkArrow>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perf {
+    border-top: 1px solid var(--border);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .meta {
+    margin-top: 12px;
+  }
+  .foot {
+    margin-block: 12px 20px;
+    font-size: 14px;
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  th,
+  td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  thead th.accent {
+    color: var(--accent);
+  }
+  tbody th {
+    font-weight: 500;
+  }
+  .detail {
+    display: block;
+    margin-top: 4px;
+  }
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .win {
+    color: var(--success);
+  }
+  .mixed,
+  .even {
+    color: var(--text-muted);
+  }
+  .loss {
+    color: var(--danger);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 20px;
+  }
+</style>

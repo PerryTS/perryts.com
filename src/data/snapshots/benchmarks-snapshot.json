@@ -1,0 +1,6213 @@
+{
+  "schema_version": 1,
+  "kind": "perry-public-node-bun-baseline",
+  "commit": "b77aba63433b100b9482d47181b5ccc5e724ff81",
+  "perry_version": "perry 0.5.1639",
+  "generated_at": "2026-09-23T01:34:16Z",
+  "freshness": {
+    "source_fingerprint": "9c87723d7cedca511b1dba158fdd505bdbabd667367ee41152f82370c9ceeae5",
+    "harness_fingerprint": "513dba8ff9eaf931edc8a5fc01a0093a1156c31b0b6c9cc1218f710405e315e0"
+  },
+  "host": {
+    "os_version": "26.5.1",
+    "kernel": "Darwin perry-macos.fritz.box 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:38:00 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8103 arm64",
+    "arch": "arm64",
+    "cpu": "Apple M1",
+    "ncpu": "8",
+    "ram_gb": 8.0
+  },
+  "runtimes": {
+    "perry": {
+      "available": true,
+      "version": "perry 0.5.1639",
+      "command": [
+        "<compiled-binary>"
+      ],
+      "compile_command": [
+        "target/release/perry",
+        "<source.ts>",
+        "-o",
+        "<compiled-binary>"
+      ],
+      "resolved_executable": "target/release/perry"
+    },
+    "node": {
+      "available": true,
+      "version": "v22.23.1",
+      "command": [
+        "node",
+        "<source.ts>"
+      ],
+      "resolved_executable": "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node"
+    },
+    "bun": {
+      "available": true,
+      "version": "1.3.14",
+      "command": [
+        "bun",
+        "run",
+        "<source.ts>"
+      ],
+      "resolved_executable": "~/.bun/bin/bun"
+    }
+  },
+  "policy": {
+    "publishable": true,
+    "quiet_host": {
+      "metric": "aggregate CPU active percentage",
+      "maximum_percent": 25.0,
+      "consecutive_seconds": 60,
+      "checked_before_each_component": true
+    },
+    "requirements": [
+      "all required runtimes available",
+      "all requested raw samples present",
+      "all correctness checks passed",
+      "all components measured at one commit"
+    ]
+  },
+  "components": {
+    "suite": {
+      "schema_version": 2,
+      "commit": "b77aba634",
+      "generated_at": "2026-09-23T00:09:33Z",
+      "run_config": {
+        "requested_samples": 5,
+        "expected_benchmarks": [
+          "02_loop_overhead",
+          "03_array_write",
+          "04_array_read",
+          "05_fibonacci",
+          "06_math_intensive",
+          "07_object_create",
+          "08_string_concat",
+          "09_method_calls",
+          "10_nested_loops",
+          "11_prime_sieve",
+          "12_binary_trees",
+          "13_factorial",
+          "14_closure",
+          "15_mandelbrot",
+          "16_matrix_multiply",
+          "bench_gc_pressure",
+          "bench_json_roundtrip",
+          "bench_object_property",
+          "bench_int_arithmetic",
+          "bench_buffer_readwrite",
+          "bench_array_grow",
+          "bench_string_heavy",
+          "bench_numeric_array_numeric",
+          "bench_numeric_array_downgrade"
+        ],
+        "warmup": "benchmark-defined internal warmup; five complete process samples"
+      },
+      "runtimes": {
+        "perry": {
+          "available": true,
+          "version": "perry 0.5.1639",
+          "command": [
+            "<compiled-binary>"
+          ],
+          "compile_command": [
+            "target/release/perry",
+            "<source.ts>",
+            "-o",
+            "<compiled-binary>"
+          ]
+        },
+        "node": {
+          "available": true,
+          "version": "v22.23.1",
+          "command": [
+            "node",
+            "<source.ts>"
+          ]
+        },
+        "bun": {
+          "available": true,
+          "version": "1.3.14",
+          "command": [
+            "bun",
+            "run",
+            "<source.ts>"
+          ]
+        }
+      },
+      "benchmarks": {
+        "02_loop_overhead": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  167,
+                  125,
+                  125,
+                  125,
+                  125
+                ],
+                "sample_count": 5,
+                "median": 125,
+                "p95": 167,
+                "min": 125,
+                "max": 167,
+                "mad": 0,
+                "stdev": 16.8
+              },
+              "rss_kb": {
+                "samples": [
+                  4432,
+                  4432,
+                  4432,
+                  4432,
+                  4432
+                ],
+                "sample_count": 5,
+                "median": 4432,
+                "p95": 4432,
+                "min": 4432,
+                "max": 4432,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  139,
+                  126,
+                  126,
+                  126,
+                  127
+                ],
+                "sample_count": 5,
+                "median": 126,
+                "p95": 139,
+                "min": 126,
+                "max": 139,
+                "mad": 0,
+                "stdev": 5.114685
+              },
+              "rss_kb": {
+                "samples": [
+                  68576,
+                  68400,
+                  68512,
+                  68464,
+                  68448
+                ],
+                "sample_count": 5,
+                "median": 68464,
+                "p95": 68576,
+                "min": 68400,
+                "max": 68576,
+                "mad": 48,
+                "stdev": 59.866518
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  134,
+                  125,
+                  125,
+                  125,
+                  126
+                ],
+                "sample_count": 5,
+                "median": 125,
+                "p95": 134,
+                "min": 125,
+                "max": 134,
+                "mad": 0,
+                "stdev": 3.521363
+              },
+              "rss_kb": {
+                "samples": [
+                  30608,
+                  30592,
+                  30576,
+                  30592,
+                  30576
+                ],
+                "sample_count": 5,
+                "median": 30592,
+                "p95": 30608,
+                "min": 30576,
+                "max": 30608,
+                "mad": 16,
+                "stdev": 11.973304
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.992063,
+              "rss": 0.064735
+            },
+            "perry_to_bun": {
+              "wall_time": 1.0,
+              "rss": 0.144874
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:3848272069"
+            ],
+            "expected_lines": [
+              "checksum:3848272069"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 125,
+          "perry_rss_kb": 4432,
+          "node_ms": 126,
+          "node_rss_kb": 68464,
+          "bun_ms": 125,
+          "bun_rss_kb": 30592,
+          "speed_ratio": 0.992063,
+          "memory_ratio": 0.064735
+        },
+        "03_array_write": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  4,
+                  2,
+                  2,
+                  1,
+                  1
+                ],
+                "sample_count": 5,
+                "median": 2,
+                "p95": 4,
+                "min": 1,
+                "max": 4,
+                "mad": 1,
+                "stdev": 1.095445
+              },
+              "rss_kb": {
+                "samples": [
+                  95616,
+                  95616,
+                  95616,
+                  95616,
+                  95616
+                ],
+                "sample_count": 5,
+                "median": 95616,
+                "p95": 95616,
+                "min": 95616,
+                "max": 95616,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  7,
+                  7,
+                  7,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 7,
+                "p95": 7,
+                "min": 6,
+                "max": 7,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  374400,
+                  374240,
+                  374032,
+                  374176,
+                  374352
+                ],
+                "sample_count": 5,
+                "median": 374240,
+                "p95": 374400,
+                "min": 374032,
+                "max": 374400,
+                "mad": 112,
+                "stdev": 130.770027
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  5,
+                  5,
+                  4,
+                  5,
+                  5
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 5,
+                "min": 4,
+                "max": 5,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  284528,
+                  245280,
+                  202848,
+                  290960,
+                  202832
+                ],
+                "sample_count": 5,
+                "median": 245280,
+                "p95": 290960,
+                "min": 202832,
+                "max": 290960,
+                "mad": 42432,
+                "stdev": 38024.662447
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.285714,
+              "rss": 0.255494
+            },
+            "perry_to_bun": {
+              "wall_time": 0.4,
+              "rss": 0.389824
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:9999999"
+            ],
+            "expected_lines": [
+              "checksum:9999999"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 2,
+          "perry_rss_kb": 95616,
+          "node_ms": 7,
+          "node_rss_kb": 374240,
+          "bun_ms": 5,
+          "bun_rss_kb": 245280,
+          "speed_ratio": 0.285714,
+          "memory_ratio": 0.255494
+        },
+        "04_array_read": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  26,
+                  9,
+                  9,
+                  9,
+                  10
+                ],
+                "sample_count": 5,
+                "median": 9,
+                "p95": 26,
+                "min": 9,
+                "max": 26,
+                "mad": 0,
+                "stdev": 6.711185
+              },
+              "rss_kb": {
+                "samples": [
+                  95568,
+                  95568,
+                  95568,
+                  95568,
+                  95568
+                ],
+                "sample_count": 5,
+                "median": 95568,
+                "p95": 95568,
+                "min": 95568,
+                "max": 95568,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  10,
+                  10,
+                  10,
+                  10,
+                  11
+                ],
+                "sample_count": 5,
+                "median": 10,
+                "p95": 11,
+                "min": 10,
+                "max": 11,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  374432,
+                  374480,
+                  374512,
+                  374304,
+                  374432
+                ],
+                "sample_count": 5,
+                "median": 374432,
+                "p95": 374512,
+                "min": 374304,
+                "max": 374512,
+                "mad": 48,
+                "stdev": 70.83502
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  14,
+                  13,
+                  13,
+                  14,
+                  14
+                ],
+                "sample_count": 5,
+                "median": 14,
+                "p95": 14,
+                "min": 13,
+                "max": 14,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  291712,
+                  285248,
+                  203552,
+                  291728,
+                  267840
+                ],
+                "sample_count": 5,
+                "median": 285248,
+                "p95": 291728,
+                "min": 203552,
+                "max": 291728,
+                "mad": 6480,
+                "stdev": 33395.626827
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.9,
+              "rss": 0.255235
+            },
+            "perry_to_bun": {
+              "wall_time": 0.642857,
+              "rss": 0.335035
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:49999995000000"
+            ],
+            "expected_lines": [
+              "sum:49999995000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 9,
+          "perry_rss_kb": 95568,
+          "node_ms": 10,
+          "node_rss_kb": 374432,
+          "bun_ms": 14,
+          "bun_rss_kb": 285248,
+          "speed_ratio": 0.9,
+          "memory_ratio": 0.255235
+        },
+        "05_fibonacci": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  385,
+                  337,
+                  337,
+                  338,
+                  338
+                ],
+                "sample_count": 5,
+                "median": 338,
+                "p95": 385,
+                "min": 337,
+                "max": 385,
+                "mad": 1,
+                "stdev": 19.005262
+              },
+              "rss_kb": {
+                "samples": [
+                  4592,
+                  4592,
+                  4592,
+                  4592,
+                  4592
+                ],
+                "sample_count": 5,
+                "median": 4592,
+                "p95": 4592,
+                "min": 4592,
+                "max": 4592,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  913,
+                  913,
+                  913,
+                  913,
+                  913
+                ],
+                "sample_count": 5,
+                "median": 913,
+                "p95": 913,
+                "min": 913,
+                "max": 913,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  68336,
+                  68288,
+                  68432,
+                  68400,
+                  68544
+                ],
+                "sample_count": 5,
+                "median": 68400,
+                "p95": 68544,
+                "min": 68288,
+                "max": 68544,
+                "mad": 64,
+                "stdev": 87.635609
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  503,
+                  503,
+                  503,
+                  504,
+                  502
+                ],
+                "sample_count": 5,
+                "median": 503,
+                "p95": 504,
+                "min": 502,
+                "max": 504,
+                "mad": 0,
+                "stdev": 0.632456
+              },
+              "rss_kb": {
+                "samples": [
+                  29392,
+                  29408,
+                  29376,
+                  29408,
+                  29392
+                ],
+                "sample_count": 5,
+                "median": 29392,
+                "p95": 29408,
+                "min": 29376,
+                "max": 29408,
+                "mad": 16,
+                "stdev": 11.973304
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.370208,
+              "rss": 0.067135
+            },
+            "perry_to_bun": {
+              "wall_time": 0.671968,
+              "rss": 0.156233
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "fib(40):102334155"
+            ],
+            "expected_lines": [
+              "fib(40):102334155"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 338,
+          "perry_rss_kb": 4592,
+          "node_ms": 913,
+          "node_rss_kb": 68400,
+          "bun_ms": 503,
+          "bun_rss_kb": 29392,
+          "speed_ratio": 0.370208,
+          "memory_ratio": 0.067135
+        },
+        "06_math_intensive": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  93,
+                  47,
+                  48,
+                  48,
+                  48
+                ],
+                "sample_count": 5,
+                "median": 48,
+                "p95": 93,
+                "min": 47,
+                "max": 93,
+                "mad": 0,
+                "stdev": 18.104143
+              },
+              "rss_kb": {
+                "samples": [
+                  4432,
+                  4432,
+                  4432,
+                  4432,
+                  4432
+                ],
+                "sample_count": 5,
+                "median": 4432,
+                "p95": 4432,
+                "min": 4432,
+                "max": 4432,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  48,
+                  49,
+                  48,
+                  48,
+                  48
+                ],
+                "sample_count": 5,
+                "median": 48,
+                "p95": 49,
+                "min": 48,
+                "max": 49,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  70480,
+                  70528,
+                  70592,
+                  70544,
+                  70448
+                ],
+                "sample_count": 5,
+                "median": 70528,
+                "p95": 70592,
+                "min": 70448,
+                "max": 70592,
+                "mad": 48,
+                "stdev": 50.190039
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  48,
+                  48,
+                  49,
+                  49,
+                  49
+                ],
+                "sample_count": 5,
+                "median": 49,
+                "p95": 49,
+                "min": 48,
+                "max": 49,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  30624,
+                  30656,
+                  30640,
+                  30640,
+                  30640
+                ],
+                "sample_count": 5,
+                "median": 30640,
+                "p95": 30656,
+                "min": 30624,
+                "max": 30656,
+                "mad": 0,
+                "stdev": 10.119289
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 1.0,
+              "rss": 0.06284
+            },
+            "perry_to_bun": {
+              "wall_time": 0.979592,
+              "rss": 0.144648
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "result:19.30474921829397"
+            ],
+            "expected_lines": [
+              "result:19.30474921829397"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 48,
+          "perry_rss_kb": 4432,
+          "node_ms": 48,
+          "node_rss_kb": 70528,
+          "bun_ms": 49,
+          "bun_rss_kb": 30640,
+          "speed_ratio": 1.0,
+          "memory_ratio": 0.06284
+        },
+        "07_object_create": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  19,
+                  8,
+                  8,
+                  8,
+                  8
+                ],
+                "sample_count": 5,
+                "median": 8,
+                "p95": 19,
+                "min": 8,
+                "max": 19,
+                "mad": 0,
+                "stdev": 4.4
+              },
+              "rss_kb": {
+                "samples": [
+                  6272,
+                  6272,
+                  6272,
+                  6272,
+                  6272
+                ],
+                "sample_count": 5,
+                "median": 6272,
+                "p95": 6272,
+                "min": 6272,
+                "max": 6272,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  5,
+                  4,
+                  5,
+                  5,
+                  4
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 5,
+                "min": 4,
+                "max": 5,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  71008,
+                  70880,
+                  71024,
+                  71072,
+                  71008
+                ],
+                "sample_count": 5,
+                "median": 71008,
+                "p95": 71072,
+                "min": 70880,
+                "max": 71072,
+                "mad": 16,
+                "stdev": 63.679196
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  7,
+                  5,
+                  5,
+                  5,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 7,
+                "min": 5,
+                "max": 7,
+                "mad": 0,
+                "stdev": 0.8
+              },
+              "rss_kb": {
+                "samples": [
+                  51536,
+                  48944,
+                  49024,
+                  48960,
+                  48880
+                ],
+                "sample_count": 5,
+                "median": 48960,
+                "p95": 51536,
+                "min": 48880,
+                "max": 51536,
+                "mad": 64,
+                "stdev": 1034.614982
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 1.6,
+              "rss": 0.088328
+            },
+            "perry_to_bun": {
+              "wall_time": 1.6,
+              "rss": 0.128105
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:1000000000000"
+            ],
+            "expected_lines": [
+              "sum:1000000000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 8,
+          "perry_rss_kb": 6272,
+          "node_ms": 5,
+          "node_rss_kb": 71008,
+          "bun_ms": 5,
+          "bun_rss_kb": 48960,
+          "speed_ratio": 1.6,
+          "memory_ratio": 0.088328
+        },
+        "08_string_concat": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  22,
+                  5,
+                  6,
+                  5,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 6,
+                "p95": 22,
+                "min": 5,
+                "max": 22,
+                "mad": 1,
+                "stdev": 6.615134
+              },
+              "rss_kb": {
+                "samples": [
+                  7344,
+                  7344,
+                  7344,
+                  7344,
+                  7344
+                ],
+                "sample_count": 5,
+                "median": 7344,
+                "p95": 7344,
+                "min": 7344,
+                "max": 7344,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  31,
+                  31,
+                  31,
+                  31,
+                  31
+                ],
+                "sample_count": 5,
+                "median": 31,
+                "p95": 31,
+                "min": 31,
+                "max": 31,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  118048,
+                  118064,
+                  118144,
+                  118048,
+                  118064
+                ],
+                "sample_count": 5,
+                "median": 118064,
+                "p95": 118144,
+                "min": 118048,
+                "max": 118144,
+                "mad": 16,
+                "stdev": 35.919911
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  6,
+                  5,
+                  5,
+                  6,
+                  5
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 6,
+                "min": 5,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  64352,
+                  64320,
+                  64320,
+                  64336,
+                  64368
+                ],
+                "sample_count": 5,
+                "median": 64336,
+                "p95": 64368,
+                "min": 64320,
+                "max": 64368,
+                "mad": 16,
+                "stdev": 18.659046
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.193548,
+              "rss": 0.062204
+            },
+            "perry_to_bun": {
+              "wall_time": 1.2,
+              "rss": 0.114151
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "length:1000000",
+              "checksum:120480"
+            ],
+            "expected_lines": [
+              "length:1000000",
+              "checksum:120480"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 6,
+          "perry_rss_kb": 7344,
+          "node_ms": 31,
+          "node_rss_kb": 118064,
+          "bun_ms": 5,
+          "bun_rss_kb": 64336,
+          "speed_ratio": 0.193548,
+          "memory_ratio": 0.062204
+        },
+        "09_method_calls": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  72,
+                  34,
+                  35,
+                  35,
+                  34
+                ],
+                "sample_count": 5,
+                "median": 35,
+                "p95": 72,
+                "min": 34,
+                "max": 72,
+                "mad": 1,
+                "stdev": 15.006665
+              },
+              "rss_kb": {
+                "samples": [
+                  6576,
+                  6560,
+                  6560,
+                  6560,
+                  6560
+                ],
+                "sample_count": 5,
+                "median": 6560,
+                "p95": 6576,
+                "min": 6560,
+                "max": 6576,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  11,
+                  11,
+                  10,
+                  11,
+                  10
+                ],
+                "sample_count": 5,
+                "median": 11,
+                "p95": 11,
+                "min": 10,
+                "max": 11,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  68880,
+                  68720,
+                  68832,
+                  68944,
+                  68896
+                ],
+                "sample_count": 5,
+                "median": 68880,
+                "p95": 68944,
+                "min": 68720,
+                "max": 68944,
+                "mad": 48,
+                "stdev": 76.130414
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  8,
+                  8,
+                  9,
+                  9,
+                  8
+                ],
+                "sample_count": 5,
+                "median": 8,
+                "p95": 9,
+                "min": 8,
+                "max": 9,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  31584,
+                  31568,
+                  31568,
+                  31552,
+                  31552
+                ],
+                "sample_count": 5,
+                "median": 31568,
+                "p95": 31584,
+                "min": 31552,
+                "max": 31584,
+                "mad": 16,
+                "stdev": 11.973304
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 3.181818,
+              "rss": 0.095238
+            },
+            "perry_to_bun": {
+              "wall_time": 4.375,
+              "rss": 0.207805
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "value:10000000"
+            ],
+            "expected_lines": [
+              "value:10000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 35,
+          "perry_rss_kb": 6560,
+          "node_ms": 11,
+          "node_rss_kb": 68880,
+          "bun_ms": 8,
+          "bun_rss_kb": 31568,
+          "speed_ratio": 3.181818,
+          "memory_ratio": 0.095238
+        },
+        "10_nested_loops": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  43,
+                  17,
+                  17,
+                  16,
+                  17
+                ],
+                "sample_count": 5,
+                "median": 17,
+                "p95": 43,
+                "min": 16,
+                "max": 43,
+                "mad": 0,
+                "stdev": 10.50714
+              },
+              "rss_kb": {
+                "samples": [
+                  6208,
+                  6208,
+                  6208,
+                  6208,
+                  6208
+                ],
+                "sample_count": 5,
+                "median": 6208,
+                "p95": 6208,
+                "min": 6208,
+                "max": 6208,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  18,
+                  18,
+                  17,
+                  18,
+                  17
+                ],
+                "sample_count": 5,
+                "median": 18,
+                "p95": 18,
+                "min": 17,
+                "max": 18,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  70640,
+                  70656,
+                  70800,
+                  70512,
+                  70560
+                ],
+                "sample_count": 5,
+                "median": 70640,
+                "p95": 70800,
+                "min": 70512,
+                "max": 70800,
+                "mad": 80,
+                "stdev": 98.422762
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  19,
+                  19,
+                  18,
+                  19,
+                  18
+                ],
+                "sample_count": 5,
+                "median": 19,
+                "p95": 19,
+                "min": 18,
+                "max": 19,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  32848,
+                  32848,
+                  32960,
+                  32848,
+                  32848
+                ],
+                "sample_count": 5,
+                "median": 32848,
+                "p95": 32960,
+                "min": 32848,
+                "max": 32960,
+                "mad": 0,
+                "stdev": 44.8
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.944444,
+              "rss": 0.087882
+            },
+            "perry_to_bun": {
+              "wall_time": 0.894737,
+              "rss": 0.188992
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:26991000000"
+            ],
+            "expected_lines": [
+              "sum:26991000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 17,
+          "perry_rss_kb": 6208,
+          "node_ms": 18,
+          "node_rss_kb": 70640,
+          "bun_ms": 19,
+          "bun_rss_kb": 32848,
+          "speed_ratio": 0.944444,
+          "memory_ratio": 0.087882
+        },
+        "11_prime_sieve": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  14,
+                  6,
+                  6,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 6,
+                "p95": 14,
+                "min": 6,
+                "max": 14,
+                "mad": 0,
+                "stdev": 3.2
+              },
+              "rss_kb": {
+                "samples": [
+                  24704,
+                  24704,
+                  24704,
+                  24704,
+                  24688
+                ],
+                "sample_count": 5,
+                "median": 24704,
+                "p95": 24704,
+                "min": 24688,
+                "max": 24704,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  6,
+                  6,
+                  5,
+                  5,
+                  5
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 6,
+                "min": 5,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  100624,
+                  100640,
+                  100672,
+                  100400,
+                  100416
+                ],
+                "sample_count": 5,
+                "median": 100624,
+                "p95": 100672,
+                "min": 100400,
+                "max": 100672,
+                "mad": 48,
+                "stdev": 117.401192
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  5,
+                  5,
+                  5,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 6,
+                "min": 5,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  62000,
+                  62048,
+                  58192,
+                  67184,
+                  62016
+                ],
+                "sample_count": 5,
+                "median": 62016,
+                "p95": 67184,
+                "min": 58192,
+                "max": 67184,
+                "mad": 32,
+                "stdev": 2862.256453
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 1.2,
+              "rss": 0.245508
+            },
+            "perry_to_bun": {
+              "wall_time": 1.2,
+              "rss": 0.398349
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "primes:78498"
+            ],
+            "expected_lines": [
+              "primes:78498"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 6,
+          "perry_rss_kb": 24704,
+          "node_ms": 5,
+          "node_rss_kb": 100624,
+          "bun_ms": 5,
+          "bun_rss_kb": 62016,
+          "speed_ratio": 1.2,
+          "memory_ratio": 0.245508
+        },
+        "12_binary_trees": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  34,
+                  12,
+                  12,
+                  13,
+                  13
+                ],
+                "sample_count": 5,
+                "median": 13,
+                "p95": 34,
+                "min": 12,
+                "max": 34,
+                "mad": 1,
+                "stdev": 8.61162
+              },
+              "rss_kb": {
+                "samples": [
+                  6256,
+                  6256,
+                  6256,
+                  6256,
+                  6256
+                ],
+                "sample_count": 5,
+                "median": 6256,
+                "p95": 6256,
+                "min": 6256,
+                "max": 6256,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  6,
+                  6,
+                  5,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 6,
+                "p95": 6,
+                "min": 5,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  70944,
+                  71072,
+                  70912,
+                  70992,
+                  70976
+                ],
+                "sample_count": 5,
+                "median": 70976,
+                "p95": 71072,
+                "min": 70912,
+                "max": 71072,
+                "mad": 32,
+                "stdev": 53.927359
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  6,
+                  6,
+                  6,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 6,
+                "p95": 6,
+                "min": 6,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  51664,
+                  51440,
+                  51472,
+                  51616,
+                  51408
+                ],
+                "sample_count": 5,
+                "median": 51472,
+                "p95": 51664,
+                "min": 51408,
+                "max": 51664,
+                "mad": 64,
+                "stdev": 101.192885
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 2.166667,
+              "rss": 0.088142
+            },
+            "perry_to_bun": {
+              "wall_time": 2.166667,
+              "rss": 0.121542
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:1500001500000"
+            ],
+            "expected_lines": [
+              "sum:1500001500000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 13,
+          "perry_rss_kb": 6256,
+          "node_ms": 6,
+          "node_rss_kb": 70976,
+          "bun_ms": 6,
+          "bun_rss_kb": 51472,
+          "speed_ratio": 2.166667,
+          "memory_ratio": 0.088142
+        },
+        "13_factorial": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  139,
+                  94,
+                  93,
+                  93,
+                  93
+                ],
+                "sample_count": 5,
+                "median": 93,
+                "p95": 139,
+                "min": 93,
+                "max": 139,
+                "mad": 0,
+                "stdev": 18.304098
+              },
+              "rss_kb": {
+                "samples": [
+                  4448,
+                  4448,
+                  4448,
+                  4448,
+                  4448
+                ],
+                "sample_count": 5,
+                "median": 4448,
+                "p95": 4448,
+                "min": 4448,
+                "max": 4448,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  95,
+                  95,
+                  95,
+                  94,
+                  95
+                ],
+                "sample_count": 5,
+                "median": 95,
+                "p95": 95,
+                "min": 94,
+                "max": 95,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  69952,
+                  70032,
+                  69952,
+                  69776,
+                  69728
+                ],
+                "sample_count": 5,
+                "median": 69952,
+                "p95": 70032,
+                "min": 69728,
+                "max": 70032,
+                "mad": 80,
+                "stdev": 115.820551
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  95,
+                  95,
+                  95,
+                  95,
+                  95
+                ],
+                "sample_count": 5,
+                "median": 95,
+                "p95": 95,
+                "min": 95,
+                "max": 95,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  31296,
+                  31280,
+                  31296,
+                  31312,
+                  31328
+                ],
+                "sample_count": 5,
+                "median": 31296,
+                "p95": 31328,
+                "min": 31280,
+                "max": 31328,
+                "mad": 16,
+                "stdev": 16.316862
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.978947,
+              "rss": 0.063586
+            },
+            "perry_to_bun": {
+              "wall_time": 0.978947,
+              "rss": 0.142127
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:49950000000"
+            ],
+            "expected_lines": [
+              "sum:49950000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 93,
+          "perry_rss_kb": 4448,
+          "node_ms": 95,
+          "node_rss_kb": 69952,
+          "bun_ms": 95,
+          "bun_rss_kb": 31296,
+          "speed_ratio": 0.978947,
+          "memory_ratio": 0.063586
+        },
+        "14_closure": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  91,
+                  47,
+                  47,
+                  47,
+                  47
+                ],
+                "sample_count": 5,
+                "median": 47,
+                "p95": 91,
+                "min": 47,
+                "max": 91,
+                "mad": 0,
+                "stdev": 17.6
+              },
+              "rss_kb": {
+                "samples": [
+                  4560,
+                  4560,
+                  4560,
+                  4560,
+                  4560
+                ],
+                "sample_count": 5,
+                "median": 4560,
+                "p95": 4560,
+                "min": 4560,
+                "max": 4560,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  49,
+                  48,
+                  49,
+                  49,
+                  49
+                ],
+                "sample_count": 5,
+                "median": 49,
+                "p95": 49,
+                "min": 48,
+                "max": 49,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  70960,
+                  70768,
+                  70832,
+                  70912,
+                  70960
+                ],
+                "sample_count": 5,
+                "median": 70912,
+                "p95": 70960,
+                "min": 70768,
+                "max": 70960,
+                "mad": 48,
+                "stdev": 75.454887
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  49,
+                  49,
+                  49,
+                  49,
+                  49
+                ],
+                "sample_count": 5,
+                "median": 49,
+                "p95": 49,
+                "min": 49,
+                "max": 49,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  31216,
+                  31232,
+                  31232,
+                  31248,
+                  31248
+                ],
+                "sample_count": 5,
+                "median": 31232,
+                "p95": 31248,
+                "min": 31216,
+                "max": 31248,
+                "mad": 16,
+                "stdev": 11.973304
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.959184,
+              "rss": 0.064305
+            },
+            "perry_to_bun": {
+              "wall_time": 0.959184,
+              "rss": 0.146004
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "sum:2500000000000000"
+            ],
+            "expected_lines": [
+              "sum:2500000000000000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 47,
+          "perry_rss_kb": 4560,
+          "node_ms": 49,
+          "node_rss_kb": 70912,
+          "bun_ms": 49,
+          "bun_rss_kb": 31232,
+          "speed_ratio": 0.959184,
+          "memory_ratio": 0.064305
+        },
+        "15_mandelbrot": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  62,
+                  25,
+                  25,
+                  25,
+                  25
+                ],
+                "sample_count": 5,
+                "median": 25,
+                "p95": 62,
+                "min": 25,
+                "max": 62,
+                "mad": 0,
+                "stdev": 14.8
+              },
+              "rss_kb": {
+                "samples": [
+                  4464,
+                  4464,
+                  4464,
+                  4464,
+                  4464
+                ],
+                "sample_count": 5,
+                "median": 4464,
+                "p95": 4464,
+                "min": 4464,
+                "max": 4464,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  25,
+                  25,
+                  24,
+                  24,
+                  24
+                ],
+                "sample_count": 5,
+                "median": 24,
+                "p95": 25,
+                "min": 24,
+                "max": 25,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  70512,
+                  70528,
+                  70656,
+                  70496,
+                  70640
+                ],
+                "sample_count": 5,
+                "median": 70528,
+                "p95": 70656,
+                "min": 70496,
+                "max": 70656,
+                "mad": 32,
+                "stdev": 67.579879
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  29,
+                  29,
+                  29,
+                  28,
+                  29
+                ],
+                "sample_count": 5,
+                "median": 29,
+                "p95": 29,
+                "min": 28,
+                "max": 29,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  31424,
+                  31472,
+                  31408,
+                  31408,
+                  31392
+                ],
+                "sample_count": 5,
+                "median": 31408,
+                "p95": 31472,
+                "min": 31392,
+                "max": 31472,
+                "mad": 16,
+                "stdev": 27.527441
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 1.041667,
+              "rss": 0.063294
+            },
+            "perry_to_bun": {
+              "wall_time": 0.862069,
+              "rss": 0.142129
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "total_iter:8011148"
+            ],
+            "expected_lines": [
+              "total_iter:8011148"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 25,
+          "perry_rss_kb": 4464,
+          "node_ms": 24,
+          "node_rss_kb": 70528,
+          "bun_ms": 29,
+          "bun_rss_kb": 31408,
+          "speed_ratio": 1.041667,
+          "memory_ratio": 0.063294
+        },
+        "16_matrix_multiply": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  56,
+                  19,
+                  19,
+                  18,
+                  19
+                ],
+                "sample_count": 5,
+                "median": 19,
+                "p95": 56,
+                "min": 18,
+                "max": 56,
+                "mad": 0,
+                "stdev": 14.905033
+              },
+              "rss_kb": {
+                "samples": [
+                  9920,
+                  9936,
+                  9920,
+                  9920,
+                  9920
+                ],
+                "sample_count": 5,
+                "median": 9920,
+                "p95": 9936,
+                "min": 9920,
+                "max": 9936,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  33,
+                  33,
+                  33,
+                  33,
+                  33
+                ],
+                "sample_count": 5,
+                "median": 33,
+                "p95": 33,
+                "min": 33,
+                "max": 33,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  74880,
+                  74704,
+                  74944,
+                  74912,
+                  74752
+                ],
+                "sample_count": 5,
+                "median": 74880,
+                "p95": 74944,
+                "min": 74704,
+                "max": 74944,
+                "mad": 64,
+                "stdev": 93.623929
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  33,
+                  33,
+                  33,
+                  33,
+                  33
+                ],
+                "sample_count": 5,
+                "median": 33,
+                "p95": 33,
+                "min": 33,
+                "max": 33,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  37856,
+                  37840,
+                  37856,
+                  37888,
+                  37856
+                ],
+                "sample_count": 5,
+                "median": 37856,
+                "p95": 37888,
+                "min": 37840,
+                "max": 37888,
+                "mad": 0,
+                "stdev": 15.676734
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.575758,
+              "rss": 0.132479
+            },
+            "perry_to_bun": {
+              "wall_time": 0.575758,
+              "rss": 0.262046
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:41079519680"
+            ],
+            "expected_lines": [
+              "checksum:41079519680"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 19,
+          "perry_rss_kb": 9920,
+          "node_ms": 33,
+          "node_rss_kb": 74880,
+          "bun_ms": 33,
+          "bun_rss_kb": 37856,
+          "speed_ratio": 0.575758,
+          "memory_ratio": 0.132479
+        },
+        "bench_gc_pressure": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  44,
+                  13,
+                  13,
+                  13,
+                  13
+                ],
+                "sample_count": 5,
+                "median": 13,
+                "p95": 44,
+                "min": 13,
+                "max": 44,
+                "mad": 0,
+                "stdev": 12.4
+              },
+              "rss_kb": {
+                "samples": [
+                  18048,
+                  18064,
+                  18064,
+                  18048,
+                  18064
+                ],
+                "sample_count": 5,
+                "median": 18064,
+                "p95": 18064,
+                "min": 18048,
+                "max": 18064,
+                "mad": 0,
+                "stdev": 7.838367
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  15,
+                  15,
+                  15,
+                  16,
+                  15
+                ],
+                "sample_count": 5,
+                "median": 15,
+                "p95": 16,
+                "min": 15,
+                "max": 16,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  77888,
+                  77744,
+                  77648,
+                  77776,
+                  77664
+                ],
+                "sample_count": 5,
+                "median": 77744,
+                "p95": 77888,
+                "min": 77648,
+                "max": 77888,
+                "mad": 80,
+                "stdev": 86.459239
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  20,
+                  19,
+                  20,
+                  20,
+                  20
+                ],
+                "sample_count": 5,
+                "median": 20,
+                "p95": 20,
+                "min": 19,
+                "max": 20,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  77616,
+                  77584,
+                  77568,
+                  77552,
+                  77568
+                ],
+                "sample_count": 5,
+                "median": 77568,
+                "p95": 77616,
+                "min": 77552,
+                "max": 77616,
+                "mad": 16,
+                "stdev": 21.703456
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.866667,
+              "rss": 0.232352
+            },
+            "perry_to_bun": {
+              "wall_time": 0.65,
+              "rss": 0.23288
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:249999500000"
+            ],
+            "expected_lines": [
+              "checksum:249999500000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 13,
+          "perry_rss_kb": 18064,
+          "node_ms": 15,
+          "node_rss_kb": 77744,
+          "bun_ms": 20,
+          "bun_rss_kb": 77568,
+          "speed_ratio": 0.866667,
+          "memory_ratio": 0.232352
+        },
+        "bench_json_roundtrip": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  156,
+                  143,
+                  144,
+                  143,
+                  144
+                ],
+                "sample_count": 5,
+                "median": 144,
+                "p95": 156,
+                "min": 143,
+                "max": 156,
+                "mad": 1,
+                "stdev": 5.01996
+              },
+              "rss_kb": {
+                "samples": [
+                  96288,
+                  96320,
+                  96288,
+                  96288,
+                  96304
+                ],
+                "sample_count": 5,
+                "median": 96288,
+                "p95": 96320,
+                "min": 96288,
+                "max": 96320,
+                "mad": 0,
+                "stdev": 12.8
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  392,
+                  395,
+                  393,
+                  392,
+                  388
+                ],
+                "sample_count": 5,
+                "median": 392,
+                "p95": 395,
+                "min": 388,
+                "max": 395,
+                "mad": 1,
+                "stdev": 2.280351
+              },
+              "rss_kb": {
+                "samples": [
+                  121936,
+                  121808,
+                  121840,
+                  122800,
+                  122000
+                ],
+                "sample_count": 5,
+                "median": 121936,
+                "p95": 122800,
+                "min": 121808,
+                "max": 122800,
+                "mad": 96,
+                "stdev": 367.986087
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  219,
+                  233,
+                  218,
+                  219,
+                  220
+                ],
+                "sample_count": 5,
+                "median": 219,
+                "p95": 233,
+                "min": 218,
+                "max": 233,
+                "mad": 1,
+                "stdev": 5.635601
+              },
+              "rss_kb": {
+                "samples": [
+                  84544,
+                  85520,
+                  83312,
+                  84528,
+                  84528
+                ],
+                "sample_count": 5,
+                "median": 84528,
+                "p95": 85520,
+                "min": 83312,
+                "max": 85520,
+                "mad": 16,
+                "stdev": 700.617328
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.367347,
+              "rss": 0.78966
+            },
+            "perry_to_bun": {
+              "wall_time": 0.657534,
+              "rss": 1.139125
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:53735550"
+            ],
+            "expected_lines": [
+              "checksum:53735550"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 144,
+          "perry_rss_kb": 96288,
+          "node_ms": 392,
+          "node_rss_kb": 121936,
+          "bun_ms": 219,
+          "bun_rss_kb": 84528,
+          "speed_ratio": 0.367347,
+          "memory_ratio": 0.78966
+        },
+        "bench_object_property": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  29,
+                  8,
+                  9,
+                  8,
+                  9
+                ],
+                "sample_count": 5,
+                "median": 9,
+                "p95": 29,
+                "min": 8,
+                "max": 29,
+                "mad": 1,
+                "stdev": 8.212186
+              },
+              "rss_kb": {
+                "samples": [
+                  17216,
+                  17232,
+                  17216,
+                  17216,
+                  17216
+                ],
+                "sample_count": 5,
+                "median": 17216,
+                "p95": 17232,
+                "min": 17216,
+                "max": 17232,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  15,
+                  16,
+                  15,
+                  15,
+                  15
+                ],
+                "sample_count": 5,
+                "median": 15,
+                "p95": 16,
+                "min": 15,
+                "max": 16,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  70576,
+                  70672,
+                  70624,
+                  70592,
+                  70624
+                ],
+                "sample_count": 5,
+                "median": 70624,
+                "p95": 70672,
+                "min": 70576,
+                "max": 70672,
+                "mad": 32,
+                "stdev": 32.946016
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  7,
+                  15,
+                  16,
+                  8,
+                  16
+                ],
+                "sample_count": 5,
+                "median": 15,
+                "p95": 16,
+                "min": 7,
+                "max": 16,
+                "mad": 1,
+                "stdev": 4.029888
+              },
+              "rss_kb": {
+                "samples": [
+                  33648,
+                  46032,
+                  46016,
+                  37120,
+                  46016
+                ],
+                "sample_count": 5,
+                "median": 46016,
+                "p95": 46032,
+                "min": 33648,
+                "max": 46032,
+                "mad": 16,
+                "stdev": 5325.617245
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.6,
+              "rss": 0.24377
+            },
+            "perry_to_bun": {
+              "wall_time": 0.6,
+              "rss": 0.374131
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:1999990000"
+            ],
+            "expected_lines": [
+              "checksum:1999990000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 9,
+          "perry_rss_kb": 17216,
+          "node_ms": 15,
+          "node_rss_kb": 70624,
+          "bun_ms": 15,
+          "bun_rss_kb": 46016,
+          "speed_ratio": 0.6,
+          "memory_ratio": 0.24377
+        },
+        "bench_int_arithmetic": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  97,
+                  52,
+                  53,
+                  52,
+                  53
+                ],
+                "sample_count": 5,
+                "median": 53,
+                "p95": 97,
+                "min": 52,
+                "max": 97,
+                "mad": 1,
+                "stdev": 17.805617
+              },
+              "rss_kb": {
+                "samples": [
+                  4832,
+                  4832,
+                  4832,
+                  4832,
+                  4832
+                ],
+                "sample_count": 5,
+                "median": 4832,
+                "p95": 4832,
+                "min": 4832,
+                "max": 4832,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  93,
+                  93,
+                  94,
+                  93,
+                  94
+                ],
+                "sample_count": 5,
+                "median": 93,
+                "p95": 94,
+                "min": 93,
+                "max": 94,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  68992,
+                  69184,
+                  69040,
+                  69056,
+                  69088
+                ],
+                "sample_count": 5,
+                "median": 69056,
+                "p95": 69184,
+                "min": 68992,
+                "max": 69184,
+                "mad": 32,
+                "stdev": 64
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  38,
+                  38,
+                  38,
+                  38,
+                  38
+                ],
+                "sample_count": 5,
+                "median": 38,
+                "p95": 38,
+                "min": 38,
+                "max": 38,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  36032,
+                  36016,
+                  36016,
+                  36032,
+                  35984
+                ],
+                "sample_count": 5,
+                "median": 36016,
+                "p95": 36032,
+                "min": 35984,
+                "max": 36032,
+                "mad": 16,
+                "stdev": 17.527122
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.569892,
+              "rss": 0.069972
+            },
+            "perry_to_bun": {
+              "wall_time": 1.394737,
+              "rss": 0.134163
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:5760000"
+            ],
+            "expected_lines": [
+              "checksum:5760000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 53,
+          "perry_rss_kb": 4832,
+          "node_ms": 93,
+          "node_rss_kb": 69056,
+          "bun_ms": 38,
+          "bun_rss_kb": 36016,
+          "speed_ratio": 0.569892,
+          "memory_ratio": 0.069972
+        },
+        "bench_buffer_readwrite": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  79,
+                  32,
+                  32,
+                  32,
+                  32
+                ],
+                "sample_count": 5,
+                "median": 32,
+                "p95": 79,
+                "min": 32,
+                "max": 79,
+                "mad": 0,
+                "stdev": 18.8
+              },
+              "rss_kb": {
+                "samples": [
+                  5744,
+                  5744,
+                  5744,
+                  5744,
+                  5744
+                ],
+                "sample_count": 5,
+                "median": 5744,
+                "p95": 5744,
+                "min": 5744,
+                "max": 5744,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  97,
+                  96,
+                  96,
+                  96,
+                  96
+                ],
+                "sample_count": 5,
+                "median": 96,
+                "p95": 97,
+                "min": 96,
+                "max": 97,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  68976,
+                  68848,
+                  68992,
+                  68912,
+                  68752
+                ],
+                "sample_count": 5,
+                "median": 68912,
+                "p95": 68992,
+                "min": 68752,
+                "max": 68992,
+                "mad": 64,
+                "stdev": 88.217912
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  193,
+                  193,
+                  193,
+                  193,
+                  192
+                ],
+                "sample_count": 5,
+                "median": 193,
+                "p95": 193,
+                "min": 192,
+                "max": 193,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  34224,
+                  34192,
+                  34240,
+                  34192,
+                  34192
+                ],
+                "sample_count": 5,
+                "median": 34192,
+                "p95": 34240,
+                "min": 34192,
+                "max": 34240,
+                "mad": 0,
+                "stdev": 20.238577
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.333333,
+              "rss": 0.083353
+            },
+            "perry_to_bun": {
+              "wall_time": 0.165803,
+              "rss": 0.167993
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:12749385600"
+            ],
+            "expected_lines": [
+              "checksum:12749385600"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 32,
+          "perry_rss_kb": 5744,
+          "node_ms": 96,
+          "node_rss_kb": 68912,
+          "bun_ms": 193,
+          "bun_rss_kb": 34192,
+          "speed_ratio": 0.333333,
+          "memory_ratio": 0.083353
+        },
+        "bench_array_grow": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  19,
+                  8,
+                  8,
+                  8,
+                  7
+                ],
+                "sample_count": 5,
+                "median": 8,
+                "p95": 19,
+                "min": 7,
+                "max": 19,
+                "mad": 0,
+                "stdev": 4.516636
+              },
+              "rss_kb": {
+                "samples": [
+                  45616,
+                  45616,
+                  45616,
+                  45616,
+                  45616
+                ],
+                "sample_count": 5,
+                "median": 45616,
+                "p95": 45616,
+                "min": 45616,
+                "max": 45616,
+                "mad": 0,
+                "stdev": 0
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  13,
+                  13,
+                  13,
+                  14,
+                  13
+                ],
+                "sample_count": 5,
+                "median": 13,
+                "p95": 14,
+                "min": 13,
+                "max": 14,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  132944,
+                  132928,
+                  132880,
+                  132800,
+                  132976
+                ],
+                "sample_count": 5,
+                "median": 132928,
+                "p95": 132976,
+                "min": 132800,
+                "max": 132976,
+                "mad": 48,
+                "stdev": 61.219605
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  8,
+                  8,
+                  9,
+                  8,
+                  9
+                ],
+                "sample_count": 5,
+                "median": 8,
+                "p95": 9,
+                "min": 8,
+                "max": 9,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  66848,
+                  75712,
+                  75680,
+                  66864,
+                  79120
+                ],
+                "sample_count": 5,
+                "median": 75680,
+                "p95": 79120,
+                "min": 66848,
+                "max": 79120,
+                "mad": 3440,
+                "stdev": 5047.155809
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.615385,
+              "rss": 0.343163
+            },
+            "perry_to_bun": {
+              "wall_time": 1.0,
+              "rss": 0.602748
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "length:2000000",
+              "checksum:2998500000"
+            ],
+            "expected_lines": [
+              "length:2000000",
+              "checksum:2998500000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 8,
+          "perry_rss_kb": 45616,
+          "node_ms": 13,
+          "node_rss_kb": 132928,
+          "bun_ms": 8,
+          "bun_rss_kb": 75680,
+          "speed_ratio": 0.615385,
+          "memory_ratio": 0.343163
+        },
+        "bench_string_heavy": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  80,
+                  36,
+                  35,
+                  35,
+                  36
+                ],
+                "sample_count": 5,
+                "median": 36,
+                "p95": 80,
+                "min": 35,
+                "max": 80,
+                "mad": 1,
+                "stdev": 17.805617
+              },
+              "rss_kb": {
+                "samples": [
+                  26336,
+                  26336,
+                  26336,
+                  26352,
+                  26336
+                ],
+                "sample_count": 5,
+                "median": 26336,
+                "p95": 26352,
+                "min": 26336,
+                "max": 26352,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  42,
+                  48,
+                  42,
+                  42,
+                  41
+                ],
+                "sample_count": 5,
+                "median": 42,
+                "p95": 48,
+                "min": 41,
+                "max": 48,
+                "mad": 0,
+                "stdev": 2.529822
+              },
+              "rss_kb": {
+                "samples": [
+                  68416,
+                  68528,
+                  68592,
+                  68608,
+                  68416
+                ],
+                "sample_count": 5,
+                "median": 68528,
+                "p95": 68608,
+                "min": 68416,
+                "max": 68608,
+                "mad": 80,
+                "stdev": 82.829946
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  29,
+                  28,
+                  29,
+                  29,
+                  29
+                ],
+                "sample_count": 5,
+                "median": 29,
+                "p95": 29,
+                "min": 28,
+                "max": 29,
+                "mad": 0,
+                "stdev": 0.4
+              },
+              "rss_kb": {
+                "samples": [
+                  62480,
+                  62464,
+                  62448,
+                  62480,
+                  62448
+                ],
+                "sample_count": 5,
+                "median": 62464,
+                "p95": 62480,
+                "min": 62448,
+                "max": 62480,
+                "mad": 16,
+                "stdev": 14.310835
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.857143,
+              "rss": 0.38431
+            },
+            "perry_to_bun": {
+              "wall_time": 1.241379,
+              "rss": 0.421619
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:21063000"
+            ],
+            "expected_lines": [
+              "checksum:21063000"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 36,
+          "perry_rss_kb": 26336,
+          "node_ms": 42,
+          "node_rss_kb": 68528,
+          "bun_ms": 29,
+          "bun_rss_kb": 62464,
+          "speed_ratio": 0.857143,
+          "memory_ratio": 0.38431
+        },
+        "bench_numeric_array_numeric": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  10,
+                  7,
+                  7,
+                  6,
+                  7
+                ],
+                "sample_count": 5,
+                "median": 7,
+                "p95": 10,
+                "min": 6,
+                "max": 10,
+                "mad": 0,
+                "stdev": 1.356466
+              },
+              "rss_kb": {
+                "samples": [
+                  24816,
+                  24832,
+                  24832,
+                  24832,
+                  24832
+                ],
+                "sample_count": 5,
+                "median": 24832,
+                "p95": 24832,
+                "min": 24816,
+                "max": 24832,
+                "mad": 0,
+                "stdev": 6.4
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  5,
+                  5,
+                  5,
+                  5,
+                  5
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 5,
+                "min": 5,
+                "max": 5,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  89456,
+                  89312,
+                  89248,
+                  89472,
+                  89344
+                ],
+                "sample_count": 5,
+                "median": 89344,
+                "p95": 89472,
+                "min": 89248,
+                "max": 89472,
+                "mad": 96,
+                "stdev": 85.626164
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  4,
+                  4,
+                  4,
+                  4,
+                  4
+                ],
+                "sample_count": 5,
+                "median": 4,
+                "p95": 4,
+                "min": 4,
+                "max": 4,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  46560,
+                  46544,
+                  46624,
+                  46560,
+                  46592
+                ],
+                "sample_count": 5,
+                "median": 46560,
+                "p95": 46624,
+                "min": 46544,
+                "max": 46624,
+                "mad": 16,
+                "stdev": 28.62167
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 1.4,
+              "rss": 0.277937
+            },
+            "perry_to_bun": {
+              "wall_time": 1.75,
+              "rss": 0.533333
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:6500625"
+            ],
+            "expected_lines": [
+              "checksum:6500625"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 7,
+          "perry_rss_kb": 24832,
+          "node_ms": 5,
+          "node_rss_kb": 89344,
+          "bun_ms": 4,
+          "bun_rss_kb": 46560,
+          "speed_ratio": 1.4,
+          "memory_ratio": 0.277937
+        },
+        "bench_numeric_array_downgrade": {
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  8,
+                  4,
+                  3,
+                  4,
+                  3
+                ],
+                "sample_count": 5,
+                "median": 4,
+                "p95": 8,
+                "min": 3,
+                "max": 8,
+                "mad": 1,
+                "stdev": 1.854724
+              },
+              "rss_kb": {
+                "samples": [
+                  25392,
+                  25392,
+                  25376,
+                  25392,
+                  25376
+                ],
+                "sample_count": 5,
+                "median": 25392,
+                "p95": 25392,
+                "min": 25376,
+                "max": 25392,
+                "mad": 0,
+                "stdev": 7.838367
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  6,
+                  6,
+                  6,
+                  6,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 6,
+                "p95": 6,
+                "min": 6,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0
+              },
+              "rss_kb": {
+                "samples": [
+                  89472,
+                  89344,
+                  89616,
+                  89376,
+                  89440
+                ],
+                "sample_count": 5,
+                "median": 89440,
+                "p95": 89616,
+                "min": 89344,
+                "max": 89616,
+                "mad": 64,
+                "stdev": 94.711351
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  5,
+                  5,
+                  6,
+                  5,
+                  6
+                ],
+                "sample_count": 5,
+                "median": 5,
+                "p95": 6,
+                "min": 5,
+                "max": 6,
+                "mad": 0,
+                "stdev": 0.489898
+              },
+              "rss_kb": {
+                "samples": [
+                  48000,
+                  48000,
+                  48016,
+                  48032,
+                  47984
+                ],
+                "sample_count": 5,
+                "median": 48000,
+                "p95": 48032,
+                "min": 47984,
+                "max": 48032,
+                "mad": 16,
+                "stdev": 16.316862
+              }
+            }
+          },
+          "ratios": {
+            "perry_to_node": {
+              "wall_time": 0.666667,
+              "rss": 0.2839
+            },
+            "perry_to_bun": {
+              "wall_time": 0.8,
+              "rss": 0.529
+            }
+          },
+          "correctness": {
+            "status": "pass",
+            "reference": "node",
+            "actual_lines": [
+              "checksum:6500875"
+            ],
+            "expected_lines": [
+              "checksum:6500875"
+            ],
+            "reason": "all 5 Perry sample(s) matched node semantic output"
+          },
+          "perry_ms": 4,
+          "perry_rss_kb": 25392,
+          "node_ms": 6,
+          "node_rss_kb": 89440,
+          "bun_ms": 5,
+          "bun_rss_kb": 48000,
+          "speed_ratio": 0.666667,
+          "memory_ratio": 0.2839
+        }
+      }
+    },
+    "polyglot": {
+      "schema_version": 1,
+      "suite": "polyglot",
+      "commit": "b77aba63433b100b9482d47181b5ccc5e724ff81",
+      "generated_at": "2026-09-23T01:17:01Z",
+      "run_config": {
+        "warmup": "none beyond benchmark-specific setup",
+        "requested_samples": 11,
+        "pinning": "macOS scheduler hint (taskpolicy -t 0 -l 0 \u2014 P-core preferred via throughput/latency tiers, NOT strict affinity)"
+      },
+      "commands": {
+        "perry": [
+          "../../target/release/perry",
+          "compile",
+          "<source.ts>",
+          "-o",
+          "<binary>"
+        ],
+        "node": [
+          "/Users/perry/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+          "<precompiled.mjs>"
+        ],
+        "bun": [
+          "/Users/perry/.bun/bin/bun",
+          "run",
+          "<source.ts>"
+        ],
+        "runner": [
+          "benchmarks/polyglot/run_all.sh",
+          "11"
+        ]
+      },
+      "runtime_metadata": {
+        "perry": {
+          "version": "perry 0.5.1639",
+          "resolved_executable": "target/release/perry"
+        },
+        "node": {
+          "version": "v22.23.1",
+          "resolved_executable": "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node"
+        },
+        "bun": {
+          "version": "1.3.14",
+          "resolved_executable": "~/.bun/bin/bun"
+        }
+      },
+      "benchmarks": {
+        "accumulate": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "45e7000362b678343915ceae0bbf34e9c236096552f86ca83f6cb91d6b0b5c67"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  138.0,
+                  94.0,
+                  94.0,
+                  94.0,
+                  94.0,
+                  93.0,
+                  94.0,
+                  94.0,
+                  93.0,
+                  94.0,
+                  94.0
+                ],
+                "sample_count": 11,
+                "median": 94.0,
+                "p95": 138.0,
+                "min": 93.0,
+                "max": 138.0,
+                "stdev": 12.712328889118782
+              },
+              "output_sha256": "45e7000362b678343915ceae0bbf34e9c236096552f86ca83f6cb91d6b0b5c67"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  95.0,
+                  95.0,
+                  94.0,
+                  95.0,
+                  94.0,
+                  94.0,
+                  94.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  94.0
+                ],
+                "sample_count": 11,
+                "median": 95.0,
+                "p95": 95.0,
+                "min": 94.0,
+                "max": 95.0,
+                "stdev": 0.4979295977319692
+              },
+              "output_sha256": "45e7000362b678343915ceae0bbf34e9c236096552f86ca83f6cb91d6b0b5c67"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  95.0,
+                  94.0,
+                  95.0
+                ],
+                "sample_count": 11,
+                "median": 95.0,
+                "p95": 95.0,
+                "min": 94.0,
+                "max": 95.0,
+                "stdev": 0.28747978728803447
+              },
+              "output_sha256": "45e7000362b678343915ceae0bbf34e9c236096552f86ca83f6cb91d6b0b5c67"
+            }
+          }
+        },
+        "array_read": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "9a59b9a771dcc3170ca6608099bc1dbe482831939679e81ae72f7bf4bd249674"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  26.0,
+                  9.0,
+                  10.0,
+                  9.0,
+                  9.0,
+                  10.0,
+                  10.0,
+                  9.0,
+                  10.0,
+                  9.0,
+                  10.0
+                ],
+                "sample_count": 11,
+                "median": 10.0,
+                "p95": 26.0,
+                "min": 9.0,
+                "max": 26.0,
+                "stdev": 4.767312946227961
+              },
+              "output_sha256": "9a59b9a771dcc3170ca6608099bc1dbe482831939679e81ae72f7bf4bd249674"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  11.0,
+                  10.0,
+                  11.0,
+                  11.0,
+                  11.0,
+                  11.0,
+                  11.0,
+                  11.0,
+                  11.0,
+                  10.0,
+                  11.0
+                ],
+                "sample_count": 11,
+                "median": 11.0,
+                "p95": 11.0,
+                "min": 10.0,
+                "max": 11.0,
+                "stdev": 0.38569460791993504
+              },
+              "output_sha256": "9a59b9a771dcc3170ca6608099bc1dbe482831939679e81ae72f7bf4bd249674"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  14.0,
+                  13.0,
+                  14.0,
+                  13.0,
+                  14.0,
+                  14.0,
+                  13.0,
+                  14.0,
+                  14.0,
+                  14.0,
+                  13.0
+                ],
+                "sample_count": 11,
+                "median": 14.0,
+                "p95": 14.0,
+                "min": 13.0,
+                "max": 14.0,
+                "stdev": 0.48104569292083466
+              },
+              "output_sha256": "9a59b9a771dcc3170ca6608099bc1dbe482831939679e81ae72f7bf4bd249674"
+            }
+          }
+        },
+        "array_write": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "a76ae1255a79f86acf51281a91633021374b072ef8c7fc75e6f1adf69e1e9ed4"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  4.0,
+                  1.0,
+                  2.0,
+                  2.0,
+                  1.0,
+                  2.0,
+                  1.0,
+                  2.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "sample_count": 11,
+                "median": 1.0,
+                "p95": 4.0,
+                "min": 1.0,
+                "max": 4.0,
+                "stdev": 0.8813963377120598
+              },
+              "output_sha256": "a76ae1255a79f86acf51281a91633021374b072ef8c7fc75e6f1adf69e1e9ed4"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0,
+                  7.0
+                ],
+                "sample_count": 11,
+                "median": 7.0,
+                "p95": 7.0,
+                "min": 7.0,
+                "max": 7.0,
+                "stdev": 0.0
+              },
+              "output_sha256": "a76ae1255a79f86acf51281a91633021374b072ef8c7fc75e6f1adf69e1e9ed4"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  4.0,
+                  5.0,
+                  5.0
+                ],
+                "sample_count": 11,
+                "median": 5.0,
+                "p95": 5.0,
+                "min": 4.0,
+                "max": 5.0,
+                "stdev": 0.28747978728803447
+              },
+              "output_sha256": "a76ae1255a79f86acf51281a91633021374b072ef8c7fc75e6f1adf69e1e9ed4"
+            }
+          }
+        },
+        "fibonacci": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "834774a30aeb60ab0f0a8dac4482efb07689d7b249da0942aa1260a78a3fa77d"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  386.0,
+                  337.0,
+                  339.0,
+                  338.0,
+                  338.0,
+                  338.0,
+                  338.0,
+                  337.0,
+                  338.0,
+                  338.0,
+                  338.0
+                ],
+                "sample_count": 11,
+                "median": 338.0,
+                "p95": 386.0,
+                "min": 337.0,
+                "max": 386.0,
+                "stdev": 13.837307338502145
+              },
+              "output_sha256": "834774a30aeb60ab0f0a8dac4482efb07689d7b249da0942aa1260a78a3fa77d"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  924.0,
+                  912.0,
+                  912.0,
+                  913.0,
+                  913.0,
+                  912.0,
+                  912.0,
+                  913.0,
+                  912.0,
+                  913.0,
+                  912.0
+                ],
+                "sample_count": 11,
+                "median": 912.0,
+                "p95": 924.0,
+                "min": 912.0,
+                "max": 924.0,
+                "stdev": 3.3673198504458424
+              },
+              "output_sha256": "834774a30aeb60ab0f0a8dac4482efb07689d7b249da0942aa1260a78a3fa77d"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  511.0,
+                  499.0,
+                  502.0,
+                  503.0,
+                  499.0,
+                  499.0,
+                  498.0,
+                  502.0,
+                  503.0,
+                  503.0,
+                  503.0
+                ],
+                "sample_count": 11,
+                "median": 502.0,
+                "p95": 511.0,
+                "min": 498.0,
+                "max": 511.0,
+                "stdev": 3.411211461689767
+              },
+              "output_sha256": "834774a30aeb60ab0f0a8dac4482efb07689d7b249da0942aa1260a78a3fa77d"
+            }
+          }
+        },
+        "loop_data_dependent": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "6cb3a76d1ca7915e12bb42333de96a572ad2f85a93f3d7bb6c2148d08be2bb2d"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  262.0,
+                  218.0,
+                  220.0,
+                  219.0,
+                  219.0,
+                  219.0,
+                  219.0,
+                  218.0,
+                  219.0,
+                  219.0,
+                  219.0
+                ],
+                "sample_count": 11,
+                "median": 219.0,
+                "p95": 262.0,
+                "min": 218.0,
+                "max": 262.0,
+                "stdev": 12.401013021803587
+              },
+              "output_sha256": "6cb3a76d1ca7915e12bb42333de96a572ad2f85a93f3d7bb6c2148d08be2bb2d"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  221.0,
+                  220.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0
+                ],
+                "sample_count": 11,
+                "median": 221.0,
+                "p95": 221.0,
+                "min": 220.0,
+                "max": 221.0,
+                "stdev": 0.28747978728803447
+              },
+              "output_sha256": "6cb3a76d1ca7915e12bb42333de96a572ad2f85a93f3d7bb6c2148d08be2bb2d"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  222.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  220.0,
+                  220.0,
+                  221.0,
+                  221.0,
+                  221.0,
+                  221.0
+                ],
+                "sample_count": 11,
+                "median": 221.0,
+                "p95": 222.0,
+                "min": 220.0,
+                "max": 222.0,
+                "stdev": 0.51425947722658
+              },
+              "output_sha256": "6cb3a76d1ca7915e12bb42333de96a572ad2f85a93f3d7bb6c2148d08be2bb2d"
+            }
+          }
+        },
+        "loop_overhead": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "bbdf35a7b000c5e4255d4405e5c3ea7a863991e0ae764edbdcdb3809dc331b65"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  168.0,
+                  125.0,
+                  125.0,
+                  125.0,
+                  126.0,
+                  125.0,
+                  125.0,
+                  125.0,
+                  125.0,
+                  125.0,
+                  125.0
+                ],
+                "sample_count": 11,
+                "median": 125.0,
+                "p95": 168.0,
+                "min": 125.0,
+                "max": 168.0,
+                "stdev": 12.336199503162154
+              },
+              "output_sha256": "bbdf35a7b000c5e4255d4405e5c3ea7a863991e0ae764edbdcdb3809dc331b65"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  127.0,
+                  126.0,
+                  127.0,
+                  126.0,
+                  127.0,
+                  126.0,
+                  126.0,
+                  126.0,
+                  126.0,
+                  126.0,
+                  126.0
+                ],
+                "sample_count": 11,
+                "median": 126.0,
+                "p95": 127.0,
+                "min": 126.0,
+                "max": 127.0,
+                "stdev": 0.4453617714151233
+              },
+              "output_sha256": "bbdf35a7b000c5e4255d4405e5c3ea7a863991e0ae764edbdcdb3809dc331b65"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  126.0,
+                  126.0,
+                  125.0,
+                  126.0,
+                  126.0,
+                  126.0,
+                  126.0,
+                  125.0,
+                  125.0,
+                  126.0,
+                  126.0
+                ],
+                "sample_count": 11,
+                "median": 126.0,
+                "p95": 126.0,
+                "min": 125.0,
+                "max": 126.0,
+                "stdev": 0.4453617714151233
+              },
+              "output_sha256": "bbdf35a7b000c5e4255d4405e5c3ea7a863991e0ae764edbdcdb3809dc331b65"
+            }
+          }
+        },
+        "math_intensive": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "02dbcc45c8e22eb2287af9c9106f65c992f093273c79f14f5fa49a4fc7ef0289"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  93.0,
+                  48.0,
+                  48.0,
+                  47.0,
+                  48.0,
+                  48.0,
+                  48.0,
+                  48.0,
+                  48.0,
+                  47.0,
+                  48.0
+                ],
+                "sample_count": 11,
+                "median": 48.0,
+                "p95": 93.0,
+                "min": 47.0,
+                "max": 93.0,
+                "stdev": 12.99968213215962
+              },
+              "output_sha256": "02dbcc45c8e22eb2287af9c9106f65c992f093273c79f14f5fa49a4fc7ef0289"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  49.0,
+                  49.0,
+                  49.0,
+                  49.0,
+                  48.0,
+                  49.0,
+                  49.0,
+                  48.0,
+                  49.0,
+                  49.0,
+                  49.0
+                ],
+                "sample_count": 11,
+                "median": 49.0,
+                "p95": 49.0,
+                "min": 48.0,
+                "max": 49.0,
+                "stdev": 0.38569460791993504
+              },
+              "output_sha256": "02dbcc45c8e22eb2287af9c9106f65c992f093273c79f14f5fa49a4fc7ef0289"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  49.0,
+                  49.0,
+                  49.0,
+                  49.0,
+                  49.0,
+                  49.0,
+                  48.0,
+                  48.0,
+                  49.0,
+                  49.0,
+                  49.0
+                ],
+                "sample_count": 11,
+                "median": 49.0,
+                "p95": 49.0,
+                "min": 48.0,
+                "max": 49.0,
+                "stdev": 0.38569460791993504
+              },
+              "output_sha256": "02dbcc45c8e22eb2287af9c9106f65c992f093273c79f14f5fa49a4fc7ef0289"
+            }
+          }
+        },
+        "nested_loops": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "8e77f4e216b88148ae91a1b1fafd99b59948aa3d0a447313af68e39a25cc21e2"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  42.0,
+                  19.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0
+                ],
+                "sample_count": 11,
+                "median": 17.0,
+                "p95": 42.0,
+                "min": 17.0,
+                "max": 42.0,
+                "stdev": 7.152413913734889
+              },
+              "output_sha256": "8e77f4e216b88148ae91a1b1fafd99b59948aa3d0a447313af68e39a25cc21e2"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  18.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  17.0,
+                  18.0,
+                  18.0,
+                  18.0,
+                  17.0,
+                  18.0,
+                  18.0
+                ],
+                "sample_count": 11,
+                "median": 18.0,
+                "p95": 18.0,
+                "min": 17.0,
+                "max": 18.0,
+                "stdev": 0.4979295977319692
+              },
+              "output_sha256": "8e77f4e216b88148ae91a1b1fafd99b59948aa3d0a447313af68e39a25cc21e2"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  18.0,
+                  19.0,
+                  19.0,
+                  19.0,
+                  19.0,
+                  19.0,
+                  18.0,
+                  18.0,
+                  18.0,
+                  19.0,
+                  19.0
+                ],
+                "sample_count": 11,
+                "median": 19.0,
+                "p95": 19.0,
+                "min": 18.0,
+                "max": 19.0,
+                "stdev": 0.48104569292083466
+              },
+              "output_sha256": "8e77f4e216b88148ae91a1b1fafd99b59948aa3d0a447313af68e39a25cc21e2"
+            }
+          }
+        },
+        "object_create": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "output_sha256": "e70c38907b55a22165abecab6fbc7e4901cc69e6aeee9fb0c32635455ec55134"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  20.0,
+                  12.0,
+                  9.0,
+                  8.0,
+                  8.0,
+                  8.0,
+                  8.0,
+                  8.0,
+                  8.0,
+                  8.0,
+                  8.0
+                ],
+                "sample_count": 11,
+                "median": 8.0,
+                "p95": 20.0,
+                "min": 8.0,
+                "max": 20.0,
+                "stdev": 3.4997048281673013
+              },
+              "output_sha256": "e70c38907b55a22165abecab6fbc7e4901cc69e6aeee9fb0c32635455ec55134"
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  4.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0,
+                  5.0
+                ],
+                "sample_count": 11,
+                "median": 5.0,
+                "p95": 5.0,
+                "min": 4.0,
+                "max": 5.0,
+                "stdev": 0.28747978728803447
+              },
+              "output_sha256": "e70c38907b55a22165abecab6fbc7e4901cc69e6aeee9fb0c32635455ec55134"
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  6.0,
+                  6.0,
+                  6.0,
+                  6.0,
+                  5.0,
+                  6.0,
+                  6.0,
+                  6.0,
+                  6.0,
+                  6.0,
+                  6.0
+                ],
+                "sample_count": 11,
+                "median": 6.0,
+                "p95": 6.0,
+                "min": 5.0,
+                "max": 6.0,
+                "stdev": 0.28747978728803447
+              },
+              "output_sha256": "e70c38907b55a22165abecab6fbc7e4901cc69e6aeee9fb0c32635455ec55134"
+            }
+          }
+        }
+      }
+    },
+    "json_polyglot": {
+      "schema_version": 1,
+      "suite": "json_polyglot",
+      "commit": "b77aba63433b100b9482d47181b5ccc5e724ff81",
+      "generated_at": "2026-09-23T01:21:55Z",
+      "run_config": {
+        "warmup": "3 untimed iterations inside each benchmark process",
+        "requested_samples": 11,
+        "pinning": "macOS scheduler hint (taskpolicy -t 0 -l 0 \u2014 P-core preferred via throughput/latency tiers, NOT strict affinity)"
+      },
+      "commands": {
+        "perry": [
+          "/Users/perry/projects/perry-public-baseline-b77aba6-astra2/target/release/perry",
+          "compile",
+          "bench.ts",
+          "-o",
+          "<binary>"
+        ],
+        "node": [
+          "/Users/perry/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+          "<precompiled.mjs>"
+        ],
+        "bun": [
+          "/Users/perry/.bun/bin/bun",
+          "bench.ts"
+        ],
+        "runner": [
+          "benchmarks/json_polyglot/run.sh"
+        ]
+      },
+      "runtime_metadata": {
+        "perry": {
+          "version": "perry 0.5.1639",
+          "resolved_executable": "target/release/perry"
+        },
+        "node": {
+          "version": "v22.23.1",
+          "resolved_executable": "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node"
+        },
+        "bun": {
+          "version": "1.3.14",
+          "resolved_executable": "~/.bun/bin/bun"
+        }
+      },
+      "benchmarks": {
+        "roundtrip": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "53735550"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  157.0,
+                  144.0,
+                  144.0,
+                  144.0,
+                  144.0,
+                  144.0,
+                  143.0,
+                  144.0,
+                  144.0,
+                  144.0,
+                  144.0
+                ],
+                "sample_count": 11,
+                "median": 144.0,
+                "p95": 157.0,
+                "min": 143.0,
+                "max": 157.0,
+                "stdev": 3.7768323777892707
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  375.0,
+                  380.0,
+                  379.0,
+                  379.0,
+                  385.0,
+                  382.0,
+                  377.0,
+                  383.0,
+                  382.0,
+                  379.0,
+                  375.0
+                ],
+                "sample_count": 11,
+                "median": 379.0,
+                "p95": 385.0,
+                "min": 375.0,
+                "max": 385.0,
+                "stdev": 3.053246477044848
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  219.0,
+                  220.0,
+                  219.0,
+                  220.0,
+                  219.0,
+                  220.0,
+                  219.0,
+                  220.0,
+                  218.0,
+                  219.0,
+                  219.0
+                ],
+                "sample_count": 11,
+                "median": 219.0,
+                "p95": 220.0,
+                "min": 218.0,
+                "max": 220.0,
+                "stdev": 0.616575453011388
+              }
+            }
+          }
+        },
+        "field_access": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "2552985550"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  322.0,
+                  318.0,
+                  318.0,
+                  318.0,
+                  317.0,
+                  318.0,
+                  318.0,
+                  318.0,
+                  318.0,
+                  318.0,
+                  317.0
+                ],
+                "sample_count": 11,
+                "median": 318.0,
+                "p95": 322.0,
+                "min": 317.0,
+                "max": 322.0,
+                "stdev": 1.2662171161076472
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  382.0,
+                  383.0,
+                  380.0,
+                  379.0,
+                  376.0,
+                  376.0,
+                  381.0,
+                  376.0,
+                  387.0,
+                  380.0,
+                  381.0
+                ],
+                "sample_count": 11,
+                "median": 380.0,
+                "p95": 387.0,
+                "min": 376.0,
+                "max": 387.0,
+                "stdev": 3.203820033946563
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  229.0,
+                  228.0,
+                  228.0,
+                  228.0,
+                  228.0,
+                  228.0,
+                  228.0,
+                  228.0,
+                  229.0,
+                  229.0,
+                  229.0
+                ],
+                "sample_count": 11,
+                "median": 228.0,
+                "p95": 229.0,
+                "min": 228.0,
+                "max": 229.0,
+                "stdev": 0.48104569292083466
+              }
+            }
+          }
+        }
+      }
+    },
+    "app_patterns": {
+      "schema_version": 1,
+      "suite": "app_patterns",
+      "commit": "b77aba63433b100b9482d47181b5ccc5e724ff81",
+      "generated_at": "2026-09-23T01:27:50Z",
+      "run_config": {
+        "warmup": 3,
+        "requested_samples": 15,
+        "interleaved": true
+      },
+      "commands": {
+        "perry": [
+          "/Users/perry/projects/perry-public-baseline-b77aba6-astra2/target/release/perry",
+          "<kernel.ts>",
+          "-o",
+          "<compiled-kernel>"
+        ],
+        "node": [
+          "/Users/perry/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+          "--experimental-strip-types",
+          "<kernel.ts>"
+        ],
+        "bun": [
+          "/Users/perry/.bun/bin/bun",
+          "run",
+          "<kernel.ts>"
+        ],
+        "measurement": [
+          "hyperfine",
+          "--warmup",
+          "3",
+          "--runs",
+          "15"
+        ]
+      },
+      "runtime_metadata": {
+        "perry": {
+          "version": "perry 0.5.1639",
+          "resolved_executable": "target/release/perry"
+        },
+        "node": {
+          "version": "v22.23.1",
+          "resolved_executable": "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node"
+        },
+        "bun": {
+          "version": "1.3.14",
+          "resolved_executable": "~/.bun/bin/bun"
+        }
+      },
+      "benchmarks": {
+        "batch": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 1601043.5000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  22.162951,
+                  21.873326,
+                  21.870242,
+                  21.926076,
+                  21.879284,
+                  22.152326,
+                  21.882743,
+                  22.083617,
+                  21.927326,
+                  21.899742,
+                  21.796243,
+                  21.856868,
+                  21.886534,
+                  21.824326,
+                  22.057784
+                ],
+                "sample_count": 15,
+                "median": 21.886534,
+                "p95": 22.162951,
+                "min": 21.796243,
+                "max": 22.162951,
+                "stdev": 0.11293885438641368
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  69.764326,
+                  70.550659,
+                  68.671451,
+                  68.866159,
+                  69.56341,
+                  68.393785,
+                  69.271076,
+                  69.383576,
+                  68.744993,
+                  70.569367,
+                  69.468826,
+                  71.898367,
+                  70.271492,
+                  69.090701,
+                  68.910743
+                ],
+                "sample_count": 15,
+                "median": 69.383576,
+                "p95": 71.898367,
+                "min": 68.393785,
+                "max": 71.898367,
+                "stdev": 0.8972574821885081
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  24.673534,
+                  24.912409,
+                  24.745659,
+                  24.768326,
+                  24.925951,
+                  24.885951,
+                  24.955826,
+                  24.658451,
+                  24.782534,
+                  24.704076,
+                  24.729117,
+                  24.607785,
+                  24.794951,
+                  24.83566,
+                  24.971368
+                ],
+                "sample_count": 15,
+                "median": 24.782534,
+                "p95": 24.971368,
+                "min": 24.607785,
+                "max": 24.971368,
+                "stdev": 0.1101938068950639
+              }
+            }
+          }
+        },
+        "buffer_transcode": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 53760000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  53.951921,
+                  53.932671,
+                  54.001129,
+                  54.545212,
+                  53.966546,
+                  54.146462,
+                  53.950212,
+                  54.081754,
+                  53.997962,
+                  53.903879,
+                  53.865421,
+                  53.976004,
+                  54.115754,
+                  54.242212,
+                  54.104837
+                ],
+                "sample_count": 15,
+                "median": 53.997962,
+                "p95": 54.545212,
+                "min": 53.865421,
+                "max": 54.545212,
+                "stdev": 0.16453093369797941
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  80.374004,
+                  81.219671,
+                  80.592879,
+                  80.799337,
+                  82.382795,
+                  80.376087,
+                  81.433337,
+                  81.320462,
+                  81.365046,
+                  80.527338,
+                  80.775629,
+                  81.103545,
+                  81.063546,
+                  82.327629,
+                  81.847088
+                ],
+                "sample_count": 15,
+                "median": 81.103545,
+                "p95": 82.382795,
+                "min": 80.374004,
+                "max": 82.382795,
+                "stdev": 0.6175469508792792
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  40.234504,
+                  40.233004,
+                  40.207879,
+                  40.305254,
+                  40.348004,
+                  40.545213,
+                  40.252088,
+                  40.323254,
+                  40.293671,
+                  40.571879,
+                  40.424921,
+                  40.254796,
+                  40.276088,
+                  40.432087,
+                  40.187545
+                ],
+                "sample_count": 15,
+                "median": 40.293671,
+                "p95": 40.571879,
+                "min": 40.187545,
+                "max": 40.571879,
+                "stdev": 0.1139251934618307
+              }
+            }
+          }
+        },
+        "date_format_parse": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 170004999949769570"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  33.133054,
+                  33.114553,
+                  33.113928,
+                  33.145637,
+                  33.221137,
+                  33.116345,
+                  33.231303,
+                  33.211929,
+                  33.179845,
+                  33.222053,
+                  33.148345,
+                  33.052803,
+                  32.958178,
+                  33.030761,
+                  32.891262
+                ],
+                "sample_count": 15,
+                "median": 33.133054,
+                "p95": 33.231303,
+                "min": 32.891262,
+                "max": 33.231303,
+                "stdev": 0.09581445432352935
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  109.835095,
+                  110.325595,
+                  109.20072,
+                  109.069928,
+                  110.004387,
+                  109.114636,
+                  109.607095,
+                  112.306261,
+                  109.993303,
+                  110.54122,
+                  109.10997,
+                  110.362887,
+                  111.749761,
+                  110.083387,
+                  110.68272
+                ],
+                "sample_count": 15,
+                "median": 110.004387,
+                "p95": 112.306261,
+                "min": 109.069928,
+                "max": 112.306261,
+                "stdev": 0.9085709244423851
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  42.957386,
+                  43.082054,
+                  43.488303,
+                  43.137428,
+                  43.684261,
+                  43.338595,
+                  43.211845,
+                  42.982803,
+                  43.19622,
+                  43.42847,
+                  43.263636,
+                  43.195512,
+                  43.259886,
+                  43.329386,
+                  43.290595
+                ],
+                "sample_count": 15,
+                "median": 43.259886,
+                "p95": 43.684261,
+                "min": 42.957386,
+                "max": 43.684261,
+                "stdev": 0.18219011685879766
+              }
+            }
+          }
+        },
+        "json_parse_1mb": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 374925000 bytes: 757607"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  55.990595,
+                  56.034262,
+                  55.79322,
+                  55.58122,
+                  55.50622,
+                  55.206929,
+                  55.293137,
+                  55.161679,
+                  55.893429,
+                  55.683179,
+                  55.679137,
+                  55.872179,
+                  55.837304,
+                  55.702845,
+                  55.734262
+                ],
+                "sample_count": 15,
+                "median": 55.702845,
+                "p95": 56.034262,
+                "min": 55.161679,
+                "max": 56.034262,
+                "stdev": 0.26128269524742687
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  119.280053,
+                  119.144345,
+                  119.33597,
+                  118.044221,
+                  117.256262,
+                  119.965554,
+                  116.256679,
+                  119.765845,
+                  118.652304,
+                  121.799179,
+                  121.944137,
+                  121.633679,
+                  121.761637,
+                  116.009095,
+                  121.971887
+                ],
+                "sample_count": 15,
+                "median": 119.33597,
+                "p95": 121.971887,
+                "min": 116.009095,
+                "max": 121.971887,
+                "stdev": 1.9680439929173374
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  65.412803,
+                  65.184803,
+                  65.419096,
+                  65.138053,
+                  65.254387,
+                  65.811054,
+                  65.475595,
+                  65.300929,
+                  65.328262,
+                  65.340721,
+                  65.201304,
+                  65.437887,
+                  65.526554,
+                  65.200596,
+                  65.420262
+                ],
+                "sample_count": 15,
+                "median": 65.340721,
+                "p95": 65.811054,
+                "min": 65.138053,
+                "max": 65.811054,
+                "stdev": 0.1647056217075249
+              }
+            }
+          }
+        },
+        "json_stringify_1mb": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 22728210"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  74.592615,
+                  74.31024,
+                  74.119948,
+                  74.365907,
+                  74.182115,
+                  74.247824,
+                  74.197907,
+                  74.335865,
+                  74.346407,
+                  74.209532,
+                  74.192448,
+                  74.731907,
+                  74.729407,
+                  77.081366,
+                  74.261199
+                ],
+                "sample_count": 15,
+                "median": 74.31024,
+                "p95": 77.081366,
+                "min": 74.119948,
+                "max": 77.081366,
+                "stdev": 0.7075011569815634
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  88.457448,
+                  88.661782,
+                  89.446532,
+                  88.897366,
+                  90.374198,
+                  88.107907,
+                  88.998949,
+                  87.846532,
+                  89.363866,
+                  88.106991,
+                  90.845032,
+                  88.891116,
+                  88.651823,
+                  89.509241,
+                  89.445032
+                ],
+                "sample_count": 15,
+                "median": 88.897366,
+                "p95": 90.845032,
+                "min": 87.846532,
+                "max": 90.845032,
+                "stdev": 0.7972277602356556
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  36.036657,
+                  35.991241,
+                  36.036282,
+                  36.056157,
+                  36.012073,
+                  35.760449,
+                  35.822074,
+                  35.987074,
+                  36.02349,
+                  35.893074,
+                  36.004365,
+                  35.743657,
+                  36.020324,
+                  35.858199,
+                  35.990449
+                ],
+                "sample_count": 15,
+                "median": 35.991241,
+                "p95": 36.056157,
+                "min": 35.743657,
+                "max": 36.056157,
+                "stdev": 0.10152693735534221
+              }
+            }
+          }
+        },
+        "map_1m": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 249999500000 249999500000 10000 size: 500000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  161.314036,
+                  161.747036,
+                  161.700745,
+                  161.542203,
+                  161.885828,
+                  162.096703,
+                  161.56087,
+                  161.529953,
+                  162.729578,
+                  161.952744,
+                  161.390494,
+                  161.533203,
+                  161.765078,
+                  161.834369,
+                  161.210453
+                ],
+                "sample_count": 15,
+                "median": 161.700745,
+                "p95": 162.729578,
+                "min": 161.210453,
+                "max": 162.729578,
+                "stdev": 0.3577705791075015
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  247.966203,
+                  246.262619,
+                  247.784453,
+                  246.44962,
+                  248.546828,
+                  248.197537,
+                  246.844078,
+                  247.678161,
+                  245.868287,
+                  244.971328,
+                  247.857995,
+                  246.31737,
+                  246.923786,
+                  245.839495,
+                  245.22487
+                ],
+                "sample_count": 15,
+                "median": 246.844078,
+                "p95": 248.546828,
+                "min": 244.971328,
+                "max": 248.546828,
+                "stdev": 1.079070857607784
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  212.986453,
+                  212.420036,
+                  212.280453,
+                  211.948619,
+                  212.831286,
+                  214.018745,
+                  213.609078,
+                  213.262911,
+                  212.362828,
+                  212.861453,
+                  213.309953,
+                  213.55287,
+                  214.309328,
+                  212.257745,
+                  213.107036
+                ],
+                "sample_count": 15,
+                "median": 212.986453,
+                "p95": 214.309328,
+                "min": 211.948619,
+                "max": 214.309328,
+                "stdev": 0.6617559155532383
+              }
+            }
+          }
+        },
+        "object_deep_clone": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 1249975000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  18.26706,
+                  18.253768,
+                  18.406227,
+                  18.200852,
+                  18.090602,
+                  18.187102,
+                  18.175561,
+                  18.19406,
+                  18.226477,
+                  18.288477,
+                  18.363893,
+                  18.589269,
+                  18.473185,
+                  18.248811,
+                  18.17056
+                ],
+                "sample_count": 15,
+                "median": 18.248811,
+                "p95": 18.589269,
+                "min": 18.090602,
+                "max": 18.589269,
+                "stdev": 0.1268769477141627
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  52.560144,
+                  52.642311,
+                  52.45056,
+                  53.757644,
+                  53.346518,
+                  52.849519,
+                  52.304186,
+                  52.704977,
+                  53.170977,
+                  55.340352,
+                  53.322393,
+                  53.255852,
+                  52.762102,
+                  52.228769,
+                  52.382144
+                ],
+                "sample_count": 15,
+                "median": 52.762102,
+                "p95": 55.340352,
+                "min": 52.228769,
+                "max": 55.340352,
+                "stdev": 0.7580609035915142
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  15.927769,
+                  16.051768,
+                  16.280477,
+                  16.025644,
+                  15.959019,
+                  16.170019,
+                  15.964144,
+                  15.978144,
+                  16.170435,
+                  16.161602,
+                  16.035893,
+                  16.148102,
+                  16.055311,
+                  15.97981,
+                  15.949518
+                ],
+                "sample_count": 15,
+                "median": 16.035893,
+                "p95": 16.280477,
+                "min": 15.927769,
+                "max": 16.280477,
+                "stdev": 0.10163151949928428
+              }
+            }
+          }
+        },
+        "promise_all_chains": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 2500050000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  86.019166,
+                  86.032166,
+                  85.932458,
+                  85.873083,
+                  85.919749,
+                  85.931415,
+                  86.478208,
+                  86.129791,
+                  86.074624,
+                  86.252124,
+                  85.679166,
+                  86.042374,
+                  86.152624,
+                  86.021457,
+                  85.919999
+                ],
+                "sample_count": 15,
+                "median": 86.021457,
+                "p95": 86.478208,
+                "min": 85.679166,
+                "max": 86.478208,
+                "stdev": 0.17677773575216468
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  59.666791,
+                  58.755374,
+                  60.036665,
+                  58.479249,
+                  58.612833,
+                  59.964166,
+                  58.273207,
+                  59.409958,
+                  60.298999,
+                  60.152624,
+                  58.541874,
+                  60.852249,
+                  59.292791,
+                  59.591665,
+                  59.35779
+                ],
+                "sample_count": 15,
+                "median": 59.409958,
+                "p95": 60.852249,
+                "min": 58.273207,
+                "max": 60.852249,
+                "stdev": 0.7399153106231969
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  20.75829,
+                  20.741166,
+                  20.776624,
+                  20.735374,
+                  20.948707,
+                  20.853166,
+                  20.960208,
+                  20.804583,
+                  20.770291,
+                  20.994415,
+                  20.742458,
+                  20.98954,
+                  20.837958,
+                  20.908374,
+                  20.660332
+                ],
+                "sample_count": 15,
+                "median": 20.804583,
+                "p95": 20.994415,
+                "min": 20.660332,
+                "max": 20.994415,
+                "stdev": 0.10188426976621849
+              }
+            }
+          }
+        },
+        "regex_replace": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 5000000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  754.548226,
+                  754.827309,
+                  754.090226,
+                  749.767976,
+                  749.612684,
+                  754.893851,
+                  750.426059,
+                  753.209851,
+                  750.689976,
+                  755.352435,
+                  756.506893,
+                  754.358851,
+                  753.980642,
+                  755.014351,
+                  750.161684
+                ],
+                "sample_count": 15,
+                "median": 754.090226,
+                "p95": 756.506893,
+                "min": 749.612684,
+                "max": 756.506893,
+                "stdev": 2.262644919018558
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  97.232101,
+                  97.630517,
+                  98.218226,
+                  99.007476,
+                  98.149726,
+                  96.978851,
+                  98.603393,
+                  96.208851,
+                  97.885685,
+                  96.390393,
+                  97.056768,
+                  97.362267,
+                  97.135101,
+                  97.666393,
+                  97.883351
+                ],
+                "sample_count": 15,
+                "median": 97.630517,
+                "p95": 99.007476,
+                "min": 96.208851,
+                "max": 99.007476,
+                "stdev": 0.7440216460226398
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  49.460601,
+                  49.532184,
+                  49.473642,
+                  49.326351,
+                  49.768809,
+                  49.492434,
+                  49.465768,
+                  49.357601,
+                  49.380684,
+                  49.454143,
+                  49.617809,
+                  49.362559,
+                  49.552934,
+                  49.659226,
+                  49.560851
+                ],
+                "sample_count": 15,
+                "median": 49.473642,
+                "p95": 49.768809,
+                "min": 49.326351,
+                "max": 49.768809,
+                "stdev": 0.11778190641169432
+              }
+            }
+          }
+        },
+        "string_concat_csv": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 6459261 rows: 100000"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  31.730402,
+                  31.757527,
+                  31.673027,
+                  31.756527,
+                  31.573819,
+                  31.823027,
+                  31.714985,
+                  31.818819,
+                  31.732944,
+                  31.708568,
+                  31.972069,
+                  31.659569,
+                  31.787736,
+                  31.608235,
+                  31.705152
+                ],
+                "sample_count": 15,
+                "median": 31.730402,
+                "p95": 31.972069,
+                "min": 31.573819,
+                "max": 31.972069,
+                "stdev": 0.09249226777950449
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  80.963111,
+                  81.579819,
+                  82.151819,
+                  81.80761,
+                  81.382985,
+                  82.186402,
+                  82.529361,
+                  82.217735,
+                  82.971736,
+                  80.82136,
+                  80.769986,
+                  81.154777,
+                  80.999735,
+                  86.542444,
+                  80.940736
+                ],
+                "sample_count": 15,
+                "median": 81.579819,
+                "p95": 86.542444,
+                "min": 80.769986,
+                "max": 86.542444,
+                "stdev": 1.3978061144068818
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  26.646777,
+                  26.701943,
+                  26.659527,
+                  27.080527,
+                  26.749652,
+                  26.973944,
+                  27.103902,
+                  26.931068,
+                  26.848027,
+                  26.917902,
+                  26.623277,
+                  27.203944,
+                  26.824194,
+                  26.867611,
+                  27.024068
+                ],
+                "sample_count": 15,
+                "median": 26.867611,
+                "p95": 27.203944,
+                "min": 26.623277,
+                "max": 27.203944,
+                "stdev": 0.1733348387431549
+              }
+            }
+          }
+        },
+        "string_split_map_join": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 1380242 kept: 33333"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  35.953624,
+                  36.249499,
+                  36.138124,
+                  36.130124,
+                  36.200333,
+                  36.246958,
+                  36.168291,
+                  35.780165,
+                  36.239499,
+                  35.966749,
+                  35.872874,
+                  35.934415,
+                  35.781166,
+                  36.220249,
+                  36.076833
+                ],
+                "sample_count": 15,
+                "median": 36.130124,
+                "p95": 36.249499,
+                "min": 35.780165,
+                "max": 36.249499,
+                "stdev": 0.16291331662569045
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  74.281208,
+                  75.108708,
+                  76.589749,
+                  76.261958,
+                  75.287457,
+                  76.990957,
+                  76.168999,
+                  76.034291,
+                  76.537332,
+                  75.174165,
+                  76.156708,
+                  74.956291,
+                  77.297916,
+                  74.990457,
+                  76.231291
+                ],
+                "sample_count": 15,
+                "median": 76.156708,
+                "p95": 77.297916,
+                "min": 74.281208,
+                "max": 77.297916,
+                "stdev": 0.8277448420984324
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  43.510415,
+                  43.190666,
+                  43.538082,
+                  43.389999,
+                  43.566833,
+                  43.508916,
+                  43.762374,
+                  43.573665,
+                  43.504999,
+                  43.42329,
+                  43.637124,
+                  44.636583,
+                  43.393874,
+                  44.795791,
+                  43.592457
+                ],
+                "sample_count": 15,
+                "median": 43.538082,
+                "p95": 44.795791,
+                "min": 43.190666,
+                "max": 44.795791,
+                "stdev": 0.43038845624356126
+              }
+            }
+          }
+        },
+        "string_template_interp": {
+          "correctness": {
+            "status": "pass",
+            "reference": "node+bun",
+            "checksum": "checksum: 7948890"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  37.994742,
+                  38.018533,
+                  37.947075,
+                  38.095491,
+                  38.217074,
+                  37.992742,
+                  37.993533,
+                  37.760075,
+                  38.019824,
+                  38.104158,
+                  37.9677,
+                  38.023867,
+                  38.346908,
+                  37.963492,
+                  39.113991
+                ],
+                "sample_count": 15,
+                "median": 38.018533,
+                "p95": 39.113991,
+                "min": 37.760075,
+                "max": 39.113991,
+                "stdev": 0.29782594438317994
+              }
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  100.559158,
+                  99.778491,
+                  101.75045,
+                  102.679075,
+                  99.01795,
+                  100.886241,
+                  99.843533,
+                  99.918033,
+                  98.858825,
+                  100.356241,
+                  100.793866,
+                  99.608033,
+                  100.759117,
+                  101.821616,
+                  97.893533
+                ],
+                "sample_count": 15,
+                "median": 100.356241,
+                "p95": 102.679075,
+                "min": 97.893533,
+                "max": 102.679075,
+                "stdev": 1.1990148107721437
+              }
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  40.229283,
+                  40.02745,
+                  40.27195,
+                  40.701075,
+                  42.02345,
+                  40.841116,
+                  40.783866,
+                  40.488575,
+                  40.167658,
+                  40.400866,
+                  43.105866,
+                  43.217491,
+                  40.6662,
+                  41.02345,
+                  40.435242
+                ],
+                "sample_count": 15,
+                "median": 40.6662,
+                "p95": 43.217491,
+                "min": 40.02745,
+                "max": 43.217491,
+                "stdev": 0.9780768965603104
+              }
+            }
+          }
+        }
+      }
+    },
+    "honest_bench": {
+      "schema_version": 1,
+      "suite": "honest_bench",
+      "commit": "b77aba63433b100b9482d47181b5ccc5e724ff81",
+      "generated_at": "2026-09-23T01:28:55.754907Z",
+      "run_config": {
+        "warmup": 5,
+        "requested_samples": 20
+      },
+      "commands": {
+        "perry": [
+          "<compiled-workload>"
+        ],
+        "perry_compile": [
+          "/Users/perry/projects/perry-public-baseline-b77aba6-astra2/target/release/perry",
+          "<source.ts>",
+          "-o",
+          "<compiled-workload>"
+        ],
+        "node": [
+          "/Users/perry/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+          "--experimental-strip-types",
+          "<source.ts>"
+        ],
+        "bun": [
+          "/Users/perry/.bun/bin/bun",
+          "run",
+          "<source.ts>"
+        ],
+        "perry_http": [
+          "<compiled-kernel>"
+        ],
+        "perry_http_compile": [
+          "/Users/perry/projects/perry-public-baseline-b77aba6-astra2/target/release/perry",
+          "<kernel.ts>",
+          "-o",
+          "<compiled-kernel>"
+        ],
+        "node_http": [
+          "node",
+          "--import",
+          "tsx",
+          "<kernel.ts>"
+        ],
+        "bun_http": [
+          "bun",
+          "run",
+          "<kernel.ts>"
+        ],
+        "oha": [
+          "/tmp/oha",
+          "-z",
+          "15s",
+          "-c",
+          "10",
+          "-r",
+          "0",
+          "--no-tui",
+          "--output-format",
+          "json",
+          "<url>"
+        ]
+      },
+      "runtime_metadata": {
+        "perry": {
+          "version": "perry 0.5.1639",
+          "resolved_executable": "target/release/perry"
+        },
+        "node": {
+          "version": "v22.23.1",
+          "resolved_executable": "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node"
+        },
+        "bun": {
+          "version": "1.3.14",
+          "resolved_executable": "~/.bun/bin/bun"
+        }
+      },
+      "benchmarks": {
+        "image_convolution": {
+          "correctness": {
+            "status": "pass",
+            "reference": "bun"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  2265.992625,
+                  2266.6055,
+                  2266.057333,
+                  2266.359042,
+                  2267.131625,
+                  2266.583042,
+                  2266.666,
+                  2266.182916,
+                  2266.191708,
+                  2266.496625,
+                  2265.902333,
+                  2266.358791,
+                  2265.591709,
+                  2266.471792,
+                  2266.005,
+                  2265.919875,
+                  2266.653084,
+                  2266.156833,
+                  2266.873833,
+                  2266.563042
+                ],
+                "sample_count": 20,
+                "median": 2266.3589165000003,
+                "p95": 2266.873833,
+                "min": 2265.591709,
+                "max": 2267.131625,
+                "stdev": 0.36460988746106804
+              },
+              "rss_kb": {
+                "samples": [
+                  61440.0,
+                  61440.0,
+                  61440.0,
+                  61440.0,
+                  61424.0,
+                  61424.0,
+                  61440.0,
+                  61424.0,
+                  61440.0,
+                  61440.0,
+                  61424.0,
+                  61440.0,
+                  61424.0,
+                  61440.0,
+                  61440.0,
+                  61440.0,
+                  61424.0,
+                  61440.0,
+                  61440.0,
+                  61440.0
+                ],
+                "sample_count": 20,
+                "median": 61440.0,
+                "p95": 61440.0,
+                "min": 61424.0,
+                "max": 61440.0,
+                "stdev": 7.332121111929344
+              },
+              "measured_command": [
+                "benchmarks/honest_bench/workloads/3_image_convolution/perry/image_conv"
+              ]
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  1220.757833,
+                  1220.066667,
+                  1220.741125,
+                  1220.184542,
+                  1221.6985,
+                  1219.575708,
+                  1219.53825,
+                  1218.992458,
+                  1220.008041,
+                  1221.00675,
+                  1219.856833,
+                  1220.44575,
+                  1222.261375,
+                  1220.553083,
+                  1219.548167,
+                  1220.70325,
+                  1221.737083,
+                  1220.041292,
+                  1222.53325,
+                  1220.404292
+                ],
+                "sample_count": 20,
+                "median": 1220.425021,
+                "p95": 1222.261375,
+                "min": 1218.992458,
+                "max": 1222.53325,
+                "stdev": 0.9146285453774275
+              },
+              "rss_kb": {
+                "samples": [
+                  120560.0,
+                  120688.0,
+                  120672.0,
+                  120784.0,
+                  120528.0,
+                  120624.0,
+                  120528.0,
+                  120576.0,
+                  120544.0,
+                  120720.0,
+                  120544.0,
+                  120704.0,
+                  120752.0,
+                  120704.0,
+                  120560.0,
+                  120528.0,
+                  120624.0,
+                  120736.0,
+                  120720.0,
+                  120496.0
+                ],
+                "sample_count": 20,
+                "median": 120624.0,
+                "p95": 120752.0,
+                "min": 120496.0,
+                "max": 120784.0,
+                "stdev": 89.12373421261027
+              },
+              "measured_command": [
+                "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+                "--experimental-strip-types",
+                "--disable-warning=MODULE_TYPELESS_PACKAGE_JSON",
+                "benchmarks/honest_bench/workloads/3_image_convolution/node/image_conv.ts"
+              ]
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  893.187584,
+                  864.429416,
+                  997.422458,
+                  883.56475,
+                  864.631833,
+                  860.147625,
+                  910.416625,
+                  860.135917,
+                  915.38875,
+                  898.63625,
+                  864.773667,
+                  898.339917,
+                  864.561666,
+                  898.458583,
+                  898.508459,
+                  910.832583,
+                  864.91125,
+                  860.578,
+                  896.211292,
+                  864.694375
+                ],
+                "sample_count": 20,
+                "median": 888.376167,
+                "p95": 915.38875,
+                "min": 860.135917,
+                "max": 997.422458,
+                "stdev": 31.51754338890929
+              },
+              "rss_kb": {
+                "samples": [
+                  84960.0,
+                  84912.0,
+                  85104.0,
+                  85008.0,
+                  84896.0,
+                  84864.0,
+                  85056.0,
+                  84896.0,
+                  85056.0,
+                  84960.0,
+                  84912.0,
+                  84960.0,
+                  84912.0,
+                  84976.0,
+                  84944.0,
+                  85024.0,
+                  84912.0,
+                  84896.0,
+                  85024.0,
+                  84928.0
+                ],
+                "sample_count": 20,
+                "median": 84952.0,
+                "p95": 85056.0,
+                "min": 84864.0,
+                "max": 85104.0,
+                "stdev": 64.0
+              },
+              "measured_command": [
+                "~/.bun/bin/bun",
+                "run",
+                "benchmarks/honest_bench/workloads/3_image_convolution/node/image_conv.ts"
+              ]
+            }
+          }
+        },
+        "json_pipeline_full": {
+          "correctness": {
+            "status": "pass",
+            "reference": "bun"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  2121.862833,
+                  2123.925875,
+                  2136.705958,
+                  2122.4205,
+                  2119.326958,
+                  2124.381459,
+                  2121.765542,
+                  2123.454083,
+                  2122.767333,
+                  2124.372625,
+                  2124.269209,
+                  2125.864041,
+                  2122.311584,
+                  2122.389167,
+                  2123.13825,
+                  2117.677333,
+                  2123.627209,
+                  2122.779375,
+                  2128.313917,
+                  2120.863833
+                ],
+                "sample_count": 20,
+                "median": 2122.9588125,
+                "p95": 2128.313917,
+                "min": 2117.677333,
+                "max": 2136.705958,
+                "stdev": 3.7026893045158027
+              },
+              "rss_kb": {
+                "samples": [
+                  691648.0,
+                  691664.0,
+                  691632.0,
+                  691632.0,
+                  691632.0,
+                  691648.0,
+                  691632.0,
+                  691632.0,
+                  691648.0,
+                  691616.0,
+                  691616.0,
+                  691632.0,
+                  691632.0,
+                  691648.0,
+                  691632.0,
+                  691632.0,
+                  691664.0,
+                  691648.0,
+                  691664.0,
+                  691648.0
+                ],
+                "sample_count": 20,
+                "median": 691632.0,
+                "p95": 691664.0,
+                "min": 691616.0,
+                "max": 691664.0,
+                "stdev": 13.856406460551018
+              },
+              "measured_command": [
+                "benchmarks/honest_bench/workloads/1_json_pipeline/perry/json_pipeline",
+                "benchmarks/honest_bench/assets/input.json",
+                "/private/tmp/out_perry.json"
+              ]
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  862.60875,
+                  857.528375,
+                  865.986708,
+                  870.402375,
+                  866.899334,
+                  863.976167,
+                  859.044292,
+                  869.08275,
+                  872.757916,
+                  890.298416,
+                  857.995083,
+                  873.446625,
+                  863.395458,
+                  866.708792,
+                  868.804,
+                  855.014334,
+                  864.922125,
+                  861.305542,
+                  858.37125,
+                  859.146416
+                ],
+                "sample_count": 20,
+                "median": 864.449146,
+                "p95": 873.446625,
+                "min": 855.014334,
+                "max": 890.298416,
+                "stdev": 7.673606907866451
+              },
+              "rss_kb": {
+                "samples": [
+                  793520.0,
+                  793584.0,
+                  793328.0,
+                  793680.0,
+                  793552.0,
+                  793456.0,
+                  793568.0,
+                  793552.0,
+                  792816.0,
+                  793328.0,
+                  793184.0,
+                  792912.0,
+                  793472.0,
+                  793680.0,
+                  793312.0,
+                  793120.0,
+                  793552.0,
+                  793632.0,
+                  793488.0,
+                  793744.0
+                ],
+                "sample_count": 20,
+                "median": 793504.0,
+                "p95": 793680.0,
+                "min": 792816.0,
+                "max": 793744.0,
+                "stdev": 245.11874673308853
+              },
+              "measured_command": [
+                "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+                "--experimental-strip-types",
+                "--disable-warning=MODULE_TYPELESS_PACKAGE_JSON",
+                "benchmarks/honest_bench/workloads/1_json_pipeline/node/json_pipeline.ts",
+                "benchmarks/honest_bench/assets/input.json",
+                "/private/tmp/out_node.json"
+              ]
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  553.270709,
+                  554.195958,
+                  557.235792,
+                  554.345291,
+                  556.197292,
+                  556.514833,
+                  555.82725,
+                  555.681958,
+                  556.703959,
+                  554.897666,
+                  554.624791,
+                  555.934708,
+                  554.080084,
+                  553.390542,
+                  555.388041,
+                  557.291459,
+                  558.232125,
+                  555.918709,
+                  556.612625,
+                  557.378875
+                ],
+                "sample_count": 20,
+                "median": 555.8729795,
+                "p95": 557.378875,
+                "min": 553.270709,
+                "max": 558.232125,
+                "stdev": 1.3572588462795594
+              },
+              "rss_kb": {
+                "samples": [
+                  593488.0,
+                  593456.0,
+                  593456.0,
+                  594256.0,
+                  594704.0,
+                  593568.0,
+                  593600.0,
+                  593552.0,
+                  593568.0,
+                  593616.0,
+                  594160.0,
+                  593584.0,
+                  593568.0,
+                  593120.0,
+                  593456.0,
+                  593920.0,
+                  593248.0,
+                  593952.0,
+                  591584.0,
+                  593536.0
+                ],
+                "sample_count": 20,
+                "median": 593568.0,
+                "p95": 594256.0,
+                "min": 591584.0,
+                "max": 594704.0,
+                "stdev": 577.6620465289371
+              },
+              "measured_command": [
+                "~/.bun/bin/bun",
+                "run",
+                "benchmarks/honest_bench/workloads/1_json_pipeline/node/json_pipeline.ts",
+                "benchmarks/honest_bench/assets/input.json",
+                "/private/tmp/out_bun.json"
+              ]
+            }
+          }
+        },
+        "json_pipeline_small": {
+          "correctness": {
+            "status": "pass",
+            "reference": "bun"
+          },
+          "runtimes": {
+            "perry": {
+              "wall_ms": {
+                "samples": [
+                  55.751416,
+                  55.913333,
+                  55.417416,
+                  55.561166,
+                  55.540291,
+                  55.440417,
+                  55.465584,
+                  55.672417,
+                  55.8645,
+                  55.789291,
+                  55.817958,
+                  55.731166,
+                  55.605417,
+                  55.588667,
+                  55.569959,
+                  55.725791,
+                  55.388791,
+                  55.704917,
+                  55.758208,
+                  55.7355
+                ],
+                "sample_count": 20,
+                "median": 55.688667,
+                "p95": 55.8645,
+                "min": 55.388791,
+                "max": 55.913333,
+                "stdev": 0.14838726174199585
+              },
+              "rss_kb": {
+                "samples": [
+                  11712.0,
+                  11696.0,
+                  11696.0,
+                  11696.0,
+                  11696.0,
+                  11696.0,
+                  11712.0,
+                  11696.0,
+                  11712.0,
+                  11712.0,
+                  11712.0,
+                  11696.0,
+                  11712.0,
+                  11712.0,
+                  11712.0,
+                  11696.0,
+                  11696.0,
+                  11696.0,
+                  11696.0,
+                  11712.0
+                ],
+                "sample_count": 20,
+                "median": 11696.0,
+                "p95": 11712.0,
+                "min": 11696.0,
+                "max": 11712.0,
+                "stdev": 7.95989949685296
+              },
+              "measured_command": [
+                "benchmarks/honest_bench/workloads/1_json_pipeline/perry/json_pipeline",
+                "benchmarks/honest_bench/assets/input_small.json",
+                "/private/tmp/out_perry.json"
+              ]
+            },
+            "node": {
+              "wall_ms": {
+                "samples": [
+                  101.46725,
+                  99.161125,
+                  100.161375,
+                  100.738875,
+                  99.173166,
+                  101.044083,
+                  102.875958,
+                  100.131875,
+                  100.683167,
+                  100.089792,
+                  98.711208,
+                  99.234583,
+                  100.5825,
+                  99.989875,
+                  99.447917,
+                  98.711917,
+                  98.399916,
+                  100.857583,
+                  99.507208,
+                  99.529292
+                ],
+                "sample_count": 20,
+                "median": 100.0398335,
+                "p95": 101.46725,
+                "min": 98.399916,
+                "max": 102.875958,
+                "stdev": 1.0550707373034223
+              },
+              "rss_kb": {
+                "samples": [
+                  65696.0,
+                  65568.0,
+                  65600.0,
+                  65696.0,
+                  65680.0,
+                  65632.0,
+                  65728.0,
+                  65680.0,
+                  65616.0,
+                  65680.0,
+                  65840.0,
+                  65616.0,
+                  65744.0,
+                  65776.0,
+                  65728.0,
+                  65616.0,
+                  65552.0,
+                  65648.0,
+                  65504.0,
+                  65648.0
+                ],
+                "sample_count": 20,
+                "median": 65664.0,
+                "p95": 65776.0,
+                "min": 65504.0,
+                "max": 65840.0,
+                "stdev": 77.7112604453177
+              },
+              "measured_command": [
+                "~/public-baseline-toolchains/node-v22.23.1-darwin-arm64/bin/node",
+                "--experimental-strip-types",
+                "--disable-warning=MODULE_TYPELESS_PACKAGE_JSON",
+                "benchmarks/honest_bench/workloads/1_json_pipeline/node/json_pipeline.ts",
+                "benchmarks/honest_bench/assets/input_small.json",
+                "/private/tmp/out_node.json"
+              ]
+            },
+            "bun": {
+              "wall_ms": {
+                "samples": [
+                  66.6905,
+                  66.867833,
+                  66.707542,
+                  66.617333,
+                  66.553792,
+                  66.7885,
+                  66.634833,
+                  66.805833,
+                  66.824792,
+                  66.755833,
+                  66.752542,
+                  66.713375,
+                  66.693584,
+                  66.950375,
+                  66.440916,
+                  66.832667,
+                  66.720666,
+                  66.7695,
+                  66.879291,
+                  66.571375
+                ],
+                "sample_count": 20,
+                "median": 66.736604,
+                "p95": 66.879291,
+                "min": 66.440916,
+                "max": 66.950375,
+                "stdev": 0.11969321264754218
+              },
+              "rss_kb": {
+                "samples": [
+                  30912.0,
+                  30912.0,
+                  30976.0,
+                  30960.0,
+                  30976.0,
+                  30912.0,
+                  30944.0,
+                  30912.0,
+                  30896.0,
+                  30880.0,
+                  30912.0,
+                  30944.0,
+                  30944.0,
+                  30912.0,
+                  30864.0,
+                  30928.0,
+                  30848.0,
+                  30912.0,
+                  30944.0,
+                  30928.0
+                ],
+                "sample_count": 20,
+                "median": 30912.0,
+                "p95": 30976.0,
+                "min": 30848.0,
+                "max": 30976.0,
+                "stdev": 32.58465896706608
+              },
+              "measured_command": [
+                "~/.bun/bin/bun",
+                "run",
+                "benchmarks/honest_bench/workloads/1_json_pipeline/node/json_pipeline.ts",
+                "benchmarks/honest_bench/assets/input_small.json",
+                "/private/tmp/out_bun.json"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

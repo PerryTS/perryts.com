@@ -1,0 +1,81 @@
+---
+import LandingLayout from "../../../components/guides/LandingLayout.astro";
+import Article from "../../../components/guides/Article.astro";
+import Architecture from "../../../components/guides/Architecture.astro";
+import Cta from "../../../components/guides/Cta.astro";
+import Button from "../../../components/Button.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+import { PRODUCT_FACTS } from "../../../data/product-facts.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "TypeScript Native Compiler: Perry’s SWC and LLVM Pipeline",
+  description:
+    "How Perry parses TypeScript with SWC, lowers supported behavior through its HIR and LLVM, and links the runtime needed for JavaScript semantics.",
+  breadcrumb: "TypeScript Native Compiler",
+};
+---
+
+<LandingLayout
+  lang={lang}
+  path="typescript-native-compiler"
+  meta={meta}
+  heading={"A TypeScript Native Compiler,\nBuilt in Rust"}
+  lead="Perry compiles supported TypeScript and JavaScript ahead of time to machine code. Native builds do not require an external JavaScript engine by default, while the Perry runtime and GC remain part of the executable."
+>
+  <Fragment slot="actions">
+    <Button href={localePath(lang, "getting-started")}>Get started</Button>
+    <Button href={links.github} variant="secondary">View source</Button>
+  </Fragment>
+
+  <Article>
+    <h2>A hybrid compiler, not “types make JavaScript static”</h2>
+    <p>
+      TypeScript annotations are mostly erased and do not prove a concrete runtime representation for every expression.
+      Perry combines declared types, inference, known call shapes, and representation selection to optimize proved cases.
+      Dynamic values, unknown receivers, prototypes, and other JavaScript behavior retain runtime paths.
+    </p>
+    <p>
+      That distinction matters: known numeric operations or object shapes may become direct machine operations, while other
+      code uses the statically linked runtime and garbage collector. Some unsupported engine semantics require the optional
+      V8 fallback or do not compile.
+    </p>
+  </Article>
+
+  <Architecture lang={lang} />
+
+  <Article>
+    <h2>The current pipeline</h2>
+    <ol>
+      <li><strong>Parse with SWC.</strong> Perry builds an AST and resolves modules before its own lowering passes.</li>
+      <li><strong>Lower to Perry HIR.</strong> The compiler records operations and the type or representation evidence it can actually prove.</li>
+      <li><strong>Specialize bounded known cases.</strong> Known calls and values can use direct paths; polymorphic cases keep checked, boxed, or dynamic fallbacks.</li>
+      <li><strong>Generate LLVM IR.</strong> LLVM optimizes and emits target-specific object code.</li>
+      <li><strong>Link and package.</strong> Perry links the required runtime, GC, libraries, and target-specific platform pieces.</li>
+    </ol>
+
+    <h2>Support is broad, not universal</h2>
+    <p>
+      The current project reports {PRODUCT_FACTS.nodeParity} parity across {PRODUCT_FACTS.nodeModuleCount} tracked Node
+      modules and roughly {PRODUCT_FACTS.nativePackageCount} native package/API implementations. Known gaps include dynamic
+      code paths and parts of JavaScript, TypeScript, Node.js, and package compatibility.
+    </p>
+    <p>
+      Perry documents {PRODUCT_FACTS.documentedTargetCount} targets, with narrower core support on some devices and HarmonyOS
+      kept as a separate preview. “One codebase” is a portability goal, not a promise that every API and layout behaves
+      identically on every platform.
+    </p>
+    <ul>
+      <li><a href={PRODUCT_FACTS.limitationsUrl}>Known limitations</a></li>
+      <li><a href={PRODUCT_FACTS.platformsUrl}>Platform status</a></li>
+      <li><a href={localePath(lang, "typescript-llvm")}>LLVM deep dive</a></li>
+    </ul>
+  </Article>
+
+  <Cta title="Try it against real code" text="Run Perry’s checker and compile the exact package graph and target you intend to ship.">
+    <Button href={localePath(lang, "getting-started")}>Get started</Button>
+  </Cta>
+</LandingLayout>
