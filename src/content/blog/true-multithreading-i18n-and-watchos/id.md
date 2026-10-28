@@ -8,9 +8,9 @@ Perry v0.4.0 adalah rilis terbesar sejak proyek dimulai. Tiga lompatan versi dal
 
 ## Multi-Threading Sejati
 
-Perry now has real OS-threaded parallelism. Not web workers with serialization overhead. Not `SharedArrayBuffer` with `Atomics`. Real threads — lightweight 8MB-stack OS threads that share nothing and cost nothing when idle.
+Perry kini memiliki paralelisme thread OS yang sebenarnya. Bukan pekerja web dengan overhead serialisasi. Bukan `SharedArrayBuffer` dengan `Atomics`. Thread sebenarnya — thread OS ringan dengan tumpukan 8 MB yang tidak berbagi apa pun dan tidak memerlukan biaya apa pun saat tidak digunakan.
 
-The new `perry/thread` module exposes three primitives:
+Modul `perry/thread` baru memperlihatkan tiga primitif:
 
 ```
 import { parallelMap, parallelFilter, spawn } from "perry/thread";
@@ -28,13 +28,13 @@ const result = await spawn(() => {
 });
 ```
 
-`parallelMap` and `parallelFilter` auto-detect the number of CPU cores and split the input array across them. For small arrays, they skip threading entirely and run synchronously — no overhead for trivial workloads.
+`parallelMap` dan `parallelFilter` secara otomatis mendeteksi jumlah inti CPU dan membagi larik input ke seluruh inti tersebut. Untuk array kecil, array melewatkan threading sepenuhnya dan berjalan secara sinkron — tidak ada overhead untuk beban kerja sepele.
 
-`spawn` launches a background OS thread and returns a Promise. The result flows back via a pending results queue that's drained during microtask processing, so you `await` it like any other async operation.
+`spawn` meluncurkan thread OS latar belakang dan mengembalikan Promise. Hasilnya mengalir kembali melalui antrean hasil tertunda yang terkuras selama pemrosesan tugas mikro, sehingga Anda `await` seperti operasi asinkron lainnya.
 
 ### Keamanan Waktu Kompilasi
 
-The most important part isn't the API — it's what the compiler *prevents*. Perry statically rejects closures that capture mutable variables:
+Bagian terpenting bukanlah API — melainkan apa yang *dicegah* oleh compiler. Perry secara statis menolak penutupan yang menangkap variabel yang bisa berubah:
 
 ```
 let counter = 0;
@@ -46,21 +46,21 @@ parallelMap(items, (item) => {
 });
 ```
 
-No shared mutable state means no data races. No locks, no mutexes, no `Atomics`. The compiler enforces thread safety before a single line of machine code is emitted.
+Tidak ada status bersama yang dapat diubah berarti tidak ada data race. Tanpa kunci, tanpa mutex, tanpa `Atomics`. Kompiler menerapkan keamanan thread sebelum satu baris kode mesin dikeluarkan.
 
 ### Di Balik Layar
 
-Each worker thread gets its own memory arena with `Drop` cleanup — no GC coordination across threads. Values are transferred via `SerializedValue` deep-copy: zero-cost for numbers, O(n) for strings, arrays, and objects. The implementation lives in a single 1,120-line Rust file (`perry-runtime/src/thread.rs`) and required no changes to the garbage collector.
+Setiap thread pekerja mendapatkan arena memorinya sendiri dengan pembersihan `Drop` — tanpa koordinasi GC di seluruh thread. Nilai ditransfer melalui salinan mendalam `SerializedValue`: tanpa biaya untuk angka, O(n) untuk string, array, dan objek. Implementasinya berada dalam satu file Rust 1.120 baris (`perry-runtime/src/thread.rs`) dan tidak memerlukan perubahan pada pengumpul sampah.
 
-Compare this to V8 isolates, which require separate heaps per worker with ~2MB overhead each. Perry's threads are just pthreads with arenas.
+Bandingkan ini dengan isolat V8, yang memerlukan heap terpisah per pekerja dengan overhead ~2MB masing-masing. Thread Perry hanyalah pthread dengan arena.
 
 ### Pipeline Compiler Paralel
 
-The compiler itself is now parallel too. Module codegen, transform passes (JS imports, native instances, monomorphization), and `nm` symbol scanning all run across all CPU cores via rayon. Combined with the Cranelift 0.121 upgrade (from 0.113 — eight minor versions of register allocation and x64 improvements), compilation is significantly faster.
+Kompilatornya sendiri sekarang juga paralel. Kodegen modul, lintasan transformasi (impor JS, instance asli, monomorfisasi), dan pemindaian simbol `nm` semuanya dijalankan di seluruh inti CPU melalui rayon. Dikombinasikan dengan peningkatan Cranelift 0.121 (dari 0.113 — delapan versi minor alokasi register dan penyempurnaan x64), kompilasi menjadi jauh lebih cepat.
 
 ## i18n Waktu Kompilasi (v0.3.0)
 
-Perry's internationalization system has zero ceremony. String literals in UI widgets are automatically treated as localizable keys. Translation files are flat JSON in a `locales/` directory. All validation happens at compile time.
+Perry tidak ada upacaranya. Literal string di widget UI secara otomatis diperlakukan sebagai kunci yang dapat dilokalkan. File terjemahan berbentuk datar JSON di direktori `locales/`. Semua validasi terjadi pada waktu kompilasi.
 
 ```
 // locales/en.json
@@ -73,18 +73,18 @@ Perry's internationalization system has zero ceremony. String literals in UI wid
 Button({ title: "greeting", action: () => {} })
 ```
 
-The compiler validates everything: missing translations, parameter mismatches, plural form errors. Translations are baked into the binary as an embedded 2D string table with near-zero runtime lookup — no parsing JSON at startup.
+Kompiler memvalidasi segalanya: terjemahan yang hilang, ketidakcocokan parameter, kesalahan bentuk jamak. Terjemahan dimasukkan ke dalam biner sebagai tabel string 2D yang tersemat dengan pencarian runtime mendekati nol — tanpa penguraian JSON saat startup.
 
 ### Apa yang Termasuk
 
--   **CLDR plural rules** for 30+ locales with `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` suffixes
--   **Format wrappers**: `Currency`, `Percent`, `ShortDate`, `LongDate`, `FormatNumber`, `FormatTime`, `Raw`
--   **Native locale detection** on all platforms: `CFLocaleCopyCurrent` (macOS/iOS), `GetUserDefaultLocaleName` (Windows), `system_property_get` (Android), `LANG`/`LC_ALL` (Linux)
--   **`perry i18n extract`** CLI: scans TS/TSX files, generates and updates locale JSON scaffolds
--   **Platform-native resource generation**: iOS `.lproj` and Android `values-xx/` directories
--   **`import { t } from "perry/i18n"`** for localizing non-UI strings
+-   **Aturan jamak CLDR** untuk 30+ lokal dengan `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` sufiks
+-   **Format pembungkus**: `Currency`, `Percent`, `ShortDate`, `LongDate`, `FormatNumber`, `FormatTime`, `Raw`
+-   **Deteksi lokal asli** di semua platform: `CFLocaleCopyCurrent` (macOS/iOS), `GetUserDefaultLocaleName` (Windows), `system_property_get` (Android), `LANG`/`LC_ALL` (Linux)
+-   **`perry i18n extract`** CLI: memindai file TS/TSX, membuat dan memperbarui JSON scaffold
+-   **Pembuatan sumber daya asli platform**: iOS `.lproj` dan direktori `values-xx/` Android
+-   **`import { t } from "perry/i18n"`** untuk melokalkan string non-UI
 
-Configure it in `perry.toml`:
+Konfigurasi di `perry.toml`:
 
 ```
 [i18n]
@@ -95,9 +95,9 @@ currencies = { USD = "en", EUR = "de", JPY = "ja" }
 
 ## Aplikasi watchOS Native (v0.3.2)
 
-Perry now compiles to watchOS — the 9th compilation target. This isn't a wrapper or a companion app. It's a standalone watchOS binary with a native SwiftUI interface.
+Perry sekarang dikompilasi ke watchOS — target kompilasi ke-9. Ini bukan aplikasi pembungkus atau pendamping. Ini adalah biner watchOS mandiri dengan antarmuka SwiftUI asli.
 
-The watchOS renderer uses a **data-driven approach**: Perry builds a UI tree via `perry_ui_*` FFI calls, and a shipped `PerryWatchApp.swift` queries the tree and renders SwiftUI views reactively. 15 widget types are supported with stubs for unsupported ones.
+Perender watchOS menggunakan **pendekatan berbasis data**: Perry membuat pohon UI melalui `perry_ui_*` FFI memanggil, dan `PerryWatchApp.swift` yang dikirimkan mengkueri pohon dan merender tampilan SwiftUI secara reaktif. 15 jenis widget didukung dengan stub untuk yang tidak didukung.
 
 ```
 # Compile for watchOS
@@ -110,17 +110,17 @@ perry run watchos
 perry setup watchos
 ```
 
-The full flow works: `perry setup watchos` shares App Store Connect credentials with iOS, `perry run watchos` auto-detects Apple Watch simulators, and `perry publish watchos` submits to the App Store.
+Alur lengkapnya berfungsi: `perry setup watchos` berbagi kredensial App Store Connect dengan iOS, `perry run watchos` mendeteksi otomatis Simulator Apple Watch, dan `perry publish watchos` dikirimkan ke App Store.
 
-This also brings the total **widget target count to four**: iOS (WidgetKit), Android (Glance), watchOS (WidgetKit), and Wear OS (Tiles). Each has its own compile target and codegen backend.
+Ini juga menjadikan total **jumlah target widget menjadi empat**: iOS (WidgetKit), Android (Glance), watchOS (WidgetKit), dan Wear OS (Ubin). Masing-masing memiliki target kompilasi dan backend codegen sendiri.
 
 ## API Audio & Kamera
 
-Two new hardware APIs ship in this release:
+Dua API perangkat keras baru dirilis dalam rilis ini:
 
-### Audio Capture (`perry/system`)
+### Pengambilan Audio (`perry/system`)
 
-Cross-platform audio capture with A-weighted dB(A) measurement:
+Pengambilan audio lintas platform dengan pengukuran dB(A) berbobot A:
 
 ```
 import { audioStart, audioStop, audioGetLevel, audioGetWaveformSamples } from "perry/system";
@@ -131,11 +131,11 @@ const waveform = audioGetWaveformSamples();  // 256-sample ring buffer
 audioStop();
 ```
 
-Platform backends: AVAudioEngine (macOS/iOS), AudioRecord via JNI (Android), PulseAudio (Linux), WASAPI (Windows), getUserMedia + AnalyserNode (Web).
+Backend platform: AVAudioEngine (macOS/iOS), AudioRecord melalui JNI (Android), PulseAudio (Linux), WASAPI (Windows), getUserMedia + AnalyserNode (Web).
 
-### Camera Capture (`perry/ui`)
+### Pengambilan Kamera (`perry/ui`)
 
-Native camera preview with pixel-level color sampling (iOS):
+Pratinjau kamera asli dengan pengambilan sampel warna tingkat piksel (iOS):
 
 ```
 import { CameraView, cameraStart, cameraSampleColor } from "perry/ui";
@@ -146,33 +146,33 @@ const [r, g, b] = cameraSampleColor(x, y);  // 5x5 averaging
 
 ## Paket Ekosistem
 
-Two first-party native packages launched:
+Dua paket asli pihak pertama diluncurkan:
 
--   **perry/push** — Push notification bindings for iOS/macOS: permission requests, APNs token retrieval, badge count. Android stub with FCM planned.
--   **perry/storekit** — StoreKit 2 in-app purchase bindings: product loading, purchases with JWS receipts, subscription checking, restore, and transaction listeners.
+-   **perry/Push** — Pengikatan pemberitahuan push untuk iOS/macOS: permintaan izin, pengambilan token APNs, jumlah lencana. Rintisan Android dengan FCM direncanakan.
+-   **perry/storekit** — Ikatan pembelian dalam aplikasi StoreKit 2: pemuatan produk, pembelian dengan tanda terima JWS, pemeriksaan langganan, pemulihan, dan pemroses transaksi.
 
-Both follow the same architecture: TypeScript declarations → Rust FFI crate → Swift bridge. Install as a dependency, import the functions, `await` the results. The compiler handles all native bridging.
+Keduanya mengikuti arsitektur yang sama: deklarasi TypeScript → Rust FFI crate → Swift bridge. Instal sebagai dependensi, impor fungsinya, `await` hasilnya. Kompiler menangani semua penghubungan asli.
 
 ## Infrastruktur
 
--   **Cranelift 0.113 → 0.121** — eight minor versions of register allocation, x64 fixes, and stack slot alignment improvements
--   **Windows function splitting** — auto-splits functions with 50+ statements into continuations to work around Cranelift codegen issues on Windows
--   **Selective module-var loading** — only loads referenced module-level variables at function entry, reducing Windows binary size by 26%
--   **Array.sort() upgrade** — from O(n²) insertion sort to O(n log n) TimSort-style hybrid
--   **perry run android** — full APK build pipeline: compile, Gradle project generation, assembleDebug, install, launch
--   **Custom Info.plist entries** — `[ios.info_plist]` in perry.toml for privacy descriptions, URL schemes, background modes
+-   **Cranelift 0,113 → 0,121** — delapan versi minor alokasi register, perbaikan x64, dan penyempurnaan penyelarasan slot tumpukan
+-   **Pemisahan fungsi Windows** — pemisahan otomatis fungsi dengan 50+ pernyataan menjadi lanjutan untuk mengatasi Cranelift masalah codegen di Windows
+-   **Pemuatan var modul selektif** — hanya memuat variabel tingkat modul yang direferensikan pada entri fungsi, sehingga mengurangi ukuran biner Windows sebesar 26%
+-   **Peningkatan array.sort()** — dari pengurutan penyisipan O(n²) ke hibrid gaya TimSort O(n log n)
+-   **perry menjalankan Android** — pipeline pembangunan APK lengkap: kompilasi, pembuatan proyek Gradle, assembleDebug, instalasi, peluncuran
+-   **Entri Info.plist khusus** — `[ios.info_plist]` di perry.toml untuk deskripsi privasi, skema URL, mode latar belakang
 
 ## Dalam Angka
 
--   **Version**: 0.2.197 → 0.4.0 (three major milestones)
--   **Compilation targets**: 8 → 9 (added watchOS)
--   **Widget targets**: 1 → 4 (iOS, Android, watchOS, Wear OS)
--   **New crates**: perry-ui-watchos, perry-codegen-glance, perry-codegen-wear-tiles
--   **New docs**: threading (4 pages), i18n (4 pages), watchOS, expanded widget docs (3 → 8 pages)
--   **perry/thread implementation**: 1,120 lines of Rust, zero changes to the GC
+-   **Versi**: 0.2.197 → 0.4.0 (tiga pencapaian utama)
+-   **Target kompilasi**: 8 → 9 (menambahkan watchOS)
+-   **Target widget**: 1 → 4 (iOS, Android, watchOS, Wear OS)
+-   **Peti baru**: perry-ui-watchos, perry-codegen-glance, perry-codegen-wear-tiles
+-   **Dokumen baru**: threading (4 halaman), i18n (4 halaman), watchOS, dokumen widget yang diperluas (3 → 8 halaman)
+-   **implementasi perry/thread**: 1.120 baris Rust, tidak ada perubahan pada GC
 
 ## Apa Selanjutnya
 
-The threading foundation opens up a lot: parallel HTTP request processing, concurrent file operations, and compute-heavy workloads that were previously blocked by single-threaded execution. On the language side, full regex support remains the biggest gap, and the `perry/ui` expansion (drag and drop, accessibility, DatePicker) continues.
+Fondasi threading membuka banyak hal: pemrosesan permintaan HTTP paralel, operasi file secara bersamaan, dan beban kerja komputasi berat yang sebelumnya diblokir oleh eksekusi thread tunggal. Di sisi bahasa, dukungan regex penuh masih menjadi kesenjangan terbesar, dan perluasan `perry/ui` (seret dan lepas, aksesibilitas, DatePicker) terus berlanjut.
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/id/roadmap/) for the full picture.
+Ikuti perkembangannya di [GitHub](https://github.com/PerryTS/perry), baca dokumen di [docs.perryts.com](https://docs.perryts.com), atau periksa [peta jalan](/id/roadmap/) untuk gambaran selengkapnya.

@@ -25,31 +25,22 @@ These aren't wrappers around a custom renderer. Each widget compiles to the plat
 
 One of the more technically interesting additions is the Canvas widget (v0.2.152). It exposes a familiar 2D drawing API directly from TypeScript — bezier curves, fills, strokes, image blitting — and compiles to the platform's accelerated 2D backend: Core Graphics on macOS/iOS, Cairo on Linux, Direct2D on Windows, and Skia on Android.
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Table Widget: NSTableView Comes to TypeScript
 
@@ -57,25 +48,19 @@ v0.2.163 landed the Table widget — the most complex component in the library. 
 
 The TypeScript API is declarative: you define columns, provide a data source, and Perry handles the platform-specific wiring at compile time. Column sorting, selection handling, and row height customization all work out of the box.
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## The perry/system Module
 

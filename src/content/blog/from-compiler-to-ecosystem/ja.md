@@ -14,25 +14,19 @@ tags: ["ecosystem", "perry/ui", "databases", "infrastructure", "milestone"]
 
 `perry/ui`はPerryの主要かつ最も高度な UIサーフェスです。リアクティブな状態管理、レイアウトコンテナ（VStack、HStack、 ZStack、SplitView）、ハードウェアアクセラレーションされたCanvas、カラムソート付きTableビュー、 ファイルダイアログ、キーチェーンアクセス、通知、マルチウィンドウのための `perry/system`モジュールを含みます — すべてTypeScriptから、 すべてプラットフォームAPIへの直接呼び出しにコンパイルされます。React互換レイヤーを含むPerryの他のすべてのUIアプローチは、`perry/ui`の上に構築され、そのウィジェットにマッピングされます。
 
-app.ts
+**app.ts**
 
+```typescript
 import { Window, VStack, Button, Text, State } from 'perry/ui';
-
 const count = new State(0);
-
 const window = new Window({ title: "Counter" });
-
 window.setContent(
-
-new VStack({ children: \[
-
-new Text({ text: count }),
-
-new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
-
-\] })
-
+  new VStack({ children: [
+    new Text({ text: count }),
+    new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
+  ] })
 );
+```
 
 リアクティブな`State`オブジェクトが重要なプリミティブです。 State値が変更されると、その状態にバインドされたウィジェットだけが更新されます — 仮想DOMの差分比較なし、 フルツリーの再レンダリングなし、リコンシリエーションパスなし。TypeScriptからネイティブプラットフォームUIへの 最も直接的なパスです。
 
@@ -40,27 +34,20 @@ new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
 
 Reactから来た開発者のために、`perry-react` はReactのコンポーネントモデルを `perry/ui`のウィジェットにマッピングする互換レイヤーを提供します。 `useState`、 `useRef`、 `useReducer`、そしてJSXを使用でき、Perryはそれらを 同じネイティブウィジェットにコンパイルします。これは便利なブリッジであり、別のレンダリングエンジンではありません。
 
-counter.tsx
+**counter.tsx**
 
+```tsx
 import React, { useState } from 'react';
-
 function Counter() {
-
-const \[count, setCount\] = useState(0);
-
-return (
-
-<div\>
-
-<h1\>{count}</h1\>
-
-<button onClick\={() => setCount(count + 1)}\>+1</button\>
-
-</div\>
-
-);
-
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
 }
+```
 
 内部では、すべてのJSX要素が`perry/ui` ウィジェットにマッピングされます：`<div>`はVStackに、 `<button>`はButtonに、 `useState`はPerryのリアクティブStateで実装されています。 まだ初期段階です — フルツリー再レンダリングとグローバルフックストレージのフェーズ1ですが、 既存のReactコードがPerryを通じてネイティブプラットフォームをターゲットにできることを証明しています。 同様のアプローチでAngularとIonicの互換性も検討中です。
 
@@ -68,29 +55,21 @@ return (
 
 データベースと通信するサーバーやデスクトップアプリを構築しているなら、Perryは Prisma互換の3つのORMでカバーします： `perry-prisma`（MySQL）、 `perry-sqlite`（SQLite）、 `perry-postgres`（PostgreSQL）。3つすべてが`@prisma/client`のドロップイン置換です。同じAPI、同じ クエリパターン、しかしデータベースへの直接FFIを持つネイティブコードにコンパイルされます — Prismaエンジンなし、 Node.jsなし。
 
-database.ts
+**database.ts**
 
+```typescript
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
-
 // Same Prisma API — compiled to native SQL via Rust FFI
-
 const users = await prisma.user.findMany({
-
-where: { email: { contains: "@perry.dev" } },
-
-orderBy: { createdAt: "desc" },
-
-take: 10,
-
+  where: { email: { contains: "@perry.dev" } },
+  orderBy: { createdAt: "desc" },
+  take: 10,
 });
-
 await prisma.post.create({
-
-data: { title: "Hello", authorId: users\[0\].id },
-
+  data: { title: "Hello", authorId: users[0].id },
 });
+```
 
 内部では、各ORMは `sqlx`を使用するRust FFIレイヤーに支えられたTypeScriptフロントエンドです。 クエリフロー：TypeScriptがクエリをJSONにシリアライズし、FFI境界を越えて渡し、Rustがパラメータ化されたSQLを構築し、 コネクションプール経由で実行し、結果をシリアライズして返します。Prismaスキーマはビルド時に読み込まれます — ランタイムのパースはゼロです。
 
@@ -100,27 +79,20 @@ data: { title: "Hello", authorId: users\[0\].id },
 
 `perry-push`は、すべてのプラットフォームでプッシュ通知を処理する 単一のライブラリです：APNs（iOS/macOS）、FCM（Android）、Web Push（ブラウザ）、 WNS（Windows）。各プロバイダーは、正確に3つの関数を持つRust FFIモジュールです： `*_provider_new`、 `*_provider_close`、 `*_send`。
 
-notify.ts
+**notify.ts**
 
+```typescript
 import { ApnProvider } from 'perry-push/apn';
-
 import { FcmProvider } from 'perry-push/fcm';
-
 const apn = new ApnProvider({ teamId, keyId, key });
-
 const fcm = new FcmProvider({ serviceAccount });
-
 // Unified result type for all providers
-
 const result = await apn.send({
-
-deviceToken: token,
-
-title: "New message",
-
-body: "You have a new reply",
-
+  deviceToken: token,
+  title: "New message",
+  body: "You have a new reply",
 });
+```
 
 暗号化は `ring`で処理されます — APNsとVAPID用のES256 JWT、 FCMサービスアカウント用のRS256、Web Pushペイロード暗号化用のAES-GCM。すべてネイティブコードにコンパイルされます。`node-gyp`なし、OpenSSL依存なし。
 

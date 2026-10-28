@@ -158,7 +158,7 @@ El benchmark destacado del artículo anterior fue `factorial` a 24,6x más rápi
 | JSON.parse (schema de 20 registros) | 547x más lento que Node | 1,3x más lento que Node | ~420x |
 | image\_conv (blur 5×5 a 4K) | 1.980ms | 457ms | 4,3x |
 | Código pesado en propiedades (hit del PIC) | línea base | 2–3x | 2–3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Uptime de Fastify bajo carga | ~60s antes de crash | indefinido | ∞ |
 
 La suite completa de 15 benchmarks contra Node sigue siendo 14 victorias y 1 empate — la misma tabla que el artículo anterior, con números ligeramente mejores en todos los frentes. El movimiento real esta semana es en cargas de trabajo que no estaban en esa suite: JSON, procesamiento de imágenes, servidores de larga duración. Ahí era donde vivían las brechas, y eso es lo que se cerró.
@@ -185,7 +185,7 @@ perry init my-app && cd my-app
 perry compile src/main.ts -o my-app && ./my-app
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Fuente: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Documentos: [docs.perryts.com](https://docs.perryts.com) — Registro de cambios: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 Issues, reproductores, y benchmarks que no son lo suficientemente rápidos: sigan viniendo. Este ritmo solo funciona porque los reportes de bugs son lo suficientemente específicos como para convertirse en reproductores de una línea. Cada commit en este artículo tiene un `#N` adjunto por una razón.
 

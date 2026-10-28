@@ -46,14 +46,14 @@ v0.5.0 เป็นรีลีสแรกที่ใช้ LLVM เป็น 
 
 นี่คือตารางที่ตอนนั้นผมไม่อยากโพสต์:
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+| เกณฑ์มาตรฐาน| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | ช้าลง 68 เท่า |
-| object\_create | 5ms | 318ms | ช้าลง 64 เท่า |
-| matrix\_multiply | 61ms | 184ms | ช้าลง 3 เท่า |
-| math\_intensive | 370ms | 131ms | เร็วขึ้น 2.8 เท่า |
-| nested\_loops | 32ms | 57ms | ช้าลง 1.8 เท่า |
-| fibonacci(40) | 505ms | 1,156ms | ช้าลง 2.3 เท่า |
+| method_calls| 16ms | 1,084ms | ช้าลง 68 เท่า |
+| object_create| 5ms | 318ms | ช้าลง 64 เท่า |
+| matrix_multiply| 61ms | 184ms | ช้าลง 3 เท่า |
+| คณิตศาสตร์เข้มข้น| 370ms | 131ms | เร็วขึ้น 2.8 เท่า |
+| Nested_loops| 32ms | 57ms | ช้าลง 1.8 เท่า |
+| ฟีโบนัชชี(40)| 505ms | 1,156ms | ช้าลง 2.3 เท่า |
 
 บาง workload เร็วขึ้น ส่วนใหญ่แย่ลงอย่างมาก `method_calls` — หนึ่งใน benchmark ที่สำคัญที่สุดเพราะเป็นตัวแทนของการใช้ class ใน TypeScript แบบ idiomatic — แย่ลงเกือบ 70 เท่าจากที่เราเคยส่งออกไปสองรีลีสก่อนหน้า
 
@@ -137,23 +137,23 @@ codegen ตรวจจับรูปแบบ `for (...; i < arr.length; ...)`
 
 ค่ามัธยฐานจาก 3 ครั้ง, macOS ARM64 (Apple Silicon, M1 Max), Node.js v25:
 
-| Benchmark | Perry | Node.js | vs Node |
+| เกณฑ์มาตรฐาน| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+| แฟกทอเรียล| 24ms | 591ms | 24.6x |
+| method_calls| 1ms | 11ms | 11x |
+| loop_overhead| 12ms | 53ms | 4.4x |
+| คณิตศาสตร์เข้มข้น| 14ms | 49ms | 3.5x |
+| array_read| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | เสมอ |
-| mandelbrot | 24ms | 24ms | เสมอ |
-| object\_create | 9ms | 8ms | 0.9x |
+| array_write| 3ms | 8ms | 2.6x |
+| string_concat| 1ms | 2ms | 2x |
+| Nested_loops| 9ms | 16ms | 1.7x |
+| prime_sieve| 4ms | 7ms | 1.7x |
+| matrix_multiply| 21ms | 34ms | 1.6x |
+| ฟีโบนัชชี(40)| 401ms | 991ms | 2.5x |
+| binary_trees| 9ms | 9ms | เสมอ |
+| แมนเดลโบรต| 24ms | 24ms | เสมอ |
+| object_create| 9ms | 8ms | 0.9x |
 
 ทุก benchmark เป็นชัยชนะหรือเสมอ ที่ใกล้เคียงที่สุดคือ `object_create` (9ms vs 8ms) ที่ allocator ของ V8 ดีจริง ๆ
 

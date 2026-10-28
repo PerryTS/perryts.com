@@ -25,31 +25,22 @@ Bunlar ozel bir renderlayici etrafindaki sarmalayicilar degildir. Her widget pla
 
 Teknik olarak en ilginc eklemelerden biri Canvas widget'idir (v0.2.152). Dogrudan TypeScript'ten taninidik bir 2D cizim API'si sunar ve platformun hizlandirilmis 2D arka ucuna derlenir: macOS/iOS'ta Core Graphics, Linux'ta Cairo, Windows'ta Direct2D ve Android'de Skia.
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Table Widget'i: NSTableView TypeScript'e Geliyor
 
@@ -57,25 +48,19 @@ v0.2.163 Table widget'ini getirdi — kutuphanedeki en karmasik bilesen. macOS't
 
 TypeScript API'si bildirimseldir: sutunlari tanimlar, bir veri kaynagi saglarsınız ve Perry derleme zamaninda platforma ozgu baglantilari yonetir.
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## perry/system Modulu
 
@@ -85,7 +70,7 @@ v0.2.155 ayrica `perry/system`'i tanitti — hicbir calisma zamani olmadan platf
 -   `system.showSaveDialog()` — yerel kaydetme diyalogu
 -   `system.showAlert()` — yerel uyari paneli
 -   `system.notify()` — isletim sistemi bildirimi
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
+-   `system.keychain.get/set()` — Anahtar Zinciri Hizmetleri / Gizli Servis / Windows Kimlik Bilgisi Deposu
 -   `system.openWindow()` — coklu pencere yonetimi
 
 ## Alti Platform Ozellik Paritesi: v0.2.162

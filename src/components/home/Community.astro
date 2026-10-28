@@ -8,6 +8,7 @@ import { localePath, type Locale } from "../../i18n/index.ts";
 import { fillDeep, messages } from "../../i18n/messages.ts";
 import { formatCompact } from "../../lib/format.ts";
 import { getRepoStats } from "../../lib/github.ts";
+import { formatPostDate, getPosts } from "../../lib/blog.ts";
 import { links } from "../../lib/links.ts";
 
 interface Props {
@@ -25,13 +26,7 @@ const channels = [
   { name: t.newsletter[0], meta: t.newsletter[1], href: localePath(lang, "newsletter"), icon: "mail" },
 ] as const;
 
-// Post titles stay in English: the posts themselves are written in English.
-const posts = [
-  { date: "2026-08-12", slug: "gc-decisions-surprises", tag: "runtime", title: "Building a GC for a native TypeScript compiler: decisions, surprises, and how it's going" },
-  { date: "2026-07-25", slug: "compiling-claude-code", tag: "compiler", title: "Compiling Claude Code: one minified bundle, 160 compiler fixes" },
-  { date: "2026-07-07", slug: "shipping-a-watch-only-app-to-the-app-store", tag: "watchOS", title: "Shipping a watch-only app to the App Store (when nothing else will)" },
-  { date: "2026-06-09", slug: "real-npm-packages-and-a-conformance-sweep", tag: "npm", title: "Real npm packages now compile: axios, zod, express — and a conformance sweep" },
-];
+const posts = (await getPosts(lang)).slice(0, 4);
 ---
 
 <section class="section section--surface community">
@@ -66,10 +61,10 @@ const posts = [
       <ul class="posts">
         {posts.map((p, i) => (
           <li data-reveal style={`--i: ${i}`}>
-            <a class="post" href={localePath(lang, `blog/${p.slug}`)} lang="en">
-              <time class="t-mono muted" datetime={p.date}>{p.date}</time>
-              <span class="post-title">{p.title}</span>
-              <span class="t-mono accent">{p.tag}</span>
+            <a class="post" href={localePath(lang, `blog/${p.slug}`)} lang={p.isFallback ? "en" : undefined}>
+              <time class="t-mono muted" datetime={p.entry.data.date.toISOString()}>{formatPostDate(p.entry.data.date, lang, "short")}</time>
+              <span class="post-title">{p.entry.data.title}</span>
+              <span class="t-mono accent">{p.entry.data.tags[0]}</span>
             </a>
           </li>
         ))}

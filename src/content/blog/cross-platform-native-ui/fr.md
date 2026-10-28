@@ -1,6 +1,6 @@
 ---
 title: "UI native multiplateforme depuis TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Comment Perry mappe une base de code TypeScript aux widgets de plate-forme sur ses cibles documentées, y compris les limitations et conditions préalables spécifiques à la plate-forme."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ La différence clé : **il n'y a pas de couche runtime entre votre code et le SD
 
 Perry fournit une API TypeScript commune pour construire des interfaces utilisateur. Cette API est délibérément de haut niveau — vous décrivez ce que votre interface doit contenir et comment elle doit se comporter, et Perry la mappe aux constructions natives appropriées.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Ce même code compile en interface native sur les six plateformes. Pas de `#ifdef`, pas de vérifications de plateforme, pas d'imports conditionnels.
 
@@ -78,7 +70,7 @@ Le binaire compilé lie contre le framework AppKit et appelle directement les fo
 
 Sur iOS, le mapping est similaire mais cible UIKit. `App` devient une `UIApplication` avec une `UIWindow` et un `UIViewController` racine. `Text` correspond à `UILabel`. `Button` correspond à `UIButton`. La disposition utilise `UIStackView` et Auto Layout. Les événements tactiles sont gérés par la chaîne de répondeurs d'UIKit.
 
-### Android — JNI + Views
+### Android — JNI + Vues
 
 Sur Android, Perry génère une bibliothèque native chargée via JNI (Java Native Interface). `App` correspond à une `Activity`. `Text` devient un `TextView`. `Button` devient un `android.widget.Button` avec un `OnClickListener`. `VStack` correspond à un `LinearLayout` vertical. Le code natif rappelle le framework Android via JNI, créant et manipulant de vraies vues Android.
 
@@ -107,7 +99,7 @@ Les six backends de plateforme sont implémentés et stables. L'ensemble actuel 
 -   **Disposition** — VStack, HStack, Spacer, ScrollView, Divider
 -   **Affichage** — Text, Image
 -   **Saisie** — Button, TextField, Toggle, Slider
--   **Navigation** — NavigationView, TabView, List
+-   **Navigation** – NavigationView, TabView, List
 -   **Conteneurs** — TreeView, SearchBar, StatusBar
 -   **État** — State<T> pour les mises à jour réactives
 

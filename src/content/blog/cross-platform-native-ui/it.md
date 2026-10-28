@@ -1,6 +1,6 @@
 ---
 title: "UI nativa multipiattaforma da TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Come Perry associa una base di codice TypeScript ai widget della piattaforma tra i suoi target documentati, inclusi limiti e prerequisiti specifici della piattaforma."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ La differenza chiave: **non c'è nessun livello runtime tra il tuo codice e l'SD
 
 Perry fornisce un'API TypeScript comune per costruire interfacce utente. Questa API è deliberatamente di alto livello — descrivi cosa deve contenere la tua UI e come deve comportarsi, e Perry la mappa ai costrutti nativi appropriati.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Lo stesso codice compila in UI nativa su tutte e sei le piattaforme. Nessun `#ifdef`, nessun controllo della piattaforma, nessun import condizionale.
 
@@ -78,7 +70,7 @@ Il binario compilato si collega al framework AppKit e chiama le funzioni del run
 
 Su iOS, il mapping è simile ma punta a UIKit. `App` diventa un `UIApplication` con un `UIWindow` e un root `UIViewController`. `Text` mappa a `UILabel`. `Button` mappa a `UIButton`. Il layout usa `UIStackView` e Auto Layout. Gli eventi touch sono gestiti attraverso la catena di risposta di UIKit.
 
-### Android — JNI + Views
+### Android: JNI + visualizzazioni
 
 Su Android, Perry genera una libreria nativa caricata via JNI (Java Native Interface). `App` mappa a un `Activity`. `Text` diventa un `TextView`. `Button` diventa un `android.widget.Button` con un `OnClickListener`. `VStack` mappa a un `LinearLayout` verticale. Il codice nativo richiama il framework Android attraverso JNI, creando e manipolando vere view Android.
 

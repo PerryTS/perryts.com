@@ -1,6 +1,6 @@
 ---
 title: "TypeScript からクロスプラットフォームのネイティブ UI を実現"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Perry が 1 つの TypeScript コードベースを、プラットフォーム固有の制限や前提条件など、文書化されたターゲット全体でプラットフォーム ウィジェットにマッピングする方法。"
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perry は根本的に異なるアプローチを取ります。ランタイム�
 
 Perry はユーザーインターフェースを構築するための共通 TypeScript API を提供します。この API は 意図的に高レベルです — UI に何を含め、どのように動作すべきかを記述すると、 Perry が適切なネイティブ構成にマッピングします。
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 同じコードが6つのプラットフォームすべてでネイティブ UI にコンパイルされます。`#ifdef` なし、 プラットフォームチェックなし、条件付きインポートなし。
 
@@ -78,7 +70,7 @@ macOS では、Perry は AppKit オブジェクトを直接作成・管理する
 
 iOS では、マッピングは同様ですが UIKit をターゲットにします。 `App` は `UIWindow` と ルート `UIViewController` を持つ`UIApplication` になります。 `Text` は `UILabel` にマッピングされます。 `Button` は `UIButton` にマッピングされます。 レイアウトには `UIStackView` と Auto Layout を使用します。 タッチイベントは UIKit のレスポンダチェーンを通じて処理されます。
 
-### Android — JNI + Views
+### Android — JNI + ビュー
 
 Android では、Perry は JNI（Java Native Interface）を介してロードされるネイティブライブラリを生成します。 `App` は `Activity` にマッピングされます。 `Text` は `TextView` になります。 `Button` は `OnClickListener` 付きの`android.widget.Button` になります。 `VStack` は垂直 `LinearLayout` にマッピングされます。 ネイティブコードは JNI を通じて Android フレームワークを呼び出し、実際の Android ビューを 作成・操作します。
 

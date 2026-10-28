@@ -77,6 +77,6 @@ Daha küçük ama gerçek: `perry setup ios --development` artık development bu
 
 Perry'nin arkasındaki bahis her zaman şu oldu: “native TypeScript”, ancak *gerçek* TypeScript çalışırsa önem kazanır — oyuncak bir alt küme değil, insanların `npm install` ettiği gerçek paketler. Bu ay çoğunlukla o işti: övünülecek tek bir sayıdan çok, “derleniyor” ile “çalışıyor” arasındaki açığı kapatmaya yönelik uzun, gösterişsiz bir itiş. Uygunluk radarları ve npm parite testleri artık izlediğimiz skor tablosu ve sayıları yayınlamaya devam edeceğiz — iyilerini de hâlâ kusurlu olanları da.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Kaynak: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Sorunlar: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

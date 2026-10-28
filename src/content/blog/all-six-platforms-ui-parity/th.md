@@ -25,31 +25,22 @@ tags: ["UI", "cross-platform", "release", "milestone"]
 
 หนึ่งในการเพิ่มที่น่าสนใจทางเทคนิคมากที่สุดคือวิดเจ็ต Canvas (v0.2.152) มันเปิดเผย API วาด 2D ที่คุ้นเคยจาก TypeScript โดยตรง — เส้นโค้งเบเซียร์ การเติม การลากเส้น การ blit ภาพ — และคอมไพล์เป็นแบ็กเอนด์ 2D ที่เร่งด้วยฮาร์ดแวร์ของแพลตฟอร์ม: Core Graphics บน macOS/iOS, Cairo บน Linux, Direct2D บน Windows และ Skia บน Android
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## วิดเจ็ต Table: NSTableView มาถึง TypeScript
 
@@ -57,25 +48,19 @@ v0.2.163 เปิดตัววิดเจ็ต Table — คอมโพเ
 
 API TypeScript เป็นแบบ declarative: คุณกำหนดคอลัมน์ ให้แหล่งข้อมูล และ Perry จัดการการเชื่อมต่อเฉพาะแพลตฟอร์มในเวลาคอมไพล์ การเรียงลำดับคอลัมน์ การจัดการการเลือก และการปรับแต่งความสูงของแถวทำงานได้ทันที
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## โมดูล perry/system
 
@@ -85,7 +70,7 @@ v0.2.155 ยังเปิดตัว `perry/system` — โมดูล TypeS
 -   `system.showSaveDialog()` — กล่องบันทึกเนทีฟ
 -   `system.showAlert()` — แผงแจ้งเตือนเนทีฟ
 -   `system.notify()` — การแจ้งเตือน OS
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
+-   `system.keychain.get/set()` — บริการพวงกุญแจ / บริการลับ / ที่เก็บข้อมูลรับรอง Windows
 -   `system.openWindow()` — การจัดการหลายหน้าต่าง
 
 ## ความเท่าเทียมฟีเจอร์หกแพลตฟอร์ม: v0.2.162

@@ -36,41 +36,32 @@ For context, `tsc --noEmit` on tRPC alone takes several seconds. Perry compiles 
 
 This was the big milestone. Hono's export structure looks like this:
 
-hono export chain
+**hono export chain**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 That `export { Hono }` is a named re-export — not `export * from` or `export { Hono } from './hono'`. In Perry's HIR, this becomes `Export::Named`, not `Export::ReExport` or `Export::ExportAll`. Previously, the compiler's class propagation only followed `ExportAll` and `ReExport` chains, so importing `Hono` from `index.ts` silently failed — the class lookup missed, and `new Hono()` returned `undefined`.
 
 Now Perry traces `Export::Named` back through the module's imports to find the original class definition and propagates it. The result:
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 The Hono constructor runs, initializes a `SmartRouter` (which internally creates both a `RegExpRouter` and a `TrieRouter`), and returns a real object. Multiple independent instances work. Constructor options are accepted.
 
@@ -78,23 +69,22 @@ The Hono constructor runs, initializes a `SmartRouter` (which internally creates
 
 tRPC's `initTRPC` lives 4 levels deep:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 That's `ExportAll` → `Named` → `ExportAll`. Perry resolves the full chain — `initTRPC` is accessible in the compiled binary. Same for `TRPCError`, which follows the same path.
 
 ### Cross-Module Class Instantiation with Arguments
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError` is defined in one module, re-exported through three intermediate barrel files, imported in the test, and instantiated with an options object. The instance's `code` field is accessible.
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi uses workspace packages — `@strapi/core` is a sibling package in the monorepo, not an npm dependency. Perry resolves the bare specifier through `package.json` exports fields:
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 The `createStrapi` function resolves correctly as a callable function through `export * from '@strapi/core'`.
 
@@ -128,27 +118,23 @@ We're being specific here because the gaps tell you as much as the wins.
 
 Hono's constructor sets up HTTP method handlers dynamically:
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 This means `app.get`, `app.post`, etc. are not statically declared — they're assigned at runtime via computed property names. Perry doesn't support `this[variable] = value` yet, so these methods are missing:
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 This is the single biggest gap for Hono. The Hono class exists, its router is initialized, but you can't register routes.
 
@@ -156,7 +142,9 @@ This is the single biggest gap for Hono. The Hono class exists, its router is in
 
 tRPC defines its entry point as:
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 At runtime, `initTRPC` shows up as `typeof function` rather than `typeof object` — the module-level `new TRPCBuilder()` expression isn't executing the constructor, so what you get is a reference to the class rather than an instance. This means `initTRPC.create()` and `initTRPC.context()` are both `undefined`.
 

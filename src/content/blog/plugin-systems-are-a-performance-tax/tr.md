@@ -73,19 +73,14 @@ Perry burada devreye girer. Perry TypeScript'i dogrudan yerel ikililer olarak de
 
 Modulleriniz yerel koda derlendiginde "eklentiler" sadece... moduller olur. Derleme zamaninda birlesirlier. Son ikilide sifir eklenti ek yuku vardir cunku eklenti yoktur — sadece yerel kod. Bir Express rota isleyicisi, bir middleware fonksiyonu, bir yardimci kutuphane — hepsi ayni ikilide dogrudan fonksiyon cagilarina derlenir. Dinamik yukleme yok, serializasyon yok, surec sinirlari yok.
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 Bu teorik degildir. Perry zaten gercek dunya TypeScript cercevelerini — Hono, tRPC, Strapi — bir saniyenin altinda 2 MB'nin altinda yerel ARM64 ikililerine derler. Bu cercereleri olusturan moduller derlenir, baglanir ve tek bir calistirilabilir dosyaya alinir. Node.js'de calisma zamani ek yuklu bir eklenti mimarisi olacak olan sey, bir Perry ikilisinde sifir maliyetli bilesim olur.
 

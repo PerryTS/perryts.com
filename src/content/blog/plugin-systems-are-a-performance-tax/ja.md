@@ -73,19 +73,14 @@ TypeScript は拡張可能なツールを構築するための最も人気のあ
 
 モジュールがネイティブコードにコンパイルされると、「プラグイン」は単なる...モジュールになります。 ビルド時に合成されます。最終バイナリにはプラグインのオーバーヘッドがゼロです。 プラグインが存在しないからです — ネイティブコードだけです。Express のルートハンドラ、 ミドルウェア関数、ユーティリティライブラリ — すべて同じバイナリ内の直接関数呼び出しに コンパイルダウンされます。動的ローディングなし、シリアライゼーションなし、プロセス境界なし。
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 これは理論的な話ではありません。Perry はすでに実世界の TypeScript フレームワーク — Hono、tRPC、 Strapi — を 2 MB 未満のネイティブ ARM64 バイナリに1秒未満でコンパイルしています。 これらのフレームワークを構成するモジュールはコンパイルされ、リンクされ、 単一の実行ファイルにインライン化されます。Node.js ではランタイムオーバーヘッドのある プラグインアーキテクチャになるものが、Perry バイナリではゼロコストの合成になります。
 

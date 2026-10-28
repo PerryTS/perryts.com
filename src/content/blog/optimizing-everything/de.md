@@ -153,12 +153,12 @@ Performance-Arbeit bringt Korrektheits-Probleme an die Oberfläche, so wie das A
 
 Der Headline-Benchmark aus dem letzten Beitrag war `factorial` mit 24,6x schneller als Node. Diese Zahl ist unverändert. Was sich diese Woche bewegt hat, ist alles drumherum:
 
-| Workload | v0.5.12 | v0.5.80 | Delta |
+| Arbeitsbelastung| v0.5.12 | v0.5.80 | Delta |
 | --- | --- | --- | --- |
 | JSON.parse (20-Record-Schema) | 547x langsamer als Node | 1,3x langsamer als Node | ~420x |
 | image\_conv (4K 5×5 Blur) | 1.980ms | 457ms | 4,3x |
 | Property-lastiger Code (PIC-Hit) | Baseline | 2–3x | 2–3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Fastify-Uptime unter Last | ~60s bis zum Absturz | unbegrenzt | ∞ |
 
 Die volle 15-Benchmark-Suite gegen Node steht weiterhin bei 14 Siegen und 1 Gleichstand — dieselbe Tabelle wie im letzten Beitrag, mit durchweg leicht besseren Zahlen. Die echte Bewegung diese Woche liegt bei Workloads, die nicht in dieser Suite waren: JSON, Bildverarbeitung, langlaufende Server. Dort lagen die Lücken, und genau diese sind geschlossen.
@@ -185,7 +185,7 @@ perry init my-app && cd my-app
 perry compile src/main.ts -o my-app && ./my-app
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Quelle: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Dokumente: [docs.perryts.com](https://docs.perryts.com) — Änderungsprotokoll: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 Issues, Reproducer und Benchmarks, die nicht schnell genug sind: immer her damit. Dieses Tempo funktioniert nur, weil die Bug-Reports spezifisch genug sind, um in Einzeiler-Reproducer umgewandelt zu werden. Jeder Commit in diesem Beitrag hat aus gutem Grund ein `#N` angehängt.
 

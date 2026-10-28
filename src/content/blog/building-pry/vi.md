@@ -1,6 +1,6 @@
 ---
 title: "Xây dựng Pry: Trình xem JSON gốc bằng TypeScript"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "Hướng dẫn xây dựng Pry, một trình xem JSON gốc được biên dịch từ TypeScript thành mã máy có thời gian chạy Perry và GC được liên kết trong đó và không có chế độ xem web."
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry được viết bằng TypeScript tiêu chuẩn. Không có cú pháp đặc
 
 Đây là điểm khởi đầu (đã đơn giản hóa cho rõ ràng):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 Đó là cốt lõi của một ứng dụng native. Không có boilerplate framework, không có cấu hình build, không có tệp dành riêng cho nền tảng. Một tệp TypeScript.
 
@@ -125,27 +82,20 @@ app.run();
 
 Pry cũng bao gồm tiện ích `countNodes` đệ quy đếm tất cả các nút trong cây JSON, và hàm trợ giúp `formatBytes` để hiển thị kích thước tệp. Đây là các hàm TypeScript tiêu chuẩn — không có gì đặc thù Perry. Chúng được biên dịch thành mã native giống như mọi thứ khác.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Biên dịch Pry
 
@@ -153,47 +103,39 @@ Biên dịch Pry với Perry là một lệnh duy nhất. Không cần dự án 
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 Binary có kích thước 48 MB vì nó bao gồm toàn bộ stack UI AppKit — render chế độ xem cây, highlight tìm kiếm, tô màu cú pháp, và xử lý bàn phím. Để so sánh, cùng ứng dụng trong Electron sẽ là 200+ MB. Một ứng dụng Perry chỉ CLI biên dịch thành 2–5 MB.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 Bản build iOS liên kết với UIKit thay vì AppKit. Perry ánh xạ cùng API `TreeView` tới `UITableView` với các section có thể mở rộng, `SearchBar` tới `UISearchBar`, và sự kiện chạm thay thế sự kiện chuột. Bản build iOS có thể triển khai lên thiết bị vật lý và simulator.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Bản build Android sinh một thư viện native được nạp qua JNI, đóng gói thành APK. `TreeView` ánh xạ tới `RecyclerView` với view holder có thể mở rộng, `SearchBar` ánh xạ tới `EditText` với `TextWatcher`, và thanh trạng thái ánh xạ tới `TextView` ở cuối layout.
 

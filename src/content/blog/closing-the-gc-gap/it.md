@@ -97,7 +97,7 @@ Perché `block_reclaim=0` nonostante più della metà degli oggetti fosse morta?
 
 La cosa più istruttiva che abbiamo trovato non era nel profilo. Era nello sweep stesso, in `crates/perry-runtime/src/gc.rs:2733`, come un commento che spiegava il design:
 
-> We deliberately do NOT push dead objects onto the global ARENA\_FREE\_LIST. The inline bump allocator never reads the free list — it uses the per-block reset instead. Pushing dead objects to the free list would cost ~50ns per object × ~700k objects per GC × ~12 GC cycles per benchmark = 420ms of pure waste in `object_create`.
+> NON inseriamo deliberatamente oggetti morti nell'ARENA_FREE_LIST globale. L'allocatore di bump in linea non legge mai l'elenco libero, ma utilizza invece il ripristino per blocco. L'inserimento di oggetti morti nell'elenco gratuito costerebbe ~50 ns per oggetto × ~700.000 oggetti per GC × ~12 GC cicli per benchmark = 420 ms di puro spreco in `object_create`.
 
 Questo è esattamente corretto per il carico contro cui era stato tarato. `object_create` è un benchmark a cui teniamo, dove le allocazioni muoiono in un loop stretto e interi blocchi si svuotano davvero tra un ciclo e l'altro. Aggiungere una passata di free-list per oggetto brucerebbe 420 ms di bookkeeping inutile per quel carico, e il percorso di block-reset cattura la stessa memoria a costo più basso.
 
@@ -172,6 +172,6 @@ hyperfine --warmup 10 --runs 100 --export-markdown abc451d-bench.md \
 
 I tuoi numeri varieranno con l'hardware e le versioni dei runtime. Se variano in modi che sembrano sbagliati, [apri una issue](https://github.com/PerryTS/perry/issues) — preferiamo saperlo.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Problemi: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

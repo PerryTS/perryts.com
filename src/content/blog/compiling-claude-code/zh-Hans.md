@@ -168,7 +168,7 @@ TUI 会渲染出来，然后在几秒钟内死于 `SIGBUS`——在一个窗口�
 | `--help` | 715 ms | 5,071 ms | 4,099 ms |
 | TUI 首次绘制 | 0.76 s | 10.9 s | 8.4 s |
 | 按键 → 绘制（p50） | 2.2 ms | 111–143 ms | 119–138 ms |
-| 内存占用，空闲状态 | 290 MB flat | ~420 MB climbing | ~420 MB climbing |
+| 内存占用，空闲状态 | 290 MB flat | ~420 MB 攀登| ~420 MB 攀爬 |
 
 `--version` 现在**反超了 Node**，而这次胜利的来源说出来有点尴尬：编译出的可执行文件导出了 300,281 个符号，所以那次启动大约 80% 的时间都花在 dyld 做弱定义合并上。一个链接器标志把导出符号数砍到 3 个，二进制体积也从 228 MB 降到 197 MB（[#6533](https://github.com/PerryTS/perry/pull/6533)）。把每个独特的正则只构建一次而不是两次（[#6534](https://github.com/PerryTS/perry/pull/6534)），以及缓存逐次写入的拦截检查（[#6532](https://github.com/PerryTS/perry/pull/6532)、[#6541](https://github.com/PerryTS/perry/pull/6541)），补齐了剩下的部分。
 

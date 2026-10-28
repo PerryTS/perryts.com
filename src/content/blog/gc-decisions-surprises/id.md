@@ -218,7 +218,7 @@ Cycle yang salah prediksi menahan paling banyak beberapa persen satu nursery, pr
 
 Perlu dinyatakan: **cerita “satu mekanisme” biasanya salah dan profil berubah di bawah kaki.** Pause fraction hari ini, diukur pada commit yang sama dengan standings di bawah:
 
-| program | wall | GC pause | pause fraction | cycles | |---|--:|--:|--:|--:| | retain | 159.5 ms | 52.0 ms | 33% | 5 | | retain1 | 71.4 ms | 38.7 ms | 54% | 3 | | retain\_wide | 206.2 ms | 75.4 ms | 37% | 8 | | shapes | 64.8 ms | 4.6 ms | **7%** | 1 | | asyncpipe | 127 ms | 0 ms | **0%** | 0 |
+| program | dinding | GC jeda | jeda pecahan | siklus | |---|--:|--:|--:|--:| | pertahankan | 159,5 mdtk | 52,0 mdtk | 33% | 5 | | pertahankan1 | 71,4 mdtk | 38,7 mdtk | 54% | 3 | | pertahankan_lebar | 206,2 mdtk | 75,4 mdtk | 37% | 8 | | bentuk | 64,8 mdtk | 4,6 mdtk | **7%** | 1 | | pipa asinkron | 127 ms | 0 ms | **0%** | 0 |
 
 Dua angka seminggu lalu 93% dan 62%; pekerjaan section ini membunuhnya. `shapes` pada 7% bukan benchmark GC lagi — sebelum bug §8, 94 ms dari program 139 ms adalah GC dan kami menamainya “high-survival GC” dari ratio itu. GC lever tak memindahkannya lagi. Ratio yang tampak seragam antarbechmark adalah kebetulan aritmetika, bukan common cause.
 

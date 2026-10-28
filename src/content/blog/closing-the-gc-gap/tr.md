@@ -172,6 +172,6 @@ hyperfine --warmup 10 --runs 100 --export-markdown abc451d-bench.md \
 
 Sayılarınız donanıma ve runtime sürümlerine göre değişecektir. Yanlış görünen şekillerde değişiyorsa, [bir issue açın](https://github.com/PerryTS/perry/issues) — bunu duymayı tercih ederiz.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Kaynak: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Sorunlar: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

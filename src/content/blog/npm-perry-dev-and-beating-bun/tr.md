@@ -25,7 +25,7 @@ Paket, yedi platforma özel opsiyonel pakete bağımlı ince bir launcher'dır �
 
 Yayınlama OIDC Trusted Publisher üzerinden yapıldı, böylece her sürümün provenance'ı var ve onu oluşturan CI işine geri bağlı. Bu kendi başına bir günlük CI işiydi — doğru `--provenance` / npm sürümü / workflow yolu kombinasyonunu kovalayan birkaç `v0.5.107` CI commit'i — ama başarıldı ve o zamandan beri her sürüm temiz geldi. Windows kullanıcıları artık birinci sınıf vatandaş ve “OS'unuz nasıl isterse öyle kurun” ekipler arası sürtüşmesi gitti.
 
-## 2\. `perry dev` — watch mode
+## 2. `perry dev` — akıllı saat modu
 
 v0.5.143 yeni bir CLI alt komutu ekledi:
 

@@ -48,7 +48,7 @@ npm run check         # astro check (types)
 
 ## Content
 
-**Blog posts** live in `src/content/blog/<slug>/<locale>.md` (or `.mdx` when a post needs components). Every post needs `en.md`; other locales are optional and fall back to English with a notice. Front matter:
+**Blog posts** live in `src/content/blog/<slug>/<locale>.md` (or `.mdx` when a post needs components). Every published post needs an English source and translations for all configured locales. During development, incomplete translations fall back to English with a notice; the beta deployment check requires complete coverage. Front matter:
 
 ```md
 ---
@@ -60,6 +60,14 @@ tags: ["compiler", "milestone"]
 ```
 
 Images and videos go in `public/blog/<slug>/` and are referenced as `/blog/<slug>/file.png`.
+
+The published blog is translated into all 13 supported locales. Keep every post's
+title, excerpt, and body in sync across those locale files, and use fenced blocks
+for code examples. The homepage's latest-post list reads the same localized
+collection as the blog index. After building, `npm run check:blog` checks complete
+translation coverage, every article and index, language switches, canonical and
+alternate URLs, sitemap entries, and local links/media. Beta deployment runs this
+check before uploading.
 
 **Page copy** lives in one JSON file per locale (`src/i18n/locales/<locale>.json`), grouped by page or section and read with `messages(lang)` (`src/i18n/messages.ts`). English is complete; any key a locale lacks falls back to English. `sitemap.xml` is generated after the build from every page whose canonical URL points at itself.
 
@@ -79,6 +87,35 @@ npm run serve         # starts Perry binary on port 3850
 ```
 
 ## Deployment
+
+### Beta
+
+PR previews run at `https://beta.perryts.com/` on `root@webserver.skelpo.net`.
+Nginx serves the Astro export from `/var/www/beta.perryts.com/current/out`.
+Deploy the current checkout with `npm run deploy:beta`. Releases are stored in
+`/var/www/beta.perryts.com/releases`; `current` is switched atomically, and older
+releases are retained for rollback. This command requires the server setup below.
+
+The Nginx configuration is in `deploy/nginx-beta.conf`, installed at
+`/etc/nginx/sites-available/beta.perryts.com` and linked from `sites-enabled`.
+It uses the existing Certbot certificate, redirects `/` to `/en/`, handles clean
+URLs, and excludes beta from indexing. Canonical URLs still point to production.
+
+Newsletter requests use a separate `perryts-beta-subscribe` systemd service on
+loopback port 3852 (`deploy/perryts-beta-subscribe.service`). It reads the existing
+Resend credentials from `/etc/perryts.env`, followed by `/etc/perryts-beta.env`:
+
+```dotenv
+PORT=3852
+ALLOWED_ORIGINS=https://beta.perryts.com
+```
+
+Beta signups use the same newsletter audience as production. No credentials are
+stored in the repository. After installing the service and environment override,
+run `systemctl daemon-reload` and `systemctl enable perryts-beta-subscribe`.
+Validate Nginx with `nginx -t` before reloading it.
+
+### Production
 
 `deploy.sh` deploys the current production arrangement. It builds the static export, uploads it together with both server sources, compiles the Perry server remotely, restarts both services, and verifies the public homepage:
 

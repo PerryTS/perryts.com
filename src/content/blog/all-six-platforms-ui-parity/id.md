@@ -6,138 +6,123 @@ tags: ["UI", "cross-platform", "release", "milestone"]
 ---
 Ketika kami meluncurkan versi pertama sistem UI native Perry, "lintas platform" berarti macOS berfungsi baik dan lima platform lainnya hanyalah stub. Hari ini, dengan v0.2.162, itu tidak lagi benar. Keenam platform — macOS, iOS, iPadOS, Android, Linux, dan Windows — sekarang berbagi paritas fitur penuh. Kode TypeScript yang sama dikompilasi menjadi widget native di setiap target.
 
-This post walks through what we shipped between v0.2.152 and v0.2.164: a Canvas widget, a full NSTableView implementation, 20+ total UI widgets, the `perry/system` module, multi-window support, system notifications, keychain access, automatic binary size reduction, and a compile-time plugin system. A lot happened.
+Postingan ini membahas apa yang kami kirimkan antara v0.2.152 dan v0.2.164: widget Canvas, implementasi NSTableView lengkap, total 20+ widget UI, modul `perry/system`, dukungan multi-jendela, notifikasi sistem, akses gantungan kunci, biner otomatis pengurangan ukuran, dan sistem plugin waktu kompilasi. Banyak yang terjadi.
 
 ## Sprint Widget: 20+ Komponen UI Native
 
-The biggest single jump came in v0.2.155, which landed 20+ UI widgets across all platforms. Perry's TypeScript UI API now covers the components you actually need to ship a real app:
+Lompatan terbesar terjadi pada v0.2.155, yang menghasilkan 20+ widget UI di semua platform. UI TypeScript API Perry kini mencakup komponen yang sebenarnya Anda perlukan untuk merilis aplikasi sebenarnya:
 
 -   **Layout** — VStack, HStack, ZStack, LazyVStack, ScrollView, SplitView
 -   **Input** — Button, TextField, TextEditor, Checkbox, Toggle, Slider, Picker
--   **Display** — Text, Label, Image, ProgressView, Divider, Spacer
+-   **Tampilan** — Text, Label, Gambar, ProgressView, Divider, Spacer
 -   **Data** — List, Table (NSTableView / GTK4 TreeView / Win32 ListView)
 -   **Overlay** — Alert, Sheet, Popover, Toolbar, NavigationBar
--   **Drawing** — Canvas (2D drawing API, hardware-accelerated per platform)
+-   **Gambar** — Canvas (gambar 2D API, diakselerasi perangkat keras per platform)
 
-These aren't wrappers around a custom renderer. Each widget compiles to the platform's own native component: `NSButton` on macOS, `UIButton` on iOS, `GtkButton` on Linux, `android.widget.Button` on Android via JNI, and `CreateWindowEx` on Windows. The OS draws them, themes them, and handles accessibility — Perry just wires up the TypeScript API.
+Ini bukan pembungkus perender khusus. Setiap widget dikompilasi ke komponen asli platform: `NSButton` di macOS, `UIButton` di iOS, `GtkButton` di Linux, `android.widget.Button` di Android melalui JNI, dan `CreateWindowEx` di Windows. OS menggambarnya, menentukan temanya, dan menangani aksesibilitas — Perry baru saja menyambungkan TypeScript API.
 
 ## Canvas: Menggambar 2D dari TypeScript
 
-One of the more technically interesting additions is the Canvas widget (v0.2.152). It exposes a familiar 2D drawing API directly from TypeScript — bezier curves, fills, strokes, image blitting — and compiles to the platform's accelerated 2D backend: Core Graphics on macOS/iOS, Cairo on Linux, Direct2D on Windows, and Skia on Android.
+Salah satu tambahan yang lebih menarik secara teknis adalah widget Canvas (v0.2.152). Ini memperlihatkan API gambar 2D yang familiar langsung dari TypeScript — kurva, isian, guratan, blitting gambar yang lebih bezier — dan dikompilasi ke backend 2D platform yang dipercepat: Grafik Inti di macOS/iOS, Kairo di Linux, Direct2D di Windows, dan Skia di Android.
 
-canvas.ts
+**kanvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Widget Table: NSTableView Hadir di TypeScript
 
-v0.2.163 landed the Table widget — the most complex component in the library. On macOS it maps to `NSTableView` with full delegate/data source wiring. On Linux it uses GTK4's `GtkTreeView`. On Windows, Win32's `ListView` control. On Android it binds to `RecyclerView` through JNI.
+v0.2.163 menampilkan widget Table — komponen paling kompleks di perpustakaan. Di macOS ia dipetakan ke `NSTableView` dengan kabel delegasi/sumber data penuh. Di Linux menggunakan `GtkTreeView` GTK4. Di Windows, kontrol `ListView` Win32. Di Android, ini terikat ke `RecyclerView` melalui JNI.
 
-The TypeScript API is declarative: you define columns, provide a data source, and Perry handles the platform-specific wiring at compile time. Column sorting, selection handling, and row height customization all work out of the box.
+TypeScript API bersifat deklaratif: Anda menentukan kolom, menyediakan sumber data, dan Perry menangani pengkabelan khusus platform pada waktu kompilasi. Penyortiran kolom, penanganan pemilihan, dan penyesuaian tinggi baris semuanya dapat dilakukan dengan mudah.
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## Modul perry/system
 
-v0.2.155 also introduced `perry/system` — a TypeScript module that exposes platform system APIs without any runtime: file dialogs, save dialogs, alerts, sheets, keychain access, system notifications, and multi-window management.
+v0.2.155 juga memperkenalkan `perry/system` — modul TypeScript yang mengekspos API sistem platform tanpa runtime apa pun: dialog file, dialog penyimpanan, peringatan, sheet, akses rantai kunci, notifikasi sistem, dan pengelolaan multi-jendela.
 
--   `system.showOpenDialog()` — native file picker (NSOpenPanel / GTK FileChooser / Win32 OPENFILENAME)
--   `system.showSaveDialog()` — native save dialog
--   `system.showAlert()` — native alert panel
--   `system.notify()` — OS notification (UserNotifications / libnotify / WinRT)
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
--   `system.openWindow()` — multi-window management
+-   `system.showOpenDialog()` — pemilih file asli (NSOpenPanel / GTK FileChooser / Win32 OPENFILENAME)
+-   `system.showSaveDialog()` — dialog penyimpanan asli
+-   `system.showAlert()` — panel peringatan asli
+-   `system.notify()` — pemberitahuan OS (UserNotifications / libnotify / WinRT)
+-   `system.keychain.get/set()` — Layanan Rantai Kunci / Layanan Rahasia / Penyimpanan Kredensial Windows
+-   `system.openWindow()` — pengelolaan multi-jendela
 
-All of these call native platform APIs directly — no Electron IPC, no web view bridge. Perry compiles the TypeScript call site to a direct native function call into the platform SDK.
+Semua ini memanggil API platform asli secara langsung — tanpa IPC Electron, tanpa jembatan tampilan web. Perry mengompilasi situs panggilan TypeScript ke panggilan fungsi asli langsung ke SDK platform.
 
 ## Paritas Fitur Enam Platform: v0.2.162
 
-The v0.2.162 milestone was about closing gaps. Before this release, macOS had the fullest feature set, iOS was mostly there, and Linux/Windows/Android lagged. v0.2.162 brought all six platforms to the same level:
+Pencapaian v0.2.162 adalah tentang menutup kesenjangan. Sebelum rilis ini, macOS memiliki rangkaian fitur terlengkap, iOS sebagian besar sudah tersedia, dan Linux/Windows/Android tertinggal. v0.2.162 membawa keenam platform ke level yang sama:
 
--   **macOS** — AppKit, complete widget set, Keychain, notifications, multi-window, toolbar
--   **iOS / iPadOS** — UIKit, full widget parity with macOS, scene lifecycle
--   **Android** — JNI bridge, all widgets via Android Views, NDK cross-compilation
--   **Linux** — GTK4, full widget set including Table, file dialogs, libsecret keychain
--   **Windows** — Win32, all widgets, Windows Credential Store, WinRT notifications
+-   **macOS** — AppKit, set widget lengkap, Gantungan Kunci, notifikasi, multi-jendela, toolbar
+-   **iOS / iPadOS** — UIKit, paritas widget lengkap dengan macOS, siklus hidup adegan
+-   **Android** — JNI bridge, semua widget melalui Android Views, kompilasi silang NDK
+-   **Linux** — GTK4, kumpulan widget lengkap termasuk Table, dialog file, gantungan kunci libsecret
+-   **Windows** — Win32, semua widget, Windows Credential Store, notifikasi WinRT
 
-This is the milestone that makes "one codebase, six platforms" real rather than aspirational. The same TypeScript file compiles to native apps on all six targets with no platform-specific code paths required for common use cases.
+Ini adalah pencapaian yang menjadikan "satu basis kode, enam platform" menjadi nyata, bukan aspirasional. File TypeScript yang sama dikompilasi ke aplikasi asli pada keenam target tanpa memerlukan jalur kode khusus platform untuk kasus penggunaan umum.
 
 ## Pengurangan Ukuran Binary Otomatis
 
-v0.2.153 shipped automatic binary size reduction — the compiler now aggressively dead-strips unused code paths, eliminates unreachable stdlib functions, and deduplicates symbol definitions during linking. A typical CLI tool that previously compiled to ~4 MB now comes in under 2 MB with zero changes to your source.
+v0.2.153 mengirimkan pengurangan ukuran biner otomatis — kompiler sekarang secara agresif menghilangkan jalur kode yang tidak digunakan, menghilangkan fungsi stdlib yang tidak dapat dijangkau, dan menghapus duplikat definisi simbol selama penautan. Alat CLI biasa yang sebelumnya dikompilasi hingga ~4 MB kini berukuran kurang dari 2 MB tanpa perubahan apa pun pada sumber Anda.
 
-This matters for real deployments. When your binary is the unit of deployment — copied to a server, distributed as a single file, embedded in a container — size directly affects transfer time and storage cost. Halving the binary size for free is a meaningful improvement.
+Ini penting untuk penerapan nyata. Ketika biner Anda adalah unit penerapan — disalin ke server, didistribusikan sebagai satu file, tertanam dalam wadah — ukuran secara langsung memengaruhi waktu transfer dan biaya penyimpanan. Mengurangi separuh ukuran biner secara gratis merupakan peningkatan yang berarti.
 
 ## Sistem Plugin Waktu Kompilasi
 
-v0.2.152 introduced Perry's plugin system — and it's architecturally unlike every other plugin system in the TypeScript ecosystem. There's no runtime plugin loading, no IPC, no dynamic `require()`. Plugins are TypeScript modules that Perry resolves and compiles at build time.
+v0.2.152 memperkenalkan sistem plugin Perry — dan secara arsitekturalnya berbeda dengan sistem plugin lainnya di ekosistem TypeScript. Tidak ada pemuatan plugin runtime, tidak ada IPC, tidak ada `require()` dinamis. Plugin adalah modul TypeScript yang Perry diselesaikan dan dikompilasi pada waktu pembuatan.
 
-The result: plugins have exactly zero runtime overhead. They compile into the same binary as your application code, with direct function calls between plugin code and host code. If you don't use a plugin, it doesn't appear in your binary at all. If you do use it, it's inlined like any other module.
+Hasilnya: plugin tidak memiliki overhead runtime sama sekali. Mereka dikompilasi ke dalam biner yang sama dengan kode aplikasi Anda, dengan pemanggilan fungsi langsung antara kode plugin dan kode host. Jika Anda tidak menggunakan plugin, plugin tersebut tidak akan muncul di biner Anda sama sekali. Jika Anda menggunakannya, modul ini akan disisipkan seperti modul lainnya.
 
-We wrote about the philosophy behind this in [Plugin Systems Are a Performance Tax](/id/blog/plugin-systems-are-a-performance-tax/). The short version: runtime plugin architectures trade performance for extensibility. Build-time composition gives you both.
+Kami menulis tentang filosofi di balik hal ini di [Sistem Plugin Adalah Pajak Kinerja](/id/blog/plugin-systems-are-a-performance-tax/). Versi singkatnya: arsitektur plugin runtime memperdagangkan kinerja untuk ekstensibilitas. Komposisi waktu pembuatan memberi Anda keduanya.
 
 ## Peningkatan Bahasa
 
-The UI sprint didn't happen in isolation — the compiler itself kept getting more capable. Across these releases:
+Sprint UI tidak terjadi secara terpisah — kompilernya sendiri semakin mampu. Di seluruh rilis berikut:
 
--   **Class expressions** — `const Foo = class extends Bar {}` now compiles correctly
--   **Generator transforms** — `function*` and `yield` compile to native state machines
--   **Map/Set as class fields** — `private items = new Map()` works in codegen
--   **FFI param type coercion** — native library calls handle type coercion automatically
--   **Bound method references** — `this.method` references work for native modules (fs, os, path)
--   `string.match()` — now fully supported
+-   **Ekspresi kelas** — `const Foo = class extends Bar {}` sekarang dikompilasi dengan benar
+-   **Transformasi generator** — kompilasi `function*` dan `yield` ke mesin status asli
+-   **Petakan/Tetapkan sebagai kolom kelas** — `private items = new Map()` berfungsi di codegen
+-   **FFI pemaksaan tipe param** — panggilan perpustakaan asli menangani pemaksaan tipe secara otomatis
+-   **Referensi metode terikat** — Referensi `this.method` berfungsi untuk modul asli (fs, os, path)
+-   `string.match()` — kini didukung sepenuhnya
 -   `path.isAbsolute()`, multi-arg `path.join()`, `path.resolve()`
--   **Web target** — Perry can now compile to a web-compatible output for hybrid deployments
+-   **Target web** — Perry kini dapat mengompilasi ke keluaran yang kompatibel dengan web untuk penerapan hibrid
 
 ## Apa Selanjutnya
 
-With six-platform UI parity shipped, the next phase is depth over breadth. We're working on:
+Dengan hadirnya paritas UI enam platform, fase selanjutnya adalah pendalaman dan keluasan. Kami sedang mengerjakan:
 
--   Full RegExp support (`regex.test()`, `string.matchAll()`)
--   Drag and drop, custom context menus, and accessibility labels in the widget system
--   A VS Code extension for Perry diagnostics and compile-on-save
--   Package manager integration — install and compile Perry-native packages with one command
--   WASM compilation target for browser deployment
--   Multi-threading via `Worker` threads
+-   Dukungan RegExp penuh (`regex.test()`, `string.matchAll()`)
+-   Seret dan lepas, menu konteks khusus, dan label aksesibilitas di sistem widget
+-   Ekstensi VS Code untuk diagnostik Perry dan kompilasi-saat disimpan
+-   Integrasi pengelola paket — instal dan kompilasi paket asli Perry dengan satu perintah
+-   Target kompilasi WASM untuk penerapan browser
+-   Multi-threading melalui thread `Worker`
 
 Jika Anda ingin mengikuti, [Perry repo](https://github.com/PerryTS/perry) terbuka. Lihat [showcase](/id/showcase/) untuk melihat apa yang sedang dibangun, atau jelajahi [roadmap](/id/roadmap/) untuk gambaran lengkap.

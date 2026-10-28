@@ -172,6 +172,6 @@ hyperfine --warmup 10 --runs 100 --export-markdown abc451d-bench.md \
 
 Seus números vão variar com hardware e versões de runtime. Se variarem de formas que parecem erradas, [abra uma issue](https://github.com/PerryTS/perry/issues) — preferimos saber disso.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Problemas: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

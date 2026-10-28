@@ -156,9 +156,9 @@ Son yaz&inodot;daki ba&scedil;l&inodot;k benchmark'&inodot;, Node'dan 24,6x daha
 | &Inodot;&scedil; yükü | v0.5.12 | v0.5.80 | Delta |
 | --- | --- | --- | --- |
 | JSON.parse (20 kay&inodot;tl&inodot; &scedil;ema) | Node'dan 547x yava&scedil; | Node'dan 1,3x yava&scedil; | ~420x |
-| image\_conv (4K 5×5 blur) | 1.980ms | 457ms | 4,3x |
+| image_conv (4K 5×5 bulanıklaştırma)| 1.980ms | 457ms | 4,3x |
 | Özellik a&gbreve;&inodot;rl&inodot;kl&inodot; kod (PIC hit) | taban | 2-3x | 2-3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Yük alt&inodot;nda Fastify çal&inodot;&scedil;ma süresi | çökmeden önce ~60s | süresiz | ∞ |
 
 Node'a kar&scedil;&inodot; tüm 15 benchmark'l&inodot;k suite hala 14 galibiyet ve 1 beraberlik — son yaz&inodot;yla ayn&inodot; tablo, genel olarak biraz daha iyi rakamlarla. Bu haftaki gerçek hareket, o suite'de olmayan i&scedil; yüklerinde: JSON, görüntü i&scedil;leme, uzun süre çal&inodot;&scedil;an sunucular. Aç&inodot;klar oradayd&inodot;, ve kapanan da onlar.

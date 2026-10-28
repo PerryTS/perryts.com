@@ -25,99 +25,56 @@ Pry is written in standard TypeScript. There's no special syntax, no macros, no 
 
 Here's the entry point (simplified for clarity):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 That's the core of a native application. No framework boilerplate, no build configuration, no platform-specific files. One TypeScript file.
 
@@ -125,27 +82,20 @@ That's the core of a native application. No framework boilerplate, no build conf
 
 Pry also includes a `countNodes` utility that recursively counts all nodes in the JSON tree, and a `formatBytes` helper for displaying file sizes. These are standard TypeScript functions — nothing Perry-specific about them. They compile to native code just like everything else.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Compiling Pry
 
@@ -153,47 +103,39 @@ Compiling Pry with Perry is a single command. No Xcode project, no Gradle config
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 The binary is 48 MB because it includes the full AppKit UI stack — tree view rendering, search highlighting, syntax coloring, and keyboard handling. For comparison, the same app in Electron would be 200+ MB. A CLI-only Perry app compiles to 2–5 MB.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 The iOS build links against UIKit instead of AppKit. Perry maps the same `TreeView` API to `UITableView` with expandable sections, `SearchBar` to `UISearchBar`, and touch events replace mouse events. The iOS build can be deployed to physical devices and simulators.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 The Android build generates a native library loaded through JNI, packaged into an APK. `TreeView` maps to a `RecyclerView` with expandable view holders, `SearchBar` maps to an `EditText` with a `TextWatcher`, and the status bar maps to a `TextView` at the bottom of the layout.
 

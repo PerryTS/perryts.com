@@ -36,17 +36,15 @@ Mỗi module nguồn đi qua toàn bộ pipeline: phân tích SWC, hạ thấp H
 
 Đây là cột mốc quan trọng. Cấu trúc export của Hono trông như thế này:
 
-hono export chain
+**hono**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 `export { Hono }` đó là một named re-export — không phải `export * from` hay `export { Hono } from './hono'`. Trong HIR của Perry, điều này trở thành `Export::Named`, không phải `Export::ReExport` hay `Export::ExportAll`. Trước đây, việc lan truyền class của trình biên dịch chỉ theo các chuỗi `ExportAll` và `ReExport`, nên import `Hono` từ `index.ts` âm thầm thất bại — tra cứu class không tìm thấy, và `new Hono()` trả về `undefined`.
 

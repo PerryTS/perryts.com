@@ -53,15 +53,15 @@ Pipeline JSON nhận được cuộc viết lại xâm lấn nhất của giai �
 
 Kết quả trên workload mà lazy tape được thiết kế riêng cho (10k bản ghi, blob ~1 MB, parse → stringify không có iteration trung gian):
 
-| Triển khai | Median (ms) | p95 (ms) | σ | Peak RSS |
+| Triển khai | Trung bình (ms)| p95 (ms) | σ | Peak RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| lê (gen-gc + băng lười)| 75 | 91 | 6.9 | 85 MB |
+| rỉ sét serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serialization)| 473 | 533 | 21.4 | 606 MB |
+| Assemblyscript+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perry tại **median 75 ms** là runtime dynamic-typing nhanh nhất trong so sánh — thắng Bun (259 ms), thắng Node (394 ms), thắng JIT server của Kotlin (453 ms). simdjson tại 24 ms là trần C++ tăng tốc bằng SIMD và sống trên trang một cách có chủ đích, không giấu sau một cherry-pick. Perry không đánh bại nó. Mục đích là chỉ ra khoảng cách để đóng nó có mục tiêu — được theo dõi trong `docs/json-typed-parse-plan.md`.
 
@@ -81,12 +81,12 @@ Ba điều đã thay đổi về cách Perry trình bày các con số hiệu n�
 
 Các kernel tiêu đề thực sự không-thể-gấp, RUNS=11 median, làm mới 2026-04-25 ở v0.5.249:
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+| Điểm chuẩn| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| fibonacci| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_depend| 235 | 229 | 129 | 229 | 322 | 232 |
+| object_create| 1 | 0 | 0 | 5 | 11 | 6 |
+| lồng_loops| 18 | 8 | 8 | 11 | 18 | 21 |
 
 Trên `fibonacci`, Perry bám sát nhóm compiled trong vòng 3–15 ms. JIT HotSpot của Java nhanh hơn ~11% nhờ inline lời gọi đệ quy. Trên `loop_data_dependent`, kernel chia thành hai cụm FP-contract: nhóm FMA-contract ở ~128 ms (Go mặc định, `g++ -O3` trên Apple Clang — cả hai fuse `sum * a + b` thành một FMADDD đơn) và nhóm no-contract ở 229–235 ms (Perry, Rust mặc định, Swift, Java không có `-XX:+UseFMA`, Bun) chạy FMUL + FADD scalar. LLVM khớp với nhóm FMA bằng `-ffp-contract=fast`; Perry không bật nó mặc định. `nested_loops` bị giới hạn cache, không phải compute; mọi người đều rơi vào 8–21 ms.
 
@@ -105,7 +105,7 @@ perry compile src/main.ts --target windows -o myapp.exe
 
 Một chủ đề của giai đoạn này: các sai lệch runtime âm thầm so với V8/JSC biến thành hoặc bản sửa hoặc lỗi biên dịch. Các cái không tầm thường:
 
--   **v0.5.255**: `BigInt.fromTwos`/`toTwos` two's complement.
+-   **v0.5.255**: `BigInt.fromTwos`/`toTwos` phần bù của hai.
 -   **v0.5.263**: phân biệt kiểu non-promise của `Promise.all`/`race`/`any`.
 -   **v0.5.281**: `NaN==NaN` + định dạng số ECMAScript (`3 → "3"`, không phải `"3.0"`; `-0 → "0"`; v.v.).
 -   **v0.5.280**: ép kiểu ToInt32 cho `NaN`/`Infinity` trong `(x) | 0`.

@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "serve": "./server",
     "deploy": "./deploy.sh",
-    "check": "astro check"
+    "deploy:beta": "bash ./deploy-beta.sh",
+    "check": "astro check",
+    "check:blog": "node scripts/check-blog.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.1",

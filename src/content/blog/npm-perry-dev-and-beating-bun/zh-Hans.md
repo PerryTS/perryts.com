@@ -46,7 +46,7 @@ perry dev
 
 在 v0.5.166 时，README 里还有一个坦白的说明：Perry 在 `json_roundtrip` 上比 Node 慢 1.6 倍（对一个 1MB、10K 条目的 blob 做 50 次 `JSON.parse` + `JSON.stringify`），比 Bun 慢 2.4 倍。Issue [#149](https://github.com/PerryTS/perry/issues/149) 跟踪了后续工作。到 v0.5.173——七天之后——这个差距已经被追平。
 
-| Workload | Perry v0.5.173 | Node v25 | Bun 1.3 |
+|工作量| Perry v0.5.173 | Node v25 | Bun 1.3 |
 | --- | --- | --- | --- |
 | `json_roundtrip` | 314ms | 377ms | 250ms |
 | `closure` | 10ms | 309ms | 51ms |

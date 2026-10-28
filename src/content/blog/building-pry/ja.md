@@ -1,6 +1,6 @@
 ---
 title: "Pry の開発：TypeScript によるネイティブ JSON ビューア"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "Pry を構築するチュートリアル。Pry は、TypeScript からマシンコードにコンパイルされたネイティブの JSON ビューアであり、Perry ランタイムと GC がリンクされています。ウェブビュー。"
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry は標準的な TypeScript で書かれています。特別な構文もマ�
 
 エントリポイントは以下の通りです（分かりやすくするために簡略化）：
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 これがネイティブアプリケーションの核心です。フレームワークのボイラープレートなし、ビルド設定なし、 プラットフォーム固有のファイルなし。1つの TypeScript ファイルです。
 
@@ -125,27 +82,20 @@ app.run();
 
 Pry には JSON ツリーのすべてのノードを再帰的にカウントする `countNodes`ユーティリティと、ファイルサイズを表示するための `formatBytes`ヘルパーも含まれています。これらは標準的な TypeScript 関数で、Perry 固有のものは何もありません。 他のすべてと同様にネイティブコードにコンパイルされます。
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Pry のコンパイル
 
@@ -153,47 +103,39 @@ Perry で Pry をコンパイルするのは1つのコマンドです。Xcode �
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 バイナリは 48 MB です。完全な AppKit UI スタック — ツリービューレンダリング、検索ハイライト、 シンタックスカラーリング、キーボードハンドリングを含むためです。比較として、同じアプリを Electron で作ると 200+ MB になります。CLI のみの Perry アプリは 2～5 MB にコンパイルされます。
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 iOS ビルドは AppKit の代わりに UIKit にリンクします。Perry は同じ `TreeView` API を展開可能なセクション付きの`UITableView` に、`SearchBar` を `UISearchBar` にマッピングし、タッチイベントがマウスイベントに代わります。 iOS ビルドは物理デバイスとシミュレータにデプロイできます。
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Android ビルドは JNI を通じてロードされるネイティブライブラリを生成し、APK にパッケージングされます。 `TreeView` は展開可能なビューホルダー付きの`RecyclerView` にマッピングされ、`SearchBar` は `TextWatcher` 付きの `EditText` にマッピングされ、ステータスバーはレイアウト下部の`TextView` にマッピングされます。
 

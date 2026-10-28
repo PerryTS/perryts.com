@@ -36,41 +36,32 @@ Baglam olarak, tek basina tRPC uzerinde `tsc --noEmit` birkac saniye surer. Perr
 
 Bu buyuk donum noktasiydi. Hono'nun disari aktarma yapisi soyle gorunur:
 
-hono export chain
+**hono dışa aktarma zinciri**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 Bu `export { Hono }` adli bir yeniden disari aktarmadir — `export * from` veya `export { Hono } from './hono'` degil. Perry'nin HIR'inda bu `Export::Named` olur, `Export::ReExport` veya `Export::ExportAll` degil. Onceden derleyicinin sinif yayilimi yalnizca `ExportAll` ve `ReExport` zincirlerini takip ediyordu, bu nedenle `index.ts`'den `Hono`'yu iceri aktarmak sessizce basarisiz oluyordu — sinif arama iskalaniyordu ve `new Hono()` `undefined` donduruyordu.
 
 Artik Perry `Export::Named`'i modulun iceri aktarmalari araciligiyla orijinal sinif tanimini bulmak ve yaymak icin geri izler. Sonuc:
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 Hono yapicisi calisir, bir `SmartRouter` baslatir (dahili olarak hem bir `RegExpRouter` hem de bir `TrieRouter` olusturur) ve gercek bir nesne dondurur. Birden fazla bagimsiz ornek calisir. Yapici secenekleri kabul edilir.
 
@@ -78,23 +69,22 @@ Hono yapicisi calisir, bir `SmartRouter` baslatir (dahili olarak hem bir `RegExp
 
 tRPC'nin `initTRPC`'si 4 seviye derinliktedir:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 Bu `ExportAll` → `Named` → `ExportAll`'dir. Perry tam zinciri cozer — `initTRPC` derlenmis ikilide erisilebilir. Ayni yolu izleyen `TRPCError` icin de ayni.
 
 ### Argumanlari Olan Moduller Arasi Sinif Ornekleme
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError` bir modulde tanimlanir, uc ara barrel dosyasi araciligiyla yeniden disari aktarilir, testte iceri aktarilir ve bir secenekler nesnesiyle orneklenir. Ornegin `code` alani erisilebilir.
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi calisma alani paketleri kullanir — `@strapi/core` monorepo'da bir kardes pakettir, npm bagimliligi degildir. Perry, `package.json` exports alanlari araciligiyla ciplak belirticiyi cozer:
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 `createStrapi` fonksiyonu `export * from '@strapi/core'` araciligiyla cagirilabilir bir fonksiyon olarak dogru sekilde cozumlenir.
 
@@ -128,27 +118,23 @@ Burada belirgin oluyoruz cunku bosluklar kazanimlar kadar cok sey anlatiyor.
 
 Hono'nun yapicisi HTTP metot isleyicilerini dinamik olarak kurar:
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 Bu, `app.get`, `app.post` vb.'nin statik olarak bildirilmedigini — hesaplanmis ozellik adlari araciligiyla calisma zamaninda atandigini gosterir. Perry henuz `this[variable] = value`'yu desteklemiyor, bu nedenle bu metotlar eksik:
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 Bu Hono icin en buyuk bosluktur. Hono sinifi mevcuttur, yonlendiricisi baslatilmistir, ancak rota kaydedemezsiniz.
 
@@ -156,7 +142,9 @@ Bu Hono icin en buyuk bosluktur. Hono sinifi mevcuttur, yonlendiricisi baslatilm
 
 tRPC giris noktasini su sekilde tanimlar:
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 Calisma zamaninda `initTRPC`, `typeof object` yerine `typeof function` olarak gorunur — modul seviyesi `new TRPCBuilder()` ifadesi yapiciyi calistirmiyor, bu nedenle bir ornek yerine sinifa bir referans elde edersiniz. Bu `initTRPC.create()` ve `initTRPC.context()`'un her ikisinin de `undefined` oldugu anlamina gelir.
 
@@ -174,15 +162,15 @@ Uc proje genelinde kalan "Unknown class" uyarilari bunlardir:
 
 | Sinif | Sayi |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| Yanıt| 11 |
+| TransformStream| 7 |
+| Okunabilir Akış| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| TextEncoderStream| 2 |
+| Yazılabilir Akış| 1 |
+| DOME istisnası| 1 |
 
 `Response`, `Request` ve `Headers` herhangi bir HTTP cercevesi icin kritik olanlardir. Bunlar `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` ve digerleri icin sahip oldugumuz benzer yerlesik codegen destegine ihtiyac duyar.
 

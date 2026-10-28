@@ -147,7 +147,7 @@ Plus die kleinen Catch-ups:
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — `substitute_locals`\-Uint8Array-Arms.
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` Ende-zu-Ende verdrahtet (Community-PR).
 
-## 6\. Windows + Scoop
+## 6. Windows + Scoop
 
 Die Windows-Toolchain-Story vereinfacht sich weiter. **v0.5.353** pinnte `clang -target` bei Host-Builds — Nicht-MSVC-clang im PATH (MinGW / MSYS2 / Anaconda / Rust-GNU-Bundles) schrieb Perrys `x86_64-pc-windows-msvc`\-IR stillschweigend zu `windows-gnu` um, und lld-link konnte die `__main`\-Referenz, die LLVMs mingw32-Emitter eingefügt hatte, nicht auflösen. Neuer `probe_clang_default_triple` ruft einmal pro Prozess `clang --version` auf und druckt einen einzigen Info-Hinweis, wenn der Host-Default GNU ist, wir aber MSVC targeten. Mit `PERRY_NO_CLANG_PROBE=1` unterdrücken.
 
@@ -188,6 +188,6 @@ perry compile main.ts -o app --enable-geisterhand
 ./app &  # dann http://localhost:7676 öffnen
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Quelle: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) – Probleme: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) – Änderungsprotokoll: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

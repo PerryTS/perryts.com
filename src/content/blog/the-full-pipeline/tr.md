@@ -28,17 +28,13 @@ Site ayrıca yapay zeka keşfedilebilirliği için bir `llms.txt` dosyası içer
 
 Perry artık kaynak koddan derlemeye ek olarak Homebrew ve APT üzerinden dağıtılıyor. Yeni bir GitHub Actions sürüm ardışık düzeni, macOS (arm64 ve x86\_64) ile Linux (x86\_64 ve arm64) için ikili dosyalar oluşturuyor, ardından Homebrew tap ve APT deposunu otomatik olarak güncelliyor.
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
 Artık repoyu klonlayıp Cargo ile derlemeye gerek yok. Perry'yi diğer araçları kurduğunuz gibi kurun.
 
@@ -65,9 +61,9 @@ Android yayınlama da otomatik tetiklenen bir kurulum sihirbazı kazandı. Üç 
 
 Perry artık TypeScript'i yerel SwiftUI WidgetKit uzantılarına derleyebilir. Bu bir sarmalayıcı veya köprü değil — derleyici HIR düzeyinde render ağacını gezer ve doğrudan SwiftUI kaynak kodu üretir. Çıktı, Xcode'un (veya Perry'nin derleme ardışık düzeninin) uygulamanıza gömebileceği eksiksiz bir WidgetKit uzantı paketidir.
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
 Yaklaşım, Perry'nin derlemesinin geri kalanından temelden farklıdır. Normal Perry kodu Cranelift üzerinden yerel makine koduna gider. Widget kodu HIR'den SwiftUI metin çıktısına gider, çünkü WidgetKit SwiftUI gerektirir — zorunlu UIKit veya AppKit koduyla bir widget uzantısı oluşturmanın yolu yoktur. Perry bunu widget render ağacını çalışma zamanı kodu değil, derleme zamanı şablonu olarak ele alarak çözer.
 

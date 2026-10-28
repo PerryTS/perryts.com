@@ -157,8 +157,8 @@ Benchmark utama dari artikel terakhir adalah `factorial` pada 24,6x lebih cepat 
 | --- | --- | --- | --- |
 | JSON.parse (schema 20-record) | 547x lebih lambat dari Node | 1,3x lebih lambat dari Node | ~420x |
 | image\_conv (blur 4K 5×5) | 1.980ms | 457ms | 4,3x |
-| Kode property-heavy (PIC hit) | baseline | 2–3x | 2–3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Kode property-heavy (PIC hit) | garis dasar| 2–3x | 2–3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Uptime Fastify di bawah beban | ~60d sebelum crash | tak terbatas | ∞ |
 
 Suite 15-benchmark lengkap melawan Node masih 14 kemenangan dan 1 seri — tabel yang sama seperti artikel lalu, dengan angka yang sedikit lebih baik di semua lini. Pergerakan nyata minggu ini ada pada beban kerja yang tidak ada dalam suite itu: JSON, pemrosesan gambar, server berjalan lama. Di sanalah celah-celah itu hidup, dan itulah yang telah ditutup.

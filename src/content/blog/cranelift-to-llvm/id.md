@@ -46,14 +46,14 @@ v0.5.0 adalah rilis pertama dengan LLVM sebagai satu-satunya backend. Kami mengh
 
 Ini tabel yang tidak ingin saya posting saat itu:
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+| Tolok ukur| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | 68x lebih lambat |
-| object\_create | 5ms | 318ms | 64x lebih lambat |
-| matrix\_multiply | 61ms | 184ms | 3x lebih lambat |
-| math\_intensive | 370ms | 131ms | 2,8x lebih cepat |
-| nested\_loops | 32ms | 57ms | 1,8x lebih lambat |
-| fibonacci(40) | 505ms | 1,156ms | 2,3x lebih lambat |
+| metode_panggilan| 16ms | 1,084ms | 68x lebih lambat |
+| objek_buat| 5ms | 318ms | 64x lebih lambat |
+| matriks_multiply| 61ms | 184ms | 3x lebih lambat |
+| matematika_intensif| 370ms | 131ms | 2,8x lebih cepat |
+| loop_sarang| 32ms | 57ms | 1,8x lebih lambat |
+| fibonacci(40)| 505ms | 1,156ms | 2,3x lebih lambat |
 
 Beberapa beban kerja menjadi lebih cepat. Sebagian besar menjadi jauh lebih buruk. `method_calls` — salah satu benchmark terpenting karena merepresentasikan penggunaan class TypeScript yang idiomatis — hampir 70x lebih buruk dari yang kami kirimkan dua rilis sebelumnya.
 
@@ -137,23 +137,23 @@ Peralihan LLVM telah meregresikan ini ke slow path universal. Memulihkan dispatc
 
 Median dari tiga kali menjalankan, macOS ARM64 (Apple Silicon, M1 Max), Node.js v25:
 
-| Benchmark | Perry | Node.js | vs Node |
+| Tolok ukur| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+| faktorial| 24ms | 591ms | 24.6x |
+| metode_panggilan| 1ms | 11ms | 11x |
+| loop_overhead| 12ms | 53ms | 4.4x |
+| matematika_intensif| 14ms | 49ms | 3.5x |
+| array_baca| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | seri |
-| mandelbrot | 24ms | 24ms | seri |
-| object\_create | 9ms | 8ms | 0.9x |
+| array_tulis| 3ms | 8ms | 2.6x |
+| string_concat| 1ms | 2ms | 2x |
+| loop_sarang| 9ms | 16ms | 1.7x |
+| saringan_prime| 4ms | 7ms | 1.7x |
+| matriks_multiply| 21ms | 34ms | 1.6x |
+| fibonacci(40)| 401ms | 991ms | 2.5x |
+| pohon_biner| 9ms | 9ms | seri |
+| mandelbrot| 24ms | 24ms | seri |
+| objek_buat| 9ms | 8ms | 0.9x |
 
 Setiap benchmark adalah kemenangan atau seri. Yang paling ketat adalah `object_create` (9ms vs 8ms), di mana allocator V8 memang sangat baik.
 

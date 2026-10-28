@@ -36,41 +36,32 @@ Per contesto, `tsc --noEmit` su tRPC da solo richiede diversi secondi. Perry com
 
 Questa è stata la grande pietra miliare. La struttura di esportazione di Hono è così:
 
-hono export chain
+**hono**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 Quel `export { Hono }` è un re-export nominato — non `export * from` o `export { Hono } from './hono'`. Nell'HIR di Perry, questo diventa `Export::Named`, non `Export::ReExport` o `Export::ExportAll`. In precedenza, la propagazione delle classi del compilatore seguiva solo le catene `ExportAll` e `ReExport`, quindi importare `Hono` da `index.ts` falliva silenziosamente — il lookup della classe mancava, e `new Hono()` restituiva `undefined`.
 
 Ora Perry traccia `Export::Named` all'indietro attraverso gli import del modulo per trovare la definizione originale della classe e la propaga. Il risultato:
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 Il costruttore Hono viene eseguito, inizializza uno `SmartRouter` (che internamente crea sia un `RegExpRouter` che un `TrieRouter`), e restituisce un oggetto reale. Funzionano istanze multiple indipendenti. Le opzioni del costruttore sono accettate.
 
@@ -78,23 +69,22 @@ Il costruttore Hono viene eseguito, inizializza uno `SmartRouter` (che intername
 
 L'`initTRPC` di tRPC si trova a 4 livelli di profondità:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 Quello è `ExportAll` → `Named` → `ExportAll`. Perry risolve l'intera catena — `initTRPC` è accessibile nel binario compilato. Lo stesso per `TRPCError`, che segue lo stesso percorso.
 
 ### Istanziazione di classi cross-modulo con argomenti
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError` è definito in un modulo, ri-esportato attraverso tre barrel file intermedi, importato nel test e istanziato con un oggetto opzioni. Il campo `code` dell'istanza è accessibile.
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi utilizza pacchetti workspace — `@strapi/core` è un pacchetto fratello nel monorepo, non una dipendenza npm. Perry risolve lo specificatore bare attraverso i campi exports di `package.json`:
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 La funzione `createStrapi` si risolve correttamente come funzione richiamabile attraverso `export * from '@strapi/core'`.
 
@@ -128,27 +118,23 @@ Siamo specifici qui perché le lacune dicono tanto quanto i successi.
 
 Il costruttore di Hono configura i gestori di metodi HTTP dinamicamente:
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 Questo significa che `app.get`, `app.post`, ecc. non sono dichiarati staticamente — sono assegnati a runtime tramite nomi di proprietà calcolati. Perry non supporta ancora `this[variable] = value`, quindi questi metodi mancano:
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 Questa è la singola lacuna più grande per Hono. La classe Hono esiste, il suo router è inizializzato, ma non è possibile registrare route.
 
@@ -156,7 +142,9 @@ Questa è la singola lacuna più grande per Hono. La classe Hono esiste, il suo 
 
 tRPC definisce il suo punto di ingresso come:
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 A runtime, `initTRPC` appare come `typeof function` piuttosto che `typeof object` — l'espressione `new TRPCBuilder()` a livello di modulo non esegue il costruttore, quindi si ottiene un riferimento alla classe piuttosto che un'istanza. Questo significa che `initTRPC.create()` e `initTRPC.context()` sono entrambi `undefined`.
 
@@ -174,15 +162,15 @@ Questi sono gli avvisi "Unknown class" rimanenti nei tre progetti:
 
 | Classe | Conteggio |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| Risposta| 11 |
+| TransformStream| 7 |
+| LeggibileStream| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| TextEncoderStream| 2 |
+| Flusso scrivibile| 1 |
+| DOMException| 1 |
 
 `Response`, `Request`e `Headers` sono quelli critici per qualsiasi framework HTTP. Questi necessitano di supporto codegen built-in simile a quello già esistente per `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` e altri.
 

@@ -28,17 +28,13 @@ The site also includes an `llms.txt` file for AI discoverability, and is deploye
 
 Perry is now distributed through Homebrew and APT, in addition to building from source. A new GitHub Actions release pipeline builds binaries for macOS (arm64 and x86\_64) and Linux (x86\_64 and arm64), then automatically updates the Homebrew tap and APT repository.
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
 No more cloning the repo and building with Cargo. Install Perry the same way you install any other tool.
 
@@ -65,9 +61,9 @@ Pre-flight validation catches problems before the build starts — provisioning 
 
 Perry can now compile TypeScript to native SwiftUI WidgetKit extensions. This is not a wrapper or a bridge — the compiler walks the render tree at the HIR level and emits SwiftUI source code directly. The output is a complete WidgetKit extension bundle that Xcode (or Perry's build pipeline) can embed in your app.
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
 The approach is fundamentally different from the rest of Perry's compilation. Normal Perry code goes through Cranelift to native machine code. Widget code goes through the HIR to SwiftUI text output, because WidgetKit requires SwiftUI — there's no way to build a widget extension with imperative UIKit or AppKit code. Perry solves this by treating the widget render tree as a compile-time template, not runtime code.
 

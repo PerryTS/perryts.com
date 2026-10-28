@@ -153,7 +153,7 @@ Deux paquets natifs de première partie ont été lancés :
 
 Les deux suivent la même architecture : déclarations TypeScript → crate FFI Rust → pont Swift. Installer comme dépendance, importer les fonctions, `await` les résultats. Le compilateur gère tout le pontage natif.
 
-## Infrastructure
+## Infrastructures
 
 -   **Cranelift 0.113 → 0.121** — huit versions mineures d'allocation de registres, corrections x64 et améliorations d'alignement des slots de pile
 -   **Découpage de fonctions Windows** — découpe automatiquement les fonctions de plus de 50 instructions en continuations pour contourner les problèmes de codegen Cranelift sur Windows

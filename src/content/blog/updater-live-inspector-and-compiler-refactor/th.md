@@ -147,7 +147,7 @@ issue 5 รายการใน tracker ([#167](https://github.com/PerryTS/perr
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — arm Uint8Array ของ `substitute_locals`
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — ต่อ `fs.appendFileSync` end-to-end (PR ชุมชน)
 
-## 6\. Windows + Scoop
+## 6. Windows + สกู๊ป
 
 เรื่อง toolchain ของ Windows ทำตัวง่ายขึ้นเรื่อย ๆ **v0.5.353** ปักหมุด `clang -target` บน build ของ host — clang ที่ไม่ใช่ MSVC ใน PATH (MinGW / MSYS2 / Anaconda / bundle GNU ของ Rust) แอบเขียน IR ของ Perry จาก `x86_64-pc-windows-msvc` เป็น `windows-gnu` และ lld-link ไม่สามารถ resolve อ้างอิง `__main` ที่ emitter mingw32 ของ LLVM ใส่เข้าไป `probe_clang_default_triple` ตัวใหม่รัน `clang --version` ครั้งเดียวต่อโปรเซส และพิมพ์โน้ตข้อมูลบรรทัดเดียวเมื่อ default ของ host เป็น GNU แต่เรา target MSVC ปิดได้ด้วย `PERRY_NO_CLANG_PROBE=1`
 
@@ -188,6 +188,6 @@ perry compile main.ts -o app --enable-geisterhand
 ./app &  # แล้วเปิด http://localhost:7676
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+แหล่งที่มา: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — ปัญหา: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — บันทึกการเปลี่ยนแปลง: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

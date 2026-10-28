@@ -1,6 +1,6 @@
 ---
 title: "Plattformübergreifende native UI aus TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Wie Perry eine TypeScript-Codebasis Plattform-Widgets über seine dokumentierten Ziele hinweg zuordnet, einschließlich der plattformspezifischen Einschränkungen und Voraussetzungen."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Der entscheidende Unterschied: **Es gibt keine Runtime-Schicht zwischen deinem C
 
 Perry bietet eine gemeinsame TypeScript-API zum Erstellen von Benutzeroberflächen. Diese API ist bewusst auf hohem Niveau — du beschreibst, was deine UI enthalten soll und wie sie sich verhalten soll, und Perry bildet es auf die entsprechenden nativen Konstrukte ab.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Derselbe Code kompiliert auf allen sechs Plattformen zu nativer UI. Kein `#ifdef`, keine Plattformprüfungen, keine bedingten Imports.
 
@@ -78,19 +70,19 @@ Die kompilierte Binärdatei linkt gegen das AppKit-Framework und ruft Objective-
 
 Auf iOS ist das Mapping ähnlich, zielt aber auf UIKit. `App` wird zu einer `UIApplication` mit einem `UIWindow` und Root-`UIViewController`. `Text` bildet auf `UILabel` ab. `Button` bildet auf `UIButton` ab. Layout verwendet `UIStackView` und Auto Layout. Touch-Events werden über UIKits Responder Chain behandelt.
 
-### Android — JNI + Views
+### Android – JNI + Aufrufe
 
 Auf Android generiert Perry eine native Bibliothek, die über JNI (Java Native Interface) geladen wird. `App` bildet auf eine `Activity` ab. `Text` wird zu einem `TextView`. `Button` wird zu einem `android.widget.Button` mit einem `OnClickListener`. `VStack` bildet auf ein vertikales `LinearLayout` ab. Der native Code ruft über JNI zurück in das Android-Framework und erstellt und manipuliert echte Android Views.
 
-### Linux — GTK4
+### Linux – GTK4
 
 Auf Linux zielt Perry auf GTK4. `App` wird zu einer `GtkApplication` mit einem `GtkApplicationWindow`. `Text` bildet auf `GtkLabel` ab. `Button` bildet auf `GtkButton` mit einem Signal-Handler ab. `VStack` bildet auf eine `GtkBox` mit vertikaler Orientierung ab. GTK4s CSS-Theming bedeutet, dass deine App automatisch dem Desktop-Theme des Benutzers folgt.
 
-### Windows — Win32
+### Windows – Win32
 
 Auf Windows generiert Perry Win32-API-Aufrufe. `App` erstellt eine Fensterklasse, registriert sie und führt eine Nachrichtenschleife aus. `Button` wird zu einem `BUTTON`\-Steuerelement, erstellt mit `CreateWindowEx`. `Text` bildet auf ein `STATIC`\-Steuerelement ab. Events werden über die Win32-Nachrichtenpumpe behandelt (`WM_COMMAND`, `WM_NOTIFY`, etc.).
 
-## State Management
+## State
 
 Perrys `State<T>`\-Primitive bietet reaktives State Management, das zu plattform-nativen Update-Mechanismen kompiliert. Wenn sich ein State-Wert ändert, löst Perry ein UI-Update über das Invalidierungssystem der Plattform aus — `setNeedsDisplay` auf macOS/iOS, `invalidate()` auf Android, `gtk_widget_queue_draw` auf Linux.
 
@@ -107,7 +99,7 @@ Alle sechs Plattform-Backends sind implementiert und stabil. Der aktuelle Widget
 -   **Layout** — VStack, HStack, Spacer, ScrollView, Divider
 -   **Anzeige** — Text, Image
 -   **Eingabe** — Button, TextField, Toggle, Slider
--   **Navigation** — NavigationView, TabView, List
+-   **Navigation** – NavigationView, TabView, List
 -   **Container** — TreeView, SearchBar, StatusBar
 -   **State** — State<T> für reaktive Updates
 

@@ -38,29 +38,21 @@ The key difference: **there is no runtime layer between your code and the platfo
 
 Perry provides a common TypeScript API for building user interfaces. This API is deliberately high-level — you describe what your UI should contain and how it should behave, and Perry maps it to the appropriate native constructs.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 This same code compiles to native UI on all six platforms. No `#ifdef`, no platform checks, no conditional imports.
 

@@ -8,7 +8,7 @@ tags: ["npm", "test262", "Windows", "widgets", "milestone"]
 
 นี่คือสิ่งที่ปล่อยออกมา จัดกลุ่มตามว่ามันมีไว้เพื่ออะไรจริง ๆ
 
-## Real npm packages compile now
+## แพ็คเกจ npm จริงคอมไพล์ทันที
 
 เส้นเรื่องเดี่ยวที่ใหญ่ที่สุดตลอดช่วงนี้คือการกวาดเพื่อทำให้ npm package ยอดนิยมคอมไพล์เป็น native binary และผ่านการทดสอบเชิงพฤติกรรม — ไม่ใช่แค่ “link โดยไม่มี error” แต่รันและให้ผลลัพธ์ที่ถูกต้อง รายการที่ตอนนี้ทำงานได้ผ่าน `perry.compilePackages` รวมถึง **axios, jose, zod v4, vitest, express, fastify, @hono/node-server, dayjs, chalk, ms, debug, lodash, ethers, argon2, และ Colyseus**
 
@@ -23,7 +23,7 @@ tags: ["npm", "test262", "Windows", "widgets", "milestone"]
 
 ใต้ทั้งหมดนั้นคือส่วนที่ทำให้ package ที่ Perry *คอมไพล์ native ไม่ได้* ยังรันได้: **V8-fallback runtime** เป็นจริงเป็นจังขึ้นในช่วงนี้ ModuleLoader ของมันตอนนี้อ่านจาก embedded module map ดังนั้น binary แบบ fallback ก็ยัง **self-contained** — ไม่มี `node_modules` กระจัดกระจายตอน runtime (v0.5.994) `createServer` เชื่อมไปยัง hyper server จริง (v0.5.999) และ global ของ Web Fetch อย่าง `Response` / `Request` / `Headers` มีอยู่ใน path แบบ fallback (v0.5.1006) และ **`import()` แบบ dynamic ที่ compile-time** — `await import('./foo.ts')` แบบ string-literal ที่ resolve ตอน build — ในที่สุดก็ลงจอด (v0.5.905, [#100](https://github.com/PerryTS/perry/issues/100))
 
-## A test262 conformance sweep
+## A test262 การกวาดล้างความสอดคล้อง
 
 อีกเส้นเรื่องที่โดดเด่นคือ conformance เรารัน pass แบบโฟกัสเทียบกับ radar ของ subset test262 และขยับเข็มบน built-in ที่ code จริงพิงหนักที่สุด:
 
@@ -37,13 +37,13 @@ language/.../destructuring 41.6% → 53.9%  (v0.5.1143)
 
 ควบคู่กับตัวเลขพาดหัว ความถูกต้องหางยาวก็ลงจอด: `JSON.parse` ตอนนี้โยน `SyntaxError` จริง (ไม่ใช่ `TypeError`) และปฏิเสธ token ที่ตามท้าย reviver ของมันเดินผ่านอัลกอริทึม `InternalizeJSONProperty` ตาม spec `Object.prototype.toString` brand ได้ถูกต้องสำหรับ typed array, Symbol, BigInt, Map/Set/WeakMap/WeakSet/Promise/RegExp `RegExp.prototype.toString` คืน `/source/flags` async generator ได้ semantics ของ `yield`\-awaits-operand ถูกต้อง เหล่านี้เป็น subset radar ไม่ใช่ suite เต็ม — Perry ยังไต่อยู่ — แต่การไต่ของเดือนนี้ชันมาก
 
-## Windows goes Fluent
+## Windows ทำงานได้อย่างคล่องแคล่ว
 
 Windows ได้รับการยกเครื่องด้านภาพ (ชุด [#4681](https://github.com/PerryTS/perry/issues/4681)) หน้าต่าง Perry ตอนนี้เลือกใช้ DWM chrome สมัยใหม่โดย default — **Mica backdrop**, มุมโค้งมน และ title bar ที่รับรู้ธีม — และ common control เรนเดอร์ผ่าน **comctl32 v6** แทน default ยุค Windows 95 window proc ตอนนี้จัดการ `WM_DPICHANGED` ดังนั้นหน้าต่างยังคมเมื่อคุณลากมันระหว่างจอที่มี scaling ผสมกัน แทนที่จะถูกยืด bitmap
 
 ที่สำคัญ ไม่มีอะไรในนี้นำ regression [#1542](https://github.com/PerryTS/perry/issues/1542) เก่า “พื้นที่ดำหลัง resize” กลับมาอีก: client area ยังถูกวาดทึบแสง และ blur-through แบบ Mica/Acrylic เต็มเฟรมยังเป็น opt-in `app.setVibrancy(...)` แบบชัดเจน ยังมี backend scaffold `--target windows-winui` ตัวใหม่ (WinUI 3) สำหรับแอปที่อยากได้ stack สมัยใหม่เต็มตัว และการแก้เล็ก ๆ แต่เป็นเรื่องจริงที่ทำให้ `perry compile main.ts -o main` ผลิต `main.exe` บน Windows เพื่อให้ PowerShell launch มันได้จริง (v0.5.1146)
 
-## New widgets, every platform
+## วิดเจ็ตใหม่ ทุกแพลตฟอร์ม
 
 widget สองตัวลงจอดในวันสุดท้ายพอดี และทั้งคู่ครอบทุกแพลตฟอร์ม UI ที่ Perry target:
 
@@ -61,7 +61,7 @@ DatePicker(2026, 6, (iso) => {
 
 ก่อนหน้านี้ในช่วงเดียวกัน ชั้นวาง widget ก็เต็มขึ้นทั้งบน desktop และ mobile ด้วย — Combobox, TreeView, Calendar, Chart, CommandPalette, RichTextEditor, MapView, PdfView, BottomNavigation, และ ImageGallery แบบ swipe ได้ — แต่ละตัวหนุนด้วย native control จริงบนทุกแพลตฟอร์ม HarmonyOS (ArkTS) ได้ Chart และ TreeView (v0.5.893) สอง widget สุดท้ายที่มันต้องการเพื่อให้เทียบเท่ากับตัวอื่น
 
-## GC, internals, and stability
+## GC ภายใน และความเสถียร
 
 release 270 ตัวนั้นส่วนใหญ่ไม่ใช่พาดหัว — มันคือ bug fix และ internals และนั่นคือประเด็นของเฟสนี้ มีบางอย่างที่ควรกล่าวถึง:
 
@@ -69,14 +69,14 @@ release 270 ตัวนั้นส่วนใหญ่ไม่ใช่พ�
 -   **memory model มีเอกสารแล้ว** ตอนนี้มี deep-dive `internals/memory-model.md` — NaN-boxing, generational GC, shadow stack และ write barrier — ต่อเข้ากับ docs site (v0.5.933)
 -   **คลื่นการแก้ความเสถียรของ codegen** ที่การกวาด npm ทำให้ผุดขึ้นมา: arrow ที่เป็น `const` ระดับโมดูลที่เรียกข้างใน async step ที่ resume แล้วไม่ SIGSEGV อีก (v0.5.953), `try { await rejected } catch { return X }` ไม่ค้างชั่วนิรันดร์อีก (v0.5.870), และ crash แบบ `js_is_truthy` / raw-pointer-range อีกหยิบมือที่ bundle จริงสะดุด
 
-## Apple housekeeping
+## การดูแลทำความสะอาดของ Apple
 
 เล็กกว่าแต่เป็นเรื่องจริง: `perry setup ios --development` ตอนนี้ provision สำหรับ development build (v0.5.1023) และ path build/link ของ Apple cross-library ถูก dedup และทำให้ portable ด้านความกว้างของ pointer (v0.5.1121/1125) — ซึ่งเป็นสิ่งที่ปลดล็อก matrix การ publish npm / Homebrew / APT / winget ที่เคยติดขัดอยู่
 
-## Where this leaves things
+## สิ่งนี้จะทิ้งอะไรไว้ที่ไหน
 
 เดิมพันเบื้องหลัง Perry มาตลอดคือ “native TypeScript” จะมีความหมายก็ต่อเมื่อ TypeScript *จริง* รันได้ — ไม่ใช่ subset ของเล่น แต่คือ package จริงที่คน `npm install` เดือนนี้ส่วนใหญ่คืองานนั้น: ไม่ใช่ตัวเลขเดียวไว้คุยโม้ แต่เป็นการดันอันยืดยาวไร้ความหรูหราเพื่อปิด gap ระหว่าง “คอมไพล์ได้” กับ “ทำงานได้” radar ของ conformance และ test ความเทียบเท่าของ npm คือ scoreboard ที่เราจับตาอยู่ตอนนี้ และเราจะโพสต์ตัวเลขต่อไป — ทั้งส่วนที่ดีและส่วนที่ยังไม่สมบูรณ์
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+แหล่งที่มา: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — ปัญหา: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

@@ -97,7 +97,7 @@ Tại sao `block_reclaim=0` dù hơn một nửa số đối tượng đã chế
 
 Điều cung cấp nhiều thông tin nhất mà chúng tôi tìm thấy không nằm trong profile. Nó nằm trong chính lần sweep, tại `crates/perry-runtime/src/gc.rs:2733`, dưới dạng một comment giải thích thiết kế:
 
-> We deliberately do NOT push dead objects onto the global ARENA\_FREE\_LIST. The inline bump allocator never reads the free list — it uses the per-block reset instead. Pushing dead objects to the free list would cost ~50ns per object × ~700k objects per GC × ~12 GC cycles per benchmark = 420ms of pure waste in `object_create`.
+> Chúng tôi cố tình KHÔNG đẩy vật thể chết lên ARENA_FREE_LIST toàn cầu. Bộ cấp phát nội tuyến không bao giờ đọc danh sách trống — thay vào đó, nó sử dụng tính năng đặt lại theo từng khối. Việc đẩy các đối tượng chết vào danh sách miễn phí sẽ tiêu tốn ~50ns mỗi đối tượng × ~700k đối tượng trên mỗi GC × ~12 GC trên mỗi điểm chuẩn = 420 mili giây chất thải tinh khiết trong `object_create`.
 
 Điều này hoàn toàn đúng đối với workload mà nó được tinh chỉnh để đối phó. `object_create` là một benchmark chúng tôi quan tâm, nơi các cấp phát chết trong một vòng lặp chặt và toàn bộ block thực sự trở nên rỗng giữa các chu kỳ. Thêm một pass free-list theo từng đối tượng sẽ đốt 420 ms ghi sổ vô nghĩa cho workload đó, và đường block-reset thu được cùng lượng bộ nhớ với giá rẻ hơn.
 
@@ -172,6 +172,6 @@ hyperfine --warmup 10 --runs 100 --export-markdown abc451d-bench.md \
 
 Các con số của bạn sẽ thay đổi theo phần cứng và phiên bản runtime. Nếu chúng thay đổi theo cách trông có vẻ sai, [mở một issue](https://github.com/PerryTS/perry/issues) — chúng tôi thà nghe về nó.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Nguồn: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Vấn đề: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

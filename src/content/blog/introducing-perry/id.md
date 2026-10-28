@@ -1,6 +1,6 @@
 ---
 title: "Memperkenalkan Perry"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry mengkompilasi TypeScript yang didukung ke executable asli mandiri dengan runtime-nya dan GC tertaut, tanpa memerlukan Node.js atau mesin JavaScript."
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Pipeline kompilasi Perry memiliki tiga tahap:
 
 Hasilnya adalah executable mandiri — biasanya 2–5 MB untuk alat CLI — yang langsung berjalan tanpa waktu pemanasan.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## Fitur TypeScript yang Didukung
 
@@ -68,9 +60,9 @@ Perry tidak terbatas pada alat CLI dan aplikasi sisi server. Perry dilengkapi de
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField, dan lainnya)
 -   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (API sama dengan iOS, dengan adaptasi khusus iPad)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
+-   **Android** — JNI + Tampilan Android (Aktivitas, Tampilan, Button, RecyclerView)
 -   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
--   **Windows** — Win32 (CreateWindowEx, common controls, GDI)
+-   **Windows** — Win32 (CreateWindowEx, kontrol umum, GDI)
 
 Insight kuncinya adalah Perry memetakan API TypeScript umum ke toolkit widget native setiap platform pada waktu kompilasi. Tidak ada lapisan bridge, tidak ada web view, dan tidak ada engine rendering kustom. Aplikasi Anda menggunakan widget platform asli, di-render oleh OS itu sendiri. Baca selengkapnya di pembahasan mendalam kami: [UI Native Lintas Platform dari TypeScript](/id/blog/cross-platform-native-ui/).
 
@@ -90,21 +82,18 @@ Ini bukan wrapper tipis di sekitar modul Node.js. Mereka dikompilasi langsung ke
 
 Untuk paket npm yang belum memiliki implementasi native Perry, Perry menawarkan mode embedding V8 opsional. Ketika diaktifkan, Perry membundel runtime V8 dan dapat mengeksekusi paket npm JavaScript standar bersama TypeScript yang dikompilasi. Ini adalah escape hatch pragmatis yang memungkinkan Anda mengadopsi Perry secara bertahap — kompilasi hot path ke kode native sambil tetap mengakses seluruh ekosistem npm untuk yang lainnya.
 
-## Cross-Compilation
+## Kompilasi Silang
 
 Perry mendukung cross-compilation secara bawaan. Dari mesin pengembangan macOS Anda, Anda dapat mengkompilasi untuk Linux (x86\_64 dan ARM64) dan iOS. Ini berarti Anda dapat membangun pipeline CI/CD di macOS dan menghasilkan binary untuk semua target deployment tanpa memerlukan mesin build khusus untuk setiap platform.
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## Performa
 
@@ -131,20 +120,15 @@ Lihat [roadmap](/id/roadmap/) lengkap untuk detail tentang apa yang sudah dirili
 
 Perry adalah open source. Anda dapat clone repo, build dari source, dan mulai mengkompilasi TypeScript hari ini:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 Jelajahi source di [GitHub](https://github.com/PerryTS/perry), lihat [showcase](/id/showcase/) untuk melihat apa yang sedang dibangun dengan Perry, atau langsung terjun ke kode. Kami tidak sabar melihat apa yang akan Anda bangun.

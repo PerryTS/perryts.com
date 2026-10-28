@@ -78,7 +78,7 @@ Das Windows-UI-Backend erhielt sein bisher umfassendstes Update:
 -   **Geisterhand-Integration** — alle Widget-Typen beim UI-Testing-Framework registriert, `/type` verwendet `SendMessageW` über HWND-Map
 -   **Android-Kamera-Unterstützung** — Kamera-Capture-API auf Android über JNI erweitert
 
-## Performance
+## Leistung
 
 v0.4.14 lieferte ein umfassendes Performance-Audit:
 

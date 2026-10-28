@@ -25,31 +25,22 @@ Perryのネイティブ UIシステムの最初のバージョンを出荷した
 
 技術的に最も興味深い追加の1つがCanvasウィジェット（v0.2.152）です。TypeScriptから直接 馴染みのある2D描画API — ベジェ曲線、塗りつぶし、ストローク、画像ブリッティング — を公開し、 プラットフォームのアクセラレーテッド2Dバックエンドにコンパイルされます： macOS/iOSではCore Graphics、LinuxではCairo、WindowsではDirect2D、AndroidではSkia。
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Tableウィジェット：NSTableViewがTypeScriptに
 
@@ -57,25 +48,19 @@ v0.2.163でTableウィジェットが追加されました — ライブラリ�
 
 TypeScript APIは宣言的です：カラムを定義し、データソースを提供すれば、Perryがコンパイル時に プラットフォーム固有の接続を処理します。カラムソート、選択ハンドリング、行の高さ カスタマイズがすべてそのまま動作します。
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## perry/system モジュール
 
@@ -85,7 +70,7 @@ v0.2.155では `perry/system` も導入されました — ランタイムなし
 -   `system.showSaveDialog()` — ネイティブ保存ダイアログ
 -   `system.showAlert()` — ネイティブアラートパネル
 -   `system.notify()` — OS通知（UserNotifications / libnotify / WinRT）
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
+-   `system.keychain.get/set()` — キーチェーン サービス / シークレット サービス / Windows 認証情報ストア
 -   `system.openWindow()` — マルチウィンドウ管理
 
 これらはすべてネイティブプラットフォームAPIを直接呼び出します — Electron IPCもWeb Viewブリッジもありません。 PerryはTypeScriptの呼び出しサイトをプラットフォームSDKへの直接的なネイティブ関数呼び出しにコンパイルします。

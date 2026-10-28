@@ -1,6 +1,6 @@
 ---
 title: "Perry'yi Tanıtıyoruz"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry, desteklediği TypeScript kodunu kendi çalışma zamanı ve GC’si bağlanmış bağımsız yerel yürütülebilir dosyalara derler; harici bir Node.js kurulumu veya JavaScript motoru gerektirmez."
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Perry'nin derleme hatti uc asamadan olusur:
 
 Sonuc, tipik olarak bir CLI araci icin 2-5 MB olan, sifir isinma suresiyle aninda baslayan bagimsiz bir calistirilabilir dosyadir.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## Hangi TypeScript Ozellikleri Destekleniyor
 
@@ -68,7 +60,7 @@ Perry, CLI araclari ve sunucu tarafi uygulamalarla sinirli degildir. Alti platfo
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField ve daha fazlasi)
 -   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (iOS ile ayni API, iPad'e ozel uyarlamalarla)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
+-   **Android** — JNI + Android Görünümleri (Etkinlik, Görünüm, Button, RecyclerView)
 -   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
 -   **Windows** — Win32 (CreateWindowEx, ortak kontroller, GDI)
 
@@ -94,17 +86,14 @@ Henuz yerel Perry uygulamalari olmayan npm paketleri icin Perry, istege bagli bi
 
 Perry, kutudan cikar cikmaz capraz derlemeyi destekler. macOS gelistirme makinenizden Linux (x86\_64 ve ARM64) ve iOS icin derleyebilirsiniz. Bu, macOS uzerinde CI/CD boru hattinizi olusturabileceginiz ve her platform icin ozel derleme makinelerine ihtiyac duymadan tum dagitim hedefleriniz icin ikililer uretebileceginiz anlamina gelir.
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## Performans
 
@@ -131,20 +120,15 @@ Neler gonderildi, neler devam ediyor ve sirada ne var gibi detaylar icin tam [yo
 
 Perry acik kaynaklidir. Depoyu klonlayabilir, kaynaktan derleyebilir ve bugun TypeScript derlemeye baslayabilirsiniz:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 Kaynak koduna [GitHub](https://github.com/PerryTS/perry)'da goz atin, [vitrin](/tr/showcase/) sayfasina bakarak Perry ile neler insa edildigini gorun veya dogrudan koda dalin. Ne insa edeceginizi gormek icin sabirsizlaniyoruz.

@@ -55,13 +55,13 @@ Il risultato sul workload per cui il tape lazy è stato progettato (10k record, 
 
 | Implementazione | Mediana (ms) | p95 (ms) | σ | RSS di picco |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| perry (gen-gc + nastro lazy)| 75 | 91 | 6.9 | 85 MB |
+| ruggine serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serializzazione)| 473 | 533 | 21.4 | 606 MB |
+| assemblyscript+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perry a **75 ms mediani** è il runtime a tipizzazione dinamica più veloce nel confronto — batte Bun (259 ms), batte Node (394 ms), batte il JIT server di Kotlin (453 ms). simdjson a 24 ms è il tetto del C++ accelerato SIMD e vive sulla pagina di proposito, non nascosto dietro un cherry-pick. Perry non lo batte. Il punto è mostrare il divario in modo che chiuderlo abbia un bersaglio — tracciato in `docs/json-typed-parse-plan.md`.
 
@@ -81,12 +81,12 @@ Tre cose sono cambiate riguardo a come Perry presenta i numeri di performance.
 
 I kernel headline genuinamente non-foldable, mediana RUNS=11, aggiornati al 2026-04-25 alla v0.5.249:
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+| Punto di riferimento| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| fibonacci| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_dependent| 235 | 229 | 129 | 229 | 322 | 232 |
+| oggetto_crea| 1 | 0 | 0 | 5 | 11 | 6 |
+| cicli_nidificati| 18 | 8 | 8 | 11 | 18 | 21 |
 
 Su `fibonacci`, Perry si allinea al gruppo dei compilati entro 3–15 ms. Il JIT HotSpot di Java è ~11% più veloce grazie all'inlining della chiamata ricorsiva. Su `loop_data_dependent`, il kernel si divide in due cluster di FP-contract: il gruppo FMA-contract a ~128 ms (Go di default, `g++ -O3` su Apple Clang — entrambi fondono `sum * a + b` in un singolo FMADDD) e il gruppo no-contract a 229–235 ms (Perry, Rust di default, Swift, Java senza `-XX:+UseFMA`, Bun) che eseguono FMUL + FADD scalari. LLVM si allinea al gruppo FMA con `-ffp-contract=fast`; Perry non lo abilita di default. `nested_loops` è cache-bound, non compute-bound; tutti atterrano a 8–21 ms.
 
@@ -140,6 +140,6 @@ cd benchmarks/json_polyglot && ./run.sh
 cd benchmarks/polyglot && ./run_all.sh
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Benchmarks: [benchmarks/README.md](https://github.com/PerryTS/perry/blob/main/benchmarks/README.md) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Benchmark: [benchmarks/README.md](https://github.com/PerryTS/perry/blob/main/benchmarks/README.md) — Registro delle modifiche: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

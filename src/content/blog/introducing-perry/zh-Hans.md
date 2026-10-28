@@ -1,6 +1,6 @@
 ---
 title: "Perry 介绍"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry 将受支持的 TypeScript 编译为独立的本机可执行文件，并链接其运行时和 GC，无需外部安装 Node.js 或 JavaScript 引擎。"
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Perry 的编译管道有三个阶段：
 
 结果是一个独立的可执行文件 —— 对于 CLI 工具通常为 2-5 MB —— 零预热时间即时启动。
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## 支持哪些 TypeScript 特性
 
@@ -94,17 +86,14 @@ Perry 不仅限于 CLI 工具和服务端应用。它附带了六个平台的原
 
 Perry 开箱即用地支持交叉编译。从您的 macOS 开发机器上，您可以为 Linux（x86\_64 和 ARM64）和 iOS 编译。这意味着您可以在 macOS 上构建 CI/CD 管道，并为所有部署 目标生成二进制文件，无需为每个平台配备专用构建机器。
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## 性能
 
@@ -131,20 +120,15 @@ Perry 正在积极开发中。编译器稳定，测试套件中 62 个测试全�
 
 Perry 是开源的。您可以克隆仓库、从源码构建，今天就开始编译 TypeScript：
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 在 [GitHub](https://github.com/PerryTS/perry) 上浏览源代码，查看 [展示页](/zh-Hans/showcase/) 看看大家正在用 Perry 构建什么，或者直接开始编码。 我们迫不及待想看到您的作品。

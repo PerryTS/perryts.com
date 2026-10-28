@@ -14,15 +14,14 @@ Die Implementierung ersetzt Compile-Time `#[cfg]`\-Checks durch Runtime-Zielerke
 
 Der Linker verwendet automatisch `/FORCE:UNRESOLVED` und generiert Stubs für fehlende UI-Symbole, sodass CLI-Apps sauber cross-kompilieren. Die Ausgabe hat standardmäßig die Endung `.exe` beim Windows-Targeting. Die vollständigen Details stehen in der [Cross-Kompilierungs-Dokumentation](https://docs.perryts.com).
 
-terminal — Linux host
+**Terminal – Linux-Host**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## iOS Game Loop-Unterstützung
 
@@ -30,23 +29,20 @@ iOS verlangt, dass UIKit den Main-Thread besitzt. Das ist für event-gesteuerte 
 
 Wenn aktiviert, emittiert der Compiler `_perry_user_main` statt `main`. Die Runtime stellt ein `main()` bereit, das `UIApplicationMain` auf dem Main-Thread aufruft und deinen Code auf einem Hintergrund-Thread startet. Scene Delegate und App Delegate handhaben den vollständigen UIKit-Lifecycle, während deine Game Loop unblockiert läuft.
 
-main.ts
+**main.ts**
 
+```typescript
 // Deine Game Loop läuft auf einem Hintergrund-Thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 Dies ermöglicht eine ganze Kategorie von Apps — Spiele, Simulationen, Echtzeit-Visualisierungen — die auf iOS vorher nicht praktikabel waren. Die iOS-Pump- und Callback-Pfade sind jetzt auch in Panic-Handling gewrappt, sodass Abstürze sowohl in der Game Loop als auch im UIKit-Lifecycle sauber abgefangen werden.
 
@@ -81,11 +77,11 @@ Das sind keine inkrementellen Updates. Beides sind Neuschreibungen von Grund auf
 
 `menuClear` und `menuAddStandardAction` waren zuvor nur macOS. Sie funktionieren jetzt auf allen 6 nativen Plattformen. Das beinhaltet auch einen Fix für einen `RefCell`\-Reentrance-Panic in `dispatch_menu_item` unter Windows.
 
-### Android: 16 KB Page Alignment
+### Android: 16 KB Seitenausrichtung
 
 Google Play erfordert jetzt 16 KB Page Alignment für native Bibliotheken. Perry setzt die entsprechenden `CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS` automatisch, und begleitende `.so`\-Dateien werden neben der Ausgabe für APK/AAB-Einbindung kopiert.
 
-## Perry React: Kanban Board
+## Perry React: Kanban-Board
 
 Die React-Kompatibilitätsschicht bekam einen realen Test: ein vollständiges 5-Spalten Kanban Board mit Verschiebe-, Hinzufüge-, Lösch- und Ansichts-Operationen. Beim Bau wurden verschachtelte Array-Children beim JSX-Rendering aufgedeckt und behoben — der rekursive `_appendChildren`\-Handler flacht jetzt Arrays korrekt ab, die von `.map()`\-Aufrufen zurückgegeben werden. Es gibt auch eine neue 14-Sektionen Kitchen Sink WorkBench-Demo, die verschiedene UI-Muster abdeckt.
 

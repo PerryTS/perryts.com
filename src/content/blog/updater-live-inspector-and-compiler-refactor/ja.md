@@ -147,7 +147,7 @@ macOS のディスパッチャは配線済み。Linux / Windows / iOS / tvOS / v
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — `substitute_locals` の Uint8Array アーム。
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` をエンドツーエンドで配線（コミュニティ PR）。
 
-## 6\. Windows + Scoop
+## 6.ウィンドウ + スクープ
 
 Windows のツールチェーン物語はさらにシンプル化を続けます。**v0.5.353** はホストビルドで `clang -target` をピン留め — PATH 上の非 MSVC な clang（MinGW / MSYS2 / Anaconda / Rust GNU バンドル）が、Perry の `x86_64-pc-windows-msvc` IR を黙って `windows-gnu` に書き換えていて、lld-link は LLVM の mingw32 エミッタが挿入する `__main` 参照を解決できずにいました。新しい `probe_clang_default_triple` は、プロセスごとに 1 回 `clang --version` を実行し、ホストのデフォルトが GNU で、しかし MSVC をターゲットしている場合に 1 行だけ情報メモを出します。`PERRY_NO_CLANG_PROBE=1` で抑制可能。
 

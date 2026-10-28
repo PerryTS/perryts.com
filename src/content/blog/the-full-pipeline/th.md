@@ -28,17 +28,13 @@ Perry ตอนนี้มีเว็บไซต์เอกสารจร�
 
 Perry ตอนนี้แจกจ่ายผ่าน Homebrew และ APT นอกเหนือจากการบิลด์จากซอร์ส ไปป์ไลน์รีลีส GitHub Actions ใหม่บิลด์ไบนารีสำหรับ macOS (arm64 และ x86\_64) และ Linux (x86\_64 และ arm64) แล้วอัปเดต Homebrew tap และ APT repository โดยอัตโนมัติ
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
 ไม่ต้องโคลน repo และบิลด์ด้วย Cargo อีกต่อไป ติดตั้ง Perry เหมือนกับที่คุณติดตั้ง เครื่องมืออื่นๆ
 
@@ -65,9 +61,9 @@ sudo apt update && sudo apt install perry
 
 Perry ตอนนี้สามารถคอมไพล์ TypeScript เป็นส่วนขยาย WidgetKit SwiftUI เนทีฟได้ นี่ไม่ใช่ wrapper หรือ bridge — คอมไพเลอร์เดินผ่านต้นไม้เรนเดอร์ที่ระดับ HIR และปล่อยซอร์สโค้ด SwiftUI โดยตรง ผลลัพธ์เป็นบันเดิลส่วนขยาย WidgetKit สมบูรณ์ที่ Xcode (หรือไปป์ไลน์บิลด์ของ Perry) สามารถฝังในแอปของคุณ
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
 แนวทางนี้แตกต่างอย่างพื้นฐานจากการคอมไพล์อื่นๆ ของ Perry โค้ด Perry ปกติ ผ่าน Cranelift ไปยังโค้ดเครื่องเนทีฟ โค้ดวิดเจ็ตผ่าน HIR ไปยังผลลัพธ์ข้อความ SwiftUI เพราะ WidgetKit ต้องการ SwiftUI — ไม่มีทางที่จะสร้างส่วนขยายวิดเจ็ตด้วยโค้ด UIKit หรือ AppKit แบบ imperative Perry แก้ปัญหานี้โดยปฏิบัติต่อต้นไม้เรนเดอร์ของวิดเจ็ตเป็น เทมเพลตเวลาคอมไพล์ ไม่ใช่โค้ดรันไทม์
 
@@ -88,7 +84,7 @@ Perry ตอนนี้สร้างแอป iPad เนทีฟเต็�
 
 Windows ได้รับการรองรับ timer (ติ๊ก `WM_TIMER` 50ms), ปุ่ม owner-drawn พร้อมพื้นหลังธีมมืด และการแก้ไขบั๊ก use-after-free ใน `to_wide().as_ptr()` ในไฟล์วิดเจ็ต 18 ไฟล์ V8 runtime ตอนนี้ทำงานบน Windows โดยมีไลบรารีระบบที่จำเป็นลิงก์แล้ว
 
-### GTK4 (Linux)
+### GTK4 (ลินุกซ์)
 
 แบ็กเอนด์ GTK4 ได้รับการปรับปรุงภาพเพื่อให้ตรงกับ macOS: CSS padding สำหรับ edge insets, สไตล์ปุ่ม Adwaita, การแก้ไขมาร์จิน VStack และนโยบายแนวนอน ScrollView
 

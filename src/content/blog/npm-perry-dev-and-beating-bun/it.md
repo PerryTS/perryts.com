@@ -25,7 +25,7 @@ Il pacchetto è un launcher sottile che dipende da sette pacchetti opzionali per
 
 La pubblicazione è passata per OIDC Trusted Publisher, quindi ogni release ha una provenance ed è legata al job CI che l'ha costruita. È stata una giornata di lavoro sulla CI a sé stante — diversi commit CI su `v0.5.107` a inseguire la giusta combinazione di `--provenance` / versione npm / percorso del workflow — ma è andata in porto, e ogni release successiva è stata pulita. Gli utenti Windows sono ora cittadini di prima classe, e l'attrito fra team di “installalo come piace al tuo OS” è sparito.
 
-## 2\. `perry dev` — watch mode
+## 2. `perry dev` - modalità smartwatch
 
 La v0.5.143 ha aggiunto un nuovo sottocomando della CLI:
 
@@ -46,7 +46,7 @@ Le due cache si sommano. La prima modifica della sessione è una compilazione co
 
 Alla v0.5.166 il README aveva un unico caveat onesto: Perry era 1,6x più lento di Node su `json_roundtrip` (50× `JSON.parse` + `JSON.stringify` su un blob da 1MB con 10K elementi), e 2,4x più lento di Bun. L'issue [#149](https://github.com/PerryTS/perry/issues/149) tracciava il follow-up. Alla v0.5.173 — sette giorni dopo — quel divario si è chiuso.
 
-| Workload | Perry v0.5.173 | Node v25 | Bun 1.3 |
+| Carico di lavoro| Perry v0.5.173 | Node v25 | Bun 1.3 |
 | --- | --- | --- | --- |
 | `json_roundtrip` | 314ms | 377ms | 250ms |
 | `closure` | 10ms | 309ms | 51ms |
@@ -119,6 +119,6 @@ winget install PerryTS.Perry
 perry dev
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Documenti: [docs.perryts.com](https://docs.perryts.com) — Registro modifiche: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

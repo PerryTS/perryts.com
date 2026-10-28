@@ -1,6 +1,6 @@
 ---
 title: "构建 Pry：用 TypeScript 编写的原生 JSON 查看器"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "构建 Pry 的演练，这是一个原生 JSON 查看器，从 TypeScript 编译为机器代码，并链接了 Perry 运行时和 GC，并且没有网页视图。"
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry 用标准 TypeScript 编写。没有特殊语法，没有宏，没有构建�
 
 以下是入口点（为清晰起见已简化）：
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 这就是一个原生应用的核心。没有框架样板代码，没有构建配置，没有平台特定文件。一个 TypeScript 文件。
 
@@ -125,27 +82,20 @@ app.run();
 
 Pry 还包含一个 `countNodes` 工具函数，递归计算 JSON 树中的所有节点， 以及一个 `formatBytes` 辅助函数用于显示文件大小。这些都是标准的 TypeScript 函数 —— 没有 Perry 特有的内容。它们和其他代码一样被编译为原生代码。
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## 编译 Pry
 
@@ -153,47 +103,39 @@ return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 二进制文件为 48 MB，因为它包含完整的 AppKit UI 栈 —— 树形视图渲染、搜索高亮、语法着色和键盘处理。 相比之下，同样的应用在 Electron 中将超过 200 MB。纯 CLI 的 Perry 应用编译后只有 2-5 MB。
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 iOS 构建链接 UIKit 而非 AppKit。Perry 将相同的 `TreeView` API 映射到带可展开 section 的 `UITableView`，`SearchBar` 映射到 `UISearchBar`， 触摸事件替代鼠标事件。iOS 构建可以部署到真实设备和模拟器。
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Android 构建生成通过 JNI 加载的原生库，打包为 APK。`TreeView` 映射到带可展开 view holder 的`RecyclerView`，`SearchBar` 映射到带`TextWatcher` 的 `EditText`， 状态栏映射到布局底部的 `TextView`。
 

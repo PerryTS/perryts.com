@@ -135,7 +135,7 @@ Artı küçük yetişmeler:
 -   **[#220](https://github.com/PerryTS/perry/issues/220)** — Windows link satırına `secur32.lib` eklendi.
 -   **[#198](https://github.com/PerryTS/perry/issues/198)** — i18n `FormatNumber` Ryū üzerinden FP round-trip.
 -   **[#188](https://github.com/PerryTS/perry/issues/188)** — `perry/i18n` format wrapper'ları için codegen dispatch bağlandı.
--   **[#189](https://github.com/PerryTS/perry/issues/189) / [#203](https://github.com/PerryTS/perry/issues/203)** — `perry/plugin` codegen dispatch.
+-   **[#189](https://github.com/PerryTS/perry/issues/189) / [#203](https://github.com/PerryTS/perry/issues/203)** — `perry/plugin` kod oluşturma gönderimi.
 -   **[#190](https://github.com/PerryTS/perry/issues/190)** — Canvas widget'ı LLVM codegen üzerinden.
 -   **[#191](https://github.com/PerryTS/perry/issues/191)** — CameraView codegen üzerinden.
 -   **[#192](https://github.com/PerryTS/perry/issues/192)** — Table widget'ı codegen üzerinden.
@@ -147,7 +147,7 @@ Artı küçük yetişmeler:
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — `substitute_locals` Uint8Array kolları.
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` uçtan uca bağlandı (topluluk PR'ı).
 
-## 6\. Windows + Scoop
+## 6. Windows + Kepçe
 
 Windows toolchain hikayesi sadeleşmeye devam ediyor. **v0.5.353**, host build'lerde `clang -target`'ı sabitledi — PATH'teki MSVC olmayan clang (MinGW / MSYS2 / Anaconda / Rust GNU bundle'ları) Perry'nin `x86_64-pc-windows-msvc` IR'ını sessizce `windows-gnu`'ya çeviriyordu, ve lld-link, LLVM'in mingw32 emitter'ının eklediği `__main` referansını çözemiyordu. Yeni `probe_clang_default_triple`, süreç başına bir kez `clang --version` çalıştırıyor ve host varsayılanı GNU iken hedef MSVC ise tek bir bilgi notu yazıyor. `PERRY_NO_CLANG_PROBE=1` ile bastırılabilir.
 
@@ -188,6 +188,6 @@ perry compile main.ts -o app --enable-geisterhand
 ./app &  # sonra http://localhost:7676 aç
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Kaynak: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Sorunlar: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Değişiklik Günlüğü: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

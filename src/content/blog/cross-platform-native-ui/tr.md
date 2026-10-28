@@ -1,6 +1,6 @@
 ---
 title: "TypeScript'ten Çapraz Platform Yerel UI"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Perry, bir TypeScript kod tabanını, platforma özgü sınırlamalar ve önkoşullar da dahil olmak üzere, belgelenmiş hedefleri genelinde platform widget'larıyla nasıl eşler?"
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Onemli fark: **kodunuz ile platform SDK'si arasinda calisma zamani katmani yoktu
 
 Perry, kullanici arayuzleri olusturmak icin ortak bir TypeScript API'si saglar. Bu API bilerek yuksek seviyelidir — UI'nizin ne icermesi gerektigini ve nasil davranmasi gerektigini tanimlarsiniz, Perry onu uygun yerel yapilara esler.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Ayni kod alti platformun hepsinde yerel UI'ya derlenir. `#ifdef` yok, platform kontrolleri yok, kosullu import'lar yok.
 
@@ -78,7 +70,7 @@ Derlenmis ikili dosya AppKit cercevesine baglanir ve Objective-C calisma zamani 
 
 iOS'ta esleme benzerdir ancak UIKit'i hedefler. `App`, bir `UIWindow` ve kok `UIViewController` ile bir `UIApplication` olur. `Text`, `UILabel`'a eslenir. `Button`, `UIButton`'a eslenir. Yerlesim `UIStackView` ve Auto Layout kullanir. Dokunma olaylari UIKit'in yanitlayici zinciri araciligiyla islenir.
 
-### Android — JNI + Views
+### Android — JNI + Görünümler
 
 Android'de Perry, JNI (Java Native Interface) araciligiyla yuklenen yerel bir kutuphane uretir. `App`, bir `Activity`'ye eslenir. `Text`, bir `TextView` olur. `Button`, bir `OnClickListener` ile`android.widget.Button` olur. `VStack`, dikey bir `LinearLayout`'a eslenir. Yerel kod, JNI araciligiyla Android cercevesine geri cagri yapar, gercek Android view'larini olusturur ve manipule eder.
 

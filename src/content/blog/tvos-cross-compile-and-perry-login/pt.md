@@ -78,7 +78,7 @@ O backend de UI Windows recebeu a sua atualização mais abrangente até agora:
 -   **Integração Geisterhand** — todos os tipos de widget registados no framework de testes UI, `/type` usa `SendMessageW` via mapa HWND
 -   **Suporte de câmara Android** — API de captura de câmara estendida para Android via JNI
 
-## Performance
+## Desempenho
 
 v0.4.14 incluiu uma auditoria de performance abrangente:
 
@@ -127,7 +127,7 @@ Uma função, duas plataformas, UI de avaliação nativa. Lógica de timing e ex
 ## Em Números
 
 -   **~120 commits** no compilador principal Perry em 5 dias
--   **24 patch releases**: v0.4.1 → v0.4.24
+-   **24 versões de patch**: v0.4.1 → v0.4.24
 -   **Alvos de compilação**: 9 → 10 (adicionado tvOS)
 -   **Alvos cross-compile a partir do Linux**: Windows → Windows, iOS, macOS (todos Apple + Windows)
 -   **Novos pacotes**: perry/appstorereview

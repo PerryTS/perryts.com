@@ -36,51 +36,41 @@ Para contexto, `tsc --noEmit` solo en tRPC toma varios segundos. Perry compila 5
 
 Este fue el gran hito. La estructura de exportación de Hono se ve así:
 
-hono export chain
+**hono cadena de exportación**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 Ese `export { Hono }` es una re-exportación nombrada — no `export * from` ni `export { Hono } from './hono'`. En la HIR de Perry, esto se convierte en `Export::Named`, no `Export::ReExport` ni `Export::ExportAll`. Anteriormente, la propagación de clases del compilador solo seguía las cadenas `ExportAll` y `ReExport`, por lo que importar `Hono` desde `index.ts` fallaba silenciosamente. Ahora Perry rastrea `Export::Named` a través de los imports del módulo para encontrar la definición de clase original y la propaga.
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 ### Resolución de re-exportación multi-nivel
 
 El `initTRPC` de tRPC vive 4 niveles de profundidad:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 Eso es `ExportAll` → `Named` → `ExportAll`. Perry resuelve la cadena completa.
 
@@ -108,15 +98,15 @@ Perry no soporta `this[variable] = value` aún, por lo que los métodos HTTP de 
 
 | Clase | Cantidad |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| Respuesta| 11 |
+| Transformar corriente| 7 |
+| Corriente legible| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| Flujo de textoEncoder| 2 |
+| Corriente de escritura| 1 |
+| Excepción DOM| 1 |
 
 `Response`, `Request` y `Headers` son los críticos para cualquier framework HTTP. Estos necesitan soporte de codegen built-in similar a lo que ya tenemos para `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` y otros.
 

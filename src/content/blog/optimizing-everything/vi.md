@@ -153,12 +153,12 @@ Công việc hiệu năng làm nổi lên các vấn đề tính đúng đắn t
 
 Benchmark tiêu đề từ bài viết trước là `factorial` nhanh hơn Node 24,6 lần. Con số đó không thay đổi. Cái đã dịch chuyển trong tuần này là mọi thứ xung quanh nó:
 
-| Workload | v0.5.12 | v0.5.80 | Delta |
+| Khối lượng công việc| v0.5.12 | v0.5.80 | Delta |
 | --- | --- | --- | --- |
 | JSON.parse (schema 20 bản ghi) | chậm hơn Node 547 lần | chậm hơn Node 1,3 lần | ~420x |
 | image\_conv (blur 4K 5×5) | 1.980ms | 457ms | 4.3x |
-| Mã nặng property (PIC hit) | baseline | 2-3x | 2-3x |
-| Fibonacci(40) | 401ms | 309ms | 1.3x |
+| Mã nặng property (PIC hit) | đường cơ sở| 2-3x | 2-3x |
+| Fibonacci(40)| 401ms | 309ms | 1.3x |
 | Uptime Fastify dưới tải | ~60s trước khi crash | vô thời hạn | ∞ |
 
 Bộ 15 benchmark đầy đủ so với Node vẫn là 14 thắng và 1 hòa — cùng bảng như bài viết trước, với các con số tốt hơn một chút trên toàn bộ. Dịch chuyển thực sự trong tuần này là trên các workload không có trong bộ đó: JSON, xử lý ảnh, server chạy lâu dài. Đó là nơi các khoảng cách tồn tại, và đó là những gì đã đóng lại.

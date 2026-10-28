@@ -55,13 +55,13 @@ JSON 파이프라인은 이 기간 동안 가장 침습적인 재작성을 받�
 
 | 구현 | 중앙값 (ms) | p95 (ms) | σ | 피크 RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| C++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| 페리(gen-gc + 게으른 테이프)| 75 | 91 | 6.9 | 85 MB |
+| 녹 serde_json(LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| 코틀린(kotlinx.serialization)| 473 | 533 | 21.4 | 606 MB |
+| 어셈블리스크립트+json-as(wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perry는 **중앙값 75 ms**로 비교 대상 중 가장 빠른 동적 타이핑 런타임입니다 — Bun(259 ms)을 이기고, Node(394 ms)를 이기고, Kotlin의 서버 JIT(453 ms)를 이깁니다. simdjson의 24 ms는 SIMD 가속 C++의 천장이며, 체리피킹 뒤에 숨겨지지 않고 의도적으로 페이지에 남아 있습니다. Perry는 이를 이기지 못합니다. 요점은 격차를 보여주어 그것을 닫는 것에 목표가 생기게 하는 것입니다 — `docs/json-typed-parse-plan.md`에서 추적됩니다.
 
@@ -83,10 +83,10 @@ Perry가 성능 숫자를 제시하는 방식에 대해 세 가지가 바뀌었�
 
 | 벤치마크 | Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| 피보나치| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_dependent| 235 | 229 | 129 | 229 | 322 | 232 |
+| object_create| 1 | 0 | 0 | 5 | 11 | 6 |
+| 중첩_루프| 18 | 8 | 8 | 11 | 18 | 21 |
 
 `fibonacci`에서 Perry는 컴파일된 그룹을 3–15 ms 이내로 따라잡습니다. Java의 HotSpot JIT는 재귀 호출 인라이닝으로 ~11% 더 빠릅니다. `loop_data_dependent`에서 커널은 두 개의 FP-contract 클러스터로 나뉩니다: ~128 ms의 FMA-contract 그룹(Go 기본값, Apple Clang의 `g++ -O3` — 둘 다 `sum * a + b`를 단일 FMADDD로 융합) 그리고 229–235 ms의 no-contract 그룹(Perry, Rust 기본값, Swift, `-XX:+UseFMA` 없는 Java, Bun)이 스칼라 FMUL + FADD를 실행합니다. LLVM은 `-ffp-contract=fast`로 FMA 그룹과 일치합니다. Perry는 그것을 기본값으로 활성화하지 않습니다. `nested_loops`는 컴퓨트 바운드가 아닌 캐시 바운드입니다. 모두가 8–21 ms에 안착합니다.
 

@@ -1,6 +1,6 @@
 ---
 title: "สร้าง Pry: โปรแกรมดู JSON เนทีฟใน TypeScript"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "บทสรุปของการสร้าง Pry ซึ่งเป็นโปรแกรมดู JSON แบบเนทีฟที่คอมไพล์จาก TypeScript ไปจนถึงโค้ดเครื่องที่มีรันไทม์ Perry และ GC ลิงก์เข้าและไม่มี webview"
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry เขียนด้วย TypeScript มาตรฐาน ไม่มี
 
 นี่คือจุดเริ่มต้น (ทำให้เรียบง่ายเพื่อความชัดเจน):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 นั่นคือแกนหลักของแอปพลิเคชันเนทีฟ ไม่มี boilerplate ของเฟรมเวิร์ก ไม่มีการกำหนดค่า build ไม่มีไฟล์เฉพาะแพลตฟอร์ม ไฟล์ TypeScript ไฟล์เดียว
 
@@ -125,27 +82,20 @@ app.run();
 
 Pry ยังมียูทิลิตี้ `countNodes` ที่ นับโหนดทั้งหมดในต้นไม้ JSON แบบ recursive และตัวช่วย `formatBytes` สำหรับแสดงขนาดไฟล์ เหล่านี้ เป็นฟังก์ชัน TypeScript มาตรฐาน — ไม่มีอะไรเฉพาะของ Perry คอมไพล์เป็น โค้ดเนทีฟเหมือนกับทุกอย่างอื่น
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## การคอมไพล์ Pry
 
@@ -153,47 +103,39 @@ return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 ไบนารีมีขนาด 48 MB เพราะรวมสแต็ก UI AppKit ทั้งหมด — การเรนเดอร์ tree view การไฮไลท์การค้นหา การระบายสี syntax และการจัดการคีย์บอร์ด เมื่อเปรียบเทียบแล้ว แอปเดียวกัน ใน Electron จะมีขนาด 200+ MB แอป Perry แบบ CLI อย่างเดียวคอมไพล์ได้ 2-5 MB
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 Build สำหรับ iOS เชื่อมต่อกับ UIKit แทน AppKit Perry แมป API `TreeView` เดียวกันเป็น `UITableView` พร้อม ส่วนที่ขยายได้ `SearchBar` เป็น `UISearchBar` และอีเวนต์สัมผัสแทนที่อีเวนต์เมาส์ Build สำหรับ iOS สามารถติดตั้งบนอุปกรณ์จริงและ simulator
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Build สำหรับ Android สร้างไลบรารีเนทีฟที่โหลดผ่าน JNI บรรจุลงใน APK `TreeView` แมปเป็น `RecyclerView` พร้อม view holders ที่ขยายได้ `SearchBar` แมปเป็น `EditText` พร้อม `TextWatcher` และ แถบสถานะแมปเป็น `TextView` ที่ด้านล่างของเลย์เอาต์
 

@@ -14,15 +14,14 @@ Perry ตอนนี้สามารถผลิตไบนารี Windows
 
 ลิงก์เกอร์ใช้ `/FORCE:UNRESOLVED` โดยอัตโนมัติและสร้างสตับสำหรับสัญลักษณ์ UI ที่ขาดหายไป ดังนั้นแอป CLI จึงครอสคอมไพล์ได้อย่างราบรื่น เอาต์พุตจะเป็น `.exe` โดยค่าเริ่มต้นเมื่อเป้าหมายเป็น Windows รายละเอียดทั้งหมดอยู่ใน [เอกสารครอสคอมไพล์](https://docs.perryts.com)
 
-terminal — Linux host
+**เทอร์มินัล — โฮสต์ Linux**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## รองรับเกมลูปบน iOS
 
@@ -30,23 +29,20 @@ iOS ต้องการให้ UIKit เป็นเจ้าของเธ
 
 เมื่อเปิดใช้งาน คอมไพเลอร์จะปล่อย `_perry_user_main` แทน `main` รันไทม์จัดเตรียม `main()` ที่เรียก `UIApplicationMain` บนเธรดหลักและสปอว์นโค้ดของคุณบนเธรดพื้นหลัง Scene delegate และ app delegate จัดการวงจรชีวิต UIKit เต็มรูปแบบในขณะที่เกมลูปของคุณรันโดยไม่ถูกบล็อก
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 สิ่งนี้เปิดใช้งานแอปทั้งหมวดหมู่ — เกม, การจำลอง, การแสดงผลแบบเรียลไทม์ — ที่ไม่สามารถทำได้จริงบน iOS ก่อนหน้านี้ เส้นทาง pump และ callback ของ iOS ตอนนี้ยังถูกห่อหุ้มด้วยการจัดการ panic ดังนั้นการแครชทั้งในเกมลูปและวงจรชีวิต UIKit จะถูกจับได้อย่างสะอาด
 

@@ -1,6 +1,6 @@
 ---
 title: "Pry'ı İnşa Etmek: TypeScript'te Yerel Bir JSON Görüntüleyici"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "TypeScript'ten Perry çalışma zamanı ve bağlı GC ile makine koduna derlenen yerel bir JSON görüntüleyicisi olan Pry'ı oluşturmanın adım adım açıklaması ve web görünümü yok."
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry standart TypeScript ile yazilmistir. Ozel sozdizimi, makro veya derleme zama
 
 Iste giris noktasi (netlik icin basitlestirilmistir):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 Isste yerel bir uygulamanin ozudur. Cerceve sablonu yok, derleme yapilandirmasi yok, platforma ozgu dosyalar yok. Tek bir TypeScript dosyasi.
 
@@ -125,27 +82,20 @@ Isste yerel bir uygulamanin ozudur. Cerceve sablonu yok, derleme yapilandirmasi 
 
 Pry ayrica JSON agacindaki tum dugumleri ozyinelemeli olarak sayan bir `countNodes` yardimci programi ve dosya boyutlarini goruntulemek icin bir `formatBytes` yardimcisi icerir. Bunlar standart TypeScript fonksiyonlaridir — Perry'ye ozgu hicbir sey yok. Diger her sey gibi yerel koda derlenir.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Pry'i Derlemek
 
@@ -153,47 +103,39 @@ Pry'i Perry ile derlemek tek bir komuttur. Xcode projesi yok, Gradle yapilandirm
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 Ikili dosya 48 MB'dir cunku tam AppKit UI yiginini icerir — agac gorunumu renderlama, arama vurgulama, sozdizimi renklendirme ve klavye isleme. Karsilastirma icin, ayni uygulama Electron'da 200+ MB olurdu. Sadece CLI olan bir Perry uygulamasi 2-5 MB'ye derlenir.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 iOS derlemesi AppKit yerine UIKit'e baglanir. Perry ayni `TreeView` API'sini genisletilebilir bolumlerle `UITableView`'a, `SearchBar`'i `UISearchBar`'a esler ve dokunma olaylari fare olaylarinin yerini alir. iOS derlemesi fiziksel cihazlara ve simulatorlere dagitilabilir.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Android derlemesi JNI araciligiyla yuklenen, bir APK'ya paketlenmis yerel bir kutuphane uretir. `TreeView`, genisletilebilir view holder'larla bir `RecyclerView`'a, `SearchBar` bir `TextWatcher` ile bir `EditText`'e ve durum cubugu yerlesimin altindaki bir `TextView`'a eslenir.
 

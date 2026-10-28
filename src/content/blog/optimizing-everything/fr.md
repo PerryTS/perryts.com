@@ -158,7 +158,7 @@ Le benchmark vedette du billet précédent était `factorial` à 24,6x plus rapi
 | JSON.parse (schéma 20 enregistrements) | 547x plus lent que Node | 1,3x plus lent que Node | ~420x |
 | image\_conv (flou 5×5 sur 4K) | 1 980ms | 457ms | 4,3x |
 | Code lourd en propriétés (touche PIC) | référence | 2–3x | 2–3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Uptime Fastify sous charge | ~60s avant plantage | indéfini | ∞ |
 
 La suite complète de 15 benchmarks contre Node est toujours à 14 victoires et 1 égalité — le même tableau que le billet précédent, avec des chiffres légèrement meilleurs partout. Le vrai mouvement cette semaine est sur les charges de travail qui n'étaient pas dans cette suite : JSON, traitement d'images, serveurs long-running. C'est là que vivaient les écarts, et c'est ce qui s'est fermé.

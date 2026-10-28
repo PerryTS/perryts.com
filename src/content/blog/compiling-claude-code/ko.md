@@ -168,7 +168,7 @@ TUI는 렌더링되다가 몇 초 안에 `SIGBUS`로 죽곤 했습니다 — 윈
 | `--help` | 715 ms | 5,071 ms | 4,099 ms |
 | TUI 첫 페인트 | 0.76 s | 10.9 s | 8.4 s |
 | 키 입력 → 페인트 (p50) | 2.2 ms | 111–143 ms | 119–138 ms |
-| 메모리 사용량, 유휴 상태 | 290 MB flat | ~420 MB climbing | ~420 MB climbing |
+| 메모리 사용량, 유휴 상태 | 290 MB flat | ~420MB 등반| ~420MB 등반 |
 
 `--version`은 이제 **Node를 이깁니다**. 그런데 그 승리의 기원은 민망했습니다: 컴파일된 실행 파일이 300,281개의 심벌을 내보내고 있었고, 그 실행 시간의 약 80%는 dyld가 약한 정의(weak-definition) 합치기를 하는 데 쓰이고 있었습니다. 링커 플래그 하나로 내보내기가 3개로 줄었고, 바이너리는 228 MB에서 197 MB가 됐습니다([#6533](https://github.com/PerryTS/perry/pull/6533)). 고유한 정규식마다 두 번이 아니라 한 번만 빌드하게 한 것([#6534](https://github.com/PerryTS/perry/pull/6534))과 저장별 인터셉션 검사를 캐싱한 것([#6532](https://github.com/PerryTS/perry/pull/6532), [#6541](https://github.com/PerryTS/perry/pull/6541))이 나머지를 해결했습니다.
 

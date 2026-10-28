@@ -55,19 +55,14 @@ TypeScript 是构建可扩展工具最流行的语言 —— 也是运行时性�
 
 这就是 Perry 的用武之地。Perry 将 TypeScript 直接编译为原生二进制文件。没有 V8，没有 JIT 预热，没有垃圾收集暂停，没有 IPC 边界。
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 ## 你真正需要的可扩展性
 

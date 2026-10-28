@@ -218,7 +218,7 @@ Cycle dự đoán sai giữ tối đa vài phần trăm một nursery, promoting
 
 Nói thẳng: **câu chuyện “một cơ chế” thường sai và profile đổi dưới chân bạn.** Pause fraction hôm nay, đo cùng commit với standings dưới:
 
-| program | wall | GC pause | pause fraction | cycles | |---|--:|--:|--:|--:| | retain | 159.5 ms | 52.0 ms | 33% | 5 | | retain1 | 71.4 ms | 38.7 ms | 54% | 3 | | retain\_wide | 206.2 ms | 75.4 ms | 37% | 8 | | shapes | 64.8 ms | 4.6 ms | **7%** | 1 | | asyncpipe | 127 ms | 0 ms | **0%** | 0 |
+| chương trình | bức tường | tạm dừng GC | phần tạm dừng | chu kỳ | |---|--:|--:|--:|--:| | giữ lại | 159,5 mili giây | 52,0 mili giây | 33% | 5 | | giữ lại1 | 71,4 mili giây | 38,7 mili giây | 54% | 3 | | giữ_rộng | 206,2 mili giây | 75,4 mili giây | 37% | 8 | | hình dạng | 64,8 mili giây | 4,6 mili giây | **7%** | 1 | | không đồng bộ | 127 mili giây | 0 mili giây | **0%** | 0 |
 
 Hai số là 93% và 62% một tuần trước; việc trong section này giết chúng. `shapes` ở 7% không còn là GC benchmark — trước bug §8 nó có 94 ms GC trong program 139 ms và được xếp “high-survival GC” từ ratio đó. GC lever không move nó nữa. Ratio trông đồng đều giữa benchmark là trùng hợp số học, không phải common cause.
 

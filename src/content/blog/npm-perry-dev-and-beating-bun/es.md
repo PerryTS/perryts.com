@@ -119,6 +119,6 @@ winget install PerryTS.Perry
 perry dev
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Fuente: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Documentos: [docs.perryts.com](https://docs.perryts.com) — Registro de cambios: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

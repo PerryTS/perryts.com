@@ -46,7 +46,7 @@ Die zwei Caches stapeln sich. Die erste Bearbeitung der Session ist eine Voll-Ko
 
 Bei v0.5.166 hatte die README eine ehrliche Einschränkung: Perry war 1,6x langsamer als Node bei `json_roundtrip` (50× `JSON.parse` + `JSON.stringify` auf einem 1MB, 10K-Item-Blob) und 2,4x langsamer als Bun. Issue [#149](https://github.com/PerryTS/perry/issues/149) trackte das Follow-up. Bis v0.5.173 — sieben Tage später — hat sich diese Lücke geschlossen.
 
-| Workload | Perry v0.5.173 | Node v25 | Bun 1.3 |
+| Arbeitsbelastung| Perry v0.5.173 | Node v25 | Bun 1.3 |
 | --- | --- | --- | --- |
 | `json_roundtrip` | 314ms | 377ms | 250ms |
 | `closure` | 10ms | 309ms | 51ms |
@@ -119,6 +119,6 @@ winget install PerryTS.Perry
 perry dev
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Quelle: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Dokumente: [docs.perryts.com](https://docs.perryts.com) — Änderungsprotokoll: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

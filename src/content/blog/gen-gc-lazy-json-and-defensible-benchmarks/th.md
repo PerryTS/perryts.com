@@ -53,15 +53,15 @@ JSON pipeline ได้รับการเขียนใหม่ที่ล
 
 ผลลัพธ์บน workload ที่ lazy tape ถูกออกแบบมาเพื่อ (10k record, blob ~1 MB, parse → stringify โดยไม่มีการ iterate ระหว่างทาง):
 
-| Implementation | Median (ms) | p95 (ms) | σ | Peak RSS |
+| การนำไปปฏิบัติ| ค่ามัธยฐาน (มิลลิวินาที)| p95 (ms) | σ | Peak RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| เพอร์รี่ (gen-gc + เลซี่เทป)| 75 | 91 | 6.9 | 85 MB |
+| สนิม serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serialization)| 473 | 533 | 21.4 | 606 MB |
+| Assemblyscript+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perry ที่ **75 ms median** เป็น runtime แบบ dynamic-typing ที่เร็วที่สุดในการเปรียบเทียบ — ชนะ Bun (259 ms), ชนะ Node (394 ms), ชนะ JIT บน server ของ Kotlin (453 ms) simdjson ที่ 24 ms คือเพดาน C++ ที่เร่งด้วย SIMD และอยู่บนหน้านี้โดยตั้งใจ ไม่ใช่ซ่อนหลังการเลือกเฉพาะ Perry ไม่ได้ชนะมัน ประเด็นคือแสดงช่องว่างเพื่อให้การปิดมันมีเป้าหมาย — ติดตามใน `docs/json-typed-parse-plan.md`
 
@@ -81,12 +81,12 @@ Perry ที่ **75 ms median** เป็น runtime แบบ dynamic-typing �
 
 Headline kernel ที่ fold ไม่ได้จริง ๆ, RUNS=11 median, refresh 2026-04-25 ที่ v0.5.249:
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+| เกณฑ์มาตรฐาน| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| ฟีโบนัชชี| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_dependent| 235 | 229 | 129 | 229 | 322 | 232 |
+| object_create| 1 | 0 | 0 | 5 | 11 | 6 |
+| Nested_loops| 18 | 8 | 8 | 11 | 18 | 21 |
 
 ใน `fibonacci` Perry เทียบเคียงกลุ่ม compiled ภายใน 3–15 ms HotSpot JIT ของ Java เร็วกว่า ~11% จากการ inline recursive call ใน `loop_data_dependent` kernel แยกเป็นสอง cluster ของ FP-contract: กลุ่ม FMA-contract ที่ ~128 ms (Go default, `g++ -O3` บน Apple Clang — ทั้งคู่ fuse `sum * a + b` เป็น FMADDD ตัวเดียว) และกลุ่ม no-contract ที่ 229–235 ms (Perry, Rust default, Swift, Java โดยไม่มี `-XX:+UseFMA`, Bun) ที่รัน scalar FMUL + FADD LLVM เทียบเคียงกลุ่ม FMA ด้วย `-ffp-contract=fast`; Perry ไม่เปิดสิ่งนั้นเป็นค่าเริ่มต้น `nested_loops` ถูก bound ด้วย cache ไม่ใช่ compute; ทุกคนลงจอดที่ 8–21 ms
 

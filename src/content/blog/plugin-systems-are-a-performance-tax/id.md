@@ -55,19 +55,14 @@ TypeScript adalah bahasa paling populer untuk membangun tool yang extensible —
 
 Di sinilah Perry berperan. Perry mengkompilasi TypeScript langsung ke binary native. Tanpa V8, tanpa pemanasan JIT, tanpa jeda garbage collection, tanpa batas IPC.
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 ## Ekstensibilitas yang Benar-Benar Anda Butuhkan
 

@@ -28,17 +28,13 @@ Perry에 이제 진정한 문서 사이트가 있습니다. mdBook으로 구축�
 
 Perry는 이제 소스 빌드 외에 Homebrew와 APT를 통해 배포됩니다. 새로운 GitHub Actions 릴리스 파이프라인이 macOS (arm64와 x86\_64) 및 Linux (x86\_64와 arm64)용 바이너리를 빌드한 다음, Homebrew 탭과 APT 리포지토리를 자동으로 업데이트합니다.
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
 더 이상 리포를 클론하고 Cargo로 빌드할 필요가 없습니다. 다른 도구와 동일한 방식으로 Perry를 설치하세요.
 
@@ -65,9 +61,9 @@ Android 게시에도 자동 트리거 설정 마법사가 추가되었습니다.
 
 Perry는 이제 TypeScript를 네이티브 SwiftUI WidgetKit 확장으로 컴파일할 수 있습니다. 이것은 래퍼나 브릿지가 아닙니다 — 컴파일러가 HIR 수준에서 렌더 트리를 순회하고 SwiftUI 소스 코드를 직접 출력합니다. 출력은 Xcode(또는 Perry의 빌드 파이프라인)가 앱에 포함할 수 있는 완전한 WidgetKit 확장 번들입니다.
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
 이 접근 방식은 Perry의 나머지 컴파일과 근본적으로 다릅니다. 일반 Perry 코드는 Cranelift을 거쳐 네이티브 머신 코드로 갑니다. 위젯 코드는 HIR에서 SwiftUI 텍스트 출력으로 갑니다. WidgetKit이 SwiftUI를 요구하기 때문입니다 — 명령형 UIKit이나 AppKit 코드로 위젯 확장을 빌드할 방법이 없습니다. Perry는 위젯 렌더 트리를 런타임 코드가 아닌 컴파일 타임 템플릿으로 처리하여 이를 해결합니다.
 
@@ -88,7 +84,7 @@ Perry는 이제 완전한 iPad 네이티브 앱을 생성합니다: `UIDeviceFam
 
 Windows가 타이머 지원(50ms `WM_TIMER` 틱), 다크 테마 배경의 오너 드로운 버튼, 18개 위젯 파일에 걸친 `to_wide().as_ptr()`의 use-after-free 버그 수정을 받았습니다. V8 런타임이 필요한 시스템 라이브러리가 링크된 상태로 Windows에서 작동합니다.
 
-### GTK4 (Linux)
+### GTK4(리눅스)
 
 GTK4 백엔드가 macOS에 맞추기 위한 비주얼 폴리시를 받았습니다: 엣지 인셋용 CSS 패딩, Adwaita 버튼 스타일링, VStack 마진 수정, ScrollView 수평 정책.
 

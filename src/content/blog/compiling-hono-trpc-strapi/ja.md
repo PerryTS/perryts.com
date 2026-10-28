@@ -36,41 +36,32 @@ TypeScript の異なる形態を代表するため、この3つを選びまし�
 
 これが大きなマイルストーンでした。Hono のエクスポート構造：
 
-hono export chain
+**hono 輸出チェーン**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 この `export { Hono }` は名前付き再エクスポートです —`export * from` でも `export { Hono } from './hono'` でもありません。 Perry の HIR では `Export::Named` になり、`Export::ReExport` や `Export::ExportAll` ではありません。以前は、コンパイラのクラス伝播が`ExportAll` と `ReExport`チェーンのみを辿っていたため、`index.ts` から `Hono` をインポートすると暗黙に失敗し、`new Hono()` が `undefined`を返していました。
 
 現在、Perry は `Export::Named` をモジュールのインポートを通じて 元のクラス定義まで遡り、それを伝播します。結果：
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 Hono のコンストラクタが実行され、`SmartRouter`（内部で `RegExpRouter` と `TrieRouter` の両方を作成）を初期化し、実際のオブジェクトを返します。 複数の独立したインスタンスが動作します。コンストラクタオプションも受け入れられます。
 
@@ -78,23 +69,22 @@ Hono のコンストラクタが実行され、`SmartRouter`（内部で `RegExp
 
 tRPC の `initTRPC` は4段階の深さにあります：
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 `ExportAll` → `Named` → `ExportAll` です。 Perry は完全なチェーンを解決し、`initTRPC` はコンパイル済みバイナリで アクセス可能です。同じパスを辿る `TRPCError` も同様です。
 
 ### 引数付きクロスモジュールクラスインスタンス化
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError` は1つのモジュールで定義され、3つの中間バレルファイルを通じて 再エクスポートされ、テストでインポートされ、オプションオブジェクトでインスタンス化されます。 インスタンスの `code` フィールドにアクセスできます。
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi はワークスペースパッケージを使用しています — `@strapi/core` は モノレポ内の兄弟パッケージで、npm 依存関係ではありません。Perry は `package.json` の exports フィールドを通じてベア指定子を解決します：
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 `createStrapi` 関数は`export * from '@strapi/core'` を通じて呼び出し可能な関数として 正しく解決されます。
 
@@ -128,27 +118,23 @@ Perry は SWC の `ExportNamed` 宣言の `type_only` フラグと個々の指�
 
 Hono のコンストラクタは HTTP メソッドハンドラを動的にセットアップします：
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 `app.get`、`app.post`などは静的に宣言されていません — 計算されたプロパティ名を介してランタイムで割り当てられます。 Perry はまだ `this[variable] = value` をサポートしていないため、 これらのメソッドが欠落しています：
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 Hono にとって最大の単一のギャップです。Hono クラスは存在し、ルーターは初期化されていますが、 ルートを登録できません。
 
@@ -156,7 +142,9 @@ Hono にとって最大の単一のギャップです。Hono クラスは存在�
 
 tRPC はそのエントリポイントを次のように定義しています：
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 ランタイムでは、`initTRPC` は `typeof object` ではなく `typeof function` として現れます — モジュールレベルの `new TRPCBuilder()` 式がコンストラクタを 実行していないため、インスタンスではなくクラスへの参照が得られます。つまり `initTRPC.create()` と `initTRPC.context()` は共に `undefined` です。
 
@@ -174,15 +162,15 @@ Strapi の `createStrapi()` 関数は内部で `new Strapi(opts)` を呼び出�
 
 | クラス | 件数 |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+|応答| 11 |
+|変換ストリーム| 7 |
+|読み取り可能なストリーム| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| TextEncoderStream| 2 |
+|書き込み可能なストリーム| 1 |
+| DOM例外| 1 |
 
 `Response`、`Request`、`Headers` はあらゆる HTTP フレームワークにとって重要です。`Map`、`Set`、 `RegExp`、`Buffer`、 `AbortController` などに既にあるものと同様のビルトインコード生成サポートが 必要です。
 

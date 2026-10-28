@@ -14,15 +14,14 @@ The implementation replaces compile-time `#[cfg]` checks with runtime target det
 
 The linker automatically uses `/FORCE:UNRESOLVED` and generates stubs for missing UI symbols, so CLI apps cross-compile cleanly. Output defaults to `.exe` when targeting Windows. The full details are in the [cross-compilation docs](https://docs.perryts.com).
 
-terminal — Linux host
+**terminal — Linux host**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## iOS Game Loop Support
 
@@ -30,23 +29,20 @@ iOS requires UIKit to own the main thread. That's fine for event-driven apps, bu
 
 When enabled, the compiler emits `_perry_user_main` instead of `main`. The runtime provides a `main()` that calls `UIApplicationMain` on the main thread and spawns your code on a background thread. Scene delegate and app delegate handle the full UIKit lifecycle while your game loop runs unblocked.
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 This enables an entire category of apps — games, simulations, real-time visualizations — that weren't practical on iOS before. The iOS pump and callback paths are also now wrapped in panic handling, so crashes in either the game loop or the UIKit lifecycle are caught cleanly.
 

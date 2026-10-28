@@ -1,6 +1,6 @@
 ---
 title: "Présentation de Perry"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry compile TypeScript en exécutables natifs autonomes avec son environnement d'exécution et son GC lié, sans nécessiter un Node.js ou moteur JavaScript."
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Le pipeline de compilation de Perry a trois étapes :
 
 Le résultat est un exécutable autonome — typiquement 2–5 Mo pour un outil CLI — qui démarre instantanément sans temps de chauffe.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## Quelles fonctionnalités TypeScript sont supportées
 
@@ -68,7 +60,7 @@ Perry ne se limite pas aux outils CLI et aux applications côté serveur. Il est
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField et plus)
 -   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (même API qu'iOS, avec des adaptations spécifiques iPad)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
+-   **Android** — JNI + Vues Android (activité, vue, Button, RecyclerView)
 -   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
 -   **Windows** — Win32 (CreateWindowEx, contrôles communs, GDI)
 
@@ -94,19 +86,16 @@ Pour les paquets npm qui n'ont pas encore d'implémentations natives Perry, Perr
 
 Perry supporte la compilation croisée nativement. Depuis votre machine de développement macOS, vous pouvez compiler pour Linux (x86\_64 et ARM64) et iOS. Cela signifie que vous pouvez construire votre pipeline CI/CD sur macOS et produire des binaires pour toutes vos cibles de déploiement sans avoir besoin de machines de compilation dédiées pour chaque plateforme.
 
-\# Compiler pour Linux depuis macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Compiler pour Linux depuis macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Compiler pour iOS depuis macOS
-
+# Compiler pour iOS depuis macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
-## Performance
+## Performances
 
 Les binaires compilés par Perry sont rapides. Comme il n'y a pas de chauffe JIT, pas de surcharge d'interpréteur et pas de pauses du ramasse-miettes, les performances sont prévisibles et constantes dès la première invocation.
 
@@ -131,20 +120,15 @@ Consultez la [feuille de route](/fr/roadmap/) complète pour les détails sur ce
 
 Perry est open source. Vous pouvez cloner le dépôt, compiler depuis les sources et commencer à compiler du TypeScript dès aujourd'hui :
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compilez votre premier fichier TypeScript
-
+# Compilez votre premier fichier TypeScript
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 Parcourez le code source sur [GitHub](https://github.com/PerryTS/perry), consultez le [showcase](/fr/showcase/) pour voir ce qui se construit avec Perry, ou plongez directement dans le code. Nous avons hâte de voir ce que vous construirez.

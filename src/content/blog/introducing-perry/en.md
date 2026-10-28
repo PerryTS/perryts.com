@@ -26,25 +26,17 @@ Perry's compilation pipeline has three stages:
 
 The result is a standalone executable — typically 2–5 MB for a CLI tool — that starts instantly with zero warm-up time.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## What TypeScript Features Are Supported
 
@@ -94,17 +86,14 @@ For npm packages that don't have native Perry implementations yet, Perry offers 
 
 Perry supports cross-compilation out of the box. From your macOS development machine, you can compile for Linux (x86\_64 and ARM64) and iOS. This means you can build your CI/CD pipeline on macOS and produce binaries for all your deployment targets without needing dedicated build machines for each platform.
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## Performance
 
@@ -131,20 +120,15 @@ Check out the full [roadmap](/en/roadmap/) for details on what's shipped, what's
 
 Perry is open source. You can clone the repo, build from source, and start compiling TypeScript today:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 Browse the source on [GitHub](https://github.com/PerryTS/perry), check out the [showcase](/en/showcase/) to see what's being built with Perry, or jump straight into the code. We can't wait to see what you build.

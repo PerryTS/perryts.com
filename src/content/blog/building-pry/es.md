@@ -1,6 +1,6 @@
 ---
 title: "Construyendo Pry: un visor de JSON nativo en TypeScript"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "Un tutorial sobre la creación de Pry, un visor nativo JSON compilado a partir de TypeScript para código máquina con el tiempo de ejecución Perry y GC vinculado y sin vista web."
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry está escrito en TypeScript estándar. No hay sintaxis especial, no hay macr
 
 Aquí está el punto de entrada (simplificado para claridad):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Leer entrada desde argumento de archivo o stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Estado reactivo
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Construir la app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 Ese es el núcleo de una aplicación nativa. Sin boilerplate de framework, sin configuración de compilación, sin archivos específicos de plataforma. Un archivo TypeScript.
 
@@ -125,27 +82,20 @@ Ese es el núcleo de una aplicación nativa. Sin boilerplate de framework, sin c
 
 Pry también incluye una utilidad `countNodes` que cuenta recursivamente todos los nodos en el árbol JSON, y un helper `formatBytes` para mostrar tamaños de archivo. Son funciones TypeScript estándar — nada específico de Perry en ellas. Compilan a código nativo igual que todo lo demás.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Compilando Pry
 
@@ -153,47 +103,39 @@ Compilar Pry con Perry es un solo comando. Sin proyecto Xcode, sin configuració
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 El binario tiene 48 MB porque incluye el stack completo de UI AppKit — renderizado de vista de árbol, resaltado de búsqueda, coloreo de sintaxis y manejo de teclado. Para comparación, la misma app en Electron sería de más de 200 MB. Una app Perry solo CLI compila a 2-5 MB.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 La compilación iOS enlaza contra UIKit en lugar de AppKit. Perry mapea la misma API `TreeView` a `UITableView` con secciones expandibles, `SearchBar` a `UISearchBar`, y los eventos táctiles reemplazan los eventos de ratón. La compilación iOS puede desplegarse en dispositivos físicos y simuladores.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 La compilación Android genera una biblioteca nativa cargada a través de JNI, empaquetada en un APK. `TreeView` mapea a un `RecyclerView` con view holders expandibles, `SearchBar` mapea a un `EditText` con un `TextWatcher`, y la barra de estado mapea a un `TextView` en la parte inferior del layout.
 

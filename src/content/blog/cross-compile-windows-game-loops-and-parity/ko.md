@@ -14,15 +14,14 @@ Perry는 이제 Linux 호스트에서 Windows `.exe` 바이너리를 생성할 �
 
 링커는 자동으로 `/FORCE:UNRESOLVED`를 사용하고 누락된 UI 심볼에 대한 스텁을 생성하므로 CLI 앱이 깔끔하게 크로스 컴파일됩니다. Windows를 타겟으로 할 때 출력은 기본적으로 `.exe`입니다. 자세한 내용은 [크로스 컴파일 문서](https://docs.perryts.com)에서 확인하세요.
 
-terminal — Linux host
+**터미널 — Linux 호스트**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## iOS 게임 루프 지원
 
@@ -30,23 +29,20 @@ iOS는 UIKit이 메인 스레드를 소유해야 합니다. 이벤트 기반 앱
 
 활성화하면 컴파일러는 `main` 대신 `_perry_user_main`을 출력합니다. 런타임은 메인 스레드에서 `UIApplicationMain`을 호출하고 백그라운드 스레드에서 사용자 코드를 생성하는 `main()`을 제공합니다. Scene delegate와 app delegate가 전체 UIKit 라이프사이클을 처리하는 동안 게임 루프는 차단 없이 실행됩니다.
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 이로써 게임, 시뮬레이션, 실시간 시각화 등 이전에는 iOS에서 실용적이지 않았던 앱의 전체 카테고리가 가능해졌습니다. iOS 펌프 및 콜백 경로도 이제 패닉 처리로 래핑되어, 게임 루프나 UIKit 라이프사이클에서의 크래시가 깔끔하게 캐치됩니다.
 

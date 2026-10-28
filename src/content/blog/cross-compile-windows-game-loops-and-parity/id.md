@@ -8,133 +8,129 @@ tags: ["compiler", "cross-compilation", "infrastructure", "milestone"]
 
 ## Cross-Compile ke Windows dari Linux
 
-Perry can now produce Windows `.exe` binaries from a Linux host. This is the missing piece for CI/CD pipelines that need to target Windows without running a Windows build machine for the entire compilation.
+Perry kini dapat menghasilkan binari `.exe` Windows dari host Linux. Ini adalah bagian yang hilang untuk pipeline CI/CD yang perlu menargetkan Windows tanpa menjalankan mesin build Windows untuk keseluruhan kompilasi.
 
-The implementation replaces compile-time `#[cfg]` checks with runtime target detection. When the compiler sees a Windows target on a non-Windows host, it locates `lld-link`, `llvm-nm`, and `llvm-ar` from the Rust toolchain or PATH via a new `find_llvm_tool()` helper. The Windows system libraries come from an [xwin](https://github.com/Jake-Shadle/xwin)\-style sysroot pointed to by `PERRY_WINDOWS_SYSROOT`.
+Implementasinya menggantikan pemeriksaan `#[cfg]` waktu kompilasi dengan deteksi target waktu proses. Ketika compiler melihat target Windows pada host non-Windows, compiler akan menemukan `lld-link`, `llvm-nm`, dan `llvm-ar` dari Rust toolchain atau PATH melalui helper `find_llvm_tool()` baru. Pustaka sistem Windows berasal dari sysroot bergaya [xwin](https://github.com/Jake-Shadle/xwin) yang ditunjukkan oleh `PERRY_WINDOWS_SYSROOT`.
 
-The linker automatically uses `/FORCE:UNRESOLVED` and generates stubs for missing UI symbols, so CLI apps cross-compile cleanly. Output defaults to `.exe` when targeting Windows. The full details are in the [cross-compilation docs](https://docs.perryts.com).
+Linker secara otomatis menggunakan `/FORCE:UNRESOLVED` dan menghasilkan stub untuk simbol UI yang hilang, sehingga aplikasi CLI melakukan kompilasi silang dengan rapi. Output defaultnya adalah `.exe` saat menargetkan Windows. Detail lengkapnya ada di [dokumen kompilasi silang](https://docs.perryts.com).
 
-terminal — Linux host
+**terminal — host Linux**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## Dukungan Game Loop iOS
 
-iOS requires UIKit to own the main thread. That's fine for event-driven apps, but it's a problem for games that need a blocking `while (!shouldClose)` loop. Perry now solves this with the `--features ios-game-loop` flag.
+iOS memerlukan UIKit untuk memiliki thread utama. Hal ini tidak masalah untuk aplikasi yang digerakkan oleh peristiwa, namun ini merupakan masalah bagi game yang memerlukan perulangan `while (!shouldClose)` pemblokiran. Perry kini menyelesaikan masalah ini dengan flag `--features ios-game-loop`.
 
-When enabled, the compiler emits `_perry_user_main` instead of `main`. The runtime provides a `main()` that calls `UIApplicationMain` on the main thread and spawns your code on a background thread. Scene delegate and app delegate handle the full UIKit lifecycle while your game loop runs unblocked.
+Bila diaktifkan, kompiler mengeluarkan `_perry_user_main` alih-alih `main`. Runtime menyediakan `main()` yang memanggil `UIApplicationMain` di thread utama dan memunculkan kode Anda di thread latar belakang. Delegasi adegan dan delegasi aplikasi menangani siklus hidup UIKit penuh saat game loop Anda berjalan tanpa pemblokiran.
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
-This enables an entire category of apps — games, simulations, real-time visualizations — that weren't practical on iOS before. The iOS pump and callback paths are also now wrapped in panic handling, so crashes in either the game loop or the UIKit lifecycle are caught cleanly.
+Ini mengaktifkan seluruh kategori aplikasi — game, simulasi, visualisasi real-time — yang sebelumnya tidak praktis di iOS. Jalur pompa dan callback iOS kini juga dilengkapi dengan penanganan panik, sehingga kerusakan pada game loop atau siklus proses UIKit dapat ditangani dengan baik.
 
 ## Pelaporan Crash
 
-Perry-compiled apps now install a panic hook and signal handlers for `SIGSEGV`, `SIGBUS`, and `SIGABRT` at startup. When a fatal crash occurs, the details are written to `~/.hone/crash.log` for the Chirp telemetry system. Caught panics (in `catch_callback_panic`) clear the log, so only genuine unrecoverable crashes are reported.
+Aplikasi yang dikompilasi Perry kini memasang pengait panik dan pengendali sinyal untuk `SIGSEGV`, `SIGBUS`, dan `SIGABRT` saat startup. Ketika terjadi kerusakan fatal, detailnya ditulis ke `~/.hone/crash.log` untuk sistem telemetri Chirp. Jika terjadi kepanikan (dalam `catch_callback_panic`) hapus log, sehingga hanya kerusakan asli yang tidak dapat diperbaiki yang dilaporkan.
 
-This is a production-readiness feature. When something goes wrong in the field, we'll know about it — and the crash log includes enough context to diagnose the issue without requiring users to manually report anything.
+Ini adalah fitur kesiapan produksi. Jika terjadi kesalahan di lapangan, kami akan mengetahuinya — dan log kerusakan menyertakan konteks yang cukup untuk mendiagnosis masalah tersebut tanpa mengharuskan pengguna melaporkan apa pun secara manual.
 
 ## Hub: Pipeline Build Windows Dua Tahap
 
-The Perry Hub build infrastructure got a significant architectural upgrade. Previously, building for Windows required a Windows worker for the entire compilation. Now the pipeline splits into two stages:
+Infrastruktur pembangunan Hub Perry mendapat peningkatan arsitektur yang signifikan. Sebelumnya, pembuatan untuk Windows memerlukan pekerja Windows untuk keseluruhan kompilasi. Kini pipeline terbagi menjadi dua tahap:
 
-1.  A Linux worker cross-compiles the Windows artifact using the new lld-link support
-2.  The Hub holds the pre-compiled artifact and re-queues the job for a Windows worker
-3.  The Windows worker only handles signing and packaging — a much lighter task
+1.  Seorang pekerja Linux mengkompilasi silang artefak Windows menggunakan dukungan lld-link baru
+2.  Hub menyimpan artefak yang telah dikompilasi sebelumnya dan mengantri ulang pekerjaan untuk pekerja Windows
+3.  Pekerja Windows hanya menangani penandatanganan dan pengemasan — tugas yang jauh lebih ringan
 
-When a worker sends `complete` with `needs_finishing: "windows"`, the Hub transparently re-queues the job. The CLI sees a seamless single-build experience.
+Saat pekerja mengirimkan `complete` dengan `needs_finishing: "windows"`, Hub secara transparan mengantri ulang pekerjaan tersebut. CLI menghadirkan pengalaman build tunggal yang mulus.
 
-The Hub also now auto-starts Azure Windows VMs when no Windows worker is connected, and build workers auto-update to the latest Perry version on new releases. Less manual infrastructure management, faster builds.
+Hub kini juga memulai otomatis VM Azure Windows ketika tidak ada pekerja Windows yang terhubung, dan pekerja bangunan melakukan pembaruan otomatis ke versi Perry terbaru pada rilis baru. Lebih sedikit pengelolaan infrastruktur manual, pembangunan lebih cepat.
 
 ## Pembaruan Dokumentasi
 
-Two major documentation rewrites landed this week on [docs.perryts.com](https://docs.perryts.com):
+Dua penulisan ulang dokumentasi utama dilakukan minggu ini di [docs.perryts.com](https://docs.perryts.com):
 
--   **perry.toml reference** — complete section documentation covering every configuration option, bundle ID resolution, entry file resolution, build number auto-increment, and CI/CD examples
--   **Geisterhand reference** — full API docs, platform setup, test automation patterns, and architecture overview for the cross-platform UI testing framework
+-   **referensi perry.toml** — dokumentasi bagian lengkap yang mencakup setiap opsi konfigurasi, resolusi ID paket, resolusi file entri, penambahan otomatis nomor build, dan contoh CI/CD
+-   **Referensi Geisterhand** — dokumen API lengkap, penyiapan platform, pola otomatisasi pengujian, dan ikhtisar arsitektur untuk framework pengujian UI lintas platform
 
-These aren't incremental updates. Both are ground-up rewrites that cover every feature and configuration option. If you're setting up a new project or writing tests, start here.
+Ini bukan pembaruan tambahan. Keduanya merupakan penulisan ulang awal yang mencakup setiap fitur dan opsi konfigurasi. Jika Anda sedang menyiapkan proyek baru atau tes menulis, mulailah dari sini.
 
 ## API Menu Lintas Platform
 
-`menuClear` and `menuAddStandardAction` were previously macOS-only. They now work on all 6 native platforms. This also includes a fix for a `RefCell` re-entrancy panic in `dispatch_menu_item` on Windows.
+`menuClear` dan `menuAddStandardAction` sebelumnya hanya macOS. Mereka sekarang bekerja di keenam platform asli. Hal ini juga mencakup perbaikan kepanikan masuk kembali `RefCell` di `dispatch_menu_item` di Windows.
 
-### Android: 16 KB Page Alignment
+### Android: Perataan Halaman 16 KB
 
-Google Play now requires 16 KB page alignment for native libraries. Perry sets the appropriate `CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS` automatically, and companion `.so` files are copied next to the output for APK/AAB inclusion.
+Google Play kini memerlukan penyelarasan halaman sebesar 16 KB untuk perpustakaan asli. Perry menyetel `CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS` yang sesuai secara otomatis, dan file `.so` pendamping disalin di sebelah output untuk penyertaan APK/AAB.
 
-## Perry React: Kanban Board
+## Perry React: Papan Kanban
 
-The React compatibility layer got a real-world test: a full 5-column Kanban board with move, add, delete, and view operations. Building it uncovered and fixed nested array children rendering in JSX — the recursive `_appendChildren` handler now properly flattens arrays returned from `.map()` calls. There's also a new 14-section Kitchen Sink WorkBench demo covering various UI patterns.
+Lapisan kompatibilitas React telah diuji di dunia nyata: papan Kanban 5 kolom lengkap dengan operasi pemindahan, penambahan, penghapusan, dan tampilan. Membuatnya terbuka dan memperbaiki rendering turunan array bersarang di JSX — handler `_appendChildren` rekursif kini meratakan array yang dikembalikan dari panggilan `.map()` dengan benar. Ada juga demo Meja Kerja Wastafel Dapur 14 bagian baru yang mencakup berbagai pola UI.
 
 ## Anvil: 100% Paritas Tes Deterministik
 
-`perrysdad` — the self-hosting LLVM compiler written in TypeScript and compiled by Perry — now passes **68 out of 68** deterministic tests, matching the main compiler's output exactly. The only differences are inherent (timestamps, `Math.random()`), and 11 tests are skipped because they require UI, timers, crypto, or platform-specific features not yet implemented.
+`perrysdad` — kompiler LLVM yang dihosting sendiri dan ditulis dalam TypeScript dan dikompilasi oleh Perry — sekarang melewati **68 dari 68** pengujian deterministik, sama persis dengan keluaran kompiler utama. Perbedaannya hanya bersifat inheren (stempel waktu, `Math.random()`), dan 11 pengujian dilewati karena memerlukan UI, timer, kripto, atau fitur khusus platform yang belum diterapkan.
 
-Key work that got it there:
+Pekerjaan utama yang mencapai hal tersebut:
 
--   **Interface method dispatch** — interface-typed variables now return correct methods via class\_id-based dispatch in ObjectHeader
--   **Dynamic property access** — runtime dispatch for computed property names
--   **Closures and this-binding** — correct capture semantics for object methods
--   **Phase 6 in progress** — async/await, generators, and condition fixes
+-   **Pengiriman metode antarmuka** — variabel bertipe antarmuka kini mengembalikan metode yang benar melalui pengiriman berbasis class_id di ObjectHeader
+-   **Akses properti dinamis** — pengiriman waktu proses untuk nama properti yang dihitung
+-   **Penutupan dan pengikatan ini** — semantik penangkapan yang benar untuk metode objek
+-   **Fase 6 sedang berlangsung** — async/menunggu, generator, dan perbaikan kondisi
 
-100% parity on deterministic tests is a significant milestone. It means the self-compiled `anvil` binary produces the exact same output as the main compiler for every testable scenario. The gap is narrowing toward full self-hosting.
+Paritas 100% pada pengujian deterministik merupakan pencapaian yang signifikan. Artinya, biner `anvil` yang dikompilasi sendiri menghasilkan keluaran yang sama persis dengan kompiler utama untuk setiap skenario yang dapat diuji. Kesenjangan semakin menyempit menuju hosting mandiri penuh.
 
 ## 50+ Perbaikan Bug
 
-A major correctness push this week. Highlights:
+Pendorongan koreksi besar minggu ini. Sorotan:
 
--   **JSON.parse** — arrays no longer truncated at 16 elements, invalid input handled correctly
--   **Uint8Array** — constructor from array variable, `.set(source, offset)` implementation (was a no-op)
--   **BigInt** — NaN-boxing with `BIGINT_TAG` for cross-module calls, keccak256 32-bit truncation fixes
--   **Optional chaining** — nested conditional expressions, toString detection, return value NaN-boxing
--   **IndexSet** — string NaN-boxing corrected to use `STRING_TAG` instead of `POINTER_TAG`
--   **MySQL** — DATETIME and BLOB types, `Date(string)` constructor
--   **Math.min/max** — spread argument handling
--   **Native method dispatch** — field-scan-and-call for `POINTER_TAG` objects
+-   **JSON.parse** — array tidak lagi terpotong pada 16 elemen, input yang tidak valid ditangani dengan benar
+-   **Uint8Array** — konstruktor dari variabel array, implementasi `.set(source, offset)` (tidak boleh dijalankan)
+-   **BigInt** — NaN-boxing dengan `BIGINT_TAG` untuk panggilan lintas modul, perbaikan pemotongan 32-bit keccak256
+-   **Rantaian opsional** — ekspresi kondisional bertingkat, deteksi toString, nilai kembalian NaN-boxing
+-   **IndexSet** — string NaN-boxing dikoreksi untuk menggunakan `STRING_TAG` alih-alih `POINTER_TAG`
+-   **MySQL** — tipe DATETIME dan BLOB, konstruktor `Date(string)`
+-   **Math.min/max** — penanganan argumen sebaran
+-   **Pengiriman metode asli** — pemindaian-dan-panggilan lapangan untuk objek `POINTER_TAG`
 
-These aren't edge cases. JSON.parse truncating arrays at 16 elements would break any real application. Uint8Array.set being a no-op would silently corrupt data. These are the fixes that make the compiler production-grade, one correctness bug at a time.
+Ini bukan kasus ekstrem. JSON.parse memotong array pada 16 elemen akan merusak aplikasi nyata apa pun. Uint8Array.set menjadi no-op akan merusak data secara diam-diam. Ini adalah perbaikan yang menjadikan compiler tingkat produksi, satu bug kebenaran pada satu waktu.
 
 ## Dalam Angka
 
--   **103 commits** to the main Perry compiler
--   **3 versions**: v0.2.195, v0.2.196, v0.2.197
--   **1 major feature**: cross-compile Windows from Linux
--   **1 new app category**: iOS game loops
--   **68/68** deterministic test parity in perrysdad
--   **50+ bug fixes** across NaN-boxing, stdlib, and native FFI
--   **2 documentation rewrites**: perry.toml and Geisterhand
--   **5 Hub improvements**: two-stage pipeline, Azure auto-startup, worker auto-update
+-   **103 komitmen** ke kompiler Perry utama
+-   **3 versi**: v0.2.195, v0.2.196, v0.2.197
+-   **1 fitur utama**: kompilasi silang Windows dari Linux
+-   **1 kategori aplikasi baru**: iOS game loop
+-   **68/68** paritas pengujian deterministik di perrysdad
+-   **50+ perbaikan bug** di NaN-boxing, stdlib, dan FFI asli
+-   **2 penulisan ulang dokumentasi**: perry.toml dan Geisterhand
+-   **5 Peningkatan hub**: pipeline dua tahap, startup otomatis Azure, pembaruan otomatis pekerja
 
 ## Apa Selanjutnya
 
-Windows cross-compilation opens the door to fully automated multi-platform CI/CD — push TypeScript, get native binaries for every target without dedicated build machines for each OS. The game loop support unlocks a whole new category of iOS apps. And 100% deterministic test parity in perrysdad means self-hosting is getting very real. What remains:
+Kompilasi silang Windows membuka pintu bagi CI/CD multi-platform yang sepenuhnya otomatis — tekan TypeScript, dapatkan binari asli untuk setiap target tanpa mesin build khusus untuk setiap OS. Dukungan game loop membuka kategori aplikasi iOS yang benar-benar baru. Dan uji paritas deterministik 100% di perrysdad berarti hosting mandiri menjadi sangat nyata. Yang tersisa:
 
--   **Full regex support** — the last major language gap
--   **perry/ui expansion** — drag and drop, accessibility labels, DatePicker
--   **perrysdad Phase 6** — async/await, generators, expanding toward full Perry parity
--   **Hub public beta** — opening distributed builds to external users
+-   **Dukungan regex penuh** — kesenjangan bahasa utama yang terakhir
+-   **ekspansi Perry/ui** — seret dan lepas, label aksesibilitas, DatePicker
+-   **perrysdad Fase 6** — async/await, generator, berkembang menuju paritas Perry penuh
+-   **Hub publik beta** — membuka build terdistribusi untuk pengguna eksternal
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/id/roadmap/) for the full picture.
+Ikuti perkembangannya di [GitHub](https://github.com/PerryTS/perry), baca dokumen di [docs.perryts.com](https://docs.perryts.com), atau periksa [peta jalan](/id/roadmap/) untuk gambaran selengkapnya.

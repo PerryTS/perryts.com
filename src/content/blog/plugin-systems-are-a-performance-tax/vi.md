@@ -55,19 +55,14 @@ TypeScript là ngôn ngữ phổ biến nhất cho xây dựng công cụ mở r
 
 Đây là nơi Perry xuất hiện. Perry biên dịch TypeScript trực tiếp thành binary native. Không V8, không khởi động JIT, không tạm dừng garbage collection, không ranh giới IPC.
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 ## Khả năng mở rộng bạn thực sự cần
 

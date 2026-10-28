@@ -58,7 +58,7 @@ Vergleich zu V8-Isolates, die separate Heaps pro Worker mit ~2MB Overhead benöt
 
 Auch der Compiler selbst ist jetzt parallel. Modul-Codegen, Transform-Passes (JS-Imports, native Instanzen, Monomorphisierung) und `nm`\-Symbolscannen laufen alle über alle CPU-Kerne via rayon. Kombiniert mit dem Cranelift 0.121 Upgrade (von 0.113 — acht Minor-Versionen mit Register-Allokation- und x64-Verbesserungen) ist die Kompilierung deutlich schneller.
 
-## Compile-Time i18n (v0.3.0)
+## Kompilierungszeit i18n (v0.3.0)
 
 Perrys Internationalisierungssystem hat null Zeremonie. String-Literale in UI-Widgets werden automatisch als lokalisierbare Schlüssel behandelt. Übersetzungsdateien sind flache JSON-Dateien in einem `locales/`\-Verzeichnis. Alle Validierung erfolgt zur Kompilierzeit.
 

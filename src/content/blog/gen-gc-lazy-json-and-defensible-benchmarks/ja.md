@@ -55,13 +55,13 @@ JSONパイプラインはこの期間で最も侵襲的な書き換えを受け�
 
 | 実装 | 中央値 (ms) | p95 (ms) | σ | ピークRSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+|ペリー (gen-gc + 遅延テープ)| 75 | 91 | 6.9 | 85 MB |
+|錆びた serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serialization)| 473 | 533 | 21.4 | 606 MB |
+| Assemblyscript+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perryの**中央値75 ms**は比較中で最速の動的型付けランタイムです ― Bun（259 ms）に勝ち、Node（394 ms）に勝ち、KotlinのサーバJIT（453 ms）に勝ちます。simdjsonの24 msはSIMDアクセラレートされたC++の上限であり、つまみ食い（cherry-pick）の裏に隠さず、意図的にページ上に存在します。Perryはそれには勝てません。ポイントはギャップを示すことで、それを閉じることに目標を持たせることです ― `docs/json-typed-parse-plan.md`で追跡されています。
 
@@ -83,10 +83,10 @@ v0.5.249での2026-04-25にリフレッシュされた、本物に折り畳め�
 
 | ベンチマーク | Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+|フィボナッチ| 318 | 330 | 315 | 282 | 1022 | 589 |
+|ループデータ依存| 235 | 229 | 129 | 229 | 322 | 232 |
+|オブジェクト作成| 1 | 0 | 0 | 5 | 11 | 6 |
+|ネストされたループ| 18 | 8 | 8 | 11 | 18 | 21 |
 
 `fibonacci`では、Perryはコンパイル済みグループに3〜15 ms以内で並びます。JavaのHotSpot JITは再帰呼び出しのインライン化により約11%高速です。`loop_data_dependent`では、カーネルは2つのFP-contractクラスタに分かれます：約128 msのFMA-contractグループ（Goデフォルト、Apple Clangの`g++ -O3` ― どちらも`sum * a + b`を単一のFMADDDに融合）と、229〜235 msのno-contractグループ（Perry、Rustデフォルト、Swift、`-XX:+UseFMA`なしのJava、Bun）でスカラFMUL + FADDを実行。LLVMは`-ffp-contract=fast`でFMAグループに並びます；Perryはそれをデフォルトでは有効にしません。`nested_loops`はキャッシュバウンドであり、計算バウンドではありません；全員が8〜21 msに着地します。
 

@@ -14,25 +14,19 @@ tags: ["ecosystem", "perry/ui", "databases", "infrastructure", "milestone"]
 
 `perry/ui` คือพื้นผิว UI หลักและก้าวหน้าที่สุดของ Perry รวมถึงการจัดการสถานะแบบรีแอคทีฟ คอนเทนเนอร์เลย์เอาต์ (VStack, HStack, ZStack, SplitView) Canvas ที่ใช้การเร่งด้วยฮาร์ดแวร์ มุมมอง Table พร้อมการเรียงลำดับคอลัมน์ โมดูล `perry/system` สำหรับไดอะล็อกไฟล์ การเข้าถึง keychain การแจ้งเตือน และหลายหน้าต่าง — ทั้งหมดจาก TypeScript ทั้งหมดคอมไพล์เป็นการเรียก API ของแพลตฟอร์มโดยตรง แนวทาง UI อื่นๆ ทุกอย่างใน Perry รวมถึงเลเยอร์ความเข้ากันได้กับ React ถูกสร้างบน `perry/ui` และแมปกลับไปยังวิดเจ็ตของมัน
 
-app.ts
+**app.ts**
 
+```typescript
 import { Window, VStack, Button, Text, State } from 'perry/ui';
-
 const count = new State(0);
-
 const window = new Window({ title: "Counter" });
-
 window.setContent(
-
-new VStack({ children: \[
-
-new Text({ text: count }),
-
-new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
-
-\] })
-
+  new VStack({ children: [
+    new Text({ text: count }),
+    new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
+  ] })
 );
+```
 
 อ็อบเจ็กต์ `State` แบบรีแอคทีฟเป็นพื้นฐานสำคัญ เมื่อค่า State เปลี่ยน เฉพาะวิดเจ็ตที่ผูกกับสถานะนั้นเท่านั้นที่อัปเดต — ไม่มี การเปรียบเทียบ DOM เสมือน ไม่มีการเรนเดอร์ใหม่ทั้งต้นไม้ ไม่มีการปรับยอดใดๆ มันเป็นเส้นทางที่ตรงที่สุดจาก TypeScript ไปยัง UI เนทีฟของแพลตฟอร์มที่มีอยู่
 
@@ -40,27 +34,20 @@ new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
 
 สำหรับนักพัฒนาที่มาจาก React `perry-react` ให้เลเยอร์ความเข้ากันได้ที่แมปโมเดลคอมโพเนนต์ของ React ไปยัง วิดเจ็ตของ `perry/ui` คุณสามารถใช้ `useState`, `useRef`, `useReducer` และ JSX — แล้ว Perry จะคอมไพล์เป็น วิดเจ็ตเนทีฟเดียวกันข้างใต้ มันเป็นสะพานเพื่อความสะดวก ไม่ใช่เอนจินเรนเดอร์แยกต่างหาก
 
-counter.tsx
+**counter.tsx**
 
+```tsx
 import React, { useState } from 'react';
-
 function Counter() {
-
-const \[count, setCount\] = useState(0);
-
-return (
-
-<div\>
-
-<h1\>{count}</h1\>
-
-<button onClick\={() => setCount(count + 1)}\>+1</button\>
-
-</div\>
-
-);
-
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
 }
+```
 
 ภายใต้ฝากระโปรง ทุกเอลิเมนต์ JSX แมปไปยังวิดเจ็ต `perry/ui`: `<div>` กลายเป็น VStack, `<button>` กลายเป็น Button, `useState` รองรับโดย State แบบรีแอคทีฟของ Perry ยังอยู่ในช่วงเริ่มต้น — เฟส 1 พร้อมการเรนเดอร์ใหม่ทั้งต้นไม้และที่เก็บ hook แบบ global — แต่ พิสูจน์ว่าโค้ด React ที่มีอยู่สามารถเป้าหมายแพลตฟอร์มเนทีฟผ่าน Perry ได้ เรายังกำลัง สำรวจความเข้ากันได้กับ Angular และ Ionic ในแนวทางเดียวกัน
 
@@ -68,29 +55,21 @@ return (
 
 หากคุณกำลังสร้างเซิร์ฟเวอร์หรือแอปเดสก์ท็อปที่สื่อสารกับฐานข้อมูล Perry ตอนนี้ ครอบคลุมด้วย ORM ที่เข้ากันได้กับ Prisma 3 ตัว: `perry-prisma` (MySQL), `perry-sqlite` (SQLite) และ `perry-postgres` (PostgreSQL) ทั้ง 3 ตัวเป็นตัวแทนที่ แบบ drop-in ของ `@prisma/client` API เดียวกัน รูปแบบคิวรีเดียวกัน แต่คอมไพล์เป็นโค้ดเนทีฟพร้อม FFI ตรงกับฐานข้อมูล — ไม่มีเอนจิน Prisma ไม่มี Node.js
 
-database.ts
+**database.ts**
 
+```typescript
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
-
 // Same Prisma API — compiled to native SQL via Rust FFI
-
 const users = await prisma.user.findMany({
-
-where: { email: { contains: "@perry.dev" } },
-
-orderBy: { createdAt: "desc" },
-
-take: 10,
-
+  where: { email: { contains: "@perry.dev" } },
+  orderBy: { createdAt: "desc" },
+  take: 10,
 });
-
 await prisma.post.create({
-
-data: { title: "Hello", authorId: users\[0\].id },
-
+  data: { title: "Hello", authorId: users[0].id },
 });
+```
 
 ภายใต้ฝากระโปรง ORM แต่ละตัวเป็นฟรอนต์เอนด์ TypeScript ที่รองรับด้วยเลเยอร์ FFI ของ Rust โดยใช้ `sqlx` โฟลว์คิวรี: TypeScript ซีเรียลไลซ์คิวรีเป็น JSON ส่งผ่านขอบเขต FFI Rust สร้าง SQL แบบมีพารามิเตอร์ รันผ่านคอนเนกชันพูล และซีเรียลไลซ์ผลลัพธ์กลับ สกีมา Prisma จะถูกอ่านในเวลาบิลด์ — ไม่มีการพาร์สขณะรันไทม์
 
@@ -100,27 +79,20 @@ data: { title: "Hello", authorId: users\[0\].id },
 
 `perry-push` เป็นไลบรารีเดียวที่จัดการการแจ้งเตือนแบบ พุชข้ามทุกแพลตฟอร์ม: APNs (iOS/macOS), FCM (Android), Web Push (เบราว์เซอร์) และ WNS (Windows) แต่ละ provider เป็นโมดูล FFI ของ Rust ที่มีฟังก์ชันเพียง 3 ตัว: `*_provider_new`, `*_provider_close` และ `*_send`
 
-notify.ts
+**notify.ts**
 
+```typescript
 import { ApnProvider } from 'perry-push/apn';
-
 import { FcmProvider } from 'perry-push/fcm';
-
 const apn = new ApnProvider({ teamId, keyId, key });
-
 const fcm = new FcmProvider({ serviceAccount });
-
 // Unified result type for all providers
-
 const result = await apn.send({
-
-deviceToken: token,
-
-title: "New message",
-
-body: "You have a new reply",
-
+  deviceToken: token,
+  title: "New message",
+  body: "You have a new reply",
 });
+```
 
 การเข้ารหัสจัดการโดย `ring` — JWT แบบ ES256 สำหรับ APNs และ VAPID, RS256 สำหรับ บัญชีบริการ FCM, AES-GCM สำหรับการเข้ารหัส payload ของ Web Push ทั้งหมดคอมไพล์เป็นโค้ดเนทีฟ ไม่มี `node-gyp` ไม่มีการพึ่งพา OpenSSL
 

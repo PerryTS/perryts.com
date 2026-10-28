@@ -77,6 +77,6 @@ Nhỏ hơn nhưng thực: `perry setup ios --development` giờ cấp provision 
 
 Cá cược phía sau Perry luôn là “TypeScript native” chỉ có ý nghĩa nếu TypeScript *thực sự* chạy — không phải một tập con đồ chơi, mà là các package thực tế mà người ta `npm install`. Tháng này hầu hết là công việc đó: ít hơn một con số duy nhất để khoe, nhiều hơn một cú đẩy dài, không hào nhoáng để khép lại khoảng cách giữa “compile được” và “hoạt động được.” Các radar conformance và các test parity npm là bảng điểm chúng tôi đang theo dõi lúc này, và chúng tôi sẽ tiếp tục đăng các con số — cái tốt và cái còn chưa hoàn hảo.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Nguồn: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Vấn đề: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

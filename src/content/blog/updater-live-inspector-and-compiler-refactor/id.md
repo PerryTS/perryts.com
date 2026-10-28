@@ -147,7 +147,7 @@ Plus penyusulan kecil:
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — cabang Uint8Array di `substitute_locals`.
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` tersambung end-to-end (PR komunitas).
 
-## 6\. Windows + Scoop
+## 6. Windows + Scoop
 
 Cerita toolchain Windows terus jadi lebih sederhana. **v0.5.353** memaku `clang -target` di build host — clang non-MSVC di PATH (MinGW / MSYS2 / Anaconda / bundle GNU Rust) diam-diam menulis ulang IR `x86_64-pc-windows-msvc` Perry menjadi `windows-gnu`, dan lld-link tidak bisa menyelesaikan referensi `__main` yang disisipkan emitter mingw32 LLVM. `probe_clang_default_triple` baru menjalankan `clang --version` sekali per proses dan mencetak satu baris catatan informatif jika default host adalah GNU sementara kita menarget MSVC. Suppress dengan `PERRY_NO_CLANG_PROBE=1`.
 
@@ -188,6 +188,6 @@ perry compile main.ts -o app --enable-geisterhand
 ./app &  # lalu buka http://localhost:7676
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Sumber: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Masalah: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

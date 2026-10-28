@@ -55,13 +55,13 @@ Lazy tape'in tasarlandığı iş yükündeki sonuç (10k kayıt, ~1 MB blob, ara
 
 | Implementasyon | Medyan (ms) | p95 (ms) | σ | Tepe RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| perry (gen-gc + tembel bant)| 75 | 91 | 6.9 | 85 MB |
+| pas serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serialization)| 473 | 533 | 21.4 | 606 MB |
+| montaj betiği+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 **Medyan 75 ms** ile Perry karşılaştırmadaki en hızlı dinamik-tipli runtime — Bun'ı (259 ms), Node'u (394 ms), Kotlin'in sunucu JIT'ini (453 ms) yeniyor. 24 ms'de simdjson, SIMD-hızlandırmalı C++ tavanı ve sayfada bilinçli olarak duruyor — cherry-pick'in arkasına saklanmıyor. Perry onu yenmiyor. Amaç farkı göstermek, böylece kapatmanın bir hedefi olsun — `docs/json-typed-parse-plan.md`'de izleniyor.
 
@@ -81,12 +81,12 @@ Perry'nin performans rakamlarını sunma şekliyle ilgili üç şey değişti.
 
 Gerçekten katlanamaz manşet kernel'leri, RUNS=11 medyan, 2026-04-25'te v0.5.249'da yenilendi:
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+| Karşılaştırma| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| fibonacci| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_dependent| 235 | 229 | 129 | 229 | 322 | 232 |
+| object_create| 1 | 0 | 0 | 5 | 11 | 6 |
+| iç içe_döngüler| 18 | 8 | 8 | 11 | 18 | 21 |
 
 `fibonacci`'de Perry, derlenmiş grupla 3–15 ms içinde eşleşiyor. Java'nın HotSpot JIT'i, özyinelemeli çağrıyı inline ettiği için ~%11 daha hızlı. `loop_data_dependent`'ta kernel iki FP-contract kümesine ayrılıyor: ~128 ms'deki FMA-contract grubu (Go default, Apple Clang'daki `g++ -O3` — her ikisi de `sum * a + b`'yi tek bir FMADDD'ye birleştiriyor) ve 229–235 ms'deki no-contract grubu (Perry, Rust default, Swift, `-XX:+UseFMA`'sız Java, Bun) skaler FMUL + FADD çalıştırıyor. LLVM, FMA grubunu `-ffp-contract=fast` ile eşliyor; Perry bunu varsayılan olarak etkinleştirmiyor. `nested_loops` cache-bound, compute-bound değil; herkes 8–21 ms'ye iniyor.
 

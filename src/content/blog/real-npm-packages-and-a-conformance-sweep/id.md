@@ -77,6 +77,6 @@ Lebih kecil tetapi nyata: `perry setup ios --development` kini menyediakan provi
 
 Taruhan di balik Perry selalu bahwa “TypeScript native” hanya berarti jika TypeScript *nyata* berjalan — bukan subset mainan, tetapi paket aktual yang orang `npm install`. Bulan ini sebagian besar pekerjaan itu: kurang satu angka untuk dibanggakan, lebih dorongan panjang tanpa glamor untuk menutup gap antara “ter-compile” dan “berfungsi.” Radar konformansi dan tes paritas npm adalah papan skor yang kami awasi sekarang, dan kami akan terus memposting angkanya — yang bagus dan yang masih belum sempurna.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Sumber: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Masalah: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

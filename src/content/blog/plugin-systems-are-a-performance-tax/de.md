@@ -73,19 +73,14 @@ Hier kommt Perry ins Spiel. Perry kompiliert TypeScript direkt zu nativen Binär
 
 Wenn deine Module zu nativem Code kompilieren, werden "Plugins" einfach... Module. Sie komponieren zur Build-Zeit. Die finale Binärdatei hat null Plugin-Overhead, weil es keine Plugins gibt — nur nativen Code. Ein Express-Route-Handler, eine Middleware-Funktion, eine Utility-Bibliothek — sie alle kompilieren zu direkten Funktionsaufrufen in derselben Binärdatei. Kein dynamisches Laden, keine Serialisierung, keine Prozessgrenzen.
 
-terminal
-
-\# Deine App, deine Abhängigkeiten, deine "Plugins" — eine Binärdatei
-
+```text
+# Deine App, deine Abhängigkeiten, deine "Plugins" — eine Binärdatei
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 Das ist nicht theoretisch. Perry kompiliert bereits reale TypeScript-Frameworks — Hono, tRPC, Strapi — zu nativen ARM64-Binärdateien unter 2 MB, in weniger als einer Sekunde. Die Module, die diese Frameworks ausmachen, werden kompiliert, gelinkt und in eine einzelne ausführbare Datei inlined. Was in Node.js eine Plugin-Architektur mit Runtime-Overhead wäre, wird in einer Perry-Binärdatei zur Zero-Cost-Komposition.
 

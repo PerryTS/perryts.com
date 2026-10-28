@@ -147,7 +147,7 @@ Cùng vài cái nhỏ:
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — nhánh Uint8Array của `substitute_locals`.
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` nối từ đầu đến cuối (PR cộng đồng).
 
-## 6\. Windows + Scoop
+## 6. Windows + Muỗng
 
 Câu chuyện toolchain Windows vẫn đang đơn giản hóa. **v0.5.353** ghim `clang -target` trên các build host — clang không phải MSVC trên PATH (MinGW / MSYS2 / Anaconda / bundle GNU của Rust) đang im lặng viết lại IR `x86_64-pc-windows-msvc` của Perry thành `windows-gnu`, và lld-link không thể giải tham chiếu `__main` mà emitter mingw32 của LLVM chèn vào. `probe_clang_default_triple` mới chạy `clang --version` một lần mỗi process và in một dòng ghi chú thông tin khi default của host là GNU nhưng đang target MSVC. Có thể tắt với `PERRY_NO_CLANG_PROBE=1`.
 
@@ -188,6 +188,6 @@ perry compile main.ts -o app --enable-geisterhand
 ./app &  # rồi mở http://localhost:7676
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Nguồn: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Vấn đề: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues) — Nhật ký thay đổi: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 — Ralph

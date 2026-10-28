@@ -1,6 +1,6 @@
 ---
 title: "UI Native Lintas Platform dari TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Bagaimana Perry memetakan basis kode TypeScript ke widget platform di seluruh target yang terdokumentasi, termasuk batasan dan prasyarat khusus platform."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perbedaan kuncinya: **tidak ada lapisan runtime antara kode Anda dan SDK platfor
 
 Perry menyediakan API TypeScript umum untuk membangun antarmuka pengguna. API ini sengaja dibuat high-level — Anda mendeskripsikan apa yang harus ada di UI dan bagaimana perilakunya, dan Perry memetakannya ke konstruksi native yang sesuai.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Kode yang sama ini dikompilasi menjadi UI native di keenam platform. Tanpa `#ifdef`, tanpa pengecekan platform, tanpa import kondisional.
 
@@ -78,7 +70,7 @@ Binary yang dikompilasi terhubung dengan framework AppKit dan memanggil fungsi O
 
 Di iOS, pemetaannya serupa tapi menargetkan UIKit. `App` menjadi `UIApplication` dengan sebuah `UIWindow` dan root `UIViewController`. `Text` dipetakan ke `UILabel`. `Button` dipetakan ke `UIButton`. Layout menggunakan `UIStackView` dan Auto Layout. Event sentuh ditangani melalui responder chain UIKit.
 
-### Android — JNI + Views
+### Android — JNI + Tampilan
 
 Di Android, Perry menghasilkan library native yang dimuat melalui JNI (Java Native Interface). `App` dipetakan ke `Activity`. `Text` menjadi `TextView`. `Button` menjadi `android.widget.Button` dengan sebuah `OnClickListener`. `VStack` dipetakan ke `LinearLayout` vertikal. Kode native memanggil kembali ke framework Android melalui JNI, membuat dan memanipulasi view Android asli.
 

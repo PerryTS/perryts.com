@@ -1,6 +1,6 @@
 ---
 title: "Membangun Pry: Penampil JSON Native dalam TypeScript"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "Panduan membuat Pry, penampil JSON asli yang dikompilasi dari TypeScript ke kode mesin dengan runtime Perry dan GC tertaut dan tidak ada tampilan web."
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry ditulis dalam TypeScript standar. Tidak ada sintaks khusus, tidak ada macro,
 
 Berikut entry point-nya (disederhanakan untuk kejelasan):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 Itulah inti dari aplikasi native. Tanpa boilerplate framework, tanpa konfigurasi build, tanpa file khusus platform. Satu file TypeScript.
 
@@ -125,27 +82,20 @@ Itulah inti dari aplikasi native. Tanpa boilerplate framework, tanpa konfigurasi
 
 Pry juga menyertakan utilitas `countNodes` yang secara rekursif menghitung semua node dalam pohon JSON, dan helper `formatBytes` untuk menampilkan ukuran file. Ini adalah fungsi TypeScript standar — tidak ada yang khusus Perry. Mereka dikompilasi ke kode native seperti yang lainnya.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Mengkompilasi Pry
 
@@ -153,47 +103,39 @@ Mengkompilasi Pry dengan Perry adalah satu perintah. Tanpa proyek Xcode, tanpa k
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 Binary berukuran 48 MB karena mencakup seluruh stack UI AppKit — rendering tree view, highlighting pencarian, pewarnaan sintaks, dan penanganan keyboard. Sebagai perbandingan, aplikasi yang sama di Electron akan berukuran 200+ MB. Aplikasi Perry khusus CLI dikompilasi menjadi 2-5 MB.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 Build iOS terhubung dengan UIKit alih-alih AppKit. Perry memetakan API `TreeView` yang sama ke `UITableView` dengan section yang bisa di-expand, `SearchBar` ke `UISearchBar`, dan event sentuh menggantikan event mouse. Build iOS dapat di-deploy ke perangkat fisik dan simulator.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Build Android menghasilkan library native yang dimuat melalui JNI, dikemas ke dalam APK. `TreeView` dipetakan ke `RecyclerView` dengan expandable view holder, `SearchBar` dipetakan ke `EditText` dengan `TextWatcher`, dan status bar dipetakan ke `TextView` di bawah layout.
 

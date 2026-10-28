@@ -46,14 +46,14 @@ v0.5.0 a été le premier release avec LLVM comme seul backend. Nous nous attend
 
 Voici le tableau que je ne voulais pas publier à l'époque :
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+| Référence| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | 68x slower |
-| object\_create | 5ms | 318ms | 64x slower |
-| matrix\_multiply | 61ms | 184ms | 3x slower |
-| math\_intensive | 370ms | 131ms | 2.8x faster |
-| nested\_loops | 32ms | 57ms | 1.8x slower |
-| fibonacci(40) | 505ms | 1,156ms | 2.3x slower |
+| appels_méthodes| 16ms | 1,084ms | 68x slower |
+| objet_créer| 5ms | 318ms | 64x slower |
+| matrice_multiply| 61ms | 184ms | 3x slower |
+| math_intensive| 370ms | 131ms | 2.8x faster |
+| boucles_imbriquées| 32ms | 57ms | 1.8x slower |
+| fibonacci(40)| 505ms | 1,156ms | 2.3x slower |
 
 Certaines charges de travail se sont accélérées. La plupart se sont considérablement dégradées. `method_calls` — l'un des benchmarks les plus importants car il représente l'utilisation idiomatique des classes TypeScript — était près de 70x pire que ce que nous avions livré deux releases plus tôt.
 
@@ -137,23 +137,23 @@ La bascule LLVM avait régressé vers le chemin lent universel. Restaurer le dis
 
 Médiane de trois exécutions, macOS ARM64 (Apple Silicon, M1 Max), Node.js v25 :
 
-| Benchmark | Perry | Node.js | vs Node |
+| Référence| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+| factorielle| 24ms | 591ms | 24.6x |
+| appels_méthodes| 1ms | 11ms | 11x |
+| boucle_overhead| 12ms | 53ms | 4.4x |
+| math_intensive| 14ms | 49ms | 3.5x |
+| array_read| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | tied |
-| mandelbrot | 24ms | 24ms | tied |
-| object\_create | 9ms | 8ms | 0.9x |
+| array_write| 3ms | 8ms | 2.6x |
+| string_concat| 1ms | 2ms | 2x |
+| boucles_imbriquées| 9ms | 16ms | 1.7x |
+| prime_sieve| 4ms | 7ms | 1.7x |
+| matrice_multiply| 21ms | 34ms | 1.6x |
+| fibonacci(40)| 401ms | 991ms | 2.5x |
+| arbres_binaires| 9ms | 9ms | tied |
+| mandelbrot| 24ms | 24ms | tied |
+| objet_créer| 9ms | 8ms | 0.9x |
 
 Chaque benchmark est une victoire ou une égalité. Le plus serré est `object_create` (9ms vs 8ms), où l'allocateur de V8 est véritablement excellent.
 

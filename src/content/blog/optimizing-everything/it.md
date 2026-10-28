@@ -153,12 +153,12 @@ Il lavoro sulle performance fa emergere problemi di correttezza nel modo in cui 
 
 Il benchmark di punta dell'ultimo articolo era `factorial` a 24,6x più veloce di Node. Quel numero è invariato. Ciò che si è mosso questa settimana è tutto il resto:
 
-| Workload | v0.5.12 | v0.5.80 | Delta |
+| Carico di lavoro| v0.5.12 | v0.5.80 | Delta |
 | --- | --- | --- | --- |
 | JSON.parse (schema 20 record) | 547x più lento di Node | 1,3x più lento di Node | ~420x |
 | image\_conv (sfocatura 5×5 su 4K) | 1.980ms | 457ms | 4,3x |
-| Codice con molte proprietà (PIC hit) | baseline | 2–3x | 2–3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Codice con molte proprietà (PIC hit) | riferimento| 2–3x | 2–3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Uptime di Fastify sotto carico | ~60s prima del crash | indefinito | ∞ |
 
 La suite completa di 15 benchmark contro Node è ancora 14 vittorie e 1 pareggio — la stessa tabella dell'articolo precedente, con numeri leggermente migliori su tutta la linea. Il movimento reale di questa settimana è sui workload che non erano in quella suite: JSON, elaborazione immagini, server long-running. È lì che vivevano i divari, ed è ciò che si è chiuso.
@@ -185,7 +185,7 @@ perry init my-app && cd my-app
 perry compile src/main.ts -o my-app && ./my-app
 ```
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Docs: [docs.perryts.com](https://docs.perryts.com) — Changelog: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Documenti: [docs.perryts.com](https://docs.perryts.com) — Registro modifiche: [CHANGELOG.md](https://github.com/PerryTS/perry/blob/main/CHANGELOG.md)
 
 Issue, riproduttori e benchmark che non sono abbastanza veloci: continuate a mandarli. Questo ritmo funziona solo perché le segnalazioni di bug sono abbastanza specifiche da trasformarsi in riproduttori da una riga. Ogni commit in questo articolo ha un `#N` allegato per un motivo.
 

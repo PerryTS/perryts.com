@@ -73,19 +73,14 @@ C'est là que Perry entre en jeu. Perry compile TypeScript directement en binair
 
 Quand vos modules compilent en code natif, les "plugins" deviennent simplement... des modules. Ils se composent au moment de la construction. Le binaire final n'a aucune surcharge de plugin car il n'y a pas de plugins — juste du code natif. Un gestionnaire de route Express, une fonction middleware, une bibliothèque utilitaire — ils compilent tous en appels de fonction directs dans le même binaire. Pas de chargement dynamique, pas de sérialisation, pas de frontières de processus.
 
-terminal
-
-\# Votre app, vos dépendances, vos "plugins" — un seul binaire
-
+```text
+# Votre app, vos dépendances, vos "plugins" — un seul binaire
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 Ce n'est pas théorique. Perry compile déjà de vrais frameworks TypeScript — Hono, tRPC, Strapi — en binaires natifs ARM64 de moins de 2 Mo, en moins d'une seconde. Les modules qui composent ces frameworks sont compilés, liés et inlinés dans un seul exécutable. Ce qui serait une architecture de plugins avec surcharge à l'exécution dans Node.js devient une composition à coût zéro dans un binaire Perry.
 

@@ -25,31 +25,22 @@ Perry의 네이티브 UI 시스템 첫 번째 버전을 출시했을 때, "크�
 
 기술적으로 가장 흥미로운 추가 기능 중 하나가 Canvas 위젯(v0.2.152)입니다. TypeScript에서 직접 익숙한 2D 드로잉 API — 베지어 곡선, 채우기, 스트로크, 이미지 블리팅 — 를 제공하며, 플랫폼의 가속 2D 백엔드로 컴파일됩니다: macOS/iOS에서는 Core Graphics, Linux에서는 Cairo, Windows에서는 Direct2D, Android에서는 Skia.
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Table 위젯: NSTableView가 TypeScript로
 
@@ -57,25 +48,19 @@ v0.2.163에서 Table 위젯이 추가되었습니다 — 라이브러리에서 �
 
 TypeScript API는 선언적입니다: 컬럼을 정의하고 데이터 소스를 제공하면, Perry가 컴파일 타임에 플랫폼별 연결을 처리합니다. 컬럼 정렬, 선택 처리, 행 높이 커스터마이징이 모두 기본으로 작동합니다.
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## perry/system 모듈
 
@@ -85,7 +70,7 @@ v0.2.155에서는 `perry/system`도 도입되었습니다 — 런타임 없이 �
 -   `system.showSaveDialog()` — 네이티브 저장 다이얼로그
 -   `system.showAlert()` — 네이티브 알림 패널
 -   `system.notify()` — OS 알림 (UserNotifications / libnotify / WinRT)
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
+-   `system.keychain.get/set()` — 키체인 서비스/비밀 서비스/Windows 자격 증명 저장소
 -   `system.openWindow()` — 멀티 윈도우 관리
 
 이 모든 것이 네이티브 플랫폼 API를 직접 호출합니다 — Electron IPC도, 웹 뷰 브리지도 없습니다. Perry는 TypeScript 호출 지점을 플랫폼 SDK로의 직접 네이티브 함수 호출로 컴파일합니다.

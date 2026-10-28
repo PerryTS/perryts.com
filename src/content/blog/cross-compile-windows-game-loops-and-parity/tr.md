@@ -14,15 +14,14 @@ Uygulama, derleme zamanı `#[cfg]` kontrolünü çalışma zamanı hedef algıla
 
 Bağlayıcı otomatik olarak `/FORCE:UNRESOLVED` kullanır ve eksik UI sembolleri için stub'lar üretir, böylece CLI uygulamaları sorunsuz cross-compile olur. Windows hedeflendiğinde çıktı varsayılan olarak `.exe`'dir. Tam ayrıntılar [cross-compilation belgelerinde](https://docs.perryts.com) bulunabilir.
 
-terminal — Linux host
+**terminal — Linux ana bilgisayarı**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## iOS Oyun Döngüsü Desteği
 
@@ -30,23 +29,20 @@ iOS, UIKit'in ana iş parçacığına sahip olmasını gerektirir. Olay güdüml
 
 Etkinleştirildiğinde, derleyici `main` yerine `_perry_user_main` yayar. Çalışma zamanı, ana iş parçacığında `UIApplicationMain`'i çağıran ve kodunuzu bir arka plan iş parçacığında başlatan bir `main()` sağlar. Scene delegate ve app delegate, oyun döngünüz engellenmeden çalışırken tam UIKit yaşam döngüsünü yönetir.
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 Bu, daha önce iOS'ta pratik olmayan oyunlar, simülasyonlar, gerçek zamanlı görseller gibi bir uygulama kategorisinin tamamını mümkün kılıyor. iOS pump ve callback yolları artık panik yönetimi ile sarılmıştır, böylece oyun döngüsünde veya UIKit yaşam döngüsünde meydana gelen çökmeler temiz bir şekilde yakalanır.
 

@@ -1,6 +1,6 @@
 ---
 title: "Giới thiệu Perry"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry biên dịch TypeScript được hỗ trợ thành các tệp thực thi gốc độc lập với thời gian chạy và GC được liên kết bên trong mà không yêu cầu cài đặt Node.js bên ngoài hoặc JavaScript."
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Pipeline biên dịch của Perry có ba giai đoạn:
 
 Kết quả là một tệp thực thi độc lập — thường 2–5 MB cho một công cụ CLI — khởi động ngay lập tức với thời gian khởi động bằng không.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## Các tính năng TypeScript được hỗ trợ
 
@@ -68,9 +60,9 @@ Perry không chỉ giới hạn ở công cụ CLI và ứng dụng phía server
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField, và nhiều hơn nữa)
 -   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (cùng API với iOS, với các điều chỉnh dành riêng cho iPad)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
+-   **Android** — JNI + Chế độ xem Android (Hoạt động, Chế độ xem, Button, RecyclerView)
 -   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
--   **Windows** — Win32 (CreateWindowEx, common controls, GDI)
+-   **Windows** — Win32 (CreatWindowEx, điều khiển chung, GDI)
 
 Điểm mấu chốt là Perry ánh xạ một API TypeScript chung tới bộ công cụ widget gốc của từng nền tảng tại thời điểm biên dịch. Không có lớp bridge, không có web view, và không có engine render tùy chỉnh. Ứng dụng của bạn sử dụng widget nền tảng thực, được render bởi chính hệ điều hành. Đọc thêm trong bài phân tích chi tiết: [Giao diện người dùng gốc đa nền tảng từ TypeScript](/vi/blog/cross-platform-native-ui/).
 
@@ -94,17 +86,14 @@ Một trong những thách thức thực tế lớn nhất của một trình bi
 
 Perry hỗ trợ biên dịch chéo ngay từ đầu. Từ máy phát triển macOS, bạn có thể biên dịch cho Linux (x86\_64 và ARM64) và iOS. Điều này có nghĩa bạn có thể xây dựng pipeline CI/CD trên macOS và tạo ra các tệp nhị phân cho tất cả các nền tảng đích mà không cần máy build chuyên dụng cho từng nền tảng.
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## Hiệu năng
 
@@ -131,20 +120,15 @@ Xem toàn bộ [lộ trình](/vi/roadmap/) để biết chi tiết về những 
 
 Perry là mã nguồn mở. Bạn có thể clone repo, build từ mã nguồn, và bắt đầu biên dịch TypeScript ngay hôm nay:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 Duyệt mã nguồn trên [GitHub](https://github.com/PerryTS/perry), xem [showcase](/vi/showcase/) để thấy những gì đang được xây dựng với Perry, hoặc bắt tay ngay vào mã nguồn. Chúng tôi rất mong được thấy những gì bạn sẽ xây dựng.

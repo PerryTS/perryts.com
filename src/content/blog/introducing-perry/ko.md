@@ -1,6 +1,6 @@
 ---
 title: "Perry 소개"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry는 지원되는 TypeScript 코드를 런타임과 GC가 함께 링크된 독립 실행형 네이티브 프로그램으로 컴파일합니다. 외부 Node.js 설치나 JavaScript 엔진은 필요하지 않습니다."
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Perry의 컴파일 파이프라인에는 세 가지 단계가 있습니다:
 
 결과물은 독립 실행 파일입니다. CLI 도구의 경우 일반적으로 2~5 MB이며, 워밍업 시간 없이 즉시 시작됩니다.
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## 지원되는 TypeScript 기능
 
@@ -66,10 +58,10 @@ Perry는 TypeScript의 광범위하고 성장하는 하위 집합을 지원합�
 Perry는 CLI 도구와 서버사이드 애플리케이션에 국한되지 않습니다. 6개 플랫폼을 위한 네이티브 UI 프레임워크를 제공합니다:
 
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField 등)
--   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
+-   **iOS** — UIKit(UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (iOS와 동일한 API, iPad 전용 적응 포함)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
--   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
+-   **Android** — JNI + Android 뷰(활동, 뷰, Button, RecyclerView)
+-   **Linux** — GTK4(GtkWindow, GtkBox, GtkButton, GtkEntry)
 -   **Windows** — Win32 (CreateWindowEx, 공통 컨트롤, GDI)
 
 핵심 인사이트는 Perry가 공통 TypeScript API를 각 플랫폼의 네이티브 위젯 툴킷에 컴파일 시점에 매핑한다는 것입니다. 브리지 레이어도, 웹 뷰도, 커스텀 렌더링 엔진도 없습니다. 앱은 OS 자체가 렌더링하는 실제 플랫폼 위젯을 사용합니다. 자세한 내용은 심층 분석 글에서 확인하세요: [TypeScript에서의 크로스 플랫폼 네이티브 UI](/ko/blog/cross-platform-native-ui/).
@@ -94,17 +86,14 @@ Perry는 CLI 도구와 서버사이드 애플리케이션에 국한되지 않습
 
 Perry는 크로스 컴파일을 기본적으로 지원합니다. macOS 개발 머신에서 Linux(x86\_64 및 ARM64)와 iOS용으로 컴파일할 수 있습니다. 이를 통해 macOS에서 CI/CD 파이프라인을 구축하고 각 플랫폼 전용 빌드 머신 없이 모든 배포 대상용 바이너리를 생성할 수 있습니다.
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## 성능
 
@@ -131,20 +120,15 @@ UI 위젯 라이브러리 확장, 문자열 및 객체 성능 개선, 완전한 
 
 Perry는 오픈 소스입니다. 저장소를 클론하고, 소스에서 빌드하여 오늘부터 TypeScript 컴파일을 시작할 수 있습니다:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 소스 코드는 [GitHub](https://github.com/PerryTS/perry)에서 탐색하고, [쇼케이스](/ko/showcase/) 에서 Perry로 만들어지고 있는 것들을 확인하거나, 바로 코드에 뛰어드세요. 여러분이 무엇을 만들지 기대됩니다.

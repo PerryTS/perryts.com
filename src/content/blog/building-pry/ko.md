@@ -1,6 +1,6 @@
 ---
 title: "Pry 개발: TypeScript로 만드는 네이티브 JSON 뷰어"
-excerpt: "A walkthrough of building Pry, a native JSON viewer compiled from TypeScript to machine code with the Perry runtime and GC linked in and no webview."
+excerpt: "TypeScript에서 Perry 런타임과 GC가 연결되어 있고 Webview는 없는 기계어 코드로 컴파일된 기본 JSON 뷰어인 Pry를 빌드하는 방법을 안내합니다."
 date: 2025-02-20
 tags: ["tutorial", "showcase", "Pry"]
 ---
@@ -25,99 +25,56 @@ Pry는 표준 TypeScript로 작성되었습니다. 특별한 문법도, 매크�
 
 다음은 진입점입니다(명확성을 위해 간소화):
 
-pry.ts
+**pry.ts**
 
+```typescript
 import { App, VStack, TreeView, SearchBar, StatusBar, State }
-
 from "perry/ui";
-
 import { readFile, readStdin } from "perry/fs";
-
 // Read input from file arg or stdin
-
-const input = process.argv\[2\]
-
-? readFile(process.argv\[2\])
-
+const input = process.argv[2]
+? readFile(process.argv[2])
 : readStdin();
-
 const startTime = Date.now();
-
 const data = JSON.parse(input);
-
 const parseMs = Date.now() - startTime;
-
 // Reactive state
-
 const searchQuery = new State("");
-
 const matchCount = new State(0);
-
 // Build the app
-
 const app = new App("Pry", {
-
 width: 800,
-
 height: 600,
-
 minWidth: 400,
-
 minHeight: 300,
-
 });
-
 app.body(() => {
-
-return VStack({ spacing: 0 }, \[
-
+return VStack({ spacing: 0 }, [
 SearchBar({
-
 placeholder: "Search keys and values...",
-
 onSearch: (q) => searchQuery.value = q,
-
 }),
-
 TreeView(data, {
-
 collapsible: true,
-
 syntaxHighlight: true,
-
 searchQuery: searchQuery,
-
 onMatchCount: (n) => matchCount.value = n,
-
 copyOnClick: true,
-
 }),
-
-StatusBar(\[
-
-\`${countNodes(data)} nodes\`,
-
-\`Parsed in ${parseMs}ms\`,
-
-\`${matchCount.value} matches\`,
-
-\]),
-
-\]);
-
+StatusBar([
+`${countNodes(data)} nodes`,
+`Parsed in ${parseMs}ms`,
+`${matchCount.value} matches`,
+]),
+]);
 });
-
 app.registerShortcut("/", () => app.focusSearchBar());
-
 app.registerShortcut("Escape", () => {
-
 searchQuery.value = "";
-
 app.focusTree();
-
 });
-
 app.run();
+```
 
 이것이 네이티브 애플리케이션의 핵심입니다. 프레임워크 보일러플레이트 없이, 빌드 설정 없이, 플랫폼별 파일 없이. 하나의 TypeScript 파일입니다.
 
@@ -125,27 +82,20 @@ app.run();
 
 Pry에는 JSON 트리의 모든 노드를 재귀적으로 세는 `countNodes`유틸리티와 파일 크기를 표시하기 위한 `formatBytes`헬퍼도 포함되어 있습니다. 이들은 표준 TypeScript 함수이며 Perry 고유의 것은 없습니다. 다른 모든 것과 마찬가지로 네이티브 코드로 컴파일됩니다.
 
-utils.ts
+**utils.ts**
 
+```typescript
 export function countNodes(data: unknown): number {
-
 if (data === null || typeof data !== "object") {
-
 return 1;
-
 }
-
 if (Array.isArray(data)) {
-
 return 1 + data.reduce((sum, item) => sum + countNodes(item), 0);
-
 }
-
-const values = Object.values(data as Record<string, unknown\>);
-
+const values = Object.values(data as Record<string, unknown>);
 return 1 + values.reduce((sum, val) => sum + countNodes(val), 0);
-
 }
+```
 
 ## Pry 컴파일
 
@@ -153,47 +103,39 @@ Perry로 Pry를 컴파일하는 것은 단일 명령입니다. Xcode 프로젝�
 
 ### macOS (ARM64)
 
+```
 $ perry build pry.ts --target macos-arm64
-
 Parsing pry.ts...
-
 Resolving imports: perry/ui, perry/fs
-
 Compiling (cranelift, arm64)...
-
 Linking with AppKit.framework...
-
 ✓ Built executable: pry (48 MB)
-
 $ file pry
-
 pry: Mach-O 64-bit executable arm64
-
 $ otool -L pry | head -5
-
 pry:
-
 /System/Library/Frameworks/AppKit.framework/AppKit
-
 /System/Library/Frameworks/Foundation.framework/Foundation
-
 /usr/lib/libSystem.B.dylib
+```
 
 바이너리가 48 MB인 이유는 전체 AppKit UI 스택 — 트리 뷰 렌더링, 검색 하이라이팅, 구문 색상 지정, 키보드 처리를 포함하기 때문입니다. 비교하면 같은 앱이 Electron에서는 200+ MB입니다. CLI 전용 Perry 앱은 2~5 MB로 컴파일됩니다.
 
 ### iOS
 
+```
 $ perry build pry.ts --target ios-arm64
-
 ✓ Built executable: pry (52 MB)
+```
 
 iOS 빌드는 AppKit 대신 UIKit에 링크합니다. Perry는 동일한 `TreeView` API를 확장 가능한 섹션이 있는`UITableView`에, `SearchBar`를 `UISearchBar`에 매핑하고, 터치 이벤트가 마우스 이벤트를 대체합니다. iOS 빌드는 실제 기기와 시뮬레이터에 배포할 수 있습니다.
 
 ### Android
 
+```
 $ perry build pry.ts --target android-arm64
-
 ✓ Built: pry.apk
+```
 
 Android 빌드는 JNI를 통해 로드되는 네이티브 라이브러리를 생성하여 APK에 패키징합니다. `TreeView`는 확장 가능한 뷰 홀더가 있는`RecyclerView`에 매핑되고,`SearchBar`는 `TextWatcher`가 있는 `EditText`에 매핑되며, 상태 바는 레이아웃 하단의`TextView`에 매핑됩니다.
 

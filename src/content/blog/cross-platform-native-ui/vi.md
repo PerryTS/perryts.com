@@ -1,6 +1,6 @@
 ---
 title: "UI gốc đa nền tảng từ TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Cách Perry ánh xạ một cơ sở mã TypeScript tới các tiện ích nền tảng trên các mục tiêu được ghi lại của nó, bao gồm các giới hạn và điều kiện tiên quyết dành riêng cho nền tảng."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perry áp dụng một cách tiếp cận hoàn toàn khác. Thay vì chạy mã
 
 Perry cung cấp một API TypeScript chung để xây dựng giao diện người dùng. API này có chủ đích ở mức cao — bạn mô tả UI nên chứa gì và hành xử như thế nào, và Perry ánh xạ nó tới các cấu trúc native phù hợp.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Cùng một đoạn mã này biên dịch thành UI native trên cả sáu nền tảng. Không cần `#ifdef`, không cần kiểm tra nền tảng, không cần import có điều kiện.
 
@@ -78,7 +70,7 @@ Binary đã biên dịch liên kết với framework AppKit và gọi trực ti�
 
 Trên iOS, ánh xạ tương tự nhưng nhắm tới UIKit. `App` trở thành `UIApplication` với một `UIWindow` và root `UIViewController`. `Text` ánh xạ tới `UILabel`. `Button` ánh xạ tới `UIButton`. Layout sử dụng `UIStackView` và Auto Layout. Sự kiện chạm được xử lý thông qua chuỗi responder của UIKit.
 
-### Android — JNI + Views
+### Android — JNI + Lượt xem
 
 Trên Android, Perry sinh một thư viện native được nạp qua JNI (Java Native Interface). `App` ánh xạ tới `Activity`. `Text` trở thành `TextView`. `Button` trở thành `android.widget.Button` với một `OnClickListener`. `VStack` ánh xạ tới `LinearLayout` dọc. Mã native gọi lại vào framework Android thông qua JNI, tạo và thao tác các view Android thực.
 

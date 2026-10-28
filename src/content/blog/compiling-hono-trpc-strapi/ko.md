@@ -36,41 +36,32 @@ TypeScript의 다양한 형태를 대표하기 때문에 이 세 가지를 선�
 
 이것이 큰 이정표였습니다. Hono의 내보내기 구조:
 
-hono export chain
+**hono 수출 체인**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 이 `export { Hono }`는 이름 지정 재수출입니다 —`export * from`도 `export { Hono } from './hono'`도 아닙니다. Perry의 HIR에서 이것은 `Export::Named`가 되며,`Export::ReExport`나 `Export::ExportAll`이 아닙니다. 이전에 컴파일러의 클래스 전파는`ExportAll`과 `ReExport`체인만 따라갔기 때문에, `index.ts`에서 `Hono`를 가져오면 조용히 실패하여 `new Hono()`가 `undefined`를 반환했습니다.
 
 이제 Perry는 `Export::Named`를 모듈의 import를 거슬러 원래 클래스 정의를 찾아 전파합니다. 결과:
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 Hono 생성자가 실행되고, `SmartRouter`(내부에서 `RegExpRouter`와 `TrieRouter` 모두를 생성)를 초기화하고, 실제 객체를 반환합니다. 독립적인 여러 인스턴스가 작동합니다. 생성자 옵션도 수락됩니다.
 
@@ -78,23 +69,22 @@ Hono 생성자가 실행되고, `SmartRouter`(내부에서 `RegExpRouter`와 `Tr
 
 tRPC의 `initTRPC`는 4단계 깊이에 있습니다:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 `ExportAll` → `Named` → `ExportAll`입니다. Perry는 전체 체인을 해석합니다 — `initTRPC`는 컴파일된 바이너리에서 접근 가능합니다. 같은 경로를 따르는 `TRPCError`도 마찬가지입니다.
 
 ### 인수가 있는 크로스 모듈 클래스 인스턴스화
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError`는 하나의 모듈에서 정의되고, 세 개의 중간 배럴 파일을 통해 재수출되며, 테스트에서 가져와 옵션 객체로 인스턴스화됩니다. 인스턴스의 `code` 필드에 접근 가능합니다.
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi는 워크스페이스 패키지를 사용합니다 — `@strapi/core`는 모노레포 내 형제 패키지이며, npm 의존성이 아닙니다. Perry는 `package.json` exports 필드를 통해 베어 지정자를 해석합니다:
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 `createStrapi` 함수는 `export * from '@strapi/core'`를 통해 호출 가능한 함수로 올바르게 해석됩니다.
 
@@ -128,27 +118,23 @@ TypeScript의 `export type { Foo }` 문법은 런타임에서 의미가 없지�
 
 Hono의 생성자는 HTTP 메서드 핸들러를 동적으로 설정합니다:
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 `app.get`, `app.post`등은 정적으로 선언되지 않으며, 계산된 프로퍼티 이름을 통해 런타임에 할당됩니다. Perry는 아직 `this[variable] = value`를 지원하지 않으므로 이 메서드들이 누락됩니다:
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 Hono에 대한 가장 큰 단일 갭입니다. Hono 클래스는 존재하고 라우터가 초기화되지만, 라우트를 등록할 수 없습니다.
 
@@ -156,7 +142,9 @@ Hono에 대한 가장 큰 단일 갭입니다. Hono 클래스는 존재하고 �
 
 tRPC는 진입점을 다음과 같이 정의합니다:
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 런타임에서 `initTRPC`는 `typeof object`가 아닌 `typeof function`으로 나타납니다 — 모듈 수준의 `new TRPCBuilder()` 표현식이 생성자를 실행하지 않으므로 인스턴스가 아닌 클래스에 대한 참조를 얻습니다. 따라서 `initTRPC.create()`와 `initTRPC.context()`는 모두 `undefined`입니다.
 
@@ -174,15 +162,15 @@ Strapi의 `createStrapi()` 함수는 내부적으로 `new Strapi(opts)`를 호�
 
 | 클래스 | 횟수 |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| 응답| 11 |
+| 변환스트림| 7 |
+| 읽기 가능한 스트림| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| 텍스트인코더스트림| 2 |
+| 쓰기 가능 스트림| 1 |
+| DOM예외| 1 |
 
 `Response`, `Request`,`Headers`가 모든 HTTP 프레임워크에 중요합니다. `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` 등에 이미 있는 것과 유사한 내장 코드 생성 지원이 필요합니다.
 

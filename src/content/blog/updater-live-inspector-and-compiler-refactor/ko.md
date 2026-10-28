@@ -147,7 +147,7 @@ macOS 디스패처는 연결됐고; Linux / Windows / iOS / tvOS / visionOS / An
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — `substitute_locals` Uint8Array 분기.
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync`를 엔드투엔드로 연결(커뮤니티 PR).
 
-## 6\. Windows + Scoop
+## 6. 윈도우 + 스쿠프
 
 Windows 툴체인 이야기는 계속해서 단순화됩니다. **v0.5.353**은 호스트 빌드에서 `clang -target`을 핀 처리했습니다 — PATH 상의 비-MSVC clang(MinGW / MSYS2 / Anaconda / Rust GNU 번들)이 Perry의 `x86_64-pc-windows-msvc` IR을 조용히 `windows-gnu`로 다시 쓰고 있었고, lld-link는 LLVM의 mingw32 이미터가 삽입한 `__main` 참조를 해결하지 못하고 있었습니다. 새 `probe_clang_default_triple`은 프로세스당 한 번 `clang --version`을 실행하고, 호스트 기본값이 GNU인데 우리가 MSVC를 타깃하고 있을 때 정보 노트를 한 줄 출력합니다. `PERRY_NO_CLANG_PROBE=1`로 억제 가능.
 

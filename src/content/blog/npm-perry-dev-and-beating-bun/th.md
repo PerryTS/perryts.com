@@ -25,7 +25,7 @@ package เป็น launcher บาง ๆ ที่ขึ้นกับ optio
 
 การ publish ผ่าน OIDC Trusted Publisher เพื่อให้ทุก release มี provenance และผูกกลับไปที่ CI job ที่ build มัน นั่นคือหนึ่งวันของงาน CI ในตัวมันเอง — commit CI `v0.5.107` หลายอันไล่หาคอมบิเนชันของ `--provenance` / npm version / workflow path ที่ถูกต้อง — แต่มันลงจอด และทุก release ตั้งแต่นั้นก็สะอาด ผู้ใช้ Windows เป็นพลเมืองชั้นหนึ่งแล้ว และแรงเสียดทานข้ามทีมของ “ติดตั้งตามที่ OS ของคุณชอบ” หายไป
 
-## 2\. `perry dev` — watch mode
+## 2. `perry dev` — โหมดสมาร์ทวอทช์
 
 v0.5.143 เพิ่ม CLI subcommand ใหม่:
 
@@ -46,7 +46,7 @@ cache ทั้งสองซ้อนทับกัน การแก้ไ�
 
 ที่ v0.5.166 README มีข้อแม้ตามตรงหนึ่งอัน: Perry ช้ากว่า Node 1.6 เท่าใน `json_roundtrip` (50x `JSON.parse` + `JSON.stringify` บน blob ขนาด 1MB 10K รายการ) และช้ากว่า Bun 2.4 เท่า Issue [#149](https://github.com/PerryTS/perry/issues/149) ติดตามการ follow-up พอถึง v0.5.173 — เจ็ดวันต่อมา — ช่องว่างนั้นก็ปิด
 
-| Workload | Perry v0.5.173 | Node v25 | Bun 1.3 |
+| ปริมาณงาน| Perry v0.5.173 | Node v25 | Bun 1.3 |
 | --- | --- | --- | --- |
 | `json_roundtrip` | 314ms | 377ms | 250ms |
 | `closure` | 10ms | 309ms | 51ms |

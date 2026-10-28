@@ -78,7 +78,7 @@ Le backend de l'interface Windows a reçu sa mise à jour la plus complète à c
 -   **Intégration Geisterhand** — tous les types de widgets enregistrés auprès du framework de test d'interface, `/type` utilise `SendMessageW` via la carte HWND
 -   **Support caméra Android** — API de capture caméra étendue à Android via JNI
 
-## Performance
+## Performances
 
 v0.4.14 a livré un audit de performance complet :
 

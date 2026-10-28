@@ -14,25 +14,19 @@ Yeni kütüphanelere girmeden önce, her şeyin merkezinde ne olduğunu vurgulam
 
 `perry/ui`, Perry'nin birincil ve en gelişmiş UI yüzeyidir. Reaktif durum yönetimi, düzen konteynerları (VStack, HStack, ZStack, SplitView), donanım hızlandırmalı Canvas, sütun sıralamalı Table görünümleri, dosya diyalogları, keychain erişimi, bildirimler ve çoklu pencere için `perry/system` modülünü içerir — hepsi TypeScript'ten, hepsi doğrudan platform API çağrılarına derlenir. React uyumluluk katmanı dahil Perry'deki diğer tüm UI yaklaşımları, `perry/ui` üzerine inşa edilir ve onun widget'larına eşlenir.
 
-app.ts
+**app.ts**
 
+```typescript
 import { Window, VStack, Button, Text, State } from 'perry/ui';
-
 const count = new State(0);
-
 const window = new Window({ title: "Counter" });
-
 window.setContent(
-
-new VStack({ children: \[
-
-new Text({ text: count }),
-
-new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
-
-\] })
-
+  new VStack({ children: [
+    new Text({ text: count }),
+    new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
+  ] })
 );
+```
 
 Reaktif `State` nesnesi anahtar ilkeldir. Bir State değeri değiştiğinde, yalnızca o duruma bağlı widget'lar güncellenir — sanal DOM karşılaştırması yok, tam ağaç yeniden renderlama yok, uzlaştırma geçişi yok. TypeScript'ten yerel platform UI'sine mevcut en doğrudan yoldur.
 
@@ -40,27 +34,20 @@ Reaktif `State` nesnesi anahtar ilkeldir. Bir State değeri değiştiğinde, yal
 
 React'ten gelen geliştiriciler için, `perry-react` React'ın bileşen modelini `perry/ui` widget'larına eşleyen bir uyumluluk katmanı sağlar. `useState`, `useRef`, `useReducer` ve JSX kullanabilirsiniz — ve Perry bunları altındaki aynı yerel widget'lara derler. Ayrı bir renderlama motoru değil, bir kolaylık köprüsüdür.
 
-counter.tsx
+**counter.tsx**
 
+```tsx
 import React, { useState } from 'react';
-
 function Counter() {
-
-const \[count, setCount\] = useState(0);
-
-return (
-
-<div\>
-
-<h1\>{count}</h1\>
-
-<button onClick\={() => setCount(count + 1)}\>+1</button\>
-
-</div\>
-
-);
-
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
 }
+```
 
 Perde arkasında, her JSX öğesi bir `perry/ui` widget'ına eşlenir: `<div>` bir VStack olur, `<button>` bir Button olur, `useState` Perry'nin reaktif State'i tarafından desteklenir. Erken aşamada — tam ağaç yeniden renderlama ve global hook depolama ile Faz 1 — ama mevcut React kodunun Perry aracılığıyla yerel platformları hedefleyebildiğini kanıtlıyor. Benzer hatlar boyunca Angular ve Ionic uyumluluğunu da keşfediyoruz.
 
@@ -68,29 +55,21 @@ Perde arkasında, her JSX öğesi bir `perry/ui` widget'ına eşlenir: `<div>` b
 
 Bir veritabanıyla iletişim kuran bir sunucu veya masaüstü uygulaması oluşturuyorsanız, Perry artık sizi Prisma uyumlu üç ORM ile karşılıyor: `perry-prisma` (MySQL), `perry-sqlite` (SQLite) ve `perry-postgres` (PostgreSQL). Üçü de `@prisma/client` için doğrudan yerine geçen değişikliklerdir. Aynı API, aynı sorgu kalıpları, ama doğrudan veritabanı FFI'si ile yerel koda derlenir — Prisma motoru yok, Node.js yok.
 
-database.ts
+**database.ts**
 
+```typescript
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
-
 // Same Prisma API — compiled to native SQL via Rust FFI
-
 const users = await prisma.user.findMany({
-
-where: { email: { contains: "@perry.dev" } },
-
-orderBy: { createdAt: "desc" },
-
-take: 10,
-
+  where: { email: { contains: "@perry.dev" } },
+  orderBy: { createdAt: "desc" },
+  take: 10,
 });
-
 await prisma.post.create({
-
-data: { title: "Hello", authorId: users\[0\].id },
-
+  data: { title: "Hello", authorId: users[0].id },
 });
+```
 
 Perde arkasında, her ORM `sqlx` kullanan bir Rust FFI katmanı tarafından desteklenen bir TypeScript ön yüzüdür. Sorgu akışı: TypeScript sorguyu JSON'a serileştirir, FFI sınırı üzerinden geçirir, Rust parametreli SQL oluşturur, bağlantı havuzu üzerinden çalıştırır ve sonucu geri serileştirir. Prisma şeması derleme zamanında okunur — sıfır çalışma zamanı ayrıştırma.
 
@@ -100,27 +79,20 @@ Perde arkasında, her ORM `sqlx` kullanan bir Rust FFI katmanı tarafından dest
 
 `perry-push`, her platformda push bildirimlerini yöneten tek bir kütüphanedir: APNs (iOS/macOS), FCM (Android), Web Push (tarayıcılar) ve WNS (Windows). Her sağlayıcı, tam olarak üç fonksiyona sahip bir Rust FFI modülüdür: `*_provider_new`, `*_provider_close` ve `*_send`.
 
-notify.ts
+**notify.ts**
 
+```typescript
 import { ApnProvider } from 'perry-push/apn';
-
 import { FcmProvider } from 'perry-push/fcm';
-
 const apn = new ApnProvider({ teamId, keyId, key });
-
 const fcm = new FcmProvider({ serviceAccount });
-
 // Unified result type for all providers
-
 const result = await apn.send({
-
-deviceToken: token,
-
-title: "New message",
-
-body: "You have a new reply",
-
+  deviceToken: token,
+  title: "New message",
+  body: "You have a new reply",
 });
+```
 
 Kriptografi `ring` tarafından yönetilir — APNs ve VAPID için ES256 JWT'ler, FCM hizmet hesapları için RS256, Web Push yük şifrelemesi için AES-GCM. Hepsi yerel koda derlenir.`node-gyp` yok, OpenSSL bağımlılığı yok.
 

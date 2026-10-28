@@ -1,6 +1,6 @@
 ---
 title: "TypeScript로 크로스 플랫폼 네이티브 UI 구현"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Perry가 하나의 TypeScript 코드베이스를 플랫폼별 제한 사항 및 전제 조건을 포함하여 문서화된 대상 전체의 플랫폼 위젯에 매핑하는 방법"
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perry는 근본적으로 다른 접근 방식을 취합니다. 런타임에서 �
 
 Perry는 사용자 인터페이스를 구축하기 위한 공통 TypeScript API를 제공합니다. 이 API는 의도적으로 높은 수준입니다 — UI에 무엇을 포함하고 어떻게 동작해야 하는지를 기술하면, Perry가 적절한 네이티브 구성으로 매핑합니다.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 동일한 코드가 6개 플랫폼 모두에서 네이티브 UI로 컴파일됩니다. `#ifdef` 없이, 플랫폼 체크 없이, 조건부 import 없이.
 
@@ -78,15 +70,15 @@ macOS에서 Perry는 AppKit 객체를 직접 생성하고 관리하는 코드를
 
 iOS에서 매핑은 유사하지만 UIKit을 대상으로 합니다. `App`은 `UIWindow`와 루트 `UIViewController`를 가진`UIApplication`이 됩니다. `Text`는 `UILabel`에 매핑됩니다. `Button`은 `UIButton`에 매핑됩니다. 레이아웃은 `UIStackView`과 Auto Layout을 사용합니다. 터치 이벤트는 UIKit의 리스폰더 체인을 통해 처리됩니다.
 
-### Android — JNI + Views
+### Android — JNI + 뷰
 
 Android에서 Perry는 JNI(Java Native Interface)를 통해 로드되는 네이티브 라이브러리를 생성합니다. `App`은 `Activity`에 매핑됩니다. `Text`는 `TextView`가 됩니다. `Button`은 `OnClickListener`가 있는`android.widget.Button`이 됩니다. `VStack`은 수직 `LinearLayout`에 매핑됩니다. 네이티브 코드는 JNI를 통해 Android 프레임워크를 호출하여 실제 Android 뷰를 생성하고 조작합니다.
 
-### Linux — GTK4
+### 리눅스 — GTK4
 
 Linux에서 Perry는 GTK4를 대상으로 합니다. `App`은 `GtkApplicationWindow`를 가진`GtkApplication`이 됩니다. `Text`는 `GtkLabel`에 매핑됩니다. `Button`은 시그널 핸들러가 있는`GtkButton`에 매핑됩니다. `VStack`은 수직 방향의 `GtkBox`에 매핑됩니다. GTK의 CSS 테마 기능으로 앱이 사용자의 데스크톱 테마를 자동으로 따릅니다.
 
-### Windows — Win32
+### 윈도우 — Win32
 
 Windows에서 Perry는 Win32 API 호출을 생성합니다. `App`은 윈도우 클래스를 생성하고 등록하며 메시지 루프를 실행합니다. `Button`은 `CreateWindowEx`로 생성된`BUTTON` 컨트롤이 됩니다. `Text`는 `STATIC` 컨트롤에 매핑됩니다. 이벤트는 Win32 메시지 펌프(`WM_COMMAND`, `WM_NOTIFY` 등)를 통해 처리됩니다.
 

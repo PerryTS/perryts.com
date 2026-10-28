@@ -14,15 +14,14 @@ L'implémentation remplace les vérifications `#[cfg]` à la compilation par une
 
 L'éditeur de liens utilise automatiquement `/FORCE:UNRESOLVED` et génère des stubs pour les symboles UI manquants, permettant aux apps CLI de se compiler proprement. La sortie est par défaut en `.exe` pour le ciblage Windows. Les détails complets sont dans la [documentation de compilation croisée](https://docs.perryts.com).
 
-terminal — Linux host
+**terminal — Hôte Linux**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## Support des boucles de jeu iOS
 
@@ -30,23 +29,20 @@ iOS exige que UIKit possède le thread principal. C'est acceptable pour les apps
 
 Lorsqu'il est activé, le compilateur émet `_perry_user_main` au lieu de `main`. Le runtime fournit un `main()` qui appelle `UIApplicationMain` sur le thread principal et lance votre code sur un thread d'arrière-plan. Le scene delegate et l'app delegate gèrent le cycle de vie UIKit complet pendant que votre boucle de jeu s'exécute sans blocage.
 
-main.ts
+**main.ts**
 
+```typescript
 // Votre boucle de jeu s'exécute sur un thread d'arrière-plan
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
 Cela ouvre toute une catégorie d'applications — jeux, simulations, visualisations en temps réel — qui n'étaient pas pratiques sur iOS auparavant. Les chemins de pompe et de callback iOS sont désormais également enveloppés dans la gestion des panics, de sorte que les crashes dans la boucle de jeu ou le cycle de vie UIKit sont capturés proprement.
 

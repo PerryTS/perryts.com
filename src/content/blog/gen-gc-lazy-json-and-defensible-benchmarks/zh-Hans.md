@@ -55,13 +55,13 @@ JSON 流水线是这一时期改动最深入的重写。旧行为：`JSON.parse`
 
 | 实现 | 中位数 (ms) | p95 (ms) | σ | 峰值 RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto` (simdjson)| 24 | 28 | 1.2 | 8 MB |
+| perry（gen-gc + 惰性磁带）| 75 | 91 | 6.9 | 85 MB |
+| rust serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin（kotlinx.序列化）| 473 | 533 | 21.4 | 606 MB |
+| assemblyscript+json-as (wasmtime)| 598 | 621 | 10.5 | 58 MB |
 
 Perry 在 **75 ms 中位数**下，是这次对比中最快的动态类型 runtime——击败 Bun（259 ms）、击败 Node（394 ms）、击败 Kotlin 服务端 JIT（453 ms）。simdjson 在 24 ms 是 SIMD 加速的 C++ 天花板，故意留在页面上而不是被精挑细选地藏起来。Perry 没有击败它。重点是把这个差距摆出来，这样要去缩小它就有目标——已在 `docs/json-typed-parse-plan.md` 中跟踪。
 
@@ -81,12 +81,12 @@ Perry 在 **75 ms 中位数**下，是这次对比中最快的动态类型 runti
 
 真正不可折叠的头牌内核，RUNS=11 中位数，2026-04-25 在 v0.5.249 刷新：
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+|基准测试| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+|斐波那契| 318 | 330 | 315 | 282 | 1022 | 589 |
+|循环数据依赖| 235 | 229 | 129 | 229 | 322 | 232 |
+|对象创建| 1 | 0 | 0 | 5 | 11 | 6 |
+|嵌套循环| 18 | 8 | 8 | 11 | 18 | 21 |
 
 在 `fibonacci` 上，Perry 与编译型那组只差 3–15 ms。Java 的 HotSpot JIT 因为内联了递归调用，要快约 11%。在 `loop_data_dependent` 上，这个内核分裂为两个 FP-contract 簇：约 128 ms 的 FMA-contract 组（Go 默认、Apple Clang 上的 `g++ -O3`——两者都把 `sum * a + b` 融合成一条 FMADDD），以及 229–235 ms 的 no-contract 组（Perry、Rust 默认、Swift、未带 `-XX:+UseFMA` 的 Java、Bun）跑标量的 FMUL + FADD。LLVM 在 `-ffp-contract=fast` 下能匹平 FMA 组；Perry 默认不开这个。`nested_loops` 是 cache-bound 而不是 compute-bound；所有人都落在 8–21 ms。
 

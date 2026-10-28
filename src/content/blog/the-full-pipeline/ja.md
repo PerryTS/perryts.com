@@ -28,17 +28,13 @@ Perryに本格的なドキュメントサイトができました。mdBookで構
 
 Perryは、ソースからのビルドに加えて、HomebrewとAPTを通じて配布されるようになりました。新しい GitHub Actionsリリースパイプラインが、macOS（arm64とx86\_64）と Linux（x86\_64とarm64）用のバイナリをビルドし、HomebrewタップとAPTリポジトリを自動的に更新します。
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
 リポジトリをクローンしてCargoでビルドする必要はもうありません。他のツールと同じ方法でPerryをインストールできます。
 
@@ -65,9 +61,9 @@ Android公開にも自動トリガーのセットアップウィザードが追�
 
 PerryはTypeScriptをネイティブSwiftUI WidgetKit拡張にコンパイルできるようになりました。これはラッパーや ブリッジではありません — コンパイラがHIRレベルでレンダーツリーを走査し、SwiftUIソースコードを 直接出力します。出力はXcode（またはPerryのビルドパイプライン）がアプリに埋め込める完全な WidgetKit拡張バンドルです。
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
 このアプローチはPerryの他のコンパイルとは根本的に異なります。通常のPerryコードは Craneliftを経てネイティブマシンコードになります。ウィジェットコードはHIRからSwiftUI テキスト出力になります。なぜならWidgetKitはSwiftUIを要求するからです — 命令型UIKitや AppKitコードでウィジェット拡張を構築する方法はありません。Perryはウィジェットのレンダーツリーを ランタイムコードではなくコンパイル時テンプレートとして扱うことでこれを解決します。
 

@@ -36,41 +36,32 @@ tags: ["compiler", "frameworks", "progress"]
 
 นี่คือจุดเปลี่ยนสำคัญ โครงสร้างการส่งออกของ Hono มีลักษณะดังนี้:
 
-hono export chain
+**hono เชนการส่งออก**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 `export { Hono }` นั้นเป็น named re-export — ไม่ใช่ `export * from` หรือ `export { Hono } from './hono'` ใน HIR ของ Perry สิ่งนี้กลายเป็น `Export::Named` ไม่ใช่ `Export::ReExport` หรือ `Export::ExportAll` ก่อนหน้านี้ การแพร่กระจายคลาสของคอมไพเลอร์ ติดตามเฉพาะสาย `ExportAll` และ `ReExport` ดังนั้นการนำเข้า `Hono` จาก `index.ts` ล้มเหลว อย่างเงียบๆ — การค้นหาคลาสพลาดและ `new Hono()` ส่งคืน `undefined`
 
 ตอนนี้ Perry ติดตาม `Export::Named` กลับผ่านการนำเข้าของ โมดูลเพื่อค้นหานิยามคลาสดั้งเดิมและแพร่กระจาย ผลลัพธ์:
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 Constructor ของ Hono ทำงาน เริ่มต้น `SmartRouter` (ซึ่งภายในสร้างทั้ง `RegExpRouter` และ `TrieRouter`) และส่งคืนออบเจ็กต์จริง อินสแตนซ์อิสระหลายตัว ทำงานได้ ตัวเลือก constructor ถูกรับ
 
@@ -78,23 +69,22 @@ Constructor ของ Hono ทำงาน เริ่มต้น `SmartRouter
 
 `initTRPC` ของ tRPC อยู่ลึก 4 ระดับ:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 นั่นคือ `ExportAll` → `Named` → `ExportAll` Perry แก้ไขสายทั้งหมด — `initTRPC` สามารถเข้าถึงได้ใน ไบนารีที่คอมไพล์แล้ว เช่นเดียวกับ `TRPCError` ซึ่งใช้เส้นทางเดียวกัน
 
 ### การสร้างอินสแตนซ์คลาสข้ามโมดูลพร้อมอาร์กิวเมนต์
 
-const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
-
+```
+const err = new TRPCError({ code: 'NOT_FOUND', message: 'resource missing' })
 // PASS: new TRPCError() returned object
-
-// PASS: err.code = NOT\_FOUND
+// PASS: err.code = NOT_FOUND
+```
 
 `TRPCError` ถูกกำหนดในโมดูลหนึ่ง re-export ผ่าน barrel files ระดับกลางสามตัว นำเข้าในการทดสอบ และสร้างอินสแตนซ์ด้วยออบเจ็กต์ตัวเลือก ฟิลด์ `code` ของอินสแตนซ์สามารถเข้าถึงได้
 
@@ -102,11 +92,11 @@ const err = new TRPCError({ code: 'NOT\_FOUND', message: 'resource missing' })
 
 Strapi ใช้แพ็กเกจ workspace — `@strapi/core` เป็นแพ็กเกจ พี่น้องใน monorepo ไม่ใช่ dependency npm Perry แก้ไข bare specifier ผ่าน ฟิลด์ exports ใน `package.json`:
 
+```
 "exports": {
-
 ".": { "source": "./src/index.ts", "import": "./dist/index.mjs" }
-
 }
+```
 
 ฟังก์ชัน `createStrapi` ถูกแก้ไขอย่างถูกต้องเป็นฟังก์ชันที่เรียกได้ ผ่าน `export * from '@strapi/core'`
 
@@ -128,27 +118,23 @@ Strapi ใช้แพ็กเกจ workspace — `@strapi/core` เป็น�
 
 Constructor ของ Hono ตั้งค่า handler เมธอด HTTP แบบไดนามิก:
 
-const allMethods = \['get', 'post', 'put', 'delete', ...\]
-
+```
+const allMethods = ['get', 'post', 'put', 'delete', ...]
 allMethods.forEach((method) => {
-
-this\[method\] = (args1, ...args) => {
-
+this[method] = (args1, ...args) => {
 // register route
-
 return this
-
 }
-
 })
+```
 
 ซึ่งหมายความว่า `app.get`, `app.post` ฯลฯ ไม่ได้ถูกประกาศแบบสแตติก — มันถูก กำหนดในรันไทม์ผ่านชื่อคุณสมบัติแบบคำนวณ Perry ยังไม่รองรับ `this[variable] = value` ดังนั้นเมธอดเหล่านี้จึงหายไป:
 
-\[4\] Dynamic method assignment (this\[method\] = ...)
-
+```
+[4] Dynamic method assignment (this[method] = ...)
 INFO: app.get not available
-
 INFO: app.on not available
+```
 
 นี่คือช่องว่างที่ใหญ่ที่สุดสำหรับ Hono คลาส Hono มีอยู่ router ของมันถูกเริ่มต้น แต่คุณไม่สามารถลงทะเบียนเส้นทางได้
 
@@ -156,7 +142,9 @@ INFO: app.on not available
 
 tRPC กำหนดจุดเริ่มต้นเป็น:
 
+```
 export const initTRPC = new TRPCBuilder()
+```
 
 ในรันไทม์ `initTRPC` แสดงเป็น `typeof function` แทนที่จะเป็น `typeof object` — นิพจน์ `new TRPCBuilder()` ระดับโมดูลไม่ได้รัน constructor ดังนั้นสิ่งที่คุณได้คือการอ้างอิงไปยังคลาสแทนที่จะเป็นอินสแตนซ์ ซึ่งหมายความว่า `initTRPC.create()` และ `initTRPC.context()` เป็น `undefined` ทั้งคู่
 
@@ -174,15 +162,15 @@ export const initTRPC = new TRPCBuilder()
 
 | คลาส | จำนวน |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| การตอบสนอง| 11 |
+| แปลงกระแส| 7 |
+| กระแสที่สามารถอ่านได้| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| TextEncoderStream| 2 |
+| กระแสที่สามารถเขียนได้| 1 |
+| DOMException| 1 |
 
 `Response`, `Request`และ `Headers` เป็นตัวสำคัญสำหรับเฟรมเวิร์ก HTTP ใดๆ สิ่งเหล่านี้ต้องการการรองรับ codegen แบบ built-in คล้ายกับที่เรามีอยู่แล้วสำหรับ `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` และอื่นๆ
 

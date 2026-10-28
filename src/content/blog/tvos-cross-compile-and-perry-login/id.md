@@ -8,7 +8,7 @@ Lima hari, 120 commit, dan Perry melompat dari v0.4.0 ke v0.4.24. Sorotan utama:
 
 ## tvOS: Target Kompilasi ke-10
 
-Perry now compiles to Apple TV. The tvOS target uses the same SwiftUI renderer as watchOS, sharing the data-driven architecture where Perry builds a UI tree and a shipped Swift host app renders it natively. Combined with the existing `@perry/threads` WASM integration, tvOS apps can run compute-heavy workloads in the background while keeping the UI responsive.
+Perry kini mengompilasi ke Apple TV. Target tvOS menggunakan perender SwiftUI yang sama dengan watchOS, berbagi arsitektur berbasis data tempat Perry membuat pohon UI dan aplikasi host Swift yang dikirimkan akan merendernya secara asli. Dikombinasikan dengan integrasi WASM `@perry/threads` yang ada, aplikasi tvOS dapat menjalankan beban kerja komputasi yang berat di latar belakang sambil menjaga UI tetap responsif.
 
 ```
 # Compile for Apple TV
@@ -18,87 +18,87 @@ perry compile main.ts --target tvos
 perry run tvos
 ```
 
-This brings the total target count to **10**: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, and Web/JavaScript. One TypeScript codebase, ten native outputs.
+Ini menjadikan jumlah total target menjadi **10**: macOS, iOS, iPadOS, Android, Linux, Windows, watchOS, tvOS, WebAssembly, dan Web/JavaScript. Satu basis kode TypeScript, sepuluh keluaran asli.
 
 ## Cross-Compile iOS dan macOS dari Linux
 
-Perry can now build iOS and macOS binaries entirely from a Linux machine using `ld64.lld` as the Mach-O linker. This is the missing piece for fully automated CI/CD — push TypeScript to a Linux server, get signed native binaries for every Apple platform without a macOS build machine.
+Perry kini dapat membuat biner iOS dan macOS seluruhnya dari mesin Linux menggunakan `ld64.lld` sebagai Mach-O penghubung. Ini adalah bagian yang hilang untuk CI/CD yang sepenuhnya otomatis — masukkan TypeScript ke server Linux, dapatkan biner asli yang ditandatangani untuk setiap platform Apple tanpa mesin build macOS.
 
-Getting here required solving a cascade of linker issues:
+Untuk sampai ke sini diperlukan penyelesaian serangkaian masalah tautan:
 
--   **Mach-O codegen triple** — added `aarch64-apple-macos` and `aarch64-apple-ios` target triples for Cranelift
--   **Framework linking** — CoreGraphics, Metal, IOKit, DiskArbitration framework search paths for cross-compile
--   **`-lobjc`** — ObjC runtime symbols needed for all Apple targets
--   **SDK version** — `sdk_version 26.0` in ld64.lld (Apple requires iOS 18+)
--   **Dead stripping** — `-dead_strip` instead of `-Wl,-dead_strip` for the Mach-O linker
--   **Runtime dedup** — strip duplicate `perry_runtime` from UI static libs to avoid link errors
+-   **codegen Mach-O triple** — menambahkan target triples `aarch64-apple-macos` dan `aarch64-apple-ios` untuk Cranelift
+-   **Penautan kerangka kerja** — Jalur pencarian kerangka kerja CoreGraphics, Metal, IOKit, DiskArbitration untuk kompilasi silang
+-   **`-lobjc`** — Simbol runtime ObjC diperlukan untuk semua target Apple
+-   **SDK versi** — `sdk_version 26.0` di ld64.lld (Apple memerlukan iOS 18+)
+-   **Dead stripping** — `-dead_strip` sebagai pengganti `-Wl,-dead_strip` untuk linker Mach-O
+-   **Runtime dedup** — menghapus duplikat `perry_runtime` dari lib statis UI untuk menghindari kesalahan tautan
 
-Combined with the existing Linux → Windows cross-compilation (v0.2.195+), Perry can now cross-compile to **every platform from Linux** — iOS, macOS, Windows, Android, WASM, and Web.
+Dikombinasikan dengan kompilasi silang Linux → Windows yang ada (v0.2.195+), Perry kini dapat melakukan kompilasi silang ke **setiap platform dari Linux** — iOS, macOS, Windows, Android, WASM, dan Web.
 
 ## Kesiapan iOS App Store
 
-A major focus this cycle was making Perry-compiled iOS apps fully App Store compliant:
+Fokus utama siklus ini adalah membuat aplikasi Perry yang dikompilasi iOS sepenuhnya mematuhi App Store:
 
--   **Full Info.plist** — all Apple-required keys: `CFBundleIdentifier`, `CFBundleName`, `CFBundleShortVersionString`, `CFBundleVersion`, `UIDeviceFamily`, `UIRequiredDeviceCapabilities`
--   **CFBundleIcons** — standard iOS icon naming (`AppIcon60x60@2x`, etc.) with fallback resolution
--   **Version from perry.toml** — `version` and `build_number` fields flow directly into the Info.plist
--   **UILaunchScreen** — uses the modern key instead of `UILaunchStoryboardName` (no storyboard file needed)
--   **Provisioning profiles** — macOS provisioning profile support for App Store and TestFlight distribution
+-   **Info Lengkap.plist** — semua kunci yang diperlukan Apple: `CFBundleIdentifier`, `CFBundleName`, `CFBundleShortVersionString`, `CFBundleVersion`, `UIDeviceFamily`, `UIRequiredDeviceCapabilities`
+-   **CFBundleIcons** — penamaan ikon iOS standar (`AppIcon60x60@2x`, dll.) dengan resolusi cadangan
+-   **Versi dari perry.toml** — kolom `version` dan `build_number` mengalir langsung ke Info.plist
+-   **UILaunchScreen** — menggunakan kunci modern sebagai pengganti `UILaunchStoryboardName` (tidak diperlukan file storyboard)
+-   **Profil penyediaan** — macOS dukungan profil penyediaan untuk App Store dan distribusi TestFlight
 
 ## Perry Login dan Billing
 
-Perry now has accounts and usage-based billing, powered by a new `perry login` CLI command and a dashboard at [app.perryts.com](https://app.perryts.com).
+Perry kini memiliki akun dan penagihan berbasis penggunaan, didukung oleh perintah `perry login` CLI baru dan dasbor di [app.perryts.com](https://app.perryts.com).
 
-### How It Works
+### Cara Kerjanya
 
--   **`perry login`** — GitHub OAuth device flow, opens browser, polls for completion
--   **Free tier** — 15 builds/month, unlimited projects with a GitHub account
--   **Pro tier** — unlimited builds via Polar.sh subscription
--   **API tokens** — generate and manage tokens from the dashboard for CI/CD
--   **Usage tracking** — monthly publish and verify counters with real-time usage bars
+-   **`perry login`** — GitHub OAuth alur perangkat, membuka browser, melakukan jajak pendapat untuk penyelesaian
+-   **Tingkat gratis** — 15 build/bulan, proyek tak terbatas dengan akun GitHub
+-   **Tingkat Pro** — build tanpa batas melalui langganan Polar.sh
+-   **API** — membuat dan mengelola token dari dasbor untuk CI/CD
+-   **Pelacakan penggunaan** — publikasi bulanan dan verifikasi penghitung dengan bilah penggunaan waktu nyata
 
-The dashboard itself is a Perry-compiled Fastify server with a Next.js static export — built with Perry, serving Perry users.
+Dasbornya sendiri adalah server Fastify yang dikompilasi Perry dengan ekspor statis Next.js — dibuat dengan Perry, melayani pengguna Perry.
 
 ## Notarisasi macOS dan Code Signing
 
-Two new signing capabilities:
+Dua kemampuan penandatanganan baru:
 
--   **`perry publish macos --notarize`** — automatically switches to Developer ID certificate (instead of App Store cert), submits to Apple's notarization service, and staples the result
--   **GCloud KMS code signing** — Windows builds can now be signed using Google Cloud KMS keys, enabling automated signing in CI without exposing private keys
+-   **`perry publish macos --notarize`** — secara otomatis beralih ke sertifikat ID Pengembang (bukan sertifikat App Store), mengirimkan ke layanan notaris Apple, dan menjepret hasilnya
+-   **Penandatanganan kode GCloud KMS** — Versi Windows kini dapat ditandatangani menggunakan kunci Google Cloud KMS, sehingga memungkinkan penandatanganan otomatis di CI tanpa mengekspos kunci pribadi
 
 ## Perombakan UI Windows
 
-The Windows UI backend received its most comprehensive update yet:
+Backend UI Windows menerima pembaruan paling komprehensif:
 
--   **DPI-aware scaling** — window size, fonts, and widget dimensions scale correctly on high-DPI displays
--   **Launcher-style window APIs** — borderless windows with custom positioning for launcher/spotlight-style UIs
--   **Global hotkeys** — system-wide keyboard shortcuts that work even when the app isn't focused
--   **App icons** — `getAppIcon` API for displaying application icons in launcher UIs
--   **Reentrancy-safe layout** — `RefCell`\-based painting replaced with `SetPropW` HWND storage to prevent panics during nested WM\_PAINT messages
--   **Geisterhand integration** — all widget types registered with the UI testing framework, `/type` uses `SendMessageW` via HWND map
--   **Android camera support** — camera capture API extended to Android via JNI
+-   **Penskalaan sesuai DPI** — ukuran jendela, font, dan dimensi widget diskalakan dengan benar pada tampilan DPI tinggi
+-   **API jendela bergaya peluncur** — jendela tanpa batas dengan pemosisian khusus untuk UI bergaya peluncur/sorotan
+-   **Tombol pintas global** — pintasan keyboard seluruh sistem yang berfungsi bahkan saat aplikasi tidak fokus
+-   **Ikon aplikasi** — `getAppIcon` API untuk menampilkan ikon aplikasi di UI peluncur
+-   **Tata letak yang aman untuk masuk kembali** — Lukisan berbasis `RefCell` diganti dengan penyimpanan HWND `SetPropW` untuk mencegah kepanikan selama pesan WM_PAINT bertumpuk
+-   **Integrasi Geisterhand** — semua jenis widget yang terdaftar dengan kerangka pengujian UI, `/type` menggunakan `SendMessageW` melalui peta HWND
+-   **Dukungan kamera Android** — API pengambilan kamera diperluas ke Android melalui JNI
 
 ## Performa
 
-v0.4.14 shipped a comprehensive performance audit:
+v0.4.14 mengirimkan audit kinerja yang komprehensif:
 
--   **Native `fcmp`** — floating-point comparisons use native CPU instructions instead of runtime function calls. Mandelbrot benchmark **30% faster**.
--   **In-place string append** — `str += "text"` modifies the buffer in place instead of allocating a new string. **125x faster** for repeated concatenation.
--   **Short-circuit AND/OR** — `&&` and `||` skip evaluation of the right operand when the result is already determined.
--   **Negative literal folding** — `-1`, `-0.5` etc. are folded to constants at HIR level instead of emitting a negation instruction.
+-   **`fcmp`** asli — perbandingan floating-point menggunakan instruksi CPU asli dan bukan pemanggilan fungsi runtime. Tolok ukur Mandelbrot **30% lebih cepat**.
+-   **Penambahan string di tempat** — `str += "text"` memodifikasi buffer di tempat alih-alih mengalokasikan string baru. **125x lebih cepat** untuk penggabungan berulang.
+-   **Hubungan pendek DAN/ATAU** — `&&` dan `||` melewatkan evaluasi operan yang tepat ketika hasilnya sudah ditentukan.
+-   **Pelipatan literal negatif** — `-1`, `-0.5` dll. dilipat ke konstanta pada tingkat HIR alih-alih mengeluarkan instruksi negasi.
 
 ## Build Paralel Hub
 
-The build orchestration server now supports concurrent builds per worker:
+Server orkestrasi pembangunan kini mendukung pembangunan serentak per pekerja:
 
--   **Slot-based dispatch** — workers report `max_concurrent` capacity, Hub tracks active jobs per worker
--   **No more 429s** — jobs queue instead of being rejected when all workers are busy
--   **Base64 artifact downloads** — binary artifacts served as base64 when the Perry runtime can't handle raw binary HTTP responses
--   **Auto-reconnect WebSocket** — build monitoring connections automatically reconnect on disconnect
+-   **Pengiriman berbasis slot** — pekerja melaporkan kapasitas `max_concurrent`, Hub melacak pekerjaan aktif per pekerja
+-   **Tidak ada lagi 429** — antrian pekerjaan bukannya ditolak ketika semua pekerja sedang sibuk
+-   **unduhan artefak Base64** — artefak biner berfungsi sebagai base64 ketika runtime Perry tidak dapat menangani respons HTTP biner mentah
+-   **Sambungkan kembali secara otomatis WebSocket** — membangun koneksi pemantauan secara otomatis menyambung kembali saat terputus
 
 ## Paket Baru: perry/appstorereview
 
-A new first-party package for prompting app store reviews:
+Paket pihak pertama baru untuk meminta peninjauan toko aplikasi:
 
 ```
 import { requestReview } from "perry/appstorereview";
@@ -109,38 +109,38 @@ import { requestReview } from "perry/appstorereview";
 requestReview();
 ```
 
-One function, two platforms, native review UI. Timing and display logic is left entirely to the developer.
+Satu fungsi, dua platform, UI ulasan asli. Logika pengaturan waktu dan tampilan diserahkan sepenuhnya kepada pengembang.
 
 ## Perbaikan Codegen
 
-120 commits means a lot of bug fixes. The most impactful:
+120 commit berarti banyak perbaikan bug. Yang paling berdampak:
 
--   **Strict equality (===)** — three separate bugs fixed in v0.4.2: type tag comparison, NaN handling, and null/undefined distinction
--   **String comparison for concatenated strings** — `===` failed when comparing strings built via concatenation due to pointer comparison instead of content comparison
--   **Constructor resolution** — `new X(args)` now correctly resolves cross-module imported constructors and closure-based constructor functions
--   **Module-level array push** — values pushed to module-level arrays inside nested function calls in loops were lost due to stale pointers after reallocation
--   **Null arithmetic coercion** — `null + 1` now correctly produces `1` via `js_number_coerce`
--   **Bitwise NOT wrapping** — `~x` now wraps to i32 as per ECMAScript semantics
--   **fetch().then()** — callbacks never fired in native UI apps due to missing event loop drain (v0.4.3)
--   **WASM modulo and exponent** — `%` and `**` operators caused WASM validation errors (v0.4.5)
+-   **Kesetaraan yang ketat (===)** — tiga bug terpisah diperbaiki di v0.4.2: perbandingan tag tipe, penanganan NaN, dan perbedaan null/tidak terdefinisi
+-   **Perbandingan string untuk string gabungan** — `===` gagal saat membandingkan string yang dibuat melalui penggabungan karena perbandingan penunjuk dan bukan perbandingan konten
+-   **Resolusi konstruktor** — `new X(args)` baru kini menyelesaikan dengan benar konstruktor yang diimpor lintas modul dan fungsi konstruktor berbasis penutupan
+-   **Pendorongan array tingkat modul** — nilai yang didorong ke array tingkat modul di dalam panggilan fungsi bersarang dalam loop hilang karena pointer basi setelah alokasi ulang
+-   **Paksaan aritmatika nol** — `null + 1` kini menghasilkan `1` dengan benar melalui `js_number_coerce`
+-   **Bitwise TIDAK membungkus** — `~x` sekarang digabungkan ke i32 sesuai semantik ECMAScript
+-   **fetch().then()** — callback tidak pernah diaktifkan di aplikasi UI asli karena tidak ada event loop drain (v0.4.3)
+-   **Modulo dan eksponen WASM** — Operator `%` dan `**` menyebabkan kesalahan validasi WASM (v0.4.5)
 
 ## Dalam Angka
 
--   **~120 commits** to the main Perry compiler in 5 days
--   **24 patch releases**: v0.4.1 → v0.4.24
--   **Compilation targets**: 9 → 10 (added tvOS)
--   **Cross-compile targets from Linux**: Windows → Windows, iOS, macOS (all Apple + Windows)
--   **New packages**: perry/appstorereview
--   **New infrastructure**: app.perryts.com dashboard, perry login CLI, Polar.sh billing
--   **Performance gains**: 30% faster mandelbrot (native fcmp), 125x faster string concatenation
+-   **~120 commit** ke compiler Perry utama dalam 5 hari
+-   **24 rilis patch**: v0.4.1 → v0.4.24
+-   **Target kompilasi**: 9 → 10 (menambahkan tvOS)
+-   **Target kompilasi silang dari Linux**: Windows → Windows, iOS, macOS (semua Apple + Windows)
+-   **Paket baru**: perry/appstorereview
+-   **Infrastruktur baru**: dasbor app.perryts.com, login perry CLI, penagihan Polar.sh
+-   **Peningkatan performa**: mandelbrot (fcmp asli) 30% lebih cepat, penggabungan string 125x lebih cepat
 
 ## Apa Selanjutnya
 
-Cross-compiling iOS and macOS from Linux means the Hub can now build for every platform from a single Linux server — no more dedicated macOS build machines for compilation (only for signing). The billing infrastructure opens the path to Hub public beta. And with tvOS added, Perry covers every Apple platform: macOS, iOS, iPadOS, watchOS, and tvOS.
+Kompilasi silang iOS dan macOS dari Linux berarti Hub kini dapat membangun untuk setiap platform dari satu server Linux — tidak ada lagi mesin pembuat macOS khusus untuk kompilasi (hanya untuk penandatanganan). Infrastruktur penagihan membuka jalur ke Hub publik beta. Dan dengan tambahan tvOS, Perry mencakup semua platform Apple: macOS, iOS, iPadOS, watchOS, dan tvOS.
 
--   **Hub public beta** — external users can push TypeScript and get native binaries
--   **Full regex support** — the last major language gap
--   **perry/ui expansion** — drag and drop, accessibility, DatePicker
--   **Source maps & debug info** — DWARF debug info for native debugging
+-   **Hub public beta** — pengguna eksternal dapat menggunakan TypeScript dan mendapatkan binari asli
+-   **Dukungan regex penuh** — kesenjangan bahasa utama yang terakhir
+-   **ekspansi Perry/ui** — seret dan lepas, aksesibilitas, DatePicker
+-   **Sumber peta & info debug** — Info debug DWARF untuk proses debug asli
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/id/roadmap/) for the full picture.
+Ikuti perkembangannya di [GitHub](https://github.com/PerryTS/perry), baca dokumen di [docs.perryts.com](https://docs.perryts.com), atau periksa [peta jalan](/id/roadmap/) untuk gambaran selengkapnya.

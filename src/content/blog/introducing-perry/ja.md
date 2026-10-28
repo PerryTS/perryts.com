@@ -1,6 +1,6 @@
 ---
 title: "Perry の紹介"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry は、外部の Node.js のインストールやリンクされたランタイムと GC を使用して、サポートされている TypeScript をスタンドアロンのネイティブ実行可能ファイルにコンパイルします。 JavaScript エンジン。"
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ Perry のコンパイルパイプラインには3つのステージがありま�
 
 結果はスタンドアロン実行ファイルです。CLI ツールで通常 2～5 MB で、 ウォームアップ時間ゼロで即座に起動します。
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## サポートされている TypeScript 機能
 
@@ -94,17 +86,14 @@ Perry は CLI ツールやサーバーサイドアプリケーションに限定
 
 Perry はクロスコンパイルをそのままサポートしています。macOS の開発マシンから Linux（x86\_64 と ARM64）と iOS 向けにコンパイルできます。これにより、macOS 上で CI/CD パイプラインを構築し、各プラットフォーム専用のビルドマシンなしで すべてのデプロイターゲット向けのバイナリを生成できます。
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## パフォーマンス
 
@@ -131,20 +120,15 @@ UI ウィジェットライブラリの拡張、文字列とオブジェクト�
 
 Perry はオープンソースです。リポジトリをクローンし、ソースからビルドして、 今日から TypeScript のコンパイルを始められます：
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 ソースコードは [GitHub](https://github.com/PerryTS/perry) で閲覧できます。 [ショーケース](/ja/showcase/) で Perry を使って構築されているものを確認するか、直接コードに飛び込んでください。 あなたが何を構築するか、楽しみにしています。

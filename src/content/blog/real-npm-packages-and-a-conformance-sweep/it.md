@@ -77,6 +77,6 @@ Più piccolo ma reale: `perry setup ios --development` ora fa il provisioning pe
 
 La scommessa dietro Perry è sempre stata che “TypeScript nativo” conta solo se gira TypeScript *vero* — non un sottoinsieme giocattolo, i pacchetti veri che la gente fa `npm install`. Questo mese è stato per lo più quel lavoro: meno un singolo numero di cui vantarsi, più una spinta lunga e poco glamour per chiudere il gap tra “compila” e “funziona.” I radar di conformance e i test di parità npm sono il tabellone che stiamo osservando ora, e continueremo a pubblicare i numeri — quelli buoni e quelli ancora imperfetti.
 
-Source: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Issues: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
+Fonte: [github.com/PerryTS/perry](https://github.com/PerryTS/perry) — Problemi: [github.com/PerryTS/perry/issues](https://github.com/PerryTS/perry/issues)
 
 — Ralph

@@ -46,14 +46,14 @@ v0.5.0はLLVMを唯一のバックエンドとした最初のリリースでし�
 
 当時は公開したくなかった表がこちらです：
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+|ベンチマーク| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | 68x slower |
-| object\_create | 5ms | 318ms | 64x slower |
-| matrix\_multiply | 61ms | 184ms | 3x slower |
-| math\_intensive | 370ms | 131ms | 2.8x faster |
-| nested\_loops | 32ms | 57ms | 1.8x slower |
-| fibonacci(40) | 505ms | 1,156ms | 2.3x slower |
+|メソッド呼び出し| 16ms | 1,084ms | 68x slower |
+|オブジェクト作成| 5ms | 318ms | 64x slower |
+|マトリックス_乗算| 61ms | 184ms | 3x slower |
+|数学集中| 370ms | 131ms | 2.8x faster |
+|ネストされたループ| 32ms | 57ms | 1.8x slower |
+|フィボナッチ(40)| 505ms | 1,156ms | 2.3x slower |
 
 一部のワークロードは高速化しました。しかし大半は劇的に悪化しました。`method_calls`は、一般的なTypeScriptのクラス使用を表すため最も重要なベンチマークの1つですが、2リリース前に出荷したものより約70倍悪化していました。
 
@@ -137,23 +137,23 @@ LLVMへの切り替えでこれが汎用スローパスに後退していまし�
 
 3回実行の中央値、macOS ARM64（Apple Silicon、M1 Max）、Node.js v25：
 
-| Benchmark | Perry | Node.js | vs Node |
+|ベンチマーク| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+|階乗| 24ms | 591ms | 24.6x |
+|メソッド呼び出し| 1ms | 11ms | 11x |
+|ループ_オーバーヘッド| 12ms | 53ms | 4.4x |
+|数学集中| 14ms | 49ms | 3.5x |
+|配列読み取り| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | tied |
-| mandelbrot | 24ms | 24ms | tied |
-| object\_create | 9ms | 8ms | 0.9x |
+|配列書き込み| 3ms | 8ms | 2.6x |
+|文字列_concat| 1ms | 2ms | 2x |
+|ネストされたループ| 9ms | 16ms | 1.7x |
+|プライムふるい| 4ms | 7ms | 1.7x |
+|マトリックス_乗算| 21ms | 34ms | 1.6x |
+|フィボナッチ(40)| 401ms | 991ms | 2.5x |
+|バイナリツリー| 9ms | 9ms | tied |
+|マンデルブロ| 24ms | 24ms | tied |
+|オブジェクト作成| 9ms | 8ms | 0.9x |
 
 すべてのベンチマークが勝利または同点です。最も接近しているのは`object_create`（9ms vs 8ms）で、V8のアロケータが本当に優秀です。
 

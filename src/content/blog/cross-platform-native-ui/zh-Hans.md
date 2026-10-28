@@ -1,6 +1,6 @@
 ---
 title: "从 TypeScript 到跨平台原生 UI"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Perry 如何将一个 TypeScript 代码库跨其记录的目标映射到平台小部件，包括特定于平台的限制和先决条件。"
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perry 采用了一种根本不同的方式。不是在运行时中运行代码�
 
 Perry 提供了一套通用的 TypeScript API 来构建用户界面。这个 API 有意设计为高层级 —— 你描述 UI 应该包含什么以及如何行为，Perry 将其映射到适当的原生结构。
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 同样的代码在所有六个平台上编译为原生 UI。不需要 `#ifdef`， 不需要平台检查，不需要条件导入。
 
@@ -78,7 +70,7 @@ app.run();
 
 在 iOS 上，映射类似但目标是 UIKit。 `App` 变为带有 `UIWindow`和根 `UIViewController` 的 `UIApplication`。 `Text` 映射为 `UILabel`。 `Button` 映射为 `UIButton`。 布局使用 `UIStackView` 和 Auto Layout。 触摸事件通过 UIKit 的响应者链处理。
 
-### Android — JNI + Views
+### Android — JNI + 视图
 
 在 Android 上，Perry 生成通过 JNI（Java 原生接口）加载的原生库。 `App` 映射为 `Activity`。 `Text` 变为 `TextView`。 `Button` 变为带有`OnClickListener` 的 `android.widget.Button`。 `VStack` 映射为垂直方向的 `LinearLayout`。 原生代码通过 JNI 回调 Android 框架，创建和操作真正的 Android 视图。
 

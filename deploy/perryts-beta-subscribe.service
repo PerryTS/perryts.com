@@ -1,0 +1,21 @@
+[Unit]
+Description=beta.perryts.com newsletter helper
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/beta.perryts.com/current
+EnvironmentFile=/etc/perryts.env
+EnvironmentFile=/etc/perryts-beta.env
+ExecStart=/usr/bin/node /var/www/beta.perryts.com/current/subscribe-server.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

@@ -46,14 +46,14 @@ v0.5.0 是以 LLVM 作为唯一后端的首个版本。我们预期编译时间�
 
 这是我当时不想公开的表格：
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+|基准测试| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | 68x slower |
-| object\_create | 5ms | 318ms | 64x slower |
-| matrix\_multiply | 61ms | 184ms | 3x slower |
-| math\_intensive | 370ms | 131ms | 2.8x faster |
-| nested\_loops | 32ms | 57ms | 1.8x slower |
-| fibonacci(40) | 505ms | 1,156ms | 2.3x slower |
+|方法调用| 16ms | 1,084ms | 68x slower |
+|对象创建| 5ms | 318ms | 64x slower |
+|矩阵乘法| 61ms | 184ms | 3x slower |
+|数学密集型| 370ms | 131ms | 2.8x faster |
+|嵌套循环| 32ms | 57ms | 1.8x slower |
+|斐波那契(40)| 505ms | 1,156ms | 2.3x slower |
 
 一些工作负载变快了。但大多数急剧恶化。`method_calls`——因为它代表了典型的 TypeScript 类使用模式，是最重要的基准测试之一——比两个版本前交付的结果慢了近 70 倍。
 
@@ -137,23 +137,23 @@ LLVM 切换时这退化回了通用慢路径。恢复静态分派使 `method_cal
 
 三次运行取中位数，macOS ARM64（Apple Silicon, M1 Max），Node.js v25：
 
-| Benchmark | Perry | Node.js | vs Node |
+|基准测试| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+|阶乘| 24ms | 591ms | 24.6x |
+|方法调用| 1ms | 11ms | 11x |
+|循环开销| 12ms | 53ms | 4.4x |
+|数学密集型| 14ms | 49ms | 3.5x |
+|数组读取| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | tied |
-| mandelbrot | 24ms | 24ms | tied |
-| object\_create | 9ms | 8ms | 0.9x |
+|数组写入| 3ms | 8ms | 2.6x |
+|字符串连接| 1ms | 2ms | 2x |
+|嵌套循环| 9ms | 16ms | 1.7x |
+|素筛| 4ms | 7ms | 1.7x |
+|矩阵乘法| 21ms | 34ms | 1.6x |
+|斐波那契(40)| 401ms | 991ms | 2.5x |
+|二叉树| 9ms | 9ms | tied |
+|曼德尔布罗特| 24ms | 24ms | tied |
+|对象创建| 9ms | 8ms | 0.9x |
 
 每项基准测试都是胜利或持平。最接近的是 `object_create`（9ms vs 8ms），V8 的分配器确实出色。
 

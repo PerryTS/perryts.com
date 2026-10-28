@@ -153,12 +153,12 @@ O trabalho de performance revela problemas de correção da mesma forma que drag
 
 O benchmark de destaque do último artigo foi `factorial` a 24,6x mais rápido que o Node. Esse número não mudou. O que se moveu esta semana é tudo ao redor:
 
-| Workload | v0.5.12 | v0.5.80 | Delta |
+| Carga de trabalho| v0.5.12 | v0.5.80 | Delta |
 | --- | --- | --- | --- |
 | JSON.parse (schema de 20 registos) | 547x mais lento que Node | 1,3x mais lento que Node | ~420x |
 | image\_conv (blur 4K 5×5) | 1.980ms | 457ms | 4,3x |
-| Código property-heavy (hit do PIC) | baseline | 2-3x | 2-3x |
-| Fibonacci(40) | 401ms | 309ms | 1,3x |
+| Código property-heavy (hit do PIC) | linha de base| 2-3x | 2-3x |
+| Fibonacci(40)| 401ms | 309ms | 1,3x |
 | Uptime do Fastify sob carga | ~60s antes do crash | indefinido | ∞ |
 
 A suite completa de 15 benchmarks contra o Node ainda é 14 vitórias e 1 empate — a mesma tabela do último artigo, com números ligeiramente melhores em toda a linha. O movimento real desta semana é em workloads que não estavam nessa suite: JSON, processamento de imagens, servidores de longa duração. Era onde as lacunas viviam, e é isso que foi fechado.

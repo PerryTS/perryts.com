@@ -218,7 +218,7 @@ Yanlış tahmin bir nursery'nin en fazla birkaç yüzdesini tutar; promoting cyc
 
 Açıkça söyleyelim: **“tek mekanizma” hikâyesi genellikle yanlıştır ve profil ayağınızın altında değişir.** Aşağıdaki sıralamayla aynı commit'te ölçülen bugünkü pause fraction'lar:
 
-| program | wall | GC pause | pause fraction | cycles | |---|--:|--:|--:|--:| | retain | 159.5 ms | 52.0 ms | 33% | 5 | | retain1 | 71.4 ms | 38.7 ms | 54% | 3 | | retain\_wide | 206.2 ms | 75.4 ms | 37% | 8 | | shapes | 64.8 ms | 4.6 ms | **7%** | 1 | | asyncpipe | 127 ms | 0 ms | **0%** | 0 |
+| programı | duvar | GC duraklatma | kesri duraklatma | çevrimler | |---|--:|--:|--:|--:| | tutmak | 159,5 ms | 52,0 ms | %33 | 5 | | koru1 | 71,4 ms | 38,7 ms | %54 | 3 | | keep_wide | 206,2 ms | 75,4 ms | %37 | 8 | | şekiller | 64,8 ms | 4,6 ms | **%7** | 1 | | asenkron boru | 127 ms | 0 ms | **%0** | 0 |
 
 İki sayı bir hafta önce %93 ve %62 idi; bu bölümdeki iş onları öldürdü. `shapes` %7 ile artık GC benchmark'ı değildir — §8'deki hatadan önce 139 ms programın 94 ms'si GC idi ve bu ratio ile “high-survival GC” diye sınıflandırdık. GC lever'ları onu artık oynatmaz. Benchmark'lar arasında aynı görünen oran ortak neden değil aritmetik tesadüftü.
 

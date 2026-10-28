@@ -25,31 +25,22 @@ Estes nao sao wrappers em torno de um renderizador customizado. Cada widget comp
 
 Uma das adicoes mais tecnicamente interessantes e o widget Canvas (v0.2.152). Ele expoe uma API de desenho 2D familiar diretamente do TypeScript — curvas bezier, preenchimentos, tracos, blitting de imagem — e compila para o backend 2D acelerado da plataforma: Core Graphics no macOS/iOS, Cairo no Linux, Direct2D no Windows e Skia no Android.
 
-canvas.ts
+**canvas.ts**
 
+```typescript
 import { Canvas, Color } from 'perry/ui';
-
 // Compiles to Core Graphics on macOS, Cairo on Linux, etc.
-
 const canvas = new Canvas({ width: 400, height: 300 });
-
 canvas.onDraw((ctx) => {
-
-ctx.fillStyle = Color.amber;
-
-ctx.fillRect(10, 10, 100, 60);
-
-ctx.strokeStyle = Color.blue;
-
-ctx.lineWidth = 2;
-
-ctx.beginPath();
-
-ctx.arc(200, 150, 80, 0, Math.PI \* 2);
-
-ctx.stroke();
-
+  ctx.fillStyle = Color.amber;
+  ctx.fillRect(10, 10, 100, 60);
+  ctx.strokeStyle = Color.blue;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(200, 150, 80, 0, Math.PI * 2);
+  ctx.stroke();
 });
+```
 
 ## Widget Table: NSTableView Chega ao TypeScript
 
@@ -57,25 +48,19 @@ A v0.2.163 trouxe o widget Table — o componente mais complexo da biblioteca. N
 
 A API TypeScript e declarativa: voce define colunas, fornece uma fonte de dados e Perry lida com a fiacao especifica da plataforma em tempo de compilacao. Ordenacao de colunas, tratamento de selecao e personalizacao da altura das linhas funcionam nativamente.
 
-table.ts
+**table.ts**
 
+```typescript
 import { Table, Column } from 'perry/ui';
-
 const table = new Table({
-
-columns: \[
-
-new Column({ title: "Name", key: "name", width: 200 }),
-
-new Column({ title: "Size", key: "size", width: 80 }),
-
-\],
-
-rows: files, // TypeScript array of objects
-
-onSelect: (row) => console.log(row.name),
-
+  columns: [
+    new Column({ title: "Name", key: "name", width: 200 }),
+    new Column({ title: "Size", key: "size", width: 80 }),
+  ],
+  rows: files,  // TypeScript array of objects
+  onSelect: (row) => console.log(row.name),
 });
+```
 
 ## O Modulo perry/system
 
@@ -85,7 +70,7 @@ A v0.2.155 tambem introduziu `perry/system` — um modulo TypeScript que expoe A
 -   `system.showSaveDialog()` — dialogo de salvamento nativo
 -   `system.showAlert()` — painel de alerta nativo
 -   `system.notify()` — notificacao do SO (UserNotifications / libnotify / WinRT)
--   `system.keychain.get/set()` — Keychain Services / Secret Service / Windows Credential Store
+-   `system.keychain.get/set()` — Serviços de chaveiro / Serviço secreto / Armazenamento de credenciais do Windows
 -   `system.openWindow()` — gerenciamento multi-janela
 
 Todos chamam APIs nativas da plataforma diretamente — sem IPC do Electron, sem bridge de web view. Perry compila o ponto de chamada TypeScript para uma chamada de funcao nativa direta no SDK da plataforma.

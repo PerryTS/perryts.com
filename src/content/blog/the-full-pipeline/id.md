@@ -6,147 +6,143 @@ tags: ["distribution", "documentation", "WidgetKit", "milestone"]
 ---
 82 commit dalam tujuh hari. Situs dokumentasi dengan 49 halaman. Publikasi App Store dan Play Store otomatis. Paket Homebrew dan APT. Ekstensi WidgetKit native yang dikompilasi dari TypeScript. Compiler LLVM self-hosting. Dan puluhan perbaikan bug di setiap platform.
 
-This post covers everything that shipped in Perry between March 6 and March 13, 2026. The theme is completion — filling in the gaps between "I wrote some TypeScript" and "my app is in the App Store."
+Postingan ini mencakup semua yang dikirimkan di Perry antara tanggal 6 Maret dan 13 Maret 2026. Tema telah selesai — mengisi kekosongan antara "Saya menulis beberapa TypeScript" dan "aplikasi saya ada di App Store."
 
 ## docs.perryts.com
 
-Perry now has a real documentation site. 49 pages built with mdBook, covering everything from getting started to the CLI reference. The docs are organized into sections:
+Perry kini memiliki situs dokumentasi nyata. 49 halaman dibuat dengan mdBook, mencakup segala hal mulai dari memulai hingga referensi CLI. Dokumen disusun menjadi beberapa bagian:
 
--   **Getting Started** — installation, first project, project structure
--   **Language Features** — everything Perry supports from TypeScript
--   **Native UI** — 12 pages covering all widget types, layout, state management, and platform-specific behavior
--   **Platforms** — dedicated pages for each of the 6 target platforms
--   **Standard Library** — 50+ native package implementations documented
--   **System APIs** — file dialogs, keychain, notifications, multi-window
--   **WidgetKit** — the new widget extension module
--   **Plugins** — compile-time plugin architecture
--   **CLI Reference** — every command and flag
+-   **Memulai** — instalasi, proyek pertama, struktur proyek
+-   **Fitur Bahasa** — semuanya Perry mendukung dari TypeScript
+-   **UI Asli** — 12 halaman yang mencakup semua jenis widget, tata letak, pengelolaan status, dan perilaku spesifik platform
+-   **Platform** — halaman khusus untuk masing-masing dari 6 platform target
+-   **Perpustakaan Standar** — 50+ implementasi paket asli didokumentasikan
+-   **API Sistem** — dialog file, gantungan kunci, notifikasi, multi-jendela
+-   **WidgetKit** — modul ekstensi widget baru
+-   **Plugin** — arsitektur plugin waktu kompilasi
+-   **CLI** — setiap perintah dan tanda
 
-The site also includes an `llms.txt` file for AI discoverability, and is deployed via GitHub Pages with a custom domain at [docs.perryts.com](https://docs.perryts.com).
+Situs ini juga menyertakan file `llms.txt` agar AI dapat ditemukan, dan diterapkan melalui Halaman GitHub dengan domain khusus di [docs.perryts.com](https://docs.perryts.com).
 
 ## Instal Perry dalam Satu Perintah
 
-Perry is now distributed through Homebrew and APT, in addition to building from source. A new GitHub Actions release pipeline builds binaries for macOS (arm64 and x86\_64) and Linux (x86\_64 and arm64), then automatically updates the Homebrew tap and APT repository.
+Perry kini didistribusikan melalui Homebrew dan APT, selain membangun dari sumber. Pipeline rilis Actions GitHub yang baru membuat binari untuk macOS (arm64 dan x86_64) dan Linux (x86_64 dan arm64), lalu secara otomatis memperbarui tap Homebrew dan APT repositori.
 
-terminal
-
-\# macOS
-
+```text
+# macOS
 brew tap PerryTS/perry
-
 brew install perry
-
-\# Debian/Ubuntu
-
+# Debian/Ubuntu
 sudo apt update && sudo apt install perry
+```
 
-No more cloning the repo and building with Cargo. Install Perry the same way you install any other tool.
+Tidak perlu lagi mengkloning repo dan membangun dengan Cargo. Instal Perry dengan cara yang sama seperti Anda menginstal alat lainnya.
 
 ## Publikasi App Store Otomatis
 
-This is the change that collapses the most manual steps. Running `perry publish ios` now handles the entire iOS distribution pipeline automatically:
+Ini adalah perubahan yang menciutkan sebagian besar langkah manual. Menjalankan `perry publish ios` kini menangani seluruh pipeline distribusi iOS secara otomatis:
 
-1.  Generates an RSA key and CSR via the App Store Connect API
-2.  Creates a distribution certificate and bundles it into a `.p12`
-3.  Registers the bundle ID
-4.  Creates and downloads a provisioning profile
-5.  Creates the App Store Connect app record
-6.  Builds, signs, and uploads to TestFlight or the App Store
+1.  Menghasilkan kunci RSA dan CSR melalui App Store Connect API
+2.  Membuat sertifikat distribusi dan memaketkannya ke dalam `.p12`
+3.  Mendaftarkan ID paket
+4.  Membuat dan mengunduh profil penyediaan
+5.  Membuat App Store Connect data aplikasi
+6.  Membuat, menandatangani, dan mengunggah ke TestFlight atau App Store
 
-No Xcode. No manual portal visits. No downloading certificates from a browser. The setup wizard runs automatically the first time you publish, walking through API key configuration and storing credentials in `perry.toml`.
+Tidak ada Xcode. Tidak ada kunjungan portal manual. Tidak ada pengunduhan sertifikat dari browser. Wizard penyiapan berjalan otomatis saat pertama kali Anda memublikasikan, menelusuri konfigurasi kunci API dan menyimpan kredensial di `perry.toml`.
 
-macOS distribution is equally automated. Perry supports three modes: TestFlight, notarized DMG, and a new **"both"** mode that publishes to the App Store and creates a notarized DMG simultaneously. Three certificate types are auto-generated: `MAC_APP_DISTRIBUTION`, `MAC_INSTALLER_DISTRIBUTION`, and `DEVELOPER_ID_APPLICATION`.
+Distribusi macOS juga dilakukan secara otomatis. Perry mendukung tiga mode: TestFlight, DMG yang disahkan, dan mode **"keduanya"** baru yang dipublikasikan ke App Store dan membuat DMG yang disahkan secara bersamaan. Tiga jenis sertifikat dibuat secara otomatis: `MAC_APP_DISTRIBUTION`, `MAC_INSTALLER_DISTRIBUTION`, dan `DEVELOPER_ID_APPLICATION`.
 
-Android publishing also gained an auto-triggered setup wizard. All three platforms now follow the same pattern: first run triggers setup, credentials are saved to the project, subsequent runs are zero-configuration.
+Publikasi Android juga mendapatkan wizard penyiapan yang dipicu secara otomatis. Ketiga platform kini mengikuti pola yang sama: proses pertama memicu penyiapan, kredensial disimpan ke proyek, proses berikutnya tanpa konfigurasi.
 
-Pre-flight validation catches problems before the build starts — provisioning profile bundle ID mismatch, certificate expiration, missing app icon, invalid version format, wrong team ID. And `encryption_exempt` in `perry.toml [ios]` auto-sets the `ITSAppUsesNonExemptEncryption` Info.plist key, skipping the manual export compliance prompt in App Store Connect.
+Validasi pra-penerbangan menemukan masalah sebelum pembangunan dimulai — ketidakcocokan ID bundel profil penyediaan, masa berlaku sertifikat, ikon aplikasi hilang, format versi tidak valid, ID tim salah. Dan `encryption_exempt` di `perry.toml [ios]` menyetel otomatis kunci Info.plist `ITSAppUsesNonExemptEncryption`, dan melewati perintah kepatuhan ekspor manual di App Store Connect.
 
-## perry/widget: WidgetKit from TypeScript
+## perry/widget: WidgetKit dari TypeScript
 
-Perry can now compile TypeScript to native SwiftUI WidgetKit extensions. This is not a wrapper or a bridge — the compiler walks the render tree at the HIR level and emits SwiftUI source code directly. The output is a complete WidgetKit extension bundle that Xcode (or Perry's build pipeline) can embed in your app.
+Perry kini dapat mengkompilasi TypeScript ke ekstensi SwiftUI WidgetKit asli. Ini bukan pembungkus atau jembatan — kompiler menjalankan pohon render pada tingkat HIR dan mengeluarkan kode sumber SwiftUI secara langsung. Outputnya adalah paket ekstensi WidgetKit lengkap yang dapat disematkan oleh Xcode (atau Perry) ke dalam aplikasi Anda.
 
-terminal
-
+```text
 perry widget.ts --target ios-widget --app-bundle-id com.example.app -o out/
+```
 
-The approach is fundamentally different from the rest of Perry's compilation. Normal Perry code goes through Cranelift to native machine code. Widget code goes through the HIR to SwiftUI text output, because WidgetKit requires SwiftUI — there's no way to build a widget extension with imperative UIKit or AppKit code. Perry solves this by treating the widget render tree as a compile-time template, not runtime code.
+Pendekatannya pada dasarnya berbeda dari kompilasi Perry lainnya. Kode Perry normal melewati Cranelift ke kode mesin asli. Kode widget melewati HIR ke keluaran teks SwiftUI, karena WidgetKit memerlukan SwiftUI — tidak ada cara untuk membuat ekstensi widget dengan perintah UIKit atau kode AppKit. Perry memecahkan masalah ini dengan memperlakukan pohon render widget sebagai templat waktu kompilasi, bukan kode waktu proses.
 
 ## Widget Baru dan Peningkatan Platform
 
-Four new widget types landed this week:
+Empat jenis widget baru hadir minggu ini:
 
--   **TextArea** — multi-line text editing on macOS, iOS, and Android
--   **SecureField** — password input on iOS and macOS
--   **QR Code** — native QR code generation on iOS, macOS, and Android
--   **Splash Screen** — auto-generated LaunchScreen storyboards (iOS) and splash themes (Android)
+-   **TextArea** — pengeditan teks multi-baris di macOS, iOS, dan Android
+-   **SecureField** — masukan sandi di iOS dan macOS
+-   **Kode QR** — pembuatan kode QR asli di iOS, macOS, dan Android
+-   **Splash Screen** — storyboard LaunchScreen yang dibuat secara otomatis (iOS) dan tema splash (Android)
 
 ### iPad Menjadi Native
 
-Perry now generates full iPad-native apps: `UIDeviceFamily [1,2]`, orientation support, `UIRequiresFullScreen`, and a compiled LaunchScreen storyboard via ibtool. A new `getDeviceIdiom()` function detects phone vs. iPad at runtime, and `PerryFrameSplit` provides frame-based horizontal split containers for iPad layouts.
+Perry kini menghasilkan aplikasi lengkap asli iPad: `UIDeviceFamily [1,2]`, dukungan orientasi, `UIRequiresFullScreen`, dan storyboard LaunchScreen yang dikompilasi melalui ibtool. Fungsi `getDeviceIdiom()` baru mendeteksi ponsel vs. iPad saat runtime, dan `PerryFrameSplit` menyediakan wadah pemisahan horizontal berbasis bingkai untuk tata letak iPad.
 
 ### Windows
 
-Windows got timer support (50ms `WM_TIMER` tick), owner-drawn buttons with dark theme backgrounds, and fixes for a use-after-free bug in `to_wide().as_ptr()` across 18 widget files. V8 runtime now works on Windows with the required system libraries linked.
+Windows mendapat dukungan pengatur waktu (centang `WM_TIMER` 50 md), tombol yang dibuat oleh pemilik dengan latar belakang tema gelap, dan perbaikan untuk bug penggunaan setelah bebas di `to_wide().as_ptr()` di 18 file widget. Waktu proses V8 kini berfungsi di Windows dengan pustaka sistem yang diperlukan tertaut.
 
 ### GTK4 (Linux)
 
-The GTK4 backend received visual polish to match macOS: CSS padding for edge insets, Adwaita button styling, VStack margin fixes, and ScrollView horizontal policy.
+Backend GTK4 menerima penyempurnaan visual agar sesuai dengan macOS: padding CSS untuk sisipan tepi, gaya tombol Adwaita, perbaikan margin VStack, dan kebijakan horizontal ScrollView.
 
-## http/https and better-sqlite3
+## http/https dan lebih baik-sqlite3
 
-Two significant stdlib additions:
+Dua tambahan stdlib yang signifikan:
 
-The new `http` and `https` native modules provide client-side HTTP using reqwest under the hood. The API matches Node.js: `request()`, `get()`, `ClientRequest` with write/end/on, and `IncomingMessage` with statusCode and event handlers.
+Modul asli `http` dan `https` yang baru menyediakan HTTP sisi klien menggunakan reqwest di balik terpal. API cocok dengan Node.js: `request()`, `get()`, `ClientRequest` dengan write/end/on, dan `IncomingMessage` dengan statusCode dan event handler.
 
-`better-sqlite3` is now fully supported: `new Database()`, `prepare`, `exec`, `run`, `get`, `all` — with proper NaN-boxing and row objects with named property access.
+`better-sqlite3` kini didukung penuh: `new Database()`, `prepare`, `exec`, `run`, `get`, `all` — dengan objek kotak dan baris NaN yang tepat dengan akses properti bernama.
 
-Other stdlib improvements: `crypto.randomBytes()` now returns a Buffer (matching Node.js), MongoDB gained `listDatabases` and `listCollections` with thread-safety fixes, and mysql2 INSERT/UPDATE/DELETE now returns `ResultSetHeader` with `insertId`.
+Peningkatan stdlib lainnya: `crypto.randomBytes()` sekarang mengembalikan Buffer (cocok dengan Node.js), MongoDB memperoleh `listDatabases` dan `listCollections` dengan perbaikan keamanan thread, dan mysql2 INSERT/UPDATE/DELETE kini mengembalikan `ResultSetHeader` dengan `insertId`.
 
 ## Perbaikan GC dan Kebenaran
 
-Several critical garbage collector and runtime correctness fixes shipped this week:
+Beberapa pengumpul sampah penting dan perbaikan kebenaran waktu proses dikirimkan minggu ini:
 
--   **GC reentrancy guard** — prevents collection during allocation, fixing RefCell double-borrow panics
--   **GC Map tracing** — Maps now properly traced during mark phase, preventing string key collection
--   **String aliasing fix** — string append now always allocates fresh strings, fixing corruption from pointer copy aliasing
--   **BigInt arithmetic** — right-shift uses arithmetic shift for negative numbers, bitwise ops use ToInt32 wrapping semantics
--   **Map.get() undefined** — returns correct `TAG_UNDEFINED` for missing keys instead of wrong NaN tag
--   **Static field GC roots** — BigInt values in static class fields registered as GC roots
+-   **GC penjaga masuk kembali** — mencegah pengumpulan selama alokasi, memperbaiki kepanikan peminjaman ganda RefCell
+-   **GC Pelacakan peta** — Peta kini ditelusuri dengan benar selama fase penandaan, sehingga mencegah pengumpulan kunci string
+-   **Perbaikan aliasing string** — penambahan string sekarang selalu mengalokasikan string baru, memperbaiki kerusakan dari aliasing salinan pointer
+-   **Aritmatika BigInt** — pergeseran kanan menggunakan pergeseran aritmatika untuk angka negatif, operasi bitwise menggunakan semantik pembungkus ToInt32
+-   **Map.get() tidak terdefinisi** — mengembalikan `TAG_UNDEFINED` yang benar untuk kunci yang hilang dan bukan tag NaN yang salah
+-   **Bidang statis GC** — Nilai BigInt dalam bidang kelas statis terdaftar sebagai GC
 
-These aren't minor. The GC reentrancy fix alone resolved an entire class of intermittent crashes. The string aliasing fix affected any program that assigned one string variable to another and then mutated either. These are the kind of bugs that only surface under real workloads, and fixing them is what makes the compiler production-grade.
+Ini bukan masalah kecil. Perbaikan masuknya kembali GC saja dapat menyelesaikan seluruh kelas error yang terjadi secara berkala. Perbaikan aliasing string memengaruhi program apa pun yang menetapkan satu variabel string ke variabel lain dan kemudian bermutasi. Ini adalah jenis bug yang hanya muncul saat beban kerja sebenarnya, dan memperbaikinya adalah hal yang menjadikan compiler berkelas produksi.
 
-## perry-verify: Hardened
+## perry-verify: Dikeraskan
 
-`perry-verify`, the automated app verification service, got a security hardening pass: sandboxed execution via `bwrap` on Linux and `sandbox-exec` on macOS, auth tokens on WebSocket handshake and binary download, per-IP rate limiting, full UUID job IDs to prevent enumeration, and reduced body limits.
+`perry-verify`, layanan verifikasi aplikasi otomatis, mendapat izin penguatan keamanan: eksekusi sandbox melalui `bwrap` di Linux dan `sandbox-exec` di macOS, token autentikasi pada jabat tangan WebSocket dan unduhan biner, pembatasan kecepatan per IP, ID tugas UUID lengkap untuk mencegah enumerasi, dan pengurangan batas isi.
 
-## perrysdad: The Self-Hosting Compiler
+## perrysdad: Kompiler Hosting Mandiri
 
-In a parallel effort, `perrysdad` — a self-hosting LLVM IR compiler written in TypeScript — went from zero to self-compilation in five phases over the week:
+Dalam upaya paralel, `perrysdad` — kompiler LLVM IR yang dihosting sendiri dan ditulis dalam TypeScript — berubah dari nol menjadi kompilasi mandiri dalam lima fase selama seminggu:
 
-1.  **Phase 0-1** — end-to-end skeleton: HIR to LLVM IR text to clang, linked against Perry's `libperry_runtime.a`
-2.  **Phase 2** — hand-rolled recursive descent parser with Pratt expression parsing for real `.ts` files
-3.  **Phase 3** — arrays, objects, and maps with runtime FFI, plus fixing a critical ABI mismatch (JSValue declared as double in LLVM IR instead of i64)
-4.  **Phase 4** — classes, enums, closures, multi-file compilation with module discovery and topological sort
+1.  **Fase 0–1** — kerangka menyeluruh dari awal hingga akhir: HIR → teks LLVM IR → clang, ditautkan dengan `libperry_runtime.a` milik Perry
+2.  **Fase 2** — pengurai keturunan rekursif linting tangan dengan penguraian ekspresi Pratt untuk file `.ts` nyata
+3.  **Fase 3** — array, objek, dan peta dengan runtime FFI, ditambah perbaikan ketidakcocokan ABI kritis (JSValue dinyatakan sebagai ganda di LLVM IR bukan i64)
+4.  **Fase 4** — kelas, enum, penutupan, kompilasi multi-file dengan penemuan modul dan pengurutan topologi
 
-The milestone: the self-compiled `anvil` binary can now compile test programs and produce correct output matching the node-compiled version. A TypeScript compiler, compiled by Perry to native code, compiling more TypeScript to native code. Turtles all the way down.
+Pencapaian penting: biner `anvil` yang dikompilasi sendiri kini dapat mengkompilasi program pengujian dan menghasilkan output yang benar yang cocok dengan versi yang dikompilasi node. Kompiler TypeScript, dikompilasi oleh Perry ke kode asli, mengkompilasi lebih banyak TypeScript ke kode asli. Kura-kura sampai ke bawah.
 
 ## Dalam Angka
 
--   **82 commits** to the main Perry compiler
--   **1 release**: v0.2.173 (March 8)
--   **49 documentation pages** at docs.perryts.com
--   **4 new widgets**: TextArea, SecureField, QR Code, Splash Screen
--   **3 distribution channels**: Homebrew, APT, source
--   **3 automated store pipelines**: App Store, TestFlight, Google Play
--   **All 6 platforms** received improvements this week
+-   **82 melakukan** ke kompiler Perry utama
+-   **1 rilis**: v0.2.173 (8 Maret)
+-   **49 halaman dokumentasi** di docs.perryts.com
+-   **4 widget baru**: TextArea, SecureField, Kode QR, Layar Pembuka
+-   **3 saluran distribusi**: Homebrew, APT, sumber
+-   **3 saluran penyimpanan otomatis**: App Store, TestFlight, Google Play
+-   **Keenam platform** menerima peningkatan minggu ini
 
 ## Apa Selanjutnya
 
-The pipeline is filling in. You can write TypeScript, compile to six platforms, distribute via Homebrew or APT, publish to the App Store and Play Store, add home screen widgets, and read comprehensive documentation — all without leaving Perry's toolchain. What remains:
+Saluran pipa sudah terisi. Anda dapat menulis TypeScript, mengkompilasi ke enam platform, mendistribusikan melalui Homebrew atau APT, memublikasikan ke App Store dan Play Store, menambahkan widget layar utama, dan membaca dokumentasi komprehensif — semuanya tanpa meninggalkan rantai alat Perry. Yang tersisa:
 
--   **Full regex support** — the last major language gap
--   **perry/ui expansion** — drag and drop, accessibility labels, DatePicker
--   **perrysdad maturation** — expanding the self-hosting compiler toward full Perry parity
--   **Hub public beta** — opening distributed builds to external users
+-   **Dukungan regex penuh** — kesenjangan bahasa utama yang terakhir
+-   **ekspansi Perry/ui** — seret dan lepas, label aksesibilitas, DatePicker
+-   **pematangan perrysdad** — memperluas compiler self-hosting menuju paritas Perry penuh
+-   **Hub publik beta** — membuka build terdistribusi untuk pengguna eksternal
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the new docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/id/roadmap/) for the full picture.
+Ikuti kemajuan di [GitHub](https://github.com/PerryTS/perry), baca dokumen baru di [docs.perryts.com](https://docs.perryts.com), atau periksa [peta jalan](/id/roadmap/) untuk gambaran selengkapnya.

@@ -36,51 +36,41 @@ Zum Kontext: `tsc --noEmit` allein auf tRPC dauert mehrere Sekunden. Perry kompi
 
 Das war der große Meilenstein. Honos Export-Struktur sieht so aus:
 
-hono export chain
+**hono-Exportkette**
 
+```
 // hono/src/hono.ts
-
 export class Hono extends HonoBase { ... }
-
 // hono/src/index.ts
-
 import { Hono } from './hono'
-
 export { Hono }
+```
 
 Dieses `export { Hono }` ist ein benannter Re-Export. In Perrys HIR wird daraus `Export::Named`. Zuvor folgte die Klassenpropagation des Compilers nur `ExportAll`\- und `ReExport`\-Ketten. Jetzt verfolgt Perry `Export::Named` durch die Imports des Moduls zurück, um die ursprüngliche Klassendefinition zu finden und sie zu propagieren.
 
-$ ./perry compile test\_hono.ts -o /tmp/test-hono && /tmp/test-hono
-
-\[1\] Class instantiation through named re-export chain
-
+```
+$ ./perry compile test_hono.ts -o /tmp/test-hono && /tmp/test-hono
+[1] Class instantiation through named re-export chain
 PASS: new Hono() returned a real object
-
-\[2\] Constructor-initialized fields
-
+[2] Constructor-initialized fields
 PASS: app.router initialized by constructor
-
 PASS: app.router.name = SmartRouter
-
-\[5\] Multiple instances
-
+[5] Multiple instances
 PASS: second instance created with router
-
-\[6\] Constructor with options
-
+[6] Constructor with options
 PASS: new Hono({ strict: false }) accepted options
+```
 
 ### Multi-Level Re-Export-Auflösung
 
 tRPCs `initTRPC` lebt 4 Ebenen tief:
 
-initTRPC.ts (export const initTRPC = ...)
-
-\-> unstable-core-do-not-import.ts (export \* from './initTRPC')
-
-\-> @trpc/server/index.ts (export { initTRPC } from '../../..')
-
-\-> index.ts (export \* from './@trpc/server')
+```
+initTRPC.ts                          (export const initTRPC = ...)
+-> unstable-core-do-not-import.ts  (export * from './initTRPC')
+-> @trpc/server/index.ts           (export { initTRPC } from '../../..')
+-> index.ts                        (export * from './@trpc/server')
+```
 
 Das ist `ExportAll` → `Named` → `ExportAll`. Perry löst die vollständige Kette auf.
 
@@ -108,15 +98,15 @@ Perry unterstützt `this[variable] = value` noch nicht, daher fehlen Honos HTTP-
 
 | Klasse | Anzahl |
 | --- | --- |
-| Response | 11 |
-| TransformStream | 7 |
-| ReadableStream | 5 |
+| Antwort| 11 |
+| TransformStream| 7 |
+| ReadableStream| 5 |
 | Request | 4 |
 | Headers | 3 |
 | Proxy | 2 |
-| TextEncoderStream | 2 |
-| WritableStream | 1 |
-| DOMException | 1 |
+| TextEncoderStream| 2 |
+| WritableStream| 1 |
+| DOMException| 1 |
 
 `Response`, `Request` und `Headers` sind die kritischen für jedes HTTP-Framework. Diese brauchen Built-In-Codegen-Unterstützung ähnlich zu dem, was wir bereits für `Map`, `Set`, `RegExp`, `Buffer`, `AbortController` und andere haben.
 

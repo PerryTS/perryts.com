@@ -14,25 +14,19 @@ Bevor wir zu den neuen Bibliotheken kommen, lohnt es sich zu betonen, was im Zen
 
 `perry/ui` ist Perrys primäre und fortschrittlichste UI-Oberfläche. Es umfasst reaktives State Management, Layout-Container (VStack, HStack, ZStack, SplitView), ein hardwarebeschleunigtes Canvas, Table Views mit Spaltensortierung, das `perry/system`\-Modul für Dateidialoge, Keychain-Zugriff, Benachrichtigungen und Multi-Window — alles aus TypeScript, alles kompiliert zu direkten Plattform-API-Aufrufen. Jeder andere UI-Ansatz in Perry, einschließlich der React-Kompatibilitätsschicht, baut auf `perry/ui` auf und bildet auf dessen Widgets zurück.
 
-app.ts
+**app.ts**
 
+```typescript
 import { Window, VStack, Button, Text, State } from 'perry/ui';
-
 const count = new State(0);
-
 const window = new Window({ title: "Counter" });
-
 window.setContent(
-
-new VStack({ children: \[
-
-new Text({ text: count }),
-
-new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
-
-\] })
-
+  new VStack({ children: [
+    new Text({ text: count }),
+    new Button({ title: "+1", onClick: () => count.set(count.get() + 1) }),
+  ] })
 );
+```
 
 Das reaktive `State`\-Objekt ist die Schlüssel-Primitive. Wenn sich ein State-Wert ändert, aktualisieren sich nur die an diesen State gebundenen Widgets — kein Virtual DOM Diffing, keine vollständigen Baum-Rerenders, kein Reconciliation-Pass. Es ist der direkteste Weg von TypeScript zu nativer Plattform-UI, der existiert.
 
@@ -40,27 +34,20 @@ Das reaktive `State`\-Objekt ist die Schlüssel-Primitive. Wenn sich ein State-W
 
 Für Entwickler, die von React kommen, bietet `perry-react` eine Kompatibilitätsschicht, die Reacts Komponentenmodell auf `perry/ui`\-Widgets abbildet. Du kannst `useState`, `useRef`, `useReducer` und JSX verwenden — und Perry kompiliert es zu denselben nativen Widgets darunter. Es ist eine Komfortbrücke, keine separate Rendering-Engine.
 
-counter.tsx
+**counter.tsx**
 
+```tsx
 import React, { useState } from 'react';
-
 function Counter() {
-
-const \[count, setCount\] = useState(0);
-
-return (
-
-<div\>
-
-<h1\>{count}</h1\>
-
-<button onClick\={() => setCount(count + 1)}\>+1</button\>
-
-</div\>
-
-);
-
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
 }
+```
 
 Unter der Haube bildet jedes JSX-Element auf ein `perry/ui`\-Widget ab: `<div>` wird zu einem VStack, `<button>` wird zu einem Button, `useState` wird durch Perrys reaktiven State gestützt. Es ist früh — Phase 1 mit Full-Tree-Rerenders und globalem Hook-Storage — aber es beweist, dass bestehender React-Code über Perry native Plattformen ansprechen kann. Wir erkunden auch Angular- und Ionic-Kompatibilität entlang ähnlicher Linien.
 
@@ -68,29 +55,21 @@ Unter der Haube bildet jedes JSX-Element auf ein `perry/ui`\-Widget ab: `<div>` 
 
 Wenn du einen Server oder eine Desktop-App baust, die mit einer Datenbank kommuniziert, hat Perry dich jetzt mit drei Prisma-kompatiblen ORMs abgedeckt: `perry-prisma` (MySQL), `perry-sqlite` (SQLite) und `perry-postgres` (PostgreSQL). Alle drei sind Drop-in-Ersatz für `@prisma/client`. Dieselbe API, dieselben Query-Muster, aber kompiliert zu nativem Code mit direktem Datenbank-FFI — kein Prisma-Engine, kein Node.js.
 
-database.ts
+**database.ts**
 
+```typescript
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
-
 // Dieselbe Prisma-API — kompiliert zu nativem SQL via Rust FFI
-
 const users = await prisma.user.findMany({
-
-where: { email: { contains: "@perry.dev" } },
-
-orderBy: { createdAt: "desc" },
-
-take: 10,
-
+  where: { email: { contains: "@perry.dev" } },
+  orderBy: { createdAt: "desc" },
+  take: 10,
 });
-
 await prisma.post.create({
-
-data: { title: "Hello", authorId: users\[0\].id },
-
+  data: { title: "Hello", authorId: users[0].id },
 });
+```
 
 Unter der Haube ist jedes ORM ein TypeScript-Frontend, gestützt durch eine Rust-FFI-Schicht mit `sqlx`. Der Query-Flow: TypeScript serialisiert die Query zu JSON, übergibt sie über die FFI-Grenze, Rust baut parametrisiertes SQL, führt es über den Connection Pool aus und serialisiert das Ergebnis zurück. Das Prisma-Schema wird zur Build-Zeit gelesen — null Runtime-Parsing.
 
@@ -100,27 +79,20 @@ Die drei Implementierungen teilen ~95 % ihres Codes. Die Unterschiede sind, was 
 
 `perry-push` ist eine einzelne Bibliothek, die Push-Benachrichtigungen über jede Plattform hinweg handhabt: APNs (iOS/macOS), FCM (Android), Web Push (Browser) und WNS (Windows). Jeder Provider ist ein Rust-FFI-Modul mit genau drei Funktionen: `*_provider_new`, `*_provider_close` und `*_send`.
 
-notify.ts
+**notify.ts**
 
+```typescript
 import { ApnProvider } from 'perry-push/apn';
-
 import { FcmProvider } from 'perry-push/fcm';
-
 const apn = new ApnProvider({ teamId, keyId, key });
-
 const fcm = new FcmProvider({ serviceAccount });
-
 // Einheitlicher Ergebnistyp für alle Provider
-
 const result = await apn.send({
-
-deviceToken: token,
-
-title: "New message",
-
-body: "You have a new reply",
-
+  deviceToken: token,
+  title: "New message",
+  body: "You have a new reply",
 });
+```
 
 Kryptografie wird von `ring` gehandhabt — ES256 JWTs für APNs und VAPID, RS256 für FCM-Servicekonten, AES-GCM für Web Push-Payload-Verschlüsselung. Alles kompiliert zu nativem Code. Kein `node-gyp`, keine OpenSSL-Abhängigkeit.
 

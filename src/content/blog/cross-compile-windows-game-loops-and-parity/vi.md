@@ -8,133 +8,129 @@ tags: ["compiler", "cross-compilation", "infrastructure", "milestone"]
 
 ## Biên dịch chéo sang Windows từ Linux
 
-Perry can now produce Windows `.exe` binaries from a Linux host. This is the missing piece for CI/CD pipelines that need to target Windows without running a Windows build machine for the entire compilation.
+Perry hiện có thể tạo các tệp nhị phân Windows `.exe` từ máy chủ Linux. Đây là phần còn thiếu cho quy trình CI/CD cần nhắm mục tiêu Windows mà không cần chạy máy xây dựng Windows để thực hiện toàn bộ quá trình biên dịch.
 
-The implementation replaces compile-time `#[cfg]` checks with runtime target detection. When the compiler sees a Windows target on a non-Windows host, it locates `lld-link`, `llvm-nm`, and `llvm-ar` from the Rust toolchain or PATH via a new `find_llvm_tool()` helper. The Windows system libraries come from an [xwin](https://github.com/Jake-Shadle/xwin)\-style sysroot pointed to by `PERRY_WINDOWS_SYSROOT`.
+Việc triển khai thay thế các kiểm tra `#[cfg]` tại thời gian biên dịch bằng tính năng phát hiện mục tiêu trong thời gian chạy. Khi trình biên dịch nhìn thấy mục tiêu Windows trên máy chủ không phải Windows, nó sẽ định vị `lld-link`, `llvm-nm` và `llvm-ar` từ chuỗi công cụ Rust hoặc PATH thông qua `find_llvm_tool()`. Các thư viện hệ thống Windows đến từ một sysroot kiểu [xwin](https://github.com/Jake-Shadle/xwin) được trỏ đến bởi `PERRY_WINDOWS_SYSROOT`.
 
-The linker automatically uses `/FORCE:UNRESOLVED` and generates stubs for missing UI symbols, so CLI apps cross-compile cleanly. Output defaults to `.exe` when targeting Windows. The full details are in the [cross-compilation docs](https://docs.perryts.com).
+Trình liên kết tự động sử dụng `/FORCE:UNRESOLVED` và tạo các phần sơ khai cho các ký hiệu giao diện người dùng bị thiếu, nhờ đó các ứng dụng CLI biên dịch chéo một cách rõ ràng. Đầu ra mặc định là `.exe` khi nhắm mục tiêu Windows. Thông tin chi tiết đầy đủ có trong [tài liệu biên dịch chéo](https://docs.perryts.com).
 
-terminal — Linux host
+**thiết bị đầu cuối — Máy chủ Linux**
 
+```
 $ perry compile main.ts --target windows
-
-Compiling main.ts for windows-x86\_64...
-
+Compiling main.ts for windows-x86_64...
 Using lld-link from Rust toolchain
-
 ✓ Compiled executable: main.exe (2.8 MB)
+```
 
 ## Hỗ trợ Game Loop iOS
 
-iOS requires UIKit to own the main thread. That's fine for event-driven apps, but it's a problem for games that need a blocking `while (!shouldClose)` loop. Perry now solves this with the `--features ios-game-loop` flag.
+iOS yêu cầu UIKit để sở hữu chuỗi chính. Điều đó tốt cho các ứng dụng hướng sự kiện, nhưng sẽ là vấn đề đối với các trò chơi cần vòng lặp `while (!shouldClose)` chặn. Perry hiện giải quyết vấn đề này bằng cờ `--features ios-game-loop`.
 
-When enabled, the compiler emits `_perry_user_main` instead of `main`. The runtime provides a `main()` that calls `UIApplicationMain` on the main thread and spawns your code on a background thread. Scene delegate and app delegate handle the full UIKit lifecycle while your game loop runs unblocked.
+Khi được bật, trình biên dịch sẽ phát ra `_perry_user_main` thay vì `main`. Thời gian chạy cung cấp một `main()` gọi `UIApplicationMain` trên luồng chính và tạo mã của bạn trên luồng nền. Đại biểu cảnh và đại biểu ứng dụng xử lý toàn bộ vòng đời UIKit trong khi vòng lặp trò chơi của bạn chạy mà không bị chặn.
 
-main.ts
+**main.ts**
 
+```typescript
 // Your game loop runs on a background thread
-
 while (!shouldClose) {
-
 update();
-
 render();
-
 awaitNextFrame();
-
 }
+```
 
-terminal
-
+```text
 $ perry run ios --features ios-game-loop
+```
 
-This enables an entire category of apps — games, simulations, real-time visualizations — that weren't practical on iOS before. The iOS pump and callback paths are also now wrapped in panic handling, so crashes in either the game loop or the UIKit lifecycle are caught cleanly.
+Điều này cho phép toàn bộ danh mục ứng dụng — trò chơi, mô phỏng, trực quan hóa thời gian thực — mà trước đây không thực tế trên iOS. Đường dẫn gọi lại và bơm iOS hiện cũng được bao bọc trong xử lý hoảng loạn, do đó, các sự cố trong vòng lặp trò chơi hoặc vòng đời UIKit đều được xử lý rõ ràng.
 
 ## Báo cáo sự cố
 
-Perry-compiled apps now install a panic hook and signal handlers for `SIGSEGV`, `SIGBUS`, and `SIGABRT` at startup. When a fatal crash occurs, the details are written to `~/.hone/crash.log` for the Chirp telemetry system. Caught panics (in `catch_callback_panic`) clear the log, so only genuine unrecoverable crashes are reported.
+Ứng dụng được biên dịch bằng Perry giờ cài đặt panic hook và trình xử lý tín hiệu cho `SIGSEGV`, `SIGBUS` và `SIGABRT` khi khởi động. Khi xảy ra sự cố nghiêm trọng, thông tin chi tiết được ghi vào `~/.hone/crash.log` cho hệ thống telemetry Chirp. Những panic đã được bắt trong `catch_callback_panic` sẽ xóa nhật ký, vì vậy chỉ các sự cố thực sự không thể phục hồi mới được báo cáo.
 
-This is a production-readiness feature. When something goes wrong in the field, we'll know about it — and the crash log includes enough context to diagnose the issue without requiring users to manually report anything.
+Đây là tính năng sẵn sàng sản xuất. Khi có sự cố xảy ra tại hiện trường, chúng tôi sẽ biết về điều đó — và nhật ký sự cố bao gồm đủ ngữ cảnh để chẩn đoán sự cố mà không yêu cầu người dùng phải báo cáo bất kỳ điều gì theo cách thủ công.
 
 ## Hub: Pipeline Build Windows hai giai đoạn
 
-The Perry Hub build infrastructure got a significant architectural upgrade. Previously, building for Windows required a Windows worker for the entire compilation. Now the pipeline splits into two stages:
+Cơ sở hạ tầng xây dựng Hub Perry đã nhận được nâng cấp kiến trúc đáng kể. Trước đây, việc xây dựng cho Windows yêu cầu một nhân viên Windows thực hiện toàn bộ quá trình biên dịch. Bây giờ, quy trình chia thành hai giai đoạn:
 
-1.  A Linux worker cross-compiles the Windows artifact using the new lld-link support
-2.  The Hub holds the pre-compiled artifact and re-queues the job for a Windows worker
-3.  The Windows worker only handles signing and packaging — a much lighter task
+1.  Một nhân viên Linux biên dịch chéo tạo phẩm Windows bằng cách sử dụng hỗ trợ lld-link mới
+2.  Trung tâm giữ cấu phần phần mềm được biên dịch trước và sắp xếp lại công việc cho nhân viên Windows
+3.  Nhân viên Windows chỉ xử lý việc ký và đóng gói — một nhiệm vụ nhẹ nhàng hơn nhiều
 
-When a worker sends `complete` with `needs_finishing: "windows"`, the Hub transparently re-queues the job. The CLI sees a seamless single-build experience.
+Khi một nhân viên gửi `complete` với `needs_finishing: "windows"`, Hub sẽ xếp hàng lại công việc một cách minh bạch. CLI mang lại trải nghiệm xây dựng đơn lẻ liền mạch.
 
-The Hub also now auto-starts Azure Windows VMs when no Windows worker is connected, and build workers auto-update to the latest Perry version on new releases. Less manual infrastructure management, faster builds.
+Hub hiện cũng tự động khởi động máy ảo Azure Windows khi không có nhân viên Windows nào được kết nối và nhân viên xây dựng tự động cập nhật lên phiên bản Perry mới nhất trên các bản phát hành mới. Quản lý cơ sở hạ tầng ít thủ công hơn, xây dựng nhanh hơn.
 
 ## Đại tu tài liệu
 
-Two major documentation rewrites landed this week on [docs.perryts.com](https://docs.perryts.com):
+Hai bản viết lại tài liệu chính đã được cập nhật vào tuần này trên [docs.perryts.com](https://docs.perryts.com):
 
--   **perry.toml reference** — complete section documentation covering every configuration option, bundle ID resolution, entry file resolution, build number auto-increment, and CI/CD examples
--   **Geisterhand reference** — full API docs, platform setup, test automation patterns, and architecture overview for the cross-platform UI testing framework
+-   **tham khảo perry.toml** — tài liệu phần hoàn chỉnh bao gồm mọi tùy chọn cấu hình, độ phân giải ID gói, độ phân giải tệp mục nhập, tự động tăng số bản dựng và ví dụ CI/CD
+-   **Tài liệu tham khảo Geisterhand** — tài liệu API đầy đủ, thiết lập nền tảng, mẫu tự động hóa thử nghiệm và tổng quan về kiến trúc cho khung thử nghiệm giao diện người dùng đa nền tảng
 
-These aren't incremental updates. Both are ground-up rewrites that cover every feature and configuration option. If you're setting up a new project or writing tests, start here.
+Đây không phải là những cập nhật gia tăng. Cả hai đều là bản viết lại cơ bản bao gồm mọi tính năng và tùy chọn cấu hình. Nếu bạn đang thiết lập một dự án mới hoặc viết bài kiểm tra, hãy bắt đầu tại đây.
 
 ## API Menu đa nền tảng
 
-`menuClear` and `menuAddStandardAction` were previously macOS-only. They now work on all 6 native platforms. This also includes a fix for a `RefCell` re-entrancy panic in `dispatch_menu_item` on Windows.
+`menuClear` và `menuAddStandardAction` trước đây chỉ có trên macOS. Giờ chúng hoạt động trên cả 6 nền tảng native. Thay đổi này cũng sửa lỗi panic do tái nhập `RefCell` trong `dispatch_menu_item` trên Windows.
 
-### Android: 16 KB Page Alignment
+### Android: Căn chỉnh trang 16 KB
 
-Google Play now requires 16 KB page alignment for native libraries. Perry sets the appropriate `CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS` automatically, and companion `.so` files are copied next to the output for APK/AAB inclusion.
+Google Play hiện yêu cầu căn chỉnh trang 16 KB cho các thư viện gốc. Perry tự động đặt `CARGO_TARGET_AARCH64_LINUX_ANDROID_RUSTFLAGS` thích hợp và các tệp `.so` đồng hành được sao chép bên cạnh đầu ra để đưa vào APK/AAB.
 
 ## Perry React: Bảng Kanban
 
-The React compatibility layer got a real-world test: a full 5-column Kanban board with move, add, delete, and view operations. Building it uncovered and fixed nested array children rendering in JSX — the recursive `_appendChildren` handler now properly flattens arrays returned from `.map()` calls. There's also a new 14-section Kitchen Sink WorkBench demo covering various UI patterns.
+Lớp tương thích React đã được kiểm tra trong thế giới thực: bảng Kanban 5 cột đầy đủ với các thao tác di chuyển, thêm, xóa và xem. Xây dựng kết xuất mảng con lồng nhau không được phát hiện và sửa lỗi trong JSX — trình xử lý đệ quy `_appendChildren` hiện đã làm phẳng chính xác các mảng được trả về từ lệnh gọi `.map()`. Ngoài ra còn có bản demo WorkBench bồn rửa nhà bếp gồm 14 phần mới bao gồm nhiều mẫu giao diện người dùng khác nhau.
 
 ## Anvil: 100% Tương đương bài kiểm tra xác định
 
-`perrysdad` — the self-hosting LLVM compiler written in TypeScript and compiled by Perry — now passes **68 out of 68** deterministic tests, matching the main compiler's output exactly. The only differences are inherent (timestamps, `Math.random()`), and 11 tests are skipped because they require UI, timers, crypto, or platform-specific features not yet implemented.
+`perrysdad` — trình biên dịch LLVM tự lưu trữ được viết bằng TypeScript và được biên dịch bởi Perry — hiện vượt qua **68 trong số 68** thử nghiệm xác định, khớp chính xác với đầu ra của trình biên dịch chính. Sự khác biệt duy nhất là cố hữu (dấu thời gian, `Math.random()`) và 11 bài kiểm tra bị bỏ qua vì chúng yêu cầu giao diện người dùng, bộ tính giờ, mật mã hoặc các tính năng dành riêng cho nền tảng chưa được triển khai.
 
-Key work that got it there:
+Công việc chính đã đạt được điều đó:
 
--   **Interface method dispatch** — interface-typed variables now return correct methods via class\_id-based dispatch in ObjectHeader
--   **Dynamic property access** — runtime dispatch for computed property names
--   **Closures and this-binding** — correct capture semantics for object methods
--   **Phase 6 in progress** — async/await, generators, and condition fixes
+-   **Gửi phương thức giao diện** — các biến kiểu giao diện hiện trả về các phương thức chính xác thông qua công văn dựa trên class_id trong ObjectHeader
+-   **Quyền truy cập thuộc tính động** — gửi thời gian chạy cho tên thuộc tính được tính toán
+-   **Đóng và liên kết này** — ngữ nghĩa nắm bắt chính xác cho các phương thức đối tượng
+-   **Đang tiến hành giai đoạn 6** — không đồng bộ/chờ đợi, trình tạo và sửa lỗi điều kiện
 
-100% parity on deterministic tests is a significant milestone. It means the self-compiled `anvil` binary produces the exact same output as the main compiler for every testable scenario. The gap is narrowing toward full self-hosting.
+Tính chẵn lẻ 100% trong các thử nghiệm xác định là một cột mốc quan trọng. Điều đó có nghĩa là tệp nhị phân `anvil` tự biên dịch tạo ra kết quả đầu ra giống hệt như trình biên dịch chính cho mọi kịch bản có thể kiểm tra. Khoảng cách đang thu hẹp theo hướng tự lưu trữ hoàn toàn.
 
 ## Hơn 50 bản sửa lỗi
 
-A major correctness push this week. Highlights:
+Một bước tiến lớn về tính đúng đắn trong tuần này. Điểm nổi bật:
 
--   **JSON.parse** — arrays no longer truncated at 16 elements, invalid input handled correctly
--   **Uint8Array** — constructor from array variable, `.set(source, offset)` implementation (was a no-op)
--   **BigInt** — NaN-boxing with `BIGINT_TAG` for cross-module calls, keccak256 32-bit truncation fixes
--   **Optional chaining** — nested conditional expressions, toString detection, return value NaN-boxing
--   **IndexSet** — string NaN-boxing corrected to use `STRING_TAG` instead of `POINTER_TAG`
--   **MySQL** — DATETIME and BLOB types, `Date(string)` constructor
--   **Math.min/max** — spread argument handling
--   **Native method dispatch** — field-scan-and-call for `POINTER_TAG` objects
+-   **JSON.parse** — mảng không còn bị cắt bớt ở 16 phần tử, dữ liệu nhập không hợp lệ được xử lý chính xác
+-   **Uint8Array** — hàm tạo từ biến mảng, triển khai `.set(source, offset)` (không hoạt động)
+-   **BigInt** — NaN-boxing với `BIGINT_TAG` cho lệnh gọi nhiều mô-đun, sửa lỗi cắt ngắn 32-bit keccak256
+-   **Xâu chuỗi tùy chọn** — các biểu thức điều kiện lồng nhau, phát hiện toString, giá trị trả về NaN-boxing
+-   **Bộ chỉ mục** — chuỗi NaN-boxing đã sửa để sử dụng `STRING_TAG` thay vì `POINTER_TAG`
+-   **MySQL** — Các loại DATETIME và BLOB, `Date(string)`
+-   **Math.min/max** — xử lý đối số trải rộng
+-   **Gửi phương thức gốc** — quét trường và gọi cho các đối tượng `POINTER_TAG` đối tượng
 
-These aren't edge cases. JSON.parse truncating arrays at 16 elements would break any real application. Uint8Array.set being a no-op would silently corrupt data. These are the fixes that make the compiler production-grade, one correctness bug at a time.
+Đây không phải là những trường hợp đặc biệt. JSON. Việc cắt bớt mảng ở 16 phần tử sẽ phá vỡ mọi ứng dụng thực tế. Uint8Array.set là một no-op sẽ âm thầm làm hỏng dữ liệu. Đây là các bản sửa lỗi khiến trình biên dịch gặp một lỗi về độ chính xác ở cấp độ sản xuất.
 
 ## Bằng số liệu
 
--   **103 commits** to the main Perry compiler
--   **3 versions**: v0.2.195, v0.2.196, v0.2.197
--   **1 major feature**: cross-compile Windows from Linux
--   **1 new app category**: iOS game loops
--   **68/68** deterministic test parity in perrysdad
--   **50+ bug fixes** across NaN-boxing, stdlib, and native FFI
--   **2 documentation rewrites**: perry.toml and Geisterhand
--   **5 Hub improvements**: two-stage pipeline, Azure auto-startup, worker auto-update
+-   **103 cam kết** với trình biên dịch Perry chính
+-   **3 phiên bản**: v0.2.195, v0.2.196, v0.2.197
+-   **1 tính năng chính**: biên dịch chéo Windows từ Linux
+-   **1 danh mục ứng dụng mới**: iOS vòng lặp trò chơi
+-   **68/68** kiểm tra tính chẵn lẻ xác định ở perrysdad
+-   **Hơn 50 bản sửa lỗi** trên NaN-boxing, stdlib và FFI gốc
+-   **2 lần viết lại tài liệu**: perry.toml và Geisterhand
+-   **5 cải tiến cho trung tâm**: quy trình hai giai đoạn, tự động khởi động Azure, tự động cập nhật cho nhân viên
 
 ## Tiếp theo là gì
 
-Windows cross-compilation opens the door to fully automated multi-platform CI/CD — push TypeScript, get native binaries for every target without dedicated build machines for each OS. The game loop support unlocks a whole new category of iOS apps. And 100% deterministic test parity in perrysdad means self-hosting is getting very real. What remains:
+Tính năng biên dịch chéo của Windows mở ra cơ hội cho CI/CD đa nền tảng hoàn toàn tự động — đẩy TypeScript, nhận các tệp nhị phân gốc cho mọi mục tiêu mà không cần máy xây dựng chuyên dụng cho từng hệ điều hành. Hỗ trợ vòng lặp trò chơi sẽ mở ra một danh mục ứng dụng iOS hoàn toàn mới. Và tính chẵn lẻ của thử nghiệm xác định 100% trong perrysdad có nghĩa là việc tự lưu trữ đang trở nên rất thực tế. Những gì còn lại:
 
--   **Full regex support** — the last major language gap
--   **perry/ui expansion** — drag and drop, accessibility labels, DatePicker
--   **perrysdad Phase 6** — async/await, generators, expanding toward full Perry parity
--   **Hub public beta** — opening distributed builds to external users
+-   **Hỗ trợ đầy đủ biểu thức chính quy** — khoảng cách ngôn ngữ lớn cuối cùng
+-   **mở rộng perry/ui** — kéo và thả, nhãn trợ năng, DatePicker
+-   **perrysdad Giai đoạn 6** — async/await, trình tạo, mở rộng tới Perry chẵn lẻ đầy đủ
+-   **Hub beta công khai** — mở các bản dựng được phân phối cho người dùng bên ngoài
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/vi/roadmap/) for the full picture.
+Theo dõi tiến trình trên [GitHub](https://github.com/PerryTS/perry), đọc tài liệu tại [docs.perryts.com](https://docs.perryts.com) hoặc kiểm tra [lộ trình](/vi/roadmap/) để có bức tranh toàn cảnh.

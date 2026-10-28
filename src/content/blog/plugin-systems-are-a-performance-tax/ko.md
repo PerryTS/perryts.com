@@ -25,7 +25,7 @@ VS Code를 설치합니다. 빠릅니다. 확장 15개를 추가합니다. 이�
 
 ## 실제 피해
 
-### WordPress
+### 워드프레스
 
 모든 플러그인이 요청 생명주기에 연결됩니다. 30개 플러그인은 페이지 로드당 30개 레이어의 함수 호출을 의미합니다. 결과: 다른 플러그인의 피해를 완화하기 위해서만 캐싱 플러그인이 존재합니다. 플러그인이 만든 성능 문제를 해결하는 성능 플러그인. 메타적 아이러니입니다.
 
@@ -73,19 +73,14 @@ TypeScript는 확장 가능한 도구를 구축하기 위한 가장 인기 있�
 
 모듈이 네이티브 코드로 컴파일되면, "플러그인"은 그냥... 모듈이 됩니다. 빌드 시점에 합성됩니다. 최종 바이너리에는 플러그인 오버헤드가 없습니다. 플러그인이 없기 때문입니다 — 네이티브 코드만 있습니다. Express 라우트 핸들러, 미들웨어 함수, 유틸리티 라이브러리 — 모두 같은 바이너리 내의 직접 함수 호출로 컴파일됩니다. 동적 로딩 없이, 직렬화 없이, 프로세스 경계 없이.
 
-terminal
-
-\# Your app, your dependencies, your "plugins" — one binary
-
+```text
+# Your app, your dependencies, your "plugins" — one binary
 $ perry compile server.ts -o server
-
 Compiling server.ts + 43 modules...
-
 ✓ Built executable: server (1.8 MB, 0.7s)
-
 $ ./server
-
 Listening on port 3000
+```
 
 이것은 이론이 아닙니다. Perry는 이미 실제 TypeScript 프레임워크 — Hono, tRPC, Strapi — 를 2 MB 미만의 네이티브 ARM64 바이너리로 1초 미만에 컴파일합니다. 이 프레임워크를 구성하는 모듈이 컴파일되고, 링크되고, 단일 실행 파일에 인라인됩니다. Node.js에서는 런타임 오버헤드가 있는 플러그인 아키텍처가 되는 것이 Perry 바이너리에서는 제로 코스트 합성이 됩니다.
 

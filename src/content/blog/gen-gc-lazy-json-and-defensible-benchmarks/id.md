@@ -53,15 +53,15 @@ Pipeline JSON mendapat penulisan ulang paling invasif dalam periode ini. Perilak
 
 Hasil pada beban kerja yang dirancang untuk lazy tape (10k record, blob ~1 MB, parse → stringify tanpa iterasi perantara):
 
-| Implementasi | Median (ms) | p95 (ms) | σ | Peak RSS |
+| Implementasi | Median (ms)| p95 (ms) | σ | Peak RSS |
 | --- | --- | --- | --- | --- |
-| c++ `-O3 -flto` (simdjson) | 24 | 28 | 1.2 | 8 MB |
-| perry (gen-gc + lazy tape) | 75 | 91 | 6.9 | 85 MB |
-| rust serde\_json (LTO) | 185 | 190 | 1.7 | 11 MB |
+| c++ `-O3 -flto`| 24 | 28 | 1.2 | 8 MB |
+| perry (gen-gc + pita malas)| 75 | 91 | 6.9 | 85 MB |
+| karat serde_json (LTO)| 185 | 190 | 1.7 | 11 MB |
 | bun | 259 | 342 | 26.1 | 82 MB |
 | node | 394 | 602 | 60.1 | 127 MB |
-| kotlin (kotlinx.serialization) | 473 | 533 | 21.4 | 606 MB |
-| assemblyscript+json-as (wasmtime) | 598 | 621 | 10.5 | 58 MB |
+| kotlin (kotlinx.serialisasi)| 473 | 533 | 21.4 | 606 MB |
+| skrip perakitan+json-as (waktu habis)| 598 | 621 | 10.5 | 58 MB |
 
 Perry pada **median 75 ms** adalah runtime dynamic-typing tercepat dalam perbandingan — mengalahkan Bun (259 ms), mengalahkan Node (394 ms), mengalahkan server JIT Kotlin (453 ms). simdjson pada 24 ms adalah ceiling C++ yang dipercepat SIMD dan ada di halaman dengan sengaja, bukan disembunyikan di balik cherry-pick. Perry tidak mengalahkannya. Tujuannya adalah menunjukkan celahnya sehingga menutupnya memiliki target — dilacak di `docs/json-typed-parse-plan.md`.
 
@@ -81,12 +81,12 @@ Tiga hal berubah tentang bagaimana Perry menyajikan angka performa.
 
 Kernel utama yang sungguh tidak dapat dilipat, RUNS=11 median, di-refresh 2026-04-25 di v0.5.249:
 
-| Benchmark | Perry | Rust | C++ | Java | Node | Bun |
+| Tolok ukur| Perry | Rust | C++ | Java | Node | Bun |
 | --- | --- | --- | --- | --- | --- | --- |
-| fibonacci | 318 | 330 | 315 | 282 | 1022 | 589 |
-| loop\_data\_dependent | 235 | 229 | 129 | 229 | 322 | 232 |
-| object\_create | 1 | 0 | 0 | 5 | 11 | 6 |
-| nested\_loops | 18 | 8 | 8 | 11 | 18 | 21 |
+| fibonacci| 318 | 330 | 315 | 282 | 1022 | 589 |
+| loop_data_dependen| 235 | 229 | 129 | 229 | 322 | 232 |
+| objek_buat| 1 | 0 | 0 | 5 | 11 | 6 |
+| loop_sarang| 18 | 8 | 8 | 11 | 18 | 21 |
 
 Pada `fibonacci`, Perry menyamai kelompok compiled dalam selisih 3–15 ms. JIT HotSpot Java ~11% lebih cepat karena meng-inline panggilan rekursif. Pada `loop_data_dependent`, kernel terbagi menjadi dua kluster FP-contract: kelompok FMA-contract pada ~128 ms (default Go, `g++ -O3` pada Apple Clang — keduanya menggabungkan `sum * a + b` menjadi satu FMADDD) dan kelompok no-contract pada 229–235 ms (Perry, default Rust, Swift, Java tanpa `-XX:+UseFMA`, Bun) yang menjalankan FMUL + FADD scalar. LLVM cocok dengan kelompok FMA dengan `-ffp-contract=fast`; Perry tidak mengaktifkannya secara default. `nested_loops` adalah cache-bound, bukan compute-bound; semua mendarat di 8–21 ms.
 
@@ -105,7 +105,7 @@ perry compile src/main.ts --target windows -o myapp.exe
 
 Tema periode ini: divergensi runtime diam-diam dari V8/JSC berubah menjadi perbaikan atau error kompilasi. Yang non-trivial:
 
--   **v0.5.255**: `BigInt.fromTwos`/`toTwos` two's complement.
+-   **v0.5.255**: `BigInt.fromTwos`/`toTwos` dua pelengkap.
 -   **v0.5.263**: diskriminasi tipe non-promise `Promise.all`/`race`/`any`.
 -   **v0.5.281**: `NaN==NaN` + format angka ECMAScript (`3 → "3"`, bukan `"3.0"`; `-0 → "0"`; dll.).
 -   **v0.5.280**: koersi ToInt32 `NaN`/`Infinity` di `(x) | 0`.

@@ -46,7 +46,7 @@ As duas caches empilham-se. A primeira edição da sessão é compilação compl
 
 Na v0.5.166 o README tinha uma ressalva honesta: o Perry era 1,6x mais lento que o Node no `json_roundtrip` (50× `JSON.parse` + `JSON.stringify` num blob de 1MB, 10K itens), e 2,4x mais lento que o Bun. A issue [#149](https://github.com/PerryTS/perry/issues/149) rastreava o follow-up. Na v0.5.173 — sete dias depois — essa lacuna fechou.
 
-| Workload | Perry v0.5.173 | Node v25 | Bun 1.3 |
+| Carga de trabalho| Perry v0.5.173 | Node v25 | Bun 1.3 |
 | --- | --- | --- | --- |
 | `json_roundtrip` | 314ms | 377ms | 250ms |
 | `closure` | 10ms | 309ms | 51ms |

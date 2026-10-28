@@ -147,7 +147,7 @@ Workspace 测试每次提交都保持 **434 passed / 0 failed / 5 ignored**；ga
 -   **[#169](https://github.com/PerryTS/perry/issues/169)** — `substitute_locals` 的 Uint8Array 分支。
 -   **[#226](https://github.com/PerryTS/perry/issues/226)** — `fs.appendFileSync` 端到端接通（社区 PR）。
 
-## 6\. Windows + Scoop
+## 6. Windows + 勺子
 
 Windows 工具链故事在持续简化。**v0.5.353** 在 host 构建中对 `clang -target` 进行钉死 — PATH 上的非 MSVC clang（MinGW / MSYS2 / Anaconda / Rust GNU bundle）会悄悄把 Perry 的 `x86_64-pc-windows-msvc` IR 改写成 `windows-gnu`，lld-link 无法解析 LLVM 的 mingw32 emitter 插入的 `__main` 引用。新增的 `probe_clang_default_triple` 每个进程跑一次 `clang --version`，当 host 默认是 GNU 但我们目标是 MSVC 时打印一行信息提示。可用 `PERRY_NO_CLANG_PROBE=1` 抑制。
 

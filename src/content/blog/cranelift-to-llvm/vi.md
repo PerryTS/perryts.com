@@ -46,14 +46,14 @@ v0.5.0 là bản phát hành đầu tiên với LLVM là backend duy nhất. Ch�
 
 Đây là bảng mà tôi không muốn đăng vào lúc đó:
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+| Điểm chuẩn| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | chậm hơn 68 lần |
-| object\_create | 5ms | 318ms | chậm hơn 64 lần |
-| matrix\_multiply | 61ms | 184ms | chậm hơn 3 lần |
-| math\_intensive | 370ms | 131ms | nhanh hơn 2,8 lần |
-| nested\_loops | 32ms | 57ms | chậm hơn 1,8 lần |
-| fibonacci(40) | 505ms | 1,156ms | chậm hơn 2,3 lần |
+| phương thức_calls| 16ms | 1,084ms | chậm hơn 68 lần |
+| object_create| 5ms | 318ms | chậm hơn 64 lần |
+| ma trận_nhân| 61ms | 184ms | chậm hơn 3 lần |
+| toán_chuyên sâu| 370ms | 131ms | nhanh hơn 2,8 lần |
+| lồng_loops| 32ms | 57ms | chậm hơn 1,8 lần |
+| fibonacci(40)| 505ms | 1,156ms | chậm hơn 2,3 lần |
 
 Một số workload nhanh hơn. Phần lớn tệ đi đáng kể. `method_calls` — một trong những benchmark quan trọng nhất vì nó đại diện cho cách sử dụng class TypeScript đúng chuẩn — tệ hơn gần 70 lần so với những gì chúng tôi phát hành hai bản trước đó.
 
@@ -137,23 +137,23 @@ Việc chuyển sang LLVM đã làm hồi quy phần này về slow path univers
 
 Trung vị của ba lần chạy, macOS ARM64 (Apple Silicon, M1 Max), Node.js v25:
 
-| Benchmark | Perry | Node.js | vs Node |
+| Điểm chuẩn| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+| giai thừa| 24ms | 591ms | 24.6x |
+| phương thức_calls| 1ms | 11ms | 11x |
+| loop_overhead| 12ms | 53ms | 4.4x |
+| toán_chuyên sâu| 14ms | 49ms | 3.5x |
+| mảng_đọc| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | hòa |
-| mandelbrot | 24ms | 24ms | hòa |
-| object\_create | 9ms | 8ms | 0.9x |
+| mảng_write| 3ms | 8ms | 2.6x |
+| string_concat| 1ms | 2ms | 2x |
+| lồng_loops| 9ms | 16ms | 1.7x |
+| prime_sàng| 4ms | 7ms | 1.7x |
+| ma trận_nhân| 21ms | 34ms | 1.6x |
+| fibonacci(40)| 401ms | 991ms | 2.5x |
+| cây nhị phân| 9ms | 9ms | hòa |
+| mandelbrot| 24ms | 24ms | hòa |
+| object_create| 9ms | 8ms | 0.9x |
 
 Mọi benchmark đều là chiến thắng hoặc hòa. Sát nhất là `object_create` (9ms vs 8ms), nơi allocator của V8 thực sự xuất sắc.
 

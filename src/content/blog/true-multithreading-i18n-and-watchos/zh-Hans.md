@@ -8,9 +8,9 @@ Perry v0.4.0 是项目启动以来最大的版本。一个周期内三次版本�
 
 ## 真正的多线程
 
-Perry now has real OS-threaded parallelism. Not web workers with serialization overhead. Not `SharedArrayBuffer` with `Atomics`. Real threads — lightweight 8MB-stack OS threads that share nothing and cost nothing when idle.
+Perry 现在拥有真正的操作系统线程并行性。不是具有序列化开销的 Web Worker。不是 `SharedArrayBuffer` 和 `Atomics`。真实线程 - 轻量级 8MB 堆栈操作系统线程，空闲时不共享任何内容且不产生任何费用。
 
-The new `perry/thread` module exposes three primitives:
+新的 `perry/thread` 模块公开了三个原语：
 
 ```
 import { parallelMap, parallelFilter, spawn } from "perry/thread";
@@ -28,13 +28,13 @@ const result = await spawn(() => {
 });
 ```
 
-`parallelMap` and `parallelFilter` auto-detect the number of CPU cores and split the input array across them. For small arrays, they skip threading entirely and run synchronously — no overhead for trivial workloads.
+`parallelMap` 和 `parallelFilter` 自动检测 CPU 核心数量并在它们之间拆分输入数组。对于小型数组，它们完全跳过线程并同步运行 - 对于微不足道的工作负载没有任何开销。
 
-`spawn` launches a background OS thread and returns a Promise. The result flows back via a pending results queue that's drained during microtask processing, so you `await` it like any other async operation.
+`spawn` 启动后台操作系统线程并返回 Promise。结果通过待处理结果队列流回，该队列在微任务处理期间耗尽，因此您可以像任何其他异步操作一样`await`它。
 
 ### 编译时安全
 
-The most important part isn't the API — it's what the compiler *prevents*. Perry statically rejects closures that capture mutable variables:
+最重要的部分不是 API，而是编译器*阻止的*。 Perry 静态地拒绝捕获可变变量的闭包：
 
 ```
 let counter = 0;
@@ -46,21 +46,21 @@ parallelMap(items, (item) => {
 });
 ```
 
-No shared mutable state means no data races. No locks, no mutexes, no `Atomics`. The compiler enforces thread safety before a single line of machine code is emitted.
+没有共享的可变状态意味着没有数据竞争。没有锁，没有互斥锁，没有`Atomics`。编译器在发出一行机器代码之前强制执行线程安全。
 
 ### 底层实现
 
-Each worker thread gets its own memory arena with `Drop` cleanup — no GC coordination across threads. Values are transferred via `SerializedValue` deep-copy: zero-cost for numbers, O(n) for strings, arrays, and objects. The implementation lives in a single 1,120-line Rust file (`perry-runtime/src/thread.rs`) and required no changes to the garbage collector.
+每个工作线程都有自己的内存空间，并进行 `Drop` 清理 — 线程间无需进行 GC 协调。值通过 `SerializedValue` 深度复制传输：数字零成本，字符串、数组和对象 O(n)。该实现位于单个 1,120 行 Rust 文件 (`perry-runtime/src/thread.rs`) 中，不需要对垃圾收集器进行任何更改。
 
-Compare this to V8 isolates, which require separate heaps per worker with ~2MB overhead each. Perry's threads are just pthreads with arenas.
+将此与 V8 隔离进行比较，后者要求每个工作线程有单独的堆，每个堆的开销约为 2MB。 Perry 的线程只是带有 arenas 的 pthreads。
 
 ### 并行编译器管道
 
-The compiler itself is now parallel too. Module codegen, transform passes (JS imports, native instances, monomorphization), and `nm` symbol scanning all run across all CPU cores via rayon. Combined with the Cranelift 0.121 upgrade (from 0.113 — eight minor versions of register allocation and x64 improvements), compilation is significantly faster.
+编译器本身现在也是并行的。模块代码生成、转换通道（JS 导入、本机实例、单态化）和 `nm` 符号扫描均通过 rayon 在所有 CPU 内核上运行。结合 Cranelift 0.121 升级（从 0.113 - 寄存器分配的八个小版本和 x64 改进），编译速度显着加快。
 
 ## 编译时 i18n（v0.3.0）
 
-Perry's internationalization system has zero ceremony. String literals in UI widgets are automatically treated as localizable keys. Translation files are flat JSON in a `locales/` directory. All validation happens at compile time.
+Perry 的国际化系统零仪式。 UI 小部件中的字符串文字会自动视为可本地化的键。翻译文件是 `locales/` 目录中的平面 JSON。所有验证都在编译时发生。
 
 ```
 // locales/en.json
@@ -73,18 +73,18 @@ Perry's internationalization system has zero ceremony. String literals in UI wid
 Button({ title: "greeting", action: () => {} })
 ```
 
-The compiler validates everything: missing translations, parameter mismatches, plural form errors. Translations are baked into the binary as an embedded 2D string table with near-zero runtime lookup — no parsing JSON at startup.
+编译器会验证所有内容：缺少翻译、参数不匹配、复数形式错误。翻译作为嵌入式 2D 字符串表烘焙到二进制文件中，运行时查找接近于零 - 启动时无需解析 JSON。
 
 ### 包含的内容
 
--   **CLDR plural rules** for 30+ locales with `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` suffixes
--   **Format wrappers**: `Currency`, `Percent`, `ShortDate`, `LongDate`, `FormatNumber`, `FormatTime`, `Raw`
--   **Native locale detection** on all platforms: `CFLocaleCopyCurrent` (macOS/iOS), `GetUserDefaultLocaleName` (Windows), `system_property_get` (Android), `LANG`/`LC_ALL` (Linux)
--   **`perry i18n extract`** CLI: scans TS/TSX files, generates and updates locale JSON scaffolds
--   **Platform-native resource generation**: iOS `.lproj` and Android `values-xx/` directories
--   **`import { t } from "perry/i18n"`** for localizing non-UI strings
+-   **CLDR 复数规则**，适用于 30 多种语言环境，包含 `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` 后缀
+-   **格式包装**：`Currency`、`Percent`、`ShortDate`、`LongDate`、`FormatNumber`、`FormatTime`、`Raw`
+-   所有平台上的 **本机区域设置检测**：`CFLocaleCopyCurrent` (macOS/iOS)、`GetUserDefaultLocaleName` (Windows)、`system_property_get` (Android)、`LANG`/`LC_ALL` (Linux)
+-   **`perry i18n extract`** CLI：扫描 TS/TSX 文件，生成和更新语言环境 JSON 脚手架
+-   **平台原生资源生成**：iOS `.lproj` 和 Android `values-xx/` 目录
+-   **`import { t } from "perry/i18n"`** 以本地化非 UI 字符串
 
-Configure it in `perry.toml`:
+在 `perry.toml` 中配置：
 
 ```
 [i18n]
@@ -95,9 +95,9 @@ currencies = { USD = "en", EUR = "de", JPY = "ja" }
 
 ## watchOS 原生应用（v0.3.2）
 
-Perry now compiles to watchOS — the 9th compilation target. This isn't a wrapper or a companion app. It's a standalone watchOS binary with a native SwiftUI interface.
+Perry 现在编译为 watchOS — 第 9 个编译目标。这不是包装器或配套应用程序。它是一个独立的 watchOS 二进制文件，具有本机 SwiftUI 界面。
 
-The watchOS renderer uses a **data-driven approach**: Perry builds a UI tree via `perry_ui_*` FFI calls, and a shipped `PerryWatchApp.swift` queries the tree and renders SwiftUI views reactively. 15 widget types are supported with stubs for unsupported ones.
+watchOS 渲染器使用**数据驱动方法**：Perry 通过 `perry_ui_*` FFI 调用，以及附带的 `PerryWatchApp.swift` 查询树并响应式渲染 SwiftUI 视图。支持 15 种小部件类型，并为不支持的小部件类型提供存根。
 
 ```
 # Compile for watchOS
@@ -110,17 +110,17 @@ perry run watchos
 perry setup watchos
 ```
 
-The full flow works: `perry setup watchos` shares App Store Connect credentials with iOS, `perry run watchos` auto-detects Apple Watch simulators, and `perry publish watchos` submits to the App Store.
+整个流程有效：`perry setup watchos` 与 iOS 共享 App Store Connect 凭据，`perry run watchos` 自动检测 Apple Watch 模拟器，并且 `perry publish watchos` 提交到 App Store。
 
-This also brings the total **widget target count to four**: iOS (WidgetKit), Android (Glance), watchOS (WidgetKit), and Wear OS (Tiles). Each has its own compile target and codegen backend.
+这也使**小部件目标总数达到四个**：iOS (WidgetKit)、Android (Glance)、watchOS (WidgetKit）和 Wear OS（Tiles）。每个都有自己的编译目标和代码生成后端。
 
 ## 音频和相机 API
 
-Two new hardware APIs ship in this release:
+此版本中发布了两个新的硬件 API：
 
-### Audio Capture (`perry/system`)
+### 音频捕获 (`perry/system`)
 
-Cross-platform audio capture with A-weighted dB(A) measurement:
+使用 A 加权 dB(A) 测量进行跨平台音频捕获：
 
 ```
 import { audioStart, audioStop, audioGetLevel, audioGetWaveformSamples } from "perry/system";
@@ -131,11 +131,11 @@ const waveform = audioGetWaveformSamples();  // 256-sample ring buffer
 audioStop();
 ```
 
-Platform backends: AVAudioEngine (macOS/iOS), AudioRecord via JNI (Android), PulseAudio (Linux), WASAPI (Windows), getUserMedia + AnalyserNode (Web).
+平台后端：AVAudioEngine (macOS/iOS)、通过 JNI 的 AudioRecord (Android)、PulseAudio (Linux)、WASAPI (Windows)、getUserMedia + AnalyserNode（Web）。
 
-### Camera Capture (`perry/ui`)
+### 相机捕获 (`perry/ui`)
 
-Native camera preview with pixel-level color sampling (iOS):
+具有像素级颜色采样的本机相机预览 (iOS)：
 
 ```
 import { CameraView, cameraStart, cameraSampleColor } from "perry/ui";
@@ -146,33 +146,33 @@ const [r, g, b] = cameraSampleColor(x, y);  // 5x5 averaging
 
 ## 生态系统包
 
-Two first-party native packages launched:
+推出了两个第一方原生软件包：
 
--   **perry/push** — Push notification bindings for iOS/macOS: permission requests, APNs token retrieval, badge count. Android stub with FCM planned.
--   **perry/storekit** — StoreKit 2 in-app purchase bindings: product loading, purchases with JWS receipts, subscription checking, restore, and transaction listeners.
+-   **perry/push** — 适用于 iOS/macOS 的推送通知绑定：权限请求、APNs 令牌检索、徽章计数。计划使用 FCM 的 Android 存根。
+-   **perry/storekit** — StoreKit 2 应用内购买绑定：产品加载、使用 JWS 收据购买、订阅检查、恢复和交易侦听器。
 
-Both follow the same architecture: TypeScript declarations → Rust FFI crate → Swift bridge. Install as a dependency, import the functions, `await` the results. The compiler handles all native bridging.
+两者都遵循相同的架构：TypeScript 声明 → Rust FFI 箱 → Swift 桥。作为依赖项安装，导入函数，`await`结果。编译器处理所有本机桥接。
 
 ## 基础设施
 
--   **Cranelift 0.113 → 0.121** — eight minor versions of register allocation, x64 fixes, and stack slot alignment improvements
--   **Windows function splitting** — auto-splits functions with 50+ statements into continuations to work around Cranelift codegen issues on Windows
--   **Selective module-var loading** — only loads referenced module-level variables at function entry, reducing Windows binary size by 26%
--   **Array.sort() upgrade** — from O(n²) insertion sort to O(n log n) TimSort-style hybrid
--   **perry run android** — full APK build pipeline: compile, Gradle project generation, assembleDebug, install, launch
--   **Custom Info.plist entries** — `[ios.info_plist]` in perry.toml for privacy descriptions, URL schemes, background modes
+-   **Cranelift 0.113 → 0.121** — 八个次要版本的寄存器分配、x64 修复和堆栈槽对齐改进
+-   **Windows 函数拆分** — 自动将包含 50 多个语句的函数拆分为延续，以解决 Windows 上的 Cranelift 代码生成问题
+-   **选择性模块变量加载** - 仅在函数入口加载引用的模块级变量，将 Windows 二进制文件大小减少 26%
+-   **Array.sort() 升级** — 从 O(n²) 插入排序到 O(n log n) TimSort 式混合排序
+-   **perry run android** — 完整的 APK 构建管道：编译、Gradle 项目生成、assembleDebug、安装、启动
+-   **自定义 Info.plist 条目** — perry.toml 中的 `[ios.info_plist]`，用于隐私说明、URL 方案、后台模式
 
 ## 数据一览
 
--   **Version**: 0.2.197 → 0.4.0 (three major milestones)
--   **Compilation targets**: 8 → 9 (added watchOS)
--   **Widget targets**: 1 → 4 (iOS, Android, watchOS, Wear OS)
--   **New crates**: perry-ui-watchos, perry-codegen-glance, perry-codegen-wear-tiles
--   **New docs**: threading (4 pages), i18n (4 pages), watchOS, expanded widget docs (3 → 8 pages)
--   **perry/thread implementation**: 1,120 lines of Rust, zero changes to the GC
+-   **版本**：0.2.197 → 0.4.0（三个主要里程碑）
+-   **编译目标**：8 → 9（添加了watchOS）
+-   **小组件目标**：1 → 4（iOS、Android、watchOS、Wear OS）
+-   **新包**：perry-ui-watchos、perry-codegen-glance、perry-codegen-wear-tiles
+-   **新文档**：线程（4 页）、i18n（4 页）、watchOS、扩展小部件文档（3 → 8 页）
+-   **perry/thread 实现**：1,120 行 Rust，对 GC 进行零更改
 
 ## 下一步
 
-The threading foundation opens up a lot: parallel HTTP request processing, concurrent file operations, and compute-heavy workloads that were previously blocked by single-threaded execution. On the language side, full regex support remains the biggest gap, and the `perry/ui` expansion (drag and drop, accessibility, DatePicker) continues.
+线程基础开放了很多：并行 HTTP 请求处理、并发文件操作以及以前被单线程执行阻止的计算密集型工作负载。在语言方面，完整的正则表达式支持仍然是最大的差距，并且 `perry/ui` 扩展（拖放、辅助功能、DatePicker）仍在继续。
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/zh-Hans/roadmap/) for the full picture.
+关注 [GitHub](https://github.com/PerryTS/perry) 上的进度，阅读 [docs.perryts.com](https://docs.perryts.com) 上的文档，或查看[路线图](/zh-Hans/roadmap/)了解完整情况。

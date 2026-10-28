@@ -1,6 +1,6 @@
 ---
 title: "UI เนทีฟข้ามแพลตฟอร์มจาก TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "วิธีที่ Perry จับคู่ฐานโค้ด TypeScript หนึ่งฐานกับวิดเจ็ตแพลตฟอร์มในเป้าหมายที่บันทึกไว้ รวมถึงข้อจำกัดและข้อกำหนดเบื้องต้นเฉพาะแพลตฟอร์ม"
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ Perry ใช้แนวทางที่แตกต่างกันโด�
 
 Perry จัดเตรียม API TypeScript ทั่วไปสำหรับสร้างอินเทอร์เฟซผู้ใช้ API นี้ ถูกออกแบบให้เป็นระดับสูงโดยเจตนา — คุณอธิบายว่า UI ของคุณควรประกอบด้วยอะไรและควร ทำงานอย่างไร และ Perry จะแมปไปยังโครงสร้างเนทีฟที่เหมาะสม
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 โค้ดเดียวกันนี้คอมไพล์เป็น UI เนทีฟบนทั้งหกแพลตฟอร์ม ไม่มี `#ifdef`ไม่มีการตรวจสอบแพลตฟอร์ม ไม่มี import แบบมีเงื่อนไข
 
@@ -78,7 +70,7 @@ app.run();
 
 บน iOS การแมปคล้ายกันแต่เป้าหมายคือ UIKit `App` กลายเป็น `UIApplication` พร้อม`UIWindow` และ `UIViewController` ราก `Text` แมปเป็น `UILabel` `Button` แมปเป็น `UIButton` เลย์เอาต์ใช้ `UIStackView` และ Auto Layout อีเวนต์สัมผัสจะถูกจัดการผ่าน responder chain ของ UIKit
 
-### Android — JNI + Views
+### Android — JNI + มุมมอง
 
 บน Android Perry สร้างไลบรารีเนทีฟที่โหลดผ่าน JNI (Java Native Interface) `App` แมปเป็น `Activity` `Text` กลายเป็น `TextView` `Button` กลายเป็น `android.widget.Button` พร้อม`OnClickListener` `VStack` แมปเป็น `LinearLayout` แนวตั้ง โค้ดเนทีฟเรียกกลับไปยัง Android framework ผ่าน JNI สร้างและ จัดการ Android views จริง
 

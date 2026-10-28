@@ -1,6 +1,6 @@
 ---
 title: "UI Nativa Multiplataforma a Partir de TypeScript"
-excerpt: "How Perry maps one TypeScript codebase to platform widgets across its documented targets, including the platform-specific limitations and prerequisites."
+excerpt: "Como Perry mapeia uma base de código TypeScript para widgets de plataforma em seus destinos documentados, incluindo as limitações e pré-requisitos específicos da plataforma."
 date: 2025-02-01
 tags: ["architecture", "UI", "cross-platform"]
 ---
@@ -38,29 +38,21 @@ A diferenca chave: **nao ha camada de runtime entre seu codigo e o SDK da plataf
 
 Perry fornece uma API TypeScript comum para construir interfaces de usuario. Esta API e deliberadamente de alto nivel — voce descreve o que sua UI deve conter e como deve se comportar, e Perry mapeia para as construcoes nativas apropriadas.
 
-counter.ts
+**counter.ts**
 
+```typescript
 import { App, Text, Button, VStack, State } from "perry/ui";
-
 const count = new State(0);
-
 const app = new App("Counter", { width: 400, height: 300 });
-
 app.body(() => {
-
-return VStack({ spacing: 16, alignment: "center" }, \[
-
-Text(\`Count: ${count.value}\`, { fontSize: 32 }),
-
+return VStack({ spacing: 16, alignment: "center" }, [
+Text(`Count: ${count.value}`, { fontSize: 32 }),
 Button("Increment", () => count.value++),
-
 Button("Reset", () => count.value = 0),
-
-\]);
-
+]);
 });
-
 app.run();
+```
 
 Este mesmo codigo compila para UI nativa em todas as seis plataformas. Sem `#ifdef`, sem verificacoes de plataforma, sem imports condicionais.
 
@@ -78,7 +70,7 @@ O binario compilado vincula-se ao framework AppKit e chama funcoes do runtime Ob
 
 No iOS, o mapeamento e similar, mas visa UIKit. `App` se torna um `UIApplication` com um `UIWindow` e `UIViewController` raiz. `Text` mapeia para `UILabel`. `Button` mapeia para `UIButton`. O layout usa `UIStackView` e Auto Layout. Eventos de toque sao tratados pela cadeia de respondedores do UIKit.
 
-### Android — JNI + Views
+### Android — JNI + Visualizações
 
 No Android, Perry gera uma biblioteca nativa carregada via JNI (Java Native Interface). `App` mapeia para uma `Activity`. `Text` se torna um `TextView`. `Button` se torna um `android.widget.Button` com um `OnClickListener`. `VStack` mapeia para um `LinearLayout` vertical. O codigo nativo chama de volta o framework Android atraves de JNI, criando e manipulando views Android reais.
 

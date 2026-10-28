@@ -46,14 +46,14 @@ v0.5.0, LLVM'nin tek backend oldu&gbreve;u ilk sürümdü. Derleme süresinde k�
 
 O zaman yay&inodot;nlamak istemedi&gbreve;im tablo:
 
-| Benchmark | Cranelift | LLVM v0.5.0 | Delta |
+| Karşılaştırma| Cranelift | LLVM v0.5.0 | Delta |
 | --- | --- | --- | --- |
-| method\_calls | 16ms | 1,084ms | 68 kat yava&scedil; |
-| object\_create | 5ms | 318ms | 64 kat yava&scedil; |
-| matrix\_multiply | 61ms | 184ms | 3 kat yava&scedil; |
-| math\_intensive | 370ms | 131ms | 2,8 kat h&inodot;zl&inodot; |
-| nested\_loops | 32ms | 57ms | 1,8 kat yava&scedil; |
-| fibonacci(40) | 505ms | 1,156ms | 2,3 kat yava&scedil; |
+| method_calls| 16ms | 1,084ms | 68 kat yava&scedil; |
+| object_create| 5ms | 318ms | 64 kat yava&scedil; |
+| matris_çarpma| 61ms | 184ms | 3 kat yava&scedil; |
+| matematik_yoğun| 370ms | 131ms | 2,8 kat h&inodot;zl&inodot; |
+| iç içe_döngüler| 32ms | 57ms | 1,8 kat yava&scedil; |
+| fibonacci(40)| 505ms | 1,156ms | 2,3 kat yava&scedil; |
 
 Baz&inodot; i&scedil; yükleri h&inodot;zland&inodot;. Ço&gbreve;u dramatik &scedil;ekilde kötüle&scedil;ti. `method_calls` — idiomatik TypeScript class kullan&inodot;m&inodot;n&inodot; temsil etti&gbreve;i için en önemli benchmark'lardan biri — iki sürüm önceki gönderdiklerimizden neredeyse 70 kat daha kötüydü.
 
@@ -137,23 +137,23 @@ LLVM geçi&scedil;i bunu evrensel slow path'e geriletmi&scedil;ti. Statik dispat
 
 Üç çal&inodot;&scedil;t&inodot;rman&inodot;n medyan&inodot;, macOS ARM64 (Apple Silicon, M1 Max), Node.js v25:
 
-| Benchmark | Perry | Node.js | vs Node |
+| Karşılaştırma| Perry | Node.js | vs Node |
 | --- | --- | --- | --- |
-| factorial | 24ms | 591ms | 24.6x |
-| method\_calls | 1ms | 11ms | 11x |
-| loop\_overhead | 12ms | 53ms | 4.4x |
-| math\_intensive | 14ms | 49ms | 3.5x |
-| array\_read | 4ms | 13ms | 3.2x |
+| faktöriyel| 24ms | 591ms | 24.6x |
+| method_calls| 1ms | 11ms | 11x |
+| loop_overhead| 12ms | 53ms | 4.4x |
+| matematik_yoğun| 14ms | 49ms | 3.5x |
+| dizi_okuma| 4ms | 13ms | 3.2x |
 | closure | 97ms | 303ms | 3.1x |
-| array\_write | 3ms | 8ms | 2.6x |
-| string\_concat | 1ms | 2ms | 2x |
-| nested\_loops | 9ms | 16ms | 1.7x |
-| prime\_sieve | 4ms | 7ms | 1.7x |
-| matrix\_multiply | 21ms | 34ms | 1.6x |
-| fibonacci(40) | 401ms | 991ms | 2.5x |
-| binary\_trees | 9ms | 9ms | berabere |
-| mandelbrot | 24ms | 24ms | berabere |
-| object\_create | 9ms | 8ms | 0.9x |
+| dizi_yaz| 3ms | 8ms | 2.6x |
+| string_concat| 1ms | 2ms | 2x |
+| iç içe_döngüler| 9ms | 16ms | 1.7x |
+| prime_sieve| 4ms | 7ms | 1.7x |
+| matris_çarpma| 21ms | 34ms | 1.6x |
+| fibonacci(40)| 401ms | 991ms | 2.5x |
+| ikili_ağaçlar| 9ms | 9ms | berabere |
+| mandelbrot| 24ms | 24ms | berabere |
+| object_create| 9ms | 8ms | 0.9x |
 
 Her benchmark bir galibiyet veya berabere. En yak&inodot;n sonuç `object_create` (9ms vs 8ms); burada V8'in allocator'ü gerçekten mükemmel.
 

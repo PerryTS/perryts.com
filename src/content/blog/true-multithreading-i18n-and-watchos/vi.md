@@ -8,9 +8,9 @@ Perry v0.4.0 là bản phát hành lớn nhất kể từ khi dự án bắt đ�
 
 ## Đa luồng thực sự
 
-Perry now has real OS-threaded parallelism. Not web workers with serialization overhead. Not `SharedArrayBuffer` with `Atomics`. Real threads — lightweight 8MB-stack OS threads that share nothing and cost nothing when idle.
+Perry hiện có tính năng song song thực sự theo luồng của hệ điều hành. Không phải nhân viên web với chi phí tuần tự hóa. Không phải `SharedArrayBuffer` với `Atomics`. Luồng thực — luồng hệ điều hành có dung lượng nhẹ 8MB, không chia sẻ gì và không tốn phí khi ở chế độ rảnh.
 
-The new `perry/thread` module exposes three primitives:
+Mô-đun `perry/thread` mới hiển thị ba nguyên hàm:
 
 ```
 import { parallelMap, parallelFilter, spawn } from "perry/thread";
@@ -28,13 +28,13 @@ const result = await spawn(() => {
 });
 ```
 
-`parallelMap` and `parallelFilter` auto-detect the number of CPU cores and split the input array across them. For small arrays, they skip threading entirely and run synchronously — no overhead for trivial workloads.
+`parallelMap` và `parallelFilter` tự động phát hiện số lượng lõi CPU và phân chia mảng đầu vào cho chúng. Đối với các mảng nhỏ, chúng bỏ qua hoàn toàn phân luồng và chạy đồng bộ — không tốn chi phí cho khối lượng công việc tầm thường.
 
-`spawn` launches a background OS thread and returns a Promise. The result flows back via a pending results queue that's drained during microtask processing, so you `await` it like any other async operation.
+`spawn` khởi chạy một chuỗi hệ điều hành nền và trả về một Lời hứa. Kết quả sẽ quay trở lại thông qua hàng đợi kết quả đang chờ xử lý đã cạn kiệt trong quá trình xử lý vi tác vụ, vì vậy, bạn `await` kết quả đó giống như mọi thao tác không đồng bộ khác.
 
 ### An toàn thời gian biên dịch
 
-The most important part isn't the API — it's what the compiler *prevents*. Perry statically rejects closures that capture mutable variables:
+Phần quan trọng nhất không phải là API — mà là thứ mà trình biên dịch *ngăn chặn*. Perry từ chối tĩnh các lần đóng nắm bắt các biến có thể thay đổi:
 
 ```
 let counter = 0;
@@ -46,21 +46,21 @@ parallelMap(items, (item) => {
 });
 ```
 
-No shared mutable state means no data races. No locks, no mutexes, no `Atomics`. The compiler enforces thread safety before a single line of machine code is emitted.
+Không có trạng thái có thể thay đổi được chia sẻ có nghĩa là không có cuộc đua dữ liệu. Không có khóa, không có mutex, không có `Atomics`. Trình biên dịch thực thi an toàn luồng trước khi một dòng mã máy được phát ra.
 
 ### Bên trong
 
-Each worker thread gets its own memory arena with `Drop` cleanup — no GC coordination across threads. Values are transferred via `SerializedValue` deep-copy: zero-cost for numbers, O(n) for strings, arrays, and objects. The implementation lives in a single 1,120-line Rust file (`perry-runtime/src/thread.rs`) and required no changes to the garbage collector.
+Mỗi luồng công việc có vùng bộ nhớ riêng với tính năng dọn dẹp `Drop` — không có sự phối hợp GC giữa các luồng. Các giá trị được truyền qua bản sao sâu `SerializedValue`: chi phí bằng 0 cho số, O(n) cho chuỗi, mảng và đối tượng. Việc triển khai tồn tại trong một tệp Rust dài 1.120 dòng (`perry-runtime/src/thread.rs`) và không yêu cầu thay đổi nào đối với trình thu gom rác.
 
-Compare this to V8 isolates, which require separate heaps per worker with ~2MB overhead each. Perry's threads are just pthreads with arenas.
+So sánh điều này với các phân lập V8, yêu cầu các vùng nhớ riêng biệt cho mỗi nhân viên với tổng chi phí ~2 MB cho mỗi vùng. Perry chỉ là pthread với đấu trường.
 
 ### Pipeline biên dịch song song
 
-The compiler itself is now parallel too. Module codegen, transform passes (JS imports, native instances, monomorphization), and `nm` symbol scanning all run across all CPU cores via rayon. Combined with the Cranelift 0.121 upgrade (from 0.113 — eight minor versions of register allocation and x64 improvements), compilation is significantly faster.
+Bản thân trình biên dịch bây giờ cũng chạy song song. Bộ mã hóa mô-đun, các thẻ chuyển đổi (nhập JS, phiên bản gốc, đơn hình hóa) và quét ký hiệu `nm` đều chạy trên tất cả các lõi CPU thông qua rayon. Kết hợp với bản nâng cấp Cranelift 0.121 (từ 0.113 — tám phiên bản nhỏ của phân bổ đăng ký và cải tiến x64), quá trình biên dịch nhanh hơn đáng kể.
 
 ## i18n thời gian biên dịch (v0.3.0)
 
-Perry's internationalization system has zero ceremony. String literals in UI widgets are automatically treated as localizable keys. Translation files are flat JSON in a `locales/` directory. All validation happens at compile time.
+Perry không có nghi lễ nào cả. Chuỗi ký tự trong tiện ích giao diện người dùng được tự động coi là khóa có thể bản địa hóa. Các tệp dịch là JSON phẳng trong thư mục `locales/`. Tất cả quá trình xác thực diễn ra tại thời điểm biên dịch.
 
 ```
 // locales/en.json
@@ -73,18 +73,18 @@ Perry's internationalization system has zero ceremony. String literals in UI wid
 Button({ title: "greeting", action: () => {} })
 ```
 
-The compiler validates everything: missing translations, parameter mismatches, plural form errors. Translations are baked into the binary as an embedded 2D string table with near-zero runtime lookup — no parsing JSON at startup.
+Trình biên dịch xác thực mọi thứ: thiếu bản dịch, tham số không khớp, lỗi dạng số nhiều. Các bản dịch được đưa vào hệ nhị phân dưới dạng bảng chuỗi 2D được nhúng với khả năng tra cứu thời gian chạy gần như bằng 0 — không cần phân tích cú pháp JSON khi khởi động.
 
 ### Bao gồm gì
 
--   **CLDR plural rules** for 30+ locales with `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` suffixes
--   **Format wrappers**: `Currency`, `Percent`, `ShortDate`, `LongDate`, `FormatNumber`, `FormatTime`, `Raw`
--   **Native locale detection** on all platforms: `CFLocaleCopyCurrent` (macOS/iOS), `GetUserDefaultLocaleName` (Windows), `system_property_get` (Android), `LANG`/`LC_ALL` (Linux)
--   **`perry i18n extract`** CLI: scans TS/TSX files, generates and updates locale JSON scaffolds
--   **Platform-native resource generation**: iOS `.lproj` and Android `values-xx/` directories
--   **`import { t } from "perry/i18n"`** for localizing non-UI strings
+-   **Quy tắc số nhiều CLDR** cho hơn 30 ngôn ngữ với `.one`/`.other`/`.few`/`.many`/`.zero`/`.two` hậu tố
+-   **Trình bao bọc định dạng**: `Currency`, `Percent`, `ShortDate`, `LongDate`, `FormatNumber`, `FormatTime`, `Raw`
+-   **Phát hiện ngôn ngữ gốc** trên tất cả các nền tảng: `CFLocaleCopyCurrent` (macOS/iOS), `GetUserDefaultLocaleName` (Windows), `system_property_get` (Android), `LANG`/`LC_ALL` (Linux)
+-   **`perry i18n extract`** CLI: quét các tệp TS/TSX, tạo và cập nhật JSON giàn giáo
+-   **Tạo tài nguyên gốc nền tảng**: iOS `.lproj` và thư mục `values-xx/` của Android
+-   **`import { t } from "perry/i18n"`** để bản địa hóa các chuỗi không phải giao diện người dùng
 
-Configure it in `perry.toml`:
+Định cấu hình nó trong `perry.toml`:
 
 ```
 [i18n]
@@ -95,9 +95,9 @@ currencies = { USD = "en", EUR = "de", JPY = "ja" }
 
 ## Ứng dụng watchOS Native (v0.3.2)
 
-Perry now compiles to watchOS — the 9th compilation target. This isn't a wrapper or a companion app. It's a standalone watchOS binary with a native SwiftUI interface.
+Perry hiện biên dịch thành watchOS — mục tiêu biên dịch thứ 9. Đây không phải là một trình bao bọc hoặc một ứng dụng đồng hành. Đó là một tệp nhị phân watchOS độc lập với giao diện SwiftUI gốc.
 
-The watchOS renderer uses a **data-driven approach**: Perry builds a UI tree via `perry_ui_*` FFI calls, and a shipped `PerryWatchApp.swift` queries the tree and renders SwiftUI views reactively. 15 widget types are supported with stubs for unsupported ones.
+Trình kết xuất watchOS sử dụng **cách tiếp cận dựa trên dữ liệu**: Perry xây dựng cây giao diện người dùng thông qua các lệnh gọi `perry_ui_*` FFI và `PerryWatchApp.swift` được vận chuyển sẽ truy vấn cây và hiển thị các chế độ xem SwiftUI một cách phản ứng. 15 loại tiện ích con được hỗ trợ kèm theo sơ khai cho những loại tiện ích không được hỗ trợ.
 
 ```
 # Compile for watchOS
@@ -110,17 +110,17 @@ perry run watchos
 perry setup watchos
 ```
 
-The full flow works: `perry setup watchos` shares App Store Connect credentials with iOS, `perry run watchos` auto-detects Apple Watch simulators, and `perry publish watchos` submits to the App Store.
+Quy trình đầy đủ hoạt động: `perry setup watchos` chia sẻ App Store Connect thông tin đăng nhập với iOS, `perry run watchos` tự động phát hiện Apple Watch và `perry publish watchos` gửi tới App Store.
 
-This also brings the total **widget target count to four**: iOS (WidgetKit), Android (Glance), watchOS (WidgetKit), and Wear OS (Tiles). Each has its own compile target and codegen backend.
+Điều này cũng nâng tổng số **số mục tiêu của tiện ích lên bốn**: iOS (WidgetKit), Android (Glance), watchOS (WidgetKit) và Wear OS (Gạch). Mỗi cái có mục tiêu biên dịch và phần phụ trợ codegen riêng.
 
 ## API Âm thanh & Camera
 
-Two new hardware APIs ship in this release:
+Hai bản phát hành API phần cứng mới trong bản phát hành này:
 
-### Audio Capture (`perry/system`)
+### Ghi âm (`perry/system`)
 
-Cross-platform audio capture with A-weighted dB(A) measurement:
+Ghi âm thanh đa nền tảng với phép đo dB(A) trọng số A:
 
 ```
 import { audioStart, audioStop, audioGetLevel, audioGetWaveformSamples } from "perry/system";
@@ -131,11 +131,11 @@ const waveform = audioGetWaveformSamples();  // 256-sample ring buffer
 audioStop();
 ```
 
-Platform backends: AVAudioEngine (macOS/iOS), AudioRecord via JNI (Android), PulseAudio (Linux), WASAPI (Windows), getUserMedia + AnalyserNode (Web).
+Phần phụ trợ nền tảng: AVAudioEngine (macOS/iOS), AudioRecord qua JNI (Android), PulseAudio (Linux), WASAPI (Windows), getUserMedia + AnalyserNode (Web).
 
-### Camera Capture (`perry/ui`)
+### Chụp bằng camera (`perry/ui`)
 
-Native camera preview with pixel-level color sampling (iOS):
+Xem trước máy ảnh gốc với lấy mẫu màu ở cấp pixel (iOS):
 
 ```
 import { CameraView, cameraStart, cameraSampleColor } from "perry/ui";
@@ -146,33 +146,33 @@ const [r, g, b] = cameraSampleColor(x, y);  // 5x5 averaging
 
 ## Gói hệ sinh thái
 
-Two first-party native packages launched:
+Đã ra mắt hai gói gốc của bên thứ nhất:
 
--   **perry/push** — Push notification bindings for iOS/macOS: permission requests, APNs token retrieval, badge count. Android stub with FCM planned.
--   **perry/storekit** — StoreKit 2 in-app purchase bindings: product loading, purchases with JWS receipts, subscription checking, restore, and transaction listeners.
+-   **perry/push** — Liên kết thông báo đẩy cho iOS/macOS: yêu cầu cấp quyền, truy xuất mã thông báo APNs, số lượng huy hiệu. Sơ khai Android có FCM đã được lên kế hoạch.
+-   **perry/storekit** — Các ràng buộc mua hàng trong ứng dụng StoreKit 2: tải sản phẩm, mua hàng bằng biên lai JWS, kiểm tra đăng ký, khôi phục và trình xử lý giao dịch.
 
-Both follow the same architecture: TypeScript declarations → Rust FFI crate → Swift bridge. Install as a dependency, import the functions, `await` the results. The compiler handles all native bridging.
+Cả hai đều tuân theo cùng một kiến ​​trúc: Khai báo TypeScript → Rust FFI thùng → Cầu nối Swift. Cài đặt dưới dạng phụ thuộc, nhập các hàm, `await` kết quả. Trình biên dịch xử lý tất cả các cầu nối gốc.
 
 ## Hạ tầng
 
--   **Cranelift 0.113 → 0.121** — eight minor versions of register allocation, x64 fixes, and stack slot alignment improvements
--   **Windows function splitting** — auto-splits functions with 50+ statements into continuations to work around Cranelift codegen issues on Windows
--   **Selective module-var loading** — only loads referenced module-level variables at function entry, reducing Windows binary size by 26%
--   **Array.sort() upgrade** — from O(n²) insertion sort to O(n log n) TimSort-style hybrid
--   **perry run android** — full APK build pipeline: compile, Gradle project generation, assembleDebug, install, launch
--   **Custom Info.plist entries** — `[ios.info_plist]` in perry.toml for privacy descriptions, URL schemes, background modes
+-   **Cranelift 0.113 → 0.121** — tám phiên bản nhỏ của phân bổ đăng ký, sửa lỗi x64 và cải tiến căn chỉnh khe ngăn xếp
+-   **Phân tách chức năng Windows** — tự động phân tách các chức năng có hơn 50 câu lệnh thành các phần tiếp theo để giải quyết các vấn đề về mã hóa Cranelift trên Windows
+-   **Tải mô-đun-var có chọn lọc** — chỉ tải các biến cấp mô-đun được tham chiếu khi nhập hàm, giảm 26% kích thước nhị phân của Windows
+-   **Nâng cấp Array.sort()** — từ sắp xếp chèn O(n²) sang sắp xếp kiểu TimSort O(n log n) kết hợp
+-   **perry chạy android** — quy trình xây dựng APK đầy đủ: biên dịch, tạo dự án Gradle, AssembleDebug, cài đặt, khởi chạy
+-   **Mục nhập Info.plist tùy chỉnh** — `[ios.info_plist]` trong perry.toml để biết mô tả về quyền riêng tư, lược đồ URL, chế độ nền
 
 ## Bằng số liệu
 
--   **Version**: 0.2.197 → 0.4.0 (three major milestones)
--   **Compilation targets**: 8 → 9 (added watchOS)
--   **Widget targets**: 1 → 4 (iOS, Android, watchOS, Wear OS)
--   **New crates**: perry-ui-watchos, perry-codegen-glance, perry-codegen-wear-tiles
--   **New docs**: threading (4 pages), i18n (4 pages), watchOS, expanded widget docs (3 → 8 pages)
--   **perry/thread implementation**: 1,120 lines of Rust, zero changes to the GC
+-   **Phiên bản**: 0.2.197 → 0.4.0 (ba cột mốc quan trọng)
+-   **Mục tiêu biên dịch**: 8 → 9 (đã thêm watchOS)
+-   **Mục tiêu của tiện ích**: 1 → 4 (iOS, Android, watchOS, Wear OS)
+-   **Hộp mới**: perry-ui-watchos, perry-codegen-glance, perry-codegen-wear-tiles
+-   **Tài liệu mới**: phân luồng (4 trang), i18n (4 trang), watchOS, tài liệu tiện ích mở rộng (3 → 8 trang)
+-   **triển khai perry/thread**: 1.120 dòng Rust, không có thay đổi nào đối với GC
 
 ## Tiếp theo là gì
 
-The threading foundation opens up a lot: parallel HTTP request processing, concurrent file operations, and compute-heavy workloads that were previously blocked by single-threaded execution. On the language side, full regex support remains the biggest gap, and the `perry/ui` expansion (drag and drop, accessibility, DatePicker) continues.
+Nền tảng phân luồng mở ra rất nhiều điều: xử lý yêu cầu HTTP song song, thao tác tệp đồng thời và khối lượng công việc tính toán nặng mà trước đây bị chặn bởi thực thi đơn luồng. Về mặt ngôn ngữ, sự hỗ trợ đầy đủ của biểu thức chính quy vẫn là khoảng cách lớn nhất và việc mở rộng `perry/ui` (kéo và thả, khả năng truy cập, DatePicker) vẫn tiếp tục.
 
-Follow the progress on [GitHub](https://github.com/PerryTS/perry), read the docs at [docs.perryts.com](https://docs.perryts.com), or check the [roadmap](/vi/roadmap/) for the full picture.
+Theo dõi tiến trình trên [GitHub](https://github.com/PerryTS/perry), đọc tài liệu tại [docs.perryts.com](https://docs.perryts.com) hoặc kiểm tra [lộ trình](/vi/roadmap/) để có bức tranh toàn cảnh.

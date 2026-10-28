@@ -1,6 +1,6 @@
 ---
 title: "แนะนำ Perry"
-excerpt: "Perry compiles supported TypeScript to standalone native executables with its runtime and GC linked in, without requiring an external Node.js installation or JavaScript engine."
+excerpt: "Perry คอมไพล์ที่รองรับ TypeScript เพื่อปฏิบัติการแบบเนทิฟแบบสแตนด์อโลนที่มีรันไทม์และ GC เชื่อมโยงอยู่ โดยไม่ต้องมีการติดตั้ง Node.js ภายนอกหรือ JavaScript"
 date: 2025-01-15
 tags: ["announcement", "compiler", "TypeScript"]
 ---
@@ -26,25 +26,17 @@ TypeScript ได้กลายเป็นภาษากลางของก
 
 ผลลัพธ์คือไฟล์เรียกทำงานแบบสแตนด์อโลน — โดยทั่วไป 2-5 MB สำหรับเครื่องมือ CLI — ที่เริ่มต้น ทันทีโดยไม่มีเวลาอุ่นเครื่อง
 
-terminal
-
+```text
 $ perry build app.ts
-
 Parsing app.ts...
-
 Compiling (cranelift, arm64)...
-
 Linking...
-
 ✓ Built executable: app (2.3 MB)
-
 $ ./app
-
 Hello from native TypeScript!
-
 $ file app
-
 app: Mach-O 64-bit executable arm64
+```
 
 ## ฟีเจอร์ TypeScript ใดบ้างที่รองรับ
 
@@ -68,9 +60,9 @@ Perry ไม่ได้จำกัดเฉพาะเครื่องม�
 -   **macOS** — AppKit (NSWindow, NSView, NSButton, NSTextField และอื่นๆ)
 -   **iOS** — UIKit (UIViewController, UIView, UIButton, UITableView)
 -   **iPadOS** — UIKit (API เดียวกับ iOS พร้อมการปรับแต่งเฉพาะสำหรับ iPad)
--   **Android** — JNI + Android Views (Activity, View, Button, RecyclerView)
+-   **Android** — JNI + มุมมอง Android (กิจกรรม, มุมมอง, Button, RecyclerView)
 -   **Linux** — GTK4 (GtkWindow, GtkBox, GtkButton, GtkEntry)
--   **Windows** — Win32 (CreateWindowEx, common controls, GDI)
+-   **Windows** — Win32 (CreateWindowEx, การควบคุมทั่วไป, GDI)
 
 ข้อมูลเชิงลึกที่สำคัญคือ Perry แมป API TypeScript ทั่วไปไปยัง toolkit วิดเจ็ตเนทีฟของแต่ละแพลตฟอร์มในเวลาคอมไพล์ ไม่มีเลเยอร์บริดจ์ ไม่มี web view และ ไม่มีเอนจินเรนเดอร์แบบกำหนดเอง แอปของคุณใช้วิดเจ็ตแพลตฟอร์มจริง เรนเดอร์โดย ระบบปฏิบัติการเอง อ่านเพิ่มเติมในบทความเชิงลึกของเรา: [UI เนทีฟข้ามแพลตฟอร์มจาก TypeScript](/th/blog/cross-platform-native-ui/).
 
@@ -94,17 +86,14 @@ Perry ไม่ได้จำกัดเฉพาะเครื่องม�
 
 Perry รองรับการคอมไพล์ข้ามแพลตฟอร์มตั้งแต่แกะกล่อง จากเครื่อง macOS สำหรับพัฒนาของคุณ คุณสามารถคอมไพล์สำหรับ Linux (x86\_64 และ ARM64) และ iOS ซึ่งหมายความว่าคุณสามารถสร้าง ไปป์ไลน์ CI/CD บน macOS และผลิตไบนารีสำหรับเป้าหมายการปรับใช้ทั้งหมดของคุณโดย ไม่ต้องมีเครื่อง build เฉพาะสำหรับแต่ละแพลตฟอร์ม
 
-\# Build for Linux from macOS
-
-$ perry build app.ts --target linux-x86\_64
-
+```
+# Build for Linux from macOS
+$ perry build app.ts --target linux-x86_64
 ✓ Built executable: app (3.1 MB)
-
-\# Build for iOS from macOS
-
+# Build for iOS from macOS
 $ perry build app.ts --target ios-arm64
-
 ✓ Built executable: app (4.8 MB)
+```
 
 ## ประสิทธิภาพ
 
@@ -131,20 +120,15 @@ Perry อยู่ในระหว่างการพัฒนาอย่�
 
 Perry เป็นโอเพนซอร์ส คุณสามารถโคลนรีโป สร้างจากซอร์สโค้ด และเริ่มคอมไพล์ TypeScript ได้วันนี้:
 
+```
 $ git clone https://github.com/PerryTS/perry.git
-
 $ cd perry
-
 $ cargo build --release
-
-\# Compile your first TypeScript file
-
+# Compile your first TypeScript file
 $ ./target/release/perry build hello.ts
-
 ✓ Built executable: hello (2.1 MB)
-
 $ ./hello
-
 Hello, world!
+```
 
 เรียกดูซอร์สโค้ดบน [GitHub](https://github.com/PerryTS/perry), ดู [showcase](/th/showcase/) เพื่อดูว่ามีอะไรถูกสร้างด้วย Perry หรือกระโดดเข้าสู่โค้ดเลย เรารอไม่ไหวที่จะเห็นสิ่งที่คุณจะสร้าง
