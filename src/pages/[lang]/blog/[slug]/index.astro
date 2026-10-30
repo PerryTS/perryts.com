@@ -53,6 +53,8 @@ const contentLang = isFallback ? "en" : lang;
 // GitHub's new-file editor; non-collaborators get a fork and a pull request automatically.
 const translateUrl = `${links.siteRepo}/new/main/src/content/blog/${post.slug}?filename=${lang}.md`;
 const published = entry.data.date.toISOString();
+const { image: cover, imageAlt: coverAlt = "" } = entry.data;
+const socialImage = entry.data.socialImage ?? cover ?? DEFAULT_SOCIAL_IMAGE;
 const blogPosting = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -63,7 +65,7 @@ const blogPosting = {
   keywords: entry.data.tags.join(", "),
   url,
   mainEntityOfPage: url,
-  image: socialImageUrl(DEFAULT_SOCIAL_IMAGE, Astro.site).toString(),
+  image: socialImageUrl(socialImage, Astro.site).toString(),
   author: { "@type": "Organization", name: "Perry", url: "https://perryts.com/" },
   publisher: { "@type": "Organization", name: "Perry", logo: { "@type": "ImageObject", url: new URL("/perry-icon.svg", Astro.site).toString() } },
 };
@@ -78,6 +80,7 @@ const blogPosting = {
   canonical={isFallback ? localePath("en", path) : undefined}
   alternates={post.locales}
   publishedTime={published}
+  image={socialImage}
 >
   <JsonLd slot="head" data={blogPosting} />
   {isFallback && (
@@ -104,6 +107,14 @@ const blogPosting = {
       </div>
     </div>
   </PageHeader>
+
+  {cover && (
+    <figure class="wrap cover">
+      <a href={cover} aria-label={t.openImage}>
+        <img src={cover} alt={coverAlt} width="1672" height="941" decoding="async" fetchpriority="high" />
+      </a>
+    </figure>
+  )}
 
   <div class="wrap body">
     {toc.length > 2 && (
@@ -197,6 +208,21 @@ const blogPosting = {
   .meta__share {
     gap: 16px;
     color: var(--text);
+  }
+  .cover {
+    padding-top: 56px;
+  }
+  .cover a {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .cover img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .meta__share a {
     display: inline-flex;
