@@ -21,6 +21,8 @@ const docTitle = t.title
   .replace(/[.。]$/, "");
 const posts = await getPosts(lang);
 const [featured, ...rest] = posts;
+const featuredHref = featured && localePath(lang, `blog/${featured.slug}`);
+const featuredCover = featured?.entry.data.image;
 
 const tagKeys = (tags: string[]) => tags.map((tag) => tag.toLowerCase()).join(" ");
 const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
@@ -40,17 +42,26 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
 
   {featured && (
     <section class="featured" data-post data-tags={tagKeys(featured.entry.data.tags)}>
-      <div class="wrap featured__inner">
-        <p class="meta t-mono muted">
-          <Badge>{t.latest}</Badge>
-          <time datetime={featured.entry.data.date.toISOString()}>{formatPostDate(featured.entry.data.date, lang, "short")}</time>
-          <span>{featured.entry.data.tags.slice(0, 3).join(" · ")}</span>
-        </p>
-        <h2 class="featured__title" lang={featured.isFallback ? "en" : undefined}>
-          <a href={localePath(lang, `blog/${featured.slug}`)}>{featured.entry.data.title}</a>
-        </h2>
-        <p class="featured__excerpt t-lead muted" lang={featured.isFallback ? "en" : undefined}>{featured.entry.data.excerpt}</p>
-        <LinkArrow href={localePath(lang, `blog/${featured.slug}`)}>{t.read}</LinkArrow>
+      <div class="wrap">
+        <article class:list={["featured__inner", { "featured__inner--cover": featuredCover }]}>
+          <div class="featured__copy">
+            <p class="meta t-mono muted">
+              <Badge>{t.latest}</Badge>
+              <time datetime={featured.entry.data.date.toISOString()}>{formatPostDate(featured.entry.data.date, lang, "short")}</time>
+              <span>{featured.entry.data.tags.slice(0, 3).join(" · ")}</span>
+            </p>
+            <h2 class="featured__title" lang={featured.isFallback ? "en" : undefined}>
+              <a href={featuredHref}>{featured.entry.data.title}</a>
+            </h2>
+            <p class="featured__excerpt t-lead muted" lang={featured.isFallback ? "en" : undefined}>{featured.entry.data.excerpt}</p>
+            <LinkArrow href={featuredHref}>{t.read}</LinkArrow>
+          </div>
+          {featuredCover && (
+            <a class="featured__media" href={featuredHref} tabindex="-1" aria-hidden="true">
+              <img src={featuredCover} alt="" width="1672" height="941" decoding="async" />
+            </a>
+          )}
+        </article>
       </div>
     </section>
   )}
@@ -134,12 +145,39 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
     color: var(--bg);
   }
   .featured__inner {
+    padding-block: 72px 88px;
+  }
+  .featured__inner--cover {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 64px;
+  }
+  .featured__copy {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
-    padding-block: 72px 80px;
-    max-width: calc(980px + 2 * var(--page-x));
-    margin-inline: 0;
+    max-width: 980px;
+  }
+  .featured__media {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    transition:
+      transform 0.4s var(--ease-out),
+      border-color 0.2s;
+  }
+  .featured__media:hover {
+    transform: translateY(-3px);
+    border-color: var(--text-muted);
+  }
+  .featured__media img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .meta {
     display: flex;
@@ -148,13 +186,13 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
     gap: 16px;
   }
   .featured__title {
-    font-size: clamp(32px, 3.2vw, 44px);
+    font-size: clamp(30px, 3vw, 44px);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.08;
   }
   .featured__title a:hover,
-  .row__title a:hover {
+  .row:hover .row__title a {
     color: var(--accent);
   }
   .list {
@@ -172,6 +210,7 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
     font-weight: 400;
   }
   .row {
+    position: relative;
     display: grid;
     grid-template-columns: 140px 1fr 220px;
     gap: 40px;
@@ -190,11 +229,29 @@ const years = [...new Set(rest.map((p) => p.entry.data.date.getUTCFullYear()))];
     flex-direction: column;
     gap: 8px;
   }
+  /* The title link covers the whole row, so the date, excerpt and tags are clickable too. */
+  .row__title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .row__title a {
+    transition: color 0.15s;
+  }
   .row__title {
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.2;
+  }
+  @media (max-width: 1024px) {
+    .featured__inner--cover {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+    .featured__media {
+      order: -1;
+    }
   }
   @media (max-width: 900px) {
     .row {

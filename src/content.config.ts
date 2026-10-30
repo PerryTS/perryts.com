@@ -15,6 +15,11 @@ const blog = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    /** Optional cover image under public/blog/<slug>/: shown on the post, the blog index and as the social preview. */
+    image: z.string().optional(),
+    /** Social preview variant of the cover (JPEG/PNG; crawlers handle WebP unevenly). Defaults to `image`. */
+    socialImage: z.string().optional(),
+    imageAlt: z.string().optional(),
   }),
 });
 
