@@ -18,7 +18,7 @@ scp subscribe-server.mjs "$SERVER:$REMOTE_DIR/releases/$RELEASE/subscribe-server
 
 # Keep earlier releases so a failed deployment can be rolled back atomically.
 ssh "$SERVER" bash -s -- "$REMOTE_DIR" "$RELEASE" <<'REMOTE'
-set -euo pipefail
+set -Eeuo pipefail
 base="$1"
 release="$2"
 # Serialize activation even if a manual deploy overlaps GitHub Actions.
