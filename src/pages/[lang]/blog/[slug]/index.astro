@@ -7,6 +7,7 @@ import Base from "../../../../layouts/Base.astro";
 import PageHeader from "../../../../components/PageHeader.astro";
 import Prose from "../../../../components/Prose.astro";
 import Tag from "../../../../components/Tag.astro";
+import BrandIcon from "../../../../components/BrandIcon.astro";
 import CopyButton from "../../../../components/CopyButton.astro";
 import NewsletterForm from "../../../../components/NewsletterForm.astro";
 import JsonLd from "../../../../components/JsonLd.astro";
@@ -82,8 +83,10 @@ const blogPosting = {
         <span><Timer size={14} stroke-width={1.75} aria-hidden="true" />{plural(lang, t.minutes, minutes)}</span>
       </div>
       <div class="meta__share">
-        <span>{t.share}</span>
-        <CopyButton text={url} label={t.copyLink} />
+        <span class="muted">{t.share}</span>
+        <CopyButton text={url} label={t.copyLink} icon="link" />
+        <a href={`https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${encodeURIComponent(entry.data.title)}`} target="_blank" rel="noopener" aria-label={`${t.share}: X`}><BrandIcon name="x" size={15} /></a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener" aria-label={`${t.share}: LinkedIn`}><BrandIcon name="linkedin" size={15} /></a>
       </div>
     </div>
   </PageHeader>
@@ -181,8 +184,20 @@ const blogPosting = {
     gap: 8px;
   }
   .meta__share {
-    gap: 12px;
+    gap: 16px;
     color: var(--text);
+  }
+  .meta__share a {
+    display: inline-flex;
+  }
+  .meta__share a,
+  .meta__share :global(.copy) {
+    opacity: 1;
+    transition: color 150ms;
+  }
+  .meta__share a:hover,
+  .meta__share :global(.copy:hover) {
+    color: var(--accent);
   }
   .body {
     display: grid;
