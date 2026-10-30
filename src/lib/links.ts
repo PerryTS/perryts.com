@@ -14,5 +14,6 @@ export const links = {
   limitations: "https://perryts.github.io/perry/language/limitations.html",
   platforms: "https://perryts.github.io/perry/platforms/overview.html",
   geisterhand: "https://geisterhand.io",
+  siteRepo: "https://github.com/PerryTS/perryts.com",
   serverSource: "https://github.com/PerryTS/perryts.com/blob/main/native-entry/server.ts",
 } as const;
