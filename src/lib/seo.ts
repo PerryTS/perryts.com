@@ -1,4 +1,4 @@
-const BRAND = " — Perry";
+const BRAND = " | Perry";
 const TITLE_MAX = 60;
 const DESCRIPTION_MAX = 160;
 
@@ -10,7 +10,7 @@ export function socialImageUrl(image: string, site: URL | undefined): URL {
 }
 
 /**
- * "<title> — Perry". The brand is dropped when the title already names Perry or when it would push
+ * "<title> | Perry". The brand is dropped when the title already names Perry or when it would push
  * the title past what search results show.
  */
 export function pageTitle(title: string, absolute = false): string {

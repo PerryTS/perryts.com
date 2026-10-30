@@ -518,7 +518,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "订阅",
-    "success": "感谢 — 你已加入名单。",
+    "success": "感谢！你已加入名单。",
     "errorInvalid": "请输入有效的电子邮件。",
     "errorGeneric": "出错了。请重试。",
     "blockTitle": "喜欢这篇文章？获取下一篇。",
@@ -528,7 +528,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — 面向 Perry 的原生 JavaScript/TypeScript 托管",
+      "metaTitle": "Coop：面向 Perry 的原生 JavaScript/TypeScript 托管",
       "metaDescription": "Coop 托管由 Perry 编译的 JavaScript/TypeScript 应用，提供共享运行时、隔离的部署工作进程以及内容寻址回滚。",
       "adjacent": "Perry 相邻项目 · Pre-1.0",
       "tagline": "让 Perry 代码安顿并运行的地方。",
@@ -631,7 +631,7 @@
       "pricing": "价格"
     },
     "home": {
-      "title": "Perry — 将 JavaScript/TypeScript 编译为原生可执行文件 | JavaScript/TypeScript 原生编译器",
+      "title": "Perry：将 JavaScript/TypeScript 编译为原生可执行文件 | JavaScript/TypeScript 原生编译器",
       "description": "Perry 是开源的 ahead-of-time JavaScript/TypeScript 编译器。一套代码，11 个平台，运行时无需 Node.js。"
     },
     "internals": {
@@ -653,7 +653,7 @@
     "newsletter": {
       "pageTitle": "Perry 新闻通讯",
       "pageDescription": "关于 Perry 新发布、平台支持和工程文章的更新。无垃圾邮件。",
-      "pageSubtitle": "关于 Perry 中正在发布的内容的简短笔记 —— 发布、平台和工程深度解析。",
+      "pageSubtitle": "关于 Perry 中正在发布的内容的简短笔记：发布、平台和工程深度解析。",
       "bullet1Title": "发布说明",
       "bullet1Body": "每个重要的 Perry 发布，附带变更内容和原因。",
       "bullet2Title": "工程文章",
@@ -768,7 +768,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -787,7 +787,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "使用 Perry 构建的快速原生 JSON 查看器。树形导航、搜索、键盘快捷键——从 TypeScript 编译为原生二进制文件。",
+      "subtitle": "使用 Perry 构建的快速原生 JSON 查看器。树形导航、搜索、键盘快捷键。从 TypeScript 编译为原生二进制文件。",
       "features": "功能",
       "treeView": "树形视图",
       "treeViewDesc": "可折叠、可导航的树形渲染，适用于深层嵌套的 JSON 结构。",
@@ -800,7 +800,7 @@
       "statusBar": "状态栏",
       "statusBarDesc": "显示节点数量、当前深度、文件大小和解析时间。",
       "syntaxColoring": "语法着色",
-      "syntaxColoringDesc": "按类型对值进行颜色编码——字符串、数字、布尔值、null。",
+      "syntaxColoringDesc": "按类型对值进行颜色编码：字符串、数字、布尔值、null。",
       "howItsBuilt": "构建方式",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "TypeScript 源码",
@@ -813,8 +813,8 @@
       "nativeWidgets": "原生 {framework} 组件",
       "available": "可用",
       "screenshots": "截图",
-      "macOsScreenshot": "macOS 截图——即将推出",
-      "iosScreenshot": "iOS 截图——即将推出",
+      "macOsScreenshot": "macOS 截图：即将推出",
+      "iosScreenshot": "iOS 截图：即将推出",
       "screenshotsNote": "截图将随着 Pry 的持续开发而添加。请查看 GitHub 仓库获取最新信息。"
     },
     "common": {

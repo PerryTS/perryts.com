@@ -518,7 +518,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "登録する",
-    "success": "ありがとうございます — 登録が完了しました。",
+    "success": "ありがとうございます。登録が完了しました。",
     "errorInvalid": "有効なメールアドレスを入力してください。",
     "errorGeneric": "問題が発生しました。もう一度お試しください。",
     "blockTitle": "この記事が気に入ったら、次の記事も受け取りませんか？",
@@ -528,7 +528,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Perry向けネイティブJavaScript/TypeScriptホスティング",
+      "metaTitle": "Coop：Perry向けネイティブJavaScript/TypeScriptホスティング",
       "metaDescription": "Coopは、共有ランタイム、分離されたデプロイワーカー、コンテンツアドレス方式のロールバックで、PerryがコンパイルしたJavaScript/TypeScriptアプリをホストします。",
       "adjacent": "Perry隣接プロジェクト · Pre-1.0",
       "tagline": "Perryコードが休み、動ける場所。",
@@ -631,7 +631,7 @@
       "pricing": "料金"
     },
     "home": {
-      "title": "Perry — JavaScript/TypeScript をネイティブ実行ファイルにコンパイル | JavaScript/TypeScript ネイティブコンパイラ",
+      "title": "Perry：JavaScript/TypeScript をネイティブ実行ファイルにコンパイル | JavaScript/TypeScript ネイティブコンパイラ",
       "description": "Perryはオープンソースのahead-of-time JavaScript/TypeScriptコンパイラです。1つのコードベースで11プラットフォームに対応し、実行時にNode.jsは不要です。"
     },
     "internals": {
@@ -768,7 +768,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -787,7 +787,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "Perryで構築された高速なネイティブJSONビューア。ツリーナビゲーション、検索、キーボードショートカット——TypeScriptからネイティブバイナリにコンパイル。",
+      "subtitle": "Perryで構築された高速なネイティブJSONビューア。ツリーナビゲーション、検索、キーボードショートカット。TypeScriptからネイティブバイナリにコンパイル。",
       "features": "機能",
       "treeView": "ツリービュー",
       "treeViewDesc": "深くネストされたJSON構造に対応する折りたたみ可能でナビゲート可能なツリー表示。",
@@ -800,7 +800,7 @@
       "statusBar": "ステータスバー",
       "statusBarDesc": "ノード数、現在の深さ、ファイルサイズ、パース時間を表示。",
       "syntaxColoring": "シンタックスカラーリング",
-      "syntaxColoringDesc": "型ごとに色分けされた値——文字列、数値、ブール値、null。",
+      "syntaxColoringDesc": "型ごとに色分けされた値：文字列、数値、ブール値、null。",
       "howItsBuilt": "構築方法",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "TypeScriptソース",
@@ -813,8 +813,8 @@
       "nativeWidgets": "ネイティブ{framework}ウィジェット",
       "available": "利用可能",
       "screenshots": "スクリーンショット",
-      "macOsScreenshot": "macOSスクリーンショット——近日公開",
-      "iosScreenshot": "iOSスクリーンショット——近日公開",
+      "macOsScreenshot": "macOSスクリーンショット：近日公開",
+      "iosScreenshot": "iOSスクリーンショット：近日公開",
       "screenshotsNote": "スクリーンショットはPryの開発が進むにつれて追加されます。最新情報はGitHubリポジトリをご確認ください。"
     },
     "common": {
