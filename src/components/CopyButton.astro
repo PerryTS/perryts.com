@@ -1,16 +1,19 @@
 ---
 import Copy from "@lucide/astro/icons/copy";
+import Link from "@lucide/astro/icons/link";
 import Check from "@lucide/astro/icons/check";
 
 interface Props {
   text: string;
   label?: string;
+  icon?: "copy" | "link";
 }
-const { text, label = "Copy" } = Astro.props;
+const { text, label = "Copy", icon = "copy" } = Astro.props;
+const Idle = icon === "link" ? Link : Copy;
 ---
 
 <button class="copy" type="button" data-copy={text} aria-label={label}>
-  <Copy class="copy__idle" size={15} stroke-width={1.75} aria-hidden="true" />
+  <Idle class="copy__idle" size={15} stroke-width={1.75} aria-hidden="true" />
   <Check class="copy__done" size={15} stroke-width={2} aria-hidden="true" />
 </button>
 
