@@ -1,12 +1,15 @@
 ---
 import { render } from "astro:content";
 import Info from "@lucide/astro/icons/info";
+import Languages from "@lucide/astro/icons/languages";
+import GitPullRequest from "@lucide/astro/icons/git-pull-request";
 import Calendar from "@lucide/astro/icons/calendar";
 import Timer from "@lucide/astro/icons/timer";
 import Base from "../../../../layouts/Base.astro";
 import PageHeader from "../../../../components/PageHeader.astro";
 import Prose from "../../../../components/Prose.astro";
 import Tag from "../../../../components/Tag.astro";
+import BrandIcon from "../../../../components/BrandIcon.astro";
 import CopyButton from "../../../../components/CopyButton.astro";
 import NewsletterForm from "../../../../components/NewsletterForm.astro";
 import JsonLd from "../../../../components/JsonLd.astro";
@@ -14,6 +17,7 @@ import { messages, plural } from "../../../../i18n/messages.ts";
 import { locales, localePath, type Locale } from "../../../../i18n/index.ts";
 import { formatPostDate, getPosts, type Post } from "../../../../lib/blog.ts";
 import { readingMinutes } from "../../../../lib/reading-time.ts";
+import { links } from "../../../../lib/links.ts";
 import { DEFAULT_SOCIAL_IMAGE, socialImageUrl } from "../../../../lib/seo.ts";
 
 // Every post exists under every locale, like the previous site; untranslated ones show English with a notice.
@@ -46,6 +50,8 @@ const minutes = readingMinutes(entry.body ?? "", isFallback ? "en" : lang);
 const path = `blog/${post.slug}`;
 const url = new URL(localePath(lang, path), Astro.site).toString();
 const contentLang = isFallback ? "en" : lang;
+// GitHub's new-file editor; non-collaborators get a fork and a pull request automatically.
+const translateUrl = `${links.siteRepo}/new/main/src/content/blog/${post.slug}?filename=${lang}.md`;
 const published = entry.data.date.toISOString();
 const { image: cover, imageAlt: coverAlt = "" } = entry.data;
 const socialImage = entry.data.socialImage ?? cover ?? DEFAULT_SOCIAL_IMAGE;
@@ -77,6 +83,15 @@ const blogPosting = {
   image={socialImage}
 >
   <JsonLd slot="head" data={blogPosting} />
+  {isFallback && (
+    <div class="translation">
+      <div class="wrap translation__inner">
+        <Languages size={16} stroke-width={1.75} aria-hidden="true" />
+        <p>{t.englishOnly}</p>
+        <a href={translateUrl}>{t.helpTranslate}<GitPullRequest size={14} stroke-width={1.75} aria-hidden="true" /></a>
+      </div>
+    </div>
+  )}
   <PageHeader title={entry.data.title} back={{ href: localePath(lang, "blog"), label: t.back }}>
     <ul slot="above" class="tags">{entry.data.tags.map((tag) => <li><Tag>{tag}</Tag></li>)}</ul>
     <div class="meta t-mono muted">
@@ -85,8 +100,10 @@ const blogPosting = {
         <span><Timer size={14} stroke-width={1.75} aria-hidden="true" />{plural(lang, t.minutes, minutes)}</span>
       </div>
       <div class="meta__share">
-        <span>{t.share}</span>
-        <CopyButton text={url} label={t.copyLink} />
+        <span class="muted">{t.share}</span>
+        <CopyButton text={url} label={t.copyLink} icon="link" />
+        <a href={`https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${encodeURIComponent(entry.data.title)}`} target="_blank" rel="noopener" aria-label={`${t.share}: X`}><BrandIcon name="x" size={15} /></a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener" aria-label={`${t.share}: LinkedIn`}><BrandIcon name="linkedin" size={15} /></a>
       </div>
     </div>
   </PageHeader>
@@ -112,9 +129,6 @@ const blogPosting = {
     )}
 
     <article class="article">
-      {isFallback && (
-        <p class="notice notice--accent"><Info size={16} stroke-width={1.75} aria-hidden="true" />{t.englishOnly}</p>
-      )}
       <p class="notice"><Info size={16} stroke-width={1.75} aria-hidden="true" />{t.historical}</p>
       <Prose lang={contentLang}><Content /></Prose>
 
@@ -192,7 +206,7 @@ const blogPosting = {
     gap: 8px;
   }
   .meta__share {
-    gap: 12px;
+    gap: 16px;
     color: var(--text);
   }
   .cover {
@@ -209,6 +223,18 @@ const blogPosting = {
     display: block;
     width: 100%;
     height: auto;
+  }
+  .meta__share a {
+    display: inline-flex;
+  }
+  .meta__share a,
+  .meta__share :global(.copy) {
+    opacity: 1;
+    transition: color 150ms;
+  }
+  .meta__share a:hover,
+  .meta__share :global(.copy:hover) {
+    color: var(--accent);
   }
   .body {
     display: grid;
@@ -260,6 +286,35 @@ const blogPosting = {
     gap: 28px;
     min-width: 0;
   }
+  .translation {
+    background: var(--surface);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .translation__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding-block: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .translation__inner > :global(svg) {
+    flex: none;
+    color: var(--accent);
+  }
+  .translation p {
+    flex: 1;
+    min-width: 0;
+    font-weight: 500;
+  }
+  .translation a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: 500;
+  }
   .notice {
     display: flex;
     gap: 12px;
@@ -274,10 +329,6 @@ const blogPosting = {
   .notice :global(svg) {
     flex: none;
     margin-top: 2px;
-  }
-  .notice--accent {
-    color: var(--text);
-    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   }
   .pager {
     display: grid;

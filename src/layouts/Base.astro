@@ -11,7 +11,7 @@ interface Props {
   description: string;
   /** Page path without locale prefix, used for alternates and the language switcher. */
   path?: string;
-  /** Render the title as-is instead of "<title> — Perry". */
+  /** Render the title as-is instead of "<title> | Perry". */
   titleIsAbsolute?: boolean;
   /** Override the canonical URL (e.g. English-only pages point to /en/). */
   canonical?: string;
@@ -58,6 +58,7 @@ const ogLocale = lang.replace("-", "_");
     {!noindex && <link rel="canonical" href={canonicalUrl} />}
     {!noindex && alternates.length > 1 && alternates.map((l) => <link rel="alternate" hreflang={l} href={new URL(localePath(l, path), Astro.site)} />)}
     {!noindex && alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={new URL(localePath("en", path), Astro.site)} />}
+    <link rel="alternate" type="application/rss+xml" title="Perry Blog" href={`${localePath(lang, "blog")}rss.xml`} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/perry-icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />

@@ -14,12 +14,12 @@ const lang = Astro.params.lang as Locale;
 const meta = {
   title: "JavaScript/TypeScript on LLVM: Monomorphization and Native Codegen",
   description:
-    "How Perry lowers JavaScript/TypeScript to LLVM IR — a typed HIR, monomorphization, NaN-boxing — and why the backend moved from Cranelift to LLVM for AOT performance.",
+    "How Perry lowers JavaScript/TypeScript to LLVM IR (a typed HIR, monomorphization, NaN-boxing) and why the backend moved from Cranelift to LLVM for AOT performance.",
   breadcrumb: "JavaScript/TypeScript on LLVM",
 };
 
 const ir = [
-  { tone: "muted" as const, text: "; LLVM IR — inline bump allocation" },
+  { tone: "muted" as const, text: "; LLVM IR: inline bump allocation" },
   { text: "%off_ptr = getelementptr i8, ptr %state, i64 8" },
   { text: "%offset  = load i64, ptr %off_ptr        ; current bump offset" },
   { text: "%new_off = add i64 %offset, 96           ; headers + 8 fields" },
@@ -35,7 +35,7 @@ const ir = [
   path="typescript-llvm"
   meta={meta}
   heading="JavaScript/TypeScript on LLVM"
-  lead="How Perry lowers a language designed for JIT engines into LLVM IR — monomorphization, NaN-boxing, inline lowerings — and why it left Cranelift."
+  lead="How Perry lowers a language designed for JIT engines into LLVM IR (monomorphization, NaN-boxing, inline lowerings) and why it left Cranelift."
 >
   <Fragment slot="actions">
     <Button href={localePath(lang, "internals")}>Compiler Internals</Button>
@@ -46,13 +46,13 @@ const ir = [
     <h2><LanguageText text="Why LLVM for JavaScript/TypeScript?" /></h2>
     <p>
       An ahead-of-time compiler lives in a different regime than a JIT. A JIT compiles while the user waits, so compile
-      latency is the constraint. An AOT compiler like Perry compiles once — on the developer's machine or in CI — and the
+      latency is the constraint. An AOT compiler like Perry compiles once, on the developer's machine or in CI, and the
       binary is executed millions of times afterwards. That asymmetry is exactly where a heavyweight optimizer pays for itself.
     </p>
     <p>
       LLVM brings two decades of middle-end work: loop vectorization, loop-invariant code motion, global value numbering,
       sparse conditional constant propagation, aggressive inlining, alias analysis. Perry's job is to hand that machinery IR
-      it can actually optimize — which is where TypeScript's type information comes in.
+      it can actually optimize, which is where TypeScript's type information comes in.
     </p>
 
     <h2>The lowering pipeline</h2>
@@ -86,14 +86,14 @@ const ir = [
     <p>
       The catch is that operations on non-number values need unpack-operate-repack bit sequences. If those sequences live as
       calls into a separately-compiled runtime, LLVM sees opaque black boxes and can't optimize across them. So Perry emits
-      hot operations — property loads, method dispatch, object allocation — as inline LLVM IR that the optimizer can fuse and
+      hot operations (property loads, method dispatch, object allocation) as inline LLVM IR that the optimizer can fuse and
       simplify. Object allocation, for example, compiles down to an inline thread-local bump allocation:
     </p>
     <Code lines={ir} />
 
     <h2>Why not Cranelift?</h2>
     <p>
-      Perry's first backend was Cranelift — the codegen behind wasmtime, built for fast, predictable compilation. It was the
+      Perry's first backend was Cranelift, the codegen behind wasmtime, built for fast, predictable compilation. It was the
       right starting point, and it remains an excellent choice for JITs and sandboxed runtimes. Two things forced the switch:
     </p>
     <ul>
@@ -103,14 +103,14 @@ const ir = [
       </li>
       <li>
         <strong>arm64_32.</strong> Apple Watch uses an ABI (64-bit instructions, 32-bit pointers) that Cranelift doesn't
-        support. For watchOS to exist as a target, LLVM was required — and maintaining two backends meant two sets of bugs,
+        support. For watchOS to exist as a target, LLVM was required, and maintaining two backends meant two sets of bugs,
         tests, and performance baselines.
       </li>
     </ul>
     <p>
       The migration was not free: the first LLVM-only release regressed some benchmarks by up to 70x because hot operations
-      initially went through opaque runtime helper calls. Recovering — inline lowerings, the bump allocator above, better
-      inlining boundaries — took the backend past its earlier baseline. That April 2026 result is historical, not a current
+      initially went through opaque runtime helper calls. Recovering (inline lowerings, the bump allocator above, better
+      inlining boundaries) took the backend past its earlier baseline. That April 2026 result is historical, not a current
       universal speed claim. The current public suite includes Perry wins, mixed rows, and losses against Node.js and Bun.
       The migration post-mortem is worth reading: <a href={localePath(lang, "blog/cranelift-to-llvm")}>From Cranelift to LLVM</a>.
     </p>
@@ -128,7 +128,7 @@ const ir = [
 
   <Cta
     title="See the output yourself"
-    text="perry compile main.ts — native machine code with the Perry runtime and GC statically linked, and no external JavaScript engine by default."
+    text="perry compile main.ts: native machine code with the Perry runtime and GC statically linked, and no external JavaScript engine by default."
   >
     <Button href={localePath(lang, "getting-started")}>Get Started</Button>
     <Button href={links.github} variant="secondary">View on GitHub</Button>

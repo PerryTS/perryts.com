@@ -28,6 +28,7 @@
     "copyLink": "Sao chép liên kết",
     "englishOnly": "Bài viết này chỉ có bằng tiếng Anh.",
     "openImage": "Mở ảnh kích thước đầy đủ",
+    "helpTranslate": "Giúp dịch bài này",
     "historical": "Bài viết có ghi ngày này phản ánh phiên bản Perry và số liệu đo tại thời điểm xuất bản. Để ra quyết định hôm nay, hãy xem các giới hạn hiện tại, hướng dẫn nền tảng và dữ liệu benchmark."
   },
   "compare": {
@@ -518,7 +519,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "Đăng ký",
-    "success": "Cảm ơn — bạn đã có trong danh sách.",
+    "success": "Cảm ơn, bạn đã có trong danh sách.",
     "errorInvalid": "Vui lòng nhập email hợp lệ.",
     "errorGeneric": "Đã có lỗi xảy ra. Vui lòng thử lại.",
     "blockTitle": "Thích bài này? Nhận bài tiếp theo.",
@@ -528,7 +529,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Lưu trữ JavaScript/TypeScript native cho Perry",
+      "metaTitle": "Coop: Lưu trữ JavaScript/TypeScript native cho Perry",
       "metaDescription": "Coop lưu trữ ứng dụng JavaScript/TypeScript được Perry biên dịch với runtime dùng chung, worker triển khai tách biệt và rollback định địa chỉ theo nội dung.",
       "adjacent": "Dự án liền kề Perry · Pre-1.0",
       "tagline": "Nơi mã Perry có thể nghỉ và chạy.",
@@ -631,7 +632,7 @@
       "pricing": "Bảng giá"
     },
     "home": {
-      "title": "Perry — Biên dịch JavaScript/TypeScript thành tệp thực thi gốc | Trình biên dịch JavaScript/TypeScript gốc",
+      "title": "Perry: Biên dịch JavaScript/TypeScript thành tệp thực thi gốc | Trình biên dịch JavaScript/TypeScript gốc",
       "description": "Perry là trình biên dịch JavaScript/TypeScript ahead-of-time mã nguồn mở. Một codebase, 11 nền tảng, không cần Node.js khi chạy."
     },
     "internals": {
@@ -653,7 +654,7 @@
     "newsletter": {
       "pageTitle": "Bản tin Perry",
       "pageDescription": "Cập nhật về các bản phát hành Perry mới, hỗ trợ nền tảng và bài viết kỹ thuật. Không spam.",
-      "pageSubtitle": "Ghi chú ngắn về những gì đang ra mắt trong Perry — bản phát hành, nền tảng và phân tích kỹ thuật chuyên sâu.",
+      "pageSubtitle": "Ghi chú ngắn về những gì đang ra mắt trong Perry: bản phát hành, nền tảng và phân tích kỹ thuật chuyên sâu.",
       "bullet1Title": "Ghi chú phát hành",
       "bullet1Body": "Mỗi bản phát hành Perry quan trọng, kèm theo những gì đã thay đổi và lý do.",
       "bullet2Title": "Bài viết kỹ thuật",
@@ -768,7 +769,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -787,7 +788,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "Trình xem JSON nhanh, gốc được xây dựng với Perry. Điều hướng cây, tìm kiếm, phím tắt — biên dịch từ TypeScript sang binary gốc.",
+      "subtitle": "Trình xem JSON nhanh, gốc được xây dựng với Perry. Điều hướng cây, tìm kiếm, phím tắt. Biên dịch từ TypeScript sang binary gốc.",
       "features": "Tính năng",
       "treeView": "Chế độ xem cây",
       "treeViewDesc": "Hiển thị cây có thể thu gọn, điều hướng cho cấu trúc JSON lồng sâu.",
@@ -800,7 +801,7 @@
       "statusBar": "Thanh trạng thái",
       "statusBarDesc": "Hiển thị số nút, độ sâu hiện tại, kích thước tệp và thời gian phân tích.",
       "syntaxColoring": "Tô màu cú pháp",
-      "syntaxColoringDesc": "Giá trị được tô màu theo kiểu — chuỗi, số, boolean, null.",
+      "syntaxColoringDesc": "Giá trị được tô màu theo kiểu: chuỗi, số, boolean, null.",
       "howItsBuilt": "Cách xây dựng",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "Mã nguồn TypeScript",
@@ -813,8 +814,8 @@
       "nativeWidgets": "Widget {framework} gốc",
       "available": "Có sẵn",
       "screenshots": "Ảnh chụp màn hình",
-      "macOsScreenshot": "Ảnh chụp macOS — sắp ra mắt",
-      "iosScreenshot": "Ảnh chụp iOS — sắp ra mắt",
+      "macOsScreenshot": "Ảnh chụp macOS: sắp ra mắt",
+      "iosScreenshot": "Ảnh chụp iOS: sắp ra mắt",
       "screenshotsNote": "Ảnh chụp màn hình sẽ được thêm khi phát triển Pry tiếp tục. Kiểm tra repo GitHub để cập nhật mới nhất."
     },
     "common": {

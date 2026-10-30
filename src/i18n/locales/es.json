@@ -29,6 +29,7 @@
     "copyLink": "Copiar enlace",
     "englishOnly": "Este artículo solo está disponible en inglés.",
     "openImage": "Abrir la imagen a tamaño completo",
+    "helpTranslate": "Ayuda a traducirlo",
     "historical": "Este artículo fechado recoge la versión de Perry y las mediciones disponibles cuando se publicó. Para decidir hoy, consulta las limitaciones actuales, la guía de plataformas y los datos de benchmarks."
   },
   "compare": {
@@ -519,7 +520,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "Suscribirse",
-    "success": "Gracias — estás en la lista.",
+    "success": "Gracias, estás en la lista.",
     "errorInvalid": "Por favor, introduce un correo válido.",
     "errorGeneric": "Algo salió mal. Inténtalo de nuevo.",
     "blockTitle": "¿Te gustó este post? Recibe el siguiente.",
@@ -529,7 +530,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Alojamiento de JavaScript/TypeScript nativo para Perry",
+      "metaTitle": "Coop: Alojamiento de JavaScript/TypeScript nativo para Perry",
       "metaDescription": "Coop aloja aplicaciones JavaScript/TypeScript compiladas por Perry con proveedores de runtime compartidos, workers de despliegue aislados y rollbacks direccionados por contenido.",
       "adjacent": "Proyecto cercano a Perry · Pre-1.0",
       "tagline": "Un lugar donde el código de Perry puede descansar y ejecutarse.",
@@ -632,7 +633,7 @@
       "pricing": "Precios"
     },
     "home": {
-      "title": "Perry — Compila JavaScript/TypeScript a ejecutables nativos | Compilador nativo de JavaScript/TypeScript",
+      "title": "Perry: Compila JavaScript/TypeScript a ejecutables nativos | Compilador nativo de JavaScript/TypeScript",
       "description": "Perry es un compilador de JavaScript/TypeScript ahead-of-time y de código abierto. Un código, 11 plataformas, sin Node.js en ejecución."
     },
     "internals": {
@@ -654,7 +655,7 @@
     "newsletter": {
       "pageTitle": "Newsletter de Perry",
       "pageDescription": "Novedades sobre nuevos releases de Perry, soporte de plataformas y artículos de ingeniería. Sin spam.",
-      "pageSubtitle": "Notas breves sobre lo que sale en Perry — releases, plataformas y artículos técnicos en profundidad.",
+      "pageSubtitle": "Notas breves sobre lo que sale en Perry: releases, plataformas y artículos técnicos en profundidad.",
       "bullet1Title": "Notas de versión",
       "bullet1Body": "Cada release importante de Perry, con qué cambió y por qué.",
       "bullet2Title": "Artículos de ingeniería",
@@ -769,7 +770,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -788,7 +789,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "Un visor de JSON rápido y nativo construido con Perry. Navegación en árbol, búsqueda, atajos de teclado — compilado de TypeScript a binarios nativos.",
+      "subtitle": "Un visor de JSON rápido y nativo construido con Perry. Navegación en árbol, búsqueda, atajos de teclado. Compilado de TypeScript a binarios nativos.",
       "features": "Características",
       "treeView": "Vista de árbol",
       "treeViewDesc": "Renderizado de árbol colapsable y navegable para estructuras JSON profundamente anidadas.",
@@ -801,7 +802,7 @@
       "statusBar": "Barra de estado",
       "statusBarDesc": "Muestra el conteo de nodos, profundidad actual, tamaño del archivo y tiempo de análisis.",
       "syntaxColoring": "Coloreado de sintaxis",
-      "syntaxColoringDesc": "Valores codificados por color según tipo — cadenas, números, booleanos, null.",
+      "syntaxColoringDesc": "Valores codificados por color según tipo: cadenas, números, booleanos, null.",
       "howItsBuilt": "Cómo está construido",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "Código fuente TypeScript",
@@ -814,8 +815,8 @@
       "nativeWidgets": "Widgets nativos de {framework}",
       "available": "Disponible",
       "screenshots": "Capturas de pantalla",
-      "macOsScreenshot": "Captura de macOS — próximamente",
-      "iosScreenshot": "Captura de iOS — próximamente",
+      "macOsScreenshot": "Captura de macOS: próximamente",
+      "iosScreenshot": "Captura de iOS: próximamente",
       "screenshotsNote": "Se añadirán capturas de pantalla a medida que continúe el desarrollo de Pry. Consulta el repositorio de GitHub para lo más reciente."
     },
     "common": {

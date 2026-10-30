@@ -28,6 +28,7 @@
     "copyLink": "Salin tautan",
     "englishOnly": "Artikel ini hanya tersedia dalam bahasa Inggris.",
     "openImage": "Buka gambar ukuran penuh",
+    "helpTranslate": "Bantu terjemahkan",
     "historical": "Artikel bertanggal ini mencatat versi Perry dan hasil pengukuran saat diterbitkan. Untuk keputusan hari ini, lihat batasan terkini, panduan platform, dan data benchmark."
   },
   "compare": {
@@ -518,7 +519,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "Berlangganan",
-    "success": "Terima kasih — kamu sudah ada di daftar.",
+    "success": "Terima kasih, kamu sudah ada di daftar.",
     "errorInvalid": "Mohon masukkan email yang valid.",
     "errorGeneric": "Ada yang salah. Silakan coba lagi.",
     "blockTitle": "Suka postingan ini? Dapatkan yang berikutnya.",
@@ -528,7 +529,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Hosting JavaScript/TypeScript native untuk Perry",
+      "metaTitle": "Coop: Hosting JavaScript/TypeScript native untuk Perry",
       "metaDescription": "Coop meng-host aplikasi JavaScript/TypeScript yang dikompilasi Perry dengan runtime bersama, worker deployment terisolasi, dan rollback berbasis alamat konten.",
       "adjacent": "Proyek yang berdekatan dengan Perry · Pre-1.0",
       "tagline": "Tempat kode Perry beristirahat dan berjalan.",
@@ -631,7 +632,7 @@
       "pricing": "Harga"
     },
     "home": {
-      "title": "Perry — Kompilasi JavaScript/TypeScript ke Executable Native | Kompiler JavaScript/TypeScript Native",
+      "title": "Perry: Kompilasi JavaScript/TypeScript ke Executable Native | Kompiler JavaScript/TypeScript Native",
       "description": "Perry adalah compiler JavaScript/TypeScript ahead-of-time yang open source. Satu codebase, 11 platform, tanpa Node.js saat runtime."
     },
     "internals": {
@@ -653,7 +654,7 @@
     "newsletter": {
       "pageTitle": "Newsletter Perry",
       "pageDescription": "Update tentang rilis Perry baru, dukungan platform, dan artikel teknis. Tanpa spam.",
-      "pageSubtitle": "Catatan singkat tentang apa yang sedang dirilis di Perry — rilis, platform, dan pembahasan teknis mendalam.",
+      "pageSubtitle": "Catatan singkat tentang apa yang sedang dirilis di Perry: rilis, platform, dan pembahasan teknis mendalam.",
       "bullet1Title": "Catatan rilis",
       "bullet1Body": "Setiap rilis Perry yang penting, dengan apa yang berubah dan kenapa.",
       "bullet2Title": "Artikel teknis",
@@ -768,7 +769,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -787,7 +788,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "Penampil JSON yang cepat dan native dibangun dengan Perry. Navigasi pohon, pencarian, pintasan keyboard — dikompilasi dari TypeScript ke binary native.",
+      "subtitle": "Penampil JSON yang cepat dan native dibangun dengan Perry. Navigasi pohon, pencarian, pintasan keyboard. Dikompilasi dari TypeScript ke binary native.",
       "features": "Fitur",
       "treeView": "Tampilan Pohon",
       "treeViewDesc": "Rendering pohon yang dapat dilipat dan dinavigasi untuk struktur JSON yang sangat bertingkat.",
@@ -800,7 +801,7 @@
       "statusBar": "Bilah Status",
       "statusBarDesc": "Menampilkan jumlah node, kedalaman saat ini, ukuran file, dan waktu parsing.",
       "syntaxColoring": "Pewarnaan Sintaks",
-      "syntaxColoringDesc": "Nilai diberi kode warna berdasarkan tipe — string, angka, boolean, null.",
+      "syntaxColoringDesc": "Nilai diberi kode warna berdasarkan tipe: string, angka, boolean, null.",
       "howItsBuilt": "Cara Pembuatannya",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "Kode Sumber TypeScript",
@@ -813,8 +814,8 @@
       "nativeWidgets": "Widget {framework} native",
       "available": "Tersedia",
       "screenshots": "Tangkapan Layar",
-      "macOsScreenshot": "Tangkapan layar macOS — segera hadir",
-      "iosScreenshot": "Tangkapan layar iOS — segera hadir",
+      "macOsScreenshot": "Tangkapan layar macOS: segera hadir",
+      "iosScreenshot": "Tangkapan layar iOS: segera hadir",
       "screenshotsNote": "Tangkapan layar akan ditambahkan seiring perkembangan Pry. Periksa repo GitHub untuk informasi terbaru."
     },
     "common": {

@@ -28,12 +28,13 @@
     "copyLink": "링크 복사",
     "englishOnly": "이 글은 영어로만 제공됩니다.",
     "openImage": "원본 크기로 이미지 열기",
+    "helpTranslate": "번역 돕기",
     "historical": "이 글은 게시 시점의 Perry 버전과 측정값을 기록합니다. 현재 판단에는 최신 제한 사항, 플랫폼 가이드, 벤치마크 데이터를 참고하세요."
   },
   "compare": {
     "ui": {
       "indexTitle": "Perry vs. 대안들",
-      "indexSubtitle": "JavaScript/TypeScript를 배포하는 다른 방법들 — 런타임, 컴파일러, 크로스 플랫폼 UI 프레임워크 — 과 Perry를 비교합니다. 솔직하고, 출처가 명시되어 있으며, 측정 가능한 수치는 그대로 제시합니다.",
+      "indexSubtitle": "JavaScript/TypeScript를 배포하는 다른 방법들(런타임, 컴파일러, 크로스 플랫폼 UI 프레임워크)과 Perry를 비교합니다. 솔직하고, 출처가 명시되어 있으며, 측정 가능한 수치는 그대로 제시합니다.",
       "indexMetaTitle": "Perry를 Bun, Deno, Electron, Tauri, React Native, Static Hermes와 비교하기",
       "indexMetaDescription": "개발자들이 선택하는 대안들에 대한 Perry의 나란한 비교: JavaScript/TypeScript 런타임 (Bun, Deno), AOT TS 컴파일러 (Static Hermes), 크로스 플랫폼 UI 프레임워크 (Electron, Tauri, React Native).",
       "backToCompare": "비교 목록으로 돌아가기",
@@ -518,7 +519,7 @@
   "newsletterForm": {
     "placeholder": "you@example.com",
     "subscribe": "구독하기",
-    "success": "감사합니다 — 구독이 완료되었습니다.",
+    "success": "감사합니다. 구독이 완료되었습니다.",
     "errorInvalid": "올바른 이메일을 입력해 주세요.",
     "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요.",
     "blockTitle": "이 글이 마음에 드셨나요? 다음 글도 받아보세요.",
@@ -528,7 +529,7 @@
   },
   "pages": {
     "coop": {
-      "metaTitle": "Coop — Perry용 네이티브 JavaScript/TypeScript 호스팅",
+      "metaTitle": "Coop: Perry용 네이티브 JavaScript/TypeScript 호스팅",
       "metaDescription": "Coop은 공유 런타임 공급자, 격리된 배포 워커, 콘텐츠 주소 기반 롤백으로 Perry가 컴파일한 JavaScript/TypeScript 앱을 호스팅합니다.",
       "adjacent": "Perry 인접 프로젝트 · Pre-1.0",
       "tagline": "Perry 코드가 쉬고 실행되는 곳.",
@@ -631,7 +632,7 @@
       "pricing": "요금"
     },
     "home": {
-      "title": "Perry — JavaScript/TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 JavaScript/TypeScript 컴파일러",
+      "title": "Perry: JavaScript/TypeScript를 네이티브 실행 파일로 컴파일 | 네이티브 JavaScript/TypeScript 컴파일러",
       "description": "Perry는 오픈 소스 ahead-of-time JavaScript/TypeScript 컴파일러입니다. 하나의 코드베이스, 11개 플랫폼, 런타임에 Node.js가 필요 없습니다."
     },
     "internals": {
@@ -653,7 +654,7 @@
     "newsletter": {
       "pageTitle": "Perry 뉴스레터",
       "pageDescription": "새로운 Perry 릴리스, 플랫폼 지원, 엔지니어링 글에 대한 업데이트. 스팸 없음.",
-      "pageSubtitle": "Perry에서 출시되는 내용에 대한 짧은 소식 — 릴리스, 플랫폼, 엔지니어링 심층 분석.",
+      "pageSubtitle": "Perry에서 출시되는 내용에 대한 짧은 소식: 릴리스, 플랫폼, 엔지니어링 심층 분석.",
       "bullet1Title": "릴리스 노트",
       "bullet1Body": "Perry의 모든 주요 릴리스, 무엇이 어떻게 바뀌었는지.",
       "bullet2Title": "엔지니어링 글",
@@ -768,7 +769,7 @@
       "policyItems": [
         "Current pages use generated facts for target counts and benchmark rows instead of copying numbers into multiple components.",
         "Historic blog posts keep their date and version context and are not presented as current benchmarks.",
-        "Support means documented, tested behavior — not blanket compatibility with every JavaScript/TypeScript program or npm package.",
+        "Support means documented, tested behavior, not blanket compatibility with every JavaScript/TypeScript program or npm package.",
         "Exact prices, quotas, SLAs, and hosted-service availability are not promised until they are confirmed in the service or a signed agreement."
       ],
       "snapshotNote": "Perry is pre-1.0 and changes quickly. Use these live sources when making a technical or commercial decision.",
@@ -787,7 +788,7 @@
       "metaDescription": "Public Perry examples and projects, with measurements labeled by artifact and environment where available."
     },
     "pry": {
-      "subtitle": "Perry로 구축된 빠른 네이티브 JSON 뷰어. 트리 탐색, 검색, 키보드 단축키 — TypeScript에서 네이티브 바이너리로 컴파일.",
+      "subtitle": "Perry로 구축된 빠른 네이티브 JSON 뷰어. 트리 탐색, 검색, 키보드 단축키. TypeScript에서 네이티브 바이너리로 컴파일.",
       "features": "기능",
       "treeView": "트리 뷰",
       "treeViewDesc": "깊이 중첩된 JSON 구조를 위한 접기 가능하고 탐색 가능한 트리 렌더링.",
@@ -800,7 +801,7 @@
       "statusBar": "상태 바",
       "statusBarDesc": "노드 수, 현재 깊이, 파일 크기, 파싱 시간 표시.",
       "syntaxColoring": "구문 색상 표시",
-      "syntaxColoringDesc": "타입별 색상 구분 — 문자열, 숫자, 불리언, null.",
+      "syntaxColoringDesc": "타입별 색상 구분: 문자열, 숫자, 불리언, null.",
       "howItsBuilt": "빌드 방식",
       "howItsBuiltDesc": "Pry is written in TypeScript and compiled with Perry to native machine code. Its executable statically links the Perry runtime and GC and does not require an external Node.js installation or JavaScript engine.",
       "typeScriptSource": "TypeScript 소스",
@@ -813,8 +814,8 @@
       "nativeWidgets": "네이티브 {framework} 위젯",
       "available": "사용 가능",
       "screenshots": "스크린샷",
-      "macOsScreenshot": "macOS 스크린샷 — 출시 예정",
-      "iosScreenshot": "iOS 스크린샷 — 출시 예정",
+      "macOsScreenshot": "macOS 스크린샷: 출시 예정",
+      "iosScreenshot": "iOS 스크린샷: 출시 예정",
       "screenshotsNote": "스크린샷은 Pry 개발이 진행되면서 추가될 예정입니다. 최신 정보는 GitHub 리포지토리를 확인하세요."
     },
     "common": {
