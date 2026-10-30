@@ -20,9 +20,9 @@ const t = messages(lang).nav;
 const items: [string, string][] = [
   [t.items.docs, links.docs],
   [t.items.showcase, localePath(lang, "showcase")],
-  [t.items.benchmarks, "#benchmarks"],
+  [t.items.benchmarks, `${localePath(lang)}#benchmarks`],
   [t.items.publish, localePath(lang, "publish")],
-  [t.items.teams, "#teams"],
+  [t.items.teams, `${localePath(lang)}#teams`],
   [t.items.blog, localePath(lang, "blog")],
 ];
 ---
