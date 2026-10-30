@@ -1,4 +1,4 @@
-name: Check and deploy beta
+name: Check and deploy
 
 on:
   pull_request:
@@ -59,3 +59,49 @@ jobs:
           chmod 600 ~/.ssh/config
           npm run deploy:beta -- --skip-build
           echo 'Deployed to https://beta.perryts.com/' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy-production:
+    needs: check-and-deploy
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Deploy every main commit in order; a newer queued commit supersedes an older queued one.
+    concurrency:
+      group: production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+      # Rebuild without the beta social-image origin.
+      - run: npm run build:site
+      - name: Deploy production
+        env:
+          PROD_DEPLOY_SSH_KEY: ${{ secrets.PROD_DEPLOY_SSH_KEY }}
+          PROD_DEPLOY_KNOWN_HOSTS: ${{ secrets.PROD_DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_SERVER: perryts-deploy@webserver.skelpo.net
+        run: |
+          set -euo pipefail
+          test -n "$PROD_DEPLOY_SSH_KEY"
+          test -n "$PROD_DEPLOY_KNOWN_HOSTS"
+          install -d -m 700 ~/.ssh
+          trap 'rm -f ~/.ssh/prod_deploy_key ~/.ssh/config ~/.ssh/known_hosts' EXIT
+          printf '%s\n' "$PROD_DEPLOY_SSH_KEY" > ~/.ssh/prod_deploy_key
+          printf '%s\n' "$PROD_DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/prod_deploy_key ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<'SSH'
+          Host webserver.skelpo.net
+            IdentityFile ~/.ssh/prod_deploy_key
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+            BatchMode yes
+            ConnectTimeout 15
+          SSH
+          chmod 600 ~/.ssh/config
+          npm run deploy -- --skip-build
+          echo 'Deployed to https://perryts.com/' >> "$GITHUB_STEP_SUMMARY"
