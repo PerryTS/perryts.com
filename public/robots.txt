@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://perryts.com/sitemap.xml
+Sitemap: https://www.perryts.com/sitemap.xml

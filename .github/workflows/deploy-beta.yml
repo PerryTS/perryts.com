@@ -104,4 +104,4 @@ jobs:
           SSH
           chmod 600 ~/.ssh/config
           npm run deploy -- --skip-build
-          echo 'Deployed to https://perryts.com/' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Deployed to https://www.perryts.com/' >> "$GITHUB_STEP_SUMMARY"

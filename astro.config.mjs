@@ -6,7 +6,7 @@ import { locales } from "./src/i18n/locales.mjs";
 // URLs match the previous Next.js site: every page lives under a locale prefix
 // (`/en/…`) with a trailing slash, and `/` redirects to `/en/`.
 export default defineConfig({
-  site: "https://perryts.com",
+  site: "https://www.perryts.com",
   // server.ts and deploy.sh serve and upload ./out.
   outDir: "./out",
   integrations: [mdx(), sitemap()],

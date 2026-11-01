@@ -1,4 +1,4 @@
-const BASE = "https://perryts.com";
+const BASE = "https://www.perryts.com";
 
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
