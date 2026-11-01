@@ -43,9 +43,9 @@ for (const locale of locales) {
       assert.ok(html.includes(`<html lang="${locale}"`), `Wrong page language: ${path}`);
       assert.ok(/<div[^>]*class="prose[^\"]*"[^>]*lang="en"/.test(html), `English-only article not marked lang="en": ${path}`);
       assert.ok(html.includes('class="translation"'), `Missing translation bar: ${path}`);
-      assert.ok(html.includes(`rel="canonical" href="https://perryts.com${englishPath}"`), `English-only post must canonicalize to English: ${path}`);
+      assert.ok(html.includes(`rel="canonical" href="https://www.perryts.com${englishPath}"`), `English-only post must canonicalize to English: ${path}`);
       assert.ok(!/<link[^>]*hreflang=/.test(html), `English-only post must not declare hreflang alternates: ${path}`);
-      assert.ok(!sitemap.includes(`<loc>https://perryts.com${path}</loc>`), `Fallback article in sitemap: ${path}`);
+      assert.ok(!sitemap.includes(`<loc>https://www.perryts.com${path}</loc>`), `Fallback article in sitemap: ${path}`);
       pages++;
       continue;
     }
@@ -65,14 +65,14 @@ for (const locale of locales) {
     assert.ok(index.includes(`href="${path}"`), `Post missing from ${locale} blog index: ${slug}`);
     assert.ok(html.includes(`<html lang="${locale}"`), `Wrong page language: ${path}`);
     assert.ok(new RegExp(`<div[^>]*class="prose[^\"]*"[^>]*lang="${locale}"`).test(html), `Article falls back to another language: ${path}`);
-    assert.ok(html.includes(`rel="canonical" href="https://perryts.com${path}"`), `Wrong canonical: ${path}`);
-    assert.ok(sitemap.includes(`<loc>https://perryts.com${path}</loc>`), `Article missing from sitemap: ${path}`);
+    assert.ok(html.includes(`rel="canonical" href="https://www.perryts.com${path}"`), `Wrong canonical: ${path}`);
+    assert.ok(sitemap.includes(`<loc>https://www.perryts.com${path}</loc>`), `Article missing from sitemap: ${path}`);
     const alternates = translated(slug);
     if (alternates.length === 1) assert.ok(!/<link[^>]*hreflang=/.test(html), `English-only post must not declare hreflang alternates: ${path}`);
     for (const alternate of locales) {
       const alternatePath = `/${alternate}/blog/${slug}/`;
       if (alternates.length > 1 && alternates.includes(alternate)) {
-        assert.ok(html.includes(`hreflang="${alternate}" href="https://perryts.com${alternatePath}"`), `Missing language alternate ${alternate}: ${path}`);
+        assert.ok(html.includes(`hreflang="${alternate}" href="https://www.perryts.com${alternatePath}"`), `Missing language alternate ${alternate}: ${path}`);
       }
       assert.ok(html.includes(`href="${alternatePath}" hreflang="${alternate}"`), `Language switcher loses the article: ${path}`);
     }

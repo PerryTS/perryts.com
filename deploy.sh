@@ -17,6 +17,20 @@ ssh "$SERVER" "mkdir -p '$REMOTE_DIR/releases/$RELEASE/out'"
 rsync -a --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r out/ "$SERVER:$REMOTE_DIR/releases/$RELEASE/out/"
 scp subscribe-server.mjs "$SERVER:$REMOTE_DIR/releases/$RELEASE/subscribe-server.mjs"
 
+# Keep the server's nginx config identical to the repo (canonical host: www.perryts.com).
+# Needs root, or passwordless sudo for /usr/local/sbin/perryts-install-nginx (see deploy/README-nginx.md).
+scp deploy/nginx-prod.conf "$SERVER:$REMOTE_DIR/releases/$RELEASE/nginx-prod.conf"
+scp deploy/install-nginx.sh "$SERVER:$REMOTE_DIR/releases/$RELEASE/install-nginx.sh"
+ssh "$SERVER" bash -s -- "$REMOTE_DIR/releases/$RELEASE" <<'NGINX'
+set -Eeuo pipefail
+dir="$1"
+if [ "$(id -u)" -eq 0 ]; then
+    bash "$dir/install-nginx.sh" "$dir/nginx-prod.conf"
+else
+    sudo -n /usr/local/sbin/perryts-install-nginx "$dir/nginx-prod.conf"
+fi
+NGINX
+
 # Keep earlier releases so a failed deployment can be rolled back atomically.
 ssh "$SERVER" bash -s -- "$REMOTE_DIR" "$RELEASE" "$KEEP_RELEASES" <<'REMOTE'
 set -Eeuo pipefail
@@ -47,8 +61,8 @@ trap rollback ERR
 restart_helper
 curl --fail --silent --show-error --retry 5 --retry-connrefused --retry-delay 1 \
     http://127.0.0.1:3851/api/health
-curl --fail --silent --show-error --resolve perryts.com:443:127.0.0.1 \
-    https://perryts.com/en/ -o /dev/null
+curl --fail --silent --show-error --resolve www.perryts.com:443:127.0.0.1 \
+    https://www.perryts.com/en/ -o /dev/null
 trap - ERR
 # Prune old releases, never the live one.
 cd "$base/releases"
@@ -57,5 +71,5 @@ ls -1 | sort | head -n -"$keep" | while read -r old; do
 done
 REMOTE
 
-curl --fail --silent --show-error https://perryts.com/en/ -o /dev/null
-echo "Live at https://perryts.com/ (release $RELEASE)"
+curl --fail --silent --show-error https://www.perryts.com/en/ -o /dev/null
+echo "Live at https://www.perryts.com/ (release $RELEASE)"
