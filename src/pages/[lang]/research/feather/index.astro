@@ -1,0 +1,289 @@
+---
+import LandingLayout from "../../../../components/guides/LandingLayout.astro";
+import Article from "../../../../components/guides/Article.astro";
+import Cards from "../../../../components/guides/Cards.astro";
+import Cta from "../../../../components/guides/Cta.astro";
+import Button from "../../../../components/Button.astro";
+import CheckList from "../../../../components/CheckList.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../../i18n/index.ts";
+import { links } from "../../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Perry Feather: Electron Apps Compiled to Native Code, No V8 (Research Status)",
+  description:
+    "Perry Feather is a research drop-in replacement for Electron: the whole app (main process, backend and renderer) is compiled by Perry to native code and runs in one process with no V8 and no Node runtime. Status as of November 2026.",
+  breadcrumb: "Perry Feather",
+};
+
+const asOf = "November 2026";
+
+const architecture = [
+  {
+    label: "Renderer",
+    title: "Your frontend, compiled",
+    text: "The app's renderer code is compiled ahead of time by Perry and calls the Blink rendering engine directly. V8 and its bindings are removed from the build; Blink's own garbage collector stays.",
+  },
+  {
+    label: "Main + backend",
+    title: "Native, same process",
+    text: "The Electron main process and the app's backend are Perry-compiled too, and run in the same process as the renderer. No Node runtime, no separate helper processes.",
+  },
+  {
+    label: "Electron API",
+    title: "The API your app already calls",
+    text: "app, BrowserWindow, webContents, ipcMain/ipcRenderer, contextBridge, Menu, dialog, shell, clipboard, nativeTheme, protocol, session and more. Anything not implemented fails loudly rather than silently.",
+  },
+  {
+    label: "Workers + Wasm",
+    title: "Precompiled workers",
+    text: "Web Workers are compiled ahead of time per known script. WebAssembly runs in an interpreter for now.",
+  },
+];
+
+const done = [
+  "A real, large open-source Electron app (a desktop coding agent UI) runs end to end: renderer, main process and backend, all compiled, in one process.",
+  "Behavior parity checked against real Electron: the same test script under both produces 232 matching trace lines, with 0 differences.",
+  "Milestone 4, “behaves like Electron desktop,” signed off in November 2026.",
+  "Electron API layer test suites green: unit, IPC (structured clone, ordered per sender) and rules.",
+];
+
+const active = [
+  "Milestone 5: an optimized build with CPU and memory on par with Electron.",
+  "Moving rasterization off the main thread.",
+  "Fewer provider round trips and cheaper ownership proofs in the compiled code.",
+  "A memory leak during long sessions (2-hour soak grows ~56 MiB/h).",
+];
+
+const later = [
+  "Packaging, installer and code signing.",
+  "Auto-update, DevTools and SSH/WSL support.",
+  "MessagePort transfer, streamed protocol responses, multiple frames per page.",
+  "Platforms beyond Windows.",
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="research/feather"
+  meta={meta}
+  parents={[{ name: "Research", path: "research" }]}
+  back={{ href: localePath(lang, "research"), label: "Research" }}
+  heading="Perry Feather"
+  lead="A drop-in replacement for Electron that compiles the entire app, renderer included, to native code. One process. No V8. No Node."
+>
+  <Fragment slot="header">
+    <p class="pill t-mono" data-reveal style="--i: 2">
+      <span class="dot" aria-hidden="true"></span>Research · Windows · status as of {asOf} · not released
+    </p>
+  </Fragment>
+
+  <Article tight>
+    <h2>The idea</h2>
+    <p>
+      An Electron app ships three runtimes: Chromium to draw the UI, V8 to run the JavaScript, and Node for the main
+      process. Every window pays for a JavaScript engine that parses and JIT-compiles the same code on every launch.
+    </p>
+    <p>
+      Perry already compiles TypeScript and JavaScript ahead of time to native code. Feather applies that to the whole
+      Electron app. Your <code>main.js</code>, your preload, your backend and your React (or whatever) frontend all go
+      through the Perry compiler. What is left of the browser is the part that is actually needed: the rendering engine,
+      calling Perry-compiled code directly instead of a JavaScript VM.
+    </p>
+    <p>
+      The goal is <strong>drop-in</strong>: keep your Electron code and your Electron APIs, swap the runtime.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap"><Cards items={architecture} min={240} /></div>
+  </section>
+
+  <Article>
+    <h2>Where it stands</h2>
+    <p>
+      Feather is research, and it is honest to say what that means today. It runs a real, complex Electron app with no V8
+      and no Node, and that app passes a behavior check against real Electron. On small apps the memory win is large. On
+      the full app, Feather is currently <em>slower and heavier</em> than Electron; that is what the optimization
+      milestone in progress is about.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <div class="tables">
+        <div data-reveal>
+          <h3 class="t-label muted">Small demo app · Oct 2026</h3>
+          <table>
+            <thead><tr><th></th><th>Feather</th><th>Electron</th></tr></thead>
+            <tbody>
+              <tr><td>Idle memory (summed RSS)</td><td class="win">56.8 MiB</td><td>314.4 MiB</td></tr>
+              <tr><td>Startup CPU time</td><td class="win">219 ms</td><td>438 ms</td></tr>
+              <tr><td>Startup wall time</td><td class="loss">208 ms</td><td>168 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div data-reveal style="--i: 1">
+          <h3 class="t-label muted">Full real-world app · Nov 2026</h3>
+          <table>
+            <thead><tr><th></th><th>Feather</th><th>Electron</th></tr></thead>
+            <tbody>
+              <tr><td>Time to app ready</td><td class="loss">11.6 s</td><td>4.06 s</td></tr>
+              <tr><td>Idle CPU (% of one core)</td><td class="loss">4.75%</td><td>1.5%</td></tr>
+              <tr><td>Private memory, 1 min idle</td><td class="loss">1,288 MiB</td><td>550 MiB</td></tr>
+              <tr><td>Typing 20 characters</td><td class="loss">2.6 s</td><td>1.17 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="muted small">
+        Measured on Windows against Electron 44. The full-app gap has known causes: software rasterization on the main
+        thread, provider round trips, ownership proofs and GC in the compiled code, and WebAssembly running in an
+        interpreter.
+      </p>
+    </div>
+  </section>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <div class="columns">
+        <div class="column" data-reveal>
+          <h2 class="t-label status status--done">Done</h2>
+          <CheckList items={done} tone="done" />
+        </div>
+        <div class="column" data-reveal style="--i: 1">
+          <h2 class="t-label status status--next">In progress</h2>
+          <CheckList items={active} tone="next" />
+        </div>
+        <div class="column" data-reveal style="--i: 2">
+          <h2 class="t-label status">Later</h2>
+          <CheckList items={later} tone="note" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Article>
+    <h2>Feather vs. other Electron alternatives</h2>
+    <p>
+      Tauri and similar tools keep a web stack and swap the backend: the UI still runs as JavaScript in a system webview.
+      Perry's own native UI goes the other way and asks you to rewrite the UI with Perry widgets. Feather is the third
+      option: <strong>keep the Electron app as it is, and remove the JavaScript engine</strong>. For the trade-offs between
+      today's shipping options, see <a href={localePath(lang, "compare/perry-vs-electron-alternatives")}>Electron
+      alternatives for JavaScript/TypeScript</a>.
+    </p>
+  </Article>
+
+  <Cta
+    title="Running a large Electron app?"
+    text="Feather is not public yet. If you maintain an Electron app and want to be an early test case, talk to us."
+  >
+    <Button href={localePath(lang, "enterprise")}>Contact the team</Button>
+    <Button href={links.discord} variant="secondary">Discord</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .tight-top {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .tables h3 {
+    margin-bottom: 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  th,
+  td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+  th:first-child,
+  td:first-child {
+    text-align: left;
+    color: var(--text-muted);
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  td {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  td:first-child {
+    font-family: inherit;
+  }
+  .win {
+    color: var(--success);
+  }
+  .loss {
+    color: var(--accent);
+  }
+  .small {
+    margin-top: 20px;
+    font-size: 14px;
+    max-width: 760px;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 32px 44px 0;
+  }
+  .column + .column {
+    padding-left: 32px;
+    border-left: 1px solid var(--border);
+  }
+  .status--done {
+    color: var(--success);
+  }
+  .status--next {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .tables,
+    .columns {
+      grid-template-columns: 1fr;
+    }
+    .column,
+    .column + .column {
+      padding: 32px 0;
+      border-left: none;
+    }
+    .column + .column {
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

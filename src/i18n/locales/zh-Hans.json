@@ -87,7 +87,8 @@
           "博客",
           "对比",
           "内部原理",
-          "Coop"
+          "Coop",
+          "研究"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "文档",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "基准测试",
       "publish": "Publish",
       "teams": "团队版",

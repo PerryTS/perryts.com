@@ -87,7 +87,8 @@
           "Blog",
           "Bandingkan",
           "Internal",
-          "Coop"
+          "Coop",
+          "Riset"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "Dokumentasi",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "Benchmark",
       "publish": "Publish",
       "teams": "Untuk tim",

@@ -87,7 +87,8 @@
           "บล็อก",
           "เปรียบเทียบ",
           "กลไกภายใน",
-          "Coop"
+          "Coop",
+          "งานวิจัย"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "เอกสาร",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "เบนช์มาร์ก",
       "publish": "Publish",
       "teams": "สำหรับทีม",

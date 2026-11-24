@@ -1,0 +1,74 @@
+---
+import LandingLayout from "../../../components/guides/LandingLayout.astro";
+import Article from "../../../components/guides/Article.astro";
+import Cards from "../../../components/guides/Cards.astro";
+import Cta from "../../../components/guides/Cta.astro";
+import Button from "../../../components/Button.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Perry Research: What the Perry Team Is Working On",
+  description:
+    "Research projects around the Perry TypeScript native compiler: Solver (whole-program facts) and Perry Feather (Electron apps compiled natively, without V8). Honest status, measured numbers, open problems.",
+  breadcrumb: "Research",
+};
+
+const projects = [
+  {
+    label: "Compiler · research",
+    title: "Solver",
+    text: "Whole-program analysis that proves what every read, call and store can touch, so the compiler can emit direct native code instead of generic dynamic lookups.",
+    href: localePath(lang, "research/solver"),
+  },
+  {
+    label: "Desktop · research",
+    title: "Perry Feather",
+    text: "A drop-in Electron replacement that compiles the whole app, renderer included, to native code: one process, no V8, no Node runtime.",
+    href: localePath(lang, "research/feather"),
+  },
+  {
+    label: "Graphics · preview",
+    title: "Perry Three.js",
+    text: "Unmodified three.js apps compiled to native binaries for macOS, iOS, tvOS and Android, with WebGL2 on ANGLE and WebGPU on wgpu.",
+    href: localePath(lang, "threejs"),
+  },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="research"
+  meta={meta}
+  heading="Research"
+  lead="The bigger bets behind Perry. Each project shows where it actually stands, with measured numbers and open problems, and is updated as work lands."
+>
+  <section class="section tight-top">
+    <div class="wrap"><Cards items={projects} min={340} heading="h2" /></div>
+  </section>
+
+  <Article>
+    <h2>How we report research</h2>
+    <p>
+      Research pages are status reports, not product promises. Numbers from unreleased work are labelled as such, unfavorable
+      results are shown next to favorable ones, and each page lists open problems alongside milestones. When something
+      ships, it moves into Perry's <a href={localePath(lang, "roadmap")}>roadmap</a> and the
+      {" "}<a href="https://github.com/PerryTS/perry/blob/main/CHANGELOG.md">changelog</a>.
+    </p>
+  </Article>
+
+  <Cta title="Want to dig in?" text="Most research lands as small, reviewed PRs on GitHub. Questions and ideas are welcome on Discord.">
+    <Button href={links.github}>Perry on GitHub</Button>
+    <Button href={links.discord} variant="secondary">Discord</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .tight-top {
+    padding-top: 56px;
+    padding-bottom: 0;
+  }
+</style>
