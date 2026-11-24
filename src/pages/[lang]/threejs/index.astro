@@ -1,0 +1,370 @@
+---
+import LandingLayout from "../../../components/guides/LandingLayout.astro";
+import Article from "../../../components/guides/Article.astro";
+import Cards from "../../../components/guides/Cards.astro";
+import Code from "../../../components/guides/Code.astro";
+import Cta from "../../../components/guides/Cta.astro";
+import Button from "../../../components/Button.astro";
+import Stat from "../../../components/Stat.astro";
+import BrandIcon from "../../../components/BrandIcon.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../i18n/index.ts";
+import { links } from "../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Perry Three.js: Compile three.js Apps to Native Binaries",
+  description:
+    "Perry compiles an unmodified three.js app (stock npm three, your index.html and src/) to a native binary for macOS, iOS, iPadOS, tvOS and Android. WebGL2 runs on ANGLE, WebGPU on wgpu, with no JavaScript engine and no WebView.",
+  breadcrumb: "Perry Three.js",
+};
+
+const pillars = [
+  {
+    label: "Unmodified",
+    title: "Stock three.js from npm",
+    text: "three 0.186.1 straight from npm, plus your app's own index.html and src/. Nothing in three.js or your app is patched, forked or aliased.",
+  },
+  {
+    label: "WebGL2",
+    title: "ANGLE, the layer Chrome uses",
+    text: "WebGL2 calls go to Google's ANGLE, which runs on Metal on Apple platforms and on OpenGL ES on Android (Vulkan optional).",
+  },
+  {
+    label: "WebGPU",
+    title: "wgpu underneath",
+    text: "three.js WebGPURenderer runs on wgpu, the WebGPU implementation used by Firefox and Deno.",
+  },
+  {
+    label: "HTML + CSS",
+    title: "Your menus and HUD, drawn natively",
+    text: "The page around the canvas, such as menus, overlays and HUD, is laid out and drawn natively, then composited with the 3D scene.",
+  },
+];
+
+const platforms = [
+  { value: "macOS", label: "Apple silicon", detail: "arm64" },
+  { value: "iOS", label: "iPhone and iPad", detail: "iOS 17+ (ANGLE)" },
+  { value: "tvOS", label: "Apple TV", detail: "tested on device" },
+  { value: "Android", label: "Phones and tablets", detail: "API 29+ (Android 10)" },
+];
+
+const features = [
+  "WebGLRenderer and WebGPURenderer",
+  "GLTFLoader, skinned meshes, AnimationMixer",
+  "Shadow maps and standard (PBR) materials",
+  "OrbitControls, raycasting, CanvasTexture",
+  "DOM, CSS, canvas 2D, input, audio, fetch, storage, Workers",
+];
+
+const gaps = [
+  "Windows and Linux desktop are not supported yet.",
+  "CSS backdrop-filter and color emoji are not implemented yet.",
+  "Post-processing and the official three.js examples suite have not been tested yet.",
+  "No npm packaging yet: builds run from Perry's in-house web runtime for now.",
+];
+
+const tuichess = {
+  appStore: "https://apps.apple.com/app/tuichess/id6831127773",
+  github: "https://github.com/skelpo/chess",
+  web3d: "https://github.com/skelpo/chess/tree/main/web3d",
+  bloomThree: "https://github.com/Bloom-Engine/three",
+};
+
+const entry = [
+  { tone: "muted" as const, text: "// main.ts: the whole native entry point" },
+  { text: 'import "./config.ts";' },
+  { text: 'import "@perryts/web";        // DOM, CSS, canvas, input, audio, fetch…' },
+  { text: 'import "@perryts/web/webgl";  // WebGL2 on ANGLE' },
+  { text: 'import "./src/main.ts";       // your unchanged three.js app' },
+];
+
+const build = [
+  { prompt: true, text: "perry compile main.ts -o chess" },
+  { prompt: true, text: "./chess" },
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="threejs"
+  meta={meta}
+  heading="Perry Three.js"
+  lead="Your three.js app, compiled ahead of time to a native binary. Stock three from npm, your own HTML and CSS, real GPU APIs underneath. No JavaScript engine, no WebView."
+>
+  <Fragment slot="header">
+    <p class="pill t-mono" data-reveal style="--i: 2">
+      <span class="dot" aria-hidden="true"></span>Research preview · macOS · iOS · iPadOS · tvOS · Android
+    </p>
+  </Fragment>
+  <Fragment slot="actions">
+    <Button href="#how-it-works">How it works</Button>
+    <Button href={links.discord} variant="secondary">Talk to us on Discord</Button>
+  </Fragment>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <figure class="shot" data-reveal>
+        <img
+          src="/threejs/chess-native.jpg"
+          width="1600"
+          height="1000"
+          alt="A 3D chess board with skinned, shadowed pieces and an HTML menu bar, running as a native macOS binary compiled by Perry"
+          loading="eager"
+        />
+        <figcaption class="t-mono muted">
+          An unchanged three.js web chess game (WebGLRenderer, skinned and shadowed pieces, HTML/CSS menu and HUD)
+          running as a Perry-compiled native macOS binary.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <div class="ship" data-reveal>
+        <div class="ship__text">
+          <p class="t-label accent">Shipping today</p>
+          <h2 class="t-h3">Play tuichess, a three.js chess game built with Perry</h2>
+          <p class="muted">
+            The chess game above is open source and on the App Store for iPhone, iPad and Mac. The store build uses Perry
+            with the <a href={tuichess.bloomThree}>Bloom engine's three.js layer</a>, which mirrors the three.js scene into
+            Bloom's native renderer. The fully compiled three.js runtime described on this page is the research preview
+            and is not in the store build yet.
+          </p>
+        </div>
+        <div class="ship__actions">
+          <Button href={tuichess.appStore}>Download on the App Store</Button>
+          <Button href={tuichess.github} variant="secondary"><BrandIcon name="github" />skelpo/chess on GitHub</Button>
+          <a class="ship__link t-mono muted" href={tuichess.web3d}>three.js source: web3d/ →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Article tight>
+    <h2 id="how-it-works">How it works</h2>
+    <p>
+      Perry compiles TypeScript and JavaScript ahead of time through LLVM into a native binary. A three.js app needs more
+      than a language, though: it expects a browser. <strong>Perry's web runtime</strong> provides those browser APIs
+      natively inside the compiled program: DOM, CSS layout, canvas 2D, input, audio, <code>fetch</code>, storage,
+      Workers, WebGL2 and WebGPU.
+    </p>
+    <p>
+      So three.js does not know it has left the browser. It calls <code>gl.drawElements</code> and the call goes to
+      ANGLE, then on to Metal or OpenGL ES. It touches <code>document</code> and gets a native DOM. Your menus are real
+      HTML and CSS, laid out and painted natively and composited over the 3D canvas.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap"><Cards items={pillars} min={240} /></div>
+  </section>
+
+  <Article>
+    <h2>What you write</h2>
+    <p>
+      The native entry point is a handful of imports. Everything after the last line is your existing web app, compiled
+      as it is:
+    </p>
+    <Code lines={entry} />
+    <Code lines={build} />
+    <p>
+      The same app builds for iOS, iPadOS, tvOS and Android with Perry's platform build scripts. The app's
+      <code>package.json</code> opts in to the two native libraries it uses and nothing else.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <h2 class="t-label muted label">Runs today on</h2>
+      <div class="stats">
+        {platforms.map((p, i) => (
+          <div data-reveal style={`--i: ${i}`}><Stat value={p.value} label={p.label} detail={p.detail} count={false} /></div>
+        ))}
+      </div>
+      <p class="muted small">
+        Tested on Apple silicon Macs, iPad, Apple TV, Pixel 4a, iPhone 11 (iOS 18.6) and Galaxy S24.
+      </p>
+    </div>
+  </section>
+
+  <section class="section tight-top">
+    <div class="wrap split">
+      <figure class="shot" data-reveal>
+        <img
+          src="/threejs/webgpu-ipad.jpg"
+          width="1600"
+          height="1199"
+          alt="A three.js WebGPURenderer scene with a lit cube and sphere casting soft shadows on a checkered floor, running natively on an iPad"
+          loading="lazy"
+        />
+        <figcaption class="t-mono muted">three.js WebGPURenderer on iPad: PCF shadows, TSL material, 4× MSAA, post pass.</figcaption>
+      </figure>
+      <div class="prose-side">
+        <h2 class="t-h3">Measured against the standards</h2>
+        <p class="muted">
+          We hold the runtime to the same conformance suites browsers use, not to a hand-picked demo:
+        </p>
+        <ul class="conf">
+          <li><span class="t-mono accent">472 / 514</span><span>Khronos WebGL conformance pages (Chrome: 513)</span></li>
+          <li><span class="t-mono accent">25,529</span><span>WebGPU CTS tests passing (Chrome: 32,698)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Article>
+    <h2>What works</h2>
+    <p>Exercised end to end by the demo apps:</p>
+    <ul>{features.map((f) => <li>{f}</li>)}</ul>
+
+    <h2>Where it stands</h2>
+    <p>
+      Perry Three.js is a <strong>research preview</strong>. Rendering is correct and runs on real devices, but
+      performance is not yet where it needs to be: script-heavy three.js scenes currently run several times more
+      instructions than in V8. The cause is understood. Compiled in isolation, Perry beats V8 on three.js math:
+      <code>Matrix4.multiplyMatrices</code> takes 237 instructions against Node's 417. Inside a full app, the same function
+      takes about 6,000, roughly 14× slower than Node, and that is what users get today. The gap exists because the
+      compiler loses the whole-program type proofs it needs once the whole app is in play. Closing that gap is the job of
+      {" "}<a href={localePath(lang, "research/solver")}>Solver</a>, which uses this chess app as its test ladder.
+    </p>
+    <p>Known gaps:</p>
+    <ul>{gaps.map((g) => <li>{g}</li>)}</ul>
+  </Article>
+
+  <Cta
+    title="Want your three.js app native?"
+    text="We're looking for real three.js apps to bring up next. Tell us what you're building."
+  >
+    <Button href={links.discord}>Join the Discord</Button>
+    <Button href={localePath(lang, "research")} variant="secondary">More Perry research</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .tight-top {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .shot {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .shot figcaption {
+    font-size: 13px;
+  }
+  .label {
+    margin-bottom: 24px;
+  }
+  .ship {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 32px;
+    padding: 32px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  .ship__text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 640px;
+  }
+  .ship__text a {
+    color: var(--text);
+    text-decoration: underline;
+  }
+  .ship__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    flex: none;
+  }
+  .ship__actions :global(.btn) {
+    justify-content: center;
+  }
+  .ship__link {
+    font-size: 13px;
+    text-align: center;
+  }
+  .ship__link:hover {
+    color: var(--accent);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-block: 32px;
+    border-block: 1px solid var(--border);
+  }
+  .small {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .split {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .prose-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .conf {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .conf li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .conf .t-mono {
+    font-size: 22px;
+  }
+  .accent {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .split {
+      grid-template-columns: 1fr;
+    }
+    .ship {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

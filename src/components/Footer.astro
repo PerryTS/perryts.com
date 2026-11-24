@@ -17,7 +17,7 @@ const t = messages(lang).footer;
 // Link targets per column, in the same order as the labels in the locale files.
 const hrefs = [
   [p("getting-started"), p("showcase"), p("publish"), p("roadmap"), p("enterprise")],
-  [links.docs, p("blog"), p("compare"), p("internals"), p("coop")],
+  [links.docs, p("blog"), p("compare"), p("internals"), p("coop"), p("research")],
   [links.github, links.discord, links.issues, links.contributing, p("newsletter")],
 ];
 const columns = t.columns.map((c, i) => ({ title: c.title, items: c.items.map((label, j) => [label, hrefs[i][j]] as const) }));

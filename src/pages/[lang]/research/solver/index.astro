@@ -1,0 +1,256 @@
+---
+import LandingLayout from "../../../../components/guides/LandingLayout.astro";
+import Article from "../../../../components/guides/Article.astro";
+import Cta from "../../../../components/guides/Cta.astro";
+import Button from "../../../../components/Button.astro";
+import CheckList from "../../../../components/CheckList.astro";
+import Stat from "../../../../components/Stat.astro";
+import { localePath, localeStaticPaths, type Locale } from "../../../../i18n/index.ts";
+import { links } from "../../../../lib/links.ts";
+
+export const getStaticPaths = localeStaticPaths;
+const lang = Astro.params.lang as Locale;
+
+const meta = {
+  title: "Solver: Whole-Program Facts for Native JavaScript/TypeScript (Research Status)",
+  description:
+    "Solver is Perry's whole-program analysis: it proves, per source site, which object layouts a read touches and which function a call reaches, so the compiler can emit direct native code. Research status as of November 2026.",
+  breadcrumb: "Solver",
+};
+
+// Status as of 2026-11-24, reported by the Perry team. Integration-branch numbers are not released.
+const asOf = "November 24, 2026";
+
+const stats = [
+  { value: "~86%", label: "read/call sites proven", detail: "rung c08 · integration branch" },
+  { value: "5.6×", label: "more proven sites than main", detail: "22,848 vs 4,082" },
+  { value: "4,016", label: "of 4,106 stores proven", detail: "rung c08 · integration branch" },
+  { value: "~4,700", label: "unit tests in the Solver suite", detail: "195 fixed vs main" },
+];
+
+const done = [
+  "Whole-program facts wired into the compiler: codegen consumes a fact only when it is proven.",
+  "Stop-on-first-unknown mode: the solver halts at the first unknown value and reports its source line and rule.",
+  "A model of the JavaScript realm (getters, Proxy, globals) derived from Perry's own runtime sources.",
+  "Source positions on every compiler operation (PR #15375, open): codegen stays byte-identical apart from two stated improvements.",
+  "All Solver work integrated onto main and measured across the full 46-rung ladder.",
+];
+
+const active = [
+  "Removing the unknown-value seed that brings the cliff back at rung c09 (OrbitControls plus a DOM style Proxy with any-key traps).",
+  "A receiver-family model for methods passed around as values, landing together with the runtime check that enforces it.",
+  "Exact names for globals read at runtime.",
+  "One solve per compile, the first of two fixes for compile time.",
+];
+
+const next = [
+  "Walk the ladder rung by rung to the end with zero unknown seeds.",
+  "Land the work on main in order: source positions, realm and escape fixes, then the receiver-family model with its runtime check.",
+  "Bring compile time back into main's range.",
+];
+
+const limits = [
+  "The c09 cliff (a DOM style Proxy with any-key traps) is still open.",
+  "Compile time and memory on large programs are well above main on the integration branch: rung c08 takes 619 s against 63 s on main.",
+  "From rung c16 on, the solve reaches its work bound and widens, so the numbers for those rungs do not mean much yet under the new model.",
+  "Some modelling premises are enforced by a runtime check that is still being built.",
+];
+---
+
+<LandingLayout
+  lang={lang}
+  path="research/solver"
+  meta={meta}
+  parents={[{ name: "Research", path: "research" }]}
+  back={{ href: localePath(lang, "research"), label: "Research" }}
+  heading="Solver"
+  lead="Whole-program facts for native JavaScript/TypeScript: prove what every read, call and store can touch, then compile it to direct code."
+>
+  <Fragment slot="header">
+    <p class="pill t-mono" data-reveal style="--i: 2">
+      <span class="dot" aria-hidden="true"></span>Research · status as of {asOf} · not released
+    </p>
+  </Fragment>
+
+  <Article>
+    <h2>What Solver is</h2>
+    <p>
+      Perry compiles JavaScript and TypeScript ahead of time to native code. When the compiler cannot tell what a property
+      read, a call or a store can touch, it has to emit generic dynamic code: look up the shape, find the slot, dispatch
+      at runtime. Solver (the <code>perry-wpfacts</code> crate, short for whole-program facts) removes that guesswork
+      wherever it can be removed soundly.
+    </p>
+    <p>
+      It treats the whole program, together with a declared model of the JavaScript realm built from Perry's own runtime
+      sources, as one constraint system. From that it proves facts at each source site, for example:
+    </p>
+    <ul>
+      <li>this read hits exactly these object layouts, at this slot;</li>
+      <li>this call goes to exactly this function;</li>
+      <li>this store cannot reach a builtin.</li>
+    </ul>
+    <p>
+      Codegen uses a fact only when it is proven. Sites without a proof keep the generic path, so a missing fact costs
+      speed and never correctness.
+    </p>
+
+    <h2>Exact or nothing</h2>
+    <p>
+      Solver uses no heuristics and no guessed fallbacks. An unknown value (⊤, "top") is tracked explicitly rather than
+      hidden. The trouble with unknowns is that they spread: one early unknown value can flow into the rest of the program
+      and make everything downstream unprovable. We call this <strong>the cliff</strong>.
+    </p>
+    <p>
+      The current work removes the places where unknowns are created, one seed at a time. The solver can stop at the
+      first unknown value and report the source line and the rule that produced it, which turns "why is this slow?" into
+      a concrete, fixable line of code in either the program or the realm model.
+    </p>
+
+    <h2>How we measure it</h2>
+    <p>
+      Progress is measured on a <em>ladder</em> of 46 rungs: successively larger builds of one real application, a chess
+      game built on <a href={localePath(lang, "threejs")}>three.js</a> with a headless web/canvas layer. Each rung adds
+      more of the real program, so each one exposes new code that the realm model and the solver have to handle exactly.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <p class="t-label muted note">Integration branch · not released</p>
+      <div class="stats">
+        {stats.map((s, i) => (
+          <div data-reveal style={`--i: ${i}`}><Stat value={s.value} label={s.label} detail={s.detail} count={false} /></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Article>
+    <h2>Where it stands</h2>
+    <p>
+      <strong>Released Perry:</strong> on the larger rungs only about 14–20% of read/call sites are proven. Rung c08, for
+      example, has 4,082 of 24,498. An early unknown floods the rest of the program.
+    </p>
+    <p>
+      <strong>Integration branch</strong> (all current Solver work merged onto main, not yet released): the cliff is gone
+      up to rung c08, with 22,848 of 26,656 read/call sites proven (about 86%, 5.6× main) and 4,016 of 4,106 stores
+      proven. At rung c09, which adds OrbitControls and the DOM style Proxy layer, the cliff comes back (4,362 of 28,181).
+      The root cause has been found and the fix is in progress.
+    </p>
+    <p>
+      <strong>Soundness.</strong> Exact modelling turns up real bugs. Along the way the work found and fixed actual
+      miscompiles: the <code>thisArg</code> model for <code>Array.prototype.forEach</code>, and a stream
+      <code>destroy()</code> that did not call a subclass's <code>_destroy</code> (now matching Node). A third, a
+      constructor-static store through a passed reference, is being fixed.
+    </p>
+    <p>
+      <strong>Compile cost.</strong> The integration branch currently compiles large rungs 6–12× slower than main (rung
+      c08: 619 s against 63 s). Profiling points to two causes: an activation pre-pass that grew into a full solve, and a
+      blow-up on Proxy any-key traps. The first fix, one solve per compile, is approved and starting.
+    </p>
+  </Article>
+
+  <section class="section tight-top">
+    <div class="wrap">
+      <div class="columns">
+        <div class="column" data-reveal>
+          <h2 class="t-label status status--done">Done</h2>
+          <CheckList items={done} tone="done" />
+        </div>
+        <div class="column" data-reveal style="--i: 1">
+          <h2 class="t-label status status--next">In progress</h2>
+          <CheckList items={active} tone="next" />
+        </div>
+        <div class="column" data-reveal style="--i: 2">
+          <h2 class="t-label status">Next</h2>
+          <CheckList items={next} tone="note" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Article>
+    <h2>Open problems and limits</h2>
+    <ul>{limits.map((l) => <li>{l}</li>)}</ul>
+    <p>
+      Solver is research. None of the integration-branch numbers above are in a released Perry build yet, and they will
+      change as the work lands. This page is updated as milestones ship; release notes are in the
+      {" "}<a href="https://github.com/PerryTS/perry/blob/main/CHANGELOG.md">changelog</a>.
+    </p>
+  </Article>
+
+  <Cta
+    title="Follow the research"
+    text="Solver work lands in Perry as small, reviewed PRs. Follow along on GitHub or ask questions on Discord."
+  >
+    <Button href="https://github.com/PerryTS/perry/pull/15375">PR #15375: source positions</Button>
+    <Button href={links.discord} variant="secondary">Discord</Button>
+  </Cta>
+</LandingLayout>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .tight-top {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .note {
+    margin-bottom: 24px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding-block: 32px;
+    border-block: 1px solid var(--border);
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--border);
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 32px 44px 0;
+  }
+  .column + .column {
+    padding-left: 32px;
+    border-left: 1px solid var(--border);
+  }
+  .status--done {
+    color: var(--success);
+  }
+  .status--next {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .columns {
+      grid-template-columns: 1fr;
+    }
+    .column,
+    .column + .column {
+      padding: 32px 0;
+      border-left: none;
+    }
+    .column + .column {
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

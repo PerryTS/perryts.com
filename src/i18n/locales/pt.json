@@ -88,7 +88,8 @@
           "Blog",
           "Comparar",
           "Internals",
-          "Coop"
+          "Coop",
+          "Pesquisa"
         ]
       },
       {
@@ -508,6 +509,7 @@
     "items": {
       "docs": "Documentação",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "Benchmarks",
       "publish": "Publish",
       "teams": "Para equipes",

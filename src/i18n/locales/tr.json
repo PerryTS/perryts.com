@@ -87,7 +87,8 @@
           "Blog",
           "Karşılaştır",
           "İç yapı",
-          "Coop"
+          "Coop",
+          "Araştırma"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "Dokümantasyon",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "Benchmark'lar",
       "publish": "Publish",
       "teams": "Ekipler için",

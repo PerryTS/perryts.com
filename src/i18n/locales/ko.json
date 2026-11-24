@@ -87,7 +87,8 @@
           "블로그",
           "비교",
           "내부 구조",
-          "Coop"
+          "Coop",
+          "연구"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "문서",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "벤치마크",
       "publish": "Publish",
       "teams": "팀용",

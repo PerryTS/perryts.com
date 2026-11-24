@@ -87,7 +87,8 @@
           "Blog",
           "So sánh",
           "Bên trong",
-          "Coop"
+          "Coop",
+          "Nghiên cứu"
         ]
       },
       {
@@ -507,6 +508,7 @@
     "items": {
       "docs": "Tài liệu",
       "showcase": "Showcase",
+      "threejs": "Three.js",
       "benchmarks": "Benchmark",
       "publish": "Publish",
       "teams": "Cho đội nhóm",

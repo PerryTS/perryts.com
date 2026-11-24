@@ -19,6 +19,7 @@ const stats = await getRepoStats();
 const t = messages(lang).nav;
 const items: [string, string][] = [
   [t.items.docs, links.docs],
+  [t.items.threejs, localePath(lang, "threejs")],
   [t.items.showcase, localePath(lang, "showcase")],
   [t.items.benchmarks, `${localePath(lang)}#benchmarks`],
   [t.items.publish, localePath(lang, "publish")],
