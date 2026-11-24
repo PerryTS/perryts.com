@@ -16,7 +16,7 @@ const lang = Astro.params.lang as Locale;
 const meta = {
   title: "Perry Three.js: Compile three.js Apps to Native Binaries",
   description:
-    "Perry compiles an unmodified three.js app (stock npm three, your index.html and src/) to a native binary for macOS, iOS, iPadOS, tvOS and Android. WebGL2 runs on ANGLE, WebGPU on wgpu, with no JavaScript engine and no WebView.",
+    "Perry compiles an unmodified three.js app (stock npm three, your index.html and src/) to a native binary for macOS, Windows, Linux, iOS, iPadOS, tvOS and Android. WebGL2 runs on ANGLE, WebGPU on wgpu, with no JavaScript engine and no WebView.",
   breadcrumb: "Perry Three.js",
 };
 
@@ -45,6 +45,8 @@ const pillars = [
 
 const platforms = [
   { value: "macOS", label: "Apple silicon", detail: "arm64" },
+  { value: "Windows", label: "Desktop", detail: "fully supported" },
+  { value: "Linux", label: "Desktop", detail: "fully supported" },
   { value: "iOS", label: "iPhone and iPad", detail: "iOS 17+ (ANGLE)" },
   { value: "tvOS", label: "Apple TV", detail: "tested on device" },
   { value: "Android", label: "Phones and tablets", detail: "API 29+ (Android 10)" },
@@ -59,7 +61,6 @@ const features = [
 ];
 
 const gaps = [
-  "Windows and Linux desktop are not supported yet.",
   "CSS backdrop-filter and color emoji are not implemented yet.",
   "Post-processing and the official three.js examples suite have not been tested yet.",
   "No npm packaging yet: builds run from Perry's in-house web runtime for now.",
@@ -95,7 +96,7 @@ const build = [
 >
   <Fragment slot="header">
     <p class="pill t-mono" data-reveal style="--i: 2">
-      <span class="dot" aria-hidden="true"></span>Research preview · macOS · iOS · iPadOS · tvOS · Android
+      <span class="dot" aria-hidden="true"></span>Research preview · macOS · Windows · Linux · iOS · iPadOS · tvOS · Android
     </p>
   </Fragment>
   <Fragment slot="actions">
@@ -171,7 +172,7 @@ const build = [
     <Code lines={entry} />
     <Code lines={build} />
     <p>
-      The same app builds for iOS, iPadOS, tvOS and Android with Perry's platform build scripts. The app's
+      The same app builds for Windows, Linux, iOS, iPadOS, tvOS and Android with Perry's platform build scripts. The app's
       <code>package.json</code> opts in to the two native libraries it uses and nothing else.
     </p>
   </Article>
@@ -318,7 +319,7 @@ const build = [
   }
   .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     padding-block: 32px;
     border-block: 1px solid var(--border);
